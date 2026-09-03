@@ -30,26 +30,28 @@ export function getActiveLongRunningGoals(
   route: RouteDocument,
   completedStepIds: ReadonlySet<string>,
 ): RouteStep[] {
-  const steps = getSortedSteps(route);
   const activeGoalIds = new Set<string>();
   const activeSteps = new Map<string, RouteStep>();
 
-  for (const step of steps) {
-    if (completedStepIds.has(step.id)) {
-      if (step.longRunningGoal?.phase === 'start' || step.longRunningGoal?.phase === 'progress') {
-        activeGoalIds.add(step.longRunningGoal.goalId);
-        activeSteps.set(step.longRunningGoal.goalId, step);
-      }
+  for (const step of getSortedSteps(route)) {
+    if (!completedStepIds.has(step.id)) {
+      continue;
+    }
 
-      if (step.longRunningGoal?.phase === 'finish') {
-        activeGoalIds.delete(step.longRunningGoal.goalId);
-        activeSteps.delete(step.longRunningGoal.goalId);
-      }
+    const goal = step.longRunningGoal;
+    if (goal?.phase === 'start') {
+      activeGoalIds.add(goal.goalId);
+      activeSteps.set(goal.goalId, step);
+    } else if (goal?.phase === 'progress' && activeGoalIds.has(goal.goalId)) {
+      activeSteps.set(goal.goalId, step);
+    } else if (goal?.phase === 'finish') {
+      activeGoalIds.delete(goal.goalId);
+      activeSteps.delete(goal.goalId);
+    }
 
-      if (step.type === 'hard_lock' && step.hardLock?.goalId) {
-        activeGoalIds.delete(step.hardLock.goalId);
-        activeSteps.delete(step.hardLock.goalId);
-      }
+    if (step.type === 'hard_lock' && step.hardLock?.goalId) {
+      activeGoalIds.delete(step.hardLock.goalId);
+      activeSteps.delete(step.hardLock.goalId);
     }
   }
 
