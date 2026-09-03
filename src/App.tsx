@@ -19,6 +19,7 @@ import {
   type ShortcutBindings,
 } from './shortcuts/types';
 import { useGlobalShortcuts } from './shortcuts/useGlobalShortcuts';
+import { restoreAndPersistWindowGeometry } from './window/persistence';
 
 const route = loadBundledRoute();
 const shortcutActions = Object.keys(defaultShortcutBindings) as ShortcutAction[];
@@ -67,6 +68,28 @@ export function App() {
   useEffect(() => {
     saveShortcutBindings(shortcutBindings);
   }, [shortcutBindings]);
+
+  useEffect(() => {
+    let disposed = false;
+    let cleanup: (() => void) | undefined;
+
+    void restoreAndPersistWindowGeometry()
+      .then((unlisten) => {
+        if (disposed) {
+          unlisten();
+        } else {
+          cleanup = unlisten;
+        }
+      })
+      .catch((error: unknown) => {
+        console.error('Impossible de restaurer la géométrie de la fenêtre.', error);
+      });
+
+    return () => {
+      disposed = true;
+      cleanup?.();
+    };
+  }, []);
 
   const currentStep = steps[viewIndex];
   const progress = getProgress(route, completedStepIds);
