@@ -116,3 +116,42 @@ test('rejects a preparation without useful content', () => {
     /PRÉPA sans preparationItems ni instruction/,
   );
 });
+
+test('rejects a launch action without structured launch metadata', () => {
+  assert.throws(
+    () =>
+      validateRoute(
+        makeRoute([
+          {
+            id: 'launch',
+            order: 1,
+            blockId: 'block-01',
+            type: 'quest',
+            title: 'Launch quest',
+            action: 'LANCER / STOP',
+          },
+          { ...finalStep, order: 2 },
+        ]),
+      ),
+    /action de lancement sans location ni launchInstruction/,
+  );
+});
+
+test('accepts a launch action with a structured location', () => {
+  assert.doesNotThrow(() =>
+    validateRoute(
+      makeRoute([
+        {
+          id: 'launch',
+          order: 1,
+          blockId: 'block-01',
+          type: 'quest',
+          title: 'Launch quest',
+          action: 'LANCER',
+          location: { x: 1, y: -2 },
+        },
+        { ...finalStep, order: 2 },
+      ]),
+    ),
+  );
+});
