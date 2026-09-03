@@ -97,6 +97,12 @@ export function validateRoute(route: RouteDocument): RouteDocument {
       assertValidUrl(step.source.url, step.id);
     }
 
+    if (step.location) {
+      if (!Number.isInteger(step.location.x) || !Number.isInteger(step.location.y)) {
+        throw new Error(`${step.id}: position invalide, x et y doivent être des entiers.`);
+      }
+    }
+
     if (step.type === 'preparation') {
       const hasItems =
         Array.isArray(step.preparationItems) &&
