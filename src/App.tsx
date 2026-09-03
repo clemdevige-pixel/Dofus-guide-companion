@@ -437,6 +437,13 @@ export function App() {
           </button>
         )}
 
+        {!currentStep.location && currentStep.launchInstruction && (
+          <div className="step-context">
+            <strong>Lancement</strong>
+            <span>{currentStep.launchInstruction}</span>
+          </div>
+        )}
+
         {currentStep.instruction && <p className="instruction">{currentStep.instruction}</p>}
 
         {currentStep.type === 'preparation' && currentStep.preparationItems && (
