@@ -29,3 +29,15 @@ jobs:
 
       - name: Build frontend
         run: pnpm build
+
+  tauri-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Check Tauri backend
+        run: cargo check --manifest-path src-tauri/Cargo.toml
