@@ -61,7 +61,7 @@ Le mock runtime a été supprimé : `data/route.json` est la seule route consomm
 
 ### Audit fils rouges du 2026-09-03
 
-L’audit a détecté 7 chaînes éditorialement marquées `FIL ROUGE` mais sans métadonnées structurées. Le Sheet source a été corrigé pour :
+L’audit a détecté 7 chaînes éditorialement marquées `FIL ROUGE` mais sans métadonnées structurées :
 
 - `combat-de-rue`
 - `benediction-viti`
@@ -71,9 +71,9 @@ L’audit a détecté 7 chaînes éditorialement marquées `FIL ROUGE` mais sans
 - `mission-solution`
 - `vie-de-chateau`
 
-Les phases `start / progress / finish` ont été ajoutées sur les lignes concernées.
+Les phases `start / progress / finish` ont été ajoutées dans le Sheet source **et synchronisées dans `data/route.json`**.
 
-**Important :** le Sheet est à jour, mais le `data/route.json` actuellement commité correspond encore à l’export précédent. Un export XLSX frais a été généré et validé localement avec 21 blocs / 957 étapes ; il reste à synchroniser le blob `data/route.json` dans GitHub. Ne surtout pas ajouter d’override runtime ou de second fichier de vérité pour contourner cette synchronisation.
+Le runtime GitHub est donc désormais aligné avec le Sheet pour ces chaînes. Aucun override, fichier parallèle ou second système de goals n’a été conservé.
 
 L’exporteur refuse désormais toute action contenant explicitement `FIL ROUGE` sans `GOAL_ID / GOAL_PHASE` afin d’éviter cette régression.
 
@@ -90,7 +90,7 @@ Présent sur `agent/initial-scaffold` :
 - types de domaine `src/route/types.ts`
 - loader `data/route.json`
 - validation stricte du `RouteDocument`
-- selectors : progression, première étape incomplète, fils rouges actifs, prochain verrou dur, verrou associé à un goal, prépa du bloc, historique
+- selectors : progression, première étape incomplète, fils rouges actifs, prochain verrou dur, verrou associé à un goal, prépa du bloc, étapes validées
 - persistance locale des `completedStepIds`
 - persistance du mode compact
 - persistance de l’étape consultée via `currentStepId`
@@ -99,9 +99,10 @@ Présent sur `agent/initial-scaffold` :
 - raccourcis globaux Tauri configurables et persistés
 - détection de conflits de raccourcis
 - raccourci afficher / masquer l’overlay
-- drawer fonctionnel : Progression / Fils rouges / Prochain verrou / Prépa du bloc / Historique / Paramètres
+- drawer fonctionnel : Progression / Fils rouges / Prochain verrou / Prépa du bloc / Étapes validées / Paramètres
 - rendu `PRÉPA` depuis `preparationItems`
-- rendu `FIL ROUGE` depuis `longRunningGoal` avec verrou associé via `goalId`
+- rendu du contexte fil rouge depuis `longRunningGoal`, indépendamment du `type` de l’étape
+- aucun message « Pas besoin de finir maintenant » sur une phase `finish`
 - rendu `VERROU DUR` depuis `hardLock`
 - validation d’un `VERROU DUR` n’auto-avance plus vers l’étape suivante
 - CI frontend + Tauri Windows
@@ -130,6 +131,14 @@ Présent sur `agent/initial-scaffold` :
 
 `getActiveLongRunningGoals` n’ouvre plus un goal sur un `progress` validé isolément. Seul un `start` validé peut ouvrir le goal ; `progress` ne met à jour qu’un goal déjà actif ; `finish` ou hard lock validé le ferme.
 
+Les goals ne sont volontairement pas contraints à avoir tous un `finish` : certaines chaînes sont conçues pour se fermer sur leur `hardLock` associé.
+
+### Vue « Étapes validées »
+
+L’ancienne appellation `Historique` était trompeuse : avec la vérité unique actuelle `completedStepIds`, l’app ne possède pas de timestamp de validation et ne peut donc pas reconstruire une chronologie réelle.
+
+La vue est maintenant correctement nommée **Étapes validées**. Ne pas ajouter de second état persistant uniquement pour recréer un historique tant qu’un besoin produit réel n’est pas validé.
+
 ### Tests
 
 Tests ciblés avec le runner natif Node, sans framework supplémentaire :
@@ -140,7 +149,7 @@ Commandes :
 - `pnpm test:route`
 - `pnpm validate:route`
 
-La CI frontend exécute désormais :
+La CI frontend exécute :
 1. `pnpm test:route`
 2. `pnpm validate:route`
 3. `pnpm build`
@@ -201,7 +210,7 @@ Fonctionnel :
 - Fils rouges
 - Prochain verrou
 - Prépa du bloc
-- Historique
+- Étapes validées
 - Paramètres
 
 Une seule surface drawer est ouverte à la fois. Ces vues sont dérivées de `route + completedStepIds`, sans nouveau store.
@@ -210,44 +219,27 @@ Une seule surface drawer est ouverte à la fois. Ces vues sont dérivées de `ro
 
 `PRÉPA` : liste structurée issue de `preparationItems`.
 
-`FIL ROUGE` : message non bloquant + verrou associé si un `hardLock.goalId` correspondant existe.
+Goal / `FIL ROUGE` : message non bloquant dérivé de `longRunningGoal` + verrou associé si un `hardLock.goalId` correspondant existe. Le comportement ne dépend pas de `type === 'long_running'`.
 
 `VERROU DUR` : message structuré via `hardLock.message`; la validation ne déclenche pas d’auto-avance. La navigation manuelle reste possible pour consulter la suite.
 
 ## 9. Prochain chantier exact
 
-### A — PRIORITÉ : synchroniser le vrai export runtime
+La synchronisation Sheet → runtime et l’audit structurel des goals sont terminés.
 
-Le Sheet contient maintenant les 7 chaînes supplémentaires structurées. Regénérer / pousser `data/route.json` sans introduire de source parallèle.
+### A — PRIORITÉ : validation réelle sous Tauri Windows
 
-L’export XLSX frais a déjà été vérifié localement : **21 blocs / 957 étapes**, lifecycle des goals valide, FIN unique et dernière, PRÉPA valides.
+1. lancer `pnpm tauri dev`
+2. naviguer vers une étape éloignée
+3. fermer / relancer
+4. vérifier reprise sur le même `currentStepId`
+5. vérifier `completedStepIds`
+6. vérifier mode compact
+7. déplacer / resize la fenêtre
+8. fermer / relancer
+9. vérifier restauration taille + position
 
-### B — Audit runtime représentatif après synchronisation
-
-Tester dans le vrai `route.json` :
-- début de route
-- PRÉPA multi-items
-- FIL ROUGE start / progress / finish
-- hard lock avec `goalId`
-- hard lock sans `goalId`
-- REPRISE
-- DONJON
-- FIN
-- historique après validations/dévalidations
-- prépa de plusieurs blocs
-
-### C — Validation persistance sous Tauri Windows
-
-1. naviguer vers une étape éloignée
-2. fermer / relancer
-3. vérifier reprise sur le même `currentStepId`
-4. vérifier `completedStepIds`
-5. vérifier mode compact
-6. déplacer / resize la fenêtre
-7. fermer / relancer
-8. vérifier restauration taille + position
-
-### D — Validation raccourcis sous Windows / Dofus
+### B — Validation raccourcis sous Windows / Dofus
 
 Tester :
 - précédent
@@ -258,7 +250,20 @@ Tester :
 - conflit de bindings
 - comportement quand Dofus a le focus
 
-### E — Polish UI seulement ensuite
+### C — Audit UX réel
+
+Valider :
+- 380 px
+- resize libre
+- always-on-top
+- footer toujours accessible
+- longues PRÉPA
+- longs textes de verrou
+- drawer sur petite fenêtre
+- start / progress / finish sur des goals portés par `quest` ou `resume`, pas seulement `long_running`
+- Étapes validées après validations/dévalidations
+
+### D — Polish UI seulement ensuite
 
 Ne pas lancer de refonte graphique avant validation fonctionnelle réelle.
 
@@ -285,10 +290,10 @@ Ne pas lancer de refonte graphique avant validation fonctionnelle réelle.
 - always-on-top validé avec Dofus
 - raccourcis globaux validés avec Dofus au premier plan
 - rendu 380 px + resize libre validés
-- audit des types spéciaux sur la vraie route synchronisée effectué
+- audit des types spéciaux sur la vraie route effectué
 
 ## 12. État PR
 
-PR #1 reste en draft tant que le nouvel export runtime et la validation Windows réelle ne sont pas terminés.
+PR #1 reste en draft tant que la validation Windows réelle n’est pas terminée.
 
-Le prochain agent ne doit pas recommencer l’exporteur, la persistance, les hotkeys ou le drawer : il doit d’abord synchroniser `data/route.json`, puis terminer la validation réelle.
+Le prochain agent ne doit pas recommencer l’exporteur, la synchronisation des goals, la persistance, les hotkeys ou le drawer : la priorité est maintenant la validation réelle de l’application sous Windows/Dofus et la correction minimale des écarts observés.
