@@ -3,7 +3,7 @@ import { dirname, resolve } from 'node:path';
 import type { RouteBlock, RouteDocument, RouteStep, StepType } from '../src/route/types';
 import { validateRoute } from '../src/route/validation';
 
-const DEFAULT_RANGE = 'ROUTE!A5:O1004';
+const DEFAULT_RANGE = 'ROUTE!A5:P1004';
 const OUTPUT_PATH = resolve('data/route.json');
 
 const typeMap: Record<string, { type: StepType; displayType?: string }> = {
@@ -34,33 +34,16 @@ type GoogleAuth = {
 
 function requireEnv(name: string): string {
   const value = process.env[name]?.trim();
-  if (!value) {
-    throw new Error(`Variable d'environnement manquante : ${name}`);
-  }
+  if (!value) throw new Error(`Variable d'environnement manquante : ${name}`);
   return value;
 }
 
 function getAuth(): GoogleAuth {
   const accessToken = process.env.GOOGLE_ACCESS_TOKEN?.trim();
   const apiKey = process.env.GOOGLE_SHEETS_API_KEY?.trim();
-
-  if (accessToken) {
-    return {
-      headers: { Authorization: `Bearer ${accessToken}` },
-      query: '',
-    };
-  }
-
-  if (apiKey) {
-    return {
-      headers: {},
-      query: `&key=${encodeURIComponent(apiKey)}`,
-    };
-  }
-
-  throw new Error(
-    'Authentification Google absente : définir GOOGLE_ACCESS_TOKEN ou GOOGLE_SHEETS_API_KEY.',
-  );
+  if (accessToken) return { headers: { Authorization: `Bearer ${accessToken}` }, query: '' };
+  if (apiKey) return { headers: {}, query: `&key=${encodeURIComponent(apiKey)}` };
+  throw new Error('Authentification Google absente : définir GOOGLE_ACCESS_TOKEN ou GOOGLE_SHEETS_API_KEY.');
 }
 
 async function fetchValues(spreadsheetId: string, valueRenderOption: 'FORMATTED_VALUE' | 'FORMULA') {
@@ -69,13 +52,11 @@ async function fetchValues(spreadsheetId: string, valueRenderOption: 'FORMATTED_
   const url =
     `https://sheets.googleapis.com/v4/spreadsheets/${encodeURIComponent(spreadsheetId)}` +
     `/values/${range}?majorDimension=ROWS&valueRenderOption=${valueRenderOption}${auth.query}`;
-
   const response = await fetch(url, { headers: auth.headers });
   if (!response.ok) {
     const body = await response.text();
     throw new Error(`Google Sheets API ${response.status}: ${body}`);
   }
-
   const payload = (await response.json()) as { values?: SheetRow[] };
   return payload.values ?? [];
 }
@@ -84,62 +65,40 @@ function cell(row: SheetRow | undefined, index: number): string {
   return row?.[index]?.trim() ?? '';
 }
 
+function parseBoolean(rawValue: string, sheetRow: number): boolean {
+  if (!rawValue) return false;
+  if (rawValue === 'TRUE') return true;
+  if (rawValue === 'FALSE') return false;
+  throw new Error(`Ligne Sheet ${sheetRow}: LANCEMENT_REQUIS invalide « ${rawValue} », attendu TRUE/FALSE.`);
+}
+
 function parseGoalPhase(rawPhase: string, sheetRow: number): GoalPhase | undefined {
-  if (!rawPhase) {
-    return undefined;
-  }
-
-  if (rawPhase === 'start' || rawPhase === 'progress' || rawPhase === 'finish') {
-    return rawPhase;
-  }
-
+  if (!rawPhase) return undefined;
+  if (rawPhase === 'start' || rawPhase === 'progress' || rawPhase === 'finish') return rawPhase;
   throw new Error(`Ligne Sheet ${sheetRow}: GOAL_PHASE inconnu « ${rawPhase} »`);
 }
 
 function parsePosition(rawPosition: string, sheetRow: number): RouteStep['location'] | undefined {
-  if (!rawPosition) {
-    return undefined;
-  }
-
+  if (!rawPosition) return undefined;
   const match = rawPosition.match(/^\[?\s*(-?\d+)\s*,\s*(-?\d+)\s*\]?$/);
   if (!match) {
     throw new Error(`Ligne Sheet ${sheetRow}: POSITION invalide « ${rawPosition} », attendu [x,y].`);
   }
-
-  return {
-    x: Number.parseInt(match[1], 10),
-    y: Number.parseInt(match[2], 10),
-  };
+  return { x: Number.parseInt(match[1], 10), y: Number.parseInt(match[2], 10) };
 }
 
 function parseHyperlinkFormula(formula: string): { label: string; url: string } | undefined {
-  if (!formula.startsWith('=HYPERLINK(')) {
-    return undefined;
-  }
-
+  if (!formula.startsWith('=HYPERLINK(')) return undefined;
   const match = formula.match(/^=HYPERLINK\("([^"]+)"[;,]"((?:[^"]|"")*)"\)$/i);
-  if (!match) {
-    throw new Error(`Formule HYPERLINK non supportée : ${formula}`);
-  }
-
-  return {
-    url: match[1],
-    label: match[2].replaceAll('""', '"'),
-  };
+  if (!match) throw new Error(`Formule HYPERLINK non supportée : ${formula}`);
+  return { url: match[1], label: match[2].replaceAll('""', '"') };
 }
 
 function parseBlock(title: string): RouteBlock | undefined {
   const match = title.match(/^NOUVEAU BLOC\s+(\d+)\s+—\s+(.+)$/i);
-  if (!match) {
-    return undefined;
-  }
-
+  if (!match) return undefined;
   const order = Number.parseInt(match[1], 10);
-  return {
-    id: `block-${match[1].padStart(2, '0')}`,
-    order,
-    title: match[2].trim(),
-  };
+  return { id: `block-${match[1].padStart(2, '0')}`, order, title: match[2].trim() };
 }
 
 function parsePreparationItems(text: string): string[] | undefined {
@@ -149,14 +108,11 @@ function parsePreparationItems(text: string): string[] | undefined {
     .filter((line) => line.startsWith('•'))
     .map((line) => line.replace(/^•\s*/, '').trim())
     .filter(Boolean);
-
   return items.length > 0 ? items : undefined;
 }
 
 function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDocument {
-  if (formattedRows.length === 0) {
-    throw new Error('Le Sheet ne contient aucune donnée dans la plage demandée.');
-  }
+  if (formattedRows.length === 0) throw new Error('Le Sheet ne contient aucune donnée dans la plage demandée.');
 
   const headers = formattedRows[0] ?? [];
   if (
@@ -166,10 +122,11 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
     cell(headers, 11) !== 'GOAL_ID' ||
     cell(headers, 12) !== 'GOAL_PHASE' ||
     cell(headers, 13) !== 'POSITION' ||
-    cell(headers, 14) !== 'LANCEMENT'
+    cell(headers, 14) !== 'LANCEMENT' ||
+    cell(headers, 15) !== 'LANCEMENT_REQUIS'
   ) {
     throw new Error(
-      'Colonnes ROUTE inattendues : TYPE, ÉTAPE, STEP_ID, GOAL_ID, GOAL_PHASE, POSITION et LANCEMENT sont obligatoires.',
+      'Colonnes ROUTE inattendues : TYPE, ÉTAPE, STEP_ID, GOAL_ID, GOAL_PHASE, POSITION, LANCEMENT et LANCEMENT_REQUIS sont obligatoires.',
     );
   }
 
@@ -185,9 +142,7 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
     const rawTitle = cell(formatted, 2);
     const sheetRow = index + 5;
 
-    if (!rawType && !rawTitle) {
-      continue;
-    }
+    if (!rawType && !rawTitle) continue;
 
     const block = !rawType ? parseBlock(rawTitle) : undefined;
     if (block) {
@@ -195,35 +150,20 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
       blocks.push(block);
       continue;
     }
-
-    if (!rawType && rawTitle === '▶ À FAIRE') {
-      continue;
-    }
-
-    if (!rawType) {
-      throw new Error(`Ligne Sheet ${sheetRow}: TYPE vide pour « ${rawTitle} »`);
-    }
-
-    if (!currentBlock) {
-      throw new Error(`Ligne Sheet ${sheetRow}: étape rencontrée avant le premier bloc.`);
-    }
+    if (!rawType && rawTitle === '▶ À FAIRE') continue;
+    if (!rawType) throw new Error(`Ligne Sheet ${sheetRow}: TYPE vide pour « ${rawTitle} »`);
+    if (!currentBlock) throw new Error(`Ligne Sheet ${sheetRow}: étape rencontrée avant le premier bloc.`);
 
     const mapping = typeMap[rawType];
-    if (!mapping) {
-      throw new Error(`Ligne Sheet ${sheetRow}: TYPE inconnu « ${rawType} »`);
-    }
+    if (!mapping) throw new Error(`Ligne Sheet ${sheetRow}: TYPE inconnu « ${rawType} »`);
 
     const id = cell(formatted, 10);
-    if (!id) {
-      throw new Error(`Ligne Sheet ${sheetRow}: STEP_ID manquant.`);
-    }
+    if (!id) throw new Error(`Ligne Sheet ${sheetRow}: STEP_ID manquant.`);
 
     const action = cell(formatted, 8);
     const goalId = cell(formatted, 11);
     const goalPhase = parseGoalPhase(cell(formatted, 12), sheetRow);
-    if (goalPhase && !goalId) {
-      throw new Error(`Ligne Sheet ${sheetRow}: GOAL_PHASE défini sans GOAL_ID.`);
-    }
+    if (goalPhase && !goalId) throw new Error(`Ligne Sheet ${sheetRow}: GOAL_PHASE défini sans GOAL_ID.`);
     if (goalId && !goalPhase && mapping.type !== 'hard_lock') {
       throw new Error(`Ligne Sheet ${sheetRow}: GOAL_ID défini sans GOAL_PHASE.`);
     }
@@ -231,9 +171,7 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
       throw new Error(`Ligne Sheet ${sheetRow}: FIL ROUGE sans GOAL_ID/GOAL_PHASE.`);
     }
     if (action.includes('FIL ROUGE') && (!goalId || !goalPhase)) {
-      throw new Error(
-        `Ligne Sheet ${sheetRow}: action « ${action} » sans GOAL_ID/GOAL_PHASE.`,
-      );
+      throw new Error(`Ligne Sheet ${sheetRow}: action « ${action} » sans GOAL_ID/GOAL_PHASE.`);
     }
 
     const hyperlink = parseHyperlinkFormula(cell(formula, 2));
@@ -241,7 +179,17 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
     const instruction = cell(formatted, 9);
     const location = parsePosition(cell(formatted, 13), sheetRow);
     const launchInstruction = cell(formatted, 14);
+    const launchRequired = parseBoolean(cell(formatted, 15), sheetRow);
     const title = rawTitle.split('\n')[0]?.trim() || rawTitle;
+
+    if (action.toUpperCase().includes('LANCER') && !launchRequired) {
+      throw new Error(`Ligne Sheet ${sheetRow}: action de lancement sans LANCEMENT_REQUIS=TRUE.`);
+    }
+    if (launchRequired && !location && !launchInstruction) {
+      throw new Error(
+        `Ligne Sheet ${sheetRow}: lancement requis sans POSITION ni LANCEMENT pour « ${title} ».` ,
+      );
+    }
 
     stepOrder += 1;
     const step: RouteStep = {
@@ -259,9 +207,7 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
       ...(mapping.type === 'preparation'
         ? { preparationItems: parsePreparationItems(preparationText || rawTitle) }
         : {}),
-      ...(goalId && goalPhase
-        ? { longRunningGoal: { goalId, phase: goalPhase } }
-        : {}),
+      ...(goalId && goalPhase ? { longRunningGoal: { goalId, phase: goalPhase } } : {}),
       ...(mapping.type === 'hard_lock'
         ? { hardLock: { ...(goalId ? { goalId } : {}), message: instruction || title } }
         : {}),
@@ -285,15 +231,12 @@ async function main() {
     fetchValues(spreadsheetId, 'FORMATTED_VALUE'),
     fetchValues(spreadsheetId, 'FORMULA'),
   ]);
-
   if (formattedRows.length !== formulaRows.length) {
     throw new Error('Les lectures FORMATTED_VALUE et FORMULA ne couvrent pas les mêmes lignes.');
   }
-
   const route = buildRoute(formattedRows, formulaRows);
   await mkdir(dirname(OUTPUT_PATH), { recursive: true });
   await writeFile(OUTPUT_PATH, `${JSON.stringify(route, null, 2)}\n`, 'utf8');
-
   console.log(`Route exportée : ${route.steps.length} étapes, ${route.blocks.length} blocs.`);
   console.log(`Fichier : ${OUTPUT_PATH}`);
 }
