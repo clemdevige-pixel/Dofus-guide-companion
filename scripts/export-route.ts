@@ -3,7 +3,7 @@ import { dirname, resolve } from 'node:path';
 import type { RouteBlock, RouteDocument, RouteStep, StepType } from '../src/route/types';
 import { validateRoute } from '../src/route/validation';
 
-const DEFAULT_RANGE = 'ROUTE!A5:M1004';
+const DEFAULT_RANGE = 'ROUTE!A5:N1004';
 const OUTPUT_PATH = resolve('data/route.json');
 
 const typeMap: Record<string, { type: StepType; displayType?: string }> = {
@@ -96,6 +96,22 @@ function parseGoalPhase(rawPhase: string, sheetRow: number): GoalPhase | undefin
   throw new Error(`Ligne Sheet ${sheetRow}: GOAL_PHASE inconnu « ${rawPhase} »`);
 }
 
+function parsePosition(rawPosition: string, sheetRow: number): RouteStep['location'] | undefined {
+  if (!rawPosition) {
+    return undefined;
+  }
+
+  const match = rawPosition.match(/^\[?\s*(-?\d+)\s*,\s*(-?\d+)\s*\]?$/);
+  if (!match) {
+    throw new Error(`Ligne Sheet ${sheetRow}: POSITION invalide « ${rawPosition} », attendu [x,y].`);
+  }
+
+  return {
+    x: Number.parseInt(match[1], 10),
+    y: Number.parseInt(match[2], 10),
+  };
+}
+
 function parseHyperlinkFormula(formula: string): { label: string; url: string } | undefined {
   if (!formula.startsWith('=HYPERLINK(')) {
     return undefined;
@@ -148,10 +164,11 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
     cell(headers, 2) !== 'ÉTAPE' ||
     cell(headers, 10) !== 'STEP_ID' ||
     cell(headers, 11) !== 'GOAL_ID' ||
-    cell(headers, 12) !== 'GOAL_PHASE'
+    cell(headers, 12) !== 'GOAL_PHASE' ||
+    cell(headers, 13) !== 'POSITION'
   ) {
     throw new Error(
-      'Colonnes ROUTE inattendues : TYPE, ÉTAPE, STEP_ID, GOAL_ID et GOAL_PHASE sont obligatoires.',
+      'Colonnes ROUTE inattendues : TYPE, ÉTAPE, STEP_ID, GOAL_ID, GOAL_PHASE et POSITION sont obligatoires.',
     );
   }
 
@@ -221,6 +238,7 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
     const hyperlink = parseHyperlinkFormula(cell(formula, 2));
     const preparationText = cell(formatted, 3);
     const instruction = cell(formatted, 9);
+    const location = parsePosition(cell(formatted, 13), sheetRow);
     const title = rawTitle.split('\n')[0]?.trim() || rawTitle;
 
     stepOrder += 1;
@@ -234,6 +252,7 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
       ...(action ? { action } : {}),
       ...(instruction ? { instruction } : {}),
       ...(hyperlink ? { source: { label: 'DPLN', url: hyperlink.url } } : {}),
+      ...(location ? { location } : {}),
       ...(mapping.type === 'preparation'
         ? { preparationItems: parsePreparationItems(preparationText || rawTitle) }
         : {}),
