@@ -1,0 +1,98 @@
+name: Sync quest positions once
+
+on:
+  push:
+    branches:
+      - agent/initial-scaffold
+    paths:
+      - .github/workflows/sync-quest-positions-once.yml
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/initial-scaffold
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.17.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Patch runtime positions
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const path = 'data/route.json';
+          const route = JSON.parse(fs.readFileSync(path, 'utf8'));
+          const positions = {
+            'route-step-0073': [5, -19],
+            'route-step-0080': [6, -18],
+            'route-step-0083': [1, -15],
+            'route-step-0095': [1, -15],
+            'route-step-0098': [1, -15],
+            'route-step-0101': [1, -15],
+            'route-step-0104': [1, -15],
+            'route-step-0121': [-55, 15],
+            'route-step-0162': [2, 1],
+            'route-step-0195': [2, -1],
+            'route-step-0288': [24, -35],
+            'route-step-0329': [-19, 30],
+            'route-step-0358': [-36, -60],
+            'route-step-0361': [27, -30],
+            'route-step-0368': [-77, -42],
+            'route-step-0387': [-45, 19],
+            'route-step-0470': [-69, -88],
+            'route-step-0525': [-57, 12],
+            'route-step-0559': [-77, -72],
+            'route-step-0569': [-77, -42],
+            'route-step-0588': [-77, -42],
+            'route-step-0611': [-68, -78],
+            'route-step-0613': [-68, -78],
+            'route-step-0614': [-68, -78],
+            'route-step-0705': [21, -33],
+            'route-step-0717': [-13, -22],
+            'route-step-0921': [-10, -31],
+            'route-step-0939': [2, 4],
+          };
+
+          const byId = new Map(route.steps.map((step) => [step.id, step]));
+          for (const [id, [x, y]] of Object.entries(positions)) {
+            const step = byId.get(id);
+            if (!step) throw new Error(`Missing route step: ${id}`);
+            step.location = { x, y };
+          }
+
+          if (Object.values(route.steps).filter((step) => step.location).length < Object.keys(positions).length) {
+            throw new Error('Not all positions were applied.');
+          }
+
+          fs.writeFileSync(path, `${JSON.stringify(route)}\n`);
+          console.log(`Applied ${Object.keys(positions).length} structured positions.`);
+          NODE
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Validate route logic
+        run: |
+          pnpm test:route
+          pnpm validate:route
+          pnpm build
+
+      - name: Commit generated runtime
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add data/route.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Sync structured quest launch positions"
+          git push origin HEAD:agent/initial-scaffold
