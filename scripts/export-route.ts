@@ -3,7 +3,7 @@ import { dirname, resolve } from 'node:path';
 import type { RouteBlock, RouteDocument, RouteStep, StepType } from '../src/route/types';
 import { validateRoute } from '../src/route/validation';
 
-const DEFAULT_RANGE = 'ROUTE!A5:N1004';
+const DEFAULT_RANGE = 'ROUTE!A5:O1004';
 const OUTPUT_PATH = resolve('data/route.json');
 
 const typeMap: Record<string, { type: StepType; displayType?: string }> = {
@@ -165,10 +165,11 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
     cell(headers, 10) !== 'STEP_ID' ||
     cell(headers, 11) !== 'GOAL_ID' ||
     cell(headers, 12) !== 'GOAL_PHASE' ||
-    cell(headers, 13) !== 'POSITION'
+    cell(headers, 13) !== 'POSITION' ||
+    cell(headers, 14) !== 'LANCEMENT'
   ) {
     throw new Error(
-      'Colonnes ROUTE inattendues : TYPE, ÉTAPE, STEP_ID, GOAL_ID, GOAL_PHASE et POSITION sont obligatoires.',
+      'Colonnes ROUTE inattendues : TYPE, ÉTAPE, STEP_ID, GOAL_ID, GOAL_PHASE, POSITION et LANCEMENT sont obligatoires.',
     );
   }
 
@@ -239,6 +240,7 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
     const preparationText = cell(formatted, 3);
     const instruction = cell(formatted, 9);
     const location = parsePosition(cell(formatted, 13), sheetRow);
+    const launchInstruction = cell(formatted, 14);
     const title = rawTitle.split('\n')[0]?.trim() || rawTitle;
 
     stepOrder += 1;
@@ -253,6 +255,7 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
       ...(instruction ? { instruction } : {}),
       ...(hyperlink ? { source: { label: 'DPLN', url: hyperlink.url } } : {}),
       ...(location ? { location } : {}),
+      ...(launchInstruction ? { launchInstruction } : {}),
       ...(mapping.type === 'preparation'
         ? { preparationItems: parsePreparationItems(preparationText || rawTitle) }
         : {}),
