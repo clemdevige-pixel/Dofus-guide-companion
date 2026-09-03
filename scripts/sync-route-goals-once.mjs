@@ -1,6 +1,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 
 const ROUTE_PATH = new URL('../data/route.json', import.meta.url);
+const APP_PATH = new URL('../src/App.tsx', import.meta.url);
 
 const expectedGoals = new Map([
   ['route-step-0073', { goalId: 'combat-de-rue', phase: 'start' }],
@@ -43,4 +44,17 @@ for (const [stepId, goal] of expectedGoals) {
 }
 
 await writeFile(ROUTE_PATH, `${JSON.stringify(route)}\n`, 'utf8');
-console.log(`Synchronisé ${expectedGoals.size} checkpoints de fils rouges.`);
+
+const oldGoalContext = "{currentStep.type === 'long_running' && (";
+const newGoalContext =
+  "{currentStep.longRunningGoal && currentStep.longRunningGoal.phase !== 'finish' && (";
+const appSource = await readFile(APP_PATH, 'utf8');
+const occurrences = appSource.split(oldGoalContext).length - 1;
+
+if (occurrences === 1) {
+  await writeFile(APP_PATH, appSource.replace(oldGoalContext, newGoalContext), 'utf8');
+} else if (!appSource.includes(newGoalContext)) {
+  throw new Error(`Contexte FIL ROUGE inattendu dans App.tsx (${occurrences} occurrence(s)).`);
+}
+
+console.log(`Synchronisé ${expectedGoals.size} checkpoints et le rendu data-driven des fils rouges.`);
