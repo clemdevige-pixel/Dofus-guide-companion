@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { loadProgress, saveProgress } from './progress/storage';
-import { mockRoute } from './route/mockRoute';
+import { loadBundledRoute } from './route/loader';
 import {
   getActiveLongRunningGoals,
   getFirstIncompleteStep,
@@ -10,9 +10,8 @@ import {
   getStepIndex,
 } from './route/selectors';
 import type { StepType } from './route/types';
-import { validateRoute } from './route/validation';
 
-const route = validateRoute(mockRoute);
+const route = loadBundledRoute();
 
 const typeLabels: Record<StepType, string> = {
   quest: 'QUÊTE',
