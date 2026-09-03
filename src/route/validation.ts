@@ -32,6 +32,17 @@ function assertValidUrl(url: string, context: string) {
   }
 }
 
+function assertValidCoordinate(
+  coordinate: { x: number; y: number } | undefined,
+  context: string,
+  label: string,
+) {
+  if (!coordinate) return;
+  if (!Number.isInteger(coordinate.x) || !Number.isInteger(coordinate.y)) {
+    throw new Error(`${context}: ${label} invalide, x et y doivent être des entiers.`);
+  }
+}
+
 export function validateRoute(route: RouteDocument): RouteDocument {
   if (route.schemaVersion !== 1) {
     throw new Error(`Version de schéma non supportée : ${route.schemaVersion}`);
@@ -97,11 +108,8 @@ export function validateRoute(route: RouteDocument): RouteDocument {
       assertValidUrl(step.source.url, step.id);
     }
 
-    if (step.location) {
-      if (!Number.isInteger(step.location.x) || !Number.isInteger(step.location.y)) {
-        throw new Error(`${step.id}: position invalide, x et y doivent être des entiers.`);
-      }
-    }
+    assertValidCoordinate(step.location, step.id, 'position de lancement');
+    assertValidCoordinate(step.destination, step.id, 'destination');
 
     if (step.launchInstruction !== undefined && !isNonEmptyString(step.launchInstruction)) {
       throw new Error(`${step.id}: instruction de lancement vide.`);
