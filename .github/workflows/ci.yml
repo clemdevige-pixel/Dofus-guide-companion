@@ -7,6 +7,9 @@ on:
       - 'agent/**'
   pull_request:
 
+permissions:
+  contents: write
+
 jobs:
   frontend:
     runs-on: ubuntu-latest
@@ -27,6 +30,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
+      - name: Synchronize route goals once
+        if: github.event_name == 'push' && github.ref == 'refs/heads/agent/initial-scaffold'
+        run: node scripts/sync-route-goals-once.mjs
+
       - name: Test route logic
         run: pnpm test:route
 
@@ -35,6 +42,18 @@ jobs:
 
       - name: Build frontend
         run: pnpm build
+
+      - name: Commit synchronized route
+        if: github.event_name == 'push' && github.ref == 'refs/heads/agent/initial-scaffold'
+        run: |
+          if git diff --quiet -- data/route.json; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/route.json
+          git commit -m "data: sync route long-running goals"
+          git push
 
   tauri-windows:
     runs-on: windows-latest
