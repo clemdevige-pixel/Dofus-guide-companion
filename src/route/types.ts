@@ -32,6 +32,10 @@ export interface RouteStep {
     label: string;
     url: string;
   };
+  location?: {
+    x: number;
+    y: number;
+  };
   preparationItems?: string[];
   longRunningGoal?: {
     goalId: string;
