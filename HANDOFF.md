@@ -34,13 +34,13 @@ Avant toute modification, lire dans cet ordre :
 - une seule vérité de progression : `completedStepIds`
 - l’étape consultée est persistée par **STEP_ID stable**, jamais par numéro de ligne ou index métier
 
-## 3. État réel du pipeline data — TERMINÉ
+## 3. Pipeline data — TERMINÉ
 
 Spreadsheet : `Roadmap ULTIMATE V2 — Astrub → Dofus Sylvestre`
 ID : `1l1eYM3T708s5j74LmsUi4wyzg6sM9xShPzS_ToBtVYg`
 Onglet : `ROUTE`
 
-Colonnes techniques présentes :
+Colonnes techniques :
 - K `STEP_ID`
 - L `GOAL_ID`
 - M `GOAL_PHASE`
@@ -56,35 +56,40 @@ Colonnes techniques présentes :
 - TYPE inconnu = erreur d’export
 - relations de goals incohérentes = erreur de validation
 
-`scripts/export-route.ts` existe et produit le vrai `data/route.json`.
+`scripts/export-route.ts` produit le vrai `data/route.json`.
 
 Le mock runtime a été supprimé : `data/route.json` est la seule route consommée par le front.
 
-## 4. État du code applicatif
+## 4. État applicatif actuel
 
-Déjà présent sur `agent/initial-scaffold` :
+Présent sur `agent/initial-scaffold` :
 
 - Tauri 2
 - React + TypeScript + Vite
 - fenêtre always-on-top
 - overlay compact / détaillé
 - navigation précédent / suivant / valider-dévalider
-- drawer secondaire
+- bloc courant visible en mode détaillé
 - types de domaine `src/route/types.ts`
 - loader `data/route.json`
 - validation stricte du `RouteDocument`
-- selectors : progression, première étape incomplète, fils rouges actifs, prochain verrou dur
+- selectors : progression, première étape incomplète, fils rouges actifs, prochain verrou dur, verrou associé à un goal, prépa du bloc, historique
 - persistance locale des `completedStepIds`
 - persistance du mode compact
-- persistance de l’étape actuellement consultée via `currentStepId`
+- persistance de l’étape consultée via `currentStepId`
 - persistance taille + position fenêtre via `src/window/persistence.ts`
 - restauration de géométrie câblée dans `App.tsx`
 - raccourcis globaux Tauri configurables et persistés
 - détection de conflits de raccourcis
 - raccourci afficher / masquer l’overlay
+- drawer fonctionnel : Progression / Fils rouges / Prochain verrou / Prépa du bloc / Historique / Paramètres
+- rendu `PRÉPA` depuis `preparationItems`
+- rendu `FIL ROUGE` depuis `longRunningGoal` avec verrou associé via `goalId`
+- rendu `VERROU DUR` depuis `hardLock`
+- validation d’un `VERROU DUR` n’auto-avance plus vers l’étape suivante
 - CI frontend + Tauri Windows
 
-## 5. Raccourcis globaux actuels
+## 5. Raccourcis globaux
 
 Actions supportées :
 - étape précédente
@@ -92,7 +97,7 @@ Actions supportées :
 - valider / dévalider
 - afficher / masquer l’overlay
 
-Bindings par défaut définis dans `src/shortcuts/types.ts`.
+Bindings par défaut dans `src/shortcuts/types.ts`.
 
 Ne pas créer un second système de raccourcis. Toute évolution passe par `src/shortcuts/*`.
 
@@ -100,7 +105,7 @@ Ne pas créer un second système de raccourcis. Toute évolution passe par `src/
 
 Progression : `src/progress/storage.ts`
 
-État persistant actuel :
+État persistant :
 - `completedStepIds`
 - `compact`
 - `currentStepId`
@@ -115,7 +120,7 @@ Géométrie fenêtre : `src/window/persistence.ts`
 
 Règle : utiliser les IDs stables de route, jamais un index persistant comme identité métier.
 
-## 7. UX cible V1
+## 7. UX V1 — état réel
 
 ### Mode compact
 - index / total
@@ -125,34 +130,58 @@ Règle : utiliser les IDs stables de route, jamais un index persistant comme ide
 - action
 - instruction courte
 - précédent / valider / suivant
+- PRÉPA longue scrollable
 
 ### Mode détaillé
 Ajoute :
 - bloc courant
 - fils rouges actifs
 - prochain verrou dur
-- préparation utile
-- drawer secondaire
+- surfaces drawer
 
-Drawer prévu :
+### Drawer
+Fonctionnel :
 - Progression
 - Fils rouges
 - Prochain verrou
 - Prépa du bloc
-- Historique
+- Historique (30 dernières validations affichées)
 - Paramètres
 
-Important : plusieurs boutons du drawer sont encore des placeholders visuels et ne disposent pas encore de vues fonctionnelles dédiées.
+Une seule surface drawer est ouverte à la fois. Ces vues sont dérivées de `route + completedStepIds`, sans nouveau store.
+
+### Types spéciaux
+
+`PRÉPA` : liste structurée issue de `preparationItems`.
+
+`FIL ROUGE` : message non bloquant + verrou associé si un `hardLock.goalId` correspondant existe.
+
+`VERROU DUR` : message structuré via `hardLock.message`; la validation ne déclenche pas d’auto-avance. La navigation manuelle reste possible pour consulter la suite.
 
 ## 8. Prochain chantier exact
 
-Le pipeline data étant terminé et la persistance/hotkeys déjà largement posées, la priorité passe maintenant à la **validation fonctionnelle du companion réel sur les 957 étapes**.
+Le pipeline data, la persistance de base, les hotkeys et les surfaces V1 sont maintenant posés.
 
-Ordre recommandé :
+La priorité est **l’audit runtime + validation Windows réelle**, pas une nouvelle couche UI.
 
-### A — Fermer la persistance V1
+### A — Audit runtime représentatif
 
-Vérifier manuellement sous Tauri Windows :
+Tester dans le vrai `route.json` :
+- début de route
+- PRÉPA multi-items
+- FIL ROUGE start / progress / finish
+- hard lock avec `goalId`
+- hard lock sans `goalId`
+- REPRISE
+- DONJON
+- FIN
+- historique après validations/dévalidations
+- prépa de plusieurs blocs
+
+Vérifier qu’aucun comportement ne dépend du titre affiché.
+
+### B — Validation persistance sous Tauri Windows
+
 1. naviguer vers une étape éloignée
 2. fermer / relancer
 3. vérifier reprise sur le même `currentStepId`
@@ -162,7 +191,7 @@ Vérifier manuellement sous Tauri Windows :
 7. fermer / relancer
 8. vérifier restauration taille + position
 
-### B — Valider les raccourcis globaux sous Windows / Dofus
+### C — Validation raccourcis sous Windows / Dofus
 
 Tester :
 - précédent
@@ -173,31 +202,20 @@ Tester :
 - conflit de bindings
 - comportement quand Dofus a le focus
 
-### C — Rendre le drawer fonctionnel sans dupliquer les données
+### D — Test UX réel
 
-Implémenter les vues via selectors dérivés de la route + `completedStepIds` :
-- Progression
-- Fils rouges
-- Prochain verrou
-- Prépa du bloc
-- Historique
+Valider :
+- 380 px
+- resize libre
+- always-on-top
+- footer toujours accessible
+- longues PRÉPA
+- longs textes de verrou
+- drawer sur petite fenêtre
 
-Aucune nouvelle source de vérité locale pour ces vues.
+### E — Polish UI seulement ensuite
 
-### D — Audit runtime du vrai `route.json`
-
-Tester des checkpoints représentatifs :
-- début de route
-- FIL ROUGE start/progress/finish
-- hard lock avec goal
-- hard lock sans goal
-- PRÉPA multi-items
-- REPRISE
-- fin de route
-
-### E — Polish UI seulement après validation fonctionnelle
-
-Ne pas partir dans une refonte graphique avant validation des flux réels en jeu.
+Ne pas lancer de refonte graphique avant validation fonctionnelle réelle.
 
 ## 9. Points de vigilance
 
@@ -209,9 +227,8 @@ Ne pas partir dans une refonte graphique avant validation des flux réels en jeu
 - modifier le minimum nécessaire
 - conserver l’architecture data-driven
 
-## 10. CI / validation
+## 10. CI / validation avant merge
 
-Avant merge de la PR :
 - `pnpm build` vert
 - Tauri Windows `cargo check` vert
 - `pnpm tauri dev` validé manuellement sous Windows
@@ -220,9 +237,10 @@ Avant merge de la PR :
 - always-on-top validé avec Dofus
 - raccourcis globaux validés avec Dofus au premier plan
 - rendu 380 px + resize libre validés
+- audit des types spéciaux sur la vraie route effectué
 
 ## 11. État PR
 
 PR #1 reste en draft tant que la validation Windows réelle n’est pas terminée.
 
-Le prochain agent ne doit pas recommencer l’exporteur ou les hotkeys : il doit repartir de l’existant, vérifier les flux réels et compléter seulement les trous fonctionnels restants.
+Le prochain agent ne doit pas recommencer l’exporteur, la persistance, les hotkeys ou le drawer : il doit auditer les flux réels et corriger uniquement les écarts observés.
