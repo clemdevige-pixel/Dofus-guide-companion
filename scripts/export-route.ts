@@ -200,6 +200,7 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
       throw new Error(`Ligne Sheet ${sheetRow}: STEP_ID manquant.`);
     }
 
+    const action = cell(formatted, 8);
     const goalId = cell(formatted, 11);
     const goalPhase = parseGoalPhase(cell(formatted, 12), sheetRow);
     if (goalPhase && !goalId) {
@@ -211,10 +212,14 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
     if (mapping.type === 'long_running' && (!goalId || !goalPhase)) {
       throw new Error(`Ligne Sheet ${sheetRow}: FIL ROUGE sans GOAL_ID/GOAL_PHASE.`);
     }
+    if (action.includes('FIL ROUGE') && (!goalId || !goalPhase)) {
+      throw new Error(
+        `Ligne Sheet ${sheetRow}: action « ${action} » sans GOAL_ID/GOAL_PHASE.`,
+      );
+    }
 
     const hyperlink = parseHyperlinkFormula(cell(formula, 2));
     const preparationText = cell(formatted, 3);
-    const action = cell(formatted, 8);
     const instruction = cell(formatted, 9);
     const title = rawTitle.split('\n')[0]?.trim() || rawTitle;
 
