@@ -25,7 +25,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: pnpm
 
       - name: Patch runtime positions
         run: |
@@ -71,7 +70,7 @@ jobs:
             step.location = { x, y };
           }
 
-          if (Object.values(route.steps).filter((step) => step.location).length < Object.keys(positions).length) {
+          if (route.steps.filter((step) => step.location).length < Object.keys(positions).length) {
             throw new Error('Not all positions were applied.');
           }
 
