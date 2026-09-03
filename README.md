@@ -33,14 +33,35 @@ route.json
 Dofus Guide Companion
 ```
 
-## Stack visée
+## Stack V1
 
-- Tauri
+- Tauri 2
 - React
 - TypeScript
 - Vite
 - données JSON data-driven
 - persistance locale
+
+## Démarrage développeur
+
+Prérequis Tauri : Rust, Node.js et les dépendances système de la plateforme.
+
+```bash
+pnpm install
+pnpm tauri dev
+```
+
+Build front seul :
+
+```bash
+pnpm build
+```
+
+Build desktop :
+
+```bash
+pnpm tauri build
+```
 
 ## Principes
 
@@ -51,4 +72,13 @@ Dofus Guide Companion
 - fonctionnement hors ligne après import des données ;
 - l'overlay doit rester plus simple à utiliser que le Google Sheet.
 
-Avant tout développement, lire `SPEC.md`, `ARCHITECTURE.md` et `docs/DATA_MODEL.md`.
+## Contrat agents
+
+Avant toute modification, lire dans cet ordre :
+
+1. `AGENTS.md`
+2. `SPEC.md`
+3. `ARCHITECTURE.md`
+4. `docs/DATA_MODEL.md`
+
+Le scaffold initial utilise volontairement des données mockées : le vrai `route.json`, la persistance et les raccourcis seront branchés par phases après validation du shell.
