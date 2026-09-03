@@ -33,6 +33,7 @@ Avant toute modification, lire dans cet ordre :
 - aucune logique spécifique à une quête hardcodée dans React
 - une seule vérité de progression : `completedStepIds`
 - l’étape consultée est persistée par **STEP_ID stable**, jamais par numéro de ligne ou index métier
+- les positions de prise de quête sont des données structurées, jamais extraites du texte dans React
 
 ## 3. Pipeline data
 
@@ -44,6 +45,7 @@ Colonnes techniques :
 - K `STEP_ID`
 - L `GOAL_ID`
 - M `GOAL_PHASE`
+- N `POSITION`
 
 État structurel :
 - **21 blocs**
@@ -52,10 +54,12 @@ Colonnes techniques :
 - hard locks structurés dans le JSON
 - liens DofusPourLesNoobs récupérés depuis les formules `HYPERLINK`
 - `PRÉPA` converties en `preparationItems` quand possible
+- positions de prise de quête exportées en `location: { x, y }`
 - TYPE inconnu = erreur d’export
+- POSITION invalide = erreur d’export
 - relations de goals incohérentes = erreur de validation
 
-`scripts/export-route.ts` produit `data/route.json`.
+`scripts/export-route.ts` produit `data/route.json` depuis `ROUTE!A5:N1004`.
 
 Le mock runtime a été supprimé : `data/route.json` est la seule route consommée par le front.
 
@@ -77,6 +81,14 @@ Le runtime GitHub est donc désormais aligné avec le Sheet pour ces chaînes. A
 
 L’exporteur refuse désormais toute action contenant explicitement `FIL ROUGE` sans `GOAL_ID / GOAL_PHASE` afin d’éviter cette régression.
 
+### Audit positions du 2026-09-03
+
+Les actions de prise de quête sont normalisées dans la route via `LANCER*`. L’audit a identifié **28 prises de quête**.
+
+Les 28 positions ont été ajoutées dans la colonne technique `POSITION` et synchronisées dans `data/route.json` sous forme structurée `location: { x, y }`.
+
+Aucune coordonnée n’est parsée depuis `title`, `action` ou `instruction` côté React.
+
 ## 4. État applicatif actuel
 
 Présent sur `agent/initial-scaffold` :
@@ -86,7 +98,7 @@ Présent sur `agent/initial-scaffold` :
 - fenêtre always-on-top
 - overlay compact / détaillé
 - navigation précédent / suivant / valider-dévalider
-- bloc courant visible en mode détaillé
+- **bloc courant toujours visible**, en compact comme en détaillé, avec `Bloc n / 21`
 - types de domaine `src/route/types.ts`
 - loader `data/route.json`
 - validation stricte du `RouteDocument`
@@ -101,6 +113,8 @@ Présent sur `agent/initial-scaffold` :
 - raccourci afficher / masquer l’overlay
 - drawer fonctionnel : Progression / Fils rouges / Prochain verrou / Prépa du bloc / Étapes validées / Paramètres
 - rendu `PRÉPA` depuis `preparationItems`
+- **chaque item de PRÉPA est cliquable et copie uniquement le nom de ressource** via le plugin Tauri clipboard officiel
+- une étape possédant `location` affiche `[x,y]` ; le clic copie `/travel x y`
 - rendu du contexte fil rouge depuis `longRunningGoal`, indépendamment du `type` de l’étape
 - aucun message « Pas besoin de finir maintenant » sur une phase `finish`
 - rendu `VERROU DUR` depuis `hardLock`
@@ -120,6 +134,7 @@ Présent sur `agent/initial-scaffold` :
 - `blockId` connus
 - types supportés
 - URLs http/https valides
+- coordonnées `location.x / location.y` entières
 - PRÉPA avec `preparationItems` ou instruction exploitable
 - VERROU DUR avec message structuré
 - lifecycle de goal **dans l’ordre réel** : `start → progress → finish`
@@ -144,6 +159,12 @@ La vue est maintenant correctement nommée **Étapes validées**. Ne pas ajouter
 Tests ciblés avec le runner natif Node, sans framework supplémentaire :
 - `src/route/selectors.test.ts`
 - `src/route/validation.test.ts`
+- `src/progress/storage.test.ts`
+
+Le test de persistance vérifie un round-trip complet `saveProgress → loadProgress` pour :
+- `completedStepIds`
+- `compact`
+- `currentStepId`
 
 Commandes :
 - `pnpm test:route`
@@ -175,6 +196,8 @@ Progression : `src/progress/storage.ts`
 - `compact`
 - `currentStepId`
 
+La sauvegarde est écrite dans le `localStorage` de la WebView à chaque changement. Le contrat logiciel couvre donc une fermeture/réouverture normale de l’application sur le même profil applicatif. Il ne couvre pas une suppression manuelle des données WebView, une désinstallation avec purge des données ou une corruption externe du profil.
+
 Géométrie fenêtre : `src/window/persistence.ts`
 
 État persistant :
@@ -190,16 +213,18 @@ Règle : utiliser les IDs stables de route, jamais un index persistant comme ide
 ### Mode compact
 - index / total
 - type
+- **bloc courant**
 - nom étape
 - lien DPLN
 - action
+- position `[x,y]` si disponible, cliquable → `/travel x y`
 - instruction courte
 - précédent / valider / suivant
 - PRÉPA longue scrollable
+- items PRÉPA cliquables → copie du nom de ressource
 
 ### Mode détaillé
 Ajoute :
-- bloc courant
 - fils rouges actifs
 - prochain verrou dur
 - surfaces drawer
@@ -217,7 +242,7 @@ Une seule surface drawer est ouverte à la fois. Ces vues sont dérivées de `ro
 
 ### Types spéciaux
 
-`PRÉPA` : liste structurée issue de `preparationItems`.
+`PRÉPA` : liste structurée issue de `preparationItems`, items cliquables pour copie presse-papier.
 
 Goal / `FIL ROUGE` : message non bloquant dérivé de `longRunningGoal` + verrou associé si un `hardLock.goalId` correspondant existe. Le comportement ne dépend pas de `type === 'long_running'`.
 
@@ -225,19 +250,21 @@ Goal / `FIL ROUGE` : message non bloquant dérivé de `longRunningGoal` + verrou
 
 ## 9. Prochain chantier exact
 
-La synchronisation Sheet → runtime et l’audit structurel des goals sont terminés.
+La synchronisation Sheet → runtime, l’audit structurel des goals et les optimisations de suivi demandées sont implémentés.
 
 ### A — PRIORITÉ : validation réelle sous Tauri Windows
 
-1. lancer `pnpm tauri dev`
-2. naviguer vers une étape éloignée
-3. fermer / relancer
-4. vérifier reprise sur le même `currentStepId`
-5. vérifier `completedStepIds`
-6. vérifier mode compact
-7. déplacer / resize la fenêtre
-8. fermer / relancer
-9. vérifier restauration taille + position
+1. `git pull`
+2. `pnpm install`
+3. lancer `pnpm tauri dev`
+4. tester clic sur une ressource PRÉPA → nom seul dans le presse-papier
+5. tester affichage du bloc en compact et détaillé
+6. tester une étape `LANCER` avec position → clic et vérifier `/travel x y`
+7. naviguer vers une étape éloignée et valider plusieurs étapes
+8. fermer complètement l’app
+9. relancer
+10. vérifier même `currentStepId`, validations et mode compact
+11. déplacer / resize la fenêtre, fermer / relancer, vérifier restauration
 
 ### B — Validation raccourcis sous Windows / Dofus
 
@@ -270,8 +297,9 @@ Ne pas lancer de refonte graphique avant validation fonctionnelle réelle.
 ## 10. Points de vigilance
 
 - ne jamais parser les titres pour reconstruire de la logique métier runtime
+- ne jamais parser les coordonnées depuis le texte dans React
 - ne jamais ajouter une route mock parallèle
-- ne jamais ajouter un fichier d’override pour les goals
+- ne jamais ajouter un fichier d’override pour les goals ou positions
 - ne jamais persister un index comme identité de progression
 - ne jamais recalculer les fils rouges depuis du texte dans React
 - éviter tout store global supplémentaire sans besoin démontré
@@ -285,6 +313,8 @@ Ne pas lancer de refonte graphique avant validation fonctionnelle réelle.
 - `pnpm build` vert
 - Tauri Windows `cargo check` vert
 - `pnpm tauri dev` validé manuellement sous Windows
+- clic ressources / presse-papier validé
+- positions `/travel` validées
 - reprise de progression validée après restart
 - taille + position restaurées
 - always-on-top validé avec Dofus
@@ -296,4 +326,4 @@ Ne pas lancer de refonte graphique avant validation fonctionnelle réelle.
 
 PR #1 reste en draft tant que la validation Windows réelle n’est pas terminée.
 
-Le prochain agent ne doit pas recommencer l’exporteur, la synchronisation des goals, la persistance, les hotkeys ou le drawer : la priorité est maintenant la validation réelle de l’application sous Windows/Dofus et la correction minimale des écarts observés.
+Le prochain agent ne doit pas recommencer l’exporteur, la synchronisation des goals/positions, la persistance, les hotkeys ou le drawer : la priorité est maintenant la validation réelle de l’application sous Windows/Dofus et la correction minimale des écarts observés.
