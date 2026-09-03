@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { getCurrentWindow } from '@tauri-apps/api/window';
 import { loadProgress, saveProgress } from './progress/storage';
 import { loadBundledRoute } from './route/loader';
 import {
@@ -10,8 +11,17 @@ import {
   getStepIndex,
 } from './route/selectors';
 import type { StepType } from './route/types';
+import { loadShortcutBindings, saveShortcutBindings } from './shortcuts/storage';
+import {
+  defaultShortcutBindings,
+  shortcutLabels,
+  type ShortcutAction,
+  type ShortcutBindings,
+} from './shortcuts/types';
+import { useGlobalShortcuts } from './shortcuts/useGlobalShortcuts';
 
 const route = loadBundledRoute();
+const shortcutActions = Object.keys(defaultShortcutBindings) as ShortcutAction[];
 
 const typeLabels: Record<StepType, string> = {
   quest: 'QUÊTE',
@@ -30,12 +40,15 @@ const typeLabels: Record<StepType, string> = {
 
 export function App() {
   const initialProgress = useMemo(() => loadProgress(), []);
+  const initialShortcuts = useMemo(() => loadShortcutBindings(), []);
   const steps = useMemo(() => getSortedSteps(route), []);
   const [completedStepIds, setCompletedStepIds] = useState<Set<string>>(
     () => new Set(initialProgress.completedStepIds),
   );
   const [compact, setCompact] = useState(initialProgress.compact);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [shortcutBindings, setShortcutBindings] = useState<ShortcutBindings>(initialShortcuts);
   const [viewIndex, setViewIndex] = useState(() => {
     const firstIncomplete = getFirstIncompleteStep(
       route,
@@ -51,18 +64,15 @@ export function App() {
     });
   }, [completedStepIds, compact]);
 
+  useEffect(() => {
+    saveShortcutBindings(shortcutBindings);
+  }, [shortcutBindings]);
+
   const currentStep = steps[viewIndex];
   const progress = getProgress(route, completedStepIds);
   const activeGoals = getActiveLongRunningGoals(route, completedStepIds);
   const nextHardLock = getNextHardLock(route, completedStepIds);
   const isCurrentCompleted = currentStep ? completedStepIds.has(currentStep.id) : false;
-
-  if (!currentStep) {
-    return <main className="overlay">Aucune étape disponible.</main>;
-  }
-
-  const typeLabel = currentStep.displayType ?? typeLabels[currentStep.type];
-  const displayIndex = viewIndex + 1;
 
   function goPrevious() {
     setViewIndex((index) => Math.max(0, index - 1));
@@ -73,6 +83,10 @@ export function App() {
   }
 
   function toggleCurrentStep() {
+    if (!currentStep) {
+      return;
+    }
+
     setCompletedStepIds((previous) => {
       const next = new Set(previous);
       const wasCompleted = next.has(currentStep.id);
@@ -89,6 +103,38 @@ export function App() {
     if (!isCurrentCompleted && viewIndex < steps.length - 1) {
       setViewIndex((index) => index + 1);
     }
+  }
+
+  async function toggleOverlayVisibility() {
+    const window = getCurrentWindow();
+    if (await window.isVisible()) {
+      await window.hide();
+    } else {
+      await window.show();
+    }
+  }
+
+  const shortcutError = useGlobalShortcuts(shortcutBindings, {
+    previous: goPrevious,
+    next: goNext,
+    toggleComplete: toggleCurrentStep,
+    toggleVisibility: toggleOverlayVisibility,
+  });
+
+  if (!currentStep) {
+    return <main className="overlay">Aucune étape disponible.</main>;
+  }
+
+  const typeLabel = currentStep.displayType ?? typeLabels[currentStep.type];
+  const displayIndex = viewIndex + 1;
+
+  function updateShortcut(action: ShortcutAction, value: string) {
+    setShortcutBindings((current) => ({ ...current, [action]: value }));
+  }
+
+  function openSettings() {
+    setDrawerOpen(false);
+    setSettingsOpen(true);
   }
 
   return (
@@ -143,8 +189,52 @@ export function App() {
           <button type="button">Prochain verrou</button>
           <button type="button">Prépa du bloc</button>
           <button type="button">Historique</button>
-          <button type="button">Paramètres</button>
+          <button type="button" onClick={openSettings}>Paramètres</button>
         </nav>
+      )}
+
+      {settingsOpen && !compact && (
+        <section className="settings-panel" aria-labelledby="settings-title">
+          <div className="settings-header">
+            <div>
+              <p className="eyebrow" id="settings-title">Paramètres</p>
+              <p className="settings-help">Raccourcis globaux Tauri, persistés localement.</p>
+            </div>
+            <button
+              className="icon-button"
+              type="button"
+              aria-label="Fermer les paramètres"
+              onClick={() => setSettingsOpen(false)}
+            >
+              ×
+            </button>
+          </div>
+
+          <div className="shortcut-list">
+            {shortcutActions.map((action) => (
+              <label className="shortcut-field" key={action}>
+                <span>{shortcutLabels[action]}</span>
+                <input
+                  type="text"
+                  value={shortcutBindings[action]}
+                  onChange={(event) => updateShortcut(action, event.target.value)}
+                  spellCheck={false}
+                />
+              </label>
+            ))}
+          </div>
+
+          {shortcutError && <p className="settings-error">⚠ {shortcutError}</p>}
+
+          <div className="settings-actions">
+            <button
+              type="button"
+              onClick={() => setShortcutBindings({ ...defaultShortcutBindings })}
+            >
+              Raccourcis par défaut
+            </button>
+          </div>
+        </section>
       )}
 
       <section
