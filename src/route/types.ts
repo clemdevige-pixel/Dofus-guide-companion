@@ -36,6 +36,7 @@ export interface RouteStep {
     x: number;
     y: number;
   };
+  launchInstruction?: string;
   preparationItems?: string[];
   longRunningGoal?: {
     goalId: string;
