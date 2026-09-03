@@ -4,7 +4,10 @@ import { loadProgress, saveProgress } from './progress/storage';
 import { loadBundledRoute } from './route/loader';
 import {
   getActiveLongRunningGoals,
+  getBlockPreparationSteps,
+  getCompletedSteps,
   getFirstIncompleteStep,
+  getHardLockForGoal,
   getNextHardLock,
   getProgress,
   getSortedSteps,
@@ -23,6 +26,15 @@ import { restoreAndPersistWindowGeometry } from './window/persistence';
 
 const route = loadBundledRoute();
 const shortcutActions = Object.keys(defaultShortcutBindings) as ShortcutAction[];
+
+type SecondaryView =
+  | 'progress'
+  | 'goals'
+  | 'lock'
+  | 'preparation'
+  | 'history'
+  | 'settings'
+  | null;
 
 const typeLabels: Record<StepType, string> = {
   quest: 'QUÊTE',
@@ -48,7 +60,7 @@ export function App() {
   );
   const [compact, setCompact] = useState(initialProgress.compact);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [secondaryView, setSecondaryView] = useState<SecondaryView>(null);
   const [shortcutBindings, setShortcutBindings] = useState<ShortcutBindings>(initialShortcuts);
   const [viewIndex, setViewIndex] = useState(() => {
     if (initialProgress.currentStepId) {
@@ -103,13 +115,25 @@ export function App() {
   const progress = getProgress(route, completedStepIds);
   const activeGoals = getActiveLongRunningGoals(route, completedStepIds);
   const nextHardLock = getNextHardLock(route, completedStepIds);
+  const completedHistory = getCompletedSteps(route, completedStepIds);
   const isCurrentCompleted = currentStep ? completedStepIds.has(currentStep.id) : false;
+  const currentBlock = currentStep
+    ? route.blocks.find((block) => block.id === currentStep.blockId)
+    : undefined;
+  const blockPreparations = currentStep
+    ? getBlockPreparationSteps(route, currentStep.blockId)
+    : [];
+  const currentGoalLock = currentStep?.longRunningGoal
+    ? getHardLockForGoal(route, currentStep.longRunningGoal.goalId)
+    : undefined;
 
   function goPrevious() {
+    setSecondaryView(null);
     setViewIndex((index) => Math.max(0, index - 1));
   }
 
   function goNext() {
+    setSecondaryView(null);
     setViewIndex((index) => Math.min(steps.length - 1, index + 1));
   }
 
@@ -131,7 +155,11 @@ export function App() {
       return next;
     });
 
-    if (!isCurrentCompleted && viewIndex < steps.length - 1) {
+    if (
+      !isCurrentCompleted &&
+      currentStep.type !== 'hard_lock' &&
+      viewIndex < steps.length - 1
+    ) {
       setViewIndex((index) => index + 1);
     }
   }
@@ -163,9 +191,9 @@ export function App() {
     setShortcutBindings((current) => ({ ...current, [action]: value }));
   }
 
-  function openSettings() {
+  function openSecondaryView(view: Exclude<SecondaryView, null>) {
     setDrawerOpen(false);
-    setSettingsOpen(true);
+    setSecondaryView(view);
   }
 
   return (
@@ -185,12 +213,17 @@ export function App() {
             <p className="progress-label">
               Étape {displayIndex} / {steps.length} · {progress.percentage}%
             </p>
+            {currentBlock && <p className="block-label">{currentBlock.title}</p>}
           </div>
           <button
             className="icon-button"
             type="button"
             aria-label="Basculer le mode compact"
-            onClick={() => setCompact(true)}
+            onClick={() => {
+              setDrawerOpen(false);
+              setSecondaryView(null);
+              setCompact(true);
+            }}
           >
             −
           </button>
@@ -215,56 +248,130 @@ export function App() {
 
       {drawerOpen && !compact && (
         <nav className="drawer" aria-label="Navigation secondaire">
-          <button type="button">Progression</button>
-          <button type="button">Fils rouges</button>
-          <button type="button">Prochain verrou</button>
-          <button type="button">Prépa du bloc</button>
-          <button type="button">Historique</button>
-          <button type="button" onClick={openSettings}>Paramètres</button>
+          <button type="button" onClick={() => openSecondaryView('progress')}>Progression</button>
+          <button type="button" onClick={() => openSecondaryView('goals')}>Fils rouges</button>
+          <button type="button" onClick={() => openSecondaryView('lock')}>Prochain verrou</button>
+          <button type="button" onClick={() => openSecondaryView('preparation')}>Prépa du bloc</button>
+          <button type="button" onClick={() => openSecondaryView('history')}>Historique</button>
+          <button type="button" onClick={() => openSecondaryView('settings')}>Paramètres</button>
         </nav>
       )}
 
-      {settingsOpen && !compact && (
-        <section className="settings-panel" aria-labelledby="settings-title">
-          <div className="settings-header">
-            <div>
-              <p className="eyebrow" id="settings-title">Paramètres</p>
-              <p className="settings-help">Raccourcis globaux Tauri, persistés localement.</p>
-            </div>
+      {secondaryView && !compact && (
+        <section className="context-panel" aria-label="Vue secondaire">
+          <div className="context-panel__header">
+            <p className="eyebrow">
+              {secondaryView === 'progress' && 'Progression'}
+              {secondaryView === 'goals' && 'Fils rouges'}
+              {secondaryView === 'lock' && 'Prochain verrou'}
+              {secondaryView === 'preparation' && 'Prépa du bloc'}
+              {secondaryView === 'history' && 'Historique'}
+              {secondaryView === 'settings' && 'Paramètres'}
+            </p>
             <button
               className="icon-button"
               type="button"
-              aria-label="Fermer les paramètres"
-              onClick={() => setSettingsOpen(false)}
+              aria-label="Fermer la vue secondaire"
+              onClick={() => setSecondaryView(null)}
             >
               ×
             </button>
           </div>
 
-          <div className="shortcut-list">
-            {shortcutActions.map((action) => (
-              <label className="shortcut-field" key={action}>
-                <span>{shortcutLabels[action]}</span>
-                <input
-                  type="text"
-                  value={shortcutBindings[action]}
-                  onChange={(event) => updateShortcut(action, event.target.value)}
-                  spellCheck={false}
-                />
-              </label>
-            ))}
-          </div>
+          {secondaryView === 'progress' && (
+            <div className="context-panel__body">
+              <p>{progress.completed} / {progress.total} étapes validées · {progress.percentage}%</p>
+              {currentBlock && <p>Bloc courant : {currentBlock.title}</p>}
+            </div>
+          )}
 
-          {shortcutError && <p className="settings-error">⚠ {shortcutError}</p>}
+          {secondaryView === 'goals' && (
+            <div className="context-panel__body">
+              {activeGoals.length === 0 ? (
+                <p>Aucun fil rouge actif.</p>
+              ) : (
+                <ul>
+                  {activeGoals.map((goal) => <li key={goal.id}>{goal.title}</li>)}
+                </ul>
+              )}
+            </div>
+          )}
 
-          <div className="settings-actions">
-            <button
-              type="button"
-              onClick={() => setShortcutBindings({ ...defaultShortcutBindings })}
-            >
-              Raccourcis par défaut
-            </button>
-          </div>
+          {secondaryView === 'lock' && (
+            <div className="context-panel__body">
+              {nextHardLock ? (
+                <>
+                  <strong>{nextHardLock.title}</strong>
+                  <p>{nextHardLock.hardLock?.message ?? nextHardLock.instruction}</p>
+                </>
+              ) : (
+                <p>Aucun verrou dur restant.</p>
+              )}
+            </div>
+          )}
+
+          {secondaryView === 'preparation' && (
+            <div className="context-panel__body">
+              {blockPreparations.length === 0 ? (
+                <p>Aucune préparation structurée dans ce bloc.</p>
+              ) : (
+                blockPreparations.map((preparation) => (
+                  <div className="preparation-group" key={preparation.id}>
+                    <strong>{preparation.title}</strong>
+                    {preparation.preparationItems && preparation.preparationItems.length > 0 ? (
+                      <ul>
+                        {preparation.preparationItems.map((item) => <li key={item}>{item}</li>)}
+                      </ul>
+                    ) : preparation.instruction ? (
+                      <p>{preparation.instruction}</p>
+                    ) : null}
+                  </div>
+                ))
+              )}
+            </div>
+          )}
+
+          {secondaryView === 'history' && (
+            <div className="context-panel__body">
+              {completedHistory.length === 0 ? (
+                <p>Aucune étape validée.</p>
+              ) : (
+                <ol className="history-list">
+                  {completedHistory.slice(0, 30).map((step) => (
+                    <li key={step.id}>{step.title}</li>
+                  ))}
+                </ol>
+              )}
+            </div>
+          )}
+
+          {secondaryView === 'settings' && (
+            <>
+              <p className="settings-help">Raccourcis globaux Tauri, persistés localement.</p>
+              <div className="shortcut-list">
+                {shortcutActions.map((action) => (
+                  <label className="shortcut-field" key={action}>
+                    <span>{shortcutLabels[action]}</span>
+                    <input
+                      type="text"
+                      value={shortcutBindings[action]}
+                      onChange={(event) => updateShortcut(action, event.target.value)}
+                      spellCheck={false}
+                    />
+                  </label>
+                ))}
+              </div>
+              {shortcutError && <p className="settings-error">⚠ {shortcutError}</p>}
+              <div className="settings-actions">
+                <button
+                  type="button"
+                  onClick={() => setShortcutBindings({ ...defaultShortcutBindings })}
+                >
+                  Raccourcis par défaut
+                </button>
+              </div>
+            </>
+          )}
         </section>
       )}
 
@@ -285,9 +392,29 @@ export function App() {
 
         {currentStep.action && <p className="action-label">{currentStep.action}</p>}
         {currentStep.instruction && <p className="instruction">{currentStep.instruction}</p>}
+
+        {currentStep.type === 'preparation' && currentStep.preparationItems && (
+          <ul className="preparation-list">
+            {currentStep.preparationItems.map((item) => <li key={item}>{item}</li>)}
+          </ul>
+        )}
+
+        {currentStep.type === 'long_running' && (
+          <div className="step-context step-context--goal">
+            <strong>Pas besoin de finir maintenant.</strong>
+            {currentGoalLock && <span>Verrou associé : {currentGoalLock.title}</span>}
+          </div>
+        )}
+
+        {currentStep.type === 'hard_lock' && (
+          <div className="step-context step-context--lock">
+            <strong>STOP — ne valide ce verrou que lorsque la condition est remplie.</strong>
+            <span>{currentStep.hardLock?.message ?? currentStep.instruction}</span>
+          </div>
+        )}
       </section>
 
-      {!compact && activeGoals.length > 0 && (
+      {!compact && secondaryView === null && activeGoals.length > 0 && (
         <section className="secondary-panel secondary-panel--goal">
           <h2>⚠ Fils rouges actifs</h2>
           <ul>
@@ -298,7 +425,7 @@ export function App() {
         </section>
       )}
 
-      {!compact && nextHardLock && (
+      {!compact && secondaryView === null && nextHardLock && (
         <section className="secondary-panel secondary-panel--lock">
           <h2>🔒 Prochain verrou dur</h2>
           <p>{nextHardLock.title}</p>
