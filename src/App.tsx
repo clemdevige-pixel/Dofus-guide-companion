@@ -51,6 +51,13 @@ export function App() {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [shortcutBindings, setShortcutBindings] = useState<ShortcutBindings>(initialShortcuts);
   const [viewIndex, setViewIndex] = useState(() => {
+    if (initialProgress.currentStepId) {
+      const savedIndex = getStepIndex(route, initialProgress.currentStepId);
+      if (savedIndex >= 0) {
+        return savedIndex;
+      }
+    }
+
     const firstIncomplete = getFirstIncompleteStep(
       route,
       new Set(initialProgress.completedStepIds),
@@ -62,8 +69,9 @@ export function App() {
     saveProgress({
       completedStepIds: [...completedStepIds],
       compact,
+      ...(steps[viewIndex] ? { currentStepId: steps[viewIndex].id } : {}),
     });
-  }, [completedStepIds, compact]);
+  }, [completedStepIds, compact, steps, viewIndex]);
 
   useEffect(() => {
     saveShortcutBindings(shortcutBindings);
