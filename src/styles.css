@@ -167,12 +167,21 @@ button {
   line-height: 1.15;
 }
 
-.step-title-row a {
+.step-title-row a,
+.source-link-button {
   flex: 0 0 auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
   color: #9ed9aa;
   font-size: 12px;
   font-weight: 800;
   text-decoration: none;
+  cursor: pointer;
+}
+
+.source-link-button:hover {
+  color: #c1efca;
 }
 
 .action-label {
@@ -208,6 +217,12 @@ button {
   border-radius: 9px;
   font-size: 12px;
   line-height: 1.4;
+}
+
+.step-context--launch {
+  border: 1px solid #334139;
+  background: #131a15;
+  color: #b8c8bb;
 }
 
 .step-context--goal {
