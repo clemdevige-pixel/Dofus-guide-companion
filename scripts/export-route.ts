@@ -3,7 +3,7 @@ import { dirname, resolve } from 'node:path';
 import type { RouteBlock, RouteDocument, RouteStep, StepType } from '../src/route/types';
 import { validateRoute } from '../src/route/validation';
 
-const DEFAULT_RANGE = 'ROUTE!A5:Q1004';
+const DEFAULT_RANGE = 'ROUTE!A5:Q';
 const OUTPUT_PATH = resolve('data/route.json');
 
 const typeMap: Record<string, { type: StepType; displayType?: string }> = {
