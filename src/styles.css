@@ -23,7 +23,8 @@ body {
 }
 
 button,
-a {
+a,
+input {
   font: inherit;
 }
 
@@ -47,7 +48,9 @@ button {
 .app-header,
 .compact-header,
 .step-title-row,
-.navigation-bar {
+.navigation-bar,
+.settings-header,
+.settings-actions {
   display: flex;
   align-items: center;
 }
@@ -71,7 +74,9 @@ button {
 .progress-label,
 .action-label,
 .instruction,
-.secondary-panel p {
+.secondary-panel p,
+.settings-help,
+.settings-error {
   margin: 0;
 }
 
@@ -83,7 +88,8 @@ button {
   text-transform: uppercase;
 }
 
-.progress-label {
+.progress-label,
+.settings-help {
   margin-top: 3px;
   color: #93a396;
   font-size: 12px;
@@ -91,7 +97,8 @@ button {
 
 .icon-button,
 .navigation-bar button,
-.drawer button {
+.drawer button,
+.settings-actions button {
   border: 1px solid #334139;
   background: #18211b;
   cursor: pointer;
@@ -105,7 +112,8 @@ button {
 
 .current-step,
 .secondary-panel,
-.drawer {
+.drawer,
+.settings-panel {
   border: 1px solid #2c3931;
   border-radius: 12px;
   background: rgba(21, 29, 24, 0.96);
@@ -208,6 +216,68 @@ button {
   padding: 9px 10px;
   border-radius: 8px;
   text-align: left;
+}
+
+.settings-panel {
+  margin-bottom: 10px;
+  padding: 12px;
+}
+
+.settings-header {
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.shortcut-list {
+  display: grid;
+  gap: 9px;
+}
+
+.shortcut-field {
+  display: grid;
+  gap: 5px;
+  color: #cbd6cd;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.shortcut-field input {
+  width: 100%;
+  min-width: 0;
+  padding: 8px 9px;
+  border: 1px solid #334139;
+  border-radius: 8px;
+  outline: none;
+  background: #0f1611;
+  color: #eef4ef;
+}
+
+.shortcut-field input:focus {
+  border-color: #578366;
+}
+
+.settings-error {
+  margin-top: 10px;
+  padding: 8px 9px;
+  border: 1px solid #765038;
+  border-radius: 8px;
+  background: #241b15;
+  color: #ffbd87;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.settings-actions {
+  justify-content: flex-end;
+  margin-top: 11px;
+}
+
+.settings-actions button {
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 800;
 }
 
 .navigation-bar {
