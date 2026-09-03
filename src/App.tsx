@@ -399,7 +399,7 @@ export function App() {
           </ul>
         )}
 
-        {currentStep.type === 'long_running' && (
+        {currentStep.longRunningGoal && currentStep.longRunningGoal.phase !== 'finish' && (
           <div className="step-context step-context--goal">
             <strong>Pas besoin de finir maintenant.</strong>
             {currentGoalLock && <span>Verrou associé : {currentGoalLock.title}</span>}
