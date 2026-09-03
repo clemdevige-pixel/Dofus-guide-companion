@@ -137,30 +137,167 @@ Conserver localement :
 
 Aucun compte utilisateur requis en V1.
 
-## 6. UX cible
+## 6. UX V1 — référence verrouillée
 
-### Mode compact
+Les wireframes ci-dessous sont la **référence UX V1**. Le scaffold et les composants doivent partir de cette structure sans ajouter de navigation ou de panneaux non prévus tant qu'un besoin concret n'est pas démontré.
 
-Afficher uniquement :
+### 6.1 Mode compact
+
+Objectif : rester lisible en jeu à environ **380 px de large** avec uniquement l'essentiel.
 
 ```text
-128 / 978  • QUÊTE
-La raison du plus fort        ↗
-AVANCER / STOP
-Jusqu'au Directeur Grunob.
-
-←        ✓        →
+┌──────────────────────────────────┐
+│ 128 / 978  •  QUÊTE              │
+│ La raison du plus fort       ↗   │
+│ AVANCER / STOP                   │
+│ Jusqu'au Directeur Grunob.       │
+│                                  │
+│ ←       ✓       →                │
+└──────────────────────────────────┘
 ```
 
-### Mode détaillé
+Règles :
 
-Ajouter :
+- aucune section secondaire visible ;
+- le nom de l'étape est prioritaire ;
+- le lien DPLN est accessible via l'icône `↗` si présent ;
+- l'action doit rester visible sans scroll ;
+- l'instruction est courte et peut être tronquée proprement si la hauteur est réduite ;
+- la navigation `précédent / valider / suivant` reste toujours accessible ;
+- le resize utilisateur ne doit jamais faire disparaître les contrôles principaux.
 
-- bloc courant ;
-- détail de l'instruction ;
-- fils rouges actifs ;
-- prochain verrou dur ;
-- préparation utile.
+### 6.2 Mode détaillé
+
+Objectif : conserver l'étape courante au centre tout en montrant le contexte utile.
+
+```text
+┌──────────────────────────────────────┐
+│  DOFUS GUIDE COMPANION               │
+│  Étape 128 / 978        13%          │
+├──────────────────────────────────────┤
+│  QUÊTE                               │
+│  La raison du plus fort        ↗ DPLN│
+│                                      │
+│  AVANCER / STOP                      │
+│                                      │
+│  Avance jusqu'au Directeur Grunob    │
+│  puis STOP avant l'Akadémie des Gobs │
+├──────────────────────────────────────┤
+│  ⚠ FILS ROUGES ACTIFS                │
+│  • L'Éternelle moisson               │
+│  • Alignement + Ordres               │
+├──────────────────────────────────────┤
+│  🔒 PROCHAIN VERROU DUR              │
+│  Niveau 80                           │
+├──────────────────────────────────────┤
+│        ←   ✓ TERMINÉ   →             │
+└──────────────────────────────────────┘
+```
+
+Règles :
+
+- bloc courant et progression globale visibles sans dominer l'écran ;
+- l'étape actuelle reste la zone principale ;
+- fils rouges et prochain verrou dur sont des sections secondaires ;
+- ces sections sont dérivées des données, jamais écrites en dur ;
+- le mode détaillé peut scroller verticalement si nécessaire, mais le footer de navigation doit rester accessible.
+
+### 6.3 Drawer latéral
+
+Accès via `☰`.
+
+```text
+☰
+
+Progression
+Fils rouges
+Prochain verrou
+Prépa du bloc
+Historique
+Paramètres
+```
+
+Règles :
+
+- drawer fermé par défaut en usage normal ;
+- une seule surface secondaire ouverte à la fois ;
+- aucune navigation du drawer ne modifie la progression par effet de bord ;
+- revenir à l'étape actuelle doit être immédiat ;
+- `Paramètres` contient notamment le remapping des raccourcis.
+
+### 6.4 Écrans contextuels par type
+
+#### FIL ROUGE
+
+```text
+┌──────────────────────────────────────┐
+│  🟣 FIL ROUGE                        │
+│  Tablette de Totankama               │
+│                                      │
+│  Accumule les 25 Trésors au fil      │
+│  de la route.                        │
+│                                      │
+│  PAS BESOIN DE FINIR MAINTENANT      │
+│                                      │
+│  🔒 Verrou plus tard : étape 441     │
+├──────────────────────────────────────┤
+│        ←   ✓ VALIDÉ   →              │
+└──────────────────────────────────────┘
+```
+
+Comportement :
+
+- signaler explicitement que l'objectif ne bloque pas encore ;
+- afficher le verrou associé si la donnée existe ;
+- rester visible dans la liste des fils rouges actifs jusqu'à sa fermeture ou son verrou.
+
+#### VERROU DUR
+
+```text
+┌──────────────────────────────────────┐
+│  🔴 VERROU DUR                       │
+│                                      │
+│  CARTE DE CANIA                      │
+│                                      │
+│  Tu ne peux pas continuer tant que   │
+│  la Carte de Cania n'est pas obtenue.│
+│                                      │
+│  [ Ouvrir le fil rouge associé ]     │
+└──────────────────────────────────────┘
+```
+
+Comportement :
+
+- doit être visuellement impossible à confondre avec une étape normale ;
+- aucune avance automatique au-delà ;
+- si un fil rouge parent existe, permettre de l'ouvrir ;
+- l'utilisateur garde la possibilité de naviguer manuellement pour consulter la route, sans que cela valide le verrou.
+
+#### DONJON
+
+- accent visuel plus fort qu'une quête ;
+- afficher clairement `FAIRE & VALIDER` ou l'action exportée ;
+- mettre en avant les mutualisations et contraintes de sortie présentes dans l'instruction ;
+- ne jamais inventer de logique spéciale à partir du nom du donjon.
+
+#### PRÉPA
+
+- rendu sous forme de liste/checklist compacte ;
+- séparer visuellement titre et ressources ;
+- ne pas dupliquer les ressources dans plusieurs composants ;
+- si la préparation est longue, autoriser un scroll interne ou une vue détaillée plutôt que d'agrandir démesurément l'overlay.
+
+#### GROSSE ÉTAPE
+
+- signaler qu'il s'agit d'une session longue ;
+- conserver l'action principale et l'objectif de sortie visibles ;
+- ne pas la transformer automatiquement en fil rouge si les données ne l'indiquent pas.
+
+#### FIN
+
+- écran dédié de fin de route ;
+- aucun bouton `suivant` actif ;
+- progression affichée comme terminée.
 
 ## 7. Types visuels minimaux
 
@@ -216,7 +353,10 @@ La V1 est considérée utilisable si :
 9. aucune logique spécifique à une quête n'est hardcodée dans le front ;
 10. les raccourcis globaux fonctionnent et peuvent être remappés depuis les réglages ;
 11. un conflit de raccourci est signalé clairement ;
-12. taille, position et raccourcis personnalisés survivent à un redémarrage.
+12. taille, position et raccourcis personnalisés survivent à un redémarrage ;
+13. les wireframes compact/détaillé/drawer sont respectés comme structure de base ;
+14. FIL ROUGE et VERROU DUR ont des comportements distincts et dérivés des données ;
+15. une étape FIN ne permet pas d'avancer vers une étape inexistante.
 
 ## 11. Décisions reportées
 
