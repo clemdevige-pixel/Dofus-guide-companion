@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1 --port 1420",
     "build": "tsc -b && vite build",
+    "export:route": "tsx scripts/export-route.ts",
     "preview": "vite preview",
     "tauri": "tauri"
   },
@@ -19,6 +20,7 @@
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^6.1.1",
+    "tsx": "^4.20.6",
     "typescript": "^7.0.2",
     "vite": "^8.2.2"
   }
