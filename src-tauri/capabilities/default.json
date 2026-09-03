@@ -3,5 +3,12 @@
   "identifier": "default",
   "description": "Default capability for the main companion window",
   "windows": ["main"],
-  "permissions": ["core:default"]
+  "permissions": [
+    "core:default",
+    "core:window:allow-hide",
+    "core:window:allow-show",
+    "global-shortcut:allow-is-registered",
+    "global-shortcut:allow-register",
+    "global-shortcut:allow-unregister"
+  ]
 }
