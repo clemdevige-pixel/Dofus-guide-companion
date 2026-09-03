@@ -15,6 +15,8 @@ const supportedTypes = new Set<StepType>([
   'finish',
 ]);
 
+type GoalState = 'active' | 'finished';
+
 function assertValidUrl(url: string, context: string) {
   try {
     const parsed = new URL(url);
@@ -32,21 +34,31 @@ export function validateRoute(route: RouteDocument): RouteDocument {
   }
 
   const blockIds = new Set<string>();
+  const blockOrders = new Set<number>();
   for (const block of route.blocks) {
     if (blockIds.has(block.id)) {
       throw new Error(`blockId dupliqué : ${block.id}`);
     }
+    if (blockOrders.has(block.order)) {
+      throw new Error(`ordre de bloc dupliqué : ${block.order}`);
+    }
     blockIds.add(block.id);
+    blockOrders.add(block.order);
   }
 
   const stepIds = new Set<string>();
-  const startedGoalIds = new Set<string>();
+  const stepOrders = new Set<number>();
+  const goalStates = new Map<string, GoalState>();
 
   for (const step of route.steps) {
     if (stepIds.has(step.id)) {
       throw new Error(`stepId dupliqué : ${step.id}`);
     }
+    if (stepOrders.has(step.order)) {
+      throw new Error(`ordre d'étape dupliqué : ${step.order}`);
+    }
     stepIds.add(step.id);
+    stepOrders.add(step.order);
 
     if (!blockIds.has(step.blockId)) {
       throw new Error(`${step.id}: blockId inconnu (${step.blockId})`);
@@ -68,27 +80,30 @@ export function validateRoute(route: RouteDocument): RouteDocument {
       throw new Error(`${step.id}: VERROU DUR sans métadonnées hardLock.`);
     }
 
-    if (step.longRunningGoal?.phase === 'start') {
-      if (startedGoalIds.has(step.longRunningGoal.goalId)) {
-        throw new Error(`goalId démarré plusieurs fois : ${step.longRunningGoal.goalId}`);
-      }
-      startedGoalIds.add(step.longRunningGoal.goalId);
-    }
-  }
-
-  for (const step of route.steps) {
     const goal = step.longRunningGoal;
-    if (
-      goal &&
-      (goal.phase === 'progress' || goal.phase === 'finish') &&
-      !startedGoalIds.has(goal.goalId)
-    ) {
-      throw new Error(`${step.id}: ${goal.phase} lié à un goalId jamais démarré (${goal.goalId})`);
+    if (goal) {
+      const state = goalStates.get(goal.goalId);
+
+      if (goal.phase === 'start') {
+        if (state) {
+          throw new Error(`${step.id}: goalId démarré plusieurs fois (${goal.goalId}).`);
+        }
+        goalStates.set(goal.goalId, 'active');
+      } else if (goal.phase === 'progress') {
+        if (state !== 'active') {
+          throw new Error(`${step.id}: progress avant start ou après finish (${goal.goalId}).`);
+        }
+      } else if (goal.phase === 'finish') {
+        if (state !== 'active') {
+          throw new Error(`${step.id}: finish avant start ou après finish (${goal.goalId}).`);
+        }
+        goalStates.set(goal.goalId, 'finished');
+      }
     }
 
-    if (step.hardLock?.goalId && !startedGoalIds.has(step.hardLock.goalId)) {
+    if (step.hardLock?.goalId && !goalStates.has(step.hardLock.goalId)) {
       throw new Error(
-        `${step.id}: verrou lié à un goalId jamais démarré (${step.hardLock.goalId})`,
+        `${step.id}: verrou lié à un goalId pas encore démarré (${step.hardLock.goalId})`,
       );
     }
   }
