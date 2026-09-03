@@ -8,6 +8,7 @@ const OUTPUT_PATH = resolve('data/route.json');
 
 const typeMap: Record<string, { type: StepType; displayType?: string }> = {
   'QUÊTE': { type: 'quest' },
+  'QUÊTES PARALLÈLES': { type: 'quest', displayType: 'QUÊTES PARALLÈLES' },
   'REPRISE': { type: 'resume' },
   'DONJON': { type: 'dungeon' },
   'PRÉPA': { type: 'preparation' },
