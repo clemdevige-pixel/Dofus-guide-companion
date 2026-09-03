@@ -3,7 +3,7 @@ import { dirname, resolve } from 'node:path';
 import type { RouteBlock, RouteDocument, RouteStep, StepType } from '../src/route/types';
 import { validateRoute } from '../src/route/validation';
 
-const DEFAULT_RANGE = 'ROUTE!A5:K1004';
+const DEFAULT_RANGE = 'ROUTE!A5:M1004';
 const OUTPUT_PATH = resolve('data/route.json');
 
 const typeMap: Record<string, { type: StepType; displayType?: string }> = {
@@ -25,6 +25,7 @@ const typeMap: Record<string, { type: StepType; displayType?: string }> = {
 };
 
 type SheetRow = string[];
+type GoalPhase = 'start' | 'progress' | 'finish';
 
 type GoogleAuth = {
   headers: Record<string, string>;
@@ -83,6 +84,18 @@ function cell(row: SheetRow | undefined, index: number): string {
   return row?.[index]?.trim() ?? '';
 }
 
+function parseGoalPhase(rawPhase: string, sheetRow: number): GoalPhase | undefined {
+  if (!rawPhase) {
+    return undefined;
+  }
+
+  if (rawPhase === 'start' || rawPhase === 'progress' || rawPhase === 'finish') {
+    return rawPhase;
+  }
+
+  throw new Error(`Ligne Sheet ${sheetRow}: GOAL_PHASE inconnu « ${rawPhase} »`);
+}
+
 function parseHyperlinkFormula(formula: string): { label: string; url: string } | undefined {
   if (!formula.startsWith('=HYPERLINK(')) {
     return undefined;
@@ -130,8 +143,16 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
   }
 
   const headers = formattedRows[0] ?? [];
-  if (cell(headers, 1) !== 'TYPE' || cell(headers, 2) !== 'ÉTAPE' || cell(headers, 10) !== 'STEP_ID') {
-    throw new Error('Colonnes ROUTE inattendues : TYPE, ÉTAPE et STEP_ID sont obligatoires.');
+  if (
+    cell(headers, 1) !== 'TYPE' ||
+    cell(headers, 2) !== 'ÉTAPE' ||
+    cell(headers, 10) !== 'STEP_ID' ||
+    cell(headers, 11) !== 'GOAL_ID' ||
+    cell(headers, 12) !== 'GOAL_PHASE'
+  ) {
+    throw new Error(
+      'Colonnes ROUTE inattendues : TYPE, ÉTAPE, STEP_ID, GOAL_ID et GOAL_PHASE sont obligatoires.',
+    );
   }
 
   const blocks: RouteBlock[] = [];
@@ -144,6 +165,7 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
     const formula = formulaRows[index] ?? [];
     const rawType = cell(formatted, 1);
     const rawTitle = cell(formatted, 2);
+    const sheetRow = index + 5;
 
     if (!rawType && !rawTitle) {
       continue;
@@ -161,21 +183,27 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
     }
 
     if (!rawType) {
-      throw new Error(`Ligne Sheet ${index + 5}: TYPE vide pour « ${rawTitle} »`);
+      throw new Error(`Ligne Sheet ${sheetRow}: TYPE vide pour « ${rawTitle} »`);
     }
 
     if (!currentBlock) {
-      throw new Error(`Ligne Sheet ${index + 5}: étape rencontrée avant le premier bloc.`);
+      throw new Error(`Ligne Sheet ${sheetRow}: étape rencontrée avant le premier bloc.`);
     }
 
     const mapping = typeMap[rawType];
     if (!mapping) {
-      throw new Error(`Ligne Sheet ${index + 5}: TYPE inconnu « ${rawType} »`);
+      throw new Error(`Ligne Sheet ${sheetRow}: TYPE inconnu « ${rawType} »`);
     }
 
     const id = cell(formatted, 10);
     if (!id) {
-      throw new Error(`Ligne Sheet ${index + 5}: STEP_ID manquant.`);
+      throw new Error(`Ligne Sheet ${sheetRow}: STEP_ID manquant.`);
+    }
+
+    const goalId = cell(formatted, 11);
+    const goalPhase = parseGoalPhase(cell(formatted, 12), sheetRow);
+    if (goalPhase && !goalId) {
+      throw new Error(`Ligne Sheet ${sheetRow}: GOAL_PHASE défini sans GOAL_ID.`);
     }
 
     const hyperlink = parseHyperlinkFormula(cell(formula, 2));
@@ -198,8 +226,11 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
       ...(mapping.type === 'preparation'
         ? { preparationItems: parsePreparationItems(preparationText || rawTitle) }
         : {}),
+      ...(goalId && goalPhase
+        ? { longRunningGoal: { goalId, phase: goalPhase } }
+        : {}),
       ...(mapping.type === 'hard_lock'
-        ? { hardLock: { message: instruction || title } }
+        ? { hardLock: { ...(goalId ? { goalId } : {}), message: instruction || title } }
         : {}),
     };
 
