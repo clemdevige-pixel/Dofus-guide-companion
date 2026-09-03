@@ -40,7 +40,7 @@ export function validateRoute(route: RouteDocument): RouteDocument {
   }
 
   const stepIds = new Set<string>();
-  const declaredGoalIds = new Set<string>();
+  const startedGoalIds = new Set<string>();
 
   for (const step of route.steps) {
     if (stepIds.has(step.id)) {
@@ -60,15 +60,35 @@ export function validateRoute(route: RouteDocument): RouteDocument {
       assertValidUrl(step.source.url, step.id);
     }
 
-    if (step.longRunningGoal) {
-      declaredGoalIds.add(step.longRunningGoal.goalId);
+    if (step.type === 'long_running' && !step.longRunningGoal) {
+      throw new Error(`${step.id}: FIL ROUGE sans métadonnées longRunningGoal.`);
+    }
+
+    if (step.type === 'hard_lock' && !step.hardLock) {
+      throw new Error(`${step.id}: VERROU DUR sans métadonnées hardLock.`);
+    }
+
+    if (step.longRunningGoal?.phase === 'start') {
+      if (startedGoalIds.has(step.longRunningGoal.goalId)) {
+        throw new Error(`goalId démarré plusieurs fois : ${step.longRunningGoal.goalId}`);
+      }
+      startedGoalIds.add(step.longRunningGoal.goalId);
     }
   }
 
   for (const step of route.steps) {
-    if (step.hardLock?.goalId && !declaredGoalIds.has(step.hardLock.goalId)) {
+    const goal = step.longRunningGoal;
+    if (
+      goal &&
+      (goal.phase === 'progress' || goal.phase === 'finish') &&
+      !startedGoalIds.has(goal.goalId)
+    ) {
+      throw new Error(`${step.id}: ${goal.phase} lié à un goalId jamais démarré (${goal.goalId})`);
+    }
+
+    if (step.hardLock?.goalId && !startedGoalIds.has(step.hardLock.goalId)) {
       throw new Error(
-        `${step.id}: verrou lié à un goalId inconnu (${step.hardLock.goalId})`,
+        `${step.id}: verrou lié à un goalId jamais démarré (${step.hardLock.goalId})`,
       );
     }
   }
