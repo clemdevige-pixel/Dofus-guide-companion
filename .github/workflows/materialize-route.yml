@@ -24,6 +24,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          sha256sum .route-transfer/part-*
           cat .route-transfer/part-* > /tmp/route.gz.b64
           base64 --decode /tmp/route.gz.b64 | gzip --decompress > data/route.json
 
