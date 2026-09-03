@@ -45,16 +45,38 @@ for (const [stepId, goal] of expectedGoals) {
 
 await writeFile(ROUTE_PATH, `${JSON.stringify(route)}\n`, 'utf8');
 
+let appSource = await readFile(APP_PATH, 'utf8');
 const oldGoalContext = "{currentStep.type === 'long_running' && (";
 const newGoalContext =
   "{currentStep.longRunningGoal && currentStep.longRunningGoal.phase !== 'finish' && (";
-const appSource = await readFile(APP_PATH, 'utf8');
-const occurrences = appSource.split(oldGoalContext).length - 1;
+const goalContextOccurrences = appSource.split(oldGoalContext).length - 1;
 
-if (occurrences === 1) {
-  await writeFile(APP_PATH, appSource.replace(oldGoalContext, newGoalContext), 'utf8');
+if (goalContextOccurrences === 1) {
+  appSource = appSource.replace(oldGoalContext, newGoalContext);
 } else if (!appSource.includes(newGoalContext)) {
-  throw new Error(`Contexte FIL ROUGE inattendu dans App.tsx (${occurrences} occurrence(s)).`);
+  throw new Error(
+    `Contexte FIL ROUGE inattendu dans App.tsx (${goalContextOccurrences} occurrence(s)).`,
+  );
 }
 
-console.log(`Synchronisé ${expectedGoals.size} checkpoints et le rendu data-driven des fils rouges.`);
+const historyLabels = [
+  [
+    ">Historique</button>",
+    ">Étapes validées</button>",
+  ],
+  [
+    "{secondaryView === 'history' && 'Historique'}",
+    "{secondaryView === 'history' && 'Étapes validées'}",
+  ],
+];
+
+for (const [oldLabel, newLabel] of historyLabels) {
+  if (appSource.includes(oldLabel)) {
+    appSource = appSource.replace(oldLabel, newLabel);
+  } else if (!appSource.includes(newLabel)) {
+    throw new Error(`Libellé attendu absent de App.tsx : ${oldLabel}`);
+  }
+}
+
+await writeFile(APP_PATH, appSource, 'utf8');
+console.log(`Synchronisé ${expectedGoals.size} checkpoints et les corrections UI data-driven.`);
