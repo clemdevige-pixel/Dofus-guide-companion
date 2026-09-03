@@ -9,40 +9,119 @@ Repo : `clemdevige-pixel/Dofus-guide-companion`
 Branche active : `agent/initial-scaffold`
 PR active : `#1 — Initial Tauri + React companion scaffold`
 
-Objectif produit : companion desktop léger, always-on-top, permettant de suivre la roadmap Dofus Astrub → Dofus Sylvestre sous forme d’overlay compact, sans avoir à naviguer dans le Google Sheet.
+Objectif produit : companion desktop léger, always-on-top, permettant de suivre la roadmap Dofus Astrub → Dofus Sylvestre sous forme d’overlay compact, sans naviguer dans le Google Sheet.
 
-Le Google Sheet reste la source éditoriale. L’app consomme un `data/route.json` strictement validé.
+Le Google Sheet reste la source éditoriale. L’app consomme uniquement `data/route.json` comme vérité runtime.
 
 Avant toute modification, lire dans cet ordre :
 1. `AGENTS.md`
 2. `SPEC.md`
 3. `ARCHITECTURE.md`
 4. `docs/DATA_MODEL.md`
-5. ce fichier `HANDOFF.md`
+5. `HANDOFF.md`
 
 ## 2. Décisions produit validées
 
-- Nom : **Dofus Guide Companion**
 - Stack : **Tauri 2 + React + TypeScript + Vite**
 - largeur compacte par défaut : **380 px**
-- fenêtre librement redimensionnable ; taille et position persistées à terme
+- fenêtre librement redimensionnable
 - always-on-top en V1
 - click-through : **V1.1**, pas en V1
-- raccourcis globaux en V1, configurables dans les réglages
-- export de route : **Google Sheet → script TypeScript → validation stricte → `data/route.json`**
+- raccourcis globaux configurables en V1
+- pipeline : **Google Sheet → exporteur TypeScript → validation stricte → `data/route.json`**
 - aucun OCR, lecture mémoire, injection ou automatisation de Dofus en V1
 - aucune logique spécifique à une quête hardcodée dans React
+- une seule vérité de progression : `completedStepIds`
+- l’étape consultée est persistée par **STEP_ID stable**, jamais par numéro de ligne ou index métier
 
-## 3. UX de référence
+## 3. État réel du pipeline data — TERMINÉ
 
-La référence UX est dans `SPEC.md`.
+Spreadsheet : `Roadmap ULTIMATE V2 — Astrub → Dofus Sylvestre`
+ID : `1l1eYM3T708s5j74LmsUi4wyzg6sM9xShPzS_ToBtVYg`
+Onglet : `ROUTE`
+
+Colonnes techniques présentes :
+- K `STEP_ID`
+- L `GOAL_ID`
+- M `GOAL_PHASE`
+
+État validé :
+- **21 blocs**
+- **957 étapes runtime**
+- aucun `STEP_ID` manquant ou dupliqué
+- fils rouges structurés via `GOAL_ID / GOAL_PHASE`
+- hard locks structurés dans le JSON
+- liens DofusPourLesNoobs récupérés depuis les formules `HYPERLINK`
+- `PRÉPA` converties en `preparationItems` quand possible
+- TYPE inconnu = erreur d’export
+- relations de goals incohérentes = erreur de validation
+
+`scripts/export-route.ts` existe et produit le vrai `data/route.json`.
+
+Le mock runtime a été supprimé : `data/route.json` est la seule route consommée par le front.
+
+## 4. État du code applicatif
+
+Déjà présent sur `agent/initial-scaffold` :
+
+- Tauri 2
+- React + TypeScript + Vite
+- fenêtre always-on-top
+- overlay compact / détaillé
+- navigation précédent / suivant / valider-dévalider
+- drawer secondaire
+- types de domaine `src/route/types.ts`
+- loader `data/route.json`
+- validation stricte du `RouteDocument`
+- selectors : progression, première étape incomplète, fils rouges actifs, prochain verrou dur
+- persistance locale des `completedStepIds`
+- persistance du mode compact
+- persistance de l’étape actuellement consultée via `currentStepId`
+- persistance taille + position fenêtre via `src/window/persistence.ts`
+- restauration de géométrie câblée dans `App.tsx`
+- raccourcis globaux Tauri configurables et persistés
+- détection de conflits de raccourcis
+- raccourci afficher / masquer l’overlay
+- CI frontend + Tauri Windows
+
+## 5. Raccourcis globaux actuels
+
+Actions supportées :
+- étape précédente
+- étape suivante
+- valider / dévalider
+- afficher / masquer l’overlay
+
+Bindings par défaut définis dans `src/shortcuts/types.ts`.
+
+Ne pas créer un second système de raccourcis. Toute évolution passe par `src/shortcuts/*`.
+
+## 6. Persistance
+
+Progression : `src/progress/storage.ts`
+
+État persistant actuel :
+- `completedStepIds`
+- `compact`
+- `currentStepId`
+
+Géométrie fenêtre : `src/window/persistence.ts`
+
+État persistant :
+- x
+- y
+- width
+- height
+
+Règle : utiliser les IDs stables de route, jamais un index persistant comme identité métier.
+
+## 7. UX cible V1
 
 ### Mode compact
-Affiche uniquement :
 - index / total
 - type
-- nom de l’étape
-- lien DPLN si présent
+- nom étape
+- lien DPLN
 - action
 - instruction courte
 - précédent / valider / suivant
@@ -63,216 +142,87 @@ Drawer prévu :
 - Historique
 - Paramètres
 
-## 4. État du code
+Important : plusieurs boutons du drawer sont encore des placeholders visuels et ne disposent pas encore de vues fonctionnelles dédiées.
 
-Le scaffold est déjà posé sur `agent/initial-scaffold` :
+## 8. Prochain chantier exact
 
-- `AGENTS.md`
-- Tauri 2
-- React + TypeScript + Vite
-- fenêtre Tauri configurée always-on-top, 380 px par défaut, redimensionnable
-- wireframe compact / détaillé
-- drawer
-- navigation étape précédente / suivante / valider
-- types de domaine dans `src/route/types.ts`
-- route chargée depuis `data/route.json`
-- loader dédié
-- validation stricte du `RouteDocument`
-- sélecteurs de progression
-- persistance locale minimale des étapes complétées + mode compact
-- calcul dérivé : première étape non validée, progression, fils rouges actifs, prochain verrou dur
-- CI GitHub front
+Le pipeline data étant terminé et la persistance/hotkeys déjà largement posées, la priorité passe maintenant à la **validation fonctionnelle du companion réel sur les 957 étapes**.
 
-Important : la route mock TypeScript a été supprimée afin d’éviter une double source de vérité. `data/route.json` est désormais la seule route consommée par le front.
+Ordre recommandé :
 
-## 5. CI
+### A — Fermer la persistance V1
 
-Une GitHub Action `.github/workflows/ci.yml` compile le front :
+Vérifier manuellement sous Tauri Windows :
+1. naviguer vers une étape éloignée
+2. fermer / relancer
+3. vérifier reprise sur le même `currentStepId`
+4. vérifier `completedStepIds`
+5. vérifier mode compact
+6. déplacer / resize la fenêtre
+7. fermer / relancer
+8. vérifier restauration taille + position
 
-- setup pnpm
-- Node 24
-- install
-- `pnpm build`
+### B — Valider les raccourcis globaux sous Windows / Dofus
 
-Dernier état vérifié avant handoff : **CI verte** après le refactor vers `data/route.json`.
+Tester :
+- précédent
+- suivant
+- valider / dévalider
+- afficher / masquer
+- reconfiguration depuis Paramètres
+- conflit de bindings
+- comportement quand Dofus a le focus
 
-Un premier échec CI avait révélé l’absence de déclaration Vite pour l’import CSS ; `src/vite-env.d.ts` a été ajouté.
+### C — Rendre le drawer fonctionnel sans dupliquer les données
 
-## 6. Google Sheet source
+Implémenter les vues via selectors dérivés de la route + `completedStepIds` :
+- Progression
+- Fils rouges
+- Prochain verrou
+- Prépa du bloc
+- Historique
 
-Spreadsheet : `Roadmap ULTIMATE V2 — Astrub → Dofus Sylvestre`
-ID : `1l1eYM3T708s5j74LmsUi4wyzg6sM9xShPzS_ToBtVYg`
-Onglet source : `ROUTE`
+Aucune nouvelle source de vérité locale pour ces vues.
 
-Structure visible actuelle :
+### D — Audit runtime du vrai `route.json`
 
-- A `BLOC` — ancienne colonne, désormais non utilisée comme source métier
-- B `TYPE`
-- C `ÉTAPE`
-- D `PRÉREQUIS / RESSOURCES`
-- E `⚠️ À SAVOIR`
-- F `SOURCE`
-- G `NOTE / OPTI`
-- H `✅`
-- I `🎯 ACTION`
-- J `⏭ SUITE / STOP`
+Tester des checkpoints représentatifs :
+- début de route
+- FIL ROUGE start/progress/finish
+- hard lock avec goal
+- hard lock sans goal
+- PRÉPA multi-items
+- REPRISE
+- fin de route
 
-Une colonne technique K `STEP_ID` vient d’être ajoutée et masquée pour donner des IDs stables indépendants des numéros de ligne.
+### E — Polish UI seulement après validation fonctionnelle
 
-### Migration STEP_ID déjà faite
+Ne pas partir dans une refonte graphique avant validation des flux réels en jeu.
 
-- colonne K créée
-- header `STEP_ID`
-- valeurs `route-step-0001`, `route-step-0002`, etc. générées
-- les formules ont ensuite été figées en valeurs
-- vérification effectuée sur les premières lignes : ce sont bien des `stringValue`, pas des formules
-- colonne K masquée
+## 9. Points de vigilance
 
-Important : **ne jamais utiliser le numéro de ligne Sheet comme identifiant métier dans l’app**.
+- ne jamais parser les titres pour reconstruire de la logique métier
+- ne jamais ajouter une route mock parallèle
+- ne jamais persister un index comme identité de progression
+- ne jamais recalculer les fils rouges depuis du texte
+- éviter tout store global supplémentaire sans besoin démontré
+- modifier le minimum nécessaire
+- conserver l’architecture data-driven
 
-## 7. Valeurs TYPE actuellement rencontrées dans ROUTE
+## 10. CI / validation
 
-Le scan complet B:C a confirmé au moins ces types :
+Avant merge de la PR :
+- `pnpm build` vert
+- Tauri Windows `cargo check` vert
+- `pnpm tauri dev` validé manuellement sous Windows
+- reprise de progression validée après restart
+- taille + position restaurées
+- always-on-top validé avec Dofus
+- raccourcis globaux validés avec Dofus au premier plan
+- rendu 380 px + resize libre validés
 
-- `PRÉPA`
-- `RÈGLE`
-- `QUÊTE`
-- `DONJON`
-- `REPRISE`
-- `JALON`
-- `FIL ROUGE`
-- `ALIGN.`
-- `TOUR`
-- `TURQUOISE`
-- `ORDRE`
-- `GROSSE ÉTAPE`
-- `OPTI ALIGNEMENT`
-- `FIN`
+## 11. État PR
 
-Les lignes `NOUVEAU BLOC XX — ...` et `▶ À FAIRE` ont un TYPE vide et doivent être traitées comme structure, pas comme étape classique.
+PR #1 reste en draft tant que la validation Windows réelle n’est pas terminée.
 
-L’exporteur ne doit **jamais** accepter silencieusement un TYPE inconnu.
-
-## 8. Mapping cible recommandé vers `StepType`
-
-À valider / implémenter explicitement dans l’exporteur :
-
-- `QUÊTE` → `quest`
-- `REPRISE` → `resume`
-- `DONJON` → `dungeon`
-- `PRÉPA` → `preparation`
-- `RÈGLE` → `rule` ou `hard_lock` si la donnée est explicitement structurée comme verrou
-- `JALON` → `milestone`
-- `FIL ROUGE` → `long_running`
-- `ALIGN.` → `alignment`
-- `ORDRE` → `order`
-- `GROSSE ÉTAPE` → `major_step`
-- `FIN` → `finish`
-
-Cas à décider proprement, sans parser du texte dans le front :
-- `TOUR` : probablement `quest` avec un champ/category dédié, ou extension de StepType si l’UX doit vraiment le distinguer
-- `TURQUOISE` : même sujet ; ne pas multiplier les StepType sans bénéfice UI réel
-- `OPTI ALIGNEMENT` : probablement `rule` / `milestone` selon intention
-
-Point important : ne pas bricoler un mapping uniquement à partir du libellé affiché. Si une distinction métier est nécessaire, enrichir le JSON/exporteur.
-
-## 9. Hyperliens DPLN
-
-Dans le Sheet, beaucoup de noms de quêtes sont des formules du type :
-
-`=HYPERLINK("https://www.dofuspourlesnoobs.com/...";"Nom de quête")`
-
-Pour le vrai exporteur, il faudra lire la cellule C avec les métadonnées/formules/hyperlinks afin de récupérer :
-- le libellé visible
-- l’URL DPLN
-
-Ne pas dépendre uniquement de la colonne F `SOURCE`, car les liens sont actuellement majoritairement portés directement par les cellules de `ÉTAPE`.
-
-## 10. Prochain chantier exact
-
-### A — Construire l’exporteur réel
-
-Créer `scripts/export-route.ts`.
-
-But :
-
-`ROUTE Google Sheet → mapping explicite → validation stricte → data/route.json`
-
-Il doit :
-
-1. lire les lignes utiles de `ROUTE`
-2. détecter les 21 `NOUVEAU BLOC XX`
-3. construire `RouteBlock[]`
-4. ignorer les lignes `▶ À FAIRE` comme structure pure
-5. produire une `RouteStep` pour les vraies étapes
-6. utiliser `STEP_ID` comme `step.id`
-7. dériver `blockId` depuis le dernier séparateur de bloc rencontré
-8. mapper les TYPE via une table explicite
-9. récupérer nom, action, instruction, lien DPLN
-10. convertir les PRÉPA multilignes en `preparationItems` si possible
-11. échouer si : TYPE inconnu, ID manquant/dupliqué, blockId absent, URL invalide, schema incohérent
-12. générer `data/route.json`
-13. faire passer `validateRouteDocument` sur le JSON produit avant écriture finale
-
-### B — Ne PAS encore enrichir automatiquement les fils rouges par heuristique texte
-
-Le modèle prévoit :
-
-```ts
-longRunningGoal?: {
-  goalId: string;
-  phase: 'start' | 'progress' | 'finish';
-}
-
-hardLock?: {
-  goalId?: string;
-  message: string;
-}
-```
-
-Le Sheet ne contient pas encore de colonnes techniques dédiées `GOAL_ID`, `GOAL_PHASE`, etc.
-
-Ne surtout pas coder dans React des règles du genre :
-
-```ts
-if (step.title.includes('Ocre')) ...
-```
-
-Deux options propres pour la suite :
-- ajouter des colonnes techniques masquées au Sheet pour ces relations ;
-- ou faire un enrichissement éditorial versionné côté exporteur via une donnée séparée, mais pas via parsing implicite des titres.
-
-La première option est préférable si le Sheet doit rester la source complète de vérité.
-
-## 11. Points de vigilance
-
-- `RÈGLE` contient parfois un vrai verrou dur (`NIVEAU 80 — VERROU DUR`, `VERROU DUR — TABLETTE DE TOTANKAMA`, etc.) et parfois une simple instruction. Le front ne doit pas deviner la différence depuis le texte.
-- Certaines lignes `PRÉPA` contiennent des sections et plusieurs paragraphes ; la première migration peut conserver `instruction` brut si `preparationItems` n’est pas fiable, puis enrichir ensuite.
-- Beaucoup d’actions sont déjà normalisées dans la colonne I : `TERMINER`, `AVANCER / STOP`, `REPRENDRE / TERMINER`, `PRÉPARER`, etc.
-- Les colonnes D/E/G peuvent contenir des infos utiles à l’instruction finale, mais le produit doit rester minimaliste. Ne pas injecter tout le bruit du Sheet dans l’overlay.
-- Une seule vérité de progression : `completedStepIds`. L’index de consultation est temporaire.
-- Toujours modifier le minimum nécessaire et éviter toute abstraction sans usage réel.
-
-## 12. État de la PR
-
-PR #1 reste en draft.
-
-Ne pas merge avant :
-- exporteur réel fonctionnel
-- `data/route.json` réel chargé
-- build vert
-- lancement manuel Windows `pnpm tauri dev`
-- validation du rendu à 380 px + resize
-- vérification always-on-top sous Dofus
-
-## 13. Première action recommandée dans le prochain chat
-
-1. lire `AGENTS.md`, `SPEC.md`, `ARCHITECTURE.md`, `docs/DATA_MODEL.md`, `HANDOFF.md`
-2. vérifier la branche `agent/initial-scaffold`
-3. relire `data/route.json`, `src/route/loadRoute.ts`, `src/route/validateRoute.ts`, `src/progress/*`
-4. implémenter `scripts/export-route.ts`
-5. ajouter le strict minimum de colonnes techniques supplémentaires au Sheet uniquement si nécessaire pour conserver une source de vérité explicite
-6. générer le premier vrai `data/route.json`
-7. CI jusqu’au vert
-
-Ne pas commencer par l’UI ou les hotkeys : le pipeline de données réel est maintenant le chantier prioritaire.
+Le prochain agent ne doit pas recommencer l’exporteur ou les hotkeys : il doit repartir de l’existant, vérifier les flux réels et compléter seulement les trous fonctionnels restants.
