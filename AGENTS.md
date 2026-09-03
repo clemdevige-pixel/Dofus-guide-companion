@@ -10,6 +10,7 @@ Toujours lire, dans cet ordre :
 2. `SPEC.md`
 3. `ARCHITECTURE.md`
 4. `docs/DATA_MODEL.md`
+5. `docs/ROUTE_OPTIMIZATION.md` pour tout chantier touchant à l'ordre, au scope ou aux mutualisations de la route
 
 Ne pas coder sur la base d'une supposition si la spec ou le modèle de données ne tranche pas le sujet.
 
@@ -23,6 +24,7 @@ Ne pas coder sur la base d'une supposition si la spec ou le modèle de données 
 - Identifiants d'étapes stables, indépendants des numéros de ligne du Sheet.
 - Ne pas ajouter backend, API, store global, abstraction ou dépendance sans besoin démontré.
 - Réutiliser l'existant avant de créer une nouvelle couche.
+- Pour l'optimisation de route : notre Sheet définit le scope ; Ganymède définit l'ordre/mutualisation à étudier ; toute modification reste vérifiée avant intégration.
 
 ## 3. Interdictions explicites
 
@@ -39,7 +41,9 @@ Interdit également :
 - synchroniser le Sheet en live pendant l'usage normal ;
 - introduire OCR, lecture mémoire du jeu, automatisation ou injection ;
 - ajouter du click-through avant la V1.1 ;
-- créer des composants génériques sans au moins deux usages concrets.
+- créer des composants génériques sans au moins deux usages concrets ;
+- recopier GP0 en bloc sans filtrer le scope Sylvestre ;
+- considérer une même position ou un même donjon comme preuve suffisante de mutualisation sans vérifier les prérequis.
 
 ## 4. Stack V1
 
@@ -101,6 +105,8 @@ Largeur compacte par défaut : 380 px, mais la fenêtre doit rester librement re
 
 Ne pas générer de logique visuelle depuis des mots présents dans `title` ou `instruction` : le rendu dépend de `type` et des champs structurés.
 
+La refonte Ganymède peut rendre nécessaire une future vue « étape de parcours » avec plusieurs quêtes concernées. Ne pas bricoler cette vue depuis le texte : d'abord stabiliser et structurer le modèle de données, ensuite adapter l'UI.
+
 ## 8. Raccourcis
 
 Les raccourcis globaux V1 sont configurables et persistés.
@@ -129,9 +135,13 @@ L'export doit échouer en cas de :
 - blockId absent ;
 - relation vers un goalId invalide ;
 - lien invalide ;
-- version de schéma non supportée.
+- version de schéma non supportée ;
+- action de lancement sans `LANCEMENT_REQUIS=TRUE` ;
+- lancement requis sans `POSITION` ni `LANCEMENT`.
 
 Ne jamais produire silencieusement un JSON partiellement valide.
+
+`data/route.json` est un artefact généré : ne jamais le modifier manuellement pour corriger la route.
 
 ## 10. Qualité
 
@@ -145,6 +155,8 @@ Avant de considérer une phase terminée :
 
 Les tests doivent cibler la logique produite : validation de route, sélecteurs de progression, persistance, raccourcis, etc. Ne pas multiplier les tests de rendu sans valeur métier.
 
+Pour un bloc de route optimisé, ajouter également les contrôles éditoriaux définis dans `docs/ROUTE_OPTIMIZATION.md` avant de le marquer `INTÉGRÉ`.
+
 ## 11. Méthode de changement
 
 Pour chaque chantier :
@@ -155,5 +167,7 @@ Pour chaque chantier :
 4. éviter toute duplication ;
 5. tester ce qui a été changé ;
 6. mettre à jour la doc seulement si le contrat produit/architecture change.
+
+Pour un chantier de route, suivre en plus le workflow `À AUDITER → EN AUDIT → VALIDÉ → INTÉGRÉ` décrit dans `docs/ROUTE_OPTIMIZATION.md` et suivi dans l'onglet `GANYMEDE_AUDIT` du Sheet.
 
 Si une demande entre en conflit avec `SPEC.md` ou `ARCHITECTURE.md`, ne pas contourner le conflit : le signaler et faire valider la nouvelle décision avant de coder.
