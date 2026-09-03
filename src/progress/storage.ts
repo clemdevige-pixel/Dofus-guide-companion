@@ -3,6 +3,7 @@ const STORAGE_KEY = 'dofus-guide-companion.progress.v1';
 export interface ProgressState {
   completedStepIds: string[];
   compact: boolean;
+  currentStepId?: string;
 }
 
 const defaultState: ProgressState = {
@@ -24,6 +25,9 @@ export function loadProgress(): ProgressState {
         ? parsed.completedStepIds.filter((id): id is string => typeof id === 'string')
         : [],
       compact: typeof parsed.compact === 'boolean' ? parsed.compact : false,
+      ...(typeof parsed.currentStepId === 'string' && parsed.currentStepId
+        ? { currentStepId: parsed.currentStepId }
+        : {}),
     };
   } catch {
     return defaultState;
