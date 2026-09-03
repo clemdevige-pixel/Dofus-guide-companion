@@ -61,7 +61,7 @@ export function App() {
     return <main className="overlay">Aucune étape disponible.</main>;
   }
 
-  const typeLabel = typeLabels[currentStep.type];
+  const typeLabel = currentStep.displayType ?? typeLabels[currentStep.type];
   const displayIndex = viewIndex + 1;
 
   function goPrevious() {
