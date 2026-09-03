@@ -66,3 +66,30 @@ export function getNextHardLock(
     (step) => step.type === 'hard_lock' && !completedStepIds.has(step.id),
   );
 }
+
+export function getHardLockForGoal(
+  route: RouteDocument,
+  goalId: string,
+): RouteStep | undefined {
+  return getSortedSteps(route).find(
+    (step) => step.type === 'hard_lock' && step.hardLock?.goalId === goalId,
+  );
+}
+
+export function getBlockPreparationSteps(
+  route: RouteDocument,
+  blockId: string,
+): RouteStep[] {
+  return getSortedSteps(route).filter(
+    (step) => step.blockId === blockId && step.type === 'preparation',
+  );
+}
+
+export function getCompletedSteps(
+  route: RouteDocument,
+  completedStepIds: ReadonlySet<string>,
+): RouteStep[] {
+  return getSortedSteps(route)
+    .filter((step) => completedStepIds.has(step.id))
+    .reverse();
+}
