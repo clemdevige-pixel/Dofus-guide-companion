@@ -2,9 +2,7 @@
 
 ## 1. Objectif
 
-Définir un format de route indépendant du Google Sheet et indépendant de l'UI.
-
-Le modèle doit représenter la roadmap sans interpréter du texte libre pour connaître le comportement d'une étape.
+Définir un format de route indépendant de l'UI. Le Google Sheet reste la source éditoriale, mais les comportements applicatifs reposent sur des champs structurés et jamais sur du parsing de texte libre.
 
 ## 2. Route
 
@@ -51,6 +49,7 @@ interface RouteStep {
   order: number;
   blockId: string;
   type: StepType;
+  displayType?: string;
 
   title: string;
   action?: string;
@@ -75,15 +74,27 @@ interface RouteStep {
 }
 ```
 
-## 5. Pourquoi `goalId`
+`displayType` conserve un libellé éditorial utile (`TOUR`, `TURQUOISE`, `ALIGN.`...) sans multiplier les types comportementaux de l'application.
 
-Un fil rouge et son verrou dur doivent être liés par une donnée explicite.
+## 5. Identité stable dans le Sheet
 
-Exemple :
+`ROUTE` contient des colonnes techniques masquées :
+
+- `STEP_ID` : identité métier stable de l'étape ;
+- `GOAL_ID` : identité stable d'un fil rouge ;
+- `GOAL_PHASE` : `start`, `progress` ou `finish`.
+
+`STEP_ID` est une valeur figée. Il ne doit jamais être recalculé depuis le numéro de ligne, le titre ou l'ordre de l'étape.
+
+Une insertion de ligne dans le Sheet ne doit donc pas invalider la progression locale déjà sauvegardée.
+
+## 6. Fils rouges et verrous
+
+Un fil rouge et son verrou sont liés par `goalId`, jamais par leur titre.
 
 ```json
 {
-  "id": "ocre-start",
+  "id": "route-step-0121",
   "type": "long_running",
   "longRunningGoal": {
     "goalId": "eternelle-moisson",
@@ -96,20 +107,20 @@ Puis :
 
 ```json
 {
-  "id": "ocre-hard-lock",
+  "id": "route-step-0887",
   "type": "hard_lock",
   "hardLock": {
     "goalId": "eternelle-moisson",
-    "message": "Terminer les étapes 1 à 18 avant de continuer."
+    "message": "Complète les captures manquantes avant de continuer."
   }
 }
 ```
 
-L'application peut alors calculer les fils rouges actifs sans rechercher les mots « Ocre » ou « fil rouge » dans les titres.
+L'application peut ainsi dériver les fils rouges actifs sans rechercher « Ocre » ou « fil rouge » dans le texte.
 
-## 6. Préparation
+## 7. Préparation
 
-Une PRÉPA doit idéalement être exportée comme liste structurée :
+Une PRÉPA est exportée vers `preparationItems` lorsque des lignes à puce sont présentes :
 
 ```json
 {
@@ -123,23 +134,22 @@ Une PRÉPA doit idéalement être exportée comme liste structurée :
 }
 ```
 
-Le texte brut peut être conservé en fallback pendant la première migration, mais la cible est une vraie liste.
+Le texte éditorial reste disponible dans le Sheet ; la V1 n'a pas besoin de dupliquer les colonnes d'audit ou de mise en forme.
 
-## 7. Action
+## 8. Action
 
-`action` est une donnée d'affichage simple, par exemple :
+`action` reste une donnée d'affichage :
 
 - `TERMINER`
 - `AVANCER / STOP`
-- `FAIRE & VALIDER`
 - `REPRENDRE / TERMINER`
 - `PRÉPARER`
 - `FIL ROUGE`
 - `VERROU DUR`
 
-L'application ne doit pas déduire le type depuis `action`.
+L'application ne déduit jamais `type` depuis `action`.
 
-## 8. Données volontairement absentes
+## 9. Données volontairement absentes
 
 Ne pas exporter si elles ne servent pas à la V1 :
 
@@ -149,43 +159,36 @@ Ne pas exporter si elles ne servent pas à la V1 :
 - couleurs du Sheet ;
 - formules du Sheet.
 
-Les couleurs sont une responsabilité de l'UI, dérivée de `type`.
+Les couleurs sont une responsabilité de l'UI, dérivée des données structurées.
 
-## 9. Exemple complet
+## 10. Export depuis le Sheet
 
-```json
-{
-  "schemaVersion": 1,
-  "routeVersion": "2026-09-03",
-  "title": "Astrub → Dofus Sylvestre",
-  "blocks": [
-    {
-      "id": "block-01",
-      "order": 1,
-      "title": "Incarnam → Astrub"
-    }
-  ],
-  "steps": [
-    {
-      "id": "block-01-premiers-pas",
-      "order": 1,
-      "blockId": "block-01",
-      "type": "quest",
-      "title": "Premiers pas",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/"
-      }
-    }
-  ]
-}
+Commande :
+
+```bash
+pnpm export:route
 ```
 
-## 10. Migration depuis le Sheet
+Configuration : voir `.env.example`.
 
-L'exporteur devra mapper explicitement les valeurs de TYPE du Sheet vers `StepType`.
+Flux :
 
-Aucune valeur inconnue ne doit être acceptée silencieusement.
+```text
+ROUTE (A:M)
+   ↓
+scripts/export-route.ts
+   ↓ validation stricte
+   ↓
+data/route.json
+```
 
-Le premier export peut conserver `instruction` sous forme de texte. Les structures plus riches (`preparationItems`, relations de fils rouges) peuvent être enrichies progressivement, mais sans créer de logique spécifique dans le front.
+L'export échoue notamment si :
+
+- `TYPE` est inconnu ;
+- `STEP_ID` manque ou est dupliqué ;
+- un bloc est absent ;
+- `GOAL_PHASE` est invalide ;
+- un verrou référence un `GOAL_ID` jamais déclaré ;
+- une URL structurée est invalide.
+
+Aucune erreur de données ne doit être masquée par une heuristique côté front.
