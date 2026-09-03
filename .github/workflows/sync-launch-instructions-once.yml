@@ -1,0 +1,87 @@
+name: Sync launch instructions once
+
+on:
+  push:
+    branches:
+      - agent/initial-scaffold
+    paths:
+      - .github/workflows/sync-launch-instructions-once.yml
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/initial-scaffold
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.17.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Patch launch instructions and generic UI
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+
+          const launchInstructions = {
+            'route-step-0007': "Nouveau personnage : la quête démarre automatiquement devant la statue de ton dieu dans le tutoriel guidé. Ancien personnage : va au Dofusarium du Temple Céleste en [1,1] pour la valider.",
+            'route-step-0008': "Dans le tutoriel guidé, après Premiers pas, reparle à Ganymède après le combat contre le Poutch Céleste.",
+            'route-step-0009': "Dans le tutoriel guidé, après Premières armes, parle à Ganymède pour continuer ton apprentissage.",
+            'route-step-0010': "Dans le tutoriel guidé, après L'anneau de tous les dangers, reparle à Maître Hoboulo pour lancer la dernière épreuve.",
+            'route-step-0050': "À la fin de Conseil de classe, la quête suivante dépend de ta classe : ouvre la page DPLN « Quête de classe », choisis ta classe puis lance la quête spécifique indiquée.",
+            'route-step-0051': "Parle à ton chef de classe et choisis « Demander s'il a encore besoin de vous ». La position dépend de ta classe.",
+            'route-step-0304': "Selon ton choix dans Au service de Danathor : si tu as empoisonné Rimaraf, parle à Danathor en [-36,-60] ; sinon parle à Larry Poller en [-34,-58].",
+            'route-step-0548': "Selon ton choix dans Au service de Danathor : si tu as empoisonné Rimaraf, parle à Danathor en [-36,-60] ; sinon parle à Amayiro en [-32,-57].",
+            'route-step-0661': "Obtiens 1 Manuel Scolaire sur les monstres de Nimotopia, puis double-clique le Manuel Scolaire dans ton inventaire pour lancer la quête.",
+            'route-step-0733': "Dans ton temple de classe, parle au maître de ta classe, évoque les Tours de la Fratrie des Oubliés puis confirme que tu es prêt à affronter leurs soldats.",
+            'route-step-0734': "Depuis ton temple de classe, utilise ta statue pour rejoindre le Domaine des dieux, descends au sous-sol puis parle à Gobanos le forgeron.",
+            'route-step-0765': "Double-clique le Joyau écarlate dans ton inventaire de quête. Il est obtenu à la fin de Les grandes galeries."
+          };
+
+          const routePath = 'data/route.json';
+          const route = JSON.parse(fs.readFileSync(routePath, 'utf8'));
+          const byId = new Map(route.steps.map((step) => [step.id, step]));
+          for (const [id, launchInstruction] of Object.entries(launchInstructions)) {
+            const step = byId.get(id);
+            if (!step) throw new Error(`STEP_ID absent: ${id}`);
+            if (step.location) throw new Error(`Le lancement alternatif ne doit pas remplacer une position: ${id}`);
+            step.launchInstruction = launchInstruction;
+          }
+          fs.writeFileSync(routePath, `${JSON.stringify(route, null, 2)}\n`);
+
+          const appPath = 'src/App.tsx';
+          let app = fs.readFileSync(appPath, 'utf8');
+          const anchor = `        {currentStep.instruction && <p className="instruction">{currentStep.instruction}</p>}`;
+          const insertion = `        {!currentStep.location && currentStep.launchInstruction && (\n          <div className="step-context">\n            <strong>Lancement</strong>\n            <span>{currentStep.launchInstruction}</span>\n          </div>\n        )}\n\n${anchor}`;
+          if (!app.includes(anchor)) throw new Error('Point d’insertion App.tsx introuvable.');
+          if (!app.includes('currentStep.launchInstruction')) {
+            app = app.replace(anchor, insertion);
+            fs.writeFileSync(appPath, app);
+          }
+          NODE
+
+      - run: pnpm test
+      - run: pnpm build
+
+      - name: Commit generated runtime and UI
+        run: |
+          if git diff --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/route.json src/App.tsx
+          git commit -m "feat(route): show non-coordinate quest launches"
+          git push
