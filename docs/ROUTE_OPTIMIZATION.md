@@ -86,7 +86,22 @@ Si plusieurs quêtes sont disponibles au même moment et peuvent progresser sans
 
 Ne pas considérer une même coordonnée comme preuve suffisante : les prérequis et l'état des quêtes doivent permettre leur coexistence réelle.
 
-### 5.2 Quêtes parallèles
+Toute prise utilise `POSITION` (position de lancement) ou `LANCEMENT` lorsqu'une coordonnée unique n'est pas correcte. `LANCEMENT_REQUIS=TRUE` est obligatoire.
+
+### 5.2 Destination de parcours
+
+`DESTINATION` est distincte de `POSITION`.
+
+- `POSITION` = endroit où la prise de quête a lieu ;
+- `DESTINATION` = endroit où le joueur doit se rendre pour exécuter le moment de parcours.
+
+Une étape sans prise de quête peut donc avoir `DESTINATION` sans `POSITION`.
+
+Une étape de prise dont l'objectif immédiat se trouve au même endroit peut avoir les deux champs identiques.
+
+Ne jamais mettre une coordonnée de farm, d'atelier, de rendu ou de simple progression dans `POSITION` uniquement pour permettre à l'UI de proposer `/travel`.
+
+### 5.3 Quêtes parallèles
 
 Une quête lancée mais non terminée doit être représentée explicitement :
 
@@ -96,25 +111,25 @@ Une quête lancée mais non terminée doit être représentée explicitement :
 
 Ne jamais masquer une quête active derrière une note éditoriale.
 
-### 5.3 Donjons
+### 5.4 Donjons
 
 Avant chaque donjon, rechercher toutes les quêtes de notre scope pouvant exploiter le même passage.
 
 Le donjon n'est exécuté que lorsque les quêtes compatibles nécessaires sont au bon checkpoint, sauf raison structurelle documentée imposant plusieurs passages.
 
-### 5.4 Ressources
+### 5.5 Ressources
 
 Avant de demander un achat ou un farm, vérifier si une quête déjà dans la route fournit la ressource avant son utilisation.
 
 Préférer la récupération naturelle lorsque cela ne crée pas de détour supérieur.
 
-### 5.5 Rendus
+### 5.6 Rendus
 
 Ne pas rendre systématiquement une quête dès que ses objectifs sont terminés.
 
 Si Ganymède montre qu'un rendu plus tardif évite un aller-retour sans bloquer la progression, déplacer le rendu au point optimal.
 
-### 5.6 Scope
+### 5.7 Scope
 
 Toute étape Ganymède doit être classée :
 
@@ -147,11 +162,13 @@ Pour chaque bloc :
 5. Construire les groupes de quêtes pouvant coexister.
 6. Chercher les objectifs, drops, PNJ et donjons communs.
 7. Vérifier les prérequis et positions des prises modifiées.
-8. Réécrire le bloc ligne par ligne, sans règle implicite.
-9. Vérifier que chaque prise a `POSITION` ou `LANCEMENT` et `LANCEMENT_REQUIS=TRUE`.
-10. Vérifier les cycles `GOAL_ID / GOAL_PHASE` des fils rouges.
-11. Exporter le Sheet via `pnpm export:route`.
-12. Lancer la validation/tests/build avant de marquer le bloc `INTÉGRÉ`.
+8. Attribuer `DESTINATION` aux moments de parcours qui ont une cible géographique.
+9. Réécrire le bloc ligne par ligne, sans règle implicite.
+10. Préserver les `STEP_ID` historiques sur le même événement métier ; créer de nouveaux IDs pour les nouveaux moments de parcours.
+11. Vérifier que chaque prise a `POSITION` ou `LANCEMENT` et `LANCEMENT_REQUIS=TRUE`.
+12. Vérifier les cycles `GOAL_ID / GOAL_PHASE` des fils rouges.
+13. Exporter le Sheet via `pnpm export:route`.
+14. Lancer la validation/tests/build avant de marquer le bloc `INTÉGRÉ`.
 
 ## 7. Critères de validation d'une mutualisation
 
@@ -162,7 +179,7 @@ Une mutualisation est acceptée seulement si :
 - aucun rendu anticipé ne ferme une autre branche ;
 - le gain est concret : trajet, combat, donjon, farm ou ressource évité ;
 - la route reste compréhensible ligne par ligne ;
-- les informations de lancement restent structurées.
+- les informations de lancement et de destination restent structurées.
 
 En cas de doute, conserver l'ordre actuel et marquer le point à vérifier dans `GANYMEDE_AUDIT` plutôt que supposer.
 
@@ -170,7 +187,9 @@ En cas de doute, conserver l'ordre actuel et marquer le point à vérifier dans 
 
 Le modèle de route doit rester indépendant de l'UI.
 
-La refonte d'ordre peut produire davantage d'étapes `LANCER`, `REPRISE`, `FIL ROUGE` et `PASSAGE MUTUALISÉ` sans ajouter de logique spécifique par quête dans React.
+La refonte d'ordre peut produire davantage d'étapes `LANCER`, `REPRISE`, `FIL ROUGE`, `PASSAGE MUTUALISÉ` et `GROSSE ÉTAPE` sans ajouter de logique spécifique par quête dans React.
+
+La future UI devra privilégier `destination` pour le prochain déplacement et conserver `location` pour expliquer/copier la position de lancement d'une quête. Elle ne doit jamais reconstruire ces informations depuis `title` ou `instruction`.
 
 Une future évolution UI pourra représenter une **étape de parcours** avec plusieurs quêtes concernées, mais cette information devra être structurée dans le modèle avant d'être rendue. Ne jamais reconstruire les regroupements en parsant `title` ou `instruction`.
 
@@ -185,6 +204,7 @@ Après les 20 blocs :
 - vérifier qu'aucune quête hors scope n'a été ajoutée par accident ;
 - vérifier tous les passages de donjons répétés et justifier ceux qui restent ;
 - vérifier toutes les prises de quête ;
+- vérifier toutes les destinations structurées utiles ;
 - vérifier les fils rouges ;
 - vérifier le chemin jusqu'au vrai Dofus Sylvestre ;
 - régénérer `data/route.json` uniquement depuis le Sheet ;
