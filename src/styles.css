@@ -50,7 +50,8 @@ button {
 .step-title-row,
 .navigation-bar,
 .settings-header,
-.settings-actions {
+.settings-actions,
+.context-panel__header {
   display: flex;
   align-items: center;
 }
@@ -72,11 +73,13 @@ button {
 
 .eyebrow,
 .progress-label,
+.block-label,
 .action-label,
 .instruction,
 .secondary-panel p,
 .settings-help,
-.settings-error {
+.settings-error,
+.context-panel__body p {
   margin: 0;
 }
 
@@ -89,10 +92,18 @@ button {
 }
 
 .progress-label,
+.block-label,
 .settings-help {
   margin-top: 3px;
   color: #93a396;
   font-size: 12px;
+}
+
+.block-label {
+  max-width: 270px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .icon-button,
@@ -113,7 +124,8 @@ button {
 .current-step,
 .secondary-panel,
 .drawer,
-.settings-panel {
+.settings-panel,
+.context-panel {
   border: 1px solid #2c3931;
   border-radius: 12px;
   background: rgba(21, 29, 24, 0.96);
@@ -121,6 +133,15 @@ button {
 
 .current-step {
   padding: 14px;
+}
+
+.current-step--hard_lock {
+  border-color: #765038;
+  background: #241b15;
+}
+
+.current-step--long_running {
+  border-color: #454064;
 }
 
 .type-badge {
@@ -167,6 +188,37 @@ button {
   color: #d4ded6;
   font-size: 14px;
   line-height: 1.45;
+}
+
+.preparation-list,
+.context-panel ul,
+.context-panel ol {
+  margin: 10px 0 0;
+  padding-left: 20px;
+  color: #cbd6cd;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.step-context {
+  display: grid;
+  gap: 5px;
+  margin-top: 12px;
+  padding: 9px 10px;
+  border-radius: 9px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.step-context--goal {
+  border: 1px solid #454064;
+  background: #1b1926;
+}
+
+.step-context--lock {
+  border: 1px solid #765038;
+  background: #2b1f17;
+  color: #ffd1aa;
 }
 
 .secondary-panel {
@@ -218,15 +270,40 @@ button {
   text-align: left;
 }
 
-.settings-panel {
+.settings-panel,
+.context-panel {
   margin-bottom: 10px;
   padding: 12px;
 }
 
-.settings-header {
+.settings-header,
+.context-panel__header {
   justify-content: space-between;
   gap: 12px;
   margin-bottom: 12px;
+}
+
+.context-panel__body {
+  display: grid;
+  gap: 9px;
+  color: #cbd6cd;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.preparation-group + .preparation-group {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #2c3931;
+}
+
+.preparation-group ul {
+  margin-top: 6px;
+}
+
+.history-list {
+  max-height: 280px;
+  overflow-y: auto;
 }
 
 .shortcut-list {
@@ -309,6 +386,11 @@ button {
 
 .overlay--compact .instruction {
   font-size: 13px;
+}
+
+.overlay--compact .preparation-list {
+  max-height: 160px;
+  overflow-y: auto;
 }
 
 @media (max-width: 330px) {
