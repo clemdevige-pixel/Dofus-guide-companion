@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { getCurrentWindow } from '@tauri-apps/api/window';
+import { writeText } from '@tauri-apps/plugin-clipboard-manager';
 import { loadProgress, saveProgress } from './progress/storage';
 import { loadBundledRoute } from './route/loader';
 import {
@@ -50,6 +51,10 @@ const typeLabels: Record<StepType, string> = {
   major_step: 'GROSSE ÉTAPE',
   finish: 'FIN',
 };
+
+function getResourceName(item: string): string {
+  return item.replace(/^\d+\s*[×x]\s*/i, '').trim();
+}
 
 export function App() {
   const initialProgress = useMemo(() => loadProgress(), []);
@@ -164,6 +169,14 @@ export function App() {
     }
   }
 
+  async function copyToClipboard(text: string) {
+    try {
+      await writeText(text);
+    } catch (error: unknown) {
+      console.error('Impossible de copier dans le presse-papier.', error);
+    }
+  }
+
   async function toggleOverlayVisibility() {
     const window = getCurrentWindow();
     if (await window.isVisible()) {
@@ -213,7 +226,6 @@ export function App() {
             <p className="progress-label">
               Étape {displayIndex} / {steps.length} · {progress.percentage}%
             </p>
-            {currentBlock && <p className="block-label">{currentBlock.title}</p>}
           </div>
           <button
             className="icon-button"
@@ -243,6 +255,13 @@ export function App() {
           >
             +
           </button>
+        </div>
+      )}
+
+      {currentBlock && (
+        <div className="block-banner">
+          <span>Bloc {currentBlock.order} / {route.blocks.length}</span>
+          <strong>{currentBlock.title}</strong>
         </div>
       )}
 
@@ -319,8 +338,20 @@ export function App() {
                   <div className="preparation-group" key={preparation.id}>
                     <strong>{preparation.title}</strong>
                     {preparation.preparationItems && preparation.preparationItems.length > 0 ? (
-                      <ul>
-                        {preparation.preparationItems.map((item) => <li key={item}>{item}</li>)}
+                      <ul className="copy-list">
+                        {preparation.preparationItems.map((item) => (
+                          <li key={item}>
+                            <button
+                              className="copy-item-button"
+                              type="button"
+                              title={`Copier ${getResourceName(item)}`}
+                              onClick={() => void copyToClipboard(getResourceName(item))}
+                            >
+                              <span>{item}</span>
+                              <span aria-hidden="true">⧉</span>
+                            </button>
+                          </li>
+                        ))}
                       </ul>
                     ) : preparation.instruction ? (
                       <p>{preparation.instruction}</p>
@@ -391,11 +422,38 @@ export function App() {
         </div>
 
         {currentStep.action && <p className="action-label">{currentStep.action}</p>}
+
+        {currentStep.location && (
+          <button
+            className="travel-button"
+            type="button"
+            title="Copier la commande de déplacement"
+            onClick={() =>
+              void copyToClipboard(`/travel ${currentStep.location?.x} ${currentStep.location?.y}`)
+            }
+          >
+            <span>[{currentStep.location.x},{currentStep.location.y}]</span>
+            <span>/travel · ⧉</span>
+          </button>
+        )}
+
         {currentStep.instruction && <p className="instruction">{currentStep.instruction}</p>}
 
         {currentStep.type === 'preparation' && currentStep.preparationItems && (
-          <ul className="preparation-list">
-            {currentStep.preparationItems.map((item) => <li key={item}>{item}</li>)}
+          <ul className="preparation-list copy-list">
+            {currentStep.preparationItems.map((item) => (
+              <li key={item}>
+                <button
+                  className="copy-item-button"
+                  type="button"
+                  title={`Copier ${getResourceName(item)}`}
+                  onClick={() => void copyToClipboard(getResourceName(item))}
+                >
+                  <span>{item}</span>
+                  <span aria-hidden="true">⧉</span>
+                </button>
+              </li>
+            ))}
           </ul>
         )}
 
