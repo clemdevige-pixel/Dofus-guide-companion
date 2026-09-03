@@ -11,6 +11,7 @@ Toujours lire, dans cet ordre :
 3. `ARCHITECTURE.md`
 4. `docs/DATA_MODEL.md`
 5. `docs/ROUTE_OPTIMIZATION.md` pour tout chantier touchant à l'ordre, au scope ou aux mutualisations de la route
+6. `docs/ROUTE_OPTIMIZATION_WORKFLOW.md` pour exécuter concrètement une passe d'audit/réécriture de route
 
 Ne pas coder sur la base d'une supposition si la spec ou le modèle de données ne tranche pas le sujet.
 
@@ -25,6 +26,7 @@ Ne pas coder sur la base d'une supposition si la spec ou le modèle de données 
 - Ne pas ajouter backend, API, store global, abstraction ou dépendance sans besoin démontré.
 - Réutiliser l'existant avant de créer une nouvelle couche.
 - Pour l'optimisation de route : notre Sheet définit le scope ; Ganymède définit l'ordre/mutualisation à étudier ; toute modification reste vérifiée avant intégration.
+- Toute réécriture de route complexe se fait par **paquet indivisible**, jamais par micro-patches laissant un état intermédiaire faux.
 
 ## 3. Interdictions explicites
 
@@ -43,7 +45,11 @@ Interdit également :
 - ajouter du click-through avant la V1.1 ;
 - créer des composants génériques sans au moins deux usages concrets ;
 - recopier GP0 en bloc sans filtrer le scope Sylvestre ;
-- considérer une même position ou un même donjon comme preuve suffisante de mutualisation sans vérifier les prérequis.
+- considérer une même position ou un même donjon comme preuve suffisante de mutualisation sans vérifier les prérequis ;
+- réutiliser un `STEP_ID` historique pour un événement métier différent ;
+- utiliser `POSITION` comme simple destination de trajet ;
+- modifier manuellement `data/route.json` pour corriger la route ;
+- considérer qu'une cellule technique a été vidée parce qu'elle a été omise d'un `updateCells` Google Sheets.
 
 ## 4. Stack V1
 
@@ -155,7 +161,7 @@ Avant de considérer une phase terminée :
 
 Les tests doivent cibler la logique produite : validation de route, sélecteurs de progression, persistance, raccourcis, etc. Ne pas multiplier les tests de rendu sans valeur métier.
 
-Pour un bloc de route optimisé, ajouter également les contrôles éditoriaux définis dans `docs/ROUTE_OPTIMIZATION.md` avant de le marquer `INTÉGRÉ`.
+Pour un bloc de route optimisé, ajouter également les contrôles éditoriaux définis dans `docs/ROUTE_OPTIMIZATION.md` et la procédure de `docs/ROUTE_OPTIMIZATION_WORKFLOW.md` avant de le marquer `INTÉGRÉ`.
 
 ## 11. Méthode de changement
 
@@ -168,6 +174,17 @@ Pour chaque chantier :
 5. tester ce qui a été changé ;
 6. mettre à jour la doc seulement si le contrat produit/architecture change.
 
-Pour un chantier de route, suivre en plus le workflow `À AUDITER → EN AUDIT → VALIDÉ → INTÉGRÉ` décrit dans `docs/ROUTE_OPTIMIZATION.md` et suivi dans l'onglet `GANYMEDE_AUDIT` du Sheet.
+Pour un chantier de route :
+
+1. lire `GANYMEDE_AUDIT` avant toute écriture ;
+2. définir le **paquet indivisible** à traiter ;
+3. cartographier et vérifier son ordre avant modification ;
+4. conserver les `STEP_ID` sur les mêmes événements métier uniquement ;
+5. écrire le paquet ;
+6. relire explicitement les colonnes techniques K→Q pour nettoyer les valeurs résiduelles ;
+7. lancer l'audit mécanique ;
+8. mettre à jour `GANYMEDE_AUDIT` avec le dernier paquet réellement intégré.
+
+Suivre le workflow `À AUDITER → EN AUDIT → VALIDÉ → INTÉGRÉ` décrit dans `docs/ROUTE_OPTIMIZATION.md` et `docs/ROUTE_OPTIMIZATION_WORKFLOW.md`.
 
 Si une demande entre en conflit avec `SPEC.md` ou `ARCHITECTURE.md`, ne pas contourner le conflit : le signaler et faire valider la nouvelle décision avant de coder.
