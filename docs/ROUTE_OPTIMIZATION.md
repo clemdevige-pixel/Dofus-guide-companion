@@ -78,6 +78,8 @@ Un moment de parcours peut contenir :
 
 La route reste strictement linéaire : le joueur doit pouvoir suivre les lignes dans l'ordre sans interpréter une règle externe.
 
+Les frontières de blocs sont éditoriales, pas des barrières d'optimisation. Si une quête déjà présente plus loin dans notre scope peut être lancée gratuitement pendant un bloc antérieur, son lancement peut être avancé. L'ancienne étape devient alors une `REPRISE` et conserve son `STEP_ID` uniquement si elle représente toujours le même événement métier. Cette règle ne permet jamais d'importer une quête hors scope.
+
 ## 5. Règles de réécriture
 
 ### 5.1 Prises anticipées
@@ -87,6 +89,13 @@ Si plusieurs quêtes sont disponibles au même moment et peuvent progresser sans
 Ne pas considérer une même coordonnée comme preuve suffisante : les prérequis et l'état des quêtes doivent permettre leur coexistence réelle.
 
 Toute prise utilise `POSITION` (position de lancement) ou `LANCEMENT` lorsqu'une coordonnée unique n'est pas correcte. `LANCEMENT_REQUIS=TRUE` est obligatoire.
+
+Une prise anticipée peut concerner une quête actuellement rangée dans un bloc ultérieur. Dans ce cas :
+
+1. vérifier qu'elle existe déjà dans le scope global ;
+2. placer son lancement au premier moment réellement disponible et utile ;
+3. garder la quête active explicitement ;
+4. convertir son ancienne prise en reprise/progression sans dupliquer la quête.
 
 ### 5.2 Destination de parcours
 
@@ -159,16 +168,17 @@ Pour chaque bloc :
 2. Identifier les guides GP Ganymède couvrant son contenu.
 3. Relever l'ordre réel de déplacement et les prises anticipées.
 4. Filtrer strictement les quêtes hors scope.
-5. Construire les groupes de quêtes pouvant coexister.
-6. Chercher les objectifs, drops, PNJ et donjons communs.
-7. Vérifier les prérequis et positions des prises modifiées.
-8. Attribuer `DESTINATION` aux moments de parcours qui ont une cible géographique.
-9. Réécrire le bloc ligne par ligne, sans règle implicite.
-10. Préserver les `STEP_ID` historiques sur le même événement métier ; créer de nouveaux IDs pour les nouveaux moments de parcours.
-11. Vérifier que chaque prise a `POSITION` ou `LANCEMENT` et `LANCEMENT_REQUIS=TRUE`.
-12. Vérifier les cycles `GOAL_ID / GOAL_PHASE` des fils rouges.
-13. Exporter le Sheet via `pnpm export:route`.
-14. Lancer la validation/tests/build avant de marquer le bloc `INTÉGRÉ`.
+5. Vérifier aussi les quêtes de blocs ultérieurs déjà dans le scope qui pourraient être lancées pendant ce parcours.
+6. Construire les groupes de quêtes pouvant coexister.
+7. Chercher les objectifs, drops, PNJ et donjons communs.
+8. Vérifier les prérequis et positions des prises modifiées.
+9. Attribuer `DESTINATION` aux moments de parcours qui ont une cible géographique.
+10. Réécrire le bloc ligne par ligne, sans règle implicite.
+11. Préserver les `STEP_ID` historiques sur le même événement métier ; créer de nouveaux IDs pour les nouveaux moments de parcours.
+12. Vérifier que chaque prise a `POSITION` ou `LANCEMENT` et `LANCEMENT_REQUIS=TRUE`.
+13. Vérifier les cycles `GOAL_ID / GOAL_PHASE` des fils rouges, y compris ceux qui traversent plusieurs blocs.
+14. Exporter le Sheet via `pnpm export:route`.
+15. Lancer la validation/tests/build avant de marquer le bloc `INTÉGRÉ`.
 
 ## 7. Critères de validation d'une mutualisation
 
@@ -202,6 +212,7 @@ Après les 20 blocs :
 - comparer le parcours complet à GP0 ;
 - vérifier qu'aucune quête obligatoire de notre scope n'a disparu ;
 - vérifier qu'aucune quête hors scope n'a été ajoutée par accident ;
+- vérifier les prises déplacées entre blocs et l'absence de doubles lancements ;
 - vérifier tous les passages de donjons répétés et justifier ceux qui restent ;
 - vérifier toutes les prises de quête ;
 - vérifier toutes les destinations structurées utiles ;
