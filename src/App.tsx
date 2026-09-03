@@ -9,8 +9,12 @@ import {
   getSortedSteps,
   getStepIndex,
 } from './route/selectors';
+import type { StepType } from './route/types';
+import { validateRoute } from './route/validation';
 
-const typeLabels: Record<string, string> = {
+const route = validateRoute(mockRoute);
+
+const typeLabels: Record<StepType, string> = {
   quest: 'QUÊTE',
   resume: 'REPRISE',
   dungeon: 'DONJON',
@@ -27,7 +31,7 @@ const typeLabels: Record<string, string> = {
 
 export function App() {
   const initialProgress = useMemo(() => loadProgress(), []);
-  const steps = useMemo(() => getSortedSteps(mockRoute), []);
+  const steps = useMemo(() => getSortedSteps(route), []);
   const [completedStepIds, setCompletedStepIds] = useState<Set<string>>(
     () => new Set(initialProgress.completedStepIds),
   );
@@ -35,10 +39,10 @@ export function App() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [viewIndex, setViewIndex] = useState(() => {
     const firstIncomplete = getFirstIncompleteStep(
-      mockRoute,
+      route,
       new Set(initialProgress.completedStepIds),
     );
-    return firstIncomplete ? Math.max(0, getStepIndex(mockRoute, firstIncomplete.id)) : 0;
+    return firstIncomplete ? Math.max(0, getStepIndex(route, firstIncomplete.id)) : 0;
   });
 
   useEffect(() => {
@@ -49,16 +53,16 @@ export function App() {
   }, [completedStepIds, compact]);
 
   const currentStep = steps[viewIndex];
-  const progress = getProgress(mockRoute, completedStepIds);
-  const activeGoals = getActiveLongRunningGoals(mockRoute, completedStepIds);
-  const nextHardLock = getNextHardLock(mockRoute, completedStepIds);
+  const progress = getProgress(route, completedStepIds);
+  const activeGoals = getActiveLongRunningGoals(route, completedStepIds);
+  const nextHardLock = getNextHardLock(route, completedStepIds);
   const isCurrentCompleted = currentStep ? completedStepIds.has(currentStep.id) : false;
 
   if (!currentStep) {
     return <main className="overlay">Aucune étape disponible.</main>;
   }
 
-  const typeLabel = typeLabels[currentStep.type] ?? currentStep.type;
+  const typeLabel = typeLabels[currentStep.type];
   const displayIndex = viewIndex + 1;
 
   function goPrevious() {
