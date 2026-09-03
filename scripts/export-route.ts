@@ -101,7 +101,7 @@ function parseHyperlinkFormula(formula: string): { label: string; url: string } 
     return undefined;
   }
 
-  const match = formula.match(/^=HYPERLINK\("([^"]+)";"((?:[^"]|"")*)"\)$/i);
+  const match = formula.match(/^=HYPERLINK\("([^"]+)"[;,]"((?:[^"]|"")*)"\)$/i);
   if (!match) {
     throw new Error(`Formule HYPERLINK non supportée : ${formula}`);
   }
@@ -204,6 +204,12 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
     const goalPhase = parseGoalPhase(cell(formatted, 12), sheetRow);
     if (goalPhase && !goalId) {
       throw new Error(`Ligne Sheet ${sheetRow}: GOAL_PHASE défini sans GOAL_ID.`);
+    }
+    if (goalId && !goalPhase && mapping.type !== 'hard_lock') {
+      throw new Error(`Ligne Sheet ${sheetRow}: GOAL_ID défini sans GOAL_PHASE.`);
+    }
+    if (mapping.type === 'long_running' && (!goalId || !goalPhase)) {
+      throw new Error(`Ligne Sheet ${sheetRow}: FIL ROUGE sans GOAL_ID/GOAL_PHASE.`);
     }
 
     const hyperlink = parseHyperlinkFormula(cell(formula, 2));
