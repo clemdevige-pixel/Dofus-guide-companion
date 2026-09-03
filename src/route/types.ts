@@ -19,6 +19,11 @@ export interface RouteBlock {
   shortTitle?: string;
 }
 
+export interface RouteCoordinate {
+  x: number;
+  y: number;
+}
+
 export interface RouteStep {
   id: string;
   order: number;
@@ -32,10 +37,10 @@ export interface RouteStep {
     label: string;
     url: string;
   };
-  location?: {
-    x: number;
-    y: number;
-  };
+  /** Position structurée où une quête est lancée. */
+  location?: RouteCoordinate;
+  /** Position structurée vers laquelle le joueur doit se rendre pour exécuter cette étape. */
+  destination?: RouteCoordinate;
   launchInstruction?: string;
   preparationItems?: string[];
   longRunningGoal?: {
