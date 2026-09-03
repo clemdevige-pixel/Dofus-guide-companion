@@ -155,3 +155,42 @@ test('accepts a launch action with a structured location', () => {
     ),
   );
 });
+
+test('accepts a pure travel step with a structured destination and no launch location', () => {
+  assert.doesNotThrow(() =>
+    validateRoute(
+      makeRoute([
+        {
+          id: 'travel',
+          order: 1,
+          blockId: 'block-01',
+          type: 'major_step',
+          title: 'Travel objective',
+          action: 'AVANCER',
+          destination: { x: -12, y: 34 },
+        },
+        { ...finalStep, order: 2 },
+      ]),
+    ),
+  );
+});
+
+test('rejects a non-integer structured destination', () => {
+  assert.throws(
+    () =>
+      validateRoute(
+        makeRoute([
+          {
+            id: 'travel',
+            order: 1,
+            blockId: 'block-01',
+            type: 'major_step',
+            title: 'Travel objective',
+            destination: { x: 1.5, y: 2 },
+          },
+          { ...finalStep, order: 2 },
+        ]),
+      ),
+    /destination invalide/,
+  );
+});
