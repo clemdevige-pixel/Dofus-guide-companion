@@ -11,7 +11,9 @@ Le companion ne connaît pas les règles métier de chaque quête. Il sait uniqu
 ```text
 Google Sheet
     ↓
-export / validation
+scripts/export-route.ts
+    ↓
+validation de schéma
     ↓
 data/route.json
     ↓
@@ -43,9 +45,13 @@ Responsabilités :
 - fenêtre native ;
 - always-on-top ;
 - position / dimensions ;
+- fenêtre redimensionnable librement ;
 - ouverture des liens externes ;
+- raccourcis clavier globaux ;
 - persistance locale si nécessaire ;
-- futurs raccourcis globaux.
+- futur click-through V1.1.
+
+Largeur compacte par défaut : **380 px**, sans empêcher le resize utilisateur.
 
 ### Front
 
@@ -59,7 +65,8 @@ Responsabilités :
 - fils rouges ;
 - verrous ;
 - progression ;
-- préférences UI.
+- préférences UI ;
+- écran de réglages des raccourcis.
 
 ## 4. Modules cibles
 
@@ -79,6 +86,11 @@ src/
 ├─ overlay/
 │  ├─ OverlayShell.tsx
 │  └─ useWindowPreferences.ts
+├─ shortcuts/
+│  ├─ shortcutStore.ts
+│  └─ shortcutService.ts
+├─ settings/
+│  └─ SettingsPanel.tsx
 ├─ features/
 │  ├─ current-step/
 │  ├─ long-running-goals/
@@ -86,6 +98,9 @@ src/
 │  └─ preparation/
 └─ ui/
    └─ composants génériques
+
+scripts/
+└─ export-route.ts
 ```
 
 Cette arborescence est indicative : ne pas créer des dossiers vides ou des abstractions avant qu'elles soient nécessaires.
@@ -98,13 +113,52 @@ Cette arborescence est indicative : ne pas créer des dossiers vides ou des abst
 - `completedStepIds` ;
 - étape courante dérivée ;
 - préférences overlay ;
+- mapping des raccourcis globaux ;
 - version de la route.
 
 L'étape courante doit autant que possible être **dérivée** de la première étape non validée plutôt que maintenue comme une deuxième vérité indépendante.
 
 Un pointeur manuel peut exister pour consulter les étapes précédentes/suivantes, mais il ne doit pas remplacer l'état réel de progression.
 
-## 6. Identifiants stables
+## 6. Raccourcis globaux
+
+Les raccourcis font partie de la V1.
+
+Mapping par défaut :
+
+```text
+Ctrl+Alt+Right  → étape suivante
+Ctrl+Alt+Left   → étape précédente
+Ctrl+Alt+Enter  → valider / dévalider
+Ctrl+Alt+Space  → afficher / masquer overlay
+```
+
+Contraintes :
+
+- mapping configurable depuis les réglages ;
+- persistance locale ;
+- restauration des valeurs par défaut ;
+- enregistrement natif centralisé dans un service unique ;
+- changement de mapping atomique : désenregistrer l'ancien puis enregistrer le nouveau ;
+- conflit ou raccourci indisponible remonté explicitement à l'UI ;
+- aucune fonctionnalité ne doit dépendre directement de la combinaison par défaut.
+
+## 7. Fenêtre overlay
+
+La fenêtre native est la source de vérité pour sa géométrie.
+
+Principes :
+
+- always-on-top ;
+- largeur initiale compacte : 380 px ;
+- redimensionnable librement ;
+- dimensions et position restaurées au lancement ;
+- définir seulement un minimum raisonnable empêchant les contrôles essentiels de devenir inutilisables ;
+- l'UI React doit être responsive au container, pas construite autour d'une largeur fixe.
+
+Le click-through n'est pas implémenté en V1. L'architecture doit toutefois éviter de rendre son ajout V1.1 coûteux.
+
+## 8. Identifiants stables
 
 Chaque étape doit posséder un `id` stable indépendant de son numéro de ligne Google Sheet.
 
@@ -121,7 +175,7 @@ block-08-tablette-totankama-lock
 
 ou identifiant généré et ensuite conservé dans la source éditoriale.
 
-## 7. Sélecteurs dérivés
+## 9. Sélecteurs dérivés
 
 Les comportements suivants doivent être calculés depuis les données :
 
@@ -135,7 +189,7 @@ Les comportements suivants doivent être calculés depuis les données :
 
 Aucun de ces éléments ne doit être dupliqué dans `route.json` s'il peut être dérivé sans ambiguïté.
 
-## 8. Validation de données
+## 10. Validation de données
 
 Le chargement doit échouer clairement si :
 
@@ -148,7 +202,9 @@ Le chargement doit échouer clairement si :
 
 Un export invalide ne doit jamais produire silencieusement une route partiellement cassée.
 
-## 9. Persistance
+Le script d'export doit valider avant d'écrire `data/route.json`.
+
+## 11. Persistance
 
 La sauvegarde locale doit être petite et atomique.
 
@@ -161,13 +217,34 @@ Exemple :
   "completedStepIds": [],
   "ui": {
     "compact": true
+  },
+  "shortcuts": {
+    "next": "Ctrl+Alt+Right",
+    "previous": "Ctrl+Alt+Left",
+    "toggleCompleted": "Ctrl+Alt+Enter",
+    "toggleOverlay": "Ctrl+Alt+Space"
   }
 }
 ```
 
 La position et la taille native de fenêtre peuvent être gérées séparément si Tauri fournit un mécanisme plus adapté.
 
-## 10. Mise à jour de route
+## 12. Export Google Sheet
+
+Le script `scripts/export-route.ts` est le seul point de transformation éditorial → runtime.
+
+Responsabilités :
+
+1. lire les données source ;
+2. normaliser les valeurs ;
+3. produire les identifiants stables selon la stratégie validée ;
+4. construire les relations structurées nécessaires ;
+5. valider le résultat ;
+6. écrire `data/route.json` uniquement si la validation passe.
+
+L'application desktop ne lit pas le Google Sheet à chaque lancement.
+
+## 13. Mise à jour de route
 
 À terme :
 
@@ -177,11 +254,13 @@ La position et la taille native de fenêtre peuvent être gérées séparément 
 4. conserver les validations dont les `stepId` existent toujours ;
 5. signaler les étapes supprimées ou renommées si nécessaire.
 
-## 11. Anti-patterns interdits
+## 14. Anti-patterns interdits
 
 - `if (step.name === "L'éternelle moisson")` dans l'UI ;
 - stockage de la même progression dans plusieurs stores ;
 - parsing du texte affiché pour deviner le comportement ;
 - dépendre des numéros de ligne du Sheet ;
 - synchroniser le Sheet en temps réel à chaque navigation ;
-- ajouter une API/backend sans besoin V1 démontré.
+- ajouter une API/backend sans besoin V1 démontré ;
+- enregistrer les raccourcis globaux depuis plusieurs composants React ;
+- figer la mise en page sur 380 px sans supporter le resize.
