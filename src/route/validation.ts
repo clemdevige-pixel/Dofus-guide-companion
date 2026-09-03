@@ -17,6 +17,10 @@ const supportedTypes = new Set<StepType>([
 
 type GoalState = 'active' | 'finished';
 
+function isNonEmptyString(value: unknown): value is string {
+  return typeof value === 'string' && value.trim().length > 0;
+}
+
 function assertValidUrl(url: string, context: string) {
   try {
     const parsed = new URL(url);
@@ -32,33 +36,51 @@ export function validateRoute(route: RouteDocument): RouteDocument {
   if (route.schemaVersion !== 1) {
     throw new Error(`Version de schéma non supportée : ${route.schemaVersion}`);
   }
+  if (!isNonEmptyString(route.routeVersion) || !isNonEmptyString(route.title)) {
+    throw new Error('RouteDocument incomplet : routeVersion et title sont obligatoires.');
+  }
+  if (!Array.isArray(route.blocks) || route.blocks.length === 0) {
+    throw new Error('RouteDocument sans bloc.');
+  }
+  if (!Array.isArray(route.steps) || route.steps.length === 0) {
+    throw new Error('RouteDocument sans étape.');
+  }
 
   const blockIds = new Set<string>();
-  const blockOrders = new Set<number>();
-  for (const block of route.blocks) {
+  for (let index = 0; index < route.blocks.length; index += 1) {
+    const block = route.blocks[index];
+    const expectedOrder = index + 1;
+
+    if (!isNonEmptyString(block.id) || !isNonEmptyString(block.title)) {
+      throw new Error(`Bloc ${expectedOrder}: id et title sont obligatoires.`);
+    }
+    if (block.order !== expectedOrder) {
+      throw new Error(`Bloc ${block.id}: ordre attendu ${expectedOrder}, reçu ${block.order}.`);
+    }
     if (blockIds.has(block.id)) {
       throw new Error(`blockId dupliqué : ${block.id}`);
     }
-    if (blockOrders.has(block.order)) {
-      throw new Error(`ordre de bloc dupliqué : ${block.order}`);
-    }
     blockIds.add(block.id);
-    blockOrders.add(block.order);
   }
 
   const stepIds = new Set<string>();
-  const stepOrders = new Set<number>();
   const goalStates = new Map<string, GoalState>();
+  let finishCount = 0;
 
-  for (const step of route.steps) {
+  for (let index = 0; index < route.steps.length; index += 1) {
+    const step = route.steps[index];
+    const expectedOrder = index + 1;
+
+    if (!isNonEmptyString(step.id) || !isNonEmptyString(step.title)) {
+      throw new Error(`Étape ${expectedOrder}: id et title sont obligatoires.`);
+    }
+    if (step.order !== expectedOrder) {
+      throw new Error(`${step.id}: ordre attendu ${expectedOrder}, reçu ${step.order}.`);
+    }
     if (stepIds.has(step.id)) {
       throw new Error(`stepId dupliqué : ${step.id}`);
     }
-    if (stepOrders.has(step.order)) {
-      throw new Error(`ordre d'étape dupliqué : ${step.order}`);
-    }
     stepIds.add(step.id);
-    stepOrders.add(step.order);
 
     if (!blockIds.has(step.blockId)) {
       throw new Error(`${step.id}: blockId inconnu (${step.blockId})`);
@@ -69,21 +91,39 @@ export function validateRoute(route: RouteDocument): RouteDocument {
     }
 
     if (step.source) {
+      if (!isNonEmptyString(step.source.label) || !isNonEmptyString(step.source.url)) {
+        throw new Error(`${step.id}: source incomplète.`);
+      }
       assertValidUrl(step.source.url, step.id);
+    }
+
+    if (step.type === 'preparation') {
+      const hasItems =
+        Array.isArray(step.preparationItems) &&
+        step.preparationItems.length > 0 &&
+        step.preparationItems.every(isNonEmptyString);
+      if (!hasItems && !isNonEmptyString(step.instruction)) {
+        throw new Error(`${step.id}: PRÉPA sans preparationItems ni instruction exploitable.`);
+      }
     }
 
     if (step.type === 'long_running' && !step.longRunningGoal) {
       throw new Error(`${step.id}: FIL ROUGE sans métadonnées longRunningGoal.`);
     }
 
-    if (step.type === 'hard_lock' && !step.hardLock) {
-      throw new Error(`${step.id}: VERROU DUR sans métadonnées hardLock.`);
+    if (step.type === 'hard_lock') {
+      if (!step.hardLock || !isNonEmptyString(step.hardLock.message)) {
+        throw new Error(`${step.id}: VERROU DUR sans message structuré.`);
+      }
     }
 
     const goal = step.longRunningGoal;
     if (goal) {
-      const state = goalStates.get(goal.goalId);
+      if (!isNonEmptyString(goal.goalId)) {
+        throw new Error(`${step.id}: goalId vide.`);
+      }
 
+      const state = goalStates.get(goal.goalId);
       if (goal.phase === 'start') {
         if (state) {
           throw new Error(`${step.id}: goalId démarré plusieurs fois (${goal.goalId}).`);
@@ -98,6 +138,8 @@ export function validateRoute(route: RouteDocument): RouteDocument {
           throw new Error(`${step.id}: finish avant start ou après finish (${goal.goalId}).`);
         }
         goalStates.set(goal.goalId, 'finished');
+      } else {
+        throw new Error(`${step.id}: phase de goal inconnue (${String(goal.phase)}).`);
       }
     }
 
@@ -106,6 +148,17 @@ export function validateRoute(route: RouteDocument): RouteDocument {
         `${step.id}: verrou lié à un goalId pas encore démarré (${step.hardLock.goalId})`,
       );
     }
+
+    if (step.type === 'finish') {
+      finishCount += 1;
+      if (index !== route.steps.length - 1) {
+        throw new Error(`${step.id}: FIN doit être la dernière étape de la route.`);
+      }
+    }
+  }
+
+  if (finishCount !== 1) {
+    throw new Error(`La route doit contenir exactement une étape FIN, reçu : ${finishCount}.`);
   }
 
   return route;
