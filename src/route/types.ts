@@ -24,6 +24,7 @@ export interface RouteStep {
   order: number;
   blockId: string;
   type: StepType;
+  displayType?: string;
   title: string;
   action?: string;
   instruction?: string;
