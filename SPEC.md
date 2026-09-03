@@ -23,13 +23,54 @@ L'application consomme un export structuré versionné. Toute règle de progress
 
 **Interdit :** coder dans React des exceptions du type « si étape X alors afficher Y ».
 
-## 4. V1 — fonctionnalités obligatoires
+## 4. Décisions produit verrouillées
+
+### Nom
+
+Nom affiché : **Dofus Guide Companion**.
+
+### Fenêtre
+
+- largeur par défaut du mode compact : **380 px** ;
+- fenêtre librement redimensionnable par l'utilisateur ;
+- taille et position mémorisées ;
+- aucune largeur métier codée en dur au-delà des minimums nécessaires à une UI exploitable.
+
+### Click-through
+
+- **hors scope V1** ;
+- cible V1.1 : option « verrouiller l'overlay » permettant de rendre la fenêtre click-through ;
+- l'activation doit rester explicitement réversible par un raccourci ou un mécanisme sûr.
+
+### Export de route
+
+- export via un script TypeScript dédié dans le repo ;
+- flux cible : `Google Sheet → validation → data/route.json` ;
+- l'application ne dépend pas d'une lecture live du Sheet pendant l'utilisation normale.
+
+### Raccourcis clavier
+
+Les raccourcis globaux sont inclus en V1.
+
+Raccourcis par défaut proposés :
+
+- `Ctrl+Alt+Right` : étape suivante ;
+- `Ctrl+Alt+Left` : étape précédente ;
+- `Ctrl+Alt+Enter` : valider / dévalider l'étape ;
+- `Ctrl+Alt+Space` : afficher / masquer l'overlay.
+
+**Tous les raccourcis doivent être configurables dans les réglages.**
+
+La configuration utilisateur est persistée localement. Les conflits / raccourcis indisponibles doivent produire un retour explicite, jamais un échec silencieux.
+
+## 5. V1 — fonctionnalités obligatoires
 
 ### Overlay
 
 - fenêtre desktop always-on-top ;
-- redimensionnable ;
+- redimensionnable librement ;
 - déplaçable ;
+- largeur compacte par défaut : 380 px ;
 - taille et position mémorisées ;
 - mode compact et mode détaillé ;
 - possibilité de réduire rapidement l'encombrement.
@@ -51,7 +92,17 @@ Afficher :
 - étape précédente ;
 - étape suivante ;
 - valider / dévalider une étape ;
-- reprise automatique sur la première étape non validée au lancement.
+- reprise automatique sur la première étape non validée au lancement ;
+- navigation disponible par boutons et raccourcis globaux.
+
+### Réglages
+
+Au minimum :
+
+- modification des raccourcis globaux ;
+- restauration des raccourcis par défaut ;
+- mode compact / détaillé ;
+- préférences d'affichage utiles à l'overlay.
 
 ### Fils rouges
 
@@ -78,14 +129,15 @@ Les étapes de préparation doivent être lisibles sous forme de checklist ou li
 Conserver localement :
 
 - étapes validées ;
-- étape courante ;
+- étape courante dérivée / position de consultation ;
 - position et taille de fenêtre ;
 - mode compact / détaillé ;
-- préférences UI.
+- préférences UI ;
+- mapping des raccourcis globaux.
 
 Aucun compte utilisateur requis en V1.
 
-## 5. UX cible
+## 6. UX cible
 
 ### Mode compact
 
@@ -110,7 +162,7 @@ Ajouter :
 - prochain verrou dur ;
 - préparation utile.
 
-## 6. Types visuels minimaux
+## 7. Types visuels minimaux
 
 L'UI doit pouvoir distinguer au minimum :
 
@@ -128,7 +180,7 @@ L'UI doit pouvoir distinguer au minimum :
 
 Le rendu dépend du type de donnée, pas du texte de l'étape.
 
-## 7. Hors scope V1
+## 8. Hors scope V1
 
 - lecture mémoire de Dofus ;
 - OCR ;
@@ -137,17 +189,19 @@ Le rendu dépend du type de donnée, pas du texte de l'étape.
 - bot ;
 - compte cloud ;
 - synchronisation multi-device ;
-- éditeur complet de roadmap dans l'application.
+- éditeur complet de roadmap dans l'application ;
+- click-through de l'overlay.
 
-## 8. Contraintes produit
+## 9. Contraintes produit
 
 - démarrage rapide ;
 - faible consommation CPU/RAM ;
 - aucune dépendance réseau nécessaire pour suivre une route déjà importée ;
 - pas de perte de progression après crash/reboot ;
-- l'application doit rester utilisable sur une petite largeur d'overlay.
+- l'application doit rester utilisable sur une petite largeur d'overlay ;
+- le resize utilisateur ne doit jamais casser la navigation principale.
 
-## 9. Critères d'acceptation V1
+## 10. Critères d'acceptation V1
 
 La V1 est considérée utilisable si :
 
@@ -158,13 +212,15 @@ La V1 est considérée utilisable si :
 5. les liens DPLN s'ouvrent dans le navigateur ;
 6. fils rouges et prochain verrou dur sont calculés depuis les données ;
 7. la fenêtre reste au-dessus de Dofus ;
-8. le mode compact tient dans un panneau étroit ;
-9. aucune logique spécifique à une quête n'est hardcodée dans le front.
+8. le mode compact est utilisable à 380 px par défaut tout en restant redimensionnable ;
+9. aucune logique spécifique à une quête n'est hardcodée dans le front ;
+10. les raccourcis globaux fonctionnent et peuvent être remappés depuis les réglages ;
+11. un conflit de raccourci est signalé clairement ;
+12. taille, position et raccourcis personnalisés survivent à un redémarrage.
 
-## 10. Décisions à valider avant scaffold
+## 11. Décisions reportées
 
-- nom final affiché de l'application ;
-- largeur cible du mode compact ;
-- comportement click-through éventuel ;
-- mécanisme d'export du Google Sheet vers `route.json` ;
-- raccourcis clavier globaux en V1 ou V1.1.
+### V1.1
+
+- click-through avec toggle explicite ;
+- raccourci de secours pour reprendre le contrôle de la fenêtre si le click-through est actif.
