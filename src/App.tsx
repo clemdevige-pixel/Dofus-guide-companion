@@ -252,7 +252,7 @@ export function App() {
           <button type="button" onClick={() => openSecondaryView('goals')}>Fils rouges</button>
           <button type="button" onClick={() => openSecondaryView('lock')}>Prochain verrou</button>
           <button type="button" onClick={() => openSecondaryView('preparation')}>Prépa du bloc</button>
-          <button type="button" onClick={() => openSecondaryView('history')}>Historique</button>
+          <button type="button" onClick={() => openSecondaryView('history')}>Étapes validées</button>
           <button type="button" onClick={() => openSecondaryView('settings')}>Paramètres</button>
         </nav>
       )}
@@ -265,7 +265,7 @@ export function App() {
               {secondaryView === 'goals' && 'Fils rouges'}
               {secondaryView === 'lock' && 'Prochain verrou'}
               {secondaryView === 'preparation' && 'Prépa du bloc'}
-              {secondaryView === 'history' && 'Historique'}
+              {secondaryView === 'history' && 'Étapes validées'}
               {secondaryView === 'settings' && 'Paramètres'}
             </p>
             <button
