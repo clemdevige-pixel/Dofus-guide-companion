@@ -103,6 +103,10 @@ export function validateRoute(route: RouteDocument): RouteDocument {
       }
     }
 
+    if (step.launchInstruction !== undefined && !isNonEmptyString(step.launchInstruction)) {
+      throw new Error(`${step.id}: instruction de lancement vide.`);
+    }
+
     if (step.type === 'preparation') {
       const hasItems =
         Array.isArray(step.preparationItems) &&
