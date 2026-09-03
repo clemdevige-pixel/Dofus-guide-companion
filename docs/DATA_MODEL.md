@@ -34,19 +34,10 @@ interface RouteBlock {
 ## 4. Étape
 
 ```ts
-type StepType =
-  | 'quest'
-  | 'resume'
-  | 'dungeon'
-  | 'preparation'
-  | 'rule'
-  | 'milestone'
-  | 'long_running'
-  | 'hard_lock'
-  | 'alignment'
-  | 'order'
-  | 'major_step'
-  | 'finish';
+interface RouteCoordinate {
+  x: number;
+  y: number;
+}
 
 interface RouteStep {
   id: string;
@@ -64,10 +55,8 @@ interface RouteStep {
     url: string;
   };
 
-  location?: {
-    x: number;
-    y: number;
-  };
+  location?: RouteCoordinate;
+  destination?: RouteCoordinate;
   launchInstruction?: string;
 
   preparationItems?: string[];
@@ -86,9 +75,21 @@ interface RouteStep {
 
 `displayType` conserve un libellé éditorial utile (`TOUR`, `TURQUOISE`, `ALIGN.`...) sans multiplier les types comportementaux de l'application.
 
-`location` représente une position de lancement unique exploitable pour `/travel`. Quand une quête n'a pas de position unique correcte, `launchInstruction` décrit explicitement comment la lancer (objet à double-cliquer, PNJ dépendant de la classe, branche de choix, etc.). L'UI n'embarque aucune logique spécifique par quête : elle affiche la position si elle existe, sinon l'instruction de lancement structurée.
+### Position de lancement vs destination
 
-Une étape pouvant lancer plusieurs quêtes compatibles peut conserver une seule `location` lorsque les prises sont réellement regroupées au même point. Si ce regroupement ne peut pas être décrit correctement par une position unique, utiliser `launchInstruction` plutôt que d'inventerer une coordonnée moyenne ou approximative.
+`location` représente **uniquement** la position où une ou plusieurs quêtes sont lancées. Elle provient de la colonne `POSITION` du Sheet et protège le contrat de prise de quête.
+
+`destination` représente le **point vers lequel le joueur doit se rendre pour exécuter l'étape courante**, même lorsqu'aucune quête n'y est lancée. Elle provient de `DESTINATION`.
+
+Les deux champs sont volontairement séparés : une étape de parcours Ganymède peut demander d'aller à un atelier, une zone de farm, un PNJ de progression ou un donjon sans lancer de nouvelle quête. Il est interdit de détourner `POSITION` pour ce besoin.
+
+Quand une prise et le prochain objectif ont lieu au même point, `location` et `destination` peuvent légitimement contenir la même coordonnée.
+
+Quand une quête n'a pas de position de lancement unique correcte, `launchInstruction` décrit explicitement comment la lancer (objet à double-cliquer, PNJ dépendant de la classe, branche de choix, etc.).
+
+Une étape pouvant lancer plusieurs quêtes compatibles peut conserver une seule `location` lorsque les prises sont réellement regroupées au même point. Si ce regroupement ne peut pas être décrit correctement par une position unique, utiliser `launchInstruction` plutôt que d'inventer une coordonnée moyenne ou approximative.
+
+L'UI n'embarque aucune logique spécifique par quête et ne doit pas reconstruire une destination depuis le texte.
 
 ## 5. Identité stable dans le Sheet
 
@@ -97,11 +98,14 @@ Une étape pouvant lancer plusieurs quêtes compatibles peut conserver une seule
 - `STEP_ID` : identité métier stable de l'étape ;
 - `GOAL_ID` : identité stable d'un fil rouge ;
 - `GOAL_PHASE` : `start`, `progress` ou `finish` ;
-- `POSITION` : position de lancement unique sous la forme `[x,y]` lorsqu'elle existe ;
+- `POSITION` : position **de lancement** unique sous la forme `[x,y]` lorsqu'elle existe ;
 - `LANCEMENT` : instruction structurée de lancement lorsqu'aucune position unique n'est correcte ;
-- `LANCEMENT_REQUIS` : booléen indiquant que la ligne réalise une ou plusieurs prises de quête et doit donc posséder `POSITION` ou `LANCEMENT`.
+- `LANCEMENT_REQUIS` : booléen indiquant que la ligne réalise une ou plusieurs prises de quête et doit donc posséder `POSITION` ou `LANCEMENT` ;
+- `DESTINATION` : destination structurée `[x,y]` du moment de parcours.
 
 `STEP_ID` est une valeur figée. Il ne doit jamais être recalculé depuis le numéro de ligne, le titre ou l'ordre de l'étape.
+
+Lors d'une relinéarisation Ganymède, un ancien `STEP_ID` reste attaché au même événement métier (par exemple la fin d'une quête ou un checkpoint déjà sauvegardé). Un nouveau moment de lancement/progression reçoit un nouvel ID. Ne jamais recycler un ID historique pour une étape sémantiquement différente.
 
 Une insertion de ligne dans le Sheet ne doit donc pas invalider la progression locale déjà sauvegardée.
 
@@ -153,7 +157,7 @@ Une PRÉPA est exportée vers `preparationItems` lorsque des lignes à puce sont
 }
 ```
 
-Le texte éditorial reste disponible dans le Sheet ; la V1 n'a pas besoin de dupliquer les colonnes d'audit ou de mise en forme.
+Le texte éditorial reste disponible dans le Sheet ; l'application n'a pas besoin de dupliquer les colonnes d'audit ou de mise en forme.
 
 La préparation doit tenir compte des ressources obtenues naturellement dans les quêtes précédentes : ne pas demander un achat/farm si la route optimisée fournit déjà la ressource avant son usage.
 
@@ -167,6 +171,7 @@ La préparation doit tenir compte des ressources obtenues naturellement dans les
 - `AVANCER / STOP`
 - `REPRENDRE / AVANCER`
 - `REPRENDRE / TERMINER`
+- `FAIRE LE LOT`
 - `PRÉPARER`
 - `FIL ROUGE`
 - `VERROU DUR`
@@ -202,7 +207,7 @@ Configuration : voir `.env.example`.
 Flux :
 
 ```text
-ROUTE (A:P)
+ROUTE (A:Q)
    ↓
 scripts/export-route.ts
    ↓ validation stricte
@@ -217,6 +222,7 @@ L'export échoue notamment si :
 - un bloc est absent ;
 - `GOAL_PHASE` est invalide ;
 - `POSITION` n'est pas une paire d'entiers `[x,y]` ;
+- `DESTINATION` n'est pas une paire d'entiers `[x,y]` ;
 - une action contient `LANCER` sans `LANCEMENT_REQUIS=TRUE` ;
 - `LANCEMENT_REQUIS=TRUE` sans `POSITION` ni `LANCEMENT` ;
 - un verrou référence un `GOAL_ID` jamais déclaré ;
