@@ -26,6 +26,11 @@ const typeMap: Record<string, { type: StepType; displayType?: string }> = {
 
 type SheetRow = string[];
 
+type GoogleAuth = {
+  headers: Record<string, string>;
+  query: string;
+};
+
 function requireEnv(name: string): string {
   const value = process.env[name]?.trim();
   if (!value) {
@@ -34,7 +39,7 @@ function requireEnv(name: string): string {
   return value;
 }
 
-function getAuth() {
+function getAuth(): GoogleAuth {
   const accessToken = process.env.GOOGLE_ACCESS_TOKEN?.trim();
   const apiKey = process.env.GOOGLE_SHEETS_API_KEY?.trim();
 
