@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { writeText } from '@tauri-apps/plugin-clipboard-manager';
+import { openUrl } from '@tauri-apps/plugin-opener';
 import { loadProgress, saveProgress } from './progress/storage';
 import { loadBundledRoute } from './route/loader';
 import {
@@ -177,6 +178,14 @@ export function App() {
     }
   }
 
+  async function openExternalSource(url: string) {
+    try {
+      await openUrl(url);
+    } catch (error: unknown) {
+      console.error("Impossible d'ouvrir le lien externe.", error);
+    }
+  }
+
   async function toggleOverlayVisibility() {
     const window = getCurrentWindow();
     if (await window.isVisible()) {
@@ -199,6 +208,13 @@ export function App() {
 
   const typeLabel = currentStep.displayType ?? typeLabels[currentStep.type];
   const displayIndex = viewIndex + 1;
+  const travelTarget = currentStep.destination ?? currentStep.location;
+  const travelLabel = currentStep.destination ? 'Destination' : 'Lancement';
+  const hasDistinctLaunchLocation =
+    currentStep.location &&
+    currentStep.destination &&
+    (currentStep.location.x !== currentStep.destination.x ||
+      currentStep.location.y !== currentStep.destination.y);
 
   function updateShortcut(action: ShortcutAction, value: string) {
     setShortcutBindings((current) => ({ ...current, [action]: value }));
@@ -415,30 +431,39 @@ export function App() {
         <div className="step-title-row">
           <h1 id="current-step-title">{currentStep.title}</h1>
           {currentStep.source && (
-            <a href={currentStep.source.url} target="_blank" rel="noreferrer">
+            <button
+              className="source-link-button"
+              type="button"
+              onClick={() => void openExternalSource(currentStep.source!.url)}
+            >
               ↗{compact ? '' : ` ${currentStep.source.label}`}
-            </a>
+            </button>
           )}
         </div>
 
         {currentStep.action && <p className="action-label">{currentStep.action}</p>}
 
-        {currentStep.location && (
+        {travelTarget && (
           <button
             className="travel-button"
             type="button"
-            title="Copier la commande de déplacement"
-            onClick={() =>
-              void copyToClipboard(`/travel ${currentStep.location?.x} ${currentStep.location?.y}`)
-            }
+            title={`Copier /travel vers la ${travelLabel.toLowerCase()}`}
+            onClick={() => void copyToClipboard(`/travel ${travelTarget.x} ${travelTarget.y}`)}
           >
-            <span>[{currentStep.location.x},{currentStep.location.y}]</span>
+            <span>{travelLabel} [{travelTarget.x},{travelTarget.y}]</span>
             <span>/travel · ⧉</span>
           </button>
         )}
 
+        {hasDistinctLaunchLocation && currentStep.location && (
+          <div className="step-context step-context--launch">
+            <strong>Lancement de la quête</strong>
+            <span>[{currentStep.location.x},{currentStep.location.y}]</span>
+          </div>
+        )}
+
         {!currentStep.location && currentStep.launchInstruction && (
-          <div className="step-context">
+          <div className="step-context step-context--launch">
             <strong>Lancement</strong>
             <span>{currentStep.launchInstruction}</span>
           </div>
