@@ -70,7 +70,8 @@ jobs:
           }
           NODE
 
-      - run: pnpm test
+      - run: pnpm test:route
+      - run: pnpm validate:route
       - run: pnpm build
 
       - name: Commit generated runtime and UI
