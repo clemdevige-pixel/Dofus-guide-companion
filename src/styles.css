@@ -1,0 +1,256 @@
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #eef4ef;
+  background: #0d120f;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  background: #0d120f;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+}
+
+.overlay {
+  position: relative;
+  min-height: 100vh;
+  padding: 12px;
+  background:
+    linear-gradient(180deg, rgba(66, 90, 72, 0.22), transparent 180px),
+    #101712;
+}
+
+.overlay--compact {
+  min-height: auto;
+}
+
+.app-header,
+.compact-header,
+.step-title-row,
+.navigation-bar {
+  display: flex;
+  align-items: center;
+}
+
+.app-header {
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 12px;
+}
+
+.compact-header {
+  justify-content: space-between;
+  margin-bottom: 8px;
+  color: #b8c8bb;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.eyebrow,
+.progress-label,
+.action-label,
+.instruction,
+.secondary-panel p {
+  margin: 0;
+}
+
+.eyebrow {
+  color: #f4f7f4;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.progress-label {
+  margin-top: 3px;
+  color: #93a396;
+  font-size: 12px;
+}
+
+.icon-button,
+.navigation-bar button,
+.drawer button {
+  border: 1px solid #334139;
+  background: #18211b;
+  cursor: pointer;
+}
+
+.icon-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+}
+
+.current-step,
+.secondary-panel,
+.drawer {
+  border: 1px solid #2c3931;
+  border-radius: 12px;
+  background: rgba(21, 29, 24, 0.96);
+}
+
+.current-step {
+  padding: 14px;
+}
+
+.type-badge {
+  display: inline-flex;
+  margin-bottom: 10px;
+  padding: 4px 7px;
+  border-radius: 999px;
+  background: #273a2d;
+  color: #a9ddb4;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.step-title-row {
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.step-title-row h1 {
+  margin: 0;
+  font-size: clamp(17px, 5vw, 22px);
+  line-height: 1.15;
+}
+
+.step-title-row a {
+  flex: 0 0 auto;
+  color: #9ed9aa;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.action-label {
+  margin-top: 14px;
+  color: #f0c678;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+}
+
+.instruction {
+  margin-top: 7px;
+  color: #d4ded6;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.secondary-panel {
+  margin-top: 9px;
+  padding: 11px 12px;
+}
+
+.secondary-panel h2 {
+  margin: 0 0 6px;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.secondary-panel ul {
+  margin: 0;
+  padding-left: 18px;
+  color: #cbd6cd;
+  font-size: 13px;
+}
+
+.secondary-panel--goal {
+  border-color: #454064;
+}
+
+.secondary-panel--lock {
+  border-color: #765038;
+  background: #241b15;
+}
+
+.secondary-panel--lock h2 {
+  color: #ffbd87;
+}
+
+.drawer {
+  position: absolute;
+  z-index: 10;
+  top: 52px;
+  left: 12px;
+  display: grid;
+  width: min(240px, calc(100vw - 24px));
+  gap: 5px;
+  padding: 8px;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.35);
+}
+
+.drawer button {
+  padding: 9px 10px;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.navigation-bar {
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.navigation-bar button {
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: 10px;
+  font-weight: 800;
+}
+
+.navigation-bar .complete-button {
+  flex: 1;
+  border-color: #386547;
+  background: #25462f;
+}
+
+.overlay--compact .current-step {
+  padding: 12px;
+}
+
+.overlay--compact .step-title-row h1 {
+  font-size: 17px;
+}
+
+.overlay--compact .instruction {
+  font-size: 13px;
+}
+
+@media (max-width: 330px) {
+  .overlay {
+    padding: 8px;
+  }
+
+  .step-title-row {
+    align-items: flex-start;
+  }
+
+  .navigation-bar button {
+    padding-inline: 10px;
+  }
+}
