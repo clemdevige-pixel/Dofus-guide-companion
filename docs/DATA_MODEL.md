@@ -60,6 +60,12 @@ interface RouteStep {
     url: string;
   };
 
+  location?: {
+    x: number;
+    y: number;
+  };
+  launchInstruction?: string;
+
   preparationItems?: string[];
 
   longRunningGoal?: {
@@ -76,13 +82,17 @@ interface RouteStep {
 
 `displayType` conserve un libellé éditorial utile (`TOUR`, `TURQUOISE`, `ALIGN.`...) sans multiplier les types comportementaux de l'application.
 
+`location` représente une position de lancement unique exploitable pour `/travel`. Quand une quête n'a pas de position unique correcte, `launchInstruction` décrit explicitement comment la lancer (objet à double-cliquer, PNJ dépendant de la classe, branche de choix, etc.). L'UI n'embarque aucune logique spécifique par quête : elle affiche la position si elle existe, sinon l'instruction de lancement structurée.
+
 ## 5. Identité stable dans le Sheet
 
 `ROUTE` contient des colonnes techniques masquées :
 
 - `STEP_ID` : identité métier stable de l'étape ;
 - `GOAL_ID` : identité stable d'un fil rouge ;
-- `GOAL_PHASE` : `start`, `progress` ou `finish`.
+- `GOAL_PHASE` : `start`, `progress` ou `finish` ;
+- `POSITION` : position de lancement unique sous la forme `[x,y]` lorsqu'elle existe ;
+- `LANCEMENT` : instruction structurée de lancement lorsqu'aucune position unique n'est correcte.
 
 `STEP_ID` est une valeur figée. Il ne doit jamais être recalculé depuis le numéro de ligne, le titre ou l'ordre de l'étape.
 
@@ -174,7 +184,7 @@ Configuration : voir `.env.example`.
 Flux :
 
 ```text
-ROUTE (A:M)
+ROUTE (A:O)
    ↓
 scripts/export-route.ts
    ↓ validation stricte
@@ -188,6 +198,8 @@ L'export échoue notamment si :
 - `STEP_ID` manque ou est dupliqué ;
 - un bloc est absent ;
 - `GOAL_PHASE` est invalide ;
+- `POSITION` n'est pas une paire d'entiers `[x,y]` ;
+- `LANCEMENT` est présent mais vide ;
 - un verrou référence un `GOAL_ID` jamais déclaré ;
 - une URL structurée est invalide.
 
