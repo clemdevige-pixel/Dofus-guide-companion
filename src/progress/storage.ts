@@ -6,18 +6,22 @@ export interface ProgressState {
   currentStepId?: string;
 }
 
+interface ProgressStorage {
+  getItem(key: string): string | null;
+  setItem(key: string, value: string): void;
+}
+
 const defaultState: ProgressState = {
   completedStepIds: [],
   compact: false,
 };
 
-export function loadProgress(): ProgressState {
-  try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (!raw) {
-      return defaultState;
-    }
+export function parseProgress(raw: string | null): ProgressState {
+  if (!raw) {
+    return defaultState;
+  }
 
+  try {
     const parsed = JSON.parse(raw) as Partial<ProgressState>;
 
     return {
@@ -34,6 +38,17 @@ export function loadProgress(): ProgressState {
   }
 }
 
-export function saveProgress(state: ProgressState): void {
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+export function loadProgress(storage: ProgressStorage = window.localStorage): ProgressState {
+  try {
+    return parseProgress(storage.getItem(STORAGE_KEY));
+  } catch {
+    return defaultState;
+  }
+}
+
+export function saveProgress(
+  state: ProgressState,
+  storage: ProgressStorage = window.localStorage,
+): void {
+  storage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
