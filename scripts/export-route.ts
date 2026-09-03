@@ -3,7 +3,7 @@ import { dirname, resolve } from 'node:path';
 import type { RouteBlock, RouteDocument, RouteStep, StepType } from '../src/route/types';
 import { validateRoute } from '../src/route/validation';
 
-const DEFAULT_RANGE = 'ROUTE!A5:P1004';
+const DEFAULT_RANGE = 'ROUTE!A5:Q1004';
 const OUTPUT_PATH = resolve('data/route.json');
 
 const typeMap: Record<string, { type: StepType; displayType?: string }> = {
@@ -78,11 +78,17 @@ function parseGoalPhase(rawPhase: string, sheetRow: number): GoalPhase | undefin
   throw new Error(`Ligne Sheet ${sheetRow}: GOAL_PHASE inconnu « ${rawPhase} »`);
 }
 
-function parsePosition(rawPosition: string, sheetRow: number): RouteStep['location'] | undefined {
+function parseCoordinate(
+  rawPosition: string,
+  sheetRow: number,
+  columnName: 'POSITION' | 'DESTINATION',
+): RouteStep['location'] | undefined {
   if (!rawPosition) return undefined;
   const match = rawPosition.match(/^\[?\s*(-?\d+)\s*,\s*(-?\d+)\s*\]?$/);
   if (!match) {
-    throw new Error(`Ligne Sheet ${sheetRow}: POSITION invalide « ${rawPosition} », attendu [x,y].`);
+    throw new Error(
+      `Ligne Sheet ${sheetRow}: ${columnName} invalide « ${rawPosition} », attendu [x,y].`,
+    );
   }
   return { x: Number.parseInt(match[1], 10), y: Number.parseInt(match[2], 10) };
 }
@@ -123,10 +129,11 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
     cell(headers, 12) !== 'GOAL_PHASE' ||
     cell(headers, 13) !== 'POSITION' ||
     cell(headers, 14) !== 'LANCEMENT' ||
-    cell(headers, 15) !== 'LANCEMENT_REQUIS'
+    cell(headers, 15) !== 'LANCEMENT_REQUIS' ||
+    cell(headers, 16) !== 'DESTINATION'
   ) {
     throw new Error(
-      'Colonnes ROUTE inattendues : TYPE, ÉTAPE, STEP_ID, GOAL_ID, GOAL_PHASE, POSITION, LANCEMENT et LANCEMENT_REQUIS sont obligatoires.',
+      'Colonnes ROUTE inattendues : TYPE, ÉTAPE, STEP_ID, GOAL_ID, GOAL_PHASE, POSITION, LANCEMENT, LANCEMENT_REQUIS et DESTINATION sont obligatoires.',
     );
   }
 
@@ -177,9 +184,10 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
     const hyperlink = parseHyperlinkFormula(cell(formula, 2));
     const preparationText = cell(formatted, 3);
     const instruction = cell(formatted, 9);
-    const location = parsePosition(cell(formatted, 13), sheetRow);
+    const location = parseCoordinate(cell(formatted, 13), sheetRow, 'POSITION');
     const launchInstruction = cell(formatted, 14);
     const launchRequired = parseBoolean(cell(formatted, 15), sheetRow);
+    const destination = parseCoordinate(cell(formatted, 16), sheetRow, 'DESTINATION');
     const title = rawTitle.split('\n')[0]?.trim() || rawTitle;
 
     if (action.toUpperCase().includes('LANCER') && !launchRequired) {
@@ -187,7 +195,7 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
     }
     if (launchRequired && !location && !launchInstruction) {
       throw new Error(
-        `Ligne Sheet ${sheetRow}: lancement requis sans POSITION ni LANCEMENT pour « ${title} ».` ,
+        `Ligne Sheet ${sheetRow}: lancement requis sans POSITION ni LANCEMENT pour « ${title} ».`,
       );
     }
 
@@ -203,6 +211,7 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
       ...(instruction ? { instruction } : {}),
       ...(hyperlink ? { source: { label: 'DPLN', url: hyperlink.url } } : {}),
       ...(location ? { location } : {}),
+      ...(destination ? { destination } : {}),
       ...(launchInstruction ? { launchInstruction } : {}),
       ...(mapping.type === 'preparation'
         ? { preparationItems: parsePreparationItems(preparationText || rawTitle) }
