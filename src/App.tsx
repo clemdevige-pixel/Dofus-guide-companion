@@ -1,25 +1,92 @@
-import { useState } from 'react';
-import type { RouteStep } from './route/types';
+import { useEffect, useMemo, useState } from 'react';
+import { loadProgress, saveProgress } from './progress/storage';
+import { mockRoute } from './route/mockRoute';
+import {
+  getActiveLongRunningGoals,
+  getFirstIncompleteStep,
+  getNextHardLock,
+  getProgress,
+  getSortedSteps,
+  getStepIndex,
+} from './route/selectors';
 
-const currentStep: RouteStep = {
-  id: 'mock-current-step',
-  order: 128,
-  blockId: 'block-03',
-  type: 'quest',
-  title: 'La raison du plus fort',
-  action: 'AVANCER / STOP',
-  instruction: "Avance jusqu'au Directeur Grunob puis STOP avant l'Akadémie des Gobs.",
-  source: {
-    label: 'DPLN',
-    url: 'https://www.dofuspourlesnoobs.com/',
-  },
+const typeLabels: Record<string, string> = {
+  quest: 'QUÊTE',
+  resume: 'REPRISE',
+  dungeon: 'DONJON',
+  preparation: 'PRÉPA',
+  rule: 'RÈGLE',
+  milestone: 'JALON',
+  long_running: 'FIL ROUGE',
+  hard_lock: 'VERROU DUR',
+  alignment: 'ALIGNEMENT',
+  order: 'ORDRE',
+  major_step: 'GROSSE ÉTAPE',
+  finish: 'FIN',
 };
 
-const activeGoals = ["L'Éternelle moisson", 'Alignement + Ordres'];
-
 export function App() {
-  const [compact, setCompact] = useState(false);
+  const initialProgress = useMemo(() => loadProgress(), []);
+  const steps = useMemo(() => getSortedSteps(mockRoute), []);
+  const [completedStepIds, setCompletedStepIds] = useState<Set<string>>(
+    () => new Set(initialProgress.completedStepIds),
+  );
+  const [compact, setCompact] = useState(initialProgress.compact);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [viewIndex, setViewIndex] = useState(() => {
+    const firstIncomplete = getFirstIncompleteStep(
+      mockRoute,
+      new Set(initialProgress.completedStepIds),
+    );
+    return firstIncomplete ? Math.max(0, getStepIndex(mockRoute, firstIncomplete.id)) : 0;
+  });
+
+  useEffect(() => {
+    saveProgress({
+      completedStepIds: [...completedStepIds],
+      compact,
+    });
+  }, [completedStepIds, compact]);
+
+  const currentStep = steps[viewIndex];
+  const progress = getProgress(mockRoute, completedStepIds);
+  const activeGoals = getActiveLongRunningGoals(mockRoute, completedStepIds);
+  const nextHardLock = getNextHardLock(mockRoute, completedStepIds);
+  const isCurrentCompleted = currentStep ? completedStepIds.has(currentStep.id) : false;
+
+  if (!currentStep) {
+    return <main className="overlay">Aucune étape disponible.</main>;
+  }
+
+  const typeLabel = typeLabels[currentStep.type] ?? currentStep.type;
+  const displayIndex = viewIndex + 1;
+
+  function goPrevious() {
+    setViewIndex((index) => Math.max(0, index - 1));
+  }
+
+  function goNext() {
+    setViewIndex((index) => Math.min(steps.length - 1, index + 1));
+  }
+
+  function toggleCurrentStep() {
+    setCompletedStepIds((previous) => {
+      const next = new Set(previous);
+      const wasCompleted = next.has(currentStep.id);
+
+      if (wasCompleted) {
+        next.delete(currentStep.id);
+      } else {
+        next.add(currentStep.id);
+      }
+
+      return next;
+    });
+
+    if (!isCurrentCompleted && viewIndex < steps.length - 1) {
+      setViewIndex((index) => index + 1);
+    }
+  }
 
   return (
     <main className={`overlay ${compact ? 'overlay--compact' : ''}`}>
@@ -35,7 +102,9 @@ export function App() {
           </button>
           <div>
             <p className="eyebrow">Dofus Guide Companion</p>
-            <p className="progress-label">Étape 128 / 978 · 13%</p>
+            <p className="progress-label">
+              Étape {displayIndex} / {steps.length} · {progress.percentage}%
+            </p>
           </div>
           <button
             className="icon-button"
@@ -50,7 +119,9 @@ export function App() {
 
       {compact && (
         <div className="compact-header">
-          <span>128 / 978 · QUÊTE</span>
+          <span>
+            {displayIndex} / {steps.length} · {typeLabel}
+          </span>
           <button
             className="icon-button"
             type="button"
@@ -73,42 +144,58 @@ export function App() {
         </nav>
       )}
 
-      <section className="current-step" aria-labelledby="current-step-title">
-        {!compact && <span className="type-badge">QUÊTE</span>}
+      <section
+        className={`current-step current-step--${currentStep.type}`}
+        aria-labelledby="current-step-title"
+      >
+        {!compact && <span className="type-badge">{typeLabel}</span>}
 
         <div className="step-title-row">
           <h1 id="current-step-title">{currentStep.title}</h1>
-          <a href={currentStep.source?.url} target="_blank" rel="noreferrer">
-            ↗{compact ? '' : ` ${currentStep.source?.label}`}
-          </a>
+          {currentStep.source && (
+            <a href={currentStep.source.url} target="_blank" rel="noreferrer">
+              ↗{compact ? '' : ` ${currentStep.source.label}`}
+            </a>
+          )}
         </div>
 
-        <p className="action-label">{currentStep.action}</p>
-        <p className="instruction">{currentStep.instruction}</p>
+        {currentStep.action && <p className="action-label">{currentStep.action}</p>}
+        {currentStep.instruction && <p className="instruction">{currentStep.instruction}</p>}
       </section>
 
-      {!compact && (
+      {!compact && activeGoals.length > 0 && (
         <section className="secondary-panel secondary-panel--goal">
           <h2>⚠ Fils rouges actifs</h2>
           <ul>
             {activeGoals.map((goal) => (
-              <li key={goal}>{goal}</li>
+              <li key={goal.id}>{goal.title}</li>
             ))}
           </ul>
         </section>
       )}
 
-      {!compact && (
+      {!compact && nextHardLock && (
         <section className="secondary-panel secondary-panel--lock">
           <h2>🔒 Prochain verrou dur</h2>
-          <p>Niveau 80</p>
+          <p>{nextHardLock.title}</p>
         </section>
       )}
 
       <footer className="navigation-bar">
-        <button type="button" aria-label="Étape précédente">←</button>
-        <button className="complete-button" type="button">✓ {compact ? '' : 'TERMINÉ'}</button>
-        <button type="button" aria-label="Étape suivante">→</button>
+        <button type="button" aria-label="Étape précédente" onClick={goPrevious} disabled={viewIndex === 0}>
+          ←
+        </button>
+        <button className="complete-button" type="button" onClick={toggleCurrentStep}>
+          {isCurrentCompleted ? '↶' : '✓'} {compact ? '' : isCurrentCompleted ? 'DÉVALIDER' : 'TERMINÉ'}
+        </button>
+        <button
+          type="button"
+          aria-label="Étape suivante"
+          onClick={goNext}
+          disabled={viewIndex === steps.length - 1}
+        >
+          →
+        </button>
       </footer>
     </main>
   );
