@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1 --port 1420",
     "build": "tsc -b && vite build",
+    "test:route": "tsx --test src/route/*.test.ts",
     "validate:route": "tsx scripts/validate-route.ts",
     "export:route": "tsx scripts/export-route.ts",
     "preview": "vite preview",
