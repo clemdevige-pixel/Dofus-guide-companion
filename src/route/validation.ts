@@ -107,6 +107,10 @@ export function validateRoute(route: RouteDocument): RouteDocument {
       throw new Error(`${step.id}: instruction de lancement vide.`);
     }
 
+    if (step.action?.toUpperCase().includes('LANCER') && !step.location && !step.launchInstruction) {
+      throw new Error(`${step.id}: action de lancement sans location ni launchInstruction.`);
+    }
+
     if (step.type === 'preparation') {
       const hasItems =
         Array.isArray(step.preparationItems) &&
