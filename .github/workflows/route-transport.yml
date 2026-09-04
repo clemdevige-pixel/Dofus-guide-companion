@@ -1,0 +1,39 @@
+name: Route transport
+
+on:
+  push:
+    branches: [tmp-route-blob]
+    paths:
+      - 'tmp/route.json.gz'
+      - '.github/workflows/route-transport.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  publish-route:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Materialize and verify route
+        shell: bash
+        run: |
+          gunzip -c tmp/route.json.gz > /tmp/route.json
+          test "$(git hash-object /tmp/route.json)" = "5efa37135ccae462a85a3a4bfd5410b6b5b1c6c4"
+      - name: Publish on active branch
+        shell: bash
+        run: |
+          git fetch origin agent/initial-scaffold
+          test "$(git rev-parse origin/agent/initial-scaffold)" = "ef046c81939606dcec76bb189b88351c931ede52"
+          git checkout -B agent/initial-scaffold origin/agent/initial-scaffold
+          cp /tmp/route.json data/route.json
+          corepack enable
+          pnpm install --frozen-lockfile
+          pnpm validate:route
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/route.json
+          git commit -m "data: regenerate route after Tour du Monde pass"
+          git push origin HEAD:agent/initial-scaffold
