@@ -118,29 +118,34 @@ export function getActiveParallelGroups(
 ): ActiveParallelGroup[] {
   const activeIds = new Set<string>();
   const memberIds = new Map<string, Set<string>>();
+  const sortedSteps = getSortedSteps(route);
 
-  for (const step of getSortedSteps(route)) {
+  for (const step of sortedSteps) {
     const parallel = step.parallelGroup;
-    if (!parallel) continue;
+    if (!parallel || !completedStepIds.has(step.id)) continue;
 
-    if (parallel.phase !== 'finish' && step.type !== 'dungeon') {
+    if (parallel.phase === 'start') {
+      activeIds.add(parallel.parallelId);
+    }
+
+    if (
+      parallel.phase !== 'finish' &&
+      step.type !== 'dungeon' &&
+      activeIds.has(parallel.parallelId)
+    ) {
       const members = memberIds.get(parallel.parallelId) ?? new Set<string>();
       members.add(step.id);
       memberIds.set(parallel.parallelId, members);
     }
 
-    if (!completedStepIds.has(step.id)) continue;
-
-    if (parallel.phase === 'start') {
-      activeIds.add(parallel.parallelId);
-    } else if (parallel.phase === 'finish') {
+    if (parallel.phase === 'finish') {
       activeIds.delete(parallel.parallelId);
     }
   }
 
   return [...activeIds].map((parallelId) => {
     const ids = memberIds.get(parallelId) ?? new Set<string>();
-    const members = getSortedSteps(route).filter((step) => ids.has(step.id));
+    const members = sortedSteps.filter((step) => ids.has(step.id));
     return { parallelId, members };
   });
 }
