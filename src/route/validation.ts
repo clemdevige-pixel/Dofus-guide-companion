@@ -1,4 +1,4 @@
-import type { GuideItemAction, RouteDocument, StepType } from './types';
+import type { GuideItemAction, RouteDocument, StepDisplayRole, StepType } from './types';
 
 const supportedTypes = new Set<StepType>([
   'quest',
@@ -21,6 +21,8 @@ const supportedGuideItemActions = new Set<GuideItemAction>([
   'finish',
   'do',
 ]);
+
+const supportedDisplayRoles = new Set<StepDisplayRole>(['objective', 'transition', 'detail']);
 
 type GoalState = 'active' | 'finished';
 
@@ -113,6 +115,13 @@ export function validateRoute(route: RouteDocument): RouteDocument {
 
     if (!supportedTypes.has(step.type)) {
       throw new Error(`${step.id}: type inconnu (${String(step.type)})`);
+    }
+
+    if (step.displayRole !== undefined && !supportedDisplayRoles.has(step.displayRole)) {
+      throw new Error(`${step.id}: displayRole inconnu (${String(step.displayRole)}).`);
+    }
+    if (step.displayRole !== undefined && !step.momentId) {
+      throw new Error(`${step.id}: displayRole défini sans momentId.`);
     }
 
     if (step.source) {
