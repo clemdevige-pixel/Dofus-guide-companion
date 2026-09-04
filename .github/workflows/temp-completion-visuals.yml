@@ -1,0 +1,69 @@
+name: Temp completion visuals patch
+
+on:
+  push:
+    branches:
+      - agent/fix-completion-visuals
+    paths:
+      - .github/workflows/temp-completion-visuals.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/fix-completion-visuals
+      - name: Patch completion visuals
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          app_path = Path('src/App.tsx')
+          app = app_path.read_text(encoding='utf-8')
+          old = "        className={`current-step current-step--${containsHardLock ? 'hard_lock' : isSequence ? 'sequence' : currentStep.type}`}\n"
+          new = "        className={`current-step current-step--${containsHardLock ? 'hard_lock' : isSequence ? 'sequence' : currentStep.type}${isCurrentCompleted ? ' current-step--completed' : ''}`}\n"
+          if app.count(old) != 1:
+              raise SystemExit(f'App patch attendu 1 occurrence, trouvé {app.count(old)}')
+          app = app.replace(old, new, 1)
+          app_path.write_text(app, encoding='utf-8')
+
+          css_path = Path('src/styles.css')
+          css = css_path.read_text(encoding='utf-8')
+          marker = '/* Completion visuals */'
+          if marker in css:
+              raise SystemExit('Completion visuals déjà présents')
+          css += r'''
+
+/* Completion visuals */
+.sequence-item--completed .sequence-item__header strong,
+.sequence-item--completed .sequence-item__action,
+.sequence-item--completed .sequence-item__note {
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+.current-step--completed:not(.current-step--sequence) .step-title-row h1,
+.current-step--completed:not(.current-step--sequence) .action-label,
+.current-step--completed:not(.current-step--sequence) .instruction,
+.current-step--completed:not(.current-step--sequence) .guide-items__row strong,
+.current-step--completed:not(.current-step--sequence) .guide-items__note,
+.current-step--completed:not(.current-step--sequence) .preparation-list {
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+'''
+          css_path.write_text(css, encoding='utf-8')
+          PY
+      - name: Commit patch
+        shell: bash
+        run: |
+          git config user.name "openai-agent"
+          git config user.email "openai-agent@users.noreply.github.com"
+          git add src/App.tsx src/styles.css
+          git commit -m "fix(ui): show completed cards consistently"
+          git push origin HEAD:agent/fix-completion-visuals
