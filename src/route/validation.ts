@@ -13,6 +13,7 @@ const supportedTypes = new Set<StepType>([
 const supportedGuideItemActions = new Set<GuideItemAction>(['take', 'advance', 'finish', 'do']);
 const supportedDisplayRoles = new Set<StepDisplayRole>(['objective', 'transition', 'detail']);
 const supportedParallelPhases = new Set<ParallelPhase>(['start', 'progress', 'finish']);
+const MAX_OBJECTIVES_PER_CARD = 5;
 
 type GoalState = 'active' | 'finished';
 
@@ -72,6 +73,7 @@ export function validateRoute(route: RouteDocument): RouteDocument {
   const parallelStarts = new Map<string, number>();
   const parallelFinishes = new Map<string, number>();
   const momentBlocks = new Map<string, string>();
+  const momentObjectiveCounts = new Map<string, number>();
   const closedMomentIds = new Set<string>();
   let activeMomentId: string | undefined;
   let finishCount = 0;
@@ -143,6 +145,15 @@ export function validateRoute(route: RouteDocument): RouteDocument {
         throw new Error(`${step.id}: momentId ${step.momentId} traverse plusieurs blocs.`);
       }
       momentBlocks.set(step.momentId, step.blockId);
+      if (step.displayRole === 'objective') {
+        const objectiveCount = (momentObjectiveCounts.get(step.momentId) ?? 0) + 1;
+        momentObjectiveCounts.set(step.momentId, objectiveCount);
+        if (objectiveCount > MAX_OBJECTIVES_PER_CARD) {
+          throw new Error(
+            `${step.id}: momentId ${step.momentId} contient plus de ${MAX_OBJECTIVES_PER_CARD} objectifs.`,
+          );
+        }
+      }
       if (closedMomentIds.has(step.momentId)) throw new Error(`${step.id}: momentId non contigu (${step.momentId}).`);
       if (activeMomentId && activeMomentId !== step.momentId) closedMomentIds.add(activeMomentId);
       activeMomentId = step.momentId;
