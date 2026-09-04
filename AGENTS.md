@@ -51,9 +51,11 @@ Interdit également :
 - corriger `data/route.json` à la main ;
 - considérer une cellule technique vidée parce qu'elle a été omise d'un `updateCells` ;
 - créer un `VERROU DUR` uniquement parce qu'un niveau personnage est recommandé/minimum ;
-- compter sur le fallback de regroupement automatique pour un moment éditorial connu : utiliser `MOMENT_ID` ;
-- laisser React décider checkbox/transition par nom de quête ou parsing d'instruction : utiliser `DISPLAY_ROLE` quand le rôle éditorial est connu ;
+- regrouper automatiquement des lignes sans `MOMENT_ID` ;
+- laisser React décider checkbox/transition par nom de quête ou parsing d'instruction : utiliser `DISPLAY_ROLE` ;
 - définir `DISPLAY_ROLE` hors d'un `MOMENT_ID` ;
+- définir un `MOMENT_ID` sans `DISPLAY_ROLE` ;
+- commencer un `MOMENT_ID` par `TRANSITION` ou `DETAIL` : le premier membre doit être `OBJECTIVE` ;
 - conserver une carte autonome uniquement pour répéter « rendre », « reprendre », « terminer », « lancer » si cette transition peut être intégrée au moment adjacent ;
 - répéter dans la carte suivante la fin déjà explicitée dans la carte précédente ;
 - afficher toutes les micro-étapes techniques comme autant d'objectifs joueur.
@@ -79,12 +81,16 @@ Doivent rester dérivés :
 - bloc courant ;
 - groupes/cartes visibles.
 
-`getStepGroups()` respecte en priorité `MOMENT_ID`. Les séquences automatiques ne sont qu'un fallback pour les étapes ordinaires sans moment explicite.
+`getStepGroups()` suit une règle unique :
+- plusieurs lignes contiguës partageant le même `MOMENT_ID` = une carte ;
+- une ligne sans `MOMENT_ID` = une carte autonome.
 
-Dans un moment explicite, `DISPLAY_ROLE` est autoritaire quand il est renseigné :
+Dans un moment explicite, `DISPLAY_ROLE` est autoritaire :
 - `OBJECTIVE` = checkbox ;
 - `TRANSITION` = ligne intermédiaire sans checkbox ;
 - `DETAIL` = information attachée à l'objectif précédent sans checkbox.
+
+Le premier membre d'un moment doit toujours être `OBJECTIVE`.
 
 ## 6. UI — contrat de lisibilité
 
@@ -96,6 +102,7 @@ Rendu cible des cartes mutualisées :
 - **1 checkbox = 1 sous-objectif significatif** (quête réelle, donjon, combat, étape majeure) ;
 - **1 ligne de transition sans checkbox** quand il faut réellement rendre/prendre/avancer/parler/donner/récupérer quelque chose entre deux objectifs ;
 - une transition doit nommer l'action, le PNJ et la position quand la donnée existe ;
+- une transition sans `instruction` propre doit rester visible via un fallback compact construit uniquement depuis ses champs structurés `action + title` ;
 - les notes critiques restent visibles : Ocre/capture, STOP, objet requis, ordre obligatoire, condition de sortie ;
 - les libellés techniques répétitifs (`REPRENDRE / FAIRE`, `FAIRE & VALIDER`, etc.) ne doivent pas dominer le rendu ;
 - la carte suivante commence sur la nouvelle action, sans réexpliquer la fin de la précédente.
@@ -119,6 +126,8 @@ L'export/validation doit échouer sur :
 - position/destination invalide ;
 - `MOMENT_ID` vide, non contigu ou multi-blocs ;
 - `DISPLAY_ROLE` inconnu ou défini sans `MOMENT_ID` ;
+- `MOMENT_ID` défini sans `DISPLAY_ROLE` ;
+- moment commençant par autre chose que `OBJECTIVE` ;
 - `VERROU DUR` de niveau personnage ;
 - route sans une unique `FIN` finale.
 
