@@ -2,11 +2,13 @@
 
 ## 1. Objectif
 
-Définir un format de route indépendant de l'UI. Le Google Sheet reste la source éditoriale, mais les comportements applicatifs reposent sur des champs structurés et jamais sur du parsing de texte libre.
+Définir un format de route indépendant de l'UI. Le Google Sheet reste la source éditoriale ; l'application consomme uniquement des champs structurés exportés vers `data/route.json`.
 
-La route optimisée ne doit pas être pensée comme une simple liste « une quête = une ligne ». Une étape peut représenter un moment de parcours : prise anticipée, progression, objectif mutualisé, donjon partagé ou reprise différée. Le modèle reste néanmoins strictement linéaire et data-driven.
+La route optimisée n'est pas une simple liste « une quête = une ligne ». Une ou plusieurs lignes techniques peuvent appartenir à un même **moment joueur** affiché comme une seule carte.
 
-Voir `docs/ROUTE_OPTIMIZATION.md` pour la méthode éditoriale Ganymède.
+Voir aussi :
+- `docs/ROUTE_OPTIMIZATION.md` : doctrine métier ;
+- `docs/ROUTE_OPTIMIZATION_WORKFLOW.md` : procédure de passe/audit.
 
 ## 2. Route
 
@@ -62,6 +64,7 @@ interface RouteStep {
     url: string;
   };
 
+  momentId?: string;
   location?: RouteCoordinate;
   destination?: RouteCoordinate;
   launchInstruction?: string;
@@ -81,183 +84,130 @@ interface RouteStep {
 }
 ```
 
-`displayType` conserve un libellé éditorial utile (`TOUR`, `TURQUOISE`, `ALIGN.`...) sans multiplier les types comportementaux de l'application.
+`displayType` conserve un libellé éditorial utile (`TOUR`, `TURQUOISE`, `ALIGN.`...) sans multiplier les types comportementaux.
 
-### Position de lancement vs destination
+## 5. MOMENT_ID — frontière de carte autoritaire
 
-`location` représente **uniquement** la position où une ou plusieurs quêtes sont lancées. Elle provient de la colonne `POSITION` du Sheet et protège le contrat de prise de quête.
+`momentId` représente un **moment joueur indivisible**. Plusieurs `RouteStep` techniques partageant le même `momentId` contigu sont rendus comme **une seule carte / un seul objectif joueur**.
 
-`destination` représente le **point vers lequel le joueur doit se rendre pour exécuter l'étape courante**, même lorsqu'aucune quête n'y est lancée. Elle provient de `DESTINATION`.
+Cas typiques :
+- terminer une quête puis lancer immédiatement sa suite auprès du même PNJ ;
+- donjon → dialogue de sortie → rendu/reprise immédiate ;
+- passage mutualisé où plusieurs lignes techniques forment un seul déplacement logique ;
+- chaîne `TERMINER + LANCER` qui ne doit jamais être éclatée en plusieurs cartes.
 
-Les deux champs sont volontairement séparés : une étape de parcours Ganymède peut demander d'aller à un atelier, une zone de farm, un PNJ de progression ou un donjon sans lancer de nouvelle quête. Il est interdit de détourner `POSITION` pour ce besoin.
+Règles strictes :
+- un `momentId` ne traverse pas deux blocs ;
+- toutes ses lignes sont contiguës ;
+- une fois fermé, le même `momentId` ne réapparaît pas plus loin ;
+- l'UI ne déduit jamais un moment depuis les titres ou les verbes d'action ;
+- le regroupement automatique sans `momentId` n'est qu'un fallback ergonomique, jamais une vérité éditoriale.
 
-Quand une prise et le prochain objectif ont lieu au même point, `location` et `destination` peuvent légitimement contenir la même coordonnée.
+Le sélecteur `getStepGroups()` traite `momentId` comme frontière autoritaire. La limite technique de séquence automatique (`MAX_SEQUENCE_STEPS`) ne doit donc jamais servir à définir la structure métier d'une carte voulue explicitement.
 
-Quand une quête n'a pas de position de lancement unique correcte, `launchInstruction` décrit explicitement comment la lancer (objet à double-cliquer, PNJ dépendant de la classe, branche de choix, etc.).
+## 6. Position de lancement vs destination
 
-Une étape pouvant lancer plusieurs quêtes compatibles peut conserver une seule `location` lorsque les prises sont réellement regroupées au même point. Si ce regroupement ne peut pas être décrit correctement par une position unique, utiliser `launchInstruction` plutôt que d'inventer une coordonnée moyenne ou approximative.
+`location` représente uniquement la position où une ou plusieurs quêtes sont lancées (`POSITION` dans le Sheet).
 
-L'UI n'embarque aucune logique spécifique par quête et ne doit pas reconstruire une destination depuis le texte.
+`destination` représente le point vers lequel le joueur doit se rendre pour exécuter le moment courant (`DESTINATION`).
 
-## 5. Roadbook structuré : GUIDE_ITEMS
+Quand une quête n'a pas de position de lancement unique correcte, `launchInstruction` décrit explicitement comment la lancer.
 
-Les moments de parcours mutualisés peuvent exposer `guideItems` pour répondre directement à la question du joueur : **quoi faire maintenant, et où ?**
+Interdit : détourner `POSITION` pour obtenir un bouton `/travel` vers un farm, un rendu ou un donjon.
 
-Exemple runtime :
+## 7. Roadbook structuré : GUIDE_ITEMS
 
-```json
-{
-  "guideItems": [
-    {
-      "action": "advance",
-      "label": "Bûcherons en détresse",
-      "location": { "x": 3, "y": -21 },
-      "note": "Interroge le Bûcheron traumatisé."
-    },
-    {
-      "action": "advance",
-      "label": "Tel est pris qui croyait prendre",
-      "location": { "x": 1, "y": -21 },
-      "note": "Parle à Alberta Borida."
-    }
-  ]
-}
-```
+Les moments mutualisés peuvent exposer `guideItems` pour répondre directement à « quoi faire maintenant, et où ? ».
 
-Dans `ROUTE`, la colonne technique `GUIDE_ITEMS` utilise **une action par ligne** avec le format :
+Format Sheet :
 
 ```text
 ACTION :: LIBELLÉ :: [x,y] :: NOTE OPTIONNELLE
 ```
 
 Actions autorisées :
-
 - `PRENDRE` → `take` ;
 - `AVANCER` → `advance` ;
 - `TERMINER` → `finish` ;
 - `FAIRE` → `do`.
 
-Exemple éditorial :
+`GUIDE_ITEMS` sert aux actions courtes. Les explications longues, STOP, ordre obligatoire et cas particuliers restent dans `instruction`.
 
-```text
-AVANCER :: Bûcherons en détresse :: [3,-21] :: Interroge le Bûcheron traumatisé.
-AVANCER :: Tel est pris qui croyait prendre :: [1,-21] :: Parle à Alberta Borida.
-```
+## 8. Identité stable dans le Sheet
 
-Règles :
+Colonnes techniques de `ROUTE` :
+- `STEP_ID` ;
+- `GOAL_ID` ;
+- `GOAL_PHASE` ;
+- `POSITION` ;
+- `LANCEMENT` ;
+- `LANCEMENT_REQUIS` ;
+- `DESTINATION` ;
+- `GUIDE_ITEMS` ;
+- `MOMENT_ID`.
 
-- `GUIDE_ITEMS` sert aux listes courtes et actionnables, pas à recopier DPLN ;
-- la note est facultative et doit seulement expliquer ce que la position représente lorsque le nom de la quête ne suffit pas ;
-- les explications longues, `STOP`, ordre obligatoire ou cas particuliers restent dans `instruction` ;
-- l'UI groupe les items par action et affiche par exemple « Vous devez maintenant prendre : » ;
-- React ne parse jamais `title` ou `instruction` pour reconstruire ces listes ;
-- les coordonnées des items sont indépendantes de `POSITION` et `DESTINATION` : elles décrivent les arrêts individuels d'un moment de parcours.
+`STEP_ID` représente un événement métier stable, jamais une ligne physique.
 
-## 6. Identité stable dans le Sheet
+Conserver un ancien ID uniquement si l'événement métier reste réellement le même. Une nouvelle prise anticipée, un nouveau checkpoint ou un nouveau moment reçoit un nouvel ID.
 
-`ROUTE` contient des colonnes techniques :
+`MOMENT_ID` ne remplace pas `STEP_ID` :
+- `STEP_ID` = identité persistante d'une étape technique ;
+- `MOMENT_ID` = regroupement éditorial de plusieurs étapes en une carte.
 
-- `STEP_ID` : identité métier stable de l'étape ;
-- `GOAL_ID` : identité stable d'un fil rouge ;
-- `GOAL_PHASE` : `start`, `progress` ou `finish` ;
-- `POSITION` : position **de lancement** unique sous la forme `[x,y]` lorsqu'elle existe ;
-- `LANCEMENT` : instruction structurée de lancement lorsqu'aucune position unique n'est correcte ;
-- `LANCEMENT_REQUIS` : booléen indiquant que la ligne réalise une ou plusieurs prises de quête et doit donc posséder `POSITION` ou `LANCEMENT` ;
-- `DESTINATION` : destination structurée `[x,y]` du moment de parcours ;
-- `GUIDE_ITEMS` : liste structurée des actions courtes du roadbook pour les étapes mutualisées.
-
-`STEP_ID` est une valeur figée. Il ne doit jamais être recalculé depuis le numéro de ligne, le titre ou l'ordre de l'étape.
-
-Lors d'une relinéarisation Ganymède, un ancien `STEP_ID` reste attaché au même événement métier (par exemple la fin d'une quête ou un checkpoint déjà sauvegardé). Un nouveau moment de lancement/progression reçoit un nouvel ID. Ne jamais recycler un ID historique pour une étape sémantiquement différente.
-
-Une insertion de ligne dans le Sheet ne doit donc pas invalider la progression locale déjà sauvegardée.
-
-## 7. Fils rouges et verrous
+## 9. Fils rouges et verrous
 
 Un fil rouge et son verrou sont liés par `goalId`, jamais par leur titre.
 
-```json
-{
-  "id": "route-step-0121",
-  "type": "long_running",
-  "longRunningGoal": {
-    "goalId": "eternelle-moisson",
-    "phase": "start"
-  }
-}
+Lifecycle :
+
+```text
+start → progress* → finish
 ```
 
-Puis :
+Un verrou peut fermer le suivi d'un goal lorsque le contrat de la route le prévoit.
 
-```json
-{
-  "id": "route-step-0887",
-  "type": "hard_lock",
-  "hardLock": {
-    "goalId": "eternelle-moisson",
-    "message": "Complète les captures manquantes avant de continuer."
-  }
-}
-```
+### Interdiction des faux verrous de niveau personnage
 
-L'application peut ainsi dériver les fils rouges actifs sans rechercher « Ocre » ou « fil rouge » dans le texte.
+Un simple niveau recommandé ou niveau minimum de personnage ne crée pas automatiquement une carte `VERROU DUR`.
 
-La refonte Ganymède augmente volontairement le nombre de quêtes gardées actives. Toute quête qui doit traverser plusieurs étapes et dont l'état applicatif doit être exposé doit utiliser le mécanisme structuré de fil rouge plutôt qu'une convention textuelle implicite.
+Les hard locks doivent représenter un blocage réel de progression dans notre route : quête obligatoire, métier requis, timer, objet/état nécessaire, succès, accès, etc.
 
-## 8. Préparation
+Le validateur rejette explicitement un `VERROU DUR` dont le titre commence par `NIVEAU <nombre>`.
 
-Une PRÉPA est exportée vers `preparationItems` lorsque des lignes à puce sont présentes :
+## 10. Préparation
 
-```json
-{
-  "type": "preparation",
-  "title": "Frigost II",
-  "preparationItems": [
-    "4 Métaria Mage jaune / rouge / verte / bleue",
-    "Pierres d'âme adaptées",
-    "29 999 kamas"
-  ]
-}
-```
+Une `PRÉPA` devient `preparationItems` quand des lignes à puce sont disponibles.
 
-Le texte éditorial reste disponible dans le Sheet ; l'application n'a pas besoin de dupliquer les colonnes d'audit ou de mise en forme.
+La préparation doit tenir compte des ressources fournies naturellement par la route avant leur consommation. Ne pas transformer un niveau conseillé en prérequis bloquant dans une PRÉPA.
 
-La préparation doit tenir compte des ressources obtenues naturellement dans les quêtes précédentes : ne pas demander un achat/farm si la route optimisée fournit déjà la ressource avant son usage.
-
-## 9. Action
+## 11. Action
 
 `action` reste principalement une donnée d'affichage :
-
-- `LANCER`
-- `LANCER / STOP`
-- `TERMINER`
-- `AVANCER / STOP`
-- `REPRENDRE / AVANCER`
-- `REPRENDRE / TERMINER`
-- `FAIRE LE LOT`
-- `PRÉPARER`
-- `FIL ROUGE`
-- `VERROU DUR`
+- `LANCER` ;
+- `LANCER / STOP` ;
+- `TERMINER` ;
+- `AVANCER / STOP` ;
+- `REPRENDRE / AVANCER` ;
+- `REPRENDRE / TERMINER` ;
+- `FAIRE LE LOT` ;
+- `PRÉPARER` ;
+- `FIL ROUGE` ;
+- `VERROU DUR`.
 
 L'application ne déduit jamais `type` depuis `action`.
 
-Exception de validation éditoriale : une action contenant `LANCER` doit avoir `LANCEMENT_REQUIS=TRUE`. Cette règle ne sert pas à déterminer le rendu ; elle protège la complétude de la donnée de lancement.
+Une action contenant `LANCER` doit posséder une donnée de lancement structurée.
 
-## 10. Données volontairement absentes
+## 12. Données volontairement absentes
 
 Ne pas exporter si elles ne servent pas à l'application :
-
 - numéro de ligne Google Sheet ;
-- colonnes d'audit internes, dont `GANYMEDE_AUDIT` ;
-- notes de validation historiques ;
-- couleurs du Sheet ;
-- formules du Sheet.
+- notes d'audit historiques ;
+- couleurs ;
+- formules ;
+- règles implicites reconstituables uniquement en lisant le texte.
 
-Les couleurs sont une responsabilité de l'UI, dérivée des données structurées.
-
-Les regroupements Ganymède ne doivent pas être reconstruits à partir du texte. Lorsqu'un moment de parcours doit afficher plusieurs quêtes concernées, utiliser `guideItems`.
-
-## 11. Export depuis le Sheet
+## 13. Export depuis le Sheet
 
 Commande :
 
@@ -265,12 +215,10 @@ Commande :
 pnpm export:route
 ```
 
-Configuration : voir `.env.example`.
-
 Flux :
 
 ```text
-ROUTE (A:R)
+ROUTE (A:S)
    ↓
 scripts/export-route.ts
    ↓ validation stricte
@@ -278,20 +226,17 @@ scripts/export-route.ts
 data/route.json
 ```
 
-L'export échoue notamment si :
-
+L'export/validation échoue notamment si :
 - `TYPE` est inconnu ;
 - `STEP_ID` manque ou est dupliqué ;
 - un bloc est absent ;
 - `GOAL_PHASE` est invalide ;
-- `POSITION` n'est pas une paire d'entiers `[x,y]` ;
-- `DESTINATION` n'est pas une paire d'entiers `[x,y]` ;
-- une entrée `GUIDE_ITEMS` utilise une action inconnue ou une position invalide ;
-- une action contient `LANCER` sans `LANCEMENT_REQUIS=TRUE` ;
-- `LANCEMENT_REQUIS=TRUE` sans `POSITION` ni `LANCEMENT` ;
-- un verrou référence un `GOAL_ID` jamais déclaré ;
+- `POSITION` / `DESTINATION` sont invalides ;
+- `GUIDE_ITEMS` est invalide ;
+- une prise n'a aucune donnée de lancement ;
+- un `MOMENT_ID` est vide, non contigu ou traverse plusieurs blocs ;
+- un hard lock référence un goal jamais démarré ;
+- un hard lock de niveau personnage est introduit ;
 - une URL structurée est invalide.
 
-Aucune erreur de données ne doit être masquée par une heuristique côté front.
-
-`data/route.json` est un artefact généré. Toute correction éditoriale se fait dans le Sheet puis passe par l'exporteur.
+`data/route.json` reste un artefact généré. Toute correction éditoriale se fait dans le Sheet puis passe par l'exporteur.
