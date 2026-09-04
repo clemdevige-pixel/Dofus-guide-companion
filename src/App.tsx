@@ -222,6 +222,10 @@ export function App() {
       return;
     }
 
+    const containsHardLock = currentGroup.steps.some(
+      (step) => stepIds.includes(step.id) && step.type === 'hard_lock',
+    );
+
     setCompletedStepIds((previous) => {
       const next = new Set(previous);
       const wasCompleted = stepIds.every((stepId) => next.has(stepId));
@@ -236,7 +240,7 @@ export function App() {
 
       const completesSequence =
         !wasCompleted && currentGroup.steps.every((step) => next.has(step.id));
-      if (completesSequence && viewIndex < stepGroups.length - 1) {
+      if (completesSequence && !containsHardLock && viewIndex < stepGroups.length - 1) {
         setViewIndex((index) => index + 1);
       }
 
