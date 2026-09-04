@@ -41,9 +41,9 @@ function getStepContext(step: RouteStep): string {
 }
 
 /**
- * A sequence card is a presentation concern only: every underlying RouteStep keeps
- * its own id and completion state. We group ordinary actionable steps and keep
- * structural/critical route checkpoints isolated.
+ * Ordinary actionable steps without an explicit editorial moment may still share a
+ * compact checklist. Explicit momentId values are handled separately and are the
+ * authoritative card boundaries.
  */
 function isSequenceCandidate(step: RouteStep): boolean {
   if (!sequenceStepTypes.has(step.type)) {
@@ -62,26 +62,13 @@ function isSequenceCandidate(step: RouteStep): boolean {
   return Boolean(step.action?.trim() || step.instruction?.trim() || step.title.trim());
 }
 
-function continuesSameMomentAfterStop(steps: RouteStep[], index: number): boolean {
-  const momentId = steps[index].momentId;
-  if (!momentId) {
-    return false;
-  }
-
-  const next = steps[index + 1];
-  return Boolean(
-    next &&
-    next.blockId === steps[index].blockId &&
-    next.momentId === momentId,
-  );
+function isExplicitMomentStep(step: RouteStep): boolean {
+  return Boolean(step.momentId && sequenceStepTypes.has(step.type));
 }
 
-/** A STOP closes a sequence unless the structured route explicitly keeps the same moment. */
-function closesSequence(steps: RouteStep[], index: number): boolean {
-  return (
-    getStepContext(steps[index]).includes('STOP') &&
-    !continuesSameMomentAfterStop(steps, index)
-  );
+/** A STOP closes only an inferred checklist. Explicit moments are already bounded by momentId. */
+function closesSequence(step: RouteStep): boolean {
+  return getStepContext(step).includes('STOP');
 }
 
 export function getSortedSteps(route: RouteDocument): RouteStep[] {
@@ -135,6 +122,33 @@ export function getStepGroups(route: RouteDocument): RouteStepGroup[] {
 
   for (let index = 0; index < steps.length; index += 1) {
     const step = steps[index];
+
+    if (isExplicitMomentStep(step)) {
+      flushSequence();
+
+      const momentId = step.momentId!;
+      const members: RouteStep[] = [step];
+      let cursor = index + 1;
+      while (
+        cursor < steps.length &&
+        steps[cursor].blockId === step.blockId &&
+        steps[cursor].momentId === momentId &&
+        isExplicitMomentStep(steps[cursor])
+      ) {
+        members.push(steps[cursor]);
+        cursor += 1;
+      }
+
+      groups.push({
+        id: `moment:${momentId}`,
+        blockId: step.blockId,
+        steps: members,
+        isSequence: members.length > 1,
+      });
+      index = cursor - 1;
+      continue;
+    }
+
     const blockChanged = sequence.length > 0 && sequence[0].blockId !== step.blockId;
     if (blockChanged || !isSequenceCandidate(step)) {
       flushSequence();
@@ -144,7 +158,7 @@ export function getStepGroups(route: RouteDocument): RouteStepGroup[] {
 
     sequence.push(step);
 
-    if (closesSequence(steps, index) || sequence.length >= MAX_SEQUENCE_STEPS) {
+    if (closesSequence(step) || sequence.length >= MAX_SEQUENCE_STEPS) {
       flushSequence();
     }
   }
