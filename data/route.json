@@ -7641,7 +7641,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/dites-le-avec-des-fleurs.html"
       },
-      "momentId": "moment-damadrya-pass",
+      "momentId": "moment-damadrya-prep",
       "location": {
         "x": 23,
         "y": -29
@@ -7664,7 +7664,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/a-la-croisee-des-mondes.html"
       },
-      "momentId": "moment-damadrya-pass",
+      "momentId": "moment-damadrya-prep",
       "location": {
         "x": 20,
         "y": -29
@@ -8578,7 +8578,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/allumer-le-feu.html"
       },
-      "momentId": "moment-emeraude-meulou-pass",
+      "momentId": "moment-emeraude-meulou-boss",
       "parallelGroup": {
         "parallelId": "parallel-meulou",
         "phase": "progress"
@@ -8605,7 +8605,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/draconanthropie.html"
       },
-      "momentId": "moment-emeraude-meulou-pass",
+      "momentId": "moment-emeraude-meulou-boss",
       "parallelGroup": {
         "parallelId": "parallel-meulou",
         "phase": "progress"
@@ -8628,7 +8628,7 @@
       "displayRole": "detail",
       "action": "FAIRE",
       "instruction": "Fais le Meulou maintenant avec les quatre objectifs actifs.\nOCRE — Capture le Meulou avec une pierre d’âme adaptée.",
-      "momentId": "moment-emeraude-meulou-pass",
+      "momentId": "moment-emeraude-meulou-boss",
       "parallelGroup": {
         "parallelId": "parallel-meulou",
         "phase": "finish"
@@ -8646,7 +8646,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/allumer-le-feu.html"
       },
-      "momentId": "moment-emeraude-meulou-pass"
+      "momentId": "moment-emeraude-meulou-boss"
     },
     {
       "id": "route-step-0320",
@@ -8660,7 +8660,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/draconanthropie.html"
       },
-      "momentId": "moment-emeraude-meulou-pass"
+      "momentId": "moment-emeraude-meulou-boss"
     },
     {
       "id": "route-step-0321",
@@ -8675,7 +8675,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/ultime-reacuteminiscence.html"
       },
-      "momentId": "moment-emeraude-meulou-pass",
+      "momentId": "moment-emeraude-finish-rat",
       "location": {
         "x": -6,
         "y": -3
@@ -8694,7 +8694,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/un-juge-hysterique.html"
       },
-      "momentId": "moment-emeraude-meulou-pass",
+      "momentId": "moment-emeraude-finish-rat",
       "parallelGroup": {
         "parallelId": "parallel-rat-blanc",
         "phase": "start"
@@ -10498,7 +10498,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-fonte-des-glaces.html"
       },
-      "momentId": "moment-route-step-0426",
+      "momentId": "moment-frigost-fonte-glaces",
       "location": {
         "x": -60,
         "y": -57
@@ -10521,7 +10521,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/lombre-et-la-glace.html"
       },
-      "momentId": "moment-route-step-0426",
+      "momentId": "moment-mansot-pass",
       "parallelGroup": {
         "parallelId": "parallel-mansot",
         "phase": "start"
@@ -10548,7 +10548,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-joyeux-de-la-couronne.html"
       },
-      "momentId": "moment-route-step-0426",
+      "momentId": "moment-mansot-pass",
       "parallelGroup": {
         "parallelId": "parallel-mansot",
         "phase": "progress"
@@ -10575,7 +10575,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-chasseurs.html"
       },
-      "momentId": "moment-route-step-0426",
+      "momentId": "moment-mansot-pass",
       "parallelGroup": {
         "parallelId": "parallel-mansot",
         "phase": "progress"
@@ -10598,7 +10598,7 @@
       "displayRole": "detail",
       "action": "FAIRE",
       "instruction": "Entre quand les quatre quêtes Frigost sont au Mansot et La bénédiction de Viti est active. Dans la salle finale, utilise l'idole de Viti Glacée avant le combat.",
-      "momentId": "moment-route-step-0426",
+      "momentId": "moment-mansot-pass",
       "parallelGroup": {
         "parallelId": "parallel-mansot",
         "phase": "finish"
@@ -10616,7 +10616,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/lombre-et-la-glace.html"
       },
-      "momentId": "moment-route-step-0426"
+      "momentId": "moment-mansot-pass"
     },
     {
       "id": "route-step-0428",
@@ -10630,7 +10630,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-joyeux-de-la-couronne.html"
       },
-      "momentId": "moment-route-step-0426"
+      "momentId": "moment-mansot-pass"
     },
     {
       "id": "route-step-0429",
@@ -10644,7 +10644,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-chasseurs.html"
       },
-      "momentId": "moment-route-step-0426"
+      "momentId": "moment-mansot-pass"
     },
     {
       "id": "route-step-0430",
@@ -14587,7 +14587,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/nos-amies-les-betes.html"
       },
-      "momentId": "moment-nimotopia-loop",
+      "momentId": "moment-nimotopia-loop-a",
       "location": {
         "x": -66,
         "y": 30
@@ -14614,7 +14614,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/shyriiwook.html"
       },
-      "momentId": "moment-nimotopia-loop",
+      "momentId": "moment-nimotopia-loop-a",
       "location": {
         "x": -64,
         "y": 29
@@ -14641,7 +14641,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/a-armes-egales.html"
       },
-      "momentId": "moment-nimotopia-loop",
+      "momentId": "moment-nimotopia-loop-a",
       "location": {
         "x": -65,
         "y": 33
@@ -14668,7 +14668,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/nos-amies-les-betes.html"
       },
-      "momentId": "moment-nimotopia-loop",
+      "momentId": "moment-nimotopia-loop-a",
       "destination": {
         "x": -66,
         "y": 31
@@ -14691,7 +14691,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/il-a-fui-il-a-tout-compris.html"
       },
-      "momentId": "moment-nimotopia-loop",
+      "momentId": "moment-nimotopia-loop-b",
       "location": {
         "x": -62,
         "y": 30
@@ -14718,7 +14718,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/shyriiwook.html"
       },
-      "momentId": "moment-nimotopia-loop",
+      "momentId": "moment-nimotopia-loop-b",
       "destination": {
         "x": -63,
         "y": 30
@@ -14741,7 +14741,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/a-armes-egales.html"
       },
-      "momentId": "moment-nimotopia-loop",
+      "momentId": "moment-nimotopia-loop-b",
       "destination": {
         "x": -65,
         "y": 33
@@ -14764,7 +14764,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-valse-des-manuels.html"
       },
-      "momentId": "moment-nimotopia-loop",
+      "momentId": "moment-nimotopia-loop-b",
       "destination": {
         "x": -63,
         "y": 29
@@ -14788,7 +14788,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/il-a-fui-il-a-tout-compris.html"
       },
-      "momentId": "moment-nimotopia-loop",
+      "momentId": "moment-nimotopia-loop-b",
       "destination": {
         "x": -62,
         "y": 30
@@ -17438,7 +17438,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-risques-du-metier.html"
       },
-      "momentId": "moment-valonia-sorciere",
+      "momentId": "moment-valonia-sorciere-boss",
       "location": {
         "x": 22,
         "y": -80
@@ -17457,7 +17457,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-sorciere-exilee.html"
       },
-      "momentId": "moment-valonia-sorciere",
+      "momentId": "moment-valonia-sorciere-boss",
       "location": {
         "x": 36,
         "y": -77
@@ -17472,7 +17472,7 @@
       "displayRole": "detail",
       "action": "FAIRE",
       "instruction": "Fais la Chambre des Maléfices avec La sorcière exilée active.",
-      "momentId": "moment-valonia-sorciere"
+      "momentId": "moment-valonia-sorciere-boss"
     },
     {
       "id": "route-step-0799",
@@ -17487,7 +17487,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-sorciere-exilee.html"
       },
-      "momentId": "moment-valonia-sorciere"
+      "momentId": "moment-valonia-sorciere-boss"
     },
     {
       "id": "route-step-0800",
@@ -17502,7 +17502,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-graine-de-la-revolte.html"
       },
-      "momentId": "moment-valonia-sorciere",
+      "momentId": "moment-valonia-flamme",
       "location": {
         "x": 33,
         "y": -84
@@ -17541,7 +17541,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-graine-de-la-revolte.html"
       },
-      "momentId": "moment-valonia-sorciere",
+      "momentId": "moment-valonia-flamme",
       "location": {
         "x": 33,
         "y": -84
@@ -17560,7 +17560,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/pour-que-la-flamme-vacille.html"
       },
-      "momentId": "moment-valonia-sorciere"
+      "momentId": "moment-valonia-flamme"
     },
     {
       "id": "route-step-0802",
@@ -18023,7 +18023,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/nordalie.html"
       },
-      "momentId": "moment-nordalie",
+      "momentId": "moment-nordalie-tal-kasha",
       "location": {
         "x": -9,
         "y": -22
@@ -18041,7 +18041,7 @@
       "title": "◆ Chambre de Tal Kasha — NORDALIE",
       "displayRole": "detail",
       "action": "FAIRE",
-      "momentId": "moment-nordalie"
+      "momentId": "moment-nordalie-tal-kasha"
     },
     {
       "id": "route-step-0832",
@@ -18056,7 +18056,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/nordalie.html"
       },
-      "momentId": "moment-nordalie"
+      "momentId": "moment-nordalie-tal-kasha"
     },
     {
       "id": "route-step-0833",
@@ -18071,7 +18071,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-guerrier-noir.html"
       },
-      "momentId": "moment-nordalie",
+      "momentId": "moment-nordalie-missions",
       "location": {
         "x": -76,
         "y": -80
@@ -18094,7 +18094,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-bonheur-est-dans-le-spray.html"
       },
-      "momentId": "moment-nordalie",
+      "momentId": "moment-nordalie-missions",
       "location": {
         "x": -76,
         "y": -80
@@ -18117,7 +18117,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/une-voix-de-crystal.html"
       },
-      "momentId": "moment-nordalie",
+      "momentId": "moment-nordalie-missions",
       "location": {
         "x": -76,
         "y": -80
@@ -18136,7 +18136,7 @@
       "displayRole": "detail",
       "action": "FAIRE",
       "instruction": "Vaincs Nileza avec Une voix de crystal au checkpoint boss, puis poursuis la quête vers le Capitaine Meno.",
-      "momentId": "moment-nordalie"
+      "momentId": "moment-nordalie-missions"
     },
     {
       "id": "route-step-0837",
@@ -18147,7 +18147,7 @@
       "displayRole": "detail",
       "action": "FAIRE",
       "instruction": "Poursuis Une voix de crystal jusqu'au Vaisseau du Capitaine Meno, vaincs Meno et effectue le dialogue requis avant de poursuivre.",
-      "momentId": "moment-nordalie"
+      "momentId": "moment-nordalie-missions"
     },
     {
       "id": "route-step-0838",
@@ -18162,7 +18162,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/une-voix-de-crystal.html"
       },
-      "momentId": "moment-nordalie"
+      "momentId": "moment-nordalie-missions"
     },
     {
       "id": "route-step-0839",
@@ -18177,7 +18177,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/une-voix-de-crystal.html"
       },
-      "momentId": "moment-nordalie"
+      "momentId": "moment-nordalie-missions"
     },
     {
       "id": "route-step-0840",
@@ -18192,7 +18192,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-mort-dans-l-ame.html"
       },
-      "momentId": "moment-nordalie",
+      "momentId": "moment-nordalie-katrepat",
       "location": {
         "x": -76,
         "y": -80
@@ -18211,7 +18211,7 @@
       "displayRole": "detail",
       "action": "FAIRE",
       "instruction": "Fais le Manoir des Katrepat avec Le mort dans l'âme au checkpoint boss.",
-      "momentId": "moment-nordalie"
+      "momentId": "moment-nordalie-katrepat"
     },
     {
       "id": "route-step-0842",
@@ -18226,7 +18226,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-mort-dans-l-ame.html"
       },
-      "momentId": "moment-nordalie"
+      "momentId": "moment-nordalie-katrepat"
     },
     {
       "id": "route-step-0843",
@@ -18240,7 +18240,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/nordalie.html"
       },
-      "momentId": "moment-nordalie"
+      "momentId": "moment-nordalie-katrepat"
     },
     {
       "id": "route-step-0844",
