@@ -91,7 +91,7 @@ function getSequenceCoordinate(step: RouteStep) {
 }
 
 function getObjectiveDisplayStep(steps: RouteStep[]): RouteStep {
-  return steps.find((step) => step.type !== 'dungeon') ?? steps[0];
+  return steps[0];
 }
 
 export function App() {
