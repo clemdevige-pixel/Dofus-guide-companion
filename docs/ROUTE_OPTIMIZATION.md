@@ -5,14 +5,14 @@
 Transformer la route Astrub → Dofus Sylvestre en script de progression réellement optimisé, sans changer son scope fonctionnel ni créer une seconde vérité.
 
 La route doit minimiser :
-
 - les allers-retours inutiles ;
-- les prises de quêtes tardives ;
-- les donjons refaits alors que plusieurs objectifs peuvent être actifs ensemble ;
-- les farms ou achats évitables lorsqu'une autre quête fournit naturellement la ressource ;
-- les rendus de quête qui obligent à revenir immédiatement dans une zone déjà quittée.
+- les prises tardives ;
+- les donjons refaits inutilement ;
+- les farms/achats évitables ;
+- les rendus qui provoquent un retour immédiat ;
+- la fragmentation artificielle d'un même moment joueur en plusieurs cartes.
 
-Le résultat attendu n'est plus un modèle naïf `prendre → terminer → prendre → terminer`, mais un parcours linéaire :
+Le résultat attendu est un parcours linéaire :
 
 ```text
 prises compatibles
@@ -25,200 +25,169 @@ prises compatibles
 
 ## 2. Sources et responsabilités
 
-### Source de vérité du scope
+### Scope
+Le Google Sheet `Roadmap ULTIMATE V2 — Astrub → Dofus Sylvestre`, onglet `ROUTE`, définit ce qui appartient à la progression.
 
-Le Google Sheet `Roadmap ULTIMATE V2 — Astrub → Dofus Sylvestre`, onglet `ROUTE`, définit ce qui appartient à notre progression.
-
-Une quête présente chez Ganymède mais absente de notre scope n'est pas ajoutée automatiquement.
-
-### Source d'optimisation
-
-Ganymède, en priorité le guide principal GP0 et les guides GP spécialisés, sert à déterminer :
-
-- l'ordre optimal des prises ;
-- les quêtes à garder actives en parallèle ;
-- les déplacements mutualisables ;
-- les objectifs qui se recoupent ;
-- les donjons à faire avec plusieurs quêtes actives ;
-- les rendus différés utiles ;
-- les ressources obtenues naturellement par une autre branche.
-
-Ganymède n'écrase jamais un prérequis validé de notre route sans vérification.
+### Optimisation
+Ganymède (GP0 + guides spécialisés) sert à déterminer l'ordre de parcours, les prises anticipées, les quêtes à garder actives, les mutualisations et les rendus différés.
 
 ### Vérification factuelle
+DofusPourLesNoobs et sources fiables équivalentes servent à confirmer prérequis, PNJ, positions, drops, conditions et ordre obligatoire.
 
-DofusPourLesNoobs et, si nécessaire, d'autres sources de quête fiables servent à confirmer :
+Ne jamais reconstruire un ordre depuis la mémoire de l'agent.
 
-- prérequis ;
-- PNJ / position de lancement ;
-- objectifs exacts ;
-- récompenses ou drops nécessaires ;
-- ordre obligatoire entre deux quêtes.
+## 3. Unité d'optimisation : le moment joueur
 
-## 3. Exception Vulbis / Parangon
+L'unité de travail n'est plus « une quête » ni « une ligne Sheet », mais un **moment joueur**.
 
-Le scope reste Sylvestre.
+Un moment peut contenir :
+- une ou plusieurs prises ;
+- plusieurs checkpoints ;
+- un donjon ;
+- plusieurs rendus/reprises ;
+- un lancement immédiat de la suite ;
+- plusieurs lignes techniques nécessaires au suivi stable.
 
-Une exception est autorisée : avancer la chaîne Vulbis uniquement jusqu'au stade où le `Parangon de puissance` devient droppable, puis conserver ce fil actif pendant les donjons niveau 200.
+Quand plusieurs lignes appartiennent à un même moment, elles partagent explicitement le même `MOMENT_ID`.
 
-Cette exception n'est intégrée que si ses prérequis deviennent raisonnablement accessibles dans la route optimisée. Ne pas gonfler artificiellement le scope avec une longue branche hors objectif uniquement pour débloquer le Parangon.
+### Règle cardinale
 
-## 4. Unité d'optimisation
+**Une carte UI doit correspondre à un moment joueur, pas à une ligne technique.**
 
-L'unité de travail n'est plus « une quête », mais un **moment de parcours**.
-
-Un moment de parcours peut contenir :
-
-- une ou plusieurs prises de quête ;
-- une quête principale à avancer ;
-- plusieurs quêtes secondaires gardées actives ;
-- un objectif partagé ;
-- un donjon mutualisé ;
-- plusieurs reprises/rendus après ce donjon.
-
-La route reste strictement linéaire : le joueur doit pouvoir suivre les lignes dans l'ordre sans interpréter une règle externe.
-
-Les frontières de blocs sont éditoriales, pas des barrières d'optimisation. Si une quête déjà présente plus loin dans notre scope peut être lancée gratuitement pendant un bloc antérieur, son lancement peut être avancé. L'ancienne étape devient alors une `REPRISE` et conserve son `STEP_ID` uniquement si elle représente toujours le même événement métier. Cette règle ne permet jamais d'importer une quête hors scope.
-
-## 5. Règles de réécriture
-
-### 5.1 Prises anticipées
-
-Si plusieurs quêtes sont disponibles au même moment et peuvent progresser sans se bloquer mutuellement, les lancer avant de quitter la zone.
-
-Ne pas considérer une même coordonnée comme preuve suffisante : les prérequis et l'état des quêtes doivent permettre leur coexistence réelle.
-
-Toute prise utilise `POSITION` (position de lancement) ou `LANCEMENT` lorsqu'une coordonnée unique n'est pas correcte. `LANCEMENT_REQUIS=TRUE` est obligatoire.
-
-Une prise anticipée peut concerner une quête actuellement rangée dans un bloc ultérieur. Dans ce cas :
-
-1. vérifier qu'elle existe déjà dans le scope global ;
-2. placer son lancement au premier moment réellement disponible et utile ;
-3. garder la quête active explicitement ;
-4. convertir son ancienne prise en reprise/progression sans dupliquer la quête.
-
-### 5.2 Destination de parcours
-
-`DESTINATION` est distincte de `POSITION`.
-
-- `POSITION` = endroit où la prise de quête a lieu ;
-- `DESTINATION` = endroit où le joueur doit se rendre pour exécuter le moment de parcours.
-
-Une étape sans prise de quête peut donc avoir `DESTINATION` sans `POSITION`.
-
-Une étape de prise dont l'objectif immédiat se trouve au même endroit peut avoir les deux champs identiques.
-
-Ne jamais mettre une coordonnée de farm, d'atelier, de rendu ou de simple progression dans `POSITION` uniquement pour permettre à l'UI de proposer `/travel`.
-
-### 5.3 Quêtes parallèles
-
-Une quête lancée mais non terminée doit être représentée explicitement :
-
-- `LANCER / STOP` ou `LANCER / FIL ROUGE` au départ ;
-- `REPRISE / AVANCER` pendant sa progression ;
-- `REPRENDRE / TERMINER` au moment optimal.
-
-Ne jamais masquer une quête active derrière une note éditoriale.
-
-### 5.4 Donjons
-
-Avant chaque donjon, rechercher toutes les quêtes de notre scope pouvant exploiter le même passage.
-
-Le donjon n'est exécuté que lorsque les quêtes compatibles nécessaires sont au bon checkpoint, sauf raison structurelle documentée imposant plusieurs passages.
-
-### 5.5 Ressources
-
-Avant de demander un achat ou un farm, vérifier si une quête déjà dans la route fournit la ressource avant son utilisation.
-
-Préférer la récupération naturelle lorsque cela ne crée pas de détour supérieur.
-
-### 5.6 Rendus
-
-Ne pas rendre systématiquement une quête dès que ses objectifs sont terminés.
-
-Si Ganymède montre qu'un rendu plus tardif évite un aller-retour sans bloquer la progression, déplacer le rendu au point optimal.
-
-### 5.7 Scope
-
-Toute étape Ganymède doit être classée :
-
-- `IN_SCOPE` : nécessaire à notre route ;
-- `SUPPORT` : non obligatoire mais utile pour mutualiser une étape déjà nécessaire ;
-- `OUT_OF_SCOPE` : ignorée ;
-- `EXCEPTION_PARANGON` : branche Vulbis autorisée jusqu'au déblocage du drop.
-
-Une étape `OUT_OF_SCOPE` ne doit pas entrer dans `ROUTE` uniquement parce qu'elle est présente dans GP0.
-
-## 6. Méthode bloc par bloc
-
-Le chantier est suivi dans l'onglet `GANYMEDE_AUDIT` du Sheet.
-
-Statuts :
+Exemple :
 
 ```text
-À AUDITER
-→ EN AUDIT
-→ VALIDÉ
-→ INTÉGRÉ
+DONJON
+→ parler au PNJ de sortie
+→ terminer la quête
+→ lancer immédiatement la suivante
 ```
 
-Pour chaque bloc :
+Si, pour le joueur, cet enchaînement est indivisible, les lignes techniques doivent partager un `MOMENT_ID` commun.
 
-1. Lire le bloc actuel complet dans `ROUTE`.
-2. Identifier les guides GP Ganymède couvrant son contenu.
-3. Relever l'ordre réel de déplacement et les prises anticipées.
-4. Filtrer strictement les quêtes hors scope.
-5. Vérifier aussi les quêtes de blocs ultérieurs déjà dans le scope qui pourraient être lancées pendant ce parcours.
-6. Construire les groupes de quêtes pouvant coexister.
-7. Chercher les objectifs, drops, PNJ et donjons communs.
-8. Vérifier les prérequis et positions des prises modifiées.
-9. Attribuer `DESTINATION` aux moments de parcours qui ont une cible géographique.
-10. Réécrire le bloc ligne par ligne, sans règle implicite.
-11. Préserver les `STEP_ID` historiques sur le même événement métier ; créer de nouveaux IDs pour les nouveaux moments de parcours.
-12. Vérifier que chaque prise a `POSITION` ou `LANCEMENT` et `LANCEMENT_REQUIS=TRUE`.
-13. Vérifier les cycles `GOAL_ID / GOAL_PHASE` des fils rouges, y compris ceux qui traversent plusieurs blocs.
-14. Exporter le Sheet via `pnpm export:route`.
-15. Lancer la validation/tests/build avant de marquer le bloc `INTÉGRÉ`.
+Le regroupement automatique par paquets est seulement un fallback pour les étapes ordinaires ; il ne doit jamais remplacer un regroupement éditorial explicite.
 
-## 7. Critères de validation d'une mutualisation
+## 4. Frontières de blocs
+
+Les blocs sont éditoriaux, pas des barrières d'optimisation.
+
+Une quête déjà IN_SCOPE peut être lancée plus tôt si :
+1. elle est réellement disponible ;
+2. son lancement précoce apporte un gain ;
+3. aucun prérequis/état n'est cassé ;
+4. l'ancienne prise est transformée en reprise au lieu d'être dupliquée.
+
+## 5. Passes globales obligatoires
+
+Après la première linéarisation, la route doit être auditée par **passes globales**, et pas seulement bloc par bloc.
+
+### Passe A — scope / prérequis réels
+- supprimer les faux bloqueurs ;
+- distinguer niveau recommandé, niveau minimum réel et verrou réellement structurant ;
+- ne jamais créer un `VERROU DUR` uniquement parce qu'un niveau personnage est indiqué ;
+- vérifier métier, timer, succès, accès, objet, état de quête et conditions réellement bloquantes.
+
+### Passe B — prises / reprises
+- chercher les prises qui doivent être avancées ;
+- chercher les quêtes lancées deux fois ;
+- vérifier tous les `LANCER`, `LANCER LES 2/4`, objets de lancement et salles de sortie ;
+- conserver les `STEP_ID` sur le même événement métier uniquement.
+
+### Passe C — donjons / mutualisations
+- pour chaque donjon, lister toutes les quêtes pouvant exploiter le même passage ;
+- justifier explicitement chaque repassage restant ;
+- vérifier captures Ocre, idoles, dialogues de sortie, drops et sauvegardes.
+
+### Passe D — moments / cartes
+- inspecter tous les `TERMINER + LANCER` ;
+- inspecter `donjon → reprise → suite` ;
+- inspecter les chaînes Tour/Emma/Alain/Thelma/Anne/Lorie et équivalentes ;
+- ajouter `MOMENT_ID` lorsqu'un seul moment joueur est encore fragmenté en plusieurs lignes ;
+- ne pas compter sur une limite automatique de 8 étapes pour définir les cartes.
+
+### Passe E — fils rouges / verrous
+- vérifier `start → progress → finish` ;
+- vérifier les hard locks associés ;
+- détecter les goals ouverts sans fermeture ou fermés avant usage ;
+- vérifier qu'un verrou arrive au dernier moment utile, pas trop tôt.
+
+### Passe F — continuité finale
+- vérifier qu'une ligne peut être suivie strictement sans interprétation externe ;
+- vérifier qu'aucune instruction « fais X puis reprends Y plus tard » n'est laissée sans étapes explicites ;
+- vérifier la continuité jusqu'au Dofus Sylvestre final.
+
+## 6. Règles de réécriture
+
+### 6.1 Prises anticipées
+Toute prise utilise `POSITION` ou `LANCEMENT`, avec `LANCEMENT_REQUIS=TRUE`.
+
+### 6.2 Destination
+`POSITION` = prise de quête.
+`DESTINATION` = prochain lieu utile du moment.
+
+Ne jamais détourner `POSITION` pour un farm, atelier, rendu ou donjon.
+
+### 6.3 Quêtes parallèles
+Une quête laissée active doit être représentée explicitement :
+- `LANCER / STOP` ou `LANCER / FIL ROUGE` ;
+- `REPRENDRE / AVANCER` ;
+- `REPRENDRE / TERMINER`.
+
+### 6.4 Donjons
+Le donjon n'est fait que lorsque les fils compatibles sont prêts, sauf repassage structurel documenté.
+
+### 6.5 Ressources
+Avant tout achat/farm, vérifier si une quête précédente fournit la ressource naturellement.
+
+### 6.6 Rendus
+Différer un rendu s'il évite un retour sans bloquer la suite.
+
+### 6.7 MOMENT_ID
+Attribuer un `MOMENT_ID` partagé lorsque plusieurs lignes techniques représentent un seul objectif joueur.
+
+Règles :
+- contigu ;
+- même bloc ;
+- pas de réutilisation plus loin ;
+- ne jamais reconstruire le regroupement depuis le texte côté React.
+
+### 6.8 Scope
+Classer les éléments Ganymède :
+- `IN_SCOPE` ;
+- `SUPPORT` ;
+- `OUT_OF_SCOPE` ;
+- `EXCEPTION_PARANGON`.
+
+## 7. Exception Vulbis / Parangon
+
+L'exception reste limitée au strict nécessaire pour rendre le Parangon de puissance droppable, puis la quête reste active pendant les gardiens 200 de la route.
+
+Ne pas poursuivre le Vulbis dans cette roadmap.
+
+## 8. Critères de validation d'une mutualisation
 
 Une mutualisation est acceptée seulement si :
+- les quêtes peuvent être actives simultanément ;
+- aucun prérequis n'est déplacé après usage ;
+- aucun rendu ne ferme une autre branche ;
+- le gain est réel ;
+- la route reste exécutable ligne par ligne ;
+- lancements/destinations restent structurés.
 
-- les quêtes peuvent réellement être actives en même temps ;
-- aucun prérequis n'est déplacé après son usage ;
-- aucun rendu anticipé ne ferme une autre branche ;
-- le gain est concret : trajet, combat, donjon, farm ou ressource évité ;
-- la route reste compréhensible ligne par ligne ;
-- les informations de lancement et de destination restent structurées.
-
-En cas de doute, conserver l'ordre actuel et marquer le point à vérifier dans `GANYMEDE_AUDIT` plutôt que supposer.
-
-## 8. Modèle de données et UI
-
-Le modèle de route doit rester indépendant de l'UI.
-
-La refonte d'ordre peut produire davantage d'étapes `LANCER`, `REPRISE`, `FIL ROUGE`, `PASSAGE MUTUALISÉ` et `GROSSE ÉTAPE` sans ajouter de logique spécifique par quête dans React.
-
-La future UI devra privilégier `destination` pour le prochain déplacement et conserver `location` pour expliquer/copier la position de lancement d'une quête. Elle ne doit jamais reconstruire ces informations depuis `title` ou `instruction`.
-
-Une future évolution UI pourra représenter une **étape de parcours** avec plusieurs quêtes concernées, mais cette information devra être structurée dans le modèle avant d'être rendue. Ne jamais reconstruire les regroupements en parsant `title` ou `instruction`.
-
-L'UI ne doit être adaptée qu'après stabilisation du nouveau contrat de données afin d'éviter une surcouche provisoire.
+En cas de doute : conserver l'ordre sûr et documenter le point au lieu d'inventer.
 
 ## 9. Contrôle final global
 
 Après les 20 blocs :
-
-- comparer le parcours complet à GP0 ;
-- vérifier qu'aucune quête obligatoire de notre scope n'a disparu ;
-- vérifier qu'aucune quête hors scope n'a été ajoutée par accident ;
-- vérifier les prises déplacées entre blocs et l'absence de doubles lancements ;
-- vérifier tous les passages de donjons répétés et justifier ceux qui restent ;
-- vérifier toutes les prises de quête ;
-- vérifier toutes les destinations structurées utiles ;
+- vérifier scope complet ;
+- vérifier doubles lancements et prises déplacées ;
+- vérifier tous les repassages de donjon ;
+- vérifier tous les `MOMENT_ID` ;
+- vérifier tous les `TERMINER + LANCER` ;
+- vérifier tous les hard locks ;
 - vérifier les fils rouges ;
-- vérifier le chemin jusqu'au vrai Dofus Sylvestre ;
+- vérifier la continuité jusqu'au vrai Dofus Sylvestre ;
 - régénérer `data/route.json` uniquement depuis le Sheet ;
-- lancer validation, tests et build.
+- lancer tests, validation et build.
 
-Le Google Sheet reste l'unique source éditoriale. `data/route.json` est toujours un artefact généré, jamais édité manuellement pour corriger la route.
+Le Google Sheet reste l'unique source éditoriale. `data/route.json` n'est jamais corrigé manuellement.
