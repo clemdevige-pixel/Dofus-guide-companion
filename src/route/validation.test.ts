@@ -194,3 +194,44 @@ test('rejects a non-integer structured destination', () => {
     /destination invalide/,
   );
 });
+
+test('accepts structured guide items for a multi-quest roadbook step', () => {
+  assert.doesNotThrow(() =>
+    validateRoute(
+      makeRoute([
+        {
+          id: 'roadbook',
+          order: 1,
+          blockId: 'block-01',
+          type: 'major_step',
+          title: 'Quest batch',
+          guideItems: [
+            { action: 'take', label: 'Quest A', location: { x: 1, y: -2 } },
+            { action: 'take', label: 'Quest B', location: { x: 3, y: -4 }, note: 'Garder active.' },
+          ],
+        },
+        { ...finalStep, order: 2 },
+      ]),
+    ),
+  );
+});
+
+test('rejects an empty guide item label', () => {
+  assert.throws(
+    () =>
+      validateRoute(
+        makeRoute([
+          {
+            id: 'roadbook',
+            order: 1,
+            blockId: 'block-01',
+            type: 'major_step',
+            title: 'Quest batch',
+            guideItems: [{ action: 'advance', label: '   ', location: { x: 1, y: -2 } }],
+          },
+          { ...finalStep, order: 2 },
+        ]),
+      ),
+    /libellé vide/,
+  );
+});
