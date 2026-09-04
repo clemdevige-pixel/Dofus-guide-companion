@@ -68,7 +68,7 @@ DONJON
 
 Si, pour le joueur, cet enchaînement est indivisible, les lignes techniques doivent partager un `MOMENT_ID` commun.
 
-Le regroupement automatique par paquets est seulement un fallback pour les étapes ordinaires ; il ne doit jamais remplacer un regroupement éditorial explicite.
+Il n'existe plus de regroupement automatique : une ligne sans `MOMENT_ID` est une carte autonome. Toute mutualisation voulue doit être explicite dans `ROUTE`.
 
 ## 4. Rendu cible d'une carte mutualisée
 
@@ -83,6 +83,8 @@ Un objectif principal est une action significative à cocher :
 - accomplir une action structurante.
 
 **1 checkbox = 1 sous-objectif significatif.**
+
+Le premier membre d'un `MOMENT_ID` est toujours `OBJECTIVE`. Chaque nouvel `OBJECTIVE` ouvre une nouvelle checkbox ; `TRANSITION` et `DETAIL` se rattachent à l'objectif précédent.
 
 Exemple cible :
 
@@ -109,6 +111,8 @@ La transition doit, quand la donnée existe, préciser :
 - l'action ;
 - le PNJ ;
 - la position.
+
+Une transition sans `instruction` explicite doit rester visible via ses champs structurés `action + title` ; l'UI ne doit jamais la faire disparaître silencieusement.
 
 ### 4.3 Informations critiques à conserver
 
@@ -169,13 +173,14 @@ Après la première linéarisation, la route doit être auditée par **passes gl
 - inspecter `donjon → reprise → suite` ;
 - inspecter les chaînes Tour/Emma/Alain/Thelma/Anne/Lorie et équivalentes ;
 - ajouter `MOMENT_ID` lorsqu'un seul moment joueur est encore fragmenté en plusieurs lignes ;
-- ne pas compter sur une limite automatique de 8 étapes pour définir les cartes.
+- vérifier que tout `MOMENT_ID` commence par `OBJECTIVE` et que chaque ligne du moment possède un `DISPLAY_ROLE`.
 
 ### Passe E — fils rouges / verrous
 - vérifier `start → progress → finish` ;
 - vérifier les hard locks associés ;
 - détecter les goals ouverts sans fermeture ou fermés avant usage ;
-- vérifier qu'un verrou arrive au dernier moment utile, pas trop tôt.
+- vérifier qu'un verrou arrive au dernier moment utile, pas trop tôt ;
+- conserver le comportement de verrou même lorsqu'un hard lock appartient à une carte mutualisée.
 
 ### Passe F — continuité finale
 - vérifier qu'une ligne peut être suivie strictement sans interprétation externe ;
@@ -234,7 +239,10 @@ Règles :
 - contigu ;
 - même bloc ;
 - pas de réutilisation plus loin ;
-- ne jamais reconstruire le regroupement depuis le texte côté React.
+- chaque membre possède un `DISPLAY_ROLE` ;
+- le premier membre est `OBJECTIVE` ;
+- une ligne sans `MOMENT_ID` reste une carte autonome ;
+- ne jamais reconstruire le regroupement depuis le texte, le type ou la proximité côté React.
 
 ### 7.8 Scope
 Classer les éléments Ganymède :
@@ -269,11 +277,12 @@ Après les 20 blocs :
 - vérifier scope complet ;
 - vérifier doubles lancements et prises déplacées ;
 - vérifier tous les repassages de donjon ;
-- vérifier tous les `MOMENT_ID` ;
+- vérifier tous les `MOMENT_ID` / `DISPLAY_ROLE` ;
 - vérifier tous les `TERMINER + LANCER` ;
 - vérifier tous les hard locks ;
 - vérifier les fils rouges ;
 - faire la passe anti-redondance carte par carte et entre cartes adjacentes ;
+- vérifier le rendu réel des transitions et des objectifs-donjons ;
 - vérifier la continuité jusqu'au vrai Dofus Sylvestre ;
 - régénérer `data/route.json` uniquement depuis le Sheet ;
 - lancer tests, validation et build.
