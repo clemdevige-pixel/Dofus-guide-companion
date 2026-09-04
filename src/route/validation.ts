@@ -50,6 +50,10 @@ function assertValidCoordinate(
   }
 }
 
+function isCharacterLevelHardLockTitle(title: string): boolean {
+  return /^\s*NIVEAU\s+\d+\b/i.test(title);
+}
+
 export function validateRoute(route: RouteDocument): RouteDocument {
   if (route.schemaVersion !== 1) {
     throw new Error(`Version de schéma non supportée : ${route.schemaVersion}`);
@@ -187,6 +191,9 @@ export function validateRoute(route: RouteDocument): RouteDocument {
     }
 
     if (step.type === 'hard_lock') {
+      if (isCharacterLevelHardLockTitle(step.title)) {
+        throw new Error(`${step.id}: un niveau de personnage ne doit pas créer de VERROU DUR.`);
+      }
       if (!step.hardLock || !isNonEmptyString(step.hardLock.message)) {
         throw new Error(`${step.id}: VERROU DUR sans message structuré.`);
       }
