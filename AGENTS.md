@@ -5,28 +5,28 @@ Ce fichier est le contrat de travail des agents qui interviennent sur ce repo.
 ## 1. Lire avant de coder
 
 Toujours lire, dans cet ordre :
-
 1. `AGENTS.md`
 2. `SPEC.md`
 3. `ARCHITECTURE.md`
 4. `docs/DATA_MODEL.md`
-5. `docs/ROUTE_OPTIMIZATION.md` pour tout chantier touchant à l'ordre, au scope ou aux mutualisations de la route
-6. `docs/ROUTE_OPTIMIZATION_WORKFLOW.md` pour exécuter concrètement une passe d'audit/réécriture de route
+5. `docs/ROUTE_OPTIMIZATION.md` pour tout chantier route
+6. `docs/ROUTE_OPTIMIZATION_WORKFLOW.md` pour toute passe d'audit/réécriture
+7. `HANDOFF.md`
 
-Ne pas coder sur la base d'une supposition si la spec ou le modèle de données ne tranche pas le sujet.
+Ne pas coder depuis une supposition si la doc ou la donnée existante permet de trancher.
 
 ## 2. Principes non négociables
 
-- Architecture simple, locale et **data-driven**.
+- Architecture simple, locale et data-driven.
 - Le Google Sheet est la source éditoriale ; l'app consomme `data/route.json`.
 - Aucune logique spécifique à une quête dans React.
 - Ne jamais parser du texte d'affichage pour déduire un comportement métier.
-- Une seule vérité pour la progression utilisateur.
-- Identifiants d'étapes stables, indépendants des numéros de ligne du Sheet.
-- Ne pas ajouter backend, API, store global, abstraction ou dépendance sans besoin démontré.
-- Réutiliser l'existant avant de créer une nouvelle couche.
-- Pour l'optimisation de route : notre Sheet définit le scope ; Ganymède définit l'ordre/mutualisation à étudier ; toute modification reste vérifiée avant intégration.
-- Toute réécriture de route complexe se fait par **paquet indivisible**, jamais par micro-patches laissant un état intermédiaire faux.
+- Une seule vérité de progression : `completedStepIds`.
+- `STEP_ID` stable et indépendant des lignes Sheet.
+- `MOMENT_ID` explicite pour les moments joueur devant former une seule carte.
+- Réutiliser l'existant avant de créer une couche.
+- Toute réécriture complexe se fait par paquet indivisible.
+- Après linéarisation locale, exécuter aussi des passes globales sur toute la route.
 
 ## 3. Interdictions explicites
 
@@ -37,19 +37,19 @@ if (step.title === "L'éternelle moisson") { ... }
 ```
 
 Interdit également :
-
-- utiliser un numéro de ligne Google Sheet comme identifiant métier ;
-- dupliquer `completed`, `currentStep` ou la progression dans plusieurs stores ;
-- synchroniser le Sheet en live pendant l'usage normal ;
-- introduire OCR, lecture mémoire du jeu, automatisation ou injection ;
-- ajouter du click-through avant la V1.1 ;
-- créer des composants génériques sans au moins deux usages concrets ;
-- recopier GP0 en bloc sans filtrer le scope Sylvestre ;
-- considérer une même position ou un même donjon comme preuve suffisante de mutualisation sans vérifier les prérequis ;
-- réutiliser un `STEP_ID` historique pour un événement métier différent ;
-- utiliser `POSITION` comme simple destination de trajet ;
-- modifier manuellement `data/route.json` pour corriger la route ;
-- considérer qu'une cellule technique a été vidée parce qu'elle a été omise d'un `updateCells` Google Sheets.
+- numéro de ligne Sheet comme identité métier ;
+- progression dupliquée dans plusieurs stores ;
+- route mock parallèle ;
+- override manuel de goals/positions/moments ;
+- OCR, lecture mémoire, injection ou automatisation Dofus ;
+- importer GP0 sans filtrer le scope ;
+- considérer une même carte/donjon comme preuve suffisante de mutualisation ;
+- réutiliser un `STEP_ID` pour un autre événement métier ;
+- utiliser `POSITION` comme destination ;
+- corriger `data/route.json` à la main ;
+- considérer une cellule technique vidée parce qu'elle a été omise d'un `updateCells` ;
+- créer un `VERROU DUR` uniquement parce qu'un niveau personnage est recommandé/minimum ;
+- compter sur le fallback de regroupement automatique pour un moment éditorial connu : utiliser `MOMENT_ID`.
 
 ## 4. Stack V1
 
@@ -57,134 +57,84 @@ Interdit également :
 - React
 - TypeScript
 - Vite
-- CSS simple / composants locaux
+- CSS simple
 - persistance locale
 
-Favoriser les API natives Tauri et le code TypeScript standard. Éviter les bibliothèques UI lourdes tant qu'elles ne sont pas nécessaires.
-
-## 5. Organisation du code
-
-L'arborescence doit rester guidée par les besoins réels. Cible générale :
-
-```text
-src/
-├─ app/
-├─ route/
-├─ progress/
-├─ overlay/
-├─ features/
-└─ ui/
-```
-
-Ne pas créer les dossiers/modules tant qu'un besoin concret ne les justifie pas.
-
-## 6. État et sélecteurs
+## 5. État et sélecteurs
 
 La progression réelle repose sur `completedStepIds`.
 
-L'étape à faire doit être dérivée autant que possible de la première étape non validée.
-
-Un index de consultation temporaire peut exister pour naviguer, mais ne doit pas devenir une deuxième vérité de progression.
-
-Les éléments suivants doivent être dérivés :
-
-- progression globale ;
-- progression du bloc ;
+Doivent rester dérivés :
+- progression ;
 - première étape non validée ;
 - fils rouges actifs ;
 - prochain verrou dur ;
-- bloc terminé.
+- bloc courant ;
+- groupes/cartes visibles.
 
-## 7. UI
+`getStepGroups()` respecte en priorité `MOMENT_ID`. Les séquences automatiques ne sont qu'un fallback pour les étapes ordinaires sans moment explicite.
 
-Les wireframes de `SPEC.md` sont la référence V1.
+## 6. UI
 
-Priorités :
+Priorités : lisibilité, faible encombrement, navigation immédiate, resize fiable.
 
-1. lisibilité en jeu ;
-2. faible encombrement ;
-3. navigation immédiate ;
-4. cohérence visuelle par `StepType` ;
-5. resize sans casse.
+Une carte représente un **moment joueur**, pas nécessairement une ligne Sheet.
 
-Largeur compacte par défaut : 380 px, mais la fenêtre doit rester librement redimensionnable.
+Ne jamais reconstruire les cartes depuis des mots présents dans `title` ou `instruction`.
 
-Ne pas générer de logique visuelle depuis des mots présents dans `title` ou `instruction` : le rendu dépend de `type` et des champs structurés.
+## 7. Export de route
 
-La refonte Ganymède peut rendre nécessaire une future vue « étape de parcours » avec plusieurs quêtes concernées. Ne pas bricoler cette vue depuis le texte : d'abord stabiliser et structurer le modèle de données, ensuite adapter l'UI.
-
-## 8. Raccourcis
-
-Les raccourcis globaux V1 sont configurables et persistés.
-
-Valeurs par défaut :
-
-- `Ctrl+Alt+Right` : suivant
-- `Ctrl+Alt+Left` : précédent
-- `Ctrl+Alt+Enter` : valider / dévalider
-- `Ctrl+Alt+Space` : afficher / masquer
-
-Un conflit doit être remonté explicitement à l'utilisateur.
-
-## 9. Export de route
-
-Le flux cible est :
+Flux :
 
 ```text
-Google Sheet → script TypeScript → validation stricte → data/route.json
+Google Sheet → scripts/export-route.ts → validation stricte → data/route.json
 ```
 
-L'export doit échouer en cas de :
+L'export/validation doit échouer sur :
+- type/ID/block invalide ;
+- relations de goal incohérentes ;
+- lancement incomplet ;
+- position/destination invalide ;
+- `MOMENT_ID` vide, non contigu ou multi-blocs ;
+- `VERROU DUR` de niveau personnage ;
+- route sans une unique `FIN` finale.
 
-- type inconnu ;
-- id dupliqué ;
-- blockId absent ;
-- relation vers un goalId invalide ;
-- lien invalide ;
-- version de schéma non supportée ;
-- action de lancement sans `LANCEMENT_REQUIS=TRUE` ;
-- lancement requis sans `POSITION` ni `LANCEMENT`.
+## 8. Méthode de chantier route
 
-Ne jamais produire silencieusement un JSON partiellement valide.
-
-`data/route.json` est un artefact généré : ne jamais le modifier manuellement pour corriger la route.
-
-## 10. Qualité
-
-Avant de considérer une phase terminée :
-
-- TypeScript doit compiler ;
-- le build front doit passer ;
-- le build/check Tauri doit passer lorsque l'environnement le permet ;
-- les tests ajoutés pendant la phase doivent passer ;
-- aucun warning connu introduit volontairement ne doit être laissé sans justification.
-
-Les tests doivent cibler la logique produite : validation de route, sélecteurs de progression, persistance, raccourcis, etc. Ne pas multiplier les tests de rendu sans valeur métier.
-
-Pour un bloc de route optimisé, ajouter également les contrôles éditoriaux définis dans `docs/ROUTE_OPTIMIZATION.md` et la procédure de `docs/ROUTE_OPTIMIZATION_WORKFLOW.md` avant de le marquer `INTÉGRÉ`.
-
-## 11. Méthode de changement
-
-Pour chaque chantier :
-
-1. comprendre l'existant ;
+Pour chaque paquet :
+1. lire l'existant ;
 2. identifier la source de vérité ;
-3. modifier le minimum nécessaire ;
-4. éviter toute duplication ;
-5. tester ce qui a été changé ;
-6. mettre à jour la doc seulement si le contrat produit/architecture change.
+3. cartographier le moment complet ;
+4. vérifier prérequis/coexistence ;
+5. décider `STEP_ID` et `MOMENT_ID` avant écriture ;
+6. écrire en une passe ;
+7. relire les colonnes techniques jusqu'à `MOMENT_ID` ;
+8. nettoyer les résidus ;
+9. contrôler mécaniquement.
 
-Pour un chantier de route :
+Après les paquets/blocs, exécuter les passes globales définies dans `docs/ROUTE_OPTIMIZATION_WORKFLOW.md` : faux verrous, transitions `TERMINER + LANCER`, donjon→reprise→suite, chaînes répétitives, goals/hard locks, continuité finale.
 
-1. lire `GANYMEDE_AUDIT` avant toute écriture ;
-2. définir le **paquet indivisible** à traiter ;
-3. cartographier et vérifier son ordre avant modification ;
-4. conserver les `STEP_ID` sur les mêmes événements métier uniquement ;
-5. écrire le paquet ;
-6. relire explicitement les colonnes techniques K→Q pour nettoyer les valeurs résiduelles ;
-7. lancer l'audit mécanique ;
-8. mettre à jour `GANYMEDE_AUDIT` avec le dernier paquet réellement intégré.
+## 9. Qualité
 
-Suivre le workflow `À AUDITER → EN AUDIT → VALIDÉ → INTÉGRÉ` décrit dans `docs/ROUTE_OPTIMIZATION.md` et `docs/ROUTE_OPTIMIZATION_WORKFLOW.md`.
+Avant de considérer un chantier intégré :
 
-Si une demande entre en conflit avec `SPEC.md` ou `ARCHITECTURE.md`, ne pas contourner le conflit : le signaler et faire valider la nouvelle décision avant de coder.
+```bash
+pnpm export:route
+pnpm test:route
+pnpm validate:route
+pnpm build
+```
+
+Le check Tauri est aussi requis lorsque l'environnement le permet.
+
+Ne pas annoncer un export/validation vert si `data/route.json` n'a pas réellement été régénéré après les dernières modifications Sheet.
+
+## 10. Règle de documentation
+
+Mettre à jour la doc lorsque le contrat produit, data, validation, regroupement de cartes ou méthodologie change.
+
+Un handoff doit indiquer précisément :
+- ce qui est déjà intégré ;
+- ce qui reste à auditer ;
+- si le Sheet et `route.json` sont synchronisés ou non ;
+- état réel des tests/validation/build.
