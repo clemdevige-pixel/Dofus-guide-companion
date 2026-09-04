@@ -71,10 +71,18 @@
 }
 
 .sequence-item__action {
-  color: #f0c678;
-  font-size: 10px;
-  font-weight: 900;
-  letter-spacing: 0.05em;
+  display: none;
+}
+
+.sequence-item__detail + .sequence-item__detail {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid #243029;
+}
+
+.sequence-item__detail .sequence-item__header strong {
+  color: #d7e2d9;
+  font-size: 12px;
 }
 
 .sequence-item__tools {
