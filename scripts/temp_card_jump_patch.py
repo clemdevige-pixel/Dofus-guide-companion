@@ -1,0 +1,172 @@
+from pathlib import Path
+
+app_path = Path('src/App.tsx')
+app = app_path.read_text(encoding='utf-8')
+
+replacements = [
+    (
+        "  const currentGroup = stepGroups[viewIndex];\n",
+        "  const [cardJumpValue, setCardJumpValue] = useState(() => String(viewIndex + 1));\n\n"
+        "  useEffect(() => {\n"
+        "    setCardJumpValue(String(viewIndex + 1));\n"
+        "  }, [viewIndex]);\n\n"
+        "  const currentGroup = stepGroups[viewIndex];\n",
+    ),
+    (
+        "  function goNext() {\n"
+        "    setSecondaryView(null);\n"
+        "    setViewIndex((index) => Math.min(stepGroups.length - 1, index + 1));\n"
+        "  }\n\n",
+        "  function goNext() {\n"
+        "    setSecondaryView(null);\n"
+        "    setViewIndex((index) => Math.min(stepGroups.length - 1, index + 1));\n"
+        "  }\n\n"
+        "  function jumpToCard() {\n"
+        "    const requestedCard = Number.parseInt(cardJumpValue, 10);\n"
+        "    if (!Number.isFinite(requestedCard)) {\n"
+        "      setCardJumpValue(String(viewIndex + 1));\n"
+        "      return;\n"
+        "    }\n\n"
+        "    const targetCard = Math.min(stepGroups.length, Math.max(1, requestedCard));\n"
+        "    setDrawerOpen(false);\n"
+        "    setSecondaryView(null);\n"
+        "    setViewIndex(targetCard - 1);\n"
+        "    setCardJumpValue(String(targetCard));\n"
+        "  }\n\n",
+    ),
+    (
+        "    if (shouldComplete && currentStep.type !== 'hard_lock' && viewIndex < stepGroups.length - 1) {\n"
+        "      setViewIndex((index) => index + 1);\n"
+        "    }\n",
+        "    const containsHardLock = currentGroup.steps.some((step) => step.type === 'hard_lock');\n"
+        "    if (shouldComplete && !containsHardLock && viewIndex < stepGroups.length - 1) {\n"
+        "      setViewIndex((index) => index + 1);\n"
+        "    }\n",
+    ),
+    (
+        "  const isSequence = currentGroup.isSequence;\n"
+        "  const typeLabel = isSequence ? 'SÉQUENCE' : currentStep.displayType ?? typeLabels[currentStep.type];\n",
+        "  const isSequence = currentGroup.isSequence;\n"
+        "  const containsHardLock = currentGroup.steps.some((step) => step.type === 'hard_lock');\n"
+        "  const typeLabel = containsHardLock\n"
+        "    ? 'VERROU DUR'\n"
+        "    : isSequence\n"
+        "      ? 'SÉQUENCE'\n"
+        "      : currentStep.displayType ?? typeLabels[currentStep.type];\n",
+    ),
+    (
+        "            <p className=\"progress-label\">\n"
+        "              Carte {displayIndex} / {stepGroups.length} · {progress.percentage}%\n"
+        "            </p>\n",
+        "            <form\n"
+        "              className=\"card-jump\"\n"
+        "              onSubmit={(event) => {\n"
+        "                event.preventDefault();\n"
+        "                jumpToCard();\n"
+        "              }}\n"
+        "            >\n"
+        "              <span>Carte</span>\n"
+        "              <input\n"
+        "                type=\"number\"\n"
+        "                min={1}\n"
+        "                max={stepGroups.length}\n"
+        "                value={cardJumpValue}\n"
+        "                aria-label=\"Aller à la carte\"\n"
+        "                onChange={(event) => setCardJumpValue(event.target.value)}\n"
+        "                onBlur={jumpToCard}\n"
+        "              />\n"
+        "              <span>/ {stepGroups.length} · {progress.percentage}%</span>\n"
+        "            </form>\n",
+    ),
+    (
+        "      {activeParallelGroups.length > 0 && (\n"
+        "        <section className=\"step-context step-context--goal\" aria-label=\"Quêtes en parallèle\">\n"
+        "          <strong>QUÊTES EN PARALLÈLE — garde-les actives</strong>\n"
+        "          {activeParallelGroups.map((group) => (\n"
+        "            <span key={group.parallelId}>{getParallelGroupLabel(group.members)}</span>\n"
+        "          ))}\n"
+        "        </section>\n"
+        "      )}\n\n",
+        "",
+    ),
+    (
+        "        className={`current-step current-step--${isSequence ? 'sequence' : currentStep.type}`}\n",
+        "        className={`current-step current-step--${containsHardLock ? 'hard_lock' : isSequence ? 'sequence' : currentStep.type}`}\n",
+    ),
+    (
+        "        {!compact && <span className=\"type-badge\">{typeLabel}</span>}\n\n"
+        "        {isSequence ? (\n",
+        "        {!compact && <span className=\"type-badge\">{typeLabel}</span>}\n\n"
+        "        {activeParallelGroups.length > 0 && (\n"
+        "          <section className=\"step-context step-context--goal\" aria-label=\"Quêtes en parallèle\">\n"
+        "            <strong>QUÊTES EN PARALLÈLE — garde-les actives</strong>\n"
+        "            {activeParallelGroups.map((group) => (\n"
+        "              <span key={group.parallelId}>{getParallelGroupLabel(group.members)}</span>\n"
+        "            ))}\n"
+        "          </section>\n"
+        "        )}\n\n"
+        "        {isSequence ? (\n",
+    ),
+    (
+        "              <h1 id=\"current-step-title\">{getSequenceTitle(currentGroup.steps)}</h1>\n"
+        "            </div>\n"
+        "            <p className=\"action-label\">{sequenceObjectives.length} objectifs à enchaîner</p>\n",
+        "              <h1 id=\"current-step-title\">\n"
+        "                {containsHardLock ? 'Verrou de progression' : getSequenceTitle(currentGroup.steps)}\n"
+        "              </h1>\n"
+        "            </div>\n"
+        "            <p className=\"action-label\">\n"
+        "              {containsHardLock\n"
+        "                ? 'STOP — ne poursuis pas tant que la condition du verrou n’est pas remplie.'\n"
+        "                : `${sequenceObjectives.length} objectifs à enchaîner`}\n"
+        "            </p>\n",
+    ),
+    (
+        "          {isCurrentCompleted ? '↶' : '✓'} {compact ? '' : isCurrentCompleted ? 'DÉVALIDER' : isSequence ? 'TOUT COCHER' : 'TERMINÉ'}\n",
+        "          {isCurrentCompleted ? '↶' : '✓'} {compact ? '' : isCurrentCompleted ? 'DÉVALIDER' : containsHardLock ? 'VALIDER LE VERROU' : isSequence ? 'TOUT COCHER' : 'TERMINÉ'}\n",
+    ),
+]
+
+for old, new in replacements:
+    count = app.count(old)
+    if count != 1:
+        raise SystemExit(f'App patch attendu 1 occurrence, trouvé {count}: {old[:100]!r}')
+    app = app.replace(old, new, 1)
+
+app_path.write_text(app, encoding='utf-8')
+
+css_path = Path('src/styles.css')
+css = css_path.read_text(encoding='utf-8')
+marker = '/* Card direct navigation */'
+if marker in css:
+    raise SystemExit('Styles card-jump déjà présents')
+css += '''
+
+/* Card direct navigation */
+.card-jump {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 3px;
+  color: #93a396;
+  font-size: 12px;
+}
+
+.card-jump input {
+  width: 46px;
+  height: 24px;
+  padding: 2px 4px;
+  border: 1px solid #334139;
+  border-radius: 6px;
+  background: #18211b;
+  color: #eef4ef;
+  text-align: center;
+  outline: none;
+}
+
+.card-jump input:focus {
+  border-color: #6a8f74;
+  box-shadow: 0 0 0 2px rgba(106, 143, 116, 0.18);
+}
+'''
+css_path.write_text(css, encoding='utf-8')
