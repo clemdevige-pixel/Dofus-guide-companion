@@ -1,20 +1,5 @@
 import type { RouteDocument, RouteStep } from './types';
 
-const MAX_SEQUENCE_STEPS = 8;
-const sequenceStepTypes = new Set<RouteStep['type']>([
-  'quest',
-  'resume',
-  'dungeon',
-  'alignment',
-  'order',
-]);
-const sequenceDetailTypes = new Set<RouteStep['type']>([
-  'dungeon',
-  'milestone',
-  'long_running',
-  'hard_lock',
-]);
-
 export interface RouteStepGroup {
   id: string;
   blockId: string;
@@ -42,47 +27,6 @@ function getRuleText(rule: RouteStep): string {
   return `⚠ ${title} — ${instruction}`;
 }
 
-function getStepContext(step: RouteStep): string {
-  return `${step.title}\n${step.action ?? ''}\n${step.instruction ?? ''}\n${step.launchInstruction ?? ''}`.toUpperCase();
-}
-
-/**
- * Ordinary actionable steps without an explicit editorial moment may still share a
- * compact checklist. Explicit momentId values are handled separately and are the
- * authoritative card boundaries.
- */
-function isSequenceCandidate(step: RouteStep): boolean {
-  if (!sequenceStepTypes.has(step.type)) {
-    return false;
-  }
-
-  if (step.guideItems?.length || step.longRunningGoal || step.hardLock) {
-    return false;
-  }
-
-  const context = getStepContext(step);
-  if (context.includes('⚠') || context.includes('FIL ROUGE') || context.includes('VERROU DUR')) {
-    return false;
-  }
-
-  return Boolean(step.action?.trim() || step.instruction?.trim() || step.title.trim());
-}
-
-/**
- * MOMENT_ID is an editorial card boundary, regardless of the technical RouteStep type.
- * This allows one player-facing moment to contain quests, resumptions, milestones,
- * hard locks, long-running-goal transitions or major steps without React having to
- * infer business meaning from text.
- */
-function isExplicitMomentStep(step: RouteStep): boolean {
-  return Boolean(step.momentId);
-}
-
-/** A STOP closes only an inferred checklist. Explicit moments are already bounded by momentId. */
-function closesSequence(step: RouteStep): boolean {
-  return getStepContext(step).includes('STOP');
-}
-
 function toSequenceDisplayStep(step: RouteStep): RouteStep {
   if (!step.action) {
     return step;
@@ -91,14 +35,6 @@ function toSequenceDisplayStep(step: RouteStep): RouteStep {
   const displayStep = { ...step };
   delete displayStep.action;
   return displayStep;
-}
-
-function attachesToPreviousObjective(step: RouteStep): boolean {
-  if (step.displayRole) {
-    return step.displayRole === 'transition' || step.displayRole === 'detail';
-  }
-
-  return sequenceDetailTypes.has(step.type);
 }
 
 export function getSortedSteps(route: RouteDocument): RouteStep[] {
@@ -129,83 +65,53 @@ export function getSortedSteps(route: RouteDocument): RouteStep[] {
   return visibleSteps;
 }
 
+/**
+ * MOMENT_ID is the only multi-step card boundary.
+ * Rows without a momentId are always standalone cards: the runtime never infers
+ * editorial grouping from type, action, STOP wording or proximity.
+ */
 export function getStepGroups(route: RouteDocument): RouteStepGroup[] {
   const steps = getSortedSteps(route);
   const groups: RouteStepGroup[] = [];
-  let sequence: RouteStep[] = [];
-
-  function flushSequence() {
-    if (sequence.length === 0) {
-      return;
-    }
-
-    const first = sequence[0];
-    const last = sequence.at(-1)!;
-    groups.push({
-      id: sequence.length === 1 ? first.id : `sequence:${first.id}:${last.id}`,
-      blockId: first.blockId,
-      steps: sequence,
-      isSequence: sequence.length > 1,
-    });
-    sequence = [];
-  }
 
   for (let index = 0; index < steps.length; index += 1) {
     const step = steps[index];
 
-    if (isExplicitMomentStep(step)) {
-      flushSequence();
-
-      const momentId = step.momentId!;
-      const members: RouteStep[] = [step];
-      let cursor = index + 1;
-      while (
-        cursor < steps.length &&
-        steps[cursor].blockId === step.blockId &&
-        steps[cursor].momentId === momentId &&
-        isExplicitMomentStep(steps[cursor])
-      ) {
-        members.push(steps[cursor]);
-        cursor += 1;
-      }
-
-      groups.push({
-        id: `moment:${momentId}`,
-        blockId: step.blockId,
-        steps: members,
-        isSequence: members.length > 1,
-      });
-      index = cursor - 1;
-      continue;
-    }
-
-    const blockChanged = sequence.length > 0 && sequence[0].blockId !== step.blockId;
-    if (blockChanged || !isSequenceCandidate(step)) {
-      flushSequence();
+    if (!step.momentId) {
       groups.push({ id: step.id, blockId: step.blockId, steps: [step], isSequence: false });
       continue;
     }
 
-    sequence.push(step);
+    const momentId = step.momentId;
+    const members: RouteStep[] = [step];
+    let cursor = index + 1;
 
-    if (closesSequence(step) || sequence.length >= MAX_SEQUENCE_STEPS) {
-      flushSequence();
+    while (
+      cursor < steps.length &&
+      steps[cursor].blockId === step.blockId &&
+      steps[cursor].momentId === momentId
+    ) {
+      members.push(steps[cursor]);
+      cursor += 1;
     }
+
+    groups.push({
+      id: `moment:${momentId}`,
+      blockId: step.blockId,
+      steps: members,
+      isSequence: members.length > 1,
+    });
+    index = cursor - 1;
   }
 
-  flushSequence();
   return groups;
 }
 
 /**
- * Builds player-facing checklist objectives inside an already bounded card.
- * DISPLAY_ROLE is authoritative when present:
+ * Builds the checklist inside an explicit player moment.
+ * DISPLAY_ROLE is authoritative:
  * - objective => one checkbox;
- * - transition/detail => visible inside the previous objective, without checkbox.
- *
- * Rows not yet migrated keep the legacy type-based fallback during the global
- * anti-redundancy pass. This fallback can be removed once every explicit moment has
- * DISPLAY_ROLE populated in ROUTE.
+ * - transition/detail => attached to the previous objective without checkbox.
  */
 export function getSequenceObjectives(steps: RouteStep[]): RouteSequenceObjective[] {
   const objectives: RouteSequenceObjective[] = [];
@@ -214,7 +120,10 @@ export function getSequenceObjectives(steps: RouteStep[]): RouteSequenceObjectiv
     const step = toSequenceDisplayStep(rawStep);
     const currentObjective = objectives.at(-1);
 
-    if (attachesToPreviousObjective(rawStep) && currentObjective) {
+    if (
+      (rawStep.displayRole === 'transition' || rawStep.displayRole === 'detail') &&
+      currentObjective
+    ) {
       currentObjective.steps.push(step);
       continue;
     }
