@@ -48,12 +48,15 @@ interface GuideItem {
   note?: string;
 }
 
+type StepDisplayRole = 'objective' | 'transition' | 'detail';
+
 interface RouteStep {
   id: string;
   order: number;
   blockId: string;
   type: StepType;
   displayType?: string;
+  displayRole?: StepDisplayRole;
 
   title: string;
   action?: string;
@@ -86,9 +89,14 @@ interface RouteStep {
 
 `displayType` conserve un libellé éditorial utile (`TOUR`, `TURQUOISE`, `ALIGN.`...) sans multiplier les types comportementaux.
 
+`displayRole` ne s'applique qu'aux lignes appartenant à un `momentId` explicite. Il indique comment la ligne participe à la carte :
+- `objective` : sous-objectif significatif avec checkbox ;
+- `transition` : action intermédiaire visible sans checkbox ;
+- `detail` : information technique attachée à l'objectif précédent sans checkbox.
+
 ## 5. MOMENT_ID — frontière de carte autoritaire
 
-`momentId` représente un **moment joueur indivisible**. Plusieurs `RouteStep` techniques partageant le même `momentId` contigu sont rendus comme **une seule carte / un seul objectif joueur**.
+`momentId` représente un **moment joueur indivisible**. Plusieurs `RouteStep` techniques partageant le même `momentId` contigu sont rendus comme **une seule carte**.
 
 Cas typiques :
 - terminer une quête puis lancer immédiatement sa suite auprès du même PNJ ;
@@ -104,6 +112,21 @@ Règles strictes :
 - le regroupement automatique sans `momentId` n'est qu'un fallback ergonomique, jamais une vérité éditoriale.
 
 Le sélecteur `getStepGroups()` traite `momentId` comme frontière autoritaire. La limite technique de séquence automatique (`MAX_SEQUENCE_STEPS`) ne doit donc jamais servir à définir la structure métier d'une carte voulue explicitement.
+
+### 5.1 DISPLAY_ROLE — structure interne d'une carte
+
+`DISPLAY_ROLE` complète `MOMENT_ID` :
+- `MOMENT_ID` répond à **« quelles lignes forment la même carte ? »** ;
+- `DISPLAY_ROLE` répond à **« cette ligne crée-t-elle une checkbox ou complète-t-elle un objectif ? »**.
+
+Valeurs Sheet autorisées :
+- `OBJECTIVE` → `objective` ;
+- `TRANSITION` → `transition` ;
+- `DETAIL` → `detail`.
+
+Un `DISPLAY_ROLE` sans `MOMENT_ID` est invalide.
+
+Pendant la migration anti-redondance, les moments non encore renseignés conservent temporairement le fallback historique du sélecteur. La cible est de renseigner explicitement les grosses cartes mutualisées puis de supprimer ce fallback une fois la migration complète.
 
 ## 6. Position de lancement vs destination
 
@@ -144,7 +167,8 @@ Colonnes techniques de `ROUTE` :
 - `LANCEMENT_REQUIS` ;
 - `DESTINATION` ;
 - `GUIDE_ITEMS` ;
-- `MOMENT_ID`.
+- `MOMENT_ID` ;
+- `DISPLAY_ROLE`.
 
 `STEP_ID` représente un événement métier stable, jamais une ligne physique.
 
@@ -152,7 +176,8 @@ Conserver un ancien ID uniquement si l'événement métier reste réellement le 
 
 `MOMENT_ID` ne remplace pas `STEP_ID` :
 - `STEP_ID` = identité persistante d'une étape technique ;
-- `MOMENT_ID` = regroupement éditorial de plusieurs étapes en une carte.
+- `MOMENT_ID` = regroupement éditorial de plusieurs étapes en une carte ;
+- `DISPLAY_ROLE` = rôle visuel de la ligne à l'intérieur de cette carte.
 
 ## 9. Fils rouges et verrous
 
@@ -188,13 +213,12 @@ La préparation doit tenir compte des ressources fournies naturellement par la r
 - `TERMINER` ;
 - `AVANCER / STOP` ;
 - `REPRENDRE / AVANCER` ;
-- `REPRENDRE / TERMINER` ;
 - `FAIRE LE LOT` ;
 - `PRÉPARER` ;
 - `FIL ROUGE` ;
 - `VERROU DUR`.
 
-L'application ne déduit jamais `type` depuis `action`.
+L'application ne déduit jamais `type` ni `displayRole` depuis `action`.
 
 Une action contenant `LANCER` doit posséder une donnée de lancement structurée.
 
@@ -218,7 +242,7 @@ pnpm export:route
 Flux :
 
 ```text
-ROUTE (A:S)
+ROUTE (A:T)
    ↓
 scripts/export-route.ts
    ↓ validation stricte
@@ -233,6 +257,7 @@ L'export/validation échoue notamment si :
 - `GOAL_PHASE` est invalide ;
 - `POSITION` / `DESTINATION` sont invalides ;
 - `GUIDE_ITEMS` est invalide ;
+- `DISPLAY_ROLE` est invalide ou défini hors `MOMENT_ID` ;
 - une prise n'a aucune donnée de lancement ;
 - un `MOMENT_ID` est vide, non contigu ou traverse plusieurs blocs ;
 - un hard lock référence un goal jamais démarré ;
