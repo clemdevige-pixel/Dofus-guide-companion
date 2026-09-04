@@ -1,7 +1,46 @@
 import type { RouteDocument, RouteStep } from './types';
 
-export function getSortedSteps(route: RouteDocument): RouteStep[] {
+function getRawSortedSteps(route: RouteDocument): RouteStep[] {
   return [...route.steps].sort((a, b) => a.order - b.order);
+}
+
+function getRuleText(rule: RouteStep): string {
+  const title = rule.title.trim();
+  const instruction = rule.instruction?.trim();
+
+  if (!instruction || instruction === title) {
+    return `⚠ ${title}`;
+  }
+
+  return `⚠ ${title} — ${instruction}`;
+}
+
+export function getSortedSteps(route: RouteDocument): RouteStep[] {
+  const visibleSteps: RouteStep[] = [];
+  const pendingRules: RouteStep[] = [];
+
+  for (const step of getRawSortedSteps(route)) {
+    if (step.type === 'rule') {
+      pendingRules.push(step);
+      continue;
+    }
+
+    if (pendingRules.length === 0) {
+      visibleSteps.push(step);
+      continue;
+    }
+
+    const ruleContext = pendingRules.map(getRuleText).join('\n');
+    const instruction = [ruleContext, step.instruction].filter(Boolean).join('\n');
+
+    visibleSteps.push({
+      ...step,
+      instruction,
+    });
+    pendingRules.length = 0;
+  }
+
+  return visibleSteps;
 }
 
 export function getFirstIncompleteStep(
