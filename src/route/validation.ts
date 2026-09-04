@@ -1,4 +1,4 @@
-import type { RouteDocument, StepType } from './types';
+import type { GuideItemAction, RouteDocument, StepType } from './types';
 
 const supportedTypes = new Set<StepType>([
   'quest',
@@ -13,6 +13,13 @@ const supportedTypes = new Set<StepType>([
   'order',
   'major_step',
   'finish',
+]);
+
+const supportedGuideItemActions = new Set<GuideItemAction>([
+  'take',
+  'advance',
+  'finish',
+  'do',
 ]);
 
 type GoalState = 'active' | 'finished';
@@ -117,6 +124,27 @@ export function validateRoute(route: RouteDocument): RouteDocument {
 
     if (step.action?.toUpperCase().includes('LANCER') && !step.location && !step.launchInstruction) {
       throw new Error(`${step.id}: action de lancement sans location ni launchInstruction.`);
+    }
+
+    if (step.guideItems !== undefined) {
+      if (!Array.isArray(step.guideItems) || step.guideItems.length === 0) {
+        throw new Error(`${step.id}: guideItems doit contenir au moins une action.`);
+      }
+
+      for (let guideIndex = 0; guideIndex < step.guideItems.length; guideIndex += 1) {
+        const item = step.guideItems[guideIndex];
+        const context = `${step.id}: guideItems[${guideIndex}]`;
+        if (!supportedGuideItemActions.has(item.action)) {
+          throw new Error(`${context}: action inconnue (${String(item.action)}).`);
+        }
+        if (!isNonEmptyString(item.label)) {
+          throw new Error(`${context}: libellé vide.`);
+        }
+        assertValidCoordinate(item.location, context, 'position');
+        if (item.note !== undefined && !isNonEmptyString(item.note)) {
+          throw new Error(`${context}: note vide.`);
+        }
+      }
     }
 
     if (step.type === 'preparation') {
