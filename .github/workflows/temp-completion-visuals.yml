@@ -67,3 +67,5 @@ jobs:
           git add src/App.tsx src/styles.css
           git commit -m "fix(ui): show completed cards consistently"
           git push origin HEAD:agent/fix-completion-visuals
+
+# trigger
