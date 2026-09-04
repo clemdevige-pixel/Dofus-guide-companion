@@ -138,6 +138,12 @@ export function validateRoute(route: RouteDocument): RouteDocument {
       if (!isNonEmptyString(step.momentId)) {
         throw new Error(`${step.id}: momentId vide.`);
       }
+
+      const opensMoment = activeMomentId !== step.momentId;
+      if (opensMoment && step.displayRole !== 'objective') {
+        throw new Error(`${step.id}: un momentId doit commencer par displayRole=objective.`);
+      }
+
       const knownBlock = momentBlocks.get(step.momentId);
       if (knownBlock && knownBlock !== step.blockId) {
         throw new Error(`${step.id}: momentId ${step.momentId} traverse plusieurs blocs.`);
