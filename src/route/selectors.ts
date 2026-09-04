@@ -16,6 +16,11 @@ export interface RouteStepGroup {
   isSequence: boolean;
 }
 
+export interface RouteSequenceObjective {
+  id: string;
+  steps: RouteStep[];
+}
+
 function getRawSortedSteps(route: RouteDocument): RouteStep[] {
   return [...route.steps].sort((a, b) => a.order - b.order);
 }
@@ -33,6 +38,10 @@ function getRuleText(rule: RouteStep): string {
 
 function getStepContext(step: RouteStep): string {
   return `${step.title}\n${step.action ?? ''}\n${step.instruction ?? ''}\n${step.launchInstruction ?? ''}`.toUpperCase();
+}
+
+function getQuestIdentity(step: RouteStep): string | undefined {
+  return step.source?.url;
 }
 
 /**
@@ -57,9 +66,36 @@ function isSequenceCandidate(step: RouteStep): boolean {
   return Boolean(step.action?.trim() || step.instruction?.trim() || step.title.trim());
 }
 
-/** A STOP may close a sequence, but must never be followed by another item in it. */
-function closesSequence(step: RouteStep): boolean {
-  return getStepContext(step).includes('STOP');
+function continuesSameQuestAfterStop(steps: RouteStep[], index: number): boolean {
+  const identity = getQuestIdentity(steps[index]);
+  if (!identity) {
+    return false;
+  }
+
+  const next = steps[index + 1];
+  if (!next || next.blockId !== steps[index].blockId) {
+    return false;
+  }
+
+  if (getQuestIdentity(next) === identity) {
+    return true;
+  }
+
+  const afterNext = steps[index + 2];
+  return (
+    next.type === 'dungeon' &&
+    Boolean(afterNext) &&
+    afterNext.blockId === steps[index].blockId &&
+    getQuestIdentity(afterNext) === identity
+  );
+}
+
+/** A STOP closes a sequence unless the structured route continues the same quest. */
+function closesSequence(steps: RouteStep[], index: number): boolean {
+  return (
+    getStepContext(steps[index]).includes('STOP') &&
+    !continuesSameQuestAfterStop(steps, index)
+  );
 }
 
 export function getSortedSteps(route: RouteDocument): RouteStep[] {
@@ -111,7 +147,8 @@ export function getStepGroups(route: RouteDocument): RouteStepGroup[] {
     sequence = [];
   }
 
-  for (const step of steps) {
+  for (let index = 0; index < steps.length; index += 1) {
+    const step = steps[index];
     const blockChanged = sequence.length > 0 && sequence[0].blockId !== step.blockId;
     if (blockChanged || !isSequenceCandidate(step)) {
       flushSequence();
@@ -121,13 +158,64 @@ export function getStepGroups(route: RouteDocument): RouteStepGroup[] {
 
     sequence.push(step);
 
-    if (closesSequence(step) || sequence.length >= MAX_SEQUENCE_STEPS) {
+    if (closesSequence(steps, index) || sequence.length >= MAX_SEQUENCE_STEPS) {
       flushSequence();
     }
   }
 
   flushSequence();
   return groups;
+}
+
+/**
+ * Collapses technical RouteSteps of the same quest into one player-facing objective.
+ * Quest identity comes from the structured source URL, never from display text.
+ * A dungeon sandwiched between two steps of the same quest belongs to that objective.
+ */
+export function getSequenceObjectives(steps: RouteStep[]): RouteSequenceObjective[] {
+  const objectives: RouteSequenceObjective[] = [];
+  let index = 0;
+
+  while (index < steps.length) {
+    const first = steps[index];
+    const identity = getQuestIdentity(first);
+
+    if (identity) {
+      const members: RouteStep[] = [first];
+      let cursor = index + 1;
+
+      while (cursor < steps.length && getQuestIdentity(steps[cursor]) === identity) {
+        members.push(steps[cursor]);
+        cursor += 1;
+      }
+
+      if (
+        cursor + 1 < steps.length &&
+        steps[cursor].type === 'dungeon' &&
+        getQuestIdentity(steps[cursor + 1]) === identity
+      ) {
+        members.push(steps[cursor], steps[cursor + 1]);
+        cursor += 2;
+
+        while (cursor < steps.length && getQuestIdentity(steps[cursor]) === identity) {
+          members.push(steps[cursor]);
+          cursor += 1;
+        }
+      }
+
+      objectives.push({
+        id: members.length === 1 ? first.id : `objective:${first.id}:${members.at(-1)!.id}`,
+        steps: members,
+      });
+      index = cursor;
+      continue;
+    }
+
+    objectives.push({ id: first.id, steps: [first] });
+    index += 1;
+  }
+
+  return objectives;
 }
 
 export function getStepGroupIndex(route: RouteDocument, stepId: string): number {
