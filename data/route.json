@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "routeVersion": "2026-09-05",
+  "routeVersion": "2026-09-04",
   "title": "Astrub → Dofus Sylvestre",
   "blocks": [
     {
@@ -5569,12 +5569,16 @@
       "title": "Comme un corbac sur sa branche — LANCER / avancer jusqu'à Reine Nyée",
       "displayRole": "objective",
       "action": "LANCER / AVANCER / STOP",
-      "instruction": "En [-5,-13], parle à Hell Munster et LANCE Comme un corbac sur sa branche. AVANCE jusqu'à l'objectif Reine Nyée puis STOP. Ne fais pas le donjon maintenant.",
+      "instruction": "En [-5,-13], parle à Hell Munster et LANCE Comme un corbac sur sa branche. AVANCE jusqu'à l'objectif Reine Nyée puis STOP. Garde cette quête active : Arak-haï en pagaille et Tour du propriétaire rejoindront ce groupe avant l'Antre de la Reine Nyée.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/comme-un-corbac-sur-sa-branche.html"
       },
       "momentId": "moment-route-step-0181",
+      "parallelGroup": {
+        "parallelId": "parallel-reine-nyee",
+        "phase": "start"
+      },
       "location": {
         "x": -5,
         "y": -13
@@ -7129,6 +7133,10 @@
         "url": "https://www.dofuspourlesnoobs.com/arak-haiuml-en-pagaille.html"
       },
       "momentId": "moment-route-step-0221",
+      "parallelGroup": {
+        "parallelId": "parallel-reine-nyee",
+        "phase": "progress"
+      },
       "location": {
         "x": 5,
         "y": -6
@@ -7270,7 +7278,11 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/tour-du-proprietaire.html"
       },
-      "momentId": "moment-route-step-0247"
+      "momentId": "moment-route-step-0247",
+      "parallelGroup": {
+        "parallelId": "parallel-reine-nyee",
+        "phase": "progress"
+      }
     },
     {
       "id": "route-step-0248",
@@ -7281,7 +7293,11 @@
       "displayRole": "detail",
       "action": "FAIRE",
       "instruction": "Avant d'entrer : Arak-haï en pagaille + Tour du propriétaire + Comme un corbac sur sa branche + L'éternelle moisson actifs.\nOCRE — Capture la Reine Nyée avec une pierre d’âme adaptée.",
-      "momentId": "moment-route-step-0247"
+      "momentId": "moment-route-step-0247",
+      "parallelGroup": {
+        "parallelId": "parallel-reine-nyee",
+        "phase": "finish"
+      }
     },
     {
       "id": "route-step-0249",
@@ -9336,12 +9352,16 @@
       "displayType": "TURQUOISE",
       "displayRole": "objective",
       "action": "LANCER / FIL ROUGE",
-      "instruction": "LANCE La bénédiction de Viti et prépare l'idole correspondant au Mansot Royal.",
+      "instruction": "LANCE La bénédiction de Viti et prépare l'idole correspondant au Mansot Royal. Garde la quête active : La voie du guerrier rejoindra ce groupe avant le Founoroshi.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-beacuteneacutediction-de-viti.html"
       },
       "momentId": "moment-viti-ouverture",
+      "parallelGroup": {
+        "parallelId": "parallel-founoroshi",
+        "phase": "start"
+      },
       "location": {
         "x": 27,
         "y": -30
@@ -10199,7 +10219,11 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-voie-du-guerrier.html"
       },
-      "momentId": "moment-route-step-0408"
+      "momentId": "moment-route-step-0408",
+      "parallelGroup": {
+        "parallelId": "parallel-founoroshi",
+        "phase": "progress"
+      }
     },
     {
       "id": "route-step-0409",
@@ -11045,7 +11069,11 @@
       "displayRole": "objective",
       "action": "FAIRE",
       "instruction": "Après le Tanukouï, valide l'étape auprès du Maître des clefs, prends Founoroshi comme objectif, puis utilise l'idole de Viti Roussie et vaincs Founoroshi.",
-      "momentId": "moment-viti-2boss"
+      "momentId": "moment-viti-2boss",
+      "parallelGroup": {
+        "parallelId": "parallel-founoroshi",
+        "phase": "finish"
+      }
     },
     {
       "id": "route-step-0457",
@@ -19694,12 +19722,16 @@
       "title": "Les totems de Maïmane — LANCER",
       "displayRole": "objective",
       "action": "LANCER / FIL ROUGE",
-      "instruction": "LANCE les Totems puis collecte les six émotions ci-dessous.",
+      "instruction": "LANCE les Totems puis collecte les six émotions ci-dessous. Garde la quête active : S'armer contre le destin rejoindra ce groupe au Vortex.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-totems-de-maimane.html"
       },
       "momentId": "moment-totems-ouverture-setup",
+      "parallelGroup": {
+        "parallelId": "parallel-vortex",
+        "phase": "start"
+      },
       "location": {
         "x": 2,
         "y": 4
@@ -19763,6 +19795,10 @@
         "url": "https://www.dofuspourlesnoobs.com/s-armer-contre-le-destin.html"
       },
       "momentId": "moment-vortex-convergence",
+      "parallelGroup": {
+        "parallelId": "parallel-vortex",
+        "phase": "progress"
+      },
       "location": {
         "x": 38,
         "y": -21
@@ -19781,7 +19817,11 @@
       "displayRole": "detail",
       "action": "FAIRE",
       "instruction": "Fais Vortex et récupère le Totem de la tristesse.",
-      "momentId": "moment-vortex-convergence"
+      "momentId": "moment-vortex-convergence",
+      "parallelGroup": {
+        "parallelId": "parallel-vortex",
+        "phase": "finish"
+      }
     },
     {
       "id": "route-step-0948",
