@@ -1,148 +1,158 @@
 # ROUTE OPTIMIZATION WORKFLOW — Procédure opérationnelle
 
-Ce document décrit **comment exécuter** la refonte Ganymède de `ROUTE` sans créer de dette ni de seconde vérité.
+Ce document décrit comment exécuter les passes d'audit/réécriture de `ROUTE` sans dette ni seconde vérité.
 
 Il complète `docs/ROUTE_OPTIMIZATION.md` :
-- `ROUTE_OPTIMIZATION.md` = doctrine / règles métier ;
-- `ROUTE_OPTIMIZATION_WORKFLOW.md` = procédure d'exécution pour les agents.
+- doctrine = `ROUTE_OPTIMIZATION.md` ;
+- exécution = ce document.
 
 ## 1. Sources à utiliser
 
 Ordre de priorité :
+1. `ROUTE` = scope + état réellement intégré ;
+2. `GANYMEDE_AUDIT` = historique de chantier si utilisé ;
+3. Ganymède GP0 / GP spécialisés = ordre/mutualisations ;
+4. DofusPourLesNoobs / source fiable = vérification factuelle ;
+5. miroir exploitable uniquement en soutien, jamais comme vérité métier unique.
 
-1. `ROUTE` = scope et état réellement intégré.
-2. `GANYMEDE_AUDIT` = état du chantier et décisions déjà prises.
-3. Ganymède GP0 / GP spécialisés = ordre de parcours et mutualisations.
-4. DofusPourLesNoobs / source fiable équivalente = vérification factuelle des prérequis, PNJ, positions, drops et conditions de lancement.
-5. Une source miroir/exploitable du parcours (ex. Le Zaap du Savoir) peut être utilisée pour récupérer un ordre ou des coordonnées lorsque Ganymède est difficile à lire, mais elle ne remplace pas la vérification métier.
+Ne jamais reconstruire un ordre depuis la mémoire.
 
-Ne jamais reconstruire un ordre depuis la mémoire de l'agent.
+## 2. Travailler par paquet indivisible
 
-## 2. Toujours travailler par paquet indivisible
+Ne pas patcher 2–3 lignes d'un parcours fortement imbriqué.
 
-Ne pas patcher 2 ou 3 quêtes d'un parcours fortement imbriqué.
-
-Un **paquet indivisible** est la plus petite portion du parcours qui peut être réordonnée sans laisser temporairement :
-- une quête rendue avant ses objectifs mutualisés ;
+Un paquet indivisible est la plus petite portion pouvant être réordonnée sans laisser :
+- une quête rendue trop tôt ;
 - une prise dupliquée ;
 - un donjon à deux endroits ;
-- un `STEP_ID` attaché à un autre événement métier ;
-- une quête active sans représentation explicite.
-
-Exemples :
-- Astrub `On marche + Ça tombe + classe + Ça sent le gaz` = un paquet ;
-- `Déjeuner + Tour du monde + Grange + Pichon + Château Ensablé` = un paquet ;
-- la boucle cimetière `Légende + Repos + Invasion` = un paquet.
+- un `STEP_ID` réaffecté ;
+- une quête active invisible ;
+- un même moment joueur éclaté artificiellement en plusieurs cartes.
 
 Le paquet passe par :
 
 ```text
-cartographié → vérifié → écrit en une passe → contrôlé mécaniquement
+cartographié → vérifié → écrit en une passe → relu mécaniquement
 ```
 
 ## 3. Cartographier avant d'écrire
 
 Pour chaque paquet :
+1. lire toutes les lignes concernées ;
+2. relever les `STEP_ID` historiques ;
+3. relever l'ordre source ;
+4. identifier prises, checkpoints, objectifs mutualisés, donjons, rendus et suites ;
+5. marquer le hors-scope ;
+6. vérifier positions/lancements ;
+7. vérifier les quêtes de blocs futurs déjà IN_SCOPE lançables ici ;
+8. déterminer si plusieurs lignes représentent un seul **moment joueur** ;
+9. décider les `MOMENT_ID` avant d'écrire.
 
-1. Lire toutes les lignes actuelles concernées dans `ROUTE`.
-2. Lister leurs `STEP_ID` historiques.
-3. Relever l'ordre Ganymède exact.
-4. Identifier :
-   - prises de quête ;
-   - checkpoints intermédiaires ;
-   - objectifs mutualisés ;
-   - rendus ;
-   - donjons ;
-   - quêtes laissées actives après le paquet.
-5. Marquer les étapes Ganymède hors scope.
-6. Vérifier les positions de lancement modifiées.
-7. Vérifier si une quête d'un bloc futur déjà IN_SCOPE peut être lancée pendant ce paquet.
-8. Enregistrer le résultat dans `GANYMEDE_AUDIT` avant une grosse réécriture.
+## 4. STEP_ID et MOMENT_ID
 
-## 4. Règle des STEP_ID
+### STEP_ID
+Un `STEP_ID` représente un événement métier stable.
 
-Un `STEP_ID` représente un **événement métier stable**, jamais une ligne physique.
+Conserver l'ID si l'événement reste le même. Créer un nouvel ID pour une nouvelle prise, un nouveau checkpoint ou une nouvelle étape réelle.
 
-### Conserver l'ID
+### MOMENT_ID
+Un `MOMENT_ID` représente une frontière de carte éditoriale.
 
-Conserver l'ancien ID si l'événement reste le même :
-- fin de la même quête ;
-- même donjon validé ;
-- même verrou ;
-- même checkpoint métier.
+L'utiliser lorsque plusieurs lignes techniques doivent être affichées comme un seul objectif joueur, notamment :
+- donjon + validation de sortie ;
+- fin d'une quête + lancement immédiat de la suivante ;
+- transition auprès du même PNJ ;
+- suite technique indivisible autour d'un boss.
 
-### Créer un nouvel ID
+Règles :
+- lignes contiguës ;
+- même bloc ;
+- un moment fermé ne réapparaît pas ;
+- pas de `MOMENT_ID` inventé côté React ;
+- ne jamais se reposer sur le fallback `MAX_SEQUENCE_STEPS=8` pour une carte voulue explicitement.
 
-Créer un nouvel ID pour :
-- nouvelle prise anticipée ;
-- nouveau moment de parcours mutualisé ;
-- nouveau checkpoint intermédiaire ;
-- nouvelle étape de reprise qui n'existait pas.
+## 5. POSITION, LANCEMENT, DESTINATION, GUIDE_ITEMS
 
-### Ne jamais faire
+- `POSITION` = prise de quête ;
+- `LANCEMENT` = méthode structurée si aucune coordonnée unique ;
+- `LANCEMENT_REQUIS=TRUE` = toute vraie prise ;
+- `DESTINATION` = prochain lieu utile ;
+- `GUIDE_ITEMS` = actions courtes internes à un moment mutualisé.
 
-Ne jamais réutiliser l'ID d'une ancienne fin de quête pour une nouvelle prise de quête simplement parce que la ligne occupe le même emplacement.
+Interdit : utiliser `POSITION` comme simple destination.
 
-## 5. POSITION, LANCEMENT et DESTINATION
+## 6. Écritures Google Sheets : nettoyage obligatoire
 
-Contrat strict :
-
-- `POSITION` = position de **prise** de quête seulement.
-- `LANCEMENT` = explication structurée lorsque la prise n'a pas une coordonnée unique correcte (objet, quête de classe, salle de sortie, plusieurs PNJ, etc.).
-- `LANCEMENT_REQUIS=TRUE` = toute étape qui contient une vraie prise de quête.
-- `DESTINATION` = prochain lieu utile du parcours, y compris farm, rendu, donjon ou checkpoint.
-
-Ne jamais détourner `POSITION` pour obtenir un bouton `/travel`.
-
-## 6. Attention aux écritures Google Sheets
-
-`updateCells` ne vide pas automatiquement les cellules que l'agent omet dans une nouvelle ligne.
-
-Conséquence : réécrire une ligne plus courte peut laisser une ancienne `POSITION`, un ancien `GOAL_ID` ou un ancien `LANCEMENT` en fin de ligne.
+`updateCells` ne vide pas les cellules techniques omises.
 
 Après toute réécriture importante :
+1. relire la plage complète jusqu'à `MOMENT_ID` ;
+2. vérifier explicitement `STEP_ID` → `MOMENT_ID` ;
+3. vider les anciennes valeurs techniques résiduelles ;
+4. ne jamais supposer que les anciens numéros de ligne sont encore valides après insertion/suppression.
 
-1. relire la plage B:Q ;
-2. vérifier explicitement les colonnes K→Q ;
-3. vider les anciennes cellules techniques qui ne s'appliquent plus.
-
-Lors d'un déplacement de lignes :
-- préférer petites opérations contrôlées ;
-- vérifier la ligne cible après insertion ;
-- ne pas supposer que les numéros de lignes historiques sont encore valides après `insertDimension` / `deleteDimension`.
-
-Si une requête batch est rejetée, considérer qu'aucune partie du lot n'est appliquée jusqu'à vérification explicite.
+Une requête batch rejetée doit être considérée comme non appliquée jusqu'à relecture.
 
 ## 7. Ordre de validation après chaque paquet
 
-Après chaque paquet écrit :
+1. rechercher `#ERROR!` ;
+2. vérifier `STEP_ID` + doublons ;
+3. vérifier chaque prise ;
+4. vérifier `POSITION` / `DESTINATION` ;
+5. vérifier `GUIDE_ITEMS` ;
+6. vérifier `GOAL_ID / GOAL_PHASE` ;
+7. vérifier `MOMENT_ID` : contigu, même bloc, sémantiquement cohérent ;
+8. rechercher l'ancienne prise/fin ailleurs ;
+9. vérifier le hors-scope ;
+10. relire la carte telle qu'un joueur la verra : un seul moment ne doit pas être fractionné.
 
-1. Rechercher `#ERROR!` dans `ROUTE`.
-2. Vérifier les `STEP_ID` du paquet et l'absence de doublon global.
-3. Vérifier tout `LANCER` : `LANCEMENT_REQUIS=TRUE` + `POSITION` ou `LANCEMENT`.
-4. Vérifier que les `POSITION` et `DESTINATION` sont des coordonnées valides lorsqu'elles sont renseignées.
-5. Vérifier les `GOAL_ID / GOAL_PHASE` touchés.
-6. Vérifier qu'aucune ancienne prise/fin n'existe encore ailleurs.
-7. Vérifier les quêtes hors scope explicitement exclues.
-8. Exporter le Sheet et lancer l'audit mécanique global.
+## 8. Passes globales après la linéarisation
 
-Un paquet n'est considéré intégré que si ce contrôle est vert.
+Une route peut être correcte localement et rester mauvaise globalement. Après les paquets/blocs, exécuter les passes suivantes sur **toute la route**.
 
-## 8. Validation mécanique globale minimale
+### Passe 1 — faux verrous
+Rechercher les hard locks de niveau personnage et autres prérequis surinterprétés.
 
-Avant de poursuivre après un gros déplacement :
+Règle : un niveau recommandé/minimum n'est pas une raison suffisante pour créer une carte `VERROU DUR`. Le validateur rejette désormais `NIVEAU <n> — VERROU DUR`.
 
-- 0 `STEP_ID` vide sur une étape runtime ;
+### Passe 2 — `TERMINER + LANCER`
+Rechercher globalement toutes les transitions où la fin et la prise suivante sont un seul moment.
+
+Pour chacune :
+- vérifier la vraie disponibilité ;
+- structurer la prise ;
+- affecter un `MOMENT_ID` commun avec les lignes du même moment si nécessaire.
+
+### Passe 3 — donjon → reprise → suite
+Rechercher chaque boss suivi de validations/reprises immédiates.
+
+Question obligatoire : « le joueur doit-il voir une seule carte ou plusieurs décisions distinctes ? »
+
+Si une seule : `MOMENT_ID` explicite.
+
+### Passe 4 — chaînes répétitives
+Auditer les chaînes Emma / Alain / Thelma / Anne / Lorie / Tour / Tour du Monde et équivalentes. Elles sont particulièrement sensibles à la fragmentation `donjon → retour PNJ → lancer suite`.
+
+### Passe 5 — goals / hard locks
+Vérifier `start → progress → finish`, les verrous associés et l'ordre réel.
+
+### Passe 6 — continuité
+Parcourir la route comme un joueur : aucune règle implicite ne doit être nécessaire pour comprendre quand reprendre une quête ou quand lancer sa suite.
+
+## 9. Validation mécanique globale minimale
+
+Avant régénération finale :
+- 0 `STEP_ID` vide ;
 - 0 `STEP_ID` dupliqué ;
 - 0 `#ERROR!` ;
 - 0 lancement incomplet ;
-- 0 `POSITION` invalide ;
-- 0 `DESTINATION` invalide ;
-- cycles `GOAL_ID` cohérents ;
-- exactement 1 `FIN` ;
-- `FIN` reste la dernière étape métier.
+- 0 position/destination invalide ;
+- 0 `MOMENT_ID` non contigu ou multi-blocs ;
+- 0 hard lock de niveau personnage ;
+- cycles de goals cohérents ;
+- exactement 1 `FIN`, dernière étape métier.
 
-Puis, à la fin d'un bloc :
+Puis :
 
 ```bash
 pnpm export:route
@@ -151,58 +161,39 @@ pnpm validate:route
 pnpm build
 ```
 
-Ne pas marquer `INTÉGRÉ` tant que `data/route.json` n'est pas régénéré depuis le Sheet et que les validations ne sont pas vertes.
+Ne pas considérer une passe intégrée tant que le JSON n'a pas été régénéré depuis le Sheet et les contrôles relancés.
 
-## 9. Mutualisation : preuve minimale
+## 10. Mutualisation : preuve minimale
 
-Une mutualisation n'est pas validée parce que deux quêtes ont le même PNJ ou la même carte.
+Une mutualisation exige :
+- coexistence réelle des quêtes ;
+- prérequis respectés ;
+- aucun rendu bloquant ;
+- gain concret ;
+- structure de carte compréhensible.
 
-Il faut démontrer au moins :
-- les deux quêtes peuvent être actives simultanément ;
-- l'ordre ne viole aucun prérequis ;
-- le rendu différé ne bloque pas une suite ;
-- le gain existe réellement (trajet, combat, donjon, drop, craft ou ressource).
+Si l'information manque : ne pas inventer.
 
-Si l'information manque : ne pas inventer. Noter le point dans `GANYMEDE_AUDIT` et conserver l'ordre sûr.
-
-## 10. Gestion du scope
+## 11. Scope
 
 Avant d'importer une étape Ganymède :
 
 ```text
-quête déjà présente quelque part dans ROUTE ?
-├─ oui → IN_SCOPE, lancement éventuellement déplaçable
-└─ non → vérifier exception/support
-        ├─ support nécessaire à une étape IN_SCOPE → documenter avant ajout
-        ├─ EXCEPTION_PARANGON → autorisé uniquement selon la doctrine Vulbis
-        └─ sinon → OUT_OF_SCOPE
+quête déjà présente dans ROUTE ?
+├─ oui → IN_SCOPE
+└─ non → SUPPORT nécessaire / EXCEPTION_PARANGON / OUT_OF_SCOPE
 ```
 
-Ne jamais importer automatiquement les quêtes que GP0 fait « au passage ».
-
-## 11. Méthode de fin de bloc
-
-Pour passer `EN AUDIT → VALIDÉ` :
-- ordre complet du bloc cartographié ;
-- toutes les mutualisations importantes vérifiées ;
-- exclusions de scope consignées ;
-- aucune supposition restante sur un lancement ou prérequis critique.
-
-Pour passer `VALIDÉ → INTÉGRÉ` :
-- `ROUTE` réécrit ;
-- audit mécanique vert ;
-- `data/route.json` régénéré ;
-- tests/validation/build verts ;
-- `GANYMEDE_AUDIT` mis à jour avec ce qui est réellement intégré.
+Ne jamais importer automatiquement tout ce que GP0 fait au passage.
 
 ## 12. Handoff obligatoire
 
-Si un agent s'arrête au milieu d'un bloc, mettre à jour `GANYMEDE_AUDIT` avec :
-- dernier paquet réellement intégré ;
-- prochain paquet indivisible ;
-- source utilisée ;
-- exclusions déjà décidées ;
-- anomalies découvertes ;
-- état du dernier audit mécanique.
+Un handoff de chantier route doit préciser :
+- dernière passe/paquet réellement intégré ;
+- prochains motifs à auditer ;
+- anomalies détectées ;
+- fichiers de code/doc modifiés ;
+- état de `ROUTE` ;
+- état du dernier export/tests/validation/build.
 
-Ne jamais écrire « bloc presque fini » sans préciser ce qui reste exact.
+Ne jamais écrire « presque fini » sans état exact.
