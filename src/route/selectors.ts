@@ -62,8 +62,14 @@ function isSequenceCandidate(step: RouteStep): boolean {
   return Boolean(step.action?.trim() || step.instruction?.trim() || step.title.trim());
 }
 
+/**
+ * MOMENT_ID is an editorial card boundary, regardless of the technical RouteStep type.
+ * This allows one player-facing moment to contain quests, resumptions, milestones,
+ * hard locks, long-running-goal transitions or major steps without React having to
+ * infer business meaning from text.
+ */
 function isExplicitMomentStep(step: RouteStep): boolean {
-  return Boolean(step.momentId && sequenceStepTypes.has(step.type));
+  return Boolean(step.momentId);
 }
 
 /** A STOP closes only an inferred checklist. Explicit moments are already bounded by momentId. */
@@ -251,7 +257,7 @@ export function getActiveLongRunningGoals(
 
     if (step.type === 'hard_lock' && step.hardLock?.goalId) {
       activeGoalIds.delete(step.hardLock.goalId);
-      activeSteps.delete(step.hardLock.goalId);
+      activeSteps.delete(step.goalId);
     }
   }
 
