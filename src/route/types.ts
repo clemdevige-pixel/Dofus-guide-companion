@@ -14,6 +14,7 @@ export type StepType =
 
 export type GuideItemAction = 'take' | 'advance' | 'finish' | 'do';
 export type StepDisplayRole = 'objective' | 'transition' | 'detail';
+export type ParallelPhase = 'start' | 'progress' | 'finish';
 
 export interface RouteBlock {
   id: string;
@@ -49,8 +50,13 @@ export interface RouteStep {
     label: string;
     url: string;
   };
-  /** Identifiant éditorial d'un même moment de parcours affiché comme un objectif unique. */
+  /** Identifiant éditorial d'un même moment de parcours affiché comme une seule carte. */
   momentId?: string;
+  /** Groupe de quêtes qui doivent rester actives et être avancées conjointement sur plusieurs cartes. */
+  parallelGroup?: {
+    parallelId: string;
+    phase: ParallelPhase;
+  };
   /** Position structurée où une quête est lancée. */
   location?: RouteCoordinate;
   /** Position structurée vers laquelle le joueur doit se rendre pour exécuter cette étape. */
