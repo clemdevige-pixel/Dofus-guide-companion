@@ -219,50 +219,62 @@ test('different explicit moments create different cards', () => {
   ]);
 });
 
-test('technical steps with the same moment id collapse into one player-facing objective', () => {
+test('complex explicit moment becomes one checkbox per meaningful sub-objective', () => {
   const momentId = 'moment-a';
   const steps: RouteStep[] = [
     {
-      id: 'advance',
+      id: 'shin',
       order: 1,
       blockId: 'block-01',
-      type: 'quest',
-      title: 'Quest A',
-      action: 'AVANCER / STOP',
+      type: 'resume',
+      title: 'Objectif Shin Larve',
+      action: 'REPRENDRE / FAIRE',
       momentId,
     },
     {
-      id: 'dungeon',
+      id: 'larves',
       order: 2,
       blockId: 'block-01',
       type: 'dungeon',
-      title: 'Dungeon A',
+      title: 'Donjon des Larves',
       action: 'FAIRE & VALIDER',
       momentId,
     },
     {
-      id: 'finish',
+      id: 'rakoopeur',
       order: 3,
       blockId: 'block-01',
       type: 'resume',
-      title: 'Quest A',
-      action: 'REPRENDRE / TERMINER',
+      title: 'Objectif Rakoopeur',
+      action: 'REPRENDRE / FAIRE',
       momentId,
     },
     {
-      id: 'quest-b',
+      id: 'sylvestre',
       order: 4,
       blockId: 'block-01',
-      type: 'quest',
-      title: 'Quest B',
-      action: 'TERMINER',
+      type: 'dungeon',
+      title: 'Refuge Sylvestre',
+      action: 'FAIRE & VALIDER',
+      momentId,
+    },
+    {
+      id: 'craqueleur',
+      order: 5,
+      blockId: 'block-01',
+      type: 'resume',
+      title: 'Objectif Craqueleur Légendaire',
+      action: 'REPRENDRE / STOP',
+      momentId,
     },
   ];
 
+  const objectives = getSequenceObjectives(steps);
   assert.deepEqual(
-    getSequenceObjectives(steps).map((objective) => objective.steps.map((step) => step.id)),
-    [['advance', 'dungeon', 'finish'], ['quest-b']],
+    objectives.map((objective) => objective.steps.map((step) => step.id)),
+    [['shin', 'larves'], ['rakoopeur', 'sylvestre'], ['craqueleur']],
   );
+  assert.equal(objectives.flatMap((objective) => objective.steps).some((step) => step.action), false);
 });
 
 test('matching external source urls do not create an implicit objective', () => {
