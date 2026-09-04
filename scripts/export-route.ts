@@ -1,9 +1,15 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import type { RouteBlock, RouteDocument, RouteStep, StepType } from '../src/route/types';
+import type {
+  GuideItemAction,
+  RouteBlock,
+  RouteDocument,
+  RouteStep,
+  StepType,
+} from '../src/route/types';
 import { validateRoute } from '../src/route/validation';
 
-const DEFAULT_RANGE = 'ROUTE!A5:Q';
+const DEFAULT_RANGE = 'ROUTE!A5:R';
 const OUTPUT_PATH = resolve('data/route.json');
 
 const typeMap: Record<string, { type: StepType; displayType?: string }> = {
@@ -23,6 +29,13 @@ const typeMap: Record<string, { type: StepType; displayType?: string }> = {
   'TOUR': { type: 'quest', displayType: 'TOUR' },
   'TURQUOISE': { type: 'quest', displayType: 'TURQUOISE' },
   'OPTI ALIGNEMENT': { type: 'rule', displayType: 'OPTI ALIGNEMENT' },
+};
+
+const guideItemActionMap: Record<string, GuideItemAction> = {
+  PRENDRE: 'take',
+  AVANCER: 'advance',
+  TERMINER: 'finish',
+  FAIRE: 'do',
 };
 
 type SheetRow = string[];
@@ -82,7 +95,7 @@ function parseGoalPhase(rawPhase: string, sheetRow: number): GoalPhase | undefin
 function parseCoordinate(
   rawPosition: string,
   sheetRow: number,
-  columnName: 'POSITION' | 'DESTINATION',
+  columnName: string,
 ): RouteStep['location'] | undefined {
   if (!rawPosition) return undefined;
   const match = rawPosition.match(/^\[?\s*(-?\d+)\s*,\s*(-?\d+)\s*\]?$/);
@@ -92,6 +105,46 @@ function parseCoordinate(
     );
   }
   return { x: Number.parseInt(match[1], 10), y: Number.parseInt(match[2], 10) };
+}
+
+function parseGuideItems(rawItems: string, sheetRow: number): RouteStep['guideItems'] {
+  if (!rawItems) return undefined;
+
+  const items = rawItems
+    .split('\n')
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line, itemIndex) => {
+      const [rawAction = '', rawLabel = '', rawLocation = '', ...noteParts] = line
+        .split('::')
+        .map((part) => part.trim());
+      const action = guideItemActionMap[rawAction.toUpperCase()];
+      if (!action) {
+        throw new Error(
+          `Ligne Sheet ${sheetRow}: GUIDE_ITEMS ${itemIndex + 1}, action inconnue « ${rawAction} ». ` +
+            'Attendu PRENDRE, AVANCER, TERMINER ou FAIRE.',
+        );
+      }
+      if (!rawLabel) {
+        throw new Error(`Ligne Sheet ${sheetRow}: GUIDE_ITEMS ${itemIndex + 1}, libellé manquant.`);
+      }
+
+      const location = parseCoordinate(
+        rawLocation,
+        sheetRow,
+        `GUIDE_ITEMS ${itemIndex + 1} position`,
+      );
+      const note = noteParts.join(' :: ').trim();
+
+      return {
+        action,
+        label: rawLabel,
+        ...(location ? { location } : {}),
+        ...(note ? { note } : {}),
+      };
+    });
+
+  return items.length > 0 ? items : undefined;
 }
 
 function parseHyperlinkFormula(formula: string): { label: string; url: string } | undefined {
@@ -131,10 +184,11 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
     cell(headers, 13) !== 'POSITION' ||
     cell(headers, 14) !== 'LANCEMENT' ||
     cell(headers, 15) !== 'LANCEMENT_REQUIS' ||
-    cell(headers, 16) !== 'DESTINATION'
+    cell(headers, 16) !== 'DESTINATION' ||
+    cell(headers, 17) !== 'GUIDE_ITEMS'
   ) {
     throw new Error(
-      'Colonnes ROUTE inattendues : TYPE, ÉTAPE, STEP_ID, GOAL_ID, GOAL_PHASE, POSITION, LANCEMENT, LANCEMENT_REQUIS et DESTINATION sont obligatoires.',
+      'Colonnes ROUTE inattendues : TYPE, ÉTAPE, STEP_ID, GOAL_ID, GOAL_PHASE, POSITION, LANCEMENT, LANCEMENT_REQUIS, DESTINATION et GUIDE_ITEMS sont obligatoires.',
     );
   }
 
@@ -189,6 +243,7 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
     const launchInstruction = cell(formatted, 14);
     const launchRequired = parseBoolean(cell(formatted, 15), sheetRow);
     const destination = parseCoordinate(cell(formatted, 16), sheetRow, 'DESTINATION');
+    const guideItems = parseGuideItems(cell(formatted, 17), sheetRow);
     const title = rawTitle.split('\n')[0]?.trim() || rawTitle;
 
     if (action.toUpperCase().includes('LANCER') && !launchRequired) {
@@ -214,6 +269,7 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
       ...(location ? { location } : {}),
       ...(destination ? { destination } : {}),
       ...(launchInstruction ? { launchInstruction } : {}),
+      ...(guideItems ? { guideItems } : {}),
       ...(mapping.type === 'preparation'
         ? { preparationItems: parsePreparationItems(preparationText || rawTitle) }
         : {}),
