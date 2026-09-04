@@ -235,3 +235,23 @@ test('rejects an empty guide item label', () => {
     /libellé vide/,
   );
 });
+
+test('rejects a character-level hard lock card', () => {
+  assert.throws(
+    () =>
+      validateRoute(
+        makeRoute([
+          {
+            id: 'level-lock',
+            order: 1,
+            blockId: 'block-01',
+            type: 'hard_lock',
+            title: 'NIVEAU 80 — VERROU DUR',
+            hardLock: { message: 'STOP jusqu’au niveau 80.' },
+          },
+          { ...finalStep, order: 2 },
+        ]),
+      ),
+    /niveau de personnage ne doit pas créer de VERROU DUR/,
+  );
+});
