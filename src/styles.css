@@ -324,6 +324,11 @@ button {
   font-size: 13px;
 }
 
+.secondary-panel--goal,
+.secondary-panel--lock {
+  display: none;
+}
+
 .secondary-panel--goal {
   border-color: #454064;
 }
