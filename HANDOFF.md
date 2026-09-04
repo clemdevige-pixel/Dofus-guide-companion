@@ -1,19 +1,17 @@
 # HANDOFF — Dofus Guide Companion
 
-Date: 2026-09-04
+Date : 2026-09-04
 
 ## 1. Contexte
 
-Projet : **Dofus Guide Companion**
-Repo : `clemdevige-pixel/Dofus-guide-companion`
+Projet : **Dofus Guide Companion**  
+Repo : `clemdevige-pixel/Dofus-guide-companion`  
 Branche active : `agent/initial-scaffold`
 
-Objectif : companion desktop Tauri/React affichant la roadmap Astrub → Dofus Sylvestre sous forme de cartes compactes réellement suivables ligne par ligne.
+Source éditoriale : Google Sheet `Roadmap ULTIMATE V2 — Astrub → Dofus Sylvestre`, onglet `ROUTE`.  
+Runtime : `data/route.json`, généré depuis le Sheet.
 
-Source éditoriale : Google Sheet `Roadmap ULTIMATE V2 — Astrub → Dofus Sylvestre`, onglet `ROUTE`.
-Runtime : `data/route.json`, généré uniquement par `scripts/export-route.ts`.
-
-Avant toute modification lire :
+Avant toute intervention lire :
 1. `AGENTS.md`
 2. `SPEC.md`
 3. `ARCHITECTURE.md`
@@ -22,202 +20,120 @@ Avant toute modification lire :
 6. `docs/ROUTE_OPTIMIZATION_WORKFLOW.md`
 7. `HANDOFF.md`
 
-## 2. Décisions structurantes
+## 2. Contrat data actuel
 
-- une seule vérité éditoriale : `ROUTE` ;
-- une seule vérité runtime : `data/route.json` généré ;
-- aucune logique spécifique à une quête dans React ;
-- `STEP_ID` = identité métier persistante d'une étape technique ;
-- `MOMENT_ID` = identité éditoriale d'un moment joueur rendu comme une seule carte ;
-- `POSITION` = lancement uniquement ;
-- `DESTINATION` = déplacement ;
-- `GUIDE_ITEMS` = actions internes courtes d'un moment ;
-- `GOAL_ID / GOAL_PHASE` = fils rouges structurés ;
-- `completedStepIds` reste la seule vérité de progression utilisateur ;
-- une information utile ne doit apparaître qu'une fois dans le flux joueur.
+- `STEP_ID` = identité stable d'une étape technique ;
+- `MOMENT_ID` = unique frontière multi-step d'une carte ;
+- une ligne sans `MOMENT_ID` = une carte autonome ;
+- aucun regroupement automatique n'existe encore ;
+- `DISPLAY_ROLE` est obligatoire dans un moment : `OBJECTIVE`, `TRANSITION`, `DETAIL` ;
+- le premier membre d'un moment est toujours `OBJECTIVE` ;
+- `OBJECTIVE` crée une checkbox ;
+- `TRANSITION` / `DETAIL` se rattachent à l'objectif précédent ;
+- `completedStepIds` reste l'unique vérité de progression.
 
-## 3. État du chantier structurel
+## 3. État route
 
-Les passes précédentes ont déjà fortement réduit la fragmentation de la route :
-- suppression de nombreuses cartes purement administratives ;
-- suppression des faux hard locks de niveau ;
-- suppression des cartes `RÈGLE` résiduelles ;
-- mutualisation de nombreuses chaînes `prendre → donjon → rendre → prendre la suivante` ;
-- ajout massif de `MOMENT_ID` sur les moments joueur ;
-- regroupement de chaînes Tour du Monde, Frigost, Pandala, Eliocalypse, Enutrosor, Cavaliers, fin Sylvestre, etc.
+La passe globale anti-redondance / confort joueur a été réalisée sur toute la route.
 
-Le runtime a été régénéré et la CI a été verte sur le commit UI `8f1691debe2820d42a208bde8ab90c9e6ed022fb` avant la présente mise à jour documentaire.
+État actuel du runtime synchronisé :
+- **20 blocs** ;
+- **986 étapes** ;
+- **328 cartes explicites** ;
+- **637 / 637** quêtes, reprises et fils rouges possèdent une source DPLN ;
+- les grosses séries d'alignement restent volontairement de grandes cartes à checkboxes : ne pas les éclater juste pour réduire leur taille.
 
-## 4. Problème restant identifié
+Les audits de cohérence ont notamment vérifié/corrigé :
+- prérequis Émeraude / élevage ;
+- Carte de Cania / Primatons ;
+- Tablette de Totankama ;
+- Le mal a dit ;
+- post-Sylargh ;
+- chaînes Otomaï / Moon / Wabbit / Valonia / Prologue / Enutrosor ;
+- fin Sylvestre ;
+- liens DPLN ;
+- titres/instructions corrompus détectés pendant la passe.
 
-La mutualisation structurelle a réduit le nombre de cartes, mais a déplacé une partie de la dette **à l'intérieur des cartes** :
-- trop de micro-étapes techniques affichées ;
-- répétitions `REPRENDRE / FAIRE`, `FAIRE & VALIDER`, `REPRENDRE / TERMINER` ;
-- même retour PNJ décrit plusieurs fois ;
-- fin d'une carte répétée au début de la suivante ;
-- cartes restantes dont la seule fonction est de rendre/reprendre/prendre la suite.
+## 4. Audit rendu UI effectué après la passe route
 
-Conclusion validée avec le produit : **ne plus corriger ces cas un par un**. Il faut maintenant une passe globale anti-redondance / confort joueur sur toute la route.
+L'audit des 328 cartes a trouvé plusieurs défauts UI hérités de l'ancien système.
 
-## 5. Nouvelle méthodologie autoritaire
+### 4.1 Transitions silencieuses
 
-### 5.1 Principe central
+66 transitions n'avaient pas d'`instruction` propre. Comme le sélecteur retirait `action`, elles pouvaient devenir pratiquement invisibles dans une carte mutualisée.
 
-**Une carte = un moment joueur. Une checkbox = un sous-objectif significatif.**
+Correction : `src/route/selectors.ts` fournit maintenant un fallback compact `action + title` uniquement pour une `TRANSITION` sans instruction explicite. Une instruction explicite reste prioritaire.
 
-Les lignes techniques peuvent rester dans `ROUTE` pour la vérité métier et la progression, mais elles ne doivent pas toutes être rendues comme objectifs autonomes.
+### 4.2 Objectif donjon mal titré
 
-### 5.2 Deux niveaux dans une carte
+L'UI cherchait auparavant la première ligne « non-donjon » pour nommer une checkbox. Cela pouvait afficher une reprise de quête à la place du vrai donjon `OBJECTIVE`.
 
-#### Objectif principal — avec checkbox
-Exemples :
-- faire un donjon ;
-- accomplir une étape de quête réelle ;
-- combat/objectif majeur ;
-- action structurante.
+Correction : le premier step du bucket d'objectif est maintenant autoritaire, conformément à `DISPLAY_ROLE`.
 
-#### Transition obligatoire — sans checkbox
-Afficher une transition seulement quand le joueur doit réellement faire quelque chose entre deux objectifs :
-- rendre la quête ;
-- prendre la suivante ;
-- avancer la quête ;
-- parler à un PNJ ;
-- donner/récupérer un objet ;
-- effectuer une action de sortie indispensable.
+### 4.3 Séquences non stylées
 
-La transition doit préciser le PNJ et la position quand la donnée existe.
+Les classes React `sequence-*` existaient sans CSS dédié.
 
-### 5.3 Exemple de rendu cible validé
+Correction : checklist compacte ajoutée dans `src/styles.css`, avec scroll interne pour les longues séquences afin de conserver la navigation accessible en mode compact et détaillé.
 
-```text
-☐ Shin Larve — Donjon des Larves · capturer pour l’Ocre
-→ Retourner voir Pat Akess [x,y] — rendre Shin Larve puis prendre Rakoopeur
-☐ Rakoopeur — Refuge Sylvestre · capturer pour l’Ocre
-→ Retourner voir Pat Akess [x,y] — rendre Rakoopeur puis prendre Craqueleur Légendaire
-☐ Craqueleur Légendaire — prendre l’objectif puis STOP
-```
+### 4.4 Verrou dur dans une séquence
 
-La transition finale n'est ajoutée que si elle est réellement nécessaire.
+`L'Ombre et la proie` est actuellement le seul `hard_lock` appartenant à un moment mutualisé.
 
-### 5.4 Informations critiques à conserver
+Correction déjà intégrée : cocher l'objectif contenant ce hard lock ne déclenche plus d'avance automatique vers la carte suivante.
 
-Toujours conserver quand pertinent :
-- Ocre / capture boss ;
-- STOP ;
-- objet requis ;
-- ordre obligatoire ;
-- dialogue de sortie ;
-- vraie condition de progression ;
-- action nécessaire avant le prochain donjon.
+Point à conserver : la consultation manuelle de la carte suivante reste autorisée ; seul l'auto-advance est interdit.
 
-### 5.5 Redondances à supprimer
+## 5. Garde-fous ajoutés
 
-Faire disparaître :
-- labels techniques qui répètent l'objectif ;
-- « quête terminée » sans action supplémentaire ;
-- retour PNJ écrit en fin d'objectif puis répété dans le suivant ;
-- carte autonome de rendu/reprise si elle peut devenir une transition ;
-- répétition de la fin de N au début de N+1 ;
-- texte explicatif qui répète déjà le titre ou la transition.
+`validateRoute()` refuse désormais notamment :
+- `MOMENT_ID` sans `DISPLAY_ROLE` ;
+- `DISPLAY_ROLE` sans `MOMENT_ID` ;
+- moment non contigu ou multi-blocs ;
+- moment commençant par `TRANSITION` ou `DETAIL` ;
+- hard lock artificiel de niveau personnage ;
+- incohérences de goals ;
+- FIN absente/multiple/non finale.
 
-## 6. Règle de passe globale à exécuter maintenant
+Tests dédiés ajoutés dans `src/route/displayRole.test.ts` pour :
+- frontières de checkbox ;
+- fallback de transition ;
+- priorité d'une instruction explicite ;
+- rejet d'un moment commençant par une transition.
 
-La prochaine intervention doit lancer la **Passe 7 — anti-redondance / confort joueur** décrite dans `docs/ROUTE_OPTIMIZATION_WORKFLOW.md`.
+## 6. État CI
 
-Pour chaque carte puis chaque paire de cartes adjacentes :
-1. identifier les sous-objectifs significatifs ;
-2. conserver une checkbox par sous-objectif ;
-3. convertir les rendus/prises/avancées indispensables en transitions compactes ;
-4. supprimer les phrases doublonnées dans la carte ;
-5. comparer la fin de N au début de N+1 ;
-6. absorber les cartes purement administratives ;
-7. conserver Ocre/STOP/objets/ordre/conditions ;
-8. vérifier que le joueur sait toujours exactement quoi faire entre deux donjons.
+Les commits fonctionnels récents ont passé côté frontend :
+- tests route ;
+- validation route ;
+- build frontend.
 
-Critère de réussite :
-- moins de cartes ;
-- moins de texte ;
-- aucune transition nécessaire perdue.
+Le check Tauri Windows doit toujours être regardé sur le dernier commit avant de déclarer un état complètement vert.
 
-## 7. Architecture UI déjà préparée
+## 7. Source/runtime
 
-`src/route/selectors.ts` et `src/App.tsx` ont été modifiés juste avant ce handoff pour commencer à distinguer les sous-objectifs des détails techniques dans les séquences.
+Le dernier changement de route (`328 cartes`) a été poussé par l'utilisateur et `data/route.json` correspond au Sheet de cette passe.
 
-Important : cette première adaptation UI **ne suffit pas**. Le chantier demandé est maintenant global et doit aussi nettoyer la source éditoriale quand la redondance est portée par `ROUTE`.
+Les changements suivants ont ensuite porté sur le code UI / validation / documentation uniquement ; ils ne nécessitent pas de nouvel export du Sheet tant que `ROUTE` ne change pas.
 
-Ne pas ajouter de parsing métier dans React. Utiliser en priorité :
-- `MOMENT_ID` ;
-- `GUIDE_ITEMS` ;
-- types structurés ;
-- `POSITION` / `DESTINATION` ;
-- autres champs existants.
+## 8. Prochain chantier exact
 
-Si la donnée structurée manque pour une transition importante, enrichir `ROUTE` proprement plutôt que déduire depuis une chaîne de texte côté UI.
+Continuer l'audit du rendu réel, pas une nouvelle chasse mécanique au nombre de cartes.
 
-## 8. Cas de référence immédiat — Pat Akess / Les sbires du maître
+Priorités :
+1. vérifier visuellement les longues séquences en compact et détaillé ;
+2. vérifier le rendu spécifique du seul hard lock mutualisé `L'Ombre et la proie` ;
+3. vérifier que les transitions courtes restent lisibles sans recréer de bruit ;
+4. vérifier les liens DPLN internes et boutons `/travel` ;
+5. corriger uniquement les défauts reproduits, sans nouvelle heuristique métier ;
+6. garder `MOMENT_ID + DISPLAY_ROLE` comme seules vérités de présentation.
 
-Dans `ROUTE`, lignes autour de 217–221 :
-- objectif Shin Larve ;
-- Donjon des Larves ;
-- objectif Rakoopeur ;
-- Refuge Sylvestre ;
-- objectif Craqueleur Légendaire / STOP.
+## 9. Interdictions à ne pas réintroduire
 
-Le rendu actuel est encore trop répétitif. Ce paquet doit servir de premier cas de validation de la nouvelle méthode :
-- checkbox Shin Larve + capture Ocre ;
-- transition Pat Akess : rendre + prendre Rakoopeur ;
-- checkbox Rakoopeur + capture Ocre ;
-- transition Pat Akess : rendre + prendre Craqueleur ;
-- checkbox/objectif Craqueleur + STOP.
-
-Attention : la position de Pat Akess `[5,0]` est déjà structurée ailleurs dans la route ; ne pas l'inventer ni parser un texte pour la récupérer.
-
-## 9. Docs mises à jour pour cette nouvelle phase
-
-Mises à jour le 2026-09-04 :
-- `AGENTS.md` ;
-- `docs/ROUTE_OPTIMIZATION.md` ;
-- `docs/ROUTE_OPTIMIZATION_WORKFLOW.md` ;
-- `HANDOFF.md`.
-
-Elles contiennent maintenant le contrat de rendu cible et la passe anti-redondance globale.
-
-## 10. Prochain chantier exact
-
-1. utiliser Pat Akess comme cas témoin ;
-2. vérifier que le rendu cible est atteint sans parsing React ;
-3. appliquer la même méthode globalement à toutes les cartes mutualisées ;
-4. faire l'audit inter-cartes sur toute la route ;
-5. supprimer/absorber les cartes administratives restantes ;
-6. mettre à jour `ROUTE` quand la redondance vient de la source ;
-7. régénérer `data/route.json` ;
-8. lancer :
-
-```bash
-pnpm export:route
-pnpm test:route
-pnpm validate:route
-pnpm build
-```
-
-9. valider ensuite le rendu Tauri Windows.
-
-## 11. Points de vigilance
-
-- ne jamais parser titres/instructions pour reconnaître une quête, un PNJ ou une transition ;
-- ne pas supprimer une vraie transition entre deux donjons sous prétexte de compacter ;
-- ne jamais transformer chaque ligne technique en checkbox ;
-- ne pas conserver une carte uniquement parce qu'elle possède un `STEP_ID` ;
-- `STEP_ID` reste nécessaire à la progression même si l'étape devient un détail/transition visuelle ;
-- `MOMENT_ID` doit rester contigu et dans un bloc ;
-- ne jamais corriger `data/route.json` à la main ;
-- relire les cellules techniques après chaque écriture Sheets ;
-- ne pas annoncer la passe finie avant audit de la dernière carte et validation mécanique complète.
-
-## 12. État validation au moment de ce handoff
-
-- dernière CI code avant docs : **SUCCESS** sur `8f1691debe2820d42a208bde8ab90c9e6ed022fb` ;
-- docs de nouvelle méthodologie : mises à jour après cette CI ;
-- passe anti-redondance globale : **À DÉMARRER** ;
-- aucun changement Sheet de cette nouvelle passe encore appliqué ;
-- prochain export/tests/build requis après les modifications de route/UI de la passe.
+- parsing du titre/instruction pour décider du regroupement ;
+- regroupement automatique sans `MOMENT_ID` ;
+- heuristique UI par `type` pour choisir le vrai objectif ;
+- nouvelle source de vérité ;
+- correction manuelle de `data/route.json` ;
+- suppression d'une transition nécessaire au seul motif de compacter ;
+- éclatement arbitraire d'une grande série cohérente uniquement parce qu'elle contient beaucoup de checkboxes.
