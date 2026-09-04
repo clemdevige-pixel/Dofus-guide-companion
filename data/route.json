@@ -148,12 +148,14 @@
       "blockId": "block-01",
       "type": "quest",
       "title": "Premiers pas",
+      "displayRole": "objective",
       "action": "TERMINER",
       "instruction": "TERMINE Premiers pas. Si tu skips volontairement le tutoriel guidé, le jeu valide automatiquement les quêtes de tutoriel.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/premiers-pas.html"
       },
+      "momentId": "moment-route-step-0007",
       "launchInstruction": "Nouveau personnage : la quête démarre automatiquement devant la statue de ton dieu dans le tutoriel guidé. Ancien personnage : va au Dofusarium du Temple Céleste en [1,1] pour la valider."
     },
     {
@@ -162,12 +164,14 @@
       "blockId": "block-01",
       "type": "quest",
       "title": "Premières armes",
+      "displayRole": "objective",
       "action": "TERMINER",
       "instruction": "TERMINE Premières armes.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/premieres-armes.html"
       },
+      "momentId": "moment-route-step-0007",
       "launchInstruction": "Dans le tutoriel guidé, après Premiers pas, reparle à Ganymède après le combat contre le Poutch Céleste."
     },
     {
@@ -176,11 +180,13 @@
       "blockId": "block-01",
       "type": "quest",
       "title": "L'anneau de tous les dangers",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/l-anneau-de-tous-les-dangers.html"
       },
+      "momentId": "moment-route-step-0007",
       "launchInstruction": "Dans le tutoriel guidé, après Premières armes, parle à Ganymède pour continuer ton apprentissage."
     },
     {
@@ -189,11 +195,13 @@
       "blockId": "block-01",
       "type": "quest",
       "title": "Sous le regard des dieux",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/sous-le-regard-des-dieux.html"
       },
+      "momentId": "moment-route-step-0007",
       "launchInstruction": "Dans le tutoriel guidé, après L'anneau de tous les dangers, reparle à Maître Hoboulo pour lancer la dernière épreuve."
     },
     {
@@ -202,11 +210,13 @@
       "blockId": "block-01",
       "type": "quest",
       "title": "Réponses à tout",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/reacuteponses-agrave-tout.html"
       },
+      "momentId": "moment-route-step-0007",
       "location": {
         "x": 1,
         "y": 1
@@ -918,12 +928,14 @@
       "blockId": "block-01",
       "type": "resume",
       "title": "Un peu de pigment — TERMINER",
+      "displayRole": "transition",
       "action": "TERMINER",
       "instruction": "En [3,-5], retourne voir Marylork et TERMINE Un peu de pigment.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/un-peu-de-pigment.html"
       },
+      "momentId": "moment-incarnam-metiers-paturages",
       "destination": {
         "x": 3,
         "y": -5
@@ -3338,11 +3350,13 @@
       "blockId": "block-02",
       "type": "quest",
       "title": "La petite mission dans la prairie",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-petite-mission-dans-la-prairie.html"
       },
+      "momentId": "moment-route-step-1121",
       "location": {
         "x": 3,
         "y": -14
@@ -4578,12 +4592,14 @@
       "blockId": "block-02",
       "type": "quest",
       "title": "Le nouveau monde",
+      "displayRole": "objective",
       "action": "TERMINER",
       "instruction": "Avec 2 Miséricordes du Chafer d'Élite, 1 Oreille de Foufayteur et 1 Huile de Sésame déjà sur toi, LANCE Le nouveau monde en [15,28]. Tue ensuite un Raul Mops pour obtenir le Gros Boulet, retourne immédiatement voir le Capitaine Kradoc et TERMINE la quête.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-nouveau-monde.html"
       },
+      "momentId": "moment-route-step-0106",
       "location": {
         "x": 15,
         "y": 28
@@ -4595,11 +4611,13 @@
       "blockId": "block-02",
       "type": "quest",
       "title": "L'île des naufragés",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/licircle-des-naufrageacutes.html"
       },
+      "momentId": "moment-route-step-0106",
       "location": {
         "x": 15,
         "y": 28
@@ -4894,11 +4912,13 @@
       "type": "alignment",
       "title": "Entrainement avec Tarche",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/entraicircnement-avec-tarche.html"
       },
+      "momentId": "moment-route-step-0129",
       "location": {
         "x": -32,
         "y": -57
@@ -4915,11 +4935,13 @@
       "type": "alignment",
       "title": "La serveuse Dame Cloude",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-tenanciegravere-dame-cloude.html"
       },
+      "momentId": "moment-route-step-0129",
       "location": {
         "x": -32,
         "y": -57
@@ -4932,11 +4954,13 @@
       "type": "alignment",
       "title": "Du pain pour les braves",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/du-pain-pour-les-braves.html"
       },
+      "momentId": "moment-route-step-0129",
       "location": {
         "x": -32,
         "y": -57
@@ -5070,8 +5094,8 @@
       "type": "quest",
       "title": "Les sbires du maître — LANCER + SCARABOSSE DORÉ",
       "displayType": "TOUR",
-      "action": "LANCER / FAIRE / CAPTURER / AVANCER / STOP",
-      "instruction": "En [5,0], parle à Pat Akess et LANCE Les sbires du maître. Fais immédiatement le Donjon des Scarafeuilles, vaincs et CAPTURE le Scarabosse Doré pour l’Ocre, puis retourne voir Pat Akess pour prendre l’objectif Donjon des Forgerons. STOP ensuite : le Forgeron sera mutualisé avec Recouvrement de dette à la Tabasse.",
+      "action": "LANCER / FAIRE / CAPTURER",
+      "instruction": "En [5,0], parle à Pat Akess et LANCE Les sbires du maître. Fais immédiatement le Donjon des Scarafeuilles, vaincs et CAPTURE le Scarabosse Doré pour l’Ocre.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-sbires-du-maitre.html"
@@ -5101,17 +5125,10 @@
             "y": 26
           },
           "note": "OCRE — Capture le Scarabosse Doré."
-        },
-        {
-          "action": "advance",
-          "label": "Les sbires du maître",
-          "location": {
-            "x": 5,
-            "y": 0
-          },
-          "note": "Prends l’objectif Donjon des Forgerons puis STOP."
         }
-      ]
+      ],
+      "momentId": "moment-route-step-0139",
+      "displayRole": "objective"
     },
     {
       "id": "route-step-0141",
@@ -5120,7 +5137,7 @@
       "type": "long_running",
       "title": "Les sbires du maître — STOP à l'objectif Donjon des Forgerons",
       "action": "AVANCER / STOP",
-      "instruction": "Prends l'objectif Donjon des Forgerons puis STOP. On le fera avec Recouvrement de dette à la Tabasse.",
+      "instruction": "Retourne voir Pat Akess en [5,0], prends l'objectif Donjon des Forgerons puis STOP. La quête reste active jusqu'au passage Forgerons.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-sbires-du-maitre.html"
@@ -5128,7 +5145,20 @@
       "longRunningGoal": {
         "goalId": "les-sbires-du-maitre",
         "phase": "start"
-      }
+      },
+      "guideItems": [
+        {
+          "action": "advance",
+          "label": "Les sbires du maître",
+          "location": {
+            "x": 5,
+            "y": 0
+          },
+          "note": "Prends l'objectif Donjon des Forgerons puis STOP."
+        }
+      ],
+      "momentId": "moment-route-step-0139",
+      "displayRole": "transition"
     },
     {
       "id": "route-step-0142",
@@ -5137,11 +5167,13 @@
       "type": "alignment",
       "title": "Entrainement avec Torche",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/entraicircnement-avec-torche.html"
       },
+      "momentId": "moment-route-step-0142",
       "location": {
         "x": -32,
         "y": -57
@@ -5154,11 +5186,13 @@
       "type": "alignment",
       "title": "Cartes spéciales d'Amayiro",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/cartes-speacuteciales-damayiro.html"
       },
+      "momentId": "moment-route-step-0142",
       "location": {
         "x": -32,
         "y": -57
@@ -5171,11 +5205,13 @@
       "type": "alignment",
       "title": "A vol d'oiseau",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/agrave-vol-doiseau.html"
       },
+      "momentId": "moment-route-step-0142",
       "location": {
         "x": -32,
         "y": -57
@@ -5188,11 +5224,13 @@
       "type": "alignment",
       "title": "Pas de fainéants dans les rangs",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/pas-de-faineacuteants-dans-les-rangs.html"
       },
+      "momentId": "moment-route-step-0142",
       "location": {
         "x": -32,
         "y": -57
@@ -5205,11 +5243,13 @@
       "type": "alignment",
       "title": "Premiere visite a Brakmar",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/premiegravere-visite-agrave-bracirckmar.html"
       },
+      "momentId": "moment-route-step-0142",
       "location": {
         "x": -32,
         "y": -57
@@ -5222,11 +5262,13 @@
       "type": "alignment",
       "title": "Un sanglier un peu trop agressif",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/un-sanglier-un-peu-trop-agressif.html"
       },
+      "momentId": "moment-route-step-0142",
       "location": {
         "x": -32,
         "y": -57
@@ -5662,11 +5704,13 @@
       "type": "alignment",
       "title": "Pot l'agent double",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/pot-lagent-double.html"
       },
+      "momentId": "moment-route-step-0172",
       "location": {
         "x": -32,
         "y": -57
@@ -5679,11 +5723,13 @@
       "type": "alignment",
       "title": "De la poudre aux yeux de Brâkmar",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/de-la-poudre-aux-yeux-de-bracirckmar.html"
       },
+      "momentId": "moment-route-step-0172",
       "location": {
         "x": -32,
         "y": -57
@@ -5696,11 +5742,13 @@
       "type": "alignment",
       "title": "Une brèche à Bonta",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/une-bregraveche-agrave-bonta.html"
       },
+      "momentId": "moment-route-step-0172",
       "location": {
         "x": -32,
         "y": -57
@@ -5713,12 +5761,14 @@
       "type": "alignment",
       "title": "D'égouts temps",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "instruction": "TERMINE la quête. Le prérequis Wabbit est déjà validé.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/deacutegouts-temps.html"
       },
+      "momentId": "moment-route-step-0172",
       "location": {
         "x": -32,
         "y": -57
@@ -5731,11 +5781,13 @@
       "type": "alignment",
       "title": "L'élite squelettique",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/leacutelite-squelettique.html"
       },
+      "momentId": "moment-route-step-0172",
       "location": {
         "x": -32,
         "y": -57
@@ -5748,11 +5800,13 @@
       "type": "alignment",
       "title": "La foire du Trool suspectée",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-foire-du-trool-suspecteacutee.html"
       },
+      "momentId": "moment-route-step-0172",
       "location": {
         "x": -32,
         "y": -57
@@ -5875,12 +5929,14 @@
       "blockId": "block-05",
       "type": "quest",
       "title": "Retourner voir le Dark Vlad, toujours sans mourir — LANCER / TERMINER",
+      "displayRole": "objective",
       "action": "LANCER / TERMINER",
       "instruction": "Suis la boussole entre les deux PNJ.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/retourner-voir-le-dark-vlad-toujours-sans-mourir.html"
       },
+      "momentId": "moment-route-step-0215",
       "location": {
         "x": -6,
         "y": -3
@@ -5916,12 +5972,14 @@
       "blockId": "block-05",
       "type": "quest",
       "title": "Qui botte le cul des Culs Bottés ? — LANCER / TERMINER",
+      "displayRole": "objective",
       "action": "LANCER / TERMINER",
       "instruction": "Après la quête, suis la boussole jusqu'à Terrdala [27,-28].",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/qui-botte-le-cul-des-culs-botteacutes.html"
       },
+      "momentId": "moment-route-step-0215",
       "location": {
         "x": 5,
         "y": 1
@@ -6568,11 +6626,13 @@
       "type": "alignment",
       "title": "Des capes Bontariennes",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/des-capes-bontariennes.html"
       },
+      "momentId": "moment-route-step-0225",
       "location": {
         "x": -32,
         "y": -57
@@ -6585,11 +6645,13 @@
       "type": "alignment",
       "title": "Corvée de patate",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/corveacutee-de-patate.html"
       },
+      "momentId": "moment-route-step-0225",
       "location": {
         "x": -32,
         "y": -57
@@ -6602,11 +6664,13 @@
       "type": "alignment",
       "title": "Lyeno, Abraknyde malgré lui",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/lyeno-abraknyde-malgreacute-lui.html"
       },
+      "momentId": "moment-route-step-0225",
       "location": {
         "x": -32,
         "y": -57
@@ -6619,11 +6683,13 @@
       "type": "alignment",
       "title": "Au service de Danathor",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/au-service-de-danathor.html"
       },
+      "momentId": "moment-route-step-0225",
       "location": {
         "x": -32,
         "y": -57
@@ -6636,11 +6702,13 @@
       "type": "alignment",
       "title": "Amayiro à l'ombre du Champo",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/amayiro-agrave-lombre-du-champo.html"
       },
+      "momentId": "moment-route-step-0225",
       "location": {
         "x": -32,
         "y": -57
@@ -6653,11 +6721,13 @@
       "type": "alignment",
       "title": "Retourner voir le Dark Vlad, toujours sans mourir — LANCER / TERMINER",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/retourner-voir-le-dark-vlad-toujours-sans-mourir.html"
       },
+      "momentId": "moment-route-step-0225",
       "location": {
         "x": -32,
         "y": -57
@@ -6981,12 +7051,14 @@
       "blockId": "block-06",
       "type": "quest",
       "title": "Les bandits de Cania — LANCER / TERMINER",
+      "displayRole": "objective",
       "action": "LANCER / TERMINER",
       "instruction": "En [-6,-3], parle à Mériana et LANCE Les bandits de Cania. TERMINE la quête selon DPLN.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-bandits-de-cania.html"
       },
+      "momentId": "moment-route-step-0221",
       "location": {
         "x": -6,
         "y": -3
@@ -7002,12 +7074,14 @@
       "blockId": "block-06",
       "type": "quest",
       "title": "C'est tout simple — LANCER / TERMINER",
+      "displayRole": "objective",
       "action": "LANCER / TERMINER",
       "instruction": "En [-6,-15], LANCE C'est tout simple et TERMINE la quête avant d'ouvrir Arak-haï en pagaille.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/cest-tout-simple.html"
       },
+      "momentId": "moment-route-step-0221",
       "location": {
         "x": -6,
         "y": -15
@@ -7023,12 +7097,14 @@
       "blockId": "block-06",
       "type": "quest",
       "title": "Arak-haï en pagaille — LANCER / avancer jusqu'à Reine Nyée",
+      "displayRole": "objective",
       "action": "LANCER / AVANCER / STOP",
       "instruction": "En [5,-6], LANCE Arak-haï en pagaille et AVANCE jusqu'à l'objectif Reine Nyée, puis STOP. Ne fais pas le donjon avant Tour du propriétaire.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/arak-haiuml-en-pagaille.html"
       },
+      "momentId": "moment-route-step-0221",
       "location": {
         "x": 5,
         "y": -6
@@ -7919,11 +7995,13 @@
       "type": "alignment",
       "title": "Dike Tarak, la menace",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/dike-tarak-la-menace.html"
       },
+      "momentId": "moment-route-step-0290",
       "location": {
         "x": -32,
         "y": -57
@@ -7936,11 +8014,13 @@
       "type": "alignment",
       "title": "Des combats pas très légaux",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/des-combats-pas-tregraves-leacutegaux.html"
       },
+      "momentId": "moment-route-step-0290",
       "location": {
         "x": -32,
         "y": -57
@@ -7953,11 +8033,13 @@
       "type": "alignment",
       "title": "Mission de reconnaissance au cimetière",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/mission-de-reconnaissance-au-cimetiegravere.html"
       },
+      "momentId": "moment-route-step-0290",
       "location": {
         "x": -32,
         "y": -57
@@ -7970,12 +8052,14 @@
       "type": "alignment",
       "title": "Vengeance par procuration — avancer jusqu'au Domaine Ancestral",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "LANCER / AVANCER / STOP",
       "instruction": "En [-32,-57], LANCE Vengeance par procuration et AVANCE jusqu'à l'Abraknyde Ancestral puis STOP.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/vengeance-par-procuration.html"
       },
+      "momentId": "moment-route-step-0290",
       "location": {
         "x": -32,
         "y": -57
@@ -8144,12 +8228,14 @@
       "type": "alignment",
       "title": "La lettre anonyme — Chapiteau / Bozoteur",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "instruction": "Entre de nouveau au Chapiteau uniquement pour tuer un Bozoteur et récupérer la Poussière magik, puis ressors et TERMINE La lettre anonyme. Aucun second Choudini nécessaire.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-lettre-anonyme.html"
       },
+      "momentId": "moment-route-step-0303",
       "location": {
         "x": -32,
         "y": -57
@@ -8162,11 +8248,13 @@
       "type": "alignment",
       "title": "Tabi t'a fleuri",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/tabi-ta-fleuri.html"
       },
+      "momentId": "moment-route-step-0303",
       "launchInstruction": "Selon ton choix dans Au service de Danathor : si tu as empoisonné Rimaraf, parle à Danathor en [-36,-60] ; sinon parle à Larry Poller en [-34,-58]."
     },
     {
@@ -8176,11 +8264,13 @@
       "type": "alignment",
       "title": "Des badges pour la bonne cause",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/des-badges-pour-la-bonne-cause.html"
       },
+      "momentId": "moment-route-step-0305",
       "location": {
         "x": -32,
         "y": -57
@@ -8193,11 +8283,13 @@
       "type": "alignment",
       "title": "Leçon de cuisine",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/leccedilon-de-cuisine.html"
       },
+      "momentId": "moment-route-step-0305",
       "location": {
         "x": -32,
         "y": -57
@@ -8210,11 +8302,13 @@
       "type": "alignment",
       "title": "Ras le bol de Lenglad",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/ras-le-bol-de-lenglad.html"
       },
+      "momentId": "moment-route-step-0305",
       "location": {
         "x": -32,
         "y": -57
@@ -8227,11 +8321,13 @@
       "type": "alignment",
       "title": "Dapyus n'est pas doué",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/dapyus-nest-pas-doueacute.html"
       },
+      "momentId": "moment-route-step-0305",
       "location": {
         "x": -32,
         "y": -57
@@ -8636,11 +8732,13 @@
       "type": "alignment",
       "title": "Les Ecas ne flippent pas",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-ecas-ne-flippent-pas.html"
       },
+      "momentId": "moment-route-step-0330",
       "location": {
         "x": -32,
         "y": -57
@@ -8653,11 +8751,13 @@
       "type": "alignment",
       "title": "Plaine de chats",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/plaine-de-chats.html"
       },
+      "momentId": "moment-route-step-0330",
       "location": {
         "x": -32,
         "y": -57
@@ -8670,11 +8770,13 @@
       "type": "alignment",
       "title": "À l'endroit, à l'envers",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/agrave-lendroit-agrave-lenvers.html"
       },
+      "momentId": "moment-route-step-0330",
       "location": {
         "x": -32,
         "y": -57
@@ -8687,11 +8789,13 @@
       "type": "alignment",
       "title": "Dans la gueule du chacha",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/dans-la-gueule-du-chacha.html"
       },
+      "momentId": "moment-route-step-0330",
       "location": {
         "x": -32,
         "y": -57
@@ -8704,11 +8808,13 @@
       "type": "alignment",
       "title": "Alimentaire mon cher",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/alimentaire-mon-cher.html"
       },
+      "momentId": "moment-route-step-0330",
       "location": {
         "x": -32,
         "y": -57
@@ -8721,11 +8827,13 @@
       "type": "alignment",
       "title": "Bouc à misère",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/bouc-a-misere.html"
       },
+      "momentId": "moment-route-step-0330",
       "location": {
         "x": -32,
         "y": -57
@@ -8738,11 +8846,13 @@
       "type": "alignment",
       "title": "Flagrant délire",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/flagrant-delire.html"
       },
+      "momentId": "moment-route-step-0330",
       "location": {
         "x": -32,
         "y": -57
@@ -8755,11 +8865,13 @@
       "type": "alignment",
       "title": "Quand y'en a marre de Brâkmar",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/quand-y-en-a-marre-de-brakmar.html"
       },
+      "momentId": "moment-route-step-0330",
       "location": {
         "x": -32,
         "y": -57
@@ -8772,12 +8884,14 @@
       "type": "alignment",
       "title": "La capture",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "instruction": "TERMINE La capture. Tu es maintenant prêt à reprendre l'alignement 51+ au bloc 09.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-capture.html"
       },
+      "momentId": "moment-route-step-0330",
       "location": {
         "x": -32,
         "y": -57
@@ -8905,12 +9019,14 @@
       "blockId": "block-07",
       "type": "quest",
       "title": "Taures et détours — avancer jusqu'au Minotoror",
+      "displayRole": "objective",
       "action": "LANCER / AVANCER / STOP",
       "instruction": "En [-6,-3], LANCE Taures et détours puis AVANCE jusqu'au Minotoror et STOP. Ne fais pas le Labyrinthe avant Royalmouth #1.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/taures-et-deacutetours.html"
       },
+      "momentId": "moment-route-step-0347",
       "location": {
         "x": -6,
         "y": -3
@@ -8926,12 +9042,14 @@
       "blockId": "block-07",
       "type": "quest",
       "title": "L'art de la langue de bois — avancer jusqu'au Chêne Mou",
+      "displayRole": "objective",
       "action": "LANCER / AVANCER / STOP",
       "instruction": "LANCE L'art de la langue de bois et avance jusqu'au Chêne Mou, puis STOP devant le donjon.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/lart-de-la-langue-de-bois.html"
       },
+      "momentId": "moment-route-step-0347",
       "location": {
         "x": -11,
         "y": -13
@@ -9739,11 +9857,13 @@
       "blockId": "block-08",
       "type": "quest",
       "title": "Regrets d'éternailes",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/regrets-deacuteternailes.html"
       },
+      "momentId": "moment-route-step-0398",
       "location": {
         "x": -42,
         "y": -17
@@ -10215,12 +10335,14 @@
       "blockId": "block-08",
       "type": "quest",
       "title": "La fonte des glaces",
+      "displayRole": "objective",
       "action": "LANCER / TERMINER",
       "instruction": "En [-60,-57], LANCE La fonte des glaces et TERMINE la quête avec les ressources préparées.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-fonte-des-glaces.html"
       },
+      "momentId": "moment-route-step-0426",
       "location": {
         "x": -60,
         "y": -57
@@ -10465,12 +10587,14 @@
       "blockId": "block-08",
       "type": "quest",
       "title": "Lumière sur l'ombre",
+      "displayRole": "objective",
       "action": "LANCER / TERMINER",
       "instruction": "En [-64,-55], LANCE Lumière sur l'ombre et TERMINE-la : cette quête est un prérequis dur futur de Le givre des révélations.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/lumiegravere-sur-lombre.html"
       },
+      "momentId": "moment-route-step-0435",
       "location": {
         "x": -64,
         "y": -55
@@ -10486,12 +10610,14 @@
       "blockId": "block-08",
       "type": "quest",
       "title": "Il préfère la mort en mer",
+      "displayRole": "objective",
       "action": "LANCER / TERMINER",
       "instruction": "En [-77,-44], LANCE Il préfère la mort en mer et TERMINE la quête avant le futur lancement de Le mal a dit.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/il-preacutefegravere-la-mort-en-mer.html"
       },
+      "momentId": "moment-route-step-0435",
       "location": {
         "x": -77,
         "y": -44
@@ -11316,11 +11442,13 @@
       "blockId": "block-09",
       "type": "order",
       "title": "Apprentissage : Disciple de Silvosse",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/apprentissage-disciple-de-silvosse.html"
       },
+      "momentId": "moment-route-step-0486",
       "location": {
         "x": -34,
         "y": -58
@@ -11332,11 +11460,13 @@
       "blockId": "block-09",
       "type": "order",
       "title": "Apprentissage : Espion Silencieux",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/apprentissage-espion-silencieux.html"
       },
+      "momentId": "moment-route-step-0486",
       "location": {
         "x": -34,
         "y": -58
@@ -11348,12 +11478,14 @@
       "blockId": "block-09",
       "type": "dungeon",
       "title": "◆ Épave du Grolandais violent — THOMAHON + FAIS DODO",
+      "displayRole": "objective",
       "action": "FAIRE",
       "instruction": "Entre : VÉRIFIE le lancement automatique de Fais dodo, t'auras du gâteau. Utilise l'idole de Thomahon Marine, vaincs Ben le Ripate puis parle à Fantômahawk avant de partir afin de TERMINER Fais dodo.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/epave-du-grolandais-violent.html"
-      }
+      },
+      "momentId": "moment-route-step-0488"
     },
     {
       "id": "route-step-0489",
@@ -11361,12 +11493,14 @@
       "blockId": "block-09",
       "type": "quest",
       "title": "Chauffage à moindre frais",
+      "displayRole": "objective",
       "action": "TERMINER",
       "instruction": "TERMINE Chauffage à moindre frais maintenant que Fais dodo, t'auras du gâteau est fermé.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/chauffage-agrave-moindre-frais.html"
       },
+      "momentId": "moment-route-step-0488",
       "location": {
         "x": -79,
         "y": -42
@@ -13927,11 +14061,13 @@
       "type": "alignment",
       "title": "À l'ombre des murs",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/a-l-ombre-des-murs.html"
       },
+      "momentId": "moment-route-step-0640",
       "location": {
         "x": -32,
         "y": -57
@@ -13944,12 +14080,14 @@
       "type": "alignment",
       "title": "Fée d'hiver — LANCER / avancer jusqu'à Ilyzaelle",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "LANCER / AVANCER / STOP",
       "instruction": "En [-32,-57], LANCE Fée d'hiver auprès d'Amayiro. Avance jusqu'à devoir entrer au Belvédère d'Ilyzaelle puis STOP. Garde la quête active jusqu'à la convergence Valonia.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/fee-d-hiver.html"
       },
+      "momentId": "moment-route-step-0640",
       "location": {
         "x": -32,
         "y": -57
@@ -14957,11 +15095,13 @@
       "blockId": "block-12",
       "type": "quest",
       "title": "À la rescousse des magypus",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/a-la-rescousse-des-magypus.html"
       },
+      "momentId": "moment-route-step-0686",
       "location": {
         "x": -63,
         "y": 29
@@ -14973,11 +15113,13 @@
       "blockId": "block-12",
       "type": "quest",
       "title": "Dernier contact",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/dernier-contact.html"
       },
+      "momentId": "moment-route-step-0686",
       "location": {
         "x": 8,
         "y": -67
@@ -14989,11 +15131,13 @@
       "blockId": "block-12",
       "type": "quest",
       "title": "La voix des morts",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-voix-des-morts.html"
       },
+      "momentId": "moment-route-step-0686",
       "location": {
         "x": 8,
         "y": -67
@@ -15005,11 +15149,13 @@
       "blockId": "block-12",
       "type": "quest",
       "title": "Le fléau de Burin",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-fleau-de-burin.html"
       },
+      "momentId": "moment-route-step-0686",
       "location": {
         "x": -12,
         "y": 22
@@ -15824,11 +15970,13 @@
       "blockId": "block-12",
       "type": "quest",
       "title": "La colère des dieux",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-colere-des-dieux.html"
       },
+      "momentId": "moment-route-step-0733",
       "launchInstruction": "Dans ton temple de classe, parle au maître de ta classe, évoque les Tours de la Fratrie des Oubliés puis confirme que tu es prêt à affronter leurs soldats."
     },
     {
@@ -15837,12 +15985,14 @@
       "blockId": "block-12",
       "type": "quest",
       "title": "L'arme fatale",
+      "displayRole": "objective",
       "action": "TERMINER",
       "instruction": "TERMINE L'arme fatale maintenant et obtiens le sort permanent Nécronyx. Il sera requis pour Bethel et Solar.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/l-arme-fatale.html"
       },
+      "momentId": "moment-route-step-0733",
       "launchInstruction": "Depuis ton temple de classe, utilise ta statue pour rejoindre le Domaine des dieux, descends au sous-sol puis parle à Gobanos le forgeron."
     },
     {
@@ -15851,12 +16001,14 @@
       "blockId": "block-12",
       "type": "quest",
       "title": "Les racines du mal — LANCER / TERMINER",
+      "displayRole": "objective",
       "action": "LANCER / TERMINER",
       "instruction": "En [-1,2], LANCE puis TERMINE Les racines du mal avant Un pouvoir mérydique.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-racines-du-mal.html"
       },
+      "momentId": "moment-route-step-0733",
       "location": {
         "x": -1,
         "y": 2
@@ -16051,11 +16203,13 @@
       "blockId": "block-12",
       "type": "quest",
       "title": "Elle va finir par se faire coffrer",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/elle-va-finir-par-se-faire-coffrer.html"
       },
+      "momentId": "moment-route-step-0748",
       "location": {
         "x": -22,
         "y": -24
@@ -16067,11 +16221,13 @@
       "blockId": "block-12",
       "type": "quest",
       "title": "Pompe à fric",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/pompe-agrave-fric.html"
       },
+      "momentId": "moment-route-step-0748",
       "location": {
         "x": -1,
         "y": -1
@@ -16083,11 +16239,13 @@
       "blockId": "block-12",
       "type": "quest",
       "title": "Koffrologie",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/koffrologie.html"
       },
+      "momentId": "moment-route-step-0748",
       "location": {
         "x": -1,
         "y": -1
@@ -16429,11 +16587,13 @@
       "blockId": "block-12",
       "type": "quest",
       "title": "Les grandes galeries",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-grandes-galeries.html"
       },
+      "momentId": "moment-route-step-0764",
       "location": {
         "x": 3,
         "y": -4
@@ -16445,11 +16605,13 @@
       "blockId": "block-12",
       "type": "quest",
       "title": "Un cœur d'or",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/un-coeligur-dor.html"
       },
+      "momentId": "moment-route-step-0764",
       "launchInstruction": "Double-clique le Joyau écarlate dans ton inventaire de quête. Il est obtenu à la fin de Les grandes galeries."
     },
     {
@@ -16458,11 +16620,13 @@
       "blockId": "block-12",
       "type": "quest",
       "title": "Maudite générosité",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/maudite-geacuteneacuterositeacute.html"
       },
+      "momentId": "moment-route-step-0764",
       "location": {
         "x": 3,
         "y": -4
@@ -16474,11 +16638,13 @@
       "blockId": "block-12",
       "type": "quest",
       "title": "Touchez pas à Grisebigle",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/touchez-pas-a-grisebigle.html"
       },
+      "momentId": "moment-route-step-0764",
       "location": {
         "x": -22,
         "y": -24
@@ -16490,11 +16656,13 @@
       "blockId": "block-12",
       "type": "quest",
       "title": "Échantillonnage",
+      "displayRole": "objective",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/eacutechantillonnage.html"
       },
+      "momentId": "moment-route-step-0764",
       "location": {
         "x": -22,
         "y": -24
@@ -17232,12 +17400,14 @@
       "type": "alignment",
       "title": "L'exorciste",
       "displayType": "ALIGN.",
+      "displayRole": "objective",
       "action": "TERMINER",
       "instruction": "TERMINE L'exorciste. Tu atteins alors l'alignement 100.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/l-exorciste.html"
       },
+      "momentId": "moment-route-step-0808",
       "location": {
         "x": -32,
         "y": -57
@@ -19567,7 +19737,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/cultures-et-turpitudes.html"
       },
-      "momentId": "moment-route-step-0963",
+      "momentId": "moment-route-step-0961",
       "location": {
         "x": 4,
         "y": -6
