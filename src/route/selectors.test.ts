@@ -1,7 +1,11 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { RouteDocument, RouteStep } from './types';
-import { getActiveLongRunningGoals, getStepGroups } from './selectors';
+import {
+  getActiveLongRunningGoals,
+  getSequenceObjectives,
+  getStepGroups,
+} from './selectors';
 
 const baseSteps: RouteStep[] = [
   {
@@ -115,6 +119,91 @@ test('STOP closes the current checklist instead of creating a useless standalone
     ['take', 'advance-stop'],
     ['next'],
   ]);
+});
+
+test('STOP does not split a quest that continues through its dungeon', () => {
+  const source = { label: 'DPLN', url: 'https://example.test/quest-a' };
+  const groupedRoute: RouteDocument = {
+    ...route,
+    steps: [
+      {
+        id: 'advance-stop',
+        order: 1,
+        blockId: 'block-01',
+        type: 'quest',
+        title: 'Quest A',
+        action: 'AVANCER / STOP',
+        source,
+      },
+      {
+        id: 'dungeon',
+        order: 2,
+        blockId: 'block-01',
+        type: 'dungeon',
+        title: 'Dungeon A',
+        action: 'FAIRE & VALIDER',
+      },
+      {
+        id: 'finish',
+        order: 3,
+        blockId: 'block-01',
+        type: 'resume',
+        title: 'Quest A',
+        action: 'REPRENDRE / TERMINER',
+        source,
+      },
+    ],
+  };
+
+  assert.deepEqual(getStepGroups(groupedRoute).map((group) => group.steps.map((step) => step.id)), [
+    ['advance-stop', 'dungeon', 'finish'],
+  ]);
+});
+
+test('same quest technical steps collapse into one player-facing objective', () => {
+  const source = { label: 'DPLN', url: 'https://example.test/quest-a' };
+  const steps: RouteStep[] = [
+    {
+      id: 'advance',
+      order: 1,
+      blockId: 'block-01',
+      type: 'quest',
+      title: 'Quest A',
+      action: 'AVANCER / STOP',
+      source,
+    },
+    {
+      id: 'dungeon',
+      order: 2,
+      blockId: 'block-01',
+      type: 'dungeon',
+      title: 'Dungeon A',
+      action: 'FAIRE & VALIDER',
+    },
+    {
+      id: 'finish',
+      order: 3,
+      blockId: 'block-01',
+      type: 'resume',
+      title: 'Quest A',
+      action: 'REPRENDRE / TERMINER',
+      source,
+    },
+    {
+      id: 'quest-b',
+      order: 4,
+      blockId: 'block-01',
+      type: 'quest',
+      title: 'Quest B',
+      action: 'TERMINER',
+      source: { label: 'DPLN', url: 'https://example.test/quest-b' },
+    },
+  ];
+
+  assert.deepEqual(
+    getSequenceObjectives(steps).map((objective) => objective.steps.map((step) => step.id)),
+    [['advance', 'dungeon', 'finish'], ['quest-b']],
+  );
 });
 
 test('structured and critical steps remain isolated', () => {
