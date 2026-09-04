@@ -6,6 +6,7 @@ import { loadProgress, saveProgress } from './progress/storage';
 import { loadBundledRoute } from './route/loader';
 import {
   getActiveLongRunningGoals,
+  getActiveParallelGroups,
   getBlockPreparationSteps,
   getCompletedSteps,
   getFirstIncompleteStep,
@@ -94,6 +95,10 @@ function getObjectiveDisplayStep(steps: RouteStep[]): RouteStep {
   return steps[0];
 }
 
+function getParallelGroupLabel(steps: RouteStep[]): string {
+  return [...new Set(steps.map((step) => step.title))].join(' + ');
+}
+
 export function App() {
   const initialProgress = useMemo(() => loadProgress(), []);
   const initialShortcuts = useMemo(() => loadShortcutBindings(), []);
@@ -169,6 +174,7 @@ export function App() {
 
   const progress = getProgress(route, completedStepIds);
   const activeGoals = getActiveLongRunningGoals(route, completedStepIds);
+  const activeParallelGroups = getActiveParallelGroups(route, completedStepIds);
   const nextHardLock = getNextHardLock(route, completedStepIds);
   const completedHistory = getCompletedSteps(route, completedStepIds);
   const isCurrentCompleted = currentGroup
@@ -360,6 +366,15 @@ export function App() {
           <span>Bloc {currentBlock.order} / {route.blocks.length}</span>
           <strong>{currentBlock.title}</strong>
         </div>
+      )}
+
+      {activeParallelGroups.length > 0 && (
+        <section className="step-context step-context--goal" aria-label="Quêtes en parallèle">
+          <strong>QUÊTES EN PARALLÈLE — garde-les actives</strong>
+          {activeParallelGroups.map((group) => (
+            <span key={group.parallelId}>{getParallelGroupLabel(group.members)}</span>
+          ))}
+        </section>
       )}
 
       {drawerOpen && !compact && (
