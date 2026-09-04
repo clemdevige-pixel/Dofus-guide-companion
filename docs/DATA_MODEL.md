@@ -39,6 +39,13 @@ interface RouteCoordinate {
   y: number;
 }
 
+interface GuideItem {
+  action: 'take' | 'advance' | 'finish' | 'do';
+  label: string;
+  location?: RouteCoordinate;
+  note?: string;
+}
+
 interface RouteStep {
   id: string;
   order: number;
@@ -59,6 +66,7 @@ interface RouteStep {
   destination?: RouteCoordinate;
   launchInstruction?: string;
 
+  guideItems?: GuideItem[];
   preparationItems?: string[];
 
   longRunningGoal?: {
@@ -91,7 +99,61 @@ Une étape pouvant lancer plusieurs quêtes compatibles peut conserver une seule
 
 L'UI n'embarque aucune logique spécifique par quête et ne doit pas reconstruire une destination depuis le texte.
 
-## 5. Identité stable dans le Sheet
+## 5. Roadbook structuré : GUIDE_ITEMS
+
+Les moments de parcours mutualisés peuvent exposer `guideItems` pour répondre directement à la question du joueur : **quoi faire maintenant, et où ?**
+
+Exemple runtime :
+
+```json
+{
+  "guideItems": [
+    {
+      "action": "advance",
+      "label": "Bûcherons en détresse",
+      "location": { "x": 3, "y": -21 },
+      "note": "Interroge le Bûcheron traumatisé."
+    },
+    {
+      "action": "advance",
+      "label": "Tel est pris qui croyait prendre",
+      "location": { "x": 1, "y": -21 },
+      "note": "Parle à Alberta Borida."
+    }
+  ]
+}
+```
+
+Dans `ROUTE`, la colonne technique `GUIDE_ITEMS` utilise **une action par ligne** avec le format :
+
+```text
+ACTION :: LIBELLÉ :: [x,y] :: NOTE OPTIONNELLE
+```
+
+Actions autorisées :
+
+- `PRENDRE` → `take` ;
+- `AVANCER` → `advance` ;
+- `TERMINER` → `finish` ;
+- `FAIRE` → `do`.
+
+Exemple éditorial :
+
+```text
+AVANCER :: Bûcherons en détresse :: [3,-21] :: Interroge le Bûcheron traumatisé.
+AVANCER :: Tel est pris qui croyait prendre :: [1,-21] :: Parle à Alberta Borida.
+```
+
+Règles :
+
+- `GUIDE_ITEMS` sert aux listes courtes et actionnables, pas à recopier DPLN ;
+- la note est facultative et doit seulement expliquer ce que la position représente lorsque le nom de la quête ne suffit pas ;
+- les explications longues, `STOP`, ordre obligatoire ou cas particuliers restent dans `instruction` ;
+- l'UI groupe les items par action et affiche par exemple « Vous devez maintenant prendre : » ;
+- React ne parse jamais `title` ou `instruction` pour reconstruire ces listes ;
+- les coordonnées des items sont indépendantes de `POSITION` et `DESTINATION` : elles décrivent les arrêts individuels d'un moment de parcours.
+
+## 6. Identité stable dans le Sheet
 
 `ROUTE` contient des colonnes techniques :
 
@@ -101,7 +163,8 @@ L'UI n'embarque aucune logique spécifique par quête et ne doit pas reconstruir
 - `POSITION` : position **de lancement** unique sous la forme `[x,y]` lorsqu'elle existe ;
 - `LANCEMENT` : instruction structurée de lancement lorsqu'aucune position unique n'est correcte ;
 - `LANCEMENT_REQUIS` : booléen indiquant que la ligne réalise une ou plusieurs prises de quête et doit donc posséder `POSITION` ou `LANCEMENT` ;
-- `DESTINATION` : destination structurée `[x,y]` du moment de parcours.
+- `DESTINATION` : destination structurée `[x,y]` du moment de parcours ;
+- `GUIDE_ITEMS` : liste structurée des actions courtes du roadbook pour les étapes mutualisées.
 
 `STEP_ID` est une valeur figée. Il ne doit jamais être recalculé depuis le numéro de ligne, le titre ou l'ordre de l'étape.
 
@@ -109,7 +172,7 @@ Lors d'une relinéarisation Ganymède, un ancien `STEP_ID` reste attaché au mê
 
 Une insertion de ligne dans le Sheet ne doit donc pas invalider la progression locale déjà sauvegardée.
 
-## 6. Fils rouges et verrous
+## 7. Fils rouges et verrous
 
 Un fil rouge et son verrou sont liés par `goalId`, jamais par leur titre.
 
@@ -141,7 +204,7 @@ L'application peut ainsi dériver les fils rouges actifs sans rechercher « Ocre
 
 La refonte Ganymède augmente volontairement le nombre de quêtes gardées actives. Toute quête qui doit traverser plusieurs étapes et dont l'état applicatif doit être exposé doit utiliser le mécanisme structuré de fil rouge plutôt qu'une convention textuelle implicite.
 
-## 7. Préparation
+## 8. Préparation
 
 Une PRÉPA est exportée vers `preparationItems` lorsque des lignes à puce sont présentes :
 
@@ -161,7 +224,7 @@ Le texte éditorial reste disponible dans le Sheet ; l'application n'a pas besoi
 
 La préparation doit tenir compte des ressources obtenues naturellement dans les quêtes précédentes : ne pas demander un achat/farm si la route optimisée fournit déjà la ressource avant son usage.
 
-## 8. Action
+## 9. Action
 
 `action` reste principalement une donnée d'affichage :
 
@@ -180,7 +243,7 @@ L'application ne déduit jamais `type` depuis `action`.
 
 Exception de validation éditoriale : une action contenant `LANCER` doit avoir `LANCEMENT_REQUIS=TRUE`. Cette règle ne sert pas à déterminer le rendu ; elle protège la complétude de la donnée de lancement.
 
-## 9. Données volontairement absentes
+## 10. Données volontairement absentes
 
 Ne pas exporter si elles ne servent pas à l'application :
 
@@ -192,9 +255,9 @@ Ne pas exporter si elles ne servent pas à l'application :
 
 Les couleurs sont une responsabilité de l'UI, dérivée des données structurées.
 
-Les regroupements Ganymède ne doivent pas être reconstruits à partir du texte. Si la future UI a besoin d'afficher explicitement plusieurs quêtes concernées par une étape de parcours, le modèle sera étendu avec un champ structuré dédié avant modification de React.
+Les regroupements Ganymède ne doivent pas être reconstruits à partir du texte. Lorsqu'un moment de parcours doit afficher plusieurs quêtes concernées, utiliser `guideItems`.
 
-## 10. Export depuis le Sheet
+## 11. Export depuis le Sheet
 
 Commande :
 
@@ -207,7 +270,7 @@ Configuration : voir `.env.example`.
 Flux :
 
 ```text
-ROUTE (A:Q)
+ROUTE (A:R)
    ↓
 scripts/export-route.ts
    ↓ validation stricte
@@ -223,6 +286,7 @@ L'export échoue notamment si :
 - `GOAL_PHASE` est invalide ;
 - `POSITION` n'est pas une paire d'entiers `[x,y]` ;
 - `DESTINATION` n'est pas une paire d'entiers `[x,y]` ;
+- une entrée `GUIDE_ITEMS` utilise une action inconnue ou une position invalide ;
 - une action contient `LANCER` sans `LANCEMENT_REQUIS=TRUE` ;
 - `LANCEMENT_REQUIS=TRUE` sans `POSITION` ni `LANCEMENT` ;
 - un verrou référence un `GOAL_ID` jamais déclaré ;
