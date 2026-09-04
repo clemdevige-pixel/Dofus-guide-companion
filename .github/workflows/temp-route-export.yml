@@ -1,0 +1,41 @@
+name: Temp route export
+
+on:
+  push:
+    branches:
+      - agent/temp-route-export
+    paths:
+      - .github/workflows/temp-route-export.yml
+
+permissions:
+  contents: write
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/temp-route-export
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Export route from Sheet
+        env:
+          ROUTE_SHEET_ID: 1l1eYM3T708s5j74LmsUi4wyzg6sM9xShPzS_ToBtVYg
+          GOOGLE_ACCESS_TOKEN: ${{ secrets.GOOGLE_ACCESS_TOKEN }}
+          GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
+        run: pnpm export:route
+      - run: pnpm validate:route
+      - name: Commit regenerated route
+        run: |
+          git config user.name "openai-agent"
+          git config user.email "openai-agent@users.noreply.github.com"
+          git add data/route.json
+          git commit -m "chore(route): sync preparation resources" || exit 0
+          git push origin HEAD:agent/temp-route-export
