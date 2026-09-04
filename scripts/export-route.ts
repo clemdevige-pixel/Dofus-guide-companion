@@ -28,7 +28,7 @@ const typeMap: Record<string, { type: StepType; displayType?: string }> = {
   'FIN': { type: 'finish' },
   'TOUR': { type: 'quest', displayType: 'TOUR' },
   'TURQUOISE': { type: 'quest', displayType: 'TURQUOISE' },
-  'OPTI ALIGNEMENT': { type: 'rule', displayType: 'OPTI ALIGNEMENT' },
+  'OPTI ALIGNEMENT': { type: 'major_step', displayType: 'OPTI ALIGNEMENT' },
 };
 
 const guideItemActionMap: Record<string, GuideItemAction> = {
