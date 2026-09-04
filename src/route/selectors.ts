@@ -257,7 +257,7 @@ export function getActiveLongRunningGoals(
 
     if (step.type === 'hard_lock' && step.hardLock?.goalId) {
       activeGoalIds.delete(step.hardLock.goalId);
-      activeSteps.delete(step.goalId);
+      activeSteps.delete(step.hardLock.goalId);
     }
   }
 
