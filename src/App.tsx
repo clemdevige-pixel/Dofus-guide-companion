@@ -125,6 +125,12 @@ export function App() {
     return firstIncomplete ? Math.max(0, getStepGroupIndex(route, firstIncomplete.id)) : 0;
   });
 
+  const [cardJumpValue, setCardJumpValue] = useState(() => String(viewIndex + 1));
+
+  useEffect(() => {
+    setCardJumpValue(String(viewIndex + 1));
+  }, [viewIndex]);
+
   const currentGroup = stepGroups[viewIndex];
   const currentStep = currentGroup
     ? currentGroup.steps.find((step) => !completedStepIds.has(step.id)) ?? currentGroup.steps[0]
@@ -200,6 +206,20 @@ export function App() {
     setViewIndex((index) => Math.min(stepGroups.length - 1, index + 1));
   }
 
+  function jumpToCard() {
+    const requestedCard = Number.parseInt(cardJumpValue, 10);
+    if (!Number.isFinite(requestedCard)) {
+      setCardJumpValue(String(viewIndex + 1));
+      return;
+    }
+
+    const targetCard = Math.min(stepGroups.length, Math.max(1, requestedCard));
+    setDrawerOpen(false);
+    setSecondaryView(null);
+    setViewIndex(targetCard - 1);
+    setCardJumpValue(String(targetCard));
+  }
+
   function toggleCurrentStep() {
     if (!currentGroup || !currentStep) {
       return;
@@ -218,7 +238,8 @@ export function App() {
       return next;
     });
 
-    if (shouldComplete && currentStep.type !== 'hard_lock' && viewIndex < stepGroups.length - 1) {
+    const containsHardLock = currentGroup.steps.some((step) => step.type === 'hard_lock');
+    if (shouldComplete && !containsHardLock && viewIndex < stepGroups.length - 1) {
       setViewIndex((index) => index + 1);
     }
   }
@@ -291,7 +312,12 @@ export function App() {
   }
 
   const isSequence = currentGroup.isSequence;
-  const typeLabel = isSequence ? 'SÉQUENCE' : currentStep.displayType ?? typeLabels[currentStep.type];
+  const containsHardLock = currentGroup.steps.some((step) => step.type === 'hard_lock');
+  const typeLabel = containsHardLock
+    ? 'VERROU DUR'
+    : isSequence
+      ? 'SÉQUENCE'
+      : currentStep.displayType ?? typeLabels[currentStep.type];
   const displayIndex = viewIndex + 1;
   const travelTarget = currentStep.destination ?? currentStep.location;
   const travelLabel = currentStep.destination ? 'Destination' : 'Lancement';
@@ -326,9 +352,25 @@ export function App() {
           </button>
           <div>
             <p className="eyebrow">Dofus Guide Companion</p>
-            <p className="progress-label">
-              Carte {displayIndex} / {stepGroups.length} · {progress.percentage}%
-            </p>
+            <form
+              className="card-jump"
+              onSubmit={(event) => {
+                event.preventDefault();
+                jumpToCard();
+              }}
+            >
+              <span>Carte</span>
+              <input
+                type="number"
+                min={1}
+                max={stepGroups.length}
+                value={cardJumpValue}
+                aria-label="Aller à la carte"
+                onChange={(event) => setCardJumpValue(event.target.value)}
+                onBlur={jumpToCard}
+              />
+              <span>/ {stepGroups.length} · {progress.percentage}%</span>
+            </form>
           </div>
           <button
             className="icon-button"
@@ -366,15 +408,6 @@ export function App() {
           <span>Bloc {currentBlock.order} / {route.blocks.length}</span>
           <strong>{currentBlock.title}</strong>
         </div>
-      )}
-
-      {activeParallelGroups.length > 0 && (
-        <section className="step-context step-context--goal" aria-label="Quêtes en parallèle">
-          <strong>QUÊTES EN PARALLÈLE — garde-les actives</strong>
-          {activeParallelGroups.map((group) => (
-            <span key={group.parallelId}>{getParallelGroupLabel(group.members)}</span>
-          ))}
-        </section>
       )}
 
       {drawerOpen && !compact && (
@@ -520,17 +553,32 @@ export function App() {
       )}
 
       <section
-        className={`current-step current-step--${isSequence ? 'sequence' : currentStep.type}`}
+        className={`current-step current-step--${containsHardLock ? 'hard_lock' : isSequence ? 'sequence' : currentStep.type}`}
         aria-labelledby="current-step-title"
       >
         {!compact && <span className="type-badge">{typeLabel}</span>}
 
+        {activeParallelGroups.length > 0 && (
+          <section className="step-context step-context--goal" aria-label="Quêtes en parallèle">
+            <strong>QUÊTES EN PARALLÈLE — garde-les actives</strong>
+            {activeParallelGroups.map((group) => (
+              <span key={group.parallelId}>{getParallelGroupLabel(group.members)}</span>
+            ))}
+          </section>
+        )}
+
         {isSequence ? (
           <>
             <div className="step-title-row">
-              <h1 id="current-step-title">{getSequenceTitle(currentGroup.steps)}</h1>
+              <h1 id="current-step-title">
+                {containsHardLock ? 'Verrou de progression' : getSequenceTitle(currentGroup.steps)}
+              </h1>
             </div>
-            <p className="action-label">{sequenceObjectives.length} objectifs à enchaîner</p>
+            <p className="action-label">
+              {containsHardLock
+                ? 'STOP — ne poursuis pas tant que la condition du verrou n’est pas remplie.'
+                : `${sequenceObjectives.length} objectifs à enchaîner`}
+            </p>
 
             <ol className="sequence-list">
               {sequenceObjectives.map((objective) => {
@@ -731,7 +779,7 @@ export function App() {
           ←
         </button>
         <button className="complete-button" type="button" onClick={toggleCurrentStep}>
-          {isCurrentCompleted ? '↶' : '✓'} {compact ? '' : isCurrentCompleted ? 'DÉVALIDER' : isSequence ? 'TOUT COCHER' : 'TERMINÉ'}
+          {isCurrentCompleted ? '↶' : '✓'} {compact ? '' : isCurrentCompleted ? 'DÉVALIDER' : containsHardLock ? 'VALIDER LE VERROU' : isSequence ? 'TOUT COCHER' : 'TERMINÉ'}
         </button>
         <button
           type="button"

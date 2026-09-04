@@ -727,3 +727,31 @@ button {
     padding-inline: 10px;
   }
 }
+
+
+/* Card direct navigation */
+.card-jump {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 3px;
+  color: #93a396;
+  font-size: 12px;
+}
+
+.card-jump input {
+  width: 46px;
+  height: 24px;
+  padding: 2px 4px;
+  border: 1px solid #334139;
+  border-radius: 6px;
+  background: #18211b;
+  color: #eef4ef;
+  text-align: center;
+  outline: none;
+}
+
+.card-jump input:focus {
+  border-color: #6a8f74;
+  box-shadow: 0 0 0 2px rgba(106, 143, 116, 0.18);
+}
