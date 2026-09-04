@@ -83,106 +83,69 @@ test('completed linked hard lock closes the goal', () => {
   );
 });
 
-test('consecutive trivial quest steps become one checklist group', () => {
+test('ordinary quest, dungeon, alignment and order steps share one checklist', () => {
   const groupedRoute: RouteDocument = {
     ...route,
     steps: [
-      {
-        id: 'take',
-        order: 1,
-        blockId: 'block-01',
-        type: 'quest',
-        title: 'Quest A — LANCER',
-        action: 'LANCER',
-        location: { x: 1, y: 2 },
-      },
-      {
-        id: 'dungeon',
-        order: 2,
-        blockId: 'block-01',
-        type: 'dungeon',
-        title: 'Dungeon A',
-        action: 'FAIRE & VALIDER',
-      },
-      {
-        id: 'finish-a',
-        order: 3,
-        blockId: 'block-01',
-        type: 'resume',
-        title: 'Quest A — TERMINER',
-        action: 'REPRENDRE / TERMINER',
-      },
-      {
-        id: 'take-b',
-        order: 4,
-        blockId: 'block-01',
-        type: 'quest',
-        title: 'Quest B — LANCER',
-        action: 'LANCER',
-        location: { x: 1, y: 2 },
-      },
+      { id: 'take', order: 1, blockId: 'block-01', type: 'quest', title: 'Quest A', action: 'LANCER' },
+      { id: 'dungeon', order: 2, blockId: 'block-01', type: 'dungeon', title: 'Dungeon A', action: 'FAIRE & VALIDER' },
+      { id: 'finish', order: 3, blockId: 'block-01', type: 'resume', title: 'Quest A', action: 'REPRENDRE / TERMINER' },
+      { id: 'alignment', order: 4, blockId: 'block-01', type: 'alignment', title: 'Alignement', action: 'TERMINER' },
+      { id: 'order', order: 5, blockId: 'block-01', type: 'order', title: 'Ordre', action: 'TERMINER' },
     ],
   };
 
   const groups = getStepGroups(groupedRoute);
   assert.equal(groups.length, 1);
   assert.equal(groups[0].isSequence, true);
-  assert.deepEqual(groups[0].steps.map((step) => step.id), ['take', 'dungeon', 'finish-a', 'take-b']);
+  assert.deepEqual(groups[0].steps.map((step) => step.id), ['take', 'dungeon', 'finish', 'alignment', 'order']);
 });
 
-test('critical and structured steps break checklist grouping', () => {
+test('STOP closes the current checklist instead of creating a useless standalone card', () => {
   const groupedRoute: RouteDocument = {
     ...route,
     steps: [
-      {
-        id: 'simple-a',
-        order: 1,
-        blockId: 'block-01',
-        type: 'quest',
-        title: 'Simple A',
-        action: 'TERMINER',
-      },
-      {
-        id: 'stop',
-        order: 2,
-        blockId: 'block-01',
-        type: 'quest',
-        title: 'Stop here',
-        action: 'LANCER / STOP',
-      },
-      {
-        id: 'simple-b',
-        order: 3,
-        blockId: 'block-01',
-        type: 'quest',
-        title: 'Simple B',
-        action: 'TERMINER',
-      },
+      { id: 'take', order: 1, blockId: 'block-01', type: 'quest', title: 'Quest A', action: 'LANCER' },
+      { id: 'advance-stop', order: 2, blockId: 'block-01', type: 'quest', title: 'Quest A — avancer', action: 'AVANCER / STOP' },
+      { id: 'next', order: 3, blockId: 'block-01', type: 'quest', title: 'Quest B', action: 'TERMINER' },
+    ],
+  };
+
+  assert.deepEqual(getStepGroups(groupedRoute).map((group) => group.steps.map((step) => step.id)), [
+    ['take', 'advance-stop'],
+    ['next'],
+  ]);
+});
+
+test('structured and critical steps remain isolated', () => {
+  const groupedRoute: RouteDocument = {
+    ...route,
+    steps: [
+      { id: 'simple-a', order: 1, blockId: 'block-01', type: 'quest', title: 'Simple A', action: 'TERMINER' },
       {
         id: 'structured',
-        order: 4,
+        order: 2,
         blockId: 'block-01',
         type: 'major_step',
         title: 'Structured',
         action: 'AVANCER',
         guideItems: [{ action: 'advance', label: 'Quest C' }],
       },
+      { id: 'simple-b', order: 3, blockId: 'block-01', type: 'quest', title: 'Simple B', action: 'TERMINER' },
     ],
   };
 
-  const groups = getStepGroups(groupedRoute);
-  assert.deepEqual(groups.map((group) => group.steps.map((step) => step.id)), [
+  assert.deepEqual(getStepGroups(groupedRoute).map((group) => group.steps.map((step) => step.id)), [
     ['simple-a'],
-    ['stop'],
-    ['simple-b'],
     ['structured'],
+    ['simple-b'],
   ]);
 });
 
-test('checklist groups are capped to six steps', () => {
+test('checklist groups are capped to eight steps', () => {
   const groupedRoute: RouteDocument = {
     ...route,
-    steps: Array.from({ length: 8 }, (_, index) => ({
+    steps: Array.from({ length: 10 }, (_, index) => ({
       id: `quest-${index + 1}`,
       order: index + 1,
       blockId: 'block-01',
@@ -192,5 +155,5 @@ test('checklist groups are capped to six steps', () => {
     })),
   };
 
-  assert.deepEqual(getStepGroups(groupedRoute).map((group) => group.steps.length), [6, 2]);
+  assert.deepEqual(getStepGroups(groupedRoute).map((group) => group.steps.length), [8, 2]);
 });
