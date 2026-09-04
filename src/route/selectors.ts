@@ -1,14 +1,12 @@
 import type { RouteDocument, RouteStep } from './types';
 
-const MAX_SEQUENCE_STEPS = 6;
-const sequenceActions = new Set([
-  'LANCER',
-  'TERMINER',
-  'LANCER / TERMINER',
-  'REPRENDRE / TERMINER',
-  'REPRENDRE / AVANCER',
-  'FAIRE & VALIDER',
-  'FAIRE / CAPTURER / VALIDER',
+const MAX_SEQUENCE_STEPS = 8;
+const sequenceStepTypes = new Set<RouteStep['type']>([
+  'quest',
+  'resume',
+  'dungeon',
+  'alignment',
+  'order',
 ]);
 
 export interface RouteStepGroup {
@@ -33,8 +31,17 @@ function getRuleText(rule: RouteStep): string {
   return `⚠ ${title} — ${instruction}`;
 }
 
+function getStepContext(step: RouteStep): string {
+  return `${step.title}\n${step.action ?? ''}\n${step.instruction ?? ''}\n${step.launchInstruction ?? ''}`.toUpperCase();
+}
+
+/**
+ * A sequence card is a presentation concern only: every underlying RouteStep keeps
+ * its own id and completion state. We group ordinary actionable steps and keep
+ * structural/critical route checkpoints isolated.
+ */
 function isSequenceCandidate(step: RouteStep): boolean {
-  if (step.type !== 'quest' && step.type !== 'resume' && step.type !== 'dungeon') {
+  if (!sequenceStepTypes.has(step.type)) {
     return false;
   }
 
@@ -42,21 +49,17 @@ function isSequenceCandidate(step: RouteStep): boolean {
     return false;
   }
 
-  const action = step.action?.trim().toUpperCase() ?? '';
-  if (!sequenceActions.has(action)) {
+  const context = getStepContext(step);
+  if (context.includes('⚠') || context.includes('FIL ROUGE') || context.includes('VERROU DUR')) {
     return false;
   }
 
-  const context = `${step.title}\n${step.instruction ?? ''}\n${step.launchInstruction ?? ''}`.toUpperCase();
-  if (context.includes('⚠') || context.includes('STOP') || context.includes('FIL ROUGE')) {
-    return false;
-  }
+  return Boolean(step.action?.trim() || step.instruction?.trim() || step.title.trim());
+}
 
-  if ((step.instruction?.length ?? 0) > 220 || (step.launchInstruction?.length ?? 0) > 220) {
-    return false;
-  }
-
-  return true;
+/** A STOP may close a sequence, but must never be followed by another item in it. */
+function closesSequence(step: RouteStep): boolean {
+  return getStepContext(step).includes('STOP');
 }
 
 export function getSortedSteps(route: RouteDocument): RouteStep[] {
@@ -90,42 +93,40 @@ export function getSortedSteps(route: RouteDocument): RouteStep[] {
 export function getStepGroups(route: RouteDocument): RouteStepGroup[] {
   const steps = getSortedSteps(route);
   const groups: RouteStepGroup[] = [];
+  let sequence: RouteStep[] = [];
 
-  for (let index = 0; index < steps.length; ) {
-    const first = steps[index];
-    if (!isSequenceCandidate(first)) {
-      groups.push({ id: first.id, blockId: first.blockId, steps: [first], isSequence: false });
-      index += 1;
-      continue;
+  function flushSequence() {
+    if (sequence.length === 0) {
+      return;
     }
 
-    const sequence: RouteStep[] = [first];
-    let cursor = index + 1;
-
-    while (cursor < steps.length && sequence.length < MAX_SEQUENCE_STEPS) {
-      const next = steps[cursor];
-      if (next.blockId !== first.blockId || !isSequenceCandidate(next)) {
-        break;
-      }
-      sequence.push(next);
-      cursor += 1;
-    }
-
-    if (sequence.length === 1) {
-      groups.push({ id: first.id, blockId: first.blockId, steps: sequence, isSequence: false });
-      index += 1;
-      continue;
-    }
-
+    const first = sequence[0];
+    const last = sequence.at(-1)!;
     groups.push({
-      id: `sequence:${sequence[0].id}:${sequence.at(-1)!.id}`,
+      id: sequence.length === 1 ? first.id : `sequence:${first.id}:${last.id}`,
       blockId: first.blockId,
       steps: sequence,
-      isSequence: true,
+      isSequence: sequence.length > 1,
     });
-    index += sequence.length;
+    sequence = [];
   }
 
+  for (const step of steps) {
+    const blockChanged = sequence.length > 0 && sequence[0].blockId !== step.blockId;
+    if (blockChanged || !isSequenceCandidate(step)) {
+      flushSequence();
+      groups.push({ id: step.id, blockId: step.blockId, steps: [step], isSequence: false });
+      continue;
+    }
+
+    sequence.push(step);
+
+    if (closesSequence(step) || sequence.length >= MAX_SEQUENCE_STEPS) {
+      flushSequence();
+    }
+  }
+
+  flushSequence();
   return groups;
 }
 
