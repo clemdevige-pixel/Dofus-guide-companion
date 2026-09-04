@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "routeVersion": "2026-09-04",
+  "routeVersion": "2026-09-05",
   "title": "Astrub → Dofus Sylvestre",
   "blocks": [
     {
@@ -1519,7 +1519,7 @@
       "displayRole": "objective",
       "action": "REPRENDRE / AVANCER",
       "instruction": "Va en [4,-1], utilise le Pot de Confiture Maison pour contourner le combat solo du Milimilou, puis parle à Hargnok et poursuis la quête.",
-      "momentId": "moment-incarnam-fin",
+      "momentId": "moment-incarnam-fin-1",
       "destination": {
         "x": 4,
         "y": -1
@@ -1534,7 +1534,7 @@
       "displayRole": "objective",
       "action": "AVANCER",
       "instruction": "À l'atelier en [2,-4], fabrique la Bounihimée pour Préparation au combat.",
-      "momentId": "moment-incarnam-fin",
+      "momentId": "moment-incarnam-fin-1",
       "destination": {
         "x": 2,
         "y": -4
@@ -1553,7 +1553,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/dans-la-gueule-du-milimilou.html"
       },
-      "momentId": "moment-incarnam-fin",
+      "momentId": "moment-incarnam-fin-1",
       "location": {
         "x": 2,
         "y": -3
@@ -1590,7 +1590,7 @@
       "displayRole": "objective",
       "action": "AVANCER",
       "instruction": "Fabrique les deux objets avant de rendre Préparation au combat.",
-      "momentId": "moment-incarnam-fin",
+      "momentId": "moment-incarnam-fin-1",
       "destination": {
         "x": 1,
         "y": -2
@@ -1627,7 +1627,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/preparation-au-combat.html"
       },
-      "momentId": "moment-incarnam-fin",
+      "momentId": "moment-incarnam-fin-2",
       "destination": {
         "x": 0,
         "y": -3
@@ -1646,7 +1646,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/des-chafers-qui-marchent.html"
       },
-      "momentId": "moment-incarnam-fin",
+      "momentId": "moment-incarnam-fin-2",
       "destination": {
         "x": 0,
         "y": -4
@@ -1665,7 +1665,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/destination-astrub.html"
       },
-      "momentId": "moment-incarnam-fin",
+      "momentId": "moment-incarnam-fin-2",
       "destination": {
         "x": 6,
         "y": -19
@@ -4655,7 +4655,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-reveil-de-pandala.html"
       },
-      "momentId": "moment-route-step-0112",
+      "momentId": "moment-pandala-wabbit-emeraude-1",
       "location": {
         "x": 12,
         "y": -21
@@ -4674,7 +4674,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-receptacle-des-dofus.html"
       },
-      "momentId": "moment-route-step-0112"
+      "momentId": "moment-pandala-wabbit-emeraude-1"
     },
     {
       "id": "route-step-0114",
@@ -4688,7 +4688,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/intrusion-chez-les-wabbits.html"
       },
-      "momentId": "moment-route-step-0112",
+      "momentId": "moment-pandala-wabbit-emeraude-1",
       "location": {
         "x": -2,
         "y": -4
@@ -4706,7 +4706,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/un-sage-parmi-les-sages.html"
       },
-      "momentId": "moment-route-step-0112",
+      "momentId": "moment-pandala-wabbit-emeraude-1",
       "location": {
         "x": 20,
         "y": -27
@@ -4724,7 +4724,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/protection-divine.html"
       },
-      "momentId": "moment-route-step-0112",
+      "momentId": "moment-pandala-wabbit-emeraude-1",
       "location": {
         "x": 23,
         "y": -4
@@ -4742,7 +4742,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/un-pendule-pour-guider-ses-pas.html"
       },
-      "momentId": "moment-route-step-0112",
+      "momentId": "moment-pandala-wabbit-emeraude-2",
       "location": {
         "x": -5,
         "y": 13
@@ -4760,7 +4760,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/voir-le-dark-vlad-et-mourir-ou-pas.html"
       },
-      "momentId": "moment-route-step-0112",
+      "momentId": "moment-pandala-wabbit-emeraude-2",
       "location": {
         "x": -5,
         "y": 13
@@ -4778,7 +4778,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-magicienne-des-mareacutecages.html"
       },
-      "momentId": "moment-route-step-0112",
+      "momentId": "moment-pandala-wabbit-emeraude-2",
       "location": {
         "x": 10,
         "y": -5
@@ -4796,7 +4796,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-dofus-et-l-alchimiste.html"
       },
-      "momentId": "moment-route-step-0112",
+      "momentId": "moment-pandala-wabbit-emeraude-2",
       "location": {
         "x": -6,
         "y": -3
@@ -5094,12 +5094,14 @@
       "type": "quest",
       "title": "Les sbires du maître — LANCER + SCARABOSSE DORÉ",
       "displayType": "TOUR",
+      "displayRole": "objective",
       "action": "LANCER / FAIRE / CAPTURER",
       "instruction": "En [5,0], parle à Pat Akess et LANCE Les sbires du maître. Fais immédiatement le Donjon des Scarafeuilles, vaincs et CAPTURE le Scarabosse Doré pour l’Ocre.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-sbires-du-maitre.html"
       },
+      "momentId": "moment-route-step-0139",
       "location": {
         "x": 5,
         "y": 0
@@ -5126,9 +5128,7 @@
           },
           "note": "OCRE — Capture le Scarabosse Doré."
         }
-      ],
-      "momentId": "moment-route-step-0139",
-      "displayRole": "objective"
+      ]
     },
     {
       "id": "route-step-0141",
@@ -5136,14 +5136,16 @@
       "blockId": "block-03",
       "type": "long_running",
       "title": "Les sbires du maître — STOP à l'objectif Donjon des Forgerons",
+      "displayRole": "transition",
       "action": "AVANCER / STOP",
-      "instruction": "Retourne voir Pat Akess en [5,0], prends l'objectif Donjon des Forgerons puis STOP. La quête reste active jusqu'au passage Forgerons.",
+      "instruction": "QUÊTES À AVANCER ENSEMBLE — Les sbires du maître + Recouvrement de dette à la Tabasse jusqu'au Donjon des Forgerons.\nRetourne voir Pat Akess en [5,0], prends l'objectif Donjon des Forgerons puis STOP. La quête reste active jusqu'au passage Forgerons.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-sbires-du-maitre.html"
       },
-      "longRunningGoal": {
-        "goalId": "les-sbires-du-maitre",
+      "momentId": "moment-route-step-0139",
+      "parallelGroup": {
+        "parallelId": "parallel-forgerons",
         "phase": "start"
       },
       "guideItems": [
@@ -5157,8 +5159,10 @@
           "note": "Prends l'objectif Donjon des Forgerons puis STOP."
         }
       ],
-      "momentId": "moment-route-step-0139",
-      "displayRole": "transition"
+      "longRunningGoal": {
+        "goalId": "les-sbires-du-maitre",
+        "phase": "start"
+      }
     },
     {
       "id": "route-step-0142",
@@ -5173,7 +5177,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/entraicircnement-avec-torche.html"
       },
-      "momentId": "moment-route-step-0142",
+      "momentId": "moment-alignement-early-a",
       "location": {
         "x": -32,
         "y": -57
@@ -5192,7 +5196,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/cartes-speacuteciales-damayiro.html"
       },
-      "momentId": "moment-route-step-0142",
+      "momentId": "moment-alignement-early-a",
       "location": {
         "x": -32,
         "y": -57
@@ -5211,7 +5215,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/agrave-vol-doiseau.html"
       },
-      "momentId": "moment-route-step-0142",
+      "momentId": "moment-alignement-early-a",
       "location": {
         "x": -32,
         "y": -57
@@ -5230,7 +5234,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/pas-de-faineacuteants-dans-les-rangs.html"
       },
-      "momentId": "moment-route-step-0142",
+      "momentId": "moment-alignement-early-b",
       "location": {
         "x": -32,
         "y": -57
@@ -5249,7 +5253,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/premiegravere-visite-agrave-bracirckmar.html"
       },
-      "momentId": "moment-route-step-0142",
+      "momentId": "moment-alignement-early-b",
       "location": {
         "x": -32,
         "y": -57
@@ -5268,7 +5272,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/un-sanglier-un-peu-trop-agressif.html"
       },
-      "momentId": "moment-route-step-0142",
+      "momentId": "moment-alignement-early-b",
       "location": {
         "x": -32,
         "y": -57
@@ -5334,6 +5338,10 @@
         "url": "https://www.dofuspourlesnoobs.com/recouvrement-de-dette-agrave-la-tabasse.html"
       },
       "momentId": "moment-route-step-0151",
+      "parallelGroup": {
+        "parallelId": "parallel-forgerons",
+        "phase": "progress"
+      },
       "location": {
         "x": -32,
         "y": -57
@@ -5348,7 +5356,11 @@
       "displayRole": "detail",
       "action": "FAIRE",
       "instruction": "Fais le donjon ; récupère le Liquide des Forgerons ; puis valide aussi l'étape Les sbires du maître auprès de Pat Akess.",
-      "momentId": "moment-route-step-0151"
+      "momentId": "moment-route-step-0151",
+      "parallelGroup": {
+        "parallelId": "parallel-forgerons",
+        "phase": "finish"
+      }
     },
     {
       "id": "route-step-0153",
@@ -5479,12 +5491,16 @@
       "title": "Donjon magistral — TERMINER + LANCER Entre quatre Blops",
       "displayRole": "transition",
       "action": "TERMINER + LANCER",
-      "instruction": "→ Alain Deix [2,-1] : rendre Donjon magistral, puis prendre Entre quatre Blops. Garde-la active jusqu’au Clos des Blops.",
+      "instruction": "QUÊTES À AVANCER ENSEMBLE — Entre quatre Blops + Le Tabi d'Amayiro jusqu'au Clos des Blops.\nTERMINE Donjon magistral puis LANCE Entre quatre Blops et garde-la active jusqu'au passage Blop Royal.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/donjon-magistral.html"
       },
       "momentId": "moment-route-step-0159",
+      "parallelGroup": {
+        "parallelId": "parallel-blops",
+        "phase": "start"
+      },
       "location": {
         "x": 2,
         "y": -1
@@ -5710,7 +5726,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/pot-lagent-double.html"
       },
-      "momentId": "moment-route-step-0172",
+      "momentId": "moment-alignement-mid-a",
       "location": {
         "x": -32,
         "y": -57
@@ -5729,7 +5745,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/de-la-poudre-aux-yeux-de-bracirckmar.html"
       },
-      "momentId": "moment-route-step-0172",
+      "momentId": "moment-alignement-mid-a",
       "location": {
         "x": -32,
         "y": -57
@@ -5748,7 +5764,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/une-bregraveche-agrave-bonta.html"
       },
-      "momentId": "moment-route-step-0172",
+      "momentId": "moment-alignement-mid-a",
       "location": {
         "x": -32,
         "y": -57
@@ -5768,7 +5784,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/deacutegouts-temps.html"
       },
-      "momentId": "moment-route-step-0172",
+      "momentId": "moment-alignement-mid-b",
       "location": {
         "x": -32,
         "y": -57
@@ -5787,7 +5803,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/leacutelite-squelettique.html"
       },
-      "momentId": "moment-route-step-0172",
+      "momentId": "moment-alignement-mid-b",
       "location": {
         "x": -32,
         "y": -57
@@ -5806,7 +5822,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-foire-du-trool-suspecteacutee.html"
       },
-      "momentId": "moment-route-step-0172",
+      "momentId": "moment-alignement-mid-b",
       "location": {
         "x": -32,
         "y": -57
@@ -5827,6 +5843,10 @@
         "url": "https://www.dofuspourlesnoobs.com/le-tabi-damayiro.html"
       },
       "momentId": "moment-route-step-0178",
+      "parallelGroup": {
+        "parallelId": "parallel-blops",
+        "phase": "progress"
+      },
       "location": {
         "x": -32,
         "y": -57
@@ -5841,7 +5861,11 @@
       "displayRole": "detail",
       "action": "FAIRE",
       "instruction": "Vaincs un Blop Royal : valide l'huile de l'alignement ET Entre quatre Blops. Entre ensuite dans la salle du Blop Multicolore pour prendre la sauvegarde avant de sortir.\nOCRE — Tu dois aussi obtenir les captures des 4 Blops Royaux : Coco, Griotte, Indigo et Reinette.",
-      "momentId": "moment-route-step-0178"
+      "momentId": "moment-route-step-0178",
+      "parallelGroup": {
+        "parallelId": "parallel-blops",
+        "phase": "finish"
+      }
     },
     {
       "id": "route-step-0180",
@@ -6632,7 +6656,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/des-capes-bontariennes.html"
       },
-      "momentId": "moment-route-step-0225",
+      "momentId": "moment-bonta-capes-a",
       "location": {
         "x": -32,
         "y": -57
@@ -6651,7 +6675,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/corveacutee-de-patate.html"
       },
-      "momentId": "moment-route-step-0225",
+      "momentId": "moment-bonta-capes-a",
       "location": {
         "x": -32,
         "y": -57
@@ -6670,7 +6694,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/lyeno-abraknyde-malgreacute-lui.html"
       },
-      "momentId": "moment-route-step-0225",
+      "momentId": "moment-bonta-capes-a",
       "location": {
         "x": -32,
         "y": -57
@@ -6689,7 +6713,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/au-service-de-danathor.html"
       },
-      "momentId": "moment-route-step-0225",
+      "momentId": "moment-bonta-capes-b",
       "location": {
         "x": -32,
         "y": -57
@@ -6708,7 +6732,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/amayiro-agrave-lombre-du-champo.html"
       },
-      "momentId": "moment-route-step-0225",
+      "momentId": "moment-bonta-capes-b",
       "location": {
         "x": -32,
         "y": -57
@@ -6727,7 +6751,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/retourner-voir-le-dark-vlad-toujours-sans-mourir.html"
       },
-      "momentId": "moment-route-step-0225",
+      "momentId": "moment-bonta-capes-b",
       "location": {
         "x": -32,
         "y": -57
@@ -7329,10 +7353,14 @@
       "type": "quest",
       "title": "Munster lève le mystère — LANCER / avancer jusqu'au Domaine Ancestral",
       "action": "LANCER / AVANCER / STOP",
-      "instruction": "En [-6,-10], LANCE Munster lève le mystère puis avance jusqu'à l'objectif Abraknyde Ancestral et STOP. Ne fais pas le Domaine avant les deux autres fils.",
+      "instruction": "QUÊTES À AVANCER ENSEMBLE — Munster lève le mystère + Vengeance par procuration + Un juge hystérique jusqu'au Domaine Ancestral.\nEn [-6,-10], LANCE Munster lève le mystère puis avance jusqu'à l'objectif Abraknyde Ancestral et STOP. Ne fais pas le Domaine avant les deux autres fils.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/munster-legraveve-le-mystegravere.html"
+      },
+      "parallelGroup": {
+        "parallelId": "parallel-domaine-ancestral",
+        "phase": "start"
       },
       "location": {
         "x": -6,
@@ -7638,12 +7666,16 @@
       "title": "Sous le bois de sa colère — LANCER / avancer jusqu'à Damadrya",
       "displayRole": "objective",
       "action": "LANCER / AVANCER / STOP",
-      "instruction": "En [22,-29], LANCE Sous le bois de sa colère et AVANCE jusqu'à la Bambusaie de Damadrya puis STOP.",
+      "instruction": "QUÊTES À AVANCER ENSEMBLE — Sous le bois de sa colère + Le Saule du Promeneur + Rester planté là jusqu'à Damadrya.\nEn [22,-29], LANCE Sous le bois de sa colère et AVANCE jusqu'à la Bambusaie de Damadrya puis STOP.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/sous-le-bois-de-sa-colere.html"
       },
       "momentId": "moment-damadrya-pass",
+      "parallelGroup": {
+        "parallelId": "parallel-damadrya",
+        "phase": "start"
+      },
       "location": {
         "x": 22,
         "y": -29
@@ -7667,6 +7699,10 @@
         "url": "https://www.dofuspourlesnoobs.com/le-saule-du-promeneur.html"
       },
       "momentId": "moment-damadrya-pass",
+      "parallelGroup": {
+        "parallelId": "parallel-damadrya",
+        "phase": "progress"
+      },
       "location": {
         "x": 26,
         "y": -31
@@ -7690,6 +7726,10 @@
         "url": "https://www.dofuspourlesnoobs.com/rester-plante-la.html"
       },
       "momentId": "moment-damadrya-pass",
+      "parallelGroup": {
+        "parallelId": "parallel-damadrya",
+        "phase": "progress"
+      },
       "location": {
         "x": -11,
         "y": -13
@@ -7708,7 +7748,11 @@
       "displayRole": "detail",
       "action": "FAIRE",
       "instruction": "OCRE — Capture Damadrya avec une pierre d’âme adaptée.",
-      "momentId": "moment-damadrya-pass"
+      "momentId": "moment-damadrya-pass",
+      "parallelGroup": {
+        "parallelId": "parallel-damadrya",
+        "phase": "finish"
+      }
     },
     {
       "id": "route-step-0271",
@@ -8060,6 +8104,10 @@
         "url": "https://www.dofuspourlesnoobs.com/vengeance-par-procuration.html"
       },
       "momentId": "moment-route-step-0290",
+      "parallelGroup": {
+        "parallelId": "parallel-domaine-ancestral",
+        "phase": "progress"
+      },
       "location": {
         "x": -32,
         "y": -57
@@ -8083,7 +8131,11 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/un-juge-hysterique.html"
       },
-      "momentId": "moment-route-step-0294"
+      "momentId": "moment-route-step-0294",
+      "parallelGroup": {
+        "parallelId": "parallel-domaine-ancestral",
+        "phase": "progress"
+      }
     },
     {
       "id": "route-step-0295",
@@ -8094,7 +8146,11 @@
       "displayRole": "detail",
       "action": "FAIRE",
       "instruction": "OCRE — Capture l’Abraknyde Ancestral avec une pierre d’âme adaptée.",
-      "momentId": "moment-route-step-0294"
+      "momentId": "moment-route-step-0294",
+      "parallelGroup": {
+        "parallelId": "parallel-domaine-ancestral",
+        "phase": "finish"
+      }
     },
     {
       "id": "route-step-0296",
@@ -8188,12 +8244,16 @@
       "title": "Plongeon et dragon — reprendre puis STOP au Chêne Mou",
       "displayRole": "transition",
       "action": "AVANCER / STOP",
-      "instruction": "AVANCE Plongeon et dragon jusqu'au Chêne Mou puis STOP. Sa reprise sera placée exactement au checkpoint Chêne Mou.",
+      "instruction": "QUÊTES À AVANCER ENSEMBLE — Plongeon et dragon + L'art de la langue de bois jusqu'au Chêne Mou.\nREPRENDS Plongeon et dragon après le Dragon Cochon et STOP au checkpoint Chêne Mou.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/plongeon-et-dragon.html"
       },
-      "momentId": "moment-route-step-0299"
+      "momentId": "moment-route-step-0299",
+      "parallelGroup": {
+        "parallelId": "parallel-chene-mou",
+        "phase": "start"
+      }
     },
     {
       "id": "route-step-0302",
@@ -8203,12 +8263,16 @@
       "title": "Un juge hystérique — OBJECTIF KOULOSSE / GARDER ACTIF",
       "displayRole": "transition",
       "action": "REPRENDRE / STOP",
-      "instruction": "→ Chris de Naire [-29,-47] : après le Dragon Cochon, prendre Koulosse puis STOP jusqu’à C'est stupéfiant.",
+      "instruction": "QUÊTES À AVANCER ENSEMBLE — Un juge hystérique + C'est stupéfiant jusqu'au Koulosse.\nPrends l'objectif Koulosse d'Un juge hystérique et garde la quête active jusqu'au passage commun.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/un-juge-hysterique.html"
       },
       "momentId": "moment-route-step-0299",
+      "parallelGroup": {
+        "parallelId": "parallel-koulosse",
+        "phase": "start"
+      },
       "guideItems": [
         {
           "action": "take",
@@ -8348,6 +8412,10 @@
         "url": "https://www.dofuspourlesnoobs.com/cest-stupeacutefiant.html"
       },
       "momentId": "moment-route-step-0309",
+      "parallelGroup": {
+        "parallelId": "parallel-koulosse",
+        "phase": "progress"
+      },
       "location": {
         "x": -32,
         "y": -57
@@ -8362,7 +8430,11 @@
       "displayRole": "detail",
       "action": "FAIRE",
       "instruction": "Fais le Koulosse maintenant et parle-lui si la quête C'est stupéfiant le demande.\nOCRE — Capture le Koulosse avec une pierre d’âme adaptée.",
-      "momentId": "moment-route-step-0309"
+      "momentId": "moment-route-step-0309",
+      "parallelGroup": {
+        "parallelId": "parallel-koulosse",
+        "phase": "finish"
+      }
     },
     {
       "id": "route-step-0311",
@@ -8386,12 +8458,16 @@
       "title": "Un juge hystérique — OBJECTIF MEULOU / GARDER ACTIF",
       "displayRole": "transition",
       "action": "REPRENDRE / STOP",
-      "instruction": "→ Chris de Naire [-29,-47] : après le Koulosse, prendre l’objectif Meulou et garder la quête active jusqu’au passage Meulou.",
+      "instruction": "QUÊTES À AVANCER ENSEMBLE — Un juge hystérique + Allumer le feu + Draconanthropie jusqu'au Meulou.\n→ Chris de Naire [-29,-47] : après le Koulosse, prendre l’objectif Meulou et garder la quête active jusqu’au passage Meulou.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/un-juge-hysterique.html"
       },
       "momentId": "moment-route-step-0309",
+      "parallelGroup": {
+        "parallelId": "parallel-meulou",
+        "phase": "start"
+      },
       "guideItems": [
         {
           "action": "take",
@@ -8417,7 +8493,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-mort-dort.html"
       },
-      "momentId": "moment-emeraude-meulou-final",
+      "momentId": "moment-emeraude-meulou-prep",
       "location": {
         "x": -33,
         "y": 33
@@ -8440,7 +8516,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/faire-le-mort.html"
       },
-      "momentId": "moment-emeraude-meulou-final",
+      "momentId": "moment-emeraude-meulou-prep",
       "location": {
         "x": -26,
         "y": 36
@@ -8463,7 +8539,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-bete-interieure.html"
       },
-      "momentId": "moment-emeraude-meulou-final",
+      "momentId": "moment-emeraude-meulou-prep",
       "location": {
         "x": -26,
         "y": -5
@@ -8486,7 +8562,11 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/allumer-le-feu.html"
       },
-      "momentId": "moment-emeraude-meulou-final",
+      "momentId": "moment-emeraude-meulou-pass",
+      "parallelGroup": {
+        "parallelId": "parallel-meulou",
+        "phase": "progress"
+      },
       "location": {
         "x": -26,
         "y": -5
@@ -8509,7 +8589,11 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/draconanthropie.html"
       },
-      "momentId": "moment-emeraude-meulou-final",
+      "momentId": "moment-emeraude-meulou-pass",
+      "parallelGroup": {
+        "parallelId": "parallel-meulou",
+        "phase": "progress"
+      },
       "location": {
         "x": -6,
         "y": -3
@@ -8528,7 +8612,11 @@
       "displayRole": "detail",
       "action": "FAIRE",
       "instruction": "Fais le Meulou maintenant avec les quatre objectifs actifs.\nOCRE — Capture le Meulou avec une pierre d’âme adaptée.",
-      "momentId": "moment-emeraude-meulou-final"
+      "momentId": "moment-emeraude-meulou-pass",
+      "parallelGroup": {
+        "parallelId": "parallel-meulou",
+        "phase": "finish"
+      }
     },
     {
       "id": "route-step-0319",
@@ -8542,7 +8630,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/allumer-le-feu.html"
       },
-      "momentId": "moment-emeraude-meulou-final"
+      "momentId": "moment-emeraude-meulou-pass"
     },
     {
       "id": "route-step-0320",
@@ -8556,7 +8644,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/draconanthropie.html"
       },
-      "momentId": "moment-emeraude-meulou-final"
+      "momentId": "moment-emeraude-meulou-pass"
     },
     {
       "id": "route-step-0321",
@@ -8571,7 +8659,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/ultime-reacuteminiscence.html"
       },
-      "momentId": "moment-emeraude-meulou-final",
+      "momentId": "moment-emeraude-meulou-pass",
       "location": {
         "x": -6,
         "y": -3
@@ -8585,12 +8673,16 @@
       "title": "Un juge hystérique — OBJECTIF RAT BLANC / GARDER ACTIF",
       "displayRole": "transition",
       "action": "REPRENDRE / STOP",
-      "instruction": "→ Chris de Naire [-29,-47] : après le Meulou, prendre l’objectif Rat Blanc puis STOP jusqu’à Vin Diou.",
+      "instruction": "QUÊTES À AVANCER ENSEMBLE — Un juge hystérique + Vin Diou jusqu'au Rat Blanc.\nAprès le Meulou, prends l'objectif Rat Blanc d'Un juge hystérique et garde la quête active jusqu'au passage Rat Blanc.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/un-juge-hysterique.html"
       },
-      "momentId": "moment-emeraude-meulou-final",
+      "momentId": "moment-emeraude-meulou-pass",
+      "parallelGroup": {
+        "parallelId": "parallel-rat-blanc",
+        "phase": "start"
+      },
       "guideItems": [
         {
           "action": "take",
@@ -8618,6 +8710,10 @@
         "url": "https://www.dofuspourlesnoobs.com/vin-diou.html"
       },
       "momentId": "moment-route-step-0323",
+      "parallelGroup": {
+        "parallelId": "parallel-rat-blanc",
+        "phase": "progress"
+      },
       "location": {
         "x": -32,
         "y": -57
@@ -8632,7 +8728,11 @@
       "displayRole": "detail",
       "action": "FAIRE",
       "instruction": "OCRE — Capture le Rat Blanc avec une pierre d’âme adaptée.",
-      "momentId": "moment-route-step-0323"
+      "momentId": "moment-route-step-0323",
+      "parallelGroup": {
+        "parallelId": "parallel-rat-blanc",
+        "phase": "finish"
+      }
     },
     {
       "id": "route-step-0325",
@@ -8738,7 +8838,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-ecas-ne-flippent-pas.html"
       },
-      "momentId": "moment-route-step-0330",
+      "momentId": "moment-eca-a",
       "location": {
         "x": -32,
         "y": -57
@@ -8757,7 +8857,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/plaine-de-chats.html"
       },
-      "momentId": "moment-route-step-0330",
+      "momentId": "moment-eca-a",
       "location": {
         "x": -32,
         "y": -57
@@ -8776,7 +8876,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/agrave-lendroit-agrave-lenvers.html"
       },
-      "momentId": "moment-route-step-0330",
+      "momentId": "moment-eca-a",
       "location": {
         "x": -32,
         "y": -57
@@ -8795,7 +8895,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/dans-la-gueule-du-chacha.html"
       },
-      "momentId": "moment-route-step-0330",
+      "momentId": "moment-eca-a",
       "location": {
         "x": -32,
         "y": -57
@@ -8814,7 +8914,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/alimentaire-mon-cher.html"
       },
-      "momentId": "moment-route-step-0330",
+      "momentId": "moment-eca-a",
       "location": {
         "x": -32,
         "y": -57
@@ -8833,7 +8933,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/bouc-a-misere.html"
       },
-      "momentId": "moment-route-step-0330",
+      "momentId": "moment-eca-b",
       "location": {
         "x": -32,
         "y": -57
@@ -8852,7 +8952,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/flagrant-delire.html"
       },
-      "momentId": "moment-route-step-0330",
+      "momentId": "moment-eca-b",
       "location": {
         "x": -32,
         "y": -57
@@ -8871,7 +8971,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/quand-y-en-a-marre-de-brakmar.html"
       },
-      "momentId": "moment-route-step-0330",
+      "momentId": "moment-eca-b",
       "location": {
         "x": -32,
         "y": -57
@@ -8891,7 +8991,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-capture.html"
       },
-      "momentId": "moment-route-step-0330",
+      "momentId": "moment-eca-b",
       "location": {
         "x": -32,
         "y": -57
@@ -8920,12 +9020,16 @@
       "displayType": "TOUR",
       "displayRole": "objective",
       "action": "REPRENDRE",
-      "instruction": "→ Kal Vissi [-19,30] : prendre l’objectif Maître Corbac, puis préparer Le livre des Taures.",
+      "instruction": "QUÊTES À AVANCER ENSEMBLE — Des donjons, encore des donjons + Le livre des Taures jusqu'au Maître Corbac.\n→ Kal Vissi [-19,30] : prendre l’objectif Maître Corbac, puis préparer Le livre des Taures.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/des-donjons-encore-des-donjons.html"
       },
       "momentId": "moment-route-step-0343",
+      "parallelGroup": {
+        "parallelId": "parallel-maitre-corbac",
+        "phase": "start"
+      },
       "guideItems": [
         {
           "action": "take",
@@ -8952,6 +9056,10 @@
         "url": "https://www.dofuspourlesnoobs.com/le-livre-des-taures.html"
       },
       "momentId": "moment-route-step-0343",
+      "parallelGroup": {
+        "parallelId": "parallel-maitre-corbac",
+        "phase": "progress"
+      },
       "location": {
         "x": -6,
         "y": -3
@@ -8970,7 +9078,11 @@
       "displayRole": "detail",
       "action": "FAIRE",
       "instruction": "Fais le Maître Corbac maintenant et récupère les objets demandés par Le livre des Taures.\nOCRE — Capture le Maître Corbac avec une pierre d’âme adaptée.",
-      "momentId": "moment-route-step-0343"
+      "momentId": "moment-route-step-0343",
+      "parallelGroup": {
+        "parallelId": "parallel-maitre-corbac",
+        "phase": "finish"
+      }
     },
     {
       "id": "route-step-0345",
@@ -9050,6 +9162,10 @@
         "url": "https://www.dofuspourlesnoobs.com/lart-de-la-langue-de-bois.html"
       },
       "momentId": "moment-route-step-0347",
+      "parallelGroup": {
+        "parallelId": "parallel-chene-mou",
+        "phase": "progress"
+      },
       "location": {
         "x": -11,
         "y": -13
@@ -9064,7 +9180,11 @@
       "displayRole": "objective",
       "action": "FAIRE",
       "instruction": "Fais le Chêne Mou maintenant. Pour Plongeon et dragon, récupère l'accès au Bosquet désenchanté ; pour L'art de la langue de bois, parle au Chêne Mou avant de sortir.\nOCRE — Capture le Chêne Mou avec une pierre d’âme adaptée.",
-      "momentId": "moment-route-step-0353"
+      "momentId": "moment-route-step-0353",
+      "parallelGroup": {
+        "parallelId": "parallel-chene-mou",
+        "phase": "finish"
+      }
     },
     {
       "id": "route-step-0354",
@@ -9266,7 +9386,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-terre-banquise.html"
       },
-      "momentId": "moment-frigost-intro",
+      "momentId": "moment-frigost-intro-a",
       "location": {
         "x": -34,
         "y": -16
@@ -9285,7 +9405,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-maire-de-glace.html"
       },
-      "momentId": "moment-frigost-intro",
+      "momentId": "moment-frigost-intro-a",
       "location": {
         "x": -81,
         "y": -37
@@ -9308,7 +9428,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-destinee.html"
       },
-      "momentId": "moment-frigost-intro",
+      "momentId": "moment-frigost-intro-a",
       "location": {
         "x": -32,
         "y": -57
@@ -9331,7 +9451,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/bienvenue-agrave-frigost.html"
       },
-      "momentId": "moment-frigost-intro",
+      "momentId": "moment-frigost-intro-a",
       "location": {
         "x": -77,
         "y": -42
@@ -9354,7 +9474,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/full-contact.html"
       },
-      "momentId": "moment-frigost-intro",
+      "momentId": "moment-frigost-intro-a",
       "location": {
         "x": -77,
         "y": -42
@@ -9377,7 +9497,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-monologues-du-vaccin.html"
       },
-      "momentId": "moment-frigost-intro",
+      "momentId": "moment-frigost-intro-b",
       "location": {
         "x": -80,
         "y": -45
@@ -9400,7 +9520,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/eacutepis-demi.html"
       },
-      "momentId": "moment-frigost-intro",
+      "momentId": "moment-frigost-intro-b",
       "location": {
         "x": -80,
         "y": -45
@@ -9423,7 +9543,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/pauvre-kiki.html"
       },
-      "momentId": "moment-frigost-intro",
+      "momentId": "moment-frigost-intro-b",
       "location": {
         "x": -79,
         "y": -42
@@ -9446,7 +9566,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/gegravene-et-tique.html"
       },
-      "momentId": "moment-frigost-intro",
+      "momentId": "moment-frigost-intro-b",
       "location": {
         "x": -69,
         "y": -42
@@ -9469,7 +9589,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/en-semant-se-ment.html"
       },
-      "momentId": "moment-frigost-intro",
+      "momentId": "moment-frigost-intro-b",
       "location": {
         "x": -82,
         "y": -48
@@ -9498,12 +9618,16 @@
       "title": "Des donjons, encore des donjons — OBJECTIF MINOTOROR",
       "displayRole": "transition",
       "action": "REPRENDRE",
-      "instruction": "→ Kal Vissi [-19,30] : après le Royalmouth, prendre l’objectif Minotoror puis enchaîner avec Taures et détours.",
+      "instruction": "QUÊTES À AVANCER ENSEMBLE — Des donjons, encore des donjons + Taures et détours jusqu'au Minotoror.\nAprès le Royalmouth, prends l'objectif Minotoror puis garde les deux quêtes au même checkpoint.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/des-donjons-encore-des-donjons.html"
       },
       "momentId": "moment-route-step-0375",
+      "parallelGroup": {
+        "parallelId": "parallel-minotoror",
+        "phase": "start"
+      },
       "guideItems": [
         {
           "action": "finish",
@@ -9537,7 +9661,11 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/taures-et-deacutetours.html"
       },
-      "momentId": "moment-route-step-0377"
+      "momentId": "moment-route-step-0377",
+      "parallelGroup": {
+        "parallelId": "parallel-minotoror",
+        "phase": "progress"
+      }
     },
     {
       "id": "route-step-0378",
@@ -9548,7 +9676,11 @@
       "displayRole": "detail",
       "action": "FAIRE",
       "instruction": "Vaincs le Minotoror. Pour Taures et détours, utilise le sortilège sur le trône et parle au Minotot ; prends aussi la sauvegarde vers le Minotot avant de quitter le donjon.\nOCRE — Capture le Minotoror avec une pierre d’âme adaptée.",
-      "momentId": "moment-route-step-0377"
+      "momentId": "moment-route-step-0377",
+      "parallelGroup": {
+        "parallelId": "parallel-minotoror",
+        "phase": "finish"
+      }
     },
     {
       "id": "route-step-0379",
@@ -10360,12 +10492,16 @@
       "title": "L'ombre et la glace — avancer jusqu'au Mansot Royal",
       "displayRole": "objective",
       "action": "LANCER / AVANCER / STOP",
-      "instruction": "En [-60,-57], LANCE L'ombre et la glace. Fais ses drops pendant que Pêche est active, puis AVANCE jusqu'au Mansot Royal et STOP.",
+      "instruction": "QUÊTES À AVANCER ENSEMBLE — L'ombre et la glace + Les joyeux de la couronne + Les chasseurs jusqu'au Mansot Royal.\nEn [-60,-57], LANCE L'ombre et la glace. Fais ses drops pendant que Pêche est active, puis AVANCE jusqu'au Mansot Royal et STOP.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/lombre-et-la-glace.html"
       },
       "momentId": "moment-route-step-0426",
+      "parallelGroup": {
+        "parallelId": "parallel-mansot",
+        "phase": "start"
+      },
       "location": {
         "x": -60,
         "y": -57
@@ -10389,6 +10525,10 @@
         "url": "https://www.dofuspourlesnoobs.com/les-joyeux-de-la-couronne.html"
       },
       "momentId": "moment-route-step-0426",
+      "parallelGroup": {
+        "parallelId": "parallel-mansot",
+        "phase": "progress"
+      },
       "location": {
         "x": -64,
         "y": -55
@@ -10412,6 +10552,10 @@
         "url": "https://www.dofuspourlesnoobs.com/les-chasseurs.html"
       },
       "momentId": "moment-route-step-0426",
+      "parallelGroup": {
+        "parallelId": "parallel-mansot",
+        "phase": "progress"
+      },
       "location": {
         "x": -76,
         "y": -42
@@ -10430,7 +10574,11 @@
       "displayRole": "detail",
       "action": "FAIRE",
       "instruction": "Entre quand les quatre quêtes Frigost sont au Mansot et La bénédiction de Viti est active. Dans la salle finale, utilise l'idole de Viti Glacée avant le combat.",
-      "momentId": "moment-route-step-0426"
+      "momentId": "moment-route-step-0426",
+      "parallelGroup": {
+        "parallelId": "parallel-mansot",
+        "phase": "finish"
+      }
     },
     {
       "id": "route-step-0427",
@@ -11161,7 +11309,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-port-salue.html"
       },
-      "momentId": "moment-alignement-51-65",
+      "momentId": "moment-alignement-51-55",
       "location": {
         "x": -32,
         "y": -57
@@ -11179,7 +11327,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/l-equipe-ment.html"
       },
-      "momentId": "moment-alignement-51-65",
+      "momentId": "moment-alignement-51-55",
       "location": {
         "x": -32,
         "y": -57
@@ -11197,7 +11345,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/une-partie-de-cache-cache.html"
       },
-      "momentId": "moment-alignement-51-65",
+      "momentId": "moment-alignement-51-55",
       "location": {
         "x": -32,
         "y": -57
@@ -11215,7 +11363,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/pour-vivre-heureux.html"
       },
-      "momentId": "moment-alignement-51-65",
+      "momentId": "moment-alignement-51-55",
       "location": {
         "x": 10,
         "y": 11
@@ -11235,7 +11383,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-tactique-des-gens-d-armes.html"
       },
-      "momentId": "moment-alignement-51-65",
+      "momentId": "moment-alignement-51-55",
       "location": {
         "x": -32,
         "y": -57
@@ -11254,7 +11402,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-panoplie-du-milicien.html"
       },
-      "momentId": "moment-alignement-51-65",
+      "momentId": "moment-alignement-56-60",
       "location": {
         "x": -32,
         "y": -57
@@ -11273,7 +11421,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/ambition-ambigue.html"
       },
-      "momentId": "moment-alignement-51-65",
+      "momentId": "moment-alignement-56-60",
       "location": {
         "x": -32,
         "y": -57
@@ -11292,7 +11440,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/traknar.html"
       },
-      "momentId": "moment-alignement-51-65",
+      "momentId": "moment-alignement-56-60",
       "location": {
         "x": -32,
         "y": -57
@@ -11311,7 +11459,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-grafioze.html"
       },
-      "momentId": "moment-alignement-51-65",
+      "momentId": "moment-alignement-56-60",
       "location": {
         "x": -32,
         "y": -57
@@ -11330,7 +11478,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/attaque-a-retardement.html"
       },
-      "momentId": "moment-alignement-51-65",
+      "momentId": "moment-alignement-56-60",
       "location": {
         "x": -32,
         "y": -57
@@ -11349,7 +11497,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/une-rumeur-interessante.html"
       },
-      "momentId": "moment-alignement-51-65",
+      "momentId": "moment-alignement-61-65",
       "location": {
         "x": -32,
         "y": -57
@@ -11368,7 +11516,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/investigations-a-moon.html"
       },
-      "momentId": "moment-alignement-51-65",
+      "momentId": "moment-alignement-61-65",
       "location": {
         "x": -32,
         "y": -57
@@ -11387,7 +11535,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/maniere-douce.html"
       },
-      "momentId": "moment-alignement-51-65",
+      "momentId": "moment-alignement-61-65",
       "location": {
         "x": -32,
         "y": -57
@@ -11406,7 +11554,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/histoires-de-tortues.html"
       },
-      "momentId": "moment-alignement-51-65",
+      "momentId": "moment-alignement-61-65",
       "location": {
         "x": -32,
         "y": -57
@@ -11421,12 +11569,16 @@
       "displayType": "ALIGN.",
       "displayRole": "objective",
       "action": "LANCER / AVANCER / STOP",
-      "instruction": "En [-32,-57], LANCE Bandanarthrie et AVANCE jusqu'au Sphincter Cell puis STOP. Attends Thomahon + Tour de rein.",
+      "instruction": "QUÊTES À AVANCER ENSEMBLE — Bandanarthrie + Tour de rein jusqu'au Sphincter Cell.\nEn [-32,-57], LANCE Bandanarthrie et AVANCE jusqu'au Sphincter Cell puis STOP. Attends Thomahon + Tour de rein.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/bandanarthrie.html"
       },
-      "momentId": "moment-alignement-51-65",
+      "momentId": "moment-alignement-61-65",
+      "parallelGroup": {
+        "parallelId": "parallel-sphincter",
+        "phase": "start"
+      },
       "location": {
         "x": -32,
         "y": -57
@@ -11520,7 +11672,11 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/tour-de-rein.html"
       },
-      "momentId": "moment-route-step-0490"
+      "momentId": "moment-route-step-0490",
+      "parallelGroup": {
+        "parallelId": "parallel-sphincter",
+        "phase": "progress"
+      }
     },
     {
       "id": "route-step-0491",
@@ -11531,7 +11687,11 @@
       "displayRole": "detail",
       "action": "FAIRE",
       "instruction": "Utilise l'idole de Thomahon Nauséabonde dans la salle finale puis vaincs le Sphincter Cell.\nOCRE — Capture Sphincter Cell avec une pierre d’âme adaptée.",
-      "momentId": "moment-route-step-0490"
+      "momentId": "moment-route-step-0490",
+      "parallelGroup": {
+        "parallelId": "parallel-sphincter",
+        "phase": "finish"
+      }
     },
     {
       "id": "route-step-0492",
@@ -11764,10 +11924,14 @@
       "type": "quest",
       "title": "Quand les esprits s'échauffent — LANCER / avancer jusqu'à Demeure des Esprits",
       "action": "LANCER / AVANCER / STOP",
-      "instruction": "En [-6,18], LANCE Quand les esprits s'échauffent et AVANCE jusqu'à la Demeure des Esprits puis STOP avant d'entrer.",
+      "instruction": "QUÊTES À AVANCER ENSEMBLE — Quand les esprits s'échauffent + Requiem pour un Yokai jusqu'à la Demeure des Esprits.\nEn [-6,18], LANCE Quand les esprits s'échauffent et AVANCE jusqu'à la Demeure des Esprits puis STOP avant d'entrer.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/quand-les-esprits-s-echauffent.html"
+      },
+      "parallelGroup": {
+        "parallelId": "parallel-esprits",
+        "phase": "start"
       },
       "location": {
         "x": -6,
@@ -11840,6 +12004,10 @@
         "url": "https://www.dofuspourlesnoobs.com/requiem-pour-un-yokai.html"
       },
       "momentId": "moment-route-step-0509",
+      "parallelGroup": {
+        "parallelId": "parallel-esprits",
+        "phase": "progress"
+      },
       "location": {
         "x": 36,
         "y": -44
@@ -11858,7 +12026,11 @@
       "displayRole": "detail",
       "action": "FAIRE",
       "instruction": "Entre avec les deux quêtes actives et vaincs Koumiho.",
-      "momentId": "moment-route-step-0509"
+      "momentId": "moment-route-step-0509",
+      "parallelGroup": {
+        "parallelId": "parallel-esprits",
+        "phase": "finish"
+      }
     },
     {
       "id": "route-step-0511",
@@ -12008,7 +12180,7 @@
       "type": "quest",
       "title": "À la recherche de Dan Lavy — avancer jusqu'à Gros Med",
       "action": "AVANCER / STOP",
-      "instruction": "Entre dans l'Hypogée et vérifie que Lavomatique se lance. Va salle 4, parle à Dan, ressors voir Annette comme demandé puis reviens salle 4 et vaincs Gros Med. Après Gros Med, GARDE Dan Lavy active et CONTINUE directement le donjon vers l'Obsidiantre.",
+      "instruction": "Avant d'entrer dans l'Hypogée, vérifie que Lavomatique est bien lancée auprès de Lave Azza. AVANCE À la recherche de Dan Lavy jusqu'à Gros Med en salle 4, puis poursuis directement jusqu'à l'Obsidiantre sans sortir.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/a-la-recherche-de-dan-lavy.html"
@@ -12026,7 +12198,7 @@
       "title": "Hypogée de l'Obsidiantre — PASSAGE MUTUALISÉ THOMAHON / DAN LAVY",
       "displayRole": "objective",
       "action": "FAIRE",
-      "instruction": "Continue depuis la salle 4, utilise l'idole de Thomahon d'Obsidienne en salle finale puis vaincs l'Obsidiantre avec Lavomatique active. Après la sortie, retourne voir Annette Daimpeau et TERMINE À la recherche de Dan Lavy ; enchaîne ensuite la validation de Lavomatique.",
+      "instruction": "VÉRIFIE Lavomatique active à l'entrée. Continue depuis la salle 4 après Gros Med, utilise l'idole de Thomahon d'Obsidienne en salle finale puis vaincs l'Obsidiantre. Après la sortie, retourne voir Annette Daimpeau et TERMINE À la recherche de Dan Lavy ; enchaîne ensuite la validation de Lavomatique.",
       "momentId": "moment-route-step-0520"
     },
     {
@@ -12140,12 +12312,16 @@
       "displayType": "TURQUOISE",
       "displayRole": "objective",
       "action": "LANCER / FIL ROUGE",
-      "instruction": "LANCE La bénédiction de Foluk et prépare les idoles Dorée, Griffée et Féérique.",
+      "instruction": "QUÊTES À AVANCER ENSEMBLE — La bénédiction de Foluk + Chachyène de vie jusqu'à Kanigroula.\nLANCE La bénédiction de Foluk et garde-la active pendant la préparation du passage Kanigroula.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-beacuteneacutediction-de-foluk.html"
       },
       "momentId": "moment-foluk-phossile",
+      "parallelGroup": {
+        "parallelId": "parallel-kanigroula",
+        "phase": "start"
+      },
       "location": {
         "x": -57,
         "y": 12
@@ -12274,6 +12450,10 @@
         "url": "https://www.dofuspourlesnoobs.com/chachyegravene-de-vie.html"
       },
       "momentId": "moment-route-step-0532",
+      "parallelGroup": {
+        "parallelId": "parallel-kanigroula",
+        "phase": "progress"
+      },
       "location": {
         "x": -9,
         "y": -49
@@ -12288,7 +12468,11 @@
       "displayRole": "detail",
       "action": "FAIRE",
       "instruction": "Utilise l'Idole de Foluk Griffée puis vaincs Kanigroula avec les trois chaînes actives.",
-      "momentId": "moment-route-step-0532"
+      "momentId": "moment-route-step-0532",
+      "parallelGroup": {
+        "parallelId": "parallel-kanigroula",
+        "phase": "finish"
+      }
     },
     {
       "id": "route-step-0534",
@@ -12373,7 +12557,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/un-coupable-ideal.html"
       },
-      "momentId": "moment-alignement-71-85",
+      "momentId": "moment-alignement-71-75",
       "location": {
         "x": -32,
         "y": -57
@@ -12392,7 +12576,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/un-peu-de-juge-hot.html"
       },
-      "momentId": "moment-alignement-71-85",
+      "momentId": "moment-alignement-71-75",
       "location": {
         "x": -32,
         "y": -57
@@ -12411,7 +12595,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/de-droles-de-temoins.html"
       },
-      "momentId": "moment-alignement-71-85",
+      "momentId": "moment-alignement-71-75",
       "location": {
         "x": -32,
         "y": -57
@@ -12430,7 +12614,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/sram-d-egoutant.html"
       },
-      "momentId": "moment-alignement-71-85",
+      "momentId": "moment-alignement-71-75",
       "location": {
         "x": -32,
         "y": -57
@@ -12449,7 +12633,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/si-j-avais-un-marteau.html"
       },
-      "momentId": "moment-alignement-71-85",
+      "momentId": "moment-alignement-71-75",
       "location": {
         "x": -32,
         "y": -57
@@ -12468,7 +12652,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/esprit-es-tu-la.html"
       },
-      "momentId": "moment-alignement-71-85",
+      "momentId": "moment-alignement-76-80",
       "location": {
         "x": -32,
         "y": -57
@@ -12487,7 +12671,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/vol-du-temps.html"
       },
-      "momentId": "moment-alignement-71-85",
+      "momentId": "moment-alignement-76-80",
       "location": {
         "x": -32,
         "y": -57
@@ -12506,7 +12690,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-memoire-en-lambeaux.html"
       },
-      "momentId": "moment-alignement-71-85",
+      "momentId": "moment-alignement-76-80",
       "location": {
         "x": -36,
         "y": -60
@@ -12525,7 +12709,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/pense-bete.html"
       },
-      "momentId": "moment-alignement-71-85",
+      "momentId": "moment-alignement-76-80",
       "location": {
         "x": -36,
         "y": -60
@@ -12544,7 +12728,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/l-eclat-de-l-aube.html"
       },
-      "momentId": "moment-alignement-71-85",
+      "momentId": "moment-alignement-76-80",
       "location": {
         "x": -36,
         "y": -60
@@ -12563,7 +12747,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/ingerence-en-amakna.html"
       },
-      "momentId": "moment-alignement-71-85",
+      "momentId": "moment-alignement-81-85",
       "location": {
         "x": -32,
         "y": -57
@@ -12582,7 +12766,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/petites-faveurs-entre-amis.html"
       },
-      "momentId": "moment-alignement-71-85",
+      "momentId": "moment-alignement-81-85",
       "launchInstruction": "Selon ton choix dans Au service de Danathor : si tu as empoisonné Rimaraf, parle à Danathor en [-36,-60] ; sinon parle à Amayiro en [-32,-57]."
     },
     {
@@ -12598,7 +12782,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-gardiens-de-la-galerie.html"
       },
-      "momentId": "moment-alignement-71-85",
+      "momentId": "moment-alignement-81-85",
       "location": {
         "x": -32,
         "y": -57
@@ -12617,7 +12801,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-plateau-de-leng.html"
       },
-      "momentId": "moment-alignement-71-85",
+      "momentId": "moment-alignement-81-85",
       "location": {
         "x": -32,
         "y": -57
@@ -12632,12 +12816,16 @@
       "displayType": "ALIGN.",
       "displayRole": "objective",
       "action": "AVANCER / STOP",
-      "instruction": "AVANCE Gelé à pierre fendre jusqu'à l'étape qui demande l'Antre du Korriandre puis STOP devant le donjon.",
+      "instruction": "QUÊTES À AVANCER ENSEMBLE — Gelé à pierre fendre + Sans ma barbe, quelle barbe + Les derniers d'entre nous jusqu'au Korriandre.\nAVANCE Gelé à pierre fendre jusqu'à l'étape qui demande l'Antre du Korriandre puis STOP devant le donjon.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/gele-a-pierre-fendre.html"
       },
-      "momentId": "moment-alignement-71-85",
+      "momentId": "moment-alignement-81-85",
+      "parallelGroup": {
+        "parallelId": "parallel-korriandre",
+        "phase": "start"
+      },
       "location": {
         "x": -32,
         "y": -57
@@ -12650,10 +12838,14 @@
       "type": "order",
       "title": "Apprentissage : Assassin Suprême — avancer jusqu'au Grand Ougah",
       "action": "AVANCER / STOP",
-      "instruction": "AVANCE Apprentissage : Assassin Suprême jusqu'au Grand Ougah puis STOP devant le Temple. Garde la quête active.",
+      "instruction": "QUÊTES À AVANCER ENSEMBLE — Apprentissage : Assassin Suprême + Un pouvoir mérydique jusqu'au Grand Ougah.\nAVANCE Apprentissage : Assassin Suprême jusqu'au Grand Ougah puis STOP devant le Temple. Garde la quête active.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/apprentissage-assassin-supreme.html"
+      },
+      "parallelGroup": {
+        "parallelId": "parallel-grand-ougah",
+        "phase": "start"
       },
       "location": {
         "x": -34,
@@ -12886,6 +13078,10 @@
         "url": "https://www.dofuspourlesnoobs.com/sans-ma-barbe-quelle-barbe.html"
       },
       "momentId": "moment-korriandre-pass",
+      "parallelGroup": {
+        "parallelId": "parallel-korriandre",
+        "phase": "progress"
+      },
       "location": {
         "x": -73,
         "y": -69
@@ -12905,6 +13101,10 @@
         "url": "https://www.dofuspourlesnoobs.com/les-derniers-d-entre-nous.html"
       },
       "momentId": "moment-korriandre-pass",
+      "parallelGroup": {
+        "parallelId": "parallel-korriandre",
+        "phase": "progress"
+      },
       "location": {
         "x": -11,
         "y": -13
@@ -12919,7 +13119,11 @@
       "displayRole": "detail",
       "action": "FAIRE",
       "instruction": "Dans la salle finale, utilise l'Idole de Foluk Féérique puis vaincs Korriandre avec les quêtes Frigost/Silvosse et l'alignement actifs.",
-      "momentId": "moment-korriandre-pass"
+      "momentId": "moment-korriandre-pass",
+      "parallelGroup": {
+        "parallelId": "parallel-korriandre",
+        "phase": "finish"
+      }
     },
     {
       "id": "route-step-0574",
@@ -13122,12 +13326,16 @@
       "title": "Le pic qui glace — avancer jusqu'au Glourséleste",
       "displayRole": "objective",
       "action": "LANCER / GARDER ACTIF",
-      "instruction": "LANCE/ACTIVE Le pic qui glace avant d'entrer dans l'Antichambre. GARDE-la active : le même passage servira d'abord à récupérer le Miel Liquide Mordoré de Mission solution, puis à vaincre le Glourséleste.",
+      "instruction": "QUÊTES À AVANCER ENSEMBLE — Le pic qui glace + Mission solution dans l'Antichambre des Gloursons.\nLANCE Le pic qui glace et garde-la active : Mission solution récupère le miel en salle 3 puis tu continues directement jusqu'au Glourséleste sans sortir.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-pic-qui-glace.html"
       },
       "momentId": "moment-route-step-0589",
+      "parallelGroup": {
+        "parallelId": "parallel-glours",
+        "phase": "start"
+      },
       "location": {
         "x": -63,
         "y": -75
@@ -13147,6 +13355,10 @@
         "url": "https://www.dofuspourlesnoobs.com/mission-solution.html"
       },
       "momentId": "moment-route-step-0589",
+      "parallelGroup": {
+        "parallelId": "parallel-glours",
+        "phase": "progress"
+      },
       "longRunningGoal": {
         "goalId": "mission-solution",
         "phase": "progress"
@@ -13161,7 +13373,11 @@
       "displayRole": "detail",
       "action": "FAIRE",
       "instruction": "Après avoir récupéré le Miel Liquide Mordoré en salle 3, CONTINUE sans sortir et vaincs le Glourséleste. À la sortie auprès de Willy La Bille, Le pic qui glace se termine et l'accès à Frigost III est débloqué.",
-      "momentId": "moment-route-step-0589"
+      "momentId": "moment-route-step-0589",
+      "parallelGroup": {
+        "parallelId": "parallel-glours",
+        "phase": "finish"
+      }
     },
     {
       "id": "route-step-0587",
@@ -13374,10 +13590,14 @@
       "type": "quest",
       "title": "Au fion du trou — LANCER / GARDER ACTIF",
       "action": "LANCER / STOP",
-      "instruction": "En [-77,-42], LANCE Au fion du trou maintenant, APRÈS avoir terminé Ça fait froid dans le dos. GARDE la quête active jusqu'au second Grolloum, qui sera fait avec La machine à démonter le temps.",
+      "instruction": "QUÊTES À AVANCER ENSEMBLE — Au fion du trou + La machine à démonter le temps jusqu'au second Grolloum.\nLANCE Au fion du trou après le premier Grolloum d'alignement et garde-la active jusqu'au passage commun avec La machine à démonter le temps.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/au-fion-du-trou.html"
+      },
+      "parallelGroup": {
+        "parallelId": "parallel-grolloum",
+        "phase": "start"
       },
       "location": {
         "x": -77,
@@ -13401,7 +13621,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/cambriolage-a-duree-determinee.html"
       },
-      "momentId": "moment-alignement-91-98",
+      "momentId": "moment-alignement-91-94",
       "location": {
         "x": -32,
         "y": -57
@@ -13420,7 +13640,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/c-est-toujours-dur-le-matin.html"
       },
-      "momentId": "moment-alignement-91-98",
+      "momentId": "moment-alignement-91-94",
       "location": {
         "x": -32,
         "y": -57
@@ -13439,7 +13659,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/je-panse-donc-jessuie.html"
       },
-      "momentId": "moment-alignement-91-98",
+      "momentId": "moment-alignement-91-94",
       "location": {
         "x": -32,
         "y": -57
@@ -13458,7 +13678,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/l-aube-des-morts-vivants.html"
       },
-      "momentId": "moment-alignement-91-98",
+      "momentId": "moment-alignement-91-94",
       "location": {
         "x": -32,
         "y": -57
@@ -13477,7 +13697,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/un-chemin-tout-trace.html"
       },
-      "momentId": "moment-alignement-91-98",
+      "momentId": "moment-alignement-95-97",
       "location": {
         "x": -32,
         "y": -57
@@ -13496,7 +13716,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/enigma.html"
       },
-      "momentId": "moment-alignement-91-98",
+      "momentId": "moment-alignement-95-97",
       "location": {
         "x": -32,
         "y": -57
@@ -13511,12 +13731,16 @@
       "displayType": "ALIGN.",
       "displayRole": "objective",
       "action": "AVANCER / STOP",
-      "instruction": "AVANCE À glacer le sang jusqu'à devoir vaincre Missiz Frizz puis STOP devant la Forgefroide. Le boss sera mutualisé avec La dernière carte au bloc 10.",
+      "instruction": "QUÊTES À AVANCER ENSEMBLE — À glacer le sang + Chaud et Froid + La dernière carte jusqu'à Missiz Frizz.\nAVANCE À glacer le sang jusqu'à devoir vaincre Missiz Frizz puis STOP devant la Forgefroide. Le boss sera mutualisé avec La dernière carte au bloc 10.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/a-glacer-le-sang.html"
       },
-      "momentId": "moment-alignement-91-98",
+      "momentId": "moment-alignement-95-97",
+      "parallelGroup": {
+        "parallelId": "parallel-missiz",
+        "phase": "start"
+      },
       "location": {
         "x": -32,
         "y": -57
@@ -13820,7 +14044,11 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/chaud-et-froid.html"
       },
-      "momentId": "moment-nileza-pass1"
+      "momentId": "moment-nileza-pass1",
+      "parallelGroup": {
+        "parallelId": "parallel-missiz",
+        "phase": "progress"
+      }
     },
     {
       "id": "route-step-0625",
@@ -13932,6 +14160,10 @@
         "url": "https://www.dofuspourlesnoobs.com/la-derniegravere-carte.html"
       },
       "momentId": "moment-route-step-0631",
+      "parallelGroup": {
+        "parallelId": "parallel-missiz",
+        "phase": "progress"
+      },
       "location": {
         "x": -68,
         "y": -78
@@ -13950,7 +14182,11 @@
       "displayRole": "detail",
       "action": "FAIRE",
       "instruction": "Capture les 2 Frimar, vaincs Missiz Frizz, récupère le Plan d’invasion ET le fluide requis par Chaud et Froid.",
-      "momentId": "moment-route-step-0631"
+      "momentId": "moment-route-step-0631",
+      "parallelGroup": {
+        "parallelId": "parallel-missiz",
+        "phase": "finish"
+      }
     },
     {
       "id": "route-step-0633",
@@ -14111,6 +14347,10 @@
         "url": "https://www.dofuspourlesnoobs.com/la-machine-agrave-deacutemonter-le-temps.html"
       },
       "momentId": "moment-route-step-0643",
+      "parallelGroup": {
+        "parallelId": "parallel-grolloum",
+        "phase": "progress"
+      },
       "location": {
         "x": -61,
         "y": -81
@@ -14133,7 +14373,11 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/donjon-de-la-mine-de-sakaiuml.html"
       },
-      "momentId": "moment-route-step-0643"
+      "momentId": "moment-route-step-0643",
+      "parallelGroup": {
+        "parallelId": "parallel-grolloum",
+        "phase": "finish"
+      }
     },
     {
       "id": "route-step-0647",
@@ -14886,7 +15130,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/aux-frontieres-du-reel.html"
       },
-      "momentId": "moment-route-step-0678",
+      "momentId": "moment-eliocalypse-reel-a",
       "location": {
         "x": 2,
         "y": 1
@@ -14904,7 +15148,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/ce-sera-mieux-avant.html"
       },
-      "momentId": "moment-route-step-0678",
+      "momentId": "moment-eliocalypse-reel-a",
       "location": {
         "x": 2,
         "y": 1
@@ -14923,7 +15167,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/amaknanomalie.html"
       },
-      "momentId": "moment-route-step-0678",
+      "momentId": "moment-eliocalypse-reel-a",
       "location": {
         "x": 2,
         "y": 1
@@ -14966,7 +15210,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-mere-des-dragoeufs.html"
       },
-      "momentId": "moment-route-step-0678",
+      "momentId": "moment-eliocalypse-reel-a",
       "location": {
         "x": 1,
         "y": 6
@@ -14992,7 +15236,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/cauchemars-premonitoires.html"
       },
-      "momentId": "moment-route-step-0678",
+      "momentId": "moment-eliocalypse-reel-a",
       "location": {
         "x": 2,
         "y": 1
@@ -15010,7 +15254,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/partie-de-chasse.html"
       },
-      "momentId": "moment-route-step-0678",
+      "momentId": "moment-eliocalypse-reel-b",
       "location": {
         "x": 0,
         "y": 0
@@ -15028,7 +15272,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/quatre-contre-un.html"
       },
-      "momentId": "moment-route-step-0678",
+      "momentId": "moment-eliocalypse-reel-b",
       "location": {
         "x": 0,
         "y": 0
@@ -15046,7 +15290,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/reves-translucides.html"
       },
-      "momentId": "moment-route-step-0678",
+      "momentId": "moment-eliocalypse-reel-b",
       "location": {
         "x": 0,
         "y": 0
@@ -15064,7 +15308,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/veilleur-sous-surveillance.html"
       },
-      "momentId": "moment-route-step-0678",
+      "momentId": "moment-eliocalypse-reel-b",
       "location": {
         "x": -13,
         "y": -22
@@ -15083,7 +15327,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-source-de-tous-les-maux.html"
       },
-      "momentId": "moment-route-step-0678",
+      "momentId": "moment-eliocalypse-reel-b",
       "location": {
         "x": 2,
         "y": 1
@@ -15231,7 +15475,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/main-dans-la-main.html"
       },
-      "momentId": "moment-tachete-reunification",
+      "momentId": "moment-tachete-reunification-a",
       "location": {
         "x": 21,
         "y": -33
@@ -15254,7 +15498,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/de-l-encre-spectaculaire.html"
       },
-      "momentId": "moment-tachete-reunification",
+      "momentId": "moment-tachete-reunification-a",
       "location": {
         "x": 19,
         "y": -21
@@ -15277,7 +15521,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/l-epopee-du-moine-pelerin.html"
       },
-      "momentId": "moment-tachete-reunification",
+      "momentId": "moment-tachete-reunification-a",
       "location": {
         "x": 23,
         "y": -32
@@ -15296,7 +15540,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/main-dans-la-main.html"
       },
-      "momentId": "moment-tachete-reunification"
+      "momentId": "moment-tachete-reunification-a"
     },
     {
       "id": "route-step-0697",
@@ -15311,7 +15555,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/deux-souffles-une-inspiration.html"
       },
-      "momentId": "moment-tachete-reunification",
+      "momentId": "moment-tachete-reunification-b",
       "location": {
         "x": 23,
         "y": -32
@@ -15334,7 +15578,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/memoire-d-orukam.html"
       },
-      "momentId": "moment-tachete-reunification"
+      "momentId": "moment-tachete-reunification-b"
     },
     {
       "id": "route-step-0699",
@@ -15349,7 +15593,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/deux-souffles-une-inspiration.html"
       },
-      "momentId": "moment-tachete-reunification"
+      "momentId": "moment-tachete-reunification-b"
     },
     {
       "id": "route-step-0700",
@@ -15364,7 +15608,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/souvenir-d-imagiro.html"
       },
-      "momentId": "moment-tachete-reunification"
+      "momentId": "moment-tachete-reunification-b"
     },
     {
       "id": "route-step-0701",
@@ -15379,7 +15623,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/deux-souffles-une-inspiration.html"
       },
-      "momentId": "moment-tachete-reunification"
+      "momentId": "moment-tachete-reunification-b"
     },
     {
       "id": "route-step-0702",
@@ -15394,7 +15638,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/main-dans-la-main.html"
       },
-      "momentId": "moment-tachete-reunification"
+      "momentId": "moment-tachete-reunification-b"
     },
     {
       "id": "route-step-0703",
@@ -15409,7 +15653,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/en-ce-jardin-qui-nous-unit.html"
       },
-      "momentId": "moment-tachete-reunification",
+      "momentId": "moment-tachete-reunification-b",
       "location": {
         "x": 23,
         "y": -32
@@ -16032,6 +16276,10 @@
         "url": "https://www.dofuspourlesnoobs.com/un-pouvoir-merydique.html"
       },
       "momentId": "moment-route-step-0736",
+      "parallelGroup": {
+        "parallelId": "parallel-grand-ougah",
+        "phase": "progress"
+      },
       "location": {
         "x": 0,
         "y": 0
@@ -16072,7 +16320,11 @@
       "displayRole": "objective",
       "action": "FAIRE",
       "instruction": "Poursuis Un pouvoir mérydique jusqu'au Grand Ougah et fais le donjon avec Apprentissage : Assassin Suprême également actif.",
-      "momentId": "moment-route-step-0736"
+      "momentId": "moment-route-step-0736",
+      "parallelGroup": {
+        "parallelId": "parallel-grand-ougah",
+        "phase": "finish"
+      }
     },
     {
       "id": "route-step-0740",
@@ -16593,7 +16845,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-grandes-galeries.html"
       },
-      "momentId": "moment-route-step-0764",
+      "momentId": "moment-enutrosor-galeries-a",
       "location": {
         "x": 3,
         "y": -4
@@ -16611,7 +16863,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/un-coeligur-dor.html"
       },
-      "momentId": "moment-route-step-0764",
+      "momentId": "moment-enutrosor-galeries-a",
       "launchInstruction": "Double-clique le Joyau écarlate dans ton inventaire de quête. Il est obtenu à la fin de Les grandes galeries."
     },
     {
@@ -16626,7 +16878,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/maudite-geacuteneacuterositeacute.html"
       },
-      "momentId": "moment-route-step-0764",
+      "momentId": "moment-enutrosor-galeries-a",
       "location": {
         "x": 3,
         "y": -4
@@ -16644,7 +16896,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/touchez-pas-a-grisebigle.html"
       },
-      "momentId": "moment-route-step-0764",
+      "momentId": "moment-enutrosor-galeries-a",
       "location": {
         "x": -22,
         "y": -24
@@ -16662,7 +16914,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/eacutechantillonnage.html"
       },
-      "momentId": "moment-route-step-0764",
+      "momentId": "moment-enutrosor-galeries-b",
       "location": {
         "x": -22,
         "y": -24
@@ -16680,7 +16932,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-silence-est-dor.html"
       },
-      "momentId": "moment-route-step-0764",
+      "momentId": "moment-enutrosor-galeries-b",
       "location": {
         "x": -1,
         "y": -1
@@ -16698,7 +16950,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/espionnage-industriel.html"
       },
-      "momentId": "moment-route-step-0764",
+      "momentId": "moment-enutrosor-galeries-b",
       "location": {
         "x": -8,
         "y": -5
@@ -16716,7 +16968,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/prise-dotages.html"
       },
-      "momentId": "moment-route-step-0764",
+      "momentId": "moment-enutrosor-galeries-b",
       "location": {
         "x": -8,
         "y": -5
@@ -16734,7 +16986,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-gregraveve-de-la-fin.html"
       },
-      "momentId": "moment-route-step-0764",
+      "momentId": "moment-enutrosor-galeries-c",
       "location": {
         "x": -8,
         "y": -5
@@ -16753,7 +17005,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/malle-des-profondeurs.html"
       },
-      "momentId": "moment-route-step-0764",
+      "momentId": "moment-enutrosor-galeries-c",
       "location": {
         "x": -1,
         "y": -1
@@ -16768,7 +17020,7 @@
       "displayRole": "detail",
       "action": "FAIRE",
       "instruction": "Fais Malléfisk puis effectue le combat solo demandé après le donjon.",
-      "momentId": "moment-route-step-0764"
+      "momentId": "moment-enutrosor-galeries-c"
     },
     {
       "id": "route-step-0775",
@@ -16782,7 +17034,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/malle-des-profondeurs.html"
       },
-      "momentId": "moment-route-step-0764"
+      "momentId": "moment-enutrosor-galeries-c"
     },
     {
       "id": "route-step-0776",
@@ -16796,7 +17048,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/reconnaissance-de-dettes.html"
       },
-      "momentId": "moment-route-step-0764",
+      "momentId": "moment-enutrosor-galeries-c",
       "location": {
         "x": -7,
         "y": -6
@@ -16814,7 +17066,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/laisseacute-en-plan.html"
       },
-      "momentId": "moment-route-step-0764",
+      "momentId": "moment-enutrosor-galeries-c",
       "location": {
         "x": -9,
         "y": -5
@@ -16882,12 +17134,16 @@
       "title": "Un morceau de roi — avancer jusqu'au Nidas",
       "displayRole": "objective",
       "action": "LANCER / AVANCER / STOP",
-      "instruction": "Lance puis STOP devant le Palais du Roi Nidas.",
+      "instruction": "QUÊTES À AVANCER ENSEMBLE — Un morceau de roi + Coiffeur de génie + Casse en Enutrosor jusqu'au Nidas.\nLance puis STOP devant le Palais du Roi Nidas.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/un-morceau-de-roi.html"
       },
       "momentId": "moment-enutrosor-nidas-prep",
+      "parallelGroup": {
+        "parallelId": "parallel-nidas",
+        "phase": "start"
+      },
       "location": {
         "x": -5,
         "y": -5
@@ -16907,6 +17163,10 @@
         "url": "https://www.dofuspourlesnoobs.com/coiffeur-de-genie.html"
       },
       "momentId": "moment-enutrosor-nidas-prep",
+      "parallelGroup": {
+        "parallelId": "parallel-nidas",
+        "phase": "progress"
+      },
       "location": {
         "x": -5,
         "y": -5
@@ -16945,7 +17205,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/dis-scierie.html"
       },
-      "momentId": "moment-valonia-ouverture",
+      "momentId": "moment-valonia-ouverture-a",
       "location": {
         "x": 38,
         "y": -77
@@ -16963,7 +17223,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/colonie-de-vaillance.html"
       },
-      "momentId": "moment-valonia-ouverture",
+      "momentId": "moment-valonia-ouverture-a",
       "location": {
         "x": 38,
         "y": -77
@@ -16981,7 +17241,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/dans-la-gueule-du-trankilou.html"
       },
-      "momentId": "moment-valonia-ouverture",
+      "momentId": "moment-valonia-ouverture-a",
       "location": {
         "x": 38,
         "y": -77
@@ -16999,7 +17259,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/association-de-fureteurs.html"
       },
-      "momentId": "moment-valonia-ouverture",
+      "momentId": "moment-valonia-ouverture-a",
       "location": {
         "x": 36,
         "y": -77
@@ -17018,7 +17278,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-complote-des-poms.html"
       },
-      "momentId": "moment-valonia-ouverture",
+      "momentId": "moment-valonia-ouverture-a",
       "location": {
         "x": 40,
         "y": -84
@@ -17036,7 +17296,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/un-evenement-inattendu.html"
       },
-      "momentId": "moment-valonia-ouverture",
+      "momentId": "moment-valonia-ouverture-b",
       "location": {
         "x": 36,
         "y": -77
@@ -17055,7 +17315,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/l-ile-maudite.html"
       },
-      "momentId": "moment-valonia-ouverture",
+      "momentId": "moment-valonia-ouverture-b",
       "location": {
         "x": 36,
         "y": -76
@@ -17070,7 +17330,7 @@
       "displayRole": "detail",
       "action": "FAIRE",
       "instruction": "Fais le Bastion des Marteaux-Aigris maintenant pour L'île maudite.",
-      "momentId": "moment-valonia-ouverture"
+      "momentId": "moment-valonia-ouverture-b"
     },
     {
       "id": "route-step-0792",
@@ -17084,7 +17344,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/l-ile-maudite.html"
       },
-      "momentId": "moment-valonia-ouverture"
+      "momentId": "moment-valonia-ouverture-b"
     },
     {
       "id": "route-step-0793",
@@ -17098,7 +17358,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/chercher-un-marteau-aigri-dans-une-galerie-d-ereboria.html"
       },
-      "momentId": "moment-valonia-ouverture",
+      "momentId": "moment-valonia-ouverture-b",
       "location": {
         "x": 32,
         "y": -64
@@ -17116,7 +17376,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-fin-des-maningances.html"
       },
-      "momentId": "moment-valonia-ouverture",
+      "momentId": "moment-valonia-ouverture-b",
       "location": {
         "x": 32,
         "y": -62
@@ -17619,6 +17879,10 @@
         "url": "https://www.dofuspourlesnoobs.com/casse-en-enutrosor.html"
       },
       "momentId": "moment-route-step-0823",
+      "parallelGroup": {
+        "parallelId": "parallel-nidas",
+        "phase": "progress"
+      },
       "location": {
         "x": 14,
         "y": 13
@@ -17637,7 +17901,11 @@
       "displayRole": "detail",
       "action": "FAIRE",
       "instruction": "Fais le Palais du Roi Nidas avec Casse en Enutrosor + Un morceau de roi + Coiffeur de génie actifs, puis sécurise les interactions de sortie avant de partir.",
-      "momentId": "moment-route-step-0823"
+      "momentId": "moment-route-step-0823",
+      "parallelGroup": {
+        "parallelId": "parallel-nidas",
+        "phase": "finish"
+      }
     },
     {
       "id": "route-step-0825",
@@ -18090,12 +18358,16 @@
       "title": "De Brikke et de Brokke — avancer jusqu'au Roi Dazak",
       "displayRole": "transition",
       "action": "AVANCER / STOP",
-      "instruction": "→ Après Les Ninsoumis, avance De Brikke et de Brokke jusqu’au Roi Dazak puis STOP. Garde le donjon pour Le dragon noir.",
+      "instruction": "QUÊTES À AVANCER ENSEMBLE — De Brikke et de Brokke + Le dragon noir jusqu'au Roi Dazak.\n→ Après Les Ninsoumis, avance De Brikke et de Brokke jusqu’au Roi Dazak puis STOP. Garde le donjon pour Le dragon noir.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/de-brikke-et-de-brokke.html"
       },
-      "momentId": "moment-route-step-0849"
+      "momentId": "moment-route-step-0849",
+      "parallelGroup": {
+        "parallelId": "parallel-dazak",
+        "phase": "start"
+      }
     },
     {
       "id": "route-step-0855",
@@ -18375,6 +18647,10 @@
         "url": "https://www.dofuspourlesnoobs.com/le-dragon-noir.html"
       },
       "momentId": "moment-ebene-dazak",
+      "parallelGroup": {
+        "parallelId": "parallel-dazak",
+        "phase": "progress"
+      },
       "location": {
         "x": -25,
         "y": -52
@@ -18393,7 +18669,11 @@
       "displayRole": "detail",
       "action": "FAIRE",
       "instruction": "Après Dazak, parle-lui avant de quitter la zone.",
-      "momentId": "moment-ebene-dazak"
+      "momentId": "moment-ebene-dazak",
+      "parallelGroup": {
+        "parallelId": "parallel-dazak",
+        "phase": "finish"
+      }
     },
     {
       "id": "route-step-0875",
@@ -19396,7 +19676,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/un-heritage-tourmente.html"
       },
-      "momentId": "moment-totems-ouverture",
+      "momentId": "moment-totems-ouverture-setup",
       "location": {
         "x": 21,
         "y": -33
@@ -19419,7 +19699,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-totems-de-maimane.html"
       },
-      "momentId": "moment-totems-ouverture",
+      "momentId": "moment-totems-ouverture-setup",
       "location": {
         "x": 2,
         "y": 4
@@ -19437,7 +19717,7 @@
       "title": "◆ Salons privés de Klime — TOTEM JOIE",
       "displayRole": "objective",
       "action": "FAIRE",
-      "momentId": "moment-totems-ouverture"
+      "momentId": "moment-totems-ouverture-donjons"
     },
     {
       "id": "route-step-0941",
@@ -19447,7 +19727,7 @@
       "title": "◆ Temple de Koutoulou — TOTEM PEUR",
       "displayRole": "objective",
       "action": "FAIRE",
-      "momentId": "moment-totems-ouverture"
+      "momentId": "moment-totems-ouverture-donjons"
     },
     {
       "id": "route-step-0942",
@@ -19457,7 +19737,7 @@
       "title": "◆ Brasserie du Roi Dazak — TOTEM COLÈRE",
       "displayRole": "objective",
       "action": "FAIRE",
-      "momentId": "moment-totems-ouverture"
+      "momentId": "moment-totems-ouverture-donjons"
     },
     {
       "id": "route-step-0943",
@@ -19467,7 +19747,7 @@
       "title": "◆ Laboratoire de Nileza — TOTEM DÉGOÛT",
       "displayRole": "objective",
       "action": "FAIRE",
-      "momentId": "moment-totems-ouverture"
+      "momentId": "moment-totems-ouverture-donjons"
     },
     {
       "id": "route-step-0946",
