@@ -12,6 +12,8 @@ export type StepType =
   | 'major_step'
   | 'finish';
 
+export type GuideItemAction = 'take' | 'advance' | 'finish' | 'do';
+
 export interface RouteBlock {
   id: string;
   order: number;
@@ -22,6 +24,13 @@ export interface RouteBlock {
 export interface RouteCoordinate {
   x: number;
   y: number;
+}
+
+export interface GuideItem {
+  action: GuideItemAction;
+  label: string;
+  location?: RouteCoordinate;
+  note?: string;
 }
 
 export interface RouteStep {
@@ -42,6 +51,8 @@ export interface RouteStep {
   /** Position structurée vers laquelle le joueur doit se rendre pour exécuter cette étape. */
   destination?: RouteCoordinate;
   launchInstruction?: string;
+  /** Actions courtes du roadbook : quoi prendre/avancer/terminer et où. */
+  guideItems?: GuideItem[];
   preparationItems?: string[];
   longRunningGoal?: {
     goalId: string;
