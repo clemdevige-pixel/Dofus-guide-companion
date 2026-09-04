@@ -7,192 +7,210 @@ Branche : `agent/initial-scaffold`
 Source de vérité : Google Sheet `Roadmap ULTIMATE V2 — Astrub → Dofus Sylvestre`, onglet `ROUTE`  
 Spreadsheet ID : `1l1eYM3T708s5j74LmsUi4wyzg6sM9xShPzS_ToBtVYg`
 
-État au 2026-09-04 :
+État au 2026-09-05 :
 
-- passe anti-redondance structurelle terminée sur toute la route ;
-- `MOMENT_ID` reste la frontière de carte autoritaire ;
-- `DISPLAY_ROLE` est renseigné sur 782/782 lignes appartenant à un moment explicite ;
-- valeurs : `OBJECTIVE`, `TRANSITION`, `DETAIL` ;
-- 1 checkbox = 1 sous-objectif significatif ;
-- les transitions administratives restent visibles sans checkbox ;
-- aucune logique spécifique par nom de quête n'a été ajoutée dans React ;
-- audit DPLN mécanique final : **737/737 lignes de quête/reprise/fil rouge portent un HYPERLINK** ;
-- contrôle Google Sheet : **0 `#ERROR!`** sur `ROUTE!A5:T1031`.
+- passe anti-redondance structurelle terminée ;
+- `MOMENT_ID` = unique frontière de carte ;
+- `DISPLAY_ROLE` = structure interne (`OBJECTIVE`, `TRANSITION`, `DETAIL`) ;
+- plafond UX : **5 objectifs maximum par carte** ;
+- le validateur refuse désormais un `MOMENT_ID` à 6+ objectifs ;
+- fenêtre : footer/navigation fixe, seule la zone carte est scrollable ;
+- audit DPLN : toutes les quêtes/reprises/fils rouges exportés ont leur source cliquable ;
+- `PARALLEL_ID` / `PARALLEL_PHASE` structurent les quêtes à garder actives et avancer conjointement ;
+- **24 groupes parallèles** confirmés dans le Sheet après croisement de la route avec le JSON Ganymède ;
+- le rappel UI `QUÊTES EN PARALLÈLE` est branché depuis la donnée structurée ;
+- un membre futur n'apparaît dans le rappel qu'une fois réellement introduit dans le parcours.
+
+## Contrat de carte
+
+### MOMENT_ID
+
+`MOMENT_ID` est l'unique frontière autoritaire d'une carte.
+
+Une ligne sans `MOMENT_ID` = une carte autonome.
+
+Un moment explicite :
+
+- reste dans un seul bloc ;
+- reste contigu ;
+- commence toujours par `DISPLAY_ROLE=OBJECTIVE` ;
+- possède `DISPLAY_ROLE` sur toutes ses lignes ;
+- contient **au maximum 5 `OBJECTIVE`**.
+
+Le code ne regroupe jamais une carte depuis un titre, un type ou un verbe d'action.
+
+### DISPLAY_ROLE
+
+- `OBJECTIVE` = checkbox ;
+- `TRANSITION` = action visible sans checkbox, attachée à l'objectif précédent ;
+- `DETAIL` = information technique attachée à l'objectif précédent.
+
+Une transition sans `instruction` garde un fallback compact `ACTION — titre` construit depuis ses champs structurés.
+
+## Taille de fenêtre / navigation
+
+La fenêtre ne doit jamais changer de taille selon la carte.
+
+Le layout est désormais :
+
+```text
+header / bloc / contexte
+zone carte flexible + scroll
+footer navigation fixe
+```
+
+Le bouton `TERMINÉ` reste donc au même emplacement même quand le contenu de la carte est plus dense.
+
+Le plafond de 5 objectifs est un contrat de lisibilité, pas un correctif de layout.
+
+## Quêtes parallèles
+
+Colonnes Sheet :
+
+- `PARALLEL_ID` ;
+- `PARALLEL_PHASE` = `START`, `PROGRESS`, `FINISH`.
+
+Runtime :
+
+```ts
+parallelGroup?: {
+  parallelId: string;
+  phase: 'start' | 'progress' | 'finish';
+}
+```
+
+Le lifecycle est strict :
+
+```text
+start → progress* → finish
+```
+
+Un groupe doit être terminé avant la fin de la route.
+
+### Sémantique UI
+
+Le groupe devient actif quand son step `start` est validé.
+
+Le rappel persistant affiche uniquement les membres déjà introduits :
+
+- après `start` : uniquement la première quête ;
+- chaque `progress` validé ajoute la nouvelle quête au rappel ;
+- `finish` retire automatiquement le groupe.
+
+Cela évite d'afficher au joueur une quête future qu'il ne peut pas encore prendre.
+
+## Audit Ganymède des convergences
+
+Le JSON Ganymède fourni par l'utilisateur contient **35 passages** où plusieurs guides sont avancés vers un même checkpoint.
+
+Ces 35 passages ont été comparés à notre route optimisée.
+
+Critère retenu pour créer un `PARALLEL_ID` : au moins deux vraies quêtes de notre route doivent rester actives / être avancées conjointement. Les captures Ocre seules, guides optionnels ou branches absentes de notre route ne suffisent pas.
+
+État Sheet : **24 groupes parallèles confirmés**.
+
+Cas structurés notamment :
+
+- Forgerons ;
+- Blops ;
+- Domaine Ancestral ;
+- Reine Nyée ;
+- Damadrya ;
+- Chêne Mou ;
+- Koulosse ;
+- Meulou ;
+- Rat Blanc ;
+- Maître Corbac ;
+- Minotoror ;
+- Mansot Royal ;
+- Sphincter Cell ;
+- Demeure des Esprits ;
+- Founoroshi ;
+- Kanigroula ;
+- Korriandre ;
+- Grand Ougah ;
+- Glourséleste ;
+- Grolloum ;
+- Missiz Frizz ;
+- Nidas ;
+- Dazak ;
+- Vortex.
+
+### Obsidiantre
+
+Pas de faux `PARALLEL_ID` créé.
+
+La route ne structurait pas explicitement le lancement de `Lavomatique` avant l'Obsidiantre. Le passage a été sécurisé par une instruction explicite demandant de vérifier `Lavomatique` avant d'entrer et de ne pas sortir après Dan Lavy.
 
 ## Audit de cohérence 2026
 
-Une passe supplémentaire a été menée avec Ganymede + DofusPourLesNoobs actuel pour vérifier qu'un joueur peut suivre la route dans l'ordre sans tomber sur un prérequis caché ou une mécanique devenue obsolète.
+La route a été recroisée avec Ganymède et DofusPourLesNoobs sur les points de blocage réels.
 
-### Corrections importantes
+Corrections majeures déjà intégrées :
 
-#### Émeraude — Naissance d'une vocation
+- prérequis élevage Émeraude ;
+- Carte de Cania / 9 Primatons ;
+- Tablette de Totankama / 25 Trésors archéologiques ;
+- timer actuel de `Le mal a dit` ;
+- post-Sylargh `Il est temps de mourir` ;
+- titres corrompus `Protéger et sévir` / `Le nouveau monde` ;
+- donnée parasite de `La marche de l'impératrice` ;
+- accès Otomaï, Moon, Wabbit, Capture d'âmes ;
+- Valonia / Dom de Pin ;
+- Prologue ;
+- Enutrosor ;
+- fin Sylvestre.
 
-La route masquait auparavant les vrais prérequis d'élevage.
+## DPLN
 
-Ils sont maintenant explicités avant la quête :
+Les liens DPLN sont portés par la donnée (`source.url`) issue des formules `HYPERLINK` du Sheet.
 
-- succès `Ce n'est qu'un prélèvement` ;
-- succès `Elle a peut-être trop mangé ?` ;
-- métier Éleveur niveau 20+ ;
-- 1 Dragodinde Rousse ;
-- 1 Dragodinde Amande ;
-- 1 Dragodinde Dorée.
+L'UI sait afficher :
 
-Le verrou métier 50 pour `Qui botte le cul des Culs Bottés ?` reste séparé et réel.
+- le lien de la quête principale ;
+- les liens distincts des sous-étapes d'une carte mutualisée ;
+- les liens des transitions lorsqu'ils diffèrent du lien principal.
 
-#### Carte de Cania — mécanique 3.4+
-
-La route ne doit plus présenter les Primatons comme un bonus opportuniste.
-
-Le fil rouge est maintenant explicite :
-
-- terminer et remettre à la justice 9 avis de recherche niveau 120 ou moins ;
-- récupérer 9 Primatons auprès du Chasseur de primes en `[5,-6]` ;
-- acheter les 3 fragments différents pour 3 Primatons chacun ;
-- assembler la Carte de Cania avant `Les bandits de Cania`.
-
-Le verrou Carte de Cania a été réécrit sur cette mécanique actuelle.
-
-#### Tablette de Totankama — mécanique 3.4+
-
-Le fil rouge est aligné sur la mécanique actuelle :
-
-- `Comment perdre ses plumes` doit être terminé ;
-- 25 Trésors archéologiques nécessaires ;
-- 5 Trésors par morceau de tablette ;
-- 5 morceaux à acheter puis assembler ;
-- deux méthodes cumulables :
-  - quête `Chasse au trésor archéologique` : 5 Trésors, limitée à 1 fois/jour ;
-  - boss de donjon niveau 120–130 : 1 Trésor automatique en donjon, pas en arène.
-
-Le verrou est conservé uniquement au moment où la tablette devient réellement obligatoire.
-
-#### Le mal a dit
-
-Le texte de prérequis était obsolète.
-
-La route accomplit déjà avant le verrou :
-
-- `Épis d'Emi` ;
-- `Bienvenue à Frigost` ;
-- `Pauvre Kiki` ;
-- `Gène et tique` ;
-- `En semant, se ment`.
-
-Le verrou indique maintenant la condition réelle restante : expiration du vaccin temporaire depuis une semaine.
-
-#### Il est temps de mourir
-
-La transition après Sylargh répétait à tort « prendre la quête et avancer jusqu'au Sylargh » alors que le boss était déjà vaincu.
-
-Elle indique maintenant la vraie suite critique :
-
-- ne pas sortir après Sylargh ;
-- détruire le Nékoléreux instable dans la salle de sortie ;
-- ressusciter ;
-- parler à Agonie ;
-- poursuivre la séquence Hyrkul selon DPLN jusqu'au Dofus Ivoire.
-
-#### Corruption éditoriale Otomaï
-
-Deux STEP_ID avaient un titre ne correspondant plus à leur contenu :
-
-- `route-step-0105` restauré en `Protéger et sévir` ;
-- `route-step-0106` restauré en `Le nouveau monde`.
-
-Le passage `Donjon douillet — Nid du Kwakwa` a également été restauré sur son STEP_ID correct.
-
-#### La marche de l'impératrice
-
-Une ancienne instruction Bworker / Maître des clefs sans rapport avec la quête a été supprimée.
-
-La ligne ne décrit plus que la mutualisation réelle avec `Pêche en eaux gelées`.
-
-## DPLN — couverture des cartes
-
-L'exporteur récupère `source.url` depuis les formules `HYPERLINK` de la colonne `ÉTAPE`.
-
-Le rendu React sait déjà afficher :
-
-- le lien de la quête principale d'un objectif ;
-- un lien distinct pour une étape interne de carte quand son URL diffère ;
-- le lien d'une carte simple.
-
-Audit mécanique sur un export frais du Sheet :
-
-```text
-737 lignes quest-like
-737 avec HYPERLINK
-0 sans lien
-```
-
-Les deux lignes d'orchestration Enutrosor contenant plusieurs noms de quêtes pointent vers la page DPLN Enutrosor ; dans la même carte, `Crache Test`, `La quatrième dimension`, `Déphorrestation` et `La meilleure défense, c'est l'attaque` ont chacune leur URL DPLN dédiée.
-
-## Cohérence Ganymede / DPLN
-
-Le tableau `GANYMEDE_AUDIT` avait déjà validé les 20 blocs individuellement.
-
-La nouvelle passe transversale a en plus revérifié les points à risque actuels :
-
-- accès Otomaï avant `Donjon magistral` ;
-- accès Moon avant `Un Kanniboul versé` ;
-- accès Wabbit avant `Le Wa Pythie` ;
-- Capture d'âmes avant `Le voleur d'âmes` ;
-- prérequis d'élevage Émeraude ;
-- Carte de Cania / Primatons ;
-- Tablette de Totankama / Trésors archéologiques ;
-- timer Frigost de `Le mal a dit` ;
-- chaîne Valonia / `L'héritage de l'île brisée` avant Dom de Pin ;
-- Prologue : `Au détour d'un rêve perdu` → `Entretemps, une renaissance` → `La bête au bois dormant` ;
-- post-Sylargh Ivoire ;
-- chaînes Enutrosor ;
-- prérequis Dom de Pin / Flovoraison / Sylvestre.
-
-Les répétitions de donjons restantes dans `GANYMEDE_AUDIT` restent justifiées par des déblocages ultérieurs et ne doivent pas être fusionnées artificiellement.
-
-## Architecture DISPLAY_ROLE
-
-Le code de la branche supporte désormais :
-
-```ts
-type StepDisplayRole = 'objective' | 'transition' | 'detail';
-```
-
-`DISPLAY_ROLE` ne peut être défini que dans un `MOMENT_ID`.
-
-`getSequenceObjectives()` respecte la donnée structurée au lieu de décider uniquement depuis le `type`.
-
-La deuxième prise groupée Enutrosor a été reclassée `TRANSITION` pour ne pas créer une checkbox administrative supplémentaire.
+Aucune URL n'est reconstruite ou devinée côté React.
 
 ## État runtime IMPORTANT
 
-Le Google Sheet est plus récent que `data/route.json`.
+Le dernier `data/route.json` poussé contient encore **21 groupes parallèles**.
 
-**Ne pas considérer le runtime comme synchronisé tant que l'export n'a pas été régénéré.**
+Le Sheet est plus récent : il contient maintenant **24 groupes**, avec les ajouts Reine Nyée, Founoroshi et Vortex.
 
-Ne jamais corriger `data/route.json` à la main.
+Un snapshot local propre a été généré depuis le Sheet :
 
-Prochaine étape technique :
-
-```bash
-pnpm export:route
-pnpm test:route
-pnpm validate:route
-pnpm build
+```text
+20 blocs
+986 étapes
+24 groupes parallèles
+max 5 objectifs par carte
 ```
 
-Puis :
+**Il faut encore synchroniser ce dernier JSON dans `data/route.json` avant de considérer le runtime parfaitement aligné.**
 
-1. contrôle visuel des grosses cartes ;
-2. vérification des boutons DPLN dans l'app ;
-3. commit/push final sur `agent/initial-scaffold`.
+Ne jamais corriger `route.json` à la main hors export/snapshot fidèle du Sheet.
+
+## Code récent
+
+- validation `≤5 objectifs` ajoutée ;
+- test de régression ajouté ;
+- `getActiveParallelGroups()` ne révèle plus les membres futurs ;
+- test parallèle mis à jour ;
+- `App.tsx` affiche un rappel persistant `QUÊTES EN PARALLÈLE` ;
+- frontend CI vert sur ces changements ;
+- check Tauri Windows lancé sur le dernier head.
 
 ## Contraintes non négociables
 
 - pas d'exception par nom de quête dans React ;
 - pas de parsing métier depuis les textes ;
 - pas de seconde source de vérité ;
-- pas de correction manuelle de `route.json` ;
+- `MOMENT_ID` = carte ;
+- `DISPLAY_ROLE` = rôle visuel interne ;
+- `PARALLEL_ID` = lifecycle de quêtes conjointes ;
+- 5 objectifs maximum par carte ;
 - pas d'invention de PNJ, position ou prérequis ;
 - préserver Ocre / STOP / objets obligatoires / dialogues de sortie / ordre imposé ;
-- optimiser le confort réel du parcours, pas le nombre de cartes pour le chiffre.
+- optimiser le confort réel, pas le nombre de cartes pour le chiffre.
