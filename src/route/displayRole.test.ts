@@ -167,3 +167,35 @@ test('an explicit moment must start with an objective', () => {
     /un momentId doit commencer par displayRole=objective/,
   );
 });
+
+test('an explicit card cannot contain more than five objectives', () => {
+  const momentId = 'moment-too-large';
+  const objectives: RouteStep[] = Array.from({ length: 6 }, (_, index) => ({
+    id: `objective-${index + 1}`,
+    order: index + 1,
+    blockId: 'block-01',
+    type: 'quest',
+    title: `Objectif ${index + 1}`,
+    momentId,
+    displayRole: 'objective',
+  }));
+
+  const route: RouteDocument = {
+    schemaVersion: 1,
+    routeVersion: 'test',
+    title: 'Test',
+    blocks: [{ id: 'block-01', order: 1, title: 'Block' }],
+    steps: [
+      ...objectives,
+      {
+        id: 'finish',
+        order: 7,
+        blockId: 'block-01',
+        type: 'finish',
+        title: 'Finish',
+      },
+    ],
+  };
+
+  assert.throws(() => validateRoute(route), /contient plus de 5 objectifs/);
+});
