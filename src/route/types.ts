@@ -46,6 +46,8 @@ export interface RouteStep {
     label: string;
     url: string;
   };
+  /** Identifiant éditorial d'un même moment de parcours affiché comme un objectif unique. */
+  momentId?: string;
   /** Position structurée où une quête est lancée. */
   location?: RouteCoordinate;
   /** Position structurée vers laquelle le joueur doit se rendre pour exécuter cette étape. */
