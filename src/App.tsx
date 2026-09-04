@@ -12,6 +12,7 @@ import {
   getHardLockForGoal,
   getNextHardLock,
   getProgress,
+  getSequenceObjectives,
   getStepGroupIndex,
   getStepGroups,
 } from './route/selectors';
@@ -89,6 +90,10 @@ function getSequenceCoordinate(step: RouteStep) {
   return step.destination ?? step.location;
 }
 
+function getObjectiveDisplayStep(steps: RouteStep[]): RouteStep {
+  return steps.find((step) => step.type !== 'dungeon') ?? steps[0];
+}
+
 export function App() {
   const initialProgress = useMemo(() => loadProgress(), []);
   const initialShortcuts = useMemo(() => loadShortcutBindings(), []);
@@ -119,6 +124,10 @@ export function App() {
   const currentStep = currentGroup
     ? currentGroup.steps.find((step) => !completedStepIds.has(step.id)) ?? currentGroup.steps[0]
     : undefined;
+  const sequenceObjectives = useMemo(
+    () => (currentGroup?.isSequence ? getSequenceObjectives(currentGroup.steps) : []),
+    [currentGroup],
+  );
 
   useEffect(() => {
     const savedStep = currentGroup
@@ -208,25 +217,31 @@ export function App() {
     }
   }
 
-  function toggleSequenceStep(stepId: string) {
+  function toggleSequenceObjective(stepIds: string[]) {
     if (!currentGroup) {
       return;
     }
 
-    const next = new Set(completedStepIds);
-    const wasCompleted = next.has(stepId);
-    if (wasCompleted) {
-      next.delete(stepId);
-    } else {
-      next.add(stepId);
-    }
-    setCompletedStepIds(next);
+    setCompletedStepIds((previous) => {
+      const next = new Set(previous);
+      const wasCompleted = stepIds.every((stepId) => next.has(stepId));
 
-    const completesSequence =
-      !wasCompleted && currentGroup.steps.every((step) => next.has(step.id));
-    if (completesSequence && viewIndex < stepGroups.length - 1) {
-      setViewIndex((index) => index + 1);
-    }
+      for (const stepId of stepIds) {
+        if (wasCompleted) {
+          next.delete(stepId);
+        } else {
+          next.add(stepId);
+        }
+      }
+
+      const completesSequence =
+        !wasCompleted && currentGroup.steps.every((step) => next.has(step.id));
+      if (completesSequence && viewIndex < stepGroups.length - 1) {
+        setViewIndex((index) => index + 1);
+      }
+
+      return next;
+    });
   }
 
   async function copyToClipboard(text: string) {
@@ -496,58 +511,84 @@ export function App() {
             <div className="step-title-row">
               <h1 id="current-step-title">{getSequenceTitle(currentGroup.steps)}</h1>
             </div>
-            <p className="action-label">{currentGroup.steps.length} objectifs à enchaîner</p>
+            <p className="action-label">{sequenceObjectives.length} objectifs à enchaîner</p>
 
             <ol className="sequence-list">
-              {currentGroup.steps.map((step) => {
-                const completed = completedStepIds.has(step.id);
-                const coordinate = getSequenceCoordinate(step);
+              {sequenceObjectives.map((objective) => {
+                const displayStep = getObjectiveDisplayStep(objective.steps);
+                const completed = objective.steps.every((step) => completedStepIds.has(step.id));
+                const stepIds = objective.steps.map((step) => step.id);
+
                 return (
-                  <li className={completed ? 'sequence-item sequence-item--completed' : 'sequence-item'} key={step.id}>
+                  <li
+                    className={completed ? 'sequence-item sequence-item--completed' : 'sequence-item'}
+                    key={objective.id}
+                  >
                     <button
                       className="sequence-checkbox"
                       type="button"
-                      aria-label={completed ? `Décocher ${step.title}` : `Cocher ${step.title}`}
+                      aria-label={completed ? `Décocher ${displayStep.title}` : `Cocher ${displayStep.title}`}
                       aria-pressed={completed}
-                      onClick={() => toggleSequenceStep(step.id)}
+                      onClick={() => toggleSequenceObjective(stepIds)}
                     >
                       {completed ? '✓' : ''}
                     </button>
                     <div className="sequence-item__content">
                       <div className="sequence-item__header">
-                        <div>
-                          {step.action && <span className="sequence-item__action">{step.action}</span>}
-                          <strong>{step.title}</strong>
-                        </div>
-                        <div className="sequence-item__tools">
-                          {coordinate && (
-                            <button
-                              className="guide-location-button"
-                              type="button"
-                              title={`Copier /travel ${coordinate.x} ${coordinate.y}`}
-                              onClick={() => void copyToClipboard(`/travel ${coordinate.x} ${coordinate.y}`)}
-                            >
-                              [{coordinate.x},{coordinate.y}] · ⧉
-                            </button>
-                          )}
-                          {step.source && (
-                            <button
-                              className="source-link-button"
-                              type="button"
-                              title={`Ouvrir ${step.source.label}`}
-                              onClick={() => void openExternalSource(step.source!.url)}
-                            >
-                              ↗
-                            </button>
-                          )}
-                        </div>
+                        <strong>{displayStep.title}</strong>
+                        {displayStep.source && (
+                          <button
+                            className="source-link-button"
+                            type="button"
+                            title={`Ouvrir ${displayStep.source.label}`}
+                            onClick={() => void openExternalSource(displayStep.source!.url)}
+                          >
+                            ↗
+                          </button>
+                        )}
                       </div>
-                      {step.launchInstruction && !step.location && (
-                        <span className="sequence-item__note">{step.launchInstruction}</span>
-                      )}
-                      {step.instruction && (
-                        <span className="sequence-item__note">{step.instruction}</span>
-                      )}
+
+                      {objective.steps.map((step) => {
+                        const coordinate = getSequenceCoordinate(step);
+                        return (
+                          <div className="sequence-item__detail" key={step.id}>
+                            <div className="sequence-item__header">
+                              <div>
+                                {step.action && <span className="sequence-item__action">{step.action}</span>}
+                                {step !== displayStep && step.type === 'dungeon' && <strong>{step.title}</strong>}
+                              </div>
+                              <div className="sequence-item__tools">
+                                {coordinate && (
+                                  <button
+                                    className="guide-location-button"
+                                    type="button"
+                                    title={`Copier /travel ${coordinate.x} ${coordinate.y}`}
+                                    onClick={() => void copyToClipboard(`/travel ${coordinate.x} ${coordinate.y}`)}
+                                  >
+                                    [{coordinate.x},{coordinate.y}] · ⧉
+                                  </button>
+                                )}
+                                {step.source && step.source.url !== displayStep.source?.url && (
+                                  <button
+                                    className="source-link-button"
+                                    type="button"
+                                    title={`Ouvrir ${step.source.label}`}
+                                    onClick={() => void openExternalSource(step.source!.url)}
+                                  >
+                                    ↗
+                                  </button>
+                                )}
+                              </div>
+                            </div>
+                            {step.launchInstruction && !step.location && (
+                              <span className="sequence-item__note">{step.launchInstruction}</span>
+                            )}
+                            {step.instruction && (
+                              <span className="sequence-item__note">{step.instruction}</span>
+                            )}
+                          </div>
+                        );
+                      })}
                     </div>
                   </li>
                 );
