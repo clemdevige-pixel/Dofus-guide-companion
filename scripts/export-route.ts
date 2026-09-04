@@ -9,7 +9,7 @@ import type {
 } from '../src/route/types';
 import { validateRoute } from '../src/route/validation';
 
-const DEFAULT_RANGE = 'ROUTE!A5:R';
+const DEFAULT_RANGE = 'ROUTE!A5:S';
 const OUTPUT_PATH = resolve('data/route.json');
 
 const typeMap: Record<string, { type: StepType; displayType?: string }> = {
@@ -185,10 +185,11 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
     cell(headers, 14) !== 'LANCEMENT' ||
     cell(headers, 15) !== 'LANCEMENT_REQUIS' ||
     cell(headers, 16) !== 'DESTINATION' ||
-    cell(headers, 17) !== 'GUIDE_ITEMS'
+    cell(headers, 17) !== 'GUIDE_ITEMS' ||
+    cell(headers, 18) !== 'MOMENT_ID'
   ) {
     throw new Error(
-      'Colonnes ROUTE inattendues : TYPE, ÉTAPE, STEP_ID, GOAL_ID, GOAL_PHASE, POSITION, LANCEMENT, LANCEMENT_REQUIS, DESTINATION et GUIDE_ITEMS sont obligatoires.',
+      'Colonnes ROUTE inattendues : TYPE, ÉTAPE, STEP_ID, GOAL_ID, GOAL_PHASE, POSITION, LANCEMENT, LANCEMENT_REQUIS, DESTINATION, GUIDE_ITEMS et MOMENT_ID sont obligatoires.',
     );
   }
 
@@ -244,6 +245,7 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
     const launchRequired = parseBoolean(cell(formatted, 15), sheetRow);
     const destination = parseCoordinate(cell(formatted, 16), sheetRow, 'DESTINATION');
     const guideItems = parseGuideItems(cell(formatted, 17), sheetRow);
+    const momentId = cell(formatted, 18);
     const title = rawTitle.split('\n')[0]?.trim() || rawTitle;
 
     if (action.toUpperCase().includes('LANCER') && !launchRequired) {
@@ -266,6 +268,7 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
       ...(action ? { action } : {}),
       ...(instruction ? { instruction } : {}),
       ...(hyperlink ? { source: { label: 'DPLN', url: hyperlink.url } } : {}),
+      ...(momentId ? { momentId } : {}),
       ...(location ? { location } : {}),
       ...(destination ? { destination } : {}),
       ...(launchInstruction ? { launchInstruction } : {}),
