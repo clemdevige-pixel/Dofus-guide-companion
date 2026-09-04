@@ -40,10 +40,6 @@ function getStepContext(step: RouteStep): string {
   return `${step.title}\n${step.action ?? ''}\n${step.instruction ?? ''}\n${step.launchInstruction ?? ''}`.toUpperCase();
 }
 
-function getQuestIdentity(step: RouteStep): string | undefined {
-  return step.source?.url;
-}
-
 /**
  * A sequence card is a presentation concern only: every underlying RouteStep keeps
  * its own id and completion state. We group ordinary actionable steps and keep
@@ -66,35 +62,25 @@ function isSequenceCandidate(step: RouteStep): boolean {
   return Boolean(step.action?.trim() || step.instruction?.trim() || step.title.trim());
 }
 
-function continuesSameQuestAfterStop(steps: RouteStep[], index: number): boolean {
-  const identity = getQuestIdentity(steps[index]);
-  if (!identity) {
+function continuesSameMomentAfterStop(steps: RouteStep[], index: number): boolean {
+  const momentId = steps[index].momentId;
+  if (!momentId) {
     return false;
   }
 
   const next = steps[index + 1];
-  if (!next || next.blockId !== steps[index].blockId) {
-    return false;
-  }
-
-  if (getQuestIdentity(next) === identity) {
-    return true;
-  }
-
-  const afterNext = steps[index + 2];
-  return (
-    next.type === 'dungeon' &&
-    Boolean(afterNext) &&
-    afterNext.blockId === steps[index].blockId &&
-    getQuestIdentity(afterNext) === identity
+  return Boolean(
+    next &&
+    next.blockId === steps[index].blockId &&
+    next.momentId === momentId,
   );
 }
 
-/** A STOP closes a sequence unless the structured route continues the same quest. */
+/** A STOP closes a sequence unless the structured route explicitly keeps the same moment. */
 function closesSequence(steps: RouteStep[], index: number): boolean {
   return (
     getStepContext(steps[index]).includes('STOP') &&
-    !continuesSameQuestAfterStop(steps, index)
+    !continuesSameMomentAfterStop(steps, index)
   );
 }
 
@@ -168,9 +154,9 @@ export function getStepGroups(route: RouteDocument): RouteStepGroup[] {
 }
 
 /**
- * Collapses technical RouteSteps of the same quest into one player-facing objective.
- * Quest identity comes from the structured source URL, never from display text.
- * A dungeon sandwiched between two steps of the same quest belongs to that objective.
+ * Collapses technical RouteSteps carrying the same explicit editorial momentId into
+ * one player-facing objective. The UI does not infer quest identity from titles,
+ * instructions or external URLs.
  */
 export function getSequenceObjectives(steps: RouteStep[]): RouteSequenceObjective[] {
   const objectives: RouteSequenceObjective[] = [];
@@ -178,41 +164,23 @@ export function getSequenceObjectives(steps: RouteStep[]): RouteSequenceObjectiv
 
   while (index < steps.length) {
     const first = steps[index];
-    const identity = getQuestIdentity(first);
+    const momentId = first.momentId;
 
-    if (identity) {
-      const members: RouteStep[] = [first];
-      let cursor = index + 1;
-
-      while (cursor < steps.length && getQuestIdentity(steps[cursor]) === identity) {
-        members.push(steps[cursor]);
-        cursor += 1;
-      }
-
-      if (
-        cursor + 1 < steps.length &&
-        steps[cursor].type === 'dungeon' &&
-        getQuestIdentity(steps[cursor + 1]) === identity
-      ) {
-        members.push(steps[cursor], steps[cursor + 1]);
-        cursor += 2;
-
-        while (cursor < steps.length && getQuestIdentity(steps[cursor]) === identity) {
-          members.push(steps[cursor]);
-          cursor += 1;
-        }
-      }
-
-      objectives.push({
-        id: members.length === 1 ? first.id : `objective:${first.id}:${members.at(-1)!.id}`,
-        steps: members,
-      });
-      index = cursor;
+    if (!momentId) {
+      objectives.push({ id: first.id, steps: [first] });
+      index += 1;
       continue;
     }
 
-    objectives.push({ id: first.id, steps: [first] });
-    index += 1;
+    const members: RouteStep[] = [first];
+    let cursor = index + 1;
+    while (cursor < steps.length && steps[cursor].momentId === momentId) {
+      members.push(steps[cursor]);
+      cursor += 1;
+    }
+
+    objectives.push({ id: `moment:${momentId}`, steps: members });
+    index = cursor;
   }
 
   return objectives;
