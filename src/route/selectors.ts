@@ -12,6 +12,11 @@ export interface RouteSequenceObjective {
   steps: RouteStep[];
 }
 
+export interface ActiveParallelGroup {
+  parallelId: string;
+  members: RouteStep[];
+}
+
 function getRawSortedSteps(route: RouteDocument): RouteStep[] {
   return [...route.steps].sort((a, b) => a.order - b.order);
 }
@@ -19,25 +24,15 @@ function getRawSortedSteps(route: RouteDocument): RouteStep[] {
 function getRuleText(rule: RouteStep): string {
   const title = rule.title.trim();
   const instruction = rule.instruction?.trim();
-
-  if (!instruction || instruction === title) {
-    return `⚠ ${title}`;
-  }
-
+  if (!instruction || instruction === title) return `⚠ ${title}`;
   return `⚠ ${title} — ${instruction}`;
 }
 
 function toSequenceDisplayStep(step: RouteStep): RouteStep {
   const displayStep = { ...step };
-
-  if (
-    step.displayRole === 'transition' &&
-    !step.instruction &&
-    (step.action || step.title)
-  ) {
+  if (step.displayRole === 'transition' && !step.instruction && (step.action || step.title)) {
     displayStep.instruction = [step.action, step.title].filter(Boolean).join(' — ');
   }
-
   delete displayStep.action;
   return displayStep;
 }
@@ -51,37 +46,26 @@ export function getSortedSteps(route: RouteDocument): RouteStep[] {
       pendingRules.push(step);
       continue;
     }
-
     if (pendingRules.length === 0) {
       visibleSteps.push(step);
       continue;
     }
-
     const ruleContext = pendingRules.map(getRuleText).join('\n');
     const instruction = [ruleContext, step.instruction].filter(Boolean).join('\n');
-
-    visibleSteps.push({
-      ...step,
-      instruction,
-    });
+    visibleSteps.push({ ...step, instruction });
     pendingRules.length = 0;
   }
 
   return visibleSteps;
 }
 
-/**
- * MOMENT_ID is the only multi-step card boundary.
- * Rows without a momentId are always standalone cards: the runtime never infers
- * editorial grouping from type, action, STOP wording or proximity.
- */
+/** MOMENT_ID is the only multi-step card boundary. */
 export function getStepGroups(route: RouteDocument): RouteStepGroup[] {
   const steps = getSortedSteps(route);
   const groups: RouteStepGroup[] = [];
 
   for (let index = 0; index < steps.length; index += 1) {
     const step = steps[index];
-
     if (!step.momentId) {
       groups.push({ id: step.id, blockId: step.blockId, steps: [step], isSequence: false });
       continue;
@@ -90,7 +74,6 @@ export function getStepGroups(route: RouteDocument): RouteStepGroup[] {
     const momentId = step.momentId;
     const members: RouteStep[] = [step];
     let cursor = index + 1;
-
     while (
       cursor < steps.length &&
       steps[cursor].blockId === step.blockId &&
@@ -112,22 +95,11 @@ export function getStepGroups(route: RouteDocument): RouteStepGroup[] {
   return groups;
 }
 
-/**
- * Builds the checklist inside an explicit player moment.
- * DISPLAY_ROLE is authoritative:
- * - objective => one checkbox;
- * - transition/detail => attached to the previous objective without checkbox.
- * A transition without its own instruction receives a compact display fallback
- * from its structured action + title so required administrative actions never
- * become invisible inside a mutualized card.
- */
 export function getSequenceObjectives(steps: RouteStep[]): RouteSequenceObjective[] {
   const objectives: RouteSequenceObjective[] = [];
-
   for (const rawStep of steps) {
     const step = toSequenceDisplayStep(rawStep);
     const currentObjective = objectives.at(-1);
-
     if (
       (rawStep.displayRole === 'transition' || rawStep.displayRole === 'detail') &&
       currentObjective
@@ -135,14 +107,42 @@ export function getSequenceObjectives(steps: RouteStep[]): RouteSequenceObjectiv
       currentObjective.steps.push(step);
       continue;
     }
+    objectives.push({ id: rawStep.id, steps: [step] });
+  }
+  return objectives;
+}
 
-    objectives.push({
-      id: rawStep.id,
-      steps: [step],
-    });
+export function getActiveParallelGroups(
+  route: RouteDocument,
+  completedStepIds: ReadonlySet<string>,
+): ActiveParallelGroup[] {
+  const activeIds = new Set<string>();
+  const memberIds = new Map<string, Set<string>>();
+
+  for (const step of getSortedSteps(route)) {
+    const parallel = step.parallelGroup;
+    if (!parallel) continue;
+
+    if (parallel.phase !== 'finish' && step.type !== 'dungeon') {
+      const members = memberIds.get(parallel.parallelId) ?? new Set<string>();
+      members.add(step.id);
+      memberIds.set(parallel.parallelId, members);
+    }
+
+    if (!completedStepIds.has(step.id)) continue;
+
+    if (parallel.phase === 'start') {
+      activeIds.add(parallel.parallelId);
+    } else if (parallel.phase === 'finish') {
+      activeIds.delete(parallel.parallelId);
+    }
   }
 
-  return objectives;
+  return [...activeIds].map((parallelId) => {
+    const ids = memberIds.get(parallelId) ?? new Set<string>();
+    const members = getSortedSteps(route).filter((step) => ids.has(step.id));
+    return { parallelId, members };
+  });
 }
 
 export function getStepGroupIndex(route: RouteDocument, stepId: string): number {
@@ -163,7 +163,6 @@ export function getStepIndex(route: RouteDocument, stepId: string): number {
 export function getProgress(route: RouteDocument, completedStepIds: ReadonlySet<string>) {
   const steps = getSortedSteps(route);
   const completed = steps.filter((step) => completedStepIds.has(step.id)).length;
-
   return {
     completed,
     total: steps.length,
@@ -179,10 +178,7 @@ export function getActiveLongRunningGoals(
   const activeSteps = new Map<string, RouteStep>();
 
   for (const step of getSortedSteps(route)) {
-    if (!completedStepIds.has(step.id)) {
-      continue;
-    }
-
+    if (!completedStepIds.has(step.id)) continue;
     const goal = step.longRunningGoal;
     if (goal?.phase === 'start') {
       activeGoalIds.add(goal.goalId);
@@ -193,7 +189,6 @@ export function getActiveLongRunningGoals(
       activeGoalIds.delete(goal.goalId);
       activeSteps.delete(goal.goalId);
     }
-
     if (step.type === 'hard_lock' && step.hardLock?.goalId) {
       activeGoalIds.delete(step.hardLock.goalId);
       activeSteps.delete(step.hardLock.goalId);
@@ -214,19 +209,13 @@ export function getNextHardLock(
   );
 }
 
-export function getHardLockForGoal(
-  route: RouteDocument,
-  goalId: string,
-): RouteStep | undefined {
+export function getHardLockForGoal(route: RouteDocument, goalId: string): RouteStep | undefined {
   return getSortedSteps(route).find(
     (step) => step.type === 'hard_lock' && step.hardLock?.goalId === goalId,
   );
 }
 
-export function getBlockPreparationSteps(
-  route: RouteDocument,
-  blockId: string,
-): RouteStep[] {
+export function getBlockPreparationSteps(route: RouteDocument, blockId: string): RouteStep[] {
   return getSortedSteps(route).filter(
     (step) => step.blockId === blockId && step.type === 'preparation',
   );
