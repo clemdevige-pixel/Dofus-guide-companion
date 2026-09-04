@@ -161,6 +161,64 @@ test('STOP does not split an explicit route moment', () => {
   ]);
 });
 
+test('different explicit moments create different cards', () => {
+  const groupedRoute: RouteDocument = {
+    ...route,
+    steps: [
+      {
+        id: 'take-a',
+        order: 1,
+        blockId: 'block-01',
+        type: 'quest',
+        title: 'Quest A',
+        action: 'LANCER',
+        momentId: 'moment-a',
+      },
+      {
+        id: 'dungeon-a',
+        order: 2,
+        blockId: 'block-01',
+        type: 'dungeon',
+        title: 'Dungeon A',
+        action: 'FAIRE & VALIDER',
+        momentId: 'moment-a',
+      },
+      {
+        id: 'finish-a-take-b',
+        order: 3,
+        blockId: 'block-01',
+        type: 'resume',
+        title: 'Finish A + take B',
+        action: 'REPRENDRE / TERMINER + LANCER',
+        momentId: 'moment-a',
+      },
+      {
+        id: 'dungeon-b',
+        order: 4,
+        blockId: 'block-01',
+        type: 'dungeon',
+        title: 'Dungeon B',
+        action: 'FAIRE & VALIDER',
+        momentId: 'moment-b',
+      },
+      {
+        id: 'finish-b',
+        order: 5,
+        blockId: 'block-01',
+        type: 'resume',
+        title: 'Finish B',
+        action: 'REPRENDRE / TERMINER',
+        momentId: 'moment-b',
+      },
+    ],
+  };
+
+  assert.deepEqual(getStepGroups(groupedRoute).map((group) => group.steps.map((step) => step.id)), [
+    ['take-a', 'dungeon-a', 'finish-a-take-b'],
+    ['dungeon-b', 'finish-b'],
+  ]);
+});
+
 test('technical steps with the same moment id collapse into one player-facing objective', () => {
   const momentId = 'moment-a';
   const steps: RouteStep[] = [
