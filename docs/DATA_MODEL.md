@@ -108,10 +108,12 @@ Règles strictes :
 - un `momentId` ne traverse pas deux blocs ;
 - toutes ses lignes sont contiguës ;
 - une fois fermé, le même `momentId` ne réapparaît pas plus loin ;
-- l'UI ne déduit jamais un moment depuis les titres ou les verbes d'action ;
-- le regroupement automatique sans `momentId` n'est qu'un fallback ergonomique, jamais une vérité éditoriale.
+- chaque ligne possédant un `momentId` possède aussi un `displayRole` ;
+- le premier membre d'un `momentId` est toujours `objective` ;
+- l'UI ne déduit jamais un moment depuis les titres, types ou verbes d'action ;
+- une ligne sans `momentId` est toujours une carte autonome.
 
-Le sélecteur `getStepGroups()` traite `momentId` comme frontière autoritaire. La limite technique de séquence automatique (`MAX_SEQUENCE_STEPS`) ne doit donc jamais servir à définir la structure métier d'une carte voulue explicitement.
+`getStepGroups()` applique uniquement ce contrat. Il n'existe plus de regroupement automatique, de limite `MAX_SEQUENCE_STEPS` ni de fallback heuristique.
 
 ### 5.1 DISPLAY_ROLE — structure interne d'une carte
 
@@ -125,8 +127,14 @@ Valeurs Sheet autorisées :
 - `DETAIL` → `detail`.
 
 Un `DISPLAY_ROLE` sans `MOMENT_ID` est invalide.
+Un `MOMENT_ID` sans `DISPLAY_ROLE` est invalide.
+Le premier membre d'un moment doit être `OBJECTIVE`.
 
-Pendant la migration anti-redondance, les moments non encore renseignés conservent temporairement le fallback historique du sélecteur. La cible est de renseigner explicitement les grosses cartes mutualisées puis de supprimer ce fallback une fois la migration complète.
+Pour l'affichage :
+- `OBJECTIVE` définit toujours le titre de sa checkbox, même lorsqu'il s'agit d'un donjon ;
+- `TRANSITION` et `DETAIL` se rattachent au dernier objectif ;
+- une `TRANSITION` sans `instruction` reste visible grâce à un fallback compact construit uniquement depuis ses champs structurés `action + title` ;
+- une instruction explicite reste prioritaire sur ce fallback.
 
 ## 6. Position de lancement vs destination
 
@@ -258,6 +266,8 @@ L'export/validation échoue notamment si :
 - `POSITION` / `DESTINATION` sont invalides ;
 - `GUIDE_ITEMS` est invalide ;
 - `DISPLAY_ROLE` est invalide ou défini hors `MOMENT_ID` ;
+- un `MOMENT_ID` est défini sans `DISPLAY_ROLE` ;
+- un moment commence par `TRANSITION` ou `DETAIL` ;
 - une prise n'a aucune donnée de lancement ;
 - un `MOMENT_ID` est vide, non contigu ou traverse plusieurs blocs ;
 - un hard lock référence un goal jamais démarré ;
