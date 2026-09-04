@@ -1,5 +1,23 @@
 import type { RouteDocument, RouteStep } from './types';
 
+const MAX_SEQUENCE_STEPS = 6;
+const sequenceActions = new Set([
+  'LANCER',
+  'TERMINER',
+  'LANCER / TERMINER',
+  'REPRENDRE / TERMINER',
+  'REPRENDRE / AVANCER',
+  'FAIRE & VALIDER',
+  'FAIRE / CAPTURER / VALIDER',
+]);
+
+export interface RouteStepGroup {
+  id: string;
+  blockId: string;
+  steps: RouteStep[];
+  isSequence: boolean;
+}
+
 function getRawSortedSteps(route: RouteDocument): RouteStep[] {
   return [...route.steps].sort((a, b) => a.order - b.order);
 }
@@ -13,6 +31,32 @@ function getRuleText(rule: RouteStep): string {
   }
 
   return `⚠ ${title} — ${instruction}`;
+}
+
+function isSequenceCandidate(step: RouteStep): boolean {
+  if (step.type !== 'quest' && step.type !== 'resume' && step.type !== 'dungeon') {
+    return false;
+  }
+
+  if (step.guideItems?.length || step.longRunningGoal || step.hardLock) {
+    return false;
+  }
+
+  const action = step.action?.trim().toUpperCase() ?? '';
+  if (!sequenceActions.has(action)) {
+    return false;
+  }
+
+  const context = `${step.title}\n${step.instruction ?? ''}\n${step.launchInstruction ?? ''}`.toUpperCase();
+  if (context.includes('⚠') || context.includes('STOP') || context.includes('FIL ROUGE')) {
+    return false;
+  }
+
+  if ((step.instruction?.length ?? 0) > 220 || (step.launchInstruction?.length ?? 0) > 220) {
+    return false;
+  }
+
+  return true;
 }
 
 export function getSortedSteps(route: RouteDocument): RouteStep[] {
@@ -41,6 +85,52 @@ export function getSortedSteps(route: RouteDocument): RouteStep[] {
   }
 
   return visibleSteps;
+}
+
+export function getStepGroups(route: RouteDocument): RouteStepGroup[] {
+  const steps = getSortedSteps(route);
+  const groups: RouteStepGroup[] = [];
+
+  for (let index = 0; index < steps.length; ) {
+    const first = steps[index];
+    if (!isSequenceCandidate(first)) {
+      groups.push({ id: first.id, blockId: first.blockId, steps: [first], isSequence: false });
+      index += 1;
+      continue;
+    }
+
+    const sequence: RouteStep[] = [first];
+    let cursor = index + 1;
+
+    while (cursor < steps.length && sequence.length < MAX_SEQUENCE_STEPS) {
+      const next = steps[cursor];
+      if (next.blockId !== first.blockId || !isSequenceCandidate(next)) {
+        break;
+      }
+      sequence.push(next);
+      cursor += 1;
+    }
+
+    if (sequence.length === 1) {
+      groups.push({ id: first.id, blockId: first.blockId, steps: sequence, isSequence: false });
+      index += 1;
+      continue;
+    }
+
+    groups.push({
+      id: `sequence:${sequence[0].id}:${sequence.at(-1)!.id}`,
+      blockId: first.blockId,
+      steps: sequence,
+      isSequence: true,
+    });
+    index += sequence.length;
+  }
+
+  return groups;
+}
+
+export function getStepGroupIndex(route: RouteDocument, stepId: string): number {
+  return getStepGroups(route).findIndex((group) => group.steps.some((step) => step.id === stepId));
 }
 
 export function getFirstIncompleteStep(
