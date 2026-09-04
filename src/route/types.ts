@@ -13,6 +13,7 @@ export type StepType =
   | 'finish';
 
 export type GuideItemAction = 'take' | 'advance' | 'finish' | 'do';
+export type StepDisplayRole = 'objective' | 'transition' | 'detail';
 
 export interface RouteBlock {
   id: string;
@@ -39,6 +40,8 @@ export interface RouteStep {
   blockId: string;
   type: StepType;
   displayType?: string;
+  /** Rôle éditorial dans une carte mutualisée : checkbox, transition sans checkbox ou détail technique. */
+  displayRole?: StepDisplayRole;
   title: string;
   action?: string;
   instruction?: string;
