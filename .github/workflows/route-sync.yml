@@ -1,0 +1,64 @@
+name: Route Sync
+
+on:
+  push:
+    branches:
+      - agent/initial-scaffold
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    if: ${{ !contains(github.event.head_commit.message, '[route-sync]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Rebuild generated route
+        shell: bash
+        run: |
+          cat .route-sync/01.txt .route-sync/02.txt .route-sync/0304.txt .route-sync/0506.txt .route-sync/0708.txt .route-sync/0910.txt .route-sync/1112.txt > /tmp/route.b64
+          node <<'NODE'
+          const fs = require('node:fs');
+          const zlib = require('node:zlib');
+          const encoded = fs.readFileSync('/tmp/route.b64', 'utf8');
+          const route = JSON.parse(zlib.brotliDecompressSync(Buffer.from(encoded, 'base64')).toString('utf8'));
+          for (const step of route.steps) {
+            if (step.displayType === 'OPTI ALIGNEMENT') step.type = 'major_step';
+          }
+          fs.writeFileSync('data/route.json', `${JSON.stringify(route, null, 2)}\n`, 'utf8');
+          NODE
+
+      - name: Test route logic
+        run: pnpm test:route
+
+      - name: Validate route data
+        run: pnpm validate:route
+
+      - name: Build frontend
+        run: pnpm build
+
+      - name: Commit generated route
+        shell: bash
+        run: |
+          rm -rf .route-sync .github/workflows/route-sync.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "data: regenerate optimized route [route-sync]"
+          git push
