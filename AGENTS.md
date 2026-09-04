@@ -24,6 +24,7 @@ Ne pas coder depuis une supposition si la doc ou la donnée existante permet de 
 - Une seule vérité de progression : `completedStepIds`.
 - `STEP_ID` stable et indépendant des lignes Sheet.
 - `MOMENT_ID` explicite pour les moments joueur devant former une seule carte.
+- `DISPLAY_ROLE` explicite quand une ligne d'un moment doit être `OBJECTIVE`, `TRANSITION` ou `DETAIL`.
 - Réutiliser l'existant avant de créer une couche.
 - Toute réécriture complexe se fait par paquet indivisible.
 - Après linéarisation locale, exécuter aussi des passes globales sur toute la route.
@@ -51,6 +52,8 @@ Interdit également :
 - considérer une cellule technique vidée parce qu'elle a été omise d'un `updateCells` ;
 - créer un `VERROU DUR` uniquement parce qu'un niveau personnage est recommandé/minimum ;
 - compter sur le fallback de regroupement automatique pour un moment éditorial connu : utiliser `MOMENT_ID` ;
+- laisser React décider checkbox/transition par nom de quête ou parsing d'instruction : utiliser `DISPLAY_ROLE` quand le rôle éditorial est connu ;
+- définir `DISPLAY_ROLE` hors d'un `MOMENT_ID` ;
 - conserver une carte autonome uniquement pour répéter « rendre », « reprendre », « terminer », « lancer » si cette transition peut être intégrée au moment adjacent ;
 - répéter dans la carte suivante la fin déjà explicitée dans la carte précédente ;
 - afficher toutes les micro-étapes techniques comme autant d'objectifs joueur.
@@ -78,6 +81,11 @@ Doivent rester dérivés :
 
 `getStepGroups()` respecte en priorité `MOMENT_ID`. Les séquences automatiques ne sont qu'un fallback pour les étapes ordinaires sans moment explicite.
 
+Dans un moment explicite, `DISPLAY_ROLE` est autoritaire quand il est renseigné :
+- `OBJECTIVE` = checkbox ;
+- `TRANSITION` = ligne intermédiaire sans checkbox ;
+- `DETAIL` = information attachée à l'objectif précédent sans checkbox.
+
 ## 6. UI — contrat de lisibilité
 
 Priorités : lisibilité, faible encombrement, navigation immédiate, resize fiable.
@@ -92,7 +100,7 @@ Rendu cible des cartes mutualisées :
 - les libellés techniques répétitifs (`REPRENDRE / FAIRE`, `FAIRE & VALIDER`, etc.) ne doivent pas dominer le rendu ;
 - la carte suivante commence sur la nouvelle action, sans réexpliquer la fin de la précédente.
 
-Ne jamais reconstruire les cartes depuis des mots présents dans `title` ou `instruction`. Les regroupements et transitions doivent venir de la donnée structurée (`MOMENT_ID`, `GUIDE_ITEMS`, types, positions, destinations, etc.).
+Ne jamais reconstruire les cartes depuis des mots présents dans `title` ou `instruction`. Les regroupements et rôles internes doivent venir de la donnée structurée (`MOMENT_ID`, `DISPLAY_ROLE`, `GUIDE_ITEMS`, positions, types, destinations, etc.).
 
 ## 7. Export de route
 
@@ -102,12 +110,15 @@ Flux :
 Google Sheet → scripts/export-route.ts → validation stricte → data/route.json
 ```
 
+Plage technique actuelle : `ROUTE!A5:T`.
+
 L'export/validation doit échouer sur :
 - type/ID/block invalide ;
 - relations de goal incohérentes ;
 - lancement incomplet ;
 - position/destination invalide ;
 - `MOMENT_ID` vide, non contigu ou multi-blocs ;
+- `DISPLAY_ROLE` inconnu ou défini sans `MOMENT_ID` ;
 - `VERROU DUR` de niveau personnage ;
 - route sans une unique `FIN` finale.
 
@@ -119,12 +130,13 @@ Pour chaque paquet :
 3. cartographier le moment complet ;
 4. vérifier prérequis/coexistence ;
 5. décider `STEP_ID` et `MOMENT_ID` avant écriture ;
-6. distinguer objectifs joueur et transitions obligatoires ;
-7. supprimer les redondances intra-carte et inter-cartes ;
-8. écrire en une passe ;
-9. relire les colonnes techniques jusqu'à `MOMENT_ID` ;
-10. nettoyer les résidus ;
-11. contrôler mécaniquement.
+6. classer chaque ligne utile en `OBJECTIVE`, `TRANSITION` ou `DETAIL` quand le moment est mutualisé ;
+7. distinguer objectifs joueur et transitions obligatoires ;
+8. supprimer les redondances intra-carte et inter-cartes ;
+9. écrire en une passe ;
+10. relire les colonnes techniques jusqu'à `DISPLAY_ROLE` ;
+11. nettoyer les résidus ;
+12. contrôler mécaniquement.
 
 Après les paquets/blocs, exécuter les passes globales définies dans `docs/ROUTE_OPTIMIZATION_WORKFLOW.md`, notamment la passe finale **anti-redondance / confort joueur** sur toute la route.
 
