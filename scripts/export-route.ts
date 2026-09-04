@@ -2,6 +2,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import type {
   GuideItemAction,
+  ParallelPhase,
   RouteBlock,
   RouteDocument,
   RouteStep,
@@ -10,7 +11,7 @@ import type {
 } from '../src/route/types';
 import { validateRoute } from '../src/route/validation';
 
-const DEFAULT_RANGE = 'ROUTE!A5:T';
+const DEFAULT_RANGE = 'ROUTE!A5:V';
 const OUTPUT_PATH = resolve('data/route.json');
 
 const typeMap: Record<string, { type: StepType; displayType?: string }> = {
@@ -46,7 +47,7 @@ const displayRoleMap: Record<string, StepDisplayRole> = {
 };
 
 type SheetRow = string[];
-type GoalPhase = 'start' | 'progress' | 'finish';
+type LifecyclePhase = 'start' | 'progress' | 'finish';
 
 type GoogleAuth = {
   headers: Record<string, string>;
@@ -93,10 +94,14 @@ function parseBoolean(rawValue: string, sheetRow: number): boolean {
   throw new Error(`Ligne Sheet ${sheetRow}: LANCEMENT_REQUIS invalide « ${rawValue} », attendu TRUE/FALSE.`);
 }
 
-function parseGoalPhase(rawPhase: string, sheetRow: number): GoalPhase | undefined {
+function parseLifecyclePhase(
+  rawPhase: string,
+  sheetRow: number,
+  columnName: 'GOAL_PHASE' | 'PARALLEL_PHASE',
+): LifecyclePhase | undefined {
   if (!rawPhase) return undefined;
   if (rawPhase === 'start' || rawPhase === 'progress' || rawPhase === 'finish') return rawPhase;
-  throw new Error(`Ligne Sheet ${sheetRow}: GOAL_PHASE inconnu « ${rawPhase} »`);
+  throw new Error(`Ligne Sheet ${sheetRow}: ${columnName} inconnu « ${rawPhase} »`);
 }
 
 function parseDisplayRole(rawRole: string, sheetRow: number): StepDisplayRole | undefined {
@@ -110,32 +115,23 @@ function parseDisplayRole(rawRole: string, sheetRow: number): StepDisplayRole | 
   return role;
 }
 
-function parseCoordinate(
-  rawPosition: string,
-  sheetRow: number,
-  columnName: string,
-): RouteStep['location'] | undefined {
+function parseCoordinate(rawPosition: string, sheetRow: number, columnName: string): RouteStep['location'] | undefined {
   if (!rawPosition) return undefined;
   const match = rawPosition.match(/^\[?\s*(-?\d+)\s*,\s*(-?\d+)\s*\]?$/);
   if (!match) {
-    throw new Error(
-      `Ligne Sheet ${sheetRow}: ${columnName} invalide « ${rawPosition} », attendu [x,y].`,
-    );
+    throw new Error(`Ligne Sheet ${sheetRow}: ${columnName} invalide « ${rawPosition} », attendu [x,y].`);
   }
   return { x: Number.parseInt(match[1], 10), y: Number.parseInt(match[2], 10) };
 }
 
 function parseGuideItems(rawItems: string, sheetRow: number): RouteStep['guideItems'] {
   if (!rawItems) return undefined;
-
   const items = rawItems
     .split('\n')
     .map((line) => line.trim())
     .filter(Boolean)
     .map((line, itemIndex) => {
-      const [rawAction = '', rawLabel = '', rawLocation = '', ...noteParts] = line
-        .split('::')
-        .map((part) => part.trim());
+      const [rawAction = '', rawLabel = '', rawLocation = '', ...noteParts] = line.split('::').map((part) => part.trim());
       const action = guideItemActionMap[rawAction.toUpperCase()];
       if (!action) {
         throw new Error(
@@ -143,17 +139,9 @@ function parseGuideItems(rawItems: string, sheetRow: number): RouteStep['guideIt
             'Attendu PRENDRE, AVANCER, TERMINER ou FAIRE.',
         );
       }
-      if (!rawLabel) {
-        throw new Error(`Ligne Sheet ${sheetRow}: GUIDE_ITEMS ${itemIndex + 1}, libellé manquant.`);
-      }
-
-      const location = parseCoordinate(
-        rawLocation,
-        sheetRow,
-        `GUIDE_ITEMS ${itemIndex + 1} position`,
-      );
+      if (!rawLabel) throw new Error(`Ligne Sheet ${sheetRow}: GUIDE_ITEMS ${itemIndex + 1}, libellé manquant.`);
+      const location = parseCoordinate(rawLocation, sheetRow, `GUIDE_ITEMS ${itemIndex + 1} position`);
       const note = noteParts.join(' :: ').trim();
-
       return {
         action,
         label: rawLabel,
@@ -161,7 +149,6 @@ function parseGuideItems(rawItems: string, sheetRow: number): RouteStep['guideIt
         ...(note ? { note } : {}),
       };
     });
-
   return items.length > 0 ? items : undefined;
 }
 
@@ -193,23 +180,14 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
   if (formattedRows.length === 0) throw new Error('Le Sheet ne contient aucune donnée dans la plage demandée.');
 
   const headers = formattedRows[0] ?? [];
-  if (
-    cell(headers, 1) !== 'TYPE' ||
-    cell(headers, 2) !== 'ÉTAPE' ||
-    cell(headers, 10) !== 'STEP_ID' ||
-    cell(headers, 11) !== 'GOAL_ID' ||
-    cell(headers, 12) !== 'GOAL_PHASE' ||
-    cell(headers, 13) !== 'POSITION' ||
-    cell(headers, 14) !== 'LANCEMENT' ||
-    cell(headers, 15) !== 'LANCEMENT_REQUIS' ||
-    cell(headers, 16) !== 'DESTINATION' ||
-    cell(headers, 17) !== 'GUIDE_ITEMS' ||
-    cell(headers, 18) !== 'MOMENT_ID' ||
-    cell(headers, 19) !== 'DISPLAY_ROLE'
-  ) {
-    throw new Error(
-      'Colonnes ROUTE inattendues : TYPE, ÉTAPE, STEP_ID, GOAL_ID, GOAL_PHASE, POSITION, LANCEMENT, LANCEMENT_REQUIS, DESTINATION, GUIDE_ITEMS, MOMENT_ID et DISPLAY_ROLE sont obligatoires.',
-    );
+  const expectedHeaders: Array<[number, string]> = [
+    [1, 'TYPE'], [2, 'ÉTAPE'], [10, 'STEP_ID'], [11, 'GOAL_ID'], [12, 'GOAL_PHASE'],
+    [13, 'POSITION'], [14, 'LANCEMENT'], [15, 'LANCEMENT_REQUIS'], [16, 'DESTINATION'],
+    [17, 'GUIDE_ITEMS'], [18, 'MOMENT_ID'], [19, 'DISPLAY_ROLE'], [20, 'PARALLEL_ID'],
+    [21, 'PARALLEL_PHASE'],
+  ];
+  if (expectedHeaders.some(([index, label]) => cell(headers, index) !== label)) {
+    throw new Error('Colonnes ROUTE inattendues : les colonnes techniques jusqu’à PARALLEL_PHASE sont obligatoires.');
   }
 
   const blocks: RouteBlock[] = [];
@@ -225,7 +203,6 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
     const sheetRow = index + 5;
 
     if (!rawType && !rawTitle) continue;
-
     const block = !rawType ? parseBlock(rawTitle) : undefined;
     if (block) {
       currentBlock = block;
@@ -244,17 +221,16 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
 
     const action = cell(formatted, 8);
     const goalId = cell(formatted, 11);
-    const goalPhase = parseGoalPhase(cell(formatted, 12), sheetRow);
+    const goalPhase = parseLifecyclePhase(cell(formatted, 12), sheetRow, 'GOAL_PHASE');
+    const parallelId = cell(formatted, 20);
+    const parallelPhase = parseLifecyclePhase(cell(formatted, 21), sheetRow, 'PARALLEL_PHASE') as ParallelPhase | undefined;
+
     if (goalPhase && !goalId) throw new Error(`Ligne Sheet ${sheetRow}: GOAL_PHASE défini sans GOAL_ID.`);
-    if (goalId && !goalPhase && mapping.type !== 'hard_lock') {
-      throw new Error(`Ligne Sheet ${sheetRow}: GOAL_ID défini sans GOAL_PHASE.`);
-    }
-    if (mapping.type === 'long_running' && (!goalId || !goalPhase)) {
-      throw new Error(`Ligne Sheet ${sheetRow}: FIL ROUGE sans GOAL_ID/GOAL_PHASE.`);
-    }
-    if (action.includes('FIL ROUGE') && (!goalId || !goalPhase)) {
-      throw new Error(`Ligne Sheet ${sheetRow}: action « ${action} » sans GOAL_ID/GOAL_PHASE.`);
-    }
+    if (goalId && !goalPhase && mapping.type !== 'hard_lock') throw new Error(`Ligne Sheet ${sheetRow}: GOAL_ID défini sans GOAL_PHASE.`);
+    if (mapping.type === 'long_running' && (!goalId || !goalPhase)) throw new Error(`Ligne Sheet ${sheetRow}: FIL ROUGE sans GOAL_ID/GOAL_PHASE.`);
+    if (action.includes('FIL ROUGE') && (!goalId || !goalPhase)) throw new Error(`Ligne Sheet ${sheetRow}: action « ${action} » sans GOAL_ID/GOAL_PHASE.`);
+    if (parallelPhase && !parallelId) throw new Error(`Ligne Sheet ${sheetRow}: PARALLEL_PHASE défini sans PARALLEL_ID.`);
+    if (parallelId && !parallelPhase) throw new Error(`Ligne Sheet ${sheetRow}: PARALLEL_ID défini sans PARALLEL_PHASE.`);
 
     const hyperlink = parseHyperlinkFormula(cell(formula, 2));
     const preparationText = cell(formatted, 3);
@@ -268,17 +244,9 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
     const displayRole = parseDisplayRole(cell(formatted, 19), sheetRow);
     const title = rawTitle.split('\n')[0]?.trim() || rawTitle;
 
-    if (action.toUpperCase().includes('LANCER') && !launchRequired) {
-      throw new Error(`Ligne Sheet ${sheetRow}: action de lancement sans LANCEMENT_REQUIS=TRUE.`);
-    }
-    if (launchRequired && !location && !launchInstruction) {
-      throw new Error(
-        `Ligne Sheet ${sheetRow}: lancement requis sans POSITION ni LANCEMENT pour « ${title} ».`,
-      );
-    }
-    if (displayRole && !momentId) {
-      throw new Error(`Ligne Sheet ${sheetRow}: DISPLAY_ROLE défini sans MOMENT_ID.`);
-    }
+    if (action.toUpperCase().includes('LANCER') && !launchRequired) throw new Error(`Ligne Sheet ${sheetRow}: action de lancement sans LANCEMENT_REQUIS=TRUE.`);
+    if (launchRequired && !location && !launchInstruction) throw new Error(`Ligne Sheet ${sheetRow}: lancement requis sans POSITION ni LANCEMENT pour « ${title} ».`);
+    if (displayRole && !momentId) throw new Error(`Ligne Sheet ${sheetRow}: DISPLAY_ROLE défini sans MOMENT_ID.`);
 
     stepOrder += 1;
     const step: RouteStep = {
@@ -293,19 +261,15 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
       ...(instruction ? { instruction } : {}),
       ...(hyperlink ? { source: { label: 'DPLN', url: hyperlink.url } } : {}),
       ...(momentId ? { momentId } : {}),
+      ...(parallelId && parallelPhase ? { parallelGroup: { parallelId, phase: parallelPhase } } : {}),
       ...(location ? { location } : {}),
       ...(destination ? { destination } : {}),
       ...(launchInstruction ? { launchInstruction } : {}),
       ...(guideItems ? { guideItems } : {}),
-      ...(mapping.type === 'preparation'
-        ? { preparationItems: parsePreparationItems(preparationText || rawTitle) }
-        : {}),
+      ...(mapping.type === 'preparation' ? { preparationItems: parsePreparationItems(preparationText || rawTitle) } : {}),
       ...(goalId && goalPhase ? { longRunningGoal: { goalId, phase: goalPhase } } : {}),
-      ...(mapping.type === 'hard_lock'
-        ? { hardLock: { ...(goalId ? { goalId } : {}), message: instruction || title } }
-        : {}),
+      ...(mapping.type === 'hard_lock' ? { hardLock: { ...(goalId ? { goalId } : {}), message: instruction || title } } : {}),
     };
-
     steps.push(step);
   }
 
@@ -324,9 +288,7 @@ async function main() {
     fetchValues(spreadsheetId, 'FORMATTED_VALUE'),
     fetchValues(spreadsheetId, 'FORMULA'),
   ]);
-  if (formattedRows.length !== formulaRows.length) {
-    throw new Error('Les lectures FORMATTED_VALUE et FORMULA ne couvrent pas les mêmes lignes.');
-  }
+  if (formattedRows.length !== formulaRows.length) throw new Error('Les lectures FORMATTED_VALUE et FORMULA ne couvrent pas les mêmes lignes.');
   const route = buildRoute(formattedRows, formulaRows);
   await mkdir(dirname(OUTPUT_PATH), { recursive: true });
   await writeFile(OUTPUT_PATH, `${JSON.stringify(route, null, 2)}\n`, 'utf8');
