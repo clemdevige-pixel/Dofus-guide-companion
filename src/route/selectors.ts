@@ -93,6 +93,14 @@ function toSequenceDisplayStep(step: RouteStep): RouteStep {
   return displayStep;
 }
 
+function attachesToPreviousObjective(step: RouteStep): boolean {
+  if (step.displayRole) {
+    return step.displayRole === 'transition' || step.displayRole === 'detail';
+  }
+
+  return sequenceDetailTypes.has(step.type);
+}
+
 export function getSortedSteps(route: RouteDocument): RouteStep[] {
   const visibleSteps: RouteStep[] = [];
   const pendingRules: RouteStep[] = [];
@@ -191,11 +199,13 @@ export function getStepGroups(route: RouteDocument): RouteStepGroup[] {
 
 /**
  * Builds player-facing checklist objectives inside an already bounded card.
- * MOMENT_ID still defines the card boundary; inside that card, each actionable
- * quest/resume/alignment/order/major step becomes one checkbox and technical detail
- * rows (dungeon, milestone, goal transition, lock) stay attached to the preceding
- * objective. This keeps large mutualised moments readable without re-splitting them
- * into several cards or parsing quest names from display text.
+ * DISPLAY_ROLE is authoritative when present:
+ * - objective => one checkbox;
+ * - transition/detail => visible inside the previous objective, without checkbox.
+ *
+ * Rows not yet migrated keep the legacy type-based fallback during the global
+ * anti-redundancy pass. This fallback can be removed once every explicit moment has
+ * DISPLAY_ROLE populated in ROUTE.
  */
 export function getSequenceObjectives(steps: RouteStep[]): RouteSequenceObjective[] {
   const objectives: RouteSequenceObjective[] = [];
@@ -204,7 +214,7 @@ export function getSequenceObjectives(steps: RouteStep[]): RouteSequenceObjectiv
     const step = toSequenceDisplayStep(rawStep);
     const currentObjective = objectives.at(-1);
 
-    if (sequenceDetailTypes.has(step.type) && currentObjective) {
+    if (attachesToPreviousObjective(rawStep) && currentObjective) {
       currentObjective.steps.push(step);
       continue;
     }
