@@ -135,3 +135,35 @@ test('displayRole cannot exist outside an explicit moment', () => {
 
   assert.throws(() => validateRoute(route), /displayRole défini sans momentId/);
 });
+
+test('an explicit moment must start with an objective', () => {
+  const route: RouteDocument = {
+    schemaVersion: 1,
+    routeVersion: 'test',
+    title: 'Test',
+    blocks: [{ id: 'block-01', order: 1, title: 'Block' }],
+    steps: [
+      {
+        id: 'transition-first',
+        order: 1,
+        blockId: 'block-01',
+        type: 'resume',
+        title: 'Rendu',
+        momentId: 'moment-invalid',
+        displayRole: 'transition',
+      },
+      {
+        id: 'finish',
+        order: 2,
+        blockId: 'block-01',
+        type: 'finish',
+        title: 'Finish',
+      },
+    ],
+  };
+
+  assert.throws(
+    () => validateRoute(route),
+    /un momentId doit commencer par displayRole=objective/,
+  );
+});
