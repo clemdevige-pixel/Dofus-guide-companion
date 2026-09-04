@@ -9,66 +9,95 @@ Spreadsheet ID : `1l1eYM3T708s5j74LmsUi4wyzg6sM9xShPzS_ToBtVYg`
 
 État au 2026-09-05 :
 
-- passe anti-redondance structurelle terminée ;
 - `MOMENT_ID` = unique frontière de carte ;
 - `DISPLAY_ROLE` = structure interne (`OBJECTIVE`, `TRANSITION`, `DETAIL`) ;
 - plafond UX : **5 objectifs maximum par carte** ;
-- le validateur refuse désormais un `MOMENT_ID` à 6+ objectifs ;
-- fenêtre : footer/navigation fixe, seule la zone carte est scrollable ;
+- validation CI : un moment à 6+ objectifs est refusé ;
+- fenêtre : header/footer stables, seule la zone carte est scrollable ;
+- `PARALLEL_ID` / `PARALLEL_PHASE` structurent les quêtes à garder actives ensemble ;
+- **24 groupes parallèles** confirmés après audit Ganymède ;
+- rappel UI `QUÊTES EN PARALLÈLE` branché depuis la donnée ;
+- les membres futurs n'apparaissent qu'une fois réellement introduits ;
 - audit DPLN : toutes les quêtes/reprises/fils rouges exportés ont leur source cliquable ;
-- `PARALLEL_ID` / `PARALLEL_PHASE` structurent les quêtes à garder actives et avancer conjointement ;
-- **24 groupes parallèles** confirmés dans le Sheet après croisement de la route avec le JSON Ganymède ;
-- le rappel UI `QUÊTES EN PARALLÈLE` est branché depuis la donnée structurée ;
-- un membre futur n'apparaît dans le rappel qu'une fois réellement introduit dans le parcours.
+- nouvelle passe de densité : **354 cartes estimées après 7 scissions supplémentaires**, toujours 986 étapes et max 5 objectifs.
 
 ## Contrat de carte
 
-### MOMENT_ID
-
-`MOMENT_ID` est l'unique frontière autoritaire d'une carte.
-
-Une ligne sans `MOMENT_ID` = une carte autonome.
-
-Un moment explicite :
+Un `MOMENT_ID` :
 
 - reste dans un seul bloc ;
 - reste contigu ;
-- commence toujours par `DISPLAY_ROLE=OBJECTIVE` ;
+- commence par `DISPLAY_ROLE=OBJECTIVE` ;
 - possède `DISPLAY_ROLE` sur toutes ses lignes ;
-- contient **au maximum 5 `OBJECTIVE`**.
+- contient au maximum 5 `OBJECTIVE`.
 
-Le code ne regroupe jamais une carte depuis un titre, un type ou un verbe d'action.
+Une ligne sans `MOMENT_ID` est une carte autonome.
 
-### DISPLAY_ROLE
+Le code ne déduit jamais de regroupement depuis les titres, types ou verbes d'action.
+
+`DISPLAY_ROLE` :
 
 - `OBJECTIVE` = checkbox ;
-- `TRANSITION` = action visible sans checkbox, attachée à l'objectif précédent ;
-- `DETAIL` = information technique attachée à l'objectif précédent.
+- `TRANSITION` = action visible sans checkbox, rattachée à l'objectif précédent ;
+- `DETAIL` = information technique rattachée à l'objectif précédent.
 
-Une transition sans `instruction` garde un fallback compact `ACTION — titre` construit depuis ses champs structurés.
+## Passe de densité 2026-09-05
 
-## Taille de fenêtre / navigation
+Le plafond de 5 objectifs ne suffisait pas pour certaines cartes qui cumulaient trop de transitions/détails. Les pires cas ont été recoupés avec leur logique métier et scindés uniquement sur des frontières naturelles.
 
-La fenêtre ne doit jamais changer de taille selon la carte.
+### Scissions appliquées
 
-Le layout est désormais :
+#### Nimotopia
 
-```text
-header / bloc / contexte
-zone carte flexible + scroll
-footer navigation fixe
-```
+Ancien `moment-nimotopia-loop` : 5 objectifs / 9 lignes techniques.
 
-Le bouton `TERMINÉ` reste donc au même emplacement même quand le contenu de la carte est plus dense.
+Devient :
 
-Le plafond de 5 objectifs est un contrat de lisibilité, pas un correctif de layout.
+- `moment-nimotopia-loop-a` : ouverture des trois premières quêtes + rendu de `Nos amies les bêtes` ;
+- `moment-nimotopia-loop-b` : `Il a fui, il a tout compris` + `La valse des manuels`.
+
+#### Nordalie
+
+Ancien `moment-nordalie` : 5 objectifs / 14 lignes techniques.
+
+Devient :
+
+- `moment-nordalie-tal-kasha` ;
+- `moment-nordalie-missions` ;
+- `moment-nordalie-katrepat`.
+
+#### Damadrya
+
+Ancien passage de 5 objectifs / 9 lignes.
+
+Devient :
+
+- `moment-damadrya-prep` : les deux quêtes de préparation ;
+- `moment-damadrya-pass` : la vraie salve parallèle des trois quêtes jusqu'à Damadrya + sorties.
+
+#### Frigost / Mansot
+
+- `moment-frigost-fonte-glaces` : `La fonte des glaces` ;
+- `moment-mansot-pass` : les trois quêtes réellement mutualisées au Mansot Royal.
+
+#### Émeraude / Meulou
+
+- `moment-emeraude-meulou-boss` : passage Meulou ;
+- `moment-emeraude-finish-rat` : obtention du Dofus Émeraude puis ouverture du prochain objectif Rat Blanc.
+
+#### Valonia / Sorcière
+
+- `moment-valonia-sorciere-boss` : `La sorcière exilée` + Chambre des Maléfices ;
+- `moment-valonia-flamme` : `La graine de la révolte` + `Pour que la flamme vacille`.
+
+Les longues cartes restantes ont été contrôlées : elles correspondent à des séquences continues et ne sont pas scindées mécaniquement.
 
 ## Quêtes parallèles
 
 Colonnes Sheet :
 
 - `PARALLEL_ID` ;
-- `PARALLEL_PHASE` = `START`, `PROGRESS`, `FINISH`.
+- `PARALLEL_PHASE` = `start`, `progress`, `finish`.
 
 Runtime :
 
@@ -79,128 +108,58 @@ parallelGroup?: {
 }
 ```
 
-Le lifecycle est strict :
+Lifecycle strict :
 
 ```text
 start → progress* → finish
 ```
 
-Un groupe doit être terminé avant la fin de la route.
+Audit JSON Ganymède : 35 convergences analysées. Critère pour créer un groupe : au moins deux vraies quêtes de notre route doivent rester actives / être avancées conjointement. Les captures Ocre seules, branches optionnelles ou guides absents ne suffisent pas.
 
-### Sémantique UI
+Groupes confirmés : Forgerons, Blops, Reine Nyée, Domaine Ancestral, Damadrya, Chêne Mou, Koulosse, Meulou, Rat Blanc, Maître Corbac, Founoroshi, Minotoror, Mansot Royal, Sphincter Cell, Demeure des Esprits, Kanigroula, Korriandre, Grand Ougah, Glourséleste, Grolloum, Missiz Frizz, Nidas, Dazak, Vortex.
 
-Le groupe devient actif quand son step `start` est validé.
-
-Le rappel persistant affiche uniquement les membres déjà introduits :
-
-- après `start` : uniquement la première quête ;
-- chaque `progress` validé ajoute la nouvelle quête au rappel ;
-- `finish` retire automatiquement le groupe.
-
-Cela évite d'afficher au joueur une quête future qu'il ne peut pas encore prendre.
-
-## Audit Ganymède des convergences
-
-Le JSON Ganymède fourni par l'utilisateur contient **35 passages** où plusieurs guides sont avancés vers un même checkpoint.
-
-Ces 35 passages ont été comparés à notre route optimisée.
-
-Critère retenu pour créer un `PARALLEL_ID` : au moins deux vraies quêtes de notre route doivent rester actives / être avancées conjointement. Les captures Ocre seules, guides optionnels ou branches absentes de notre route ne suffisent pas.
-
-État Sheet : **24 groupes parallèles confirmés**.
-
-Cas structurés notamment :
-
-- Forgerons ;
-- Blops ;
-- Domaine Ancestral ;
-- Reine Nyée ;
-- Damadrya ;
-- Chêne Mou ;
-- Koulosse ;
-- Meulou ;
-- Rat Blanc ;
-- Maître Corbac ;
-- Minotoror ;
-- Mansot Royal ;
-- Sphincter Cell ;
-- Demeure des Esprits ;
-- Founoroshi ;
-- Kanigroula ;
-- Korriandre ;
-- Grand Ougah ;
-- Glourséleste ;
-- Grolloum ;
-- Missiz Frizz ;
-- Nidas ;
-- Dazak ;
-- Vortex.
+Toutes les instructions explicites `QUÊTES À AVANCER ENSEMBLE` sont maintenant adossées à un `PARALLEL_ID`.
 
 ### Obsidiantre
 
-Pas de faux `PARALLEL_ID` créé.
+Pas de faux groupe parallèle créé : `Lavomatique` n'avait pas de lancement structuré propre dans la route. Le passage demande explicitement de vérifier que `Lavomatique` est lancée avant l'entrée et de ne pas sortir après Dan Lavy.
 
-La route ne structurait pas explicitement le lancement de `Lavomatique` avant l'Obsidiantre. Le passage a été sécurisé par une instruction explicite demandant de vérifier `Lavomatique` avant d'entrer et de ne pas sortir après Dan Lavy.
+## Cohérence / DPLN
 
-## Audit de cohérence 2026
-
-La route a été recroisée avec Ganymède et DofusPourLesNoobs sur les points de blocage réels.
-
-Corrections majeures déjà intégrées :
+Corrections importantes déjà intégrées :
 
 - prérequis élevage Émeraude ;
 - Carte de Cania / 9 Primatons ;
 - Tablette de Totankama / 25 Trésors archéologiques ;
-- timer actuel de `Le mal a dit` ;
+- timer de `Le mal a dit` ;
 - post-Sylargh `Il est temps de mourir` ;
-- titres corrompus `Protéger et sévir` / `Le nouveau monde` ;
-- donnée parasite de `La marche de l'impératrice` ;
+- titres `Protéger et sévir` / `Le nouveau monde` restaurés ;
+- donnée parasite de `La marche de l'impératrice` supprimée ;
 - accès Otomaï, Moon, Wabbit, Capture d'âmes ;
 - Valonia / Dom de Pin ;
 - Prologue ;
 - Enutrosor ;
 - fin Sylvestre.
 
-## DPLN
-
-Les liens DPLN sont portés par la donnée (`source.url`) issue des formules `HYPERLINK` du Sheet.
-
-L'UI sait afficher :
-
-- le lien de la quête principale ;
-- les liens distincts des sous-étapes d'une carte mutualisée ;
-- les liens des transitions lorsqu'ils diffèrent du lien principal.
-
-Aucune URL n'est reconstruite ou devinée côté React.
+Les URLs DPLN viennent uniquement des formules `HYPERLINK` du Sheet. L'UI sait afficher les liens de la quête principale et des sous-étapes internes quand ils diffèrent.
 
 ## État runtime IMPORTANT
 
-Le dernier `data/route.json` poussé contient encore **21 groupes parallèles**.
+Le commit `317184c92bb262763cc40f1aac07bb3f97edee0a` a synchronisé le runtime à **24 groupes parallèles** et passe tests + validation + build frontend.
 
-Le Sheet est plus récent : il contient maintenant **24 groupes**, avec les ajouts Reine Nyée, Founoroshi et Vortex.
+Depuis ce commit, le Sheet a reçu les **7 scissions de densité** listées ci-dessus. Il est donc de nouveau légèrement plus récent que `data/route.json`.
 
-Un snapshot local propre a été généré depuis le Sheet :
+Snapshot fidèle prêt :
 
 ```text
 20 blocs
 986 étapes
+354 cartes
 24 groupes parallèles
 max 5 objectifs par carte
 ```
 
-**Il faut encore synchroniser ce dernier JSON dans `data/route.json` avant de considérer le runtime parfaitement aligné.**
-
-Ne jamais corriger `route.json` à la main hors export/snapshot fidèle du Sheet.
-
-## Code récent
-
-- validation `≤5 objectifs` ajoutée ;
-- test de régression ajouté ;
-- `getActiveParallelGroups()` ne révèle plus les membres futurs ;
-- test parallèle mis à jour ;
-- `App.tsx` affiche un rappel persistant `QUÊTES EN PARALLÈLE` ;
-- frontend CI vert sur ces changements ;
-- check Tauri Windows lancé sur le dernier head.
+Il faut synchroniser ce snapshot dans `data/route.json` avant de considérer le runtime parfaitement aligné.
 
 ## Contraintes non négociables
 
@@ -210,7 +169,7 @@ Ne jamais corriger `route.json` à la main hors export/snapshot fidèle du Sheet
 - `MOMENT_ID` = carte ;
 - `DISPLAY_ROLE` = rôle visuel interne ;
 - `PARALLEL_ID` = lifecycle de quêtes conjointes ;
-- 5 objectifs maximum par carte ;
+- max 5 objectifs par carte ;
 - pas d'invention de PNJ, position ou prérequis ;
 - préserver Ocre / STOP / objets obligatoires / dialogues de sortie / ordre imposé ;
 - optimiser le confort réel, pas le nombre de cartes pour le chiffre.
