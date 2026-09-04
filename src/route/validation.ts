@@ -123,6 +123,9 @@ export function validateRoute(route: RouteDocument): RouteDocument {
     if (step.displayRole !== undefined && !step.momentId) {
       throw new Error(`${step.id}: displayRole défini sans momentId.`);
     }
+    if (step.momentId !== undefined && step.displayRole === undefined) {
+      throw new Error(`${step.id}: momentId défini sans displayRole.`);
+    }
 
     if (step.source) {
       if (!isNonEmptyString(step.source.label) || !isNonEmptyString(step.source.url)) {
