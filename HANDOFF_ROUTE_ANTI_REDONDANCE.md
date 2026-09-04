@@ -140,9 +140,9 @@ Nettoyé :
 - Ougah
 - Corruption
 
-### Ivoire / Nordalie — dernière passe en cours au moment du handoff
+### Ivoire / Nordalie
 
-Derniers changements effectués juste avant ce handoff :
+Nettoyé :
 
 - `Le dragon blanc` → texte compact
 - `Examen de passage` → texte compact
@@ -157,64 +157,73 @@ Derniers changements effectués juste avant ce handoff :
 - retour partitions / Pichon de `Une voix de crystal` compacté
 - `Il est temps de mourir` → transition compactée
 
+### Passe 2026-09-04 — lignes 860 → fin
+
+La plage `A860:S1031` a maintenant été relue jusqu’à la dernière ligne.
+
+Nettoyages appliqués :
+
+- fin Ivoire / début Ébène : suppression des annonces de quêtes futures injectées trop tôt dans `SUITE / STOP` ;
+- `De Brikke et de Brokke` : transitions locales réécrites et anciennes anticipations supprimées ;
+- `L'épée du rocher` : ouverture compactée, anciennes annonces futures retirées ;
+- Ocre final / Quatre sur six / Dragons / Totems / S'armer : suppression des instructions appartenant à des séquences réellement présentes plus loin ;
+- `Qui nous protège` : Nidas + Aurore Pourpre + préparation Djaul + Solar réunis sous le même `MOMENT_ID` `moment-sigils-donjons` ;
+- notes critiques qui étaient seulement dans `⚠️ À SAVOIR` réinjectées dans `SUITE / STOP` quand elles doivent réellement être visibles dans l'app : Skeunk, Crocabulia, Dazak, Klime, Dantinéa, Bouftou Royal ;
+- Dragons : transition Rosal réécrite pour prendre les 4 quêtes, terminer le Dragon des eaux et garder les 3 autres actives.
+
+Normalisation globale de bruit éditorial :
+
+- `FAIRE & VALIDER` → `FAIRE` dans `ACTION`, y compris dans les formules génératrices ;
+- `REPRENDRE / FAIRE` → `FAIRE` ;
+- `REPRENDRE / TERMINER` → `TERMINER`, y compris les variantes/formules ;
+- suffixe de titre `— REPRENDRE / TERMINER` supprimé sur 111 titres ;
+- suffixe `— REPRENDRE ET TERMINER` supprimé sur 42 titres ;
+- les formules `HYPERLINK` ont été modifiées sans supprimer les liens.
+
+Contrôles Sheet déjà faits après ces écritures :
+
+- 0 `#ERROR!` dans `A5:S1031` ;
+- 0 `FAIRE & VALIDER` restant dans `ACTION` ;
+- 0 `REPRENDRE / TERMINER` restant dans `ACTION` ;
+- 0 suffixe `REPRENDRE / TERMINER` restant dans `ÉTAPE` ;
+- 0 `VERROU DUR — NIVEAU ...` détecté ;
+- 0 type `RÈGLE` détecté.
+
+### Point d'architecture découvert pendant la passe
+
+Le runtime actuel sait regrouper une carte avec `MOMENT_ID`, mais `getSequenceObjectives()` décide encore les checkboxes principalement depuis le `type` :
+
+- `REPRISE` devient par défaut une checkbox ;
+- `DONJON` devient par défaut un détail de la checkbox précédente.
+
+Cela ne permet pas toujours d'exprimer exactement le contrat validé `1 checkbox = 1 sous-objectif significatif`, par exemple sur une séquence Skeunk → transition → Fraktale → rendu final.
+
+**Ne pas corriger avec des exceptions par nom de quête ou du parsing React.**
+
+Le prochain changement code doit être une extension structurée minimale permettant à `ROUTE` d'indiquer explicitement le rôle d'une ligne dans une carte (objectif cochable vs transition/détail), tout en conservant `STEP_ID` comme vérité de progression et `MOMENT_ID` comme frontière de carte. Ne pas implémenter une heuristique supplémentaire par texte.
+
 ## Point de reprise EXACT
 
-Continuer à partir d’environ la ligne **860+** du Sheet `ROUTE`.
+La passe éditoriale ciblée 860 → fin a été effectuée. Le prochain point de reprise est :
 
-Dernière plage lue intégralement : `A860:S1031`.
+1. résoudre proprement le rôle objectif/transition dans le modèle data-driven ;
+2. utiliser un cas témoin complexe (`L'épée du rocher` ou Pat Akess) pour valider le rendu ;
+3. reprendre ensuite l'audit global inter-cartes sur les lignes antérieures à 860 (`REPRENDS`, `Retourne voir`, `TERMINE`, cartes administratives absorbables) ;
+4. terminer la passe globale jusqu'à la première carte.
 
-Priorités restantes :
+## Audit global restant
 
-1. **Fin Ivoire / début Ébène**
-   - De Brikke et de Brokke
-   - L’épée du rocher
-   - Le forgeur de légende
-   - Bethel
-   - Koutoulou
-   - Dazak
-   - Klime
-   - Reine des Voleurs
-   - Solar
+Rechercher/auditer dans tout `ROUTE` :
 
-2. **Ocre final**
-   - L’éternelle moisson → Kralamoure
-   - garder la capture / ouverture / rendu mais éviter toute répétition
+- `REPRENDS` dans `SUITE / STOP` : certains sont nécessaires, d'autres encore redondants ;
+- `Retourne voir` ;
+- `TERMINE` ;
+- `GARDE la quête active` ;
+- `LANCER / TERMINER` ;
+- variantes techniques résiduelles dans les titres ;
+- cartes `JALON` qui peuvent être absorbées.
 
-3. **Quatre sur six / Six sur six**
-   - Bworker
-   - Ougah
-   - Ombre
-   - Glourséleste
-   - 4 dragons
-   - Dantinéa
-   - L’avis de la Mort
-   - Tempête de l’Eliocalypse
-
-4. **Totems / S’armer / Comte**
-   - forte densité de donjons + reprises, parfait pour le nouveau format
-
-5. **Qui nous protège**
-   - Nidas / Aurore Pourpre / Solar
-   - garder les sigils utiles, supprimer les redondances
-
-6. **Prologue / Dom de Pin / Final Sylvestre**
-   - final doit rester ultra lisible, aucune redite autorisée
-
-## Audit global à faire après la passe éditoriale
-
-Rechercher dans tout `ROUTE` :
-
-- `REPRENDS`
-- `Retourne voir`
-- `TERMINE`
-- `GARDE la quête active`
-- `LANCER / TERMINER`
-- `REPRENDRE / TERMINER`
-- `FAIRE & VALIDER`
-- cartes `JALON` qui peuvent être absorbées
-- cartes `VERROU DUR — NIVEAU N` : elles doivent être supprimées partout ; le niveau ne doit pas être un hardlock de cette roadmap
-
-Attention : ne pas supprimer les vrais verrous de contenu (tablette Totankama, Ocre d’ambre, Ocre final, alignement 100, timer vaccin, etc.).
+Les vrais verrous de contenu restent conservés (tablette Totankama, Ocre d’ambre, Ocre final, alignement 100, timer vaccin, etc.).
 
 ## Contrôles finaux obligatoires
 
@@ -240,7 +249,7 @@ Avant cette nouvelle passe anti-redondance, la route validait :
 
 `Route valide : 1028 étapes, 20 blocs.`
 
-Attention : les dernières modifications du Sheet de cette conversation ne sont pas encore régénérées / testées dans le runtime au moment de ce handoff.
+**État actuel : les nouvelles modifications du Sheet décrites ci-dessus ne sont pas encore régénérées dans `data/route.json`, ni testées via `test:route`, `validate:route` et `build`. Ne pas annoncer la route synchronisée/verte avant cet export.**
 
 ## Contraintes utilisateur importantes
 
