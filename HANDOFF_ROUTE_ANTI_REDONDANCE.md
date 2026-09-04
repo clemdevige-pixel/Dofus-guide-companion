@@ -1,262 +1,198 @@
-# HANDOFF — Route anti-redondance / confort joueur
+# HANDOFF — Route anti-redondance / cohérence globale
 
 ## TL;DR
 
-Chantier actif : refonte éditoriale globale de la route pour réduire massivement les cartes et textes redondants tout en conservant toutes les transitions réellement nécessaires entre quêtes/donjons.
+Branche : `agent/initial-scaffold`
 
-Branche active : `agent/initial-scaffold`
-
-Source de vérité route : Google Sheet `Roadmap ULTIMATE V2 — Astrub → Dofus Sylvestre`, onglet `ROUTE`
+Source de vérité : Google Sheet `Roadmap ULTIMATE V2 — Astrub → Dofus Sylvestre`, onglet `ROUTE`  
 Spreadsheet ID : `1l1eYM3T708s5j74LmsUi4wyzg6sM9xShPzS_ToBtVYg`
 
-Repo : `clemdevige-pixel/Dofus-guide-companion`
+État au 2026-09-04 :
 
-## Méthode cible VALIDÉE
+- passe anti-redondance structurelle terminée sur toute la route ;
+- `MOMENT_ID` reste la frontière de carte autoritaire ;
+- `DISPLAY_ROLE` est renseigné sur 782/782 lignes appartenant à un moment explicite ;
+- valeurs : `OBJECTIVE`, `TRANSITION`, `DETAIL` ;
+- 1 checkbox = 1 sous-objectif significatif ;
+- les transitions administratives restent visibles sans checkbox ;
+- aucune logique spécifique par nom de quête n'a été ajoutée dans React ;
+- audit DPLN mécanique final : **737/737 lignes de quête/reprise/fil rouge portent un HYPERLINK** ;
+- contrôle Google Sheet : **0 `#ERROR!`** sur `ROUTE!A5:T1031`.
 
-Règle fondamentale :
+## Audit de cohérence 2026
 
-- **1 carte = 1 moment joueur**
-- **1 checkbox = 1 sous-objectif significatif**
-- les micro-étapes techniques restent dans la data si nécessaires, mais ne doivent pas être affichées comme autant de sous-cartes / blocs textuels redondants
-- les transitions indispensables entre deux objectifs restent visibles sous forme de ligne compacte sans checkbox
+Une passe supplémentaire a été menée avec Ganymede + DofusPourLesNoobs actuel pour vérifier qu'un joueur peut suivre la route dans l'ordre sans tomber sur un prérequis caché ou une mécanique devenue obsolète.
 
-Format cible :
+### Corrections importantes
 
-1. `☐ Shin Larve — Donjon des Larves · capturer pour l’Ocre`
-2. `→ Pat Akess [x,y] : rendre Shin Larve puis prendre Rakoopeur`
-3. `☐ Rakoopeur — Refuge Sylvestre · capturer pour l’Ocre`
-4. `→ Pat Akess [x,y] : rendre Rakoopeur puis prendre Craqueleur Légendaire`
-5. `☐ Craqueleur Légendaire — ... puis STOP`
+#### Émeraude — Naissance d'une vocation
 
-Une transition reste affichée uniquement si elle demande réellement au joueur de :
+La route masquait auparavant les vrais prérequis d'élevage.
 
-- rendre une quête
-- prendre la suivante
-- parler à un PNJ
-- avancer une quête avant le prochain donjon
-- récupérer / donner un objet
-- changer de zone / PNJ
-- respecter un STOP / ordre obligatoire
+Ils sont maintenant explicités avant la quête :
 
-À supprimer :
+- succès `Ce n'est qu'un prélèvement` ;
+- succès `Elle a peut-être trop mangé ?` ;
+- métier Éleveur niveau 20+ ;
+- 1 Dragodinde Rousse ;
+- 1 Dragodinde Amande ;
+- 1 Dragodinde Dorée.
 
-- `REPRENDRE / FAIRE`
-- `FAIRE & VALIDER`
-- `REPRENDRE / TERMINER`
-- répétitions du nom du PNJ déjà évident dans la carte
-- répétitions de fin de carte N au début de N+1
-- cartes purement administratives absorbables dans une carte adjacente
-- textes qui répètent titre + checklist + transition
+Le verrou métier 50 pour `Qui botte le cul des Culs Bottés ?` reste séparé et réel.
 
-Exception : Ocre / capture boss / STOP / objet obligatoire / ordre de dialogue / sauvegarde / condition spéciale = toujours conservés.
+#### Carte de Cania — mécanique 3.4+
 
-## Décisions d’architecture
+La route ne doit plus présenter les Primatons comme un bonus opportuniste.
 
-- `MOMENT_ID` doit rester la clé d’agrégation autoritaire côté rendu.
-- Ne pas ajouter de parsing métier fragile dans React.
-- S’appuyer sur les données structurées déjà présentes : `MOMENT_ID`, `GUIDE_ITEMS`, positions, type, etc.
-- Le chantier n’est pas seulement UI : la source `ROUTE` doit être nettoyée pour éviter les doublons à la racine.
+Le fil rouge est maintenant explicite :
 
-## Docs déjà mises à jour
+- terminer et remettre à la justice 9 avis de recherche niveau 120 ou moins ;
+- récupérer 9 Primatons auprès du Chasseur de primes en `[5,-6]` ;
+- acheter les 3 fragments différents pour 3 Primatons chacun ;
+- assembler la Carte de Cania avant `Les bandits de Cania`.
 
-La nouvelle méthode a été documentée dans :
+Le verrou Carte de Cania a été réécrit sur cette mécanique actuelle.
 
-- `AGENTS.md`
-- `docs/ROUTE_OPTIMIZATION.md`
-- `docs/ROUTE_OPTIMIZATION_WORKFLOW.md`
-- `HANDOFF.md`
+#### Tablette de Totankama — mécanique 3.4+
 
-La passe dédiée est la **Passe 7 — anti-redondance / confort joueur**.
+Le fil rouge est aligné sur la mécanique actuelle :
 
-## Travaux déjà effectués dans cette passe
+- `Comment perdre ses plumes` doit être terminé ;
+- 25 Trésors archéologiques nécessaires ;
+- 5 Trésors par morceau de tablette ;
+- 5 morceaux à acheter puis assembler ;
+- deux méthodes cumulables :
+  - quête `Chasse au trésor archéologique` : 5 Trésors, limitée à 1 fois/jour ;
+  - boss de donjon niveau 120–130 : 1 Trésor automatique en donjon, pas en arène.
 
-### Tours du Monde / chaînes principales
+Le verrou est conservé uniquement au moment où la tablette devient réellement obligatoire.
 
-Nettoyage et transitions compactées sur :
+#### Le mal a dit
 
-- Pat Akess / Les sbires du maître
-- Maître des clefs
-- Chris de Naire / Un juge hystérique
-- Kal Vissi / Des donjons, encore des donjons
-- La voie du guerrier
-- Emma Tompouce
-- Alain Deix
-- Thelma
-- Anne Ullaire
-- Lorie Culère
+Le texte de prérequis était obsolète.
 
-Exemples de nouveau format :
+La route accomplit déjà avant le verrou :
 
-`→ Anne Ullaire [-45,19] : rendre Tour d'honneur, puis prendre Tour de marionnettes.`
+- `Épis d'Emi` ;
+- `Bienvenue à Frigost` ;
+- `Pauvre Kiki` ;
+- `Gène et tique` ;
+- `En semant, se ment`.
 
-`→ Chris de Naire [-29,-47] : après le Koulosse, prendre l’objectif Meulou et garder la quête active jusqu’au passage Meulou.`
+Le verrou indique maintenant la condition réelle restante : expiration du vaccin temporaire depuis une semaine.
 
-`→ Kal Vissi [-19,30] : après le Tofu Royal, prendre l’objectif Crocabulia puis enchaîner sur l’Antre.`
+#### Il est temps de mourir
 
-### Frigost / Turquoise
+La transition après Sylargh répétait à tort « prendre la quête et avancer jusqu'au Sylargh » alors que le boss était déjà vaincu.
 
-Passes de compactage faites sur plusieurs transitions importantes :
+Elle indique maintenant la vraie suite critique :
 
-- Royalmouth → Minotoror
-- Tofu Royal / Crocabulia
-- Thomahon / Foluk
-- bénédictions et rendus
-- `La voie du guerrier` fin Minotot / Bworker / rendu final
+- ne pas sortir après Sylargh ;
+- détruire le Nékoléreux instable dans la salle de sortie ;
+- ressusciter ;
+- parler à Agonie ;
+- poursuivre la séquence Hyrkul selon DPLN jusqu'au Dofus Ivoire.
 
-### Sufokia / Meno
+#### Corruption éditoriale Otomaï
 
-Nettoyé :
+Deux STEP_ID avaient un titre ne correspondant plus à leur contenu :
 
-- La pêche aux infos
-- Il y a de l’électricité dans l’eau
-- Topo le petit robot
-- Piège de crystal
-- Meno
-- Son nom est Personne
+- `route-step-0105` restauré en `Protéger et sévir` ;
+- `route-step-0106` restauré en `Le nouveau monde`.
 
-La séquence est maintenant pensée comme une seule carte séquentielle avec transitions compactes.
+Le passage `Donjon douillet — Nid du Kwakwa` a également été restauré sur son STEP_ID correct.
 
-### Tacheté / réunification Pandala
+#### La marche de l'impératrice
 
-Nettoyé :
+Une ancienne instruction Bworker / Maître des clefs sans rapport avec la quête a été supprimée.
 
-- Main dans la main
-- De l’encre spectaculaire
-- L’épopée du moine pèlerin
-- Deux souffles, une inspiration
-- Roi Imagami
-- Reine Amirukam
-- fin Main dans la main
-- En ce jardin qui nous unit
-- obtention Dofus Tacheté
+La ligne ne décrit plus que la mutualisation réelle avec `Pêche en eaux gelées`.
 
-### Cavaliers / Corruption
+## DPLN — couverture des cartes
 
-Nettoyé :
+L'exporteur récupère `source.url` depuis les formules `HYPERLINK` de la colonne `ÉTAPE`.
 
-- Servitude
-- Misère
-- Un pouvoir mérydique
-- Ougah
-- Corruption
+Le rendu React sait déjà afficher :
 
-### Ivoire / Nordalie
+- le lien de la quête principale d'un objectif ;
+- un lien distinct pour une étape interne de carte quand son URL diffère ;
+- le lien d'une carte simple.
 
-Nettoyé :
+Audit mécanique sur un export frais du Sheet :
 
-- `Le dragon blanc` → texte compact
-- `Examen de passage` → texte compact
-- `Casse en Enutrosor` → texte compact
-- rendus `Un morceau de roi` / `Coiffeur de génie` simplifiés
-- `Nordalie` ouverture compactée
-- missions Nordalie transformées vers le format objectif clair :
-  - `☐ Le guerrier noir — [-76,-80] — à faire en premier.`
-  - `☐ Le bonheur est dans le spray — [-76,-80].`
-  - `☐ Une voix de crystal — [-76,-80] → Nileza, puis STOP.`
-  - `☐ Le mort dans l’âme — [-76,-80] → Katrepat, puis STOP.`
-- retour partitions / Pichon de `Une voix de crystal` compacté
-- `Il est temps de mourir` → transition compactée
-
-### Passe 2026-09-04 — lignes 860 → fin
-
-La plage `A860:S1031` a maintenant été relue jusqu’à la dernière ligne.
-
-Nettoyages appliqués :
-
-- fin Ivoire / début Ébène : suppression des annonces de quêtes futures injectées trop tôt dans `SUITE / STOP` ;
-- `De Brikke et de Brokke` : transitions locales réécrites et anciennes anticipations supprimées ;
-- `L'épée du rocher` : ouverture compactée, anciennes annonces futures retirées ;
-- Ocre final / Quatre sur six / Dragons / Totems / S'armer : suppression des instructions appartenant à des séquences réellement présentes plus loin ;
-- `Qui nous protège` : Nidas + Aurore Pourpre + préparation Djaul + Solar réunis sous le même `MOMENT_ID` `moment-sigils-donjons` ;
-- notes critiques qui étaient seulement dans `⚠️ À SAVOIR` réinjectées dans `SUITE / STOP` quand elles doivent réellement être visibles dans l'app : Skeunk, Crocabulia, Dazak, Klime, Dantinéa, Bouftou Royal ;
-- Dragons : transition Rosal réécrite pour prendre les 4 quêtes, terminer le Dragon des eaux et garder les 3 autres actives.
-
-Normalisation globale de bruit éditorial :
-
-- `FAIRE & VALIDER` → `FAIRE` dans `ACTION`, y compris dans les formules génératrices ;
-- `REPRENDRE / FAIRE` → `FAIRE` ;
-- `REPRENDRE / TERMINER` → `TERMINER`, y compris les variantes/formules ;
-- suffixe de titre `— REPRENDRE / TERMINER` supprimé sur 111 titres ;
-- suffixe `— REPRENDRE ET TERMINER` supprimé sur 42 titres ;
-- les formules `HYPERLINK` ont été modifiées sans supprimer les liens.
-
-Contrôles Sheet déjà faits après ces écritures :
-
-- 0 `#ERROR!` dans `A5:S1031` ;
-- 0 `FAIRE & VALIDER` restant dans `ACTION` ;
-- 0 `REPRENDRE / TERMINER` restant dans `ACTION` ;
-- 0 suffixe `REPRENDRE / TERMINER` restant dans `ÉTAPE` ;
-- 0 `VERROU DUR — NIVEAU ...` détecté ;
-- 0 type `RÈGLE` détecté.
-
-### Point d'architecture découvert pendant la passe
-
-Le runtime actuel sait regrouper une carte avec `MOMENT_ID`, mais `getSequenceObjectives()` décide encore les checkboxes principalement depuis le `type` :
-
-- `REPRISE` devient par défaut une checkbox ;
-- `DONJON` devient par défaut un détail de la checkbox précédente.
-
-Cela ne permet pas toujours d'exprimer exactement le contrat validé `1 checkbox = 1 sous-objectif significatif`, par exemple sur une séquence Skeunk → transition → Fraktale → rendu final.
-
-**Ne pas corriger avec des exceptions par nom de quête ou du parsing React.**
-
-Le prochain changement code doit être une extension structurée minimale permettant à `ROUTE` d'indiquer explicitement le rôle d'une ligne dans une carte (objectif cochable vs transition/détail), tout en conservant `STEP_ID` comme vérité de progression et `MOMENT_ID` comme frontière de carte. Ne pas implémenter une heuristique supplémentaire par texte.
-
-## Point de reprise EXACT
-
-La passe éditoriale ciblée 860 → fin a été effectuée. Le prochain point de reprise est :
-
-1. résoudre proprement le rôle objectif/transition dans le modèle data-driven ;
-2. utiliser un cas témoin complexe (`L'épée du rocher` ou Pat Akess) pour valider le rendu ;
-3. reprendre ensuite l'audit global inter-cartes sur les lignes antérieures à 860 (`REPRENDS`, `Retourne voir`, `TERMINE`, cartes administratives absorbables) ;
-4. terminer la passe globale jusqu'à la première carte.
-
-## Audit global restant
-
-Rechercher/auditer dans tout `ROUTE` :
-
-- `REPRENDS` dans `SUITE / STOP` : certains sont nécessaires, d'autres encore redondants ;
-- `Retourne voir` ;
-- `TERMINE` ;
-- `GARDE la quête active` ;
-- `LANCER / TERMINER` ;
-- variantes techniques résiduelles dans les titres ;
-- cartes `JALON` qui peuvent être absorbées.
-
-Les vrais verrous de contenu restent conservés (tablette Totankama, Ocre d’ambre, Ocre final, alignement 100, timer vaccin, etc.).
-
-## Contrôles finaux obligatoires
-
-Après nettoyage complet :
-
-1. régénérer `data/route.json` depuis le Sheet
-2. lancer :
-   - `pnpm.cmd test:route`
-   - `pnpm.cmd validate:route`
-   - `pnpm.cmd build`
-3. vérifier que `MOMENT_ID` ne traverse pas un bloc illogiquement
-4. contrôler visuellement les grosses cartes séquence dans l’app
-5. commit + push sur `agent/initial-scaffold`
-6. donner au user :
-
-```powershell
-git pull origin agent/initial-scaffold
+```text
+737 lignes quest-like
+737 avec HYPERLINK
+0 sans lien
 ```
 
-## État de validation connu
+Les deux lignes d'orchestration Enutrosor contenant plusieurs noms de quêtes pointent vers la page DPLN Enutrosor ; dans la même carte, `Crache Test`, `La quatrième dimension`, `Déphorrestation` et `La meilleure défense, c'est l'attaque` ont chacune leur URL DPLN dédiée.
 
-Avant cette nouvelle passe anti-redondance, la route validait :
+## Cohérence Ganymede / DPLN
 
-`Route valide : 1028 étapes, 20 blocs.`
+Le tableau `GANYMEDE_AUDIT` avait déjà validé les 20 blocs individuellement.
 
-**État actuel : les nouvelles modifications du Sheet décrites ci-dessus ne sont pas encore régénérées dans `data/route.json`, ni testées via `test:route`, `validate:route` et `build`. Ne pas annoncer la route synchronisée/verte avant cet export.**
+La nouvelle passe transversale a en plus revérifié les points à risque actuels :
 
-## Contraintes utilisateur importantes
+- accès Otomaï avant `Donjon magistral` ;
+- accès Moon avant `Un Kanniboul versé` ;
+- accès Wabbit avant `Le Wa Pythie` ;
+- Capture d'âmes avant `Le voleur d'âmes` ;
+- prérequis d'élevage Émeraude ;
+- Carte de Cania / Primatons ;
+- Tablette de Totankama / Trésors archéologiques ;
+- timer Frigost de `Le mal a dit` ;
+- chaîne Valonia / `L'héritage de l'île brisée` avant Dom de Pin ;
+- Prologue : `Au détour d'un rêve perdu` → `Entretemps, une renaissance` → `La bête au bois dormant` ;
+- post-Sylargh Ivoire ;
+- chaînes Enutrosor ;
+- prérequis Dom de Pin / Flovoraison / Sylvestre.
 
-- ne jamais bricoler une surcouche React pour masquer une mauvaise donnée
-- rester data-driven
-- ne pas traiter les cas un par un si une règle globale est possible
-- l’objectif est le confort de suivi du guide complet, pas juste une réduction artificielle du nombre de cartes
-- ne pas supprimer une transition nécessaire entre deux donjons
-- toujours préciser rendu / prise / avancement de quête quand c’est réellement requis
-- ne pas inventer de PNJ / position : utiliser uniquement les données/source existantes
+Les répétitions de donjons restantes dans `GANYMEDE_AUDIT` restent justifiées par des déblocages ultérieurs et ne doivent pas être fusionnées artificiellement.
+
+## Architecture DISPLAY_ROLE
+
+Le code de la branche supporte désormais :
+
+```ts
+type StepDisplayRole = 'objective' | 'transition' | 'detail';
+```
+
+`DISPLAY_ROLE` ne peut être défini que dans un `MOMENT_ID`.
+
+`getSequenceObjectives()` respecte la donnée structurée au lieu de décider uniquement depuis le `type`.
+
+La deuxième prise groupée Enutrosor a été reclassée `TRANSITION` pour ne pas créer une checkbox administrative supplémentaire.
+
+## État runtime IMPORTANT
+
+Le Google Sheet est plus récent que `data/route.json`.
+
+**Ne pas considérer le runtime comme synchronisé tant que l'export n'a pas été régénéré.**
+
+Ne jamais corriger `data/route.json` à la main.
+
+Prochaine étape technique :
+
+```bash
+pnpm export:route
+pnpm test:route
+pnpm validate:route
+pnpm build
+```
+
+Puis :
+
+1. contrôle visuel des grosses cartes ;
+2. vérification des boutons DPLN dans l'app ;
+3. commit/push final sur `agent/initial-scaffold`.
+
+## Contraintes non négociables
+
+- pas d'exception par nom de quête dans React ;
+- pas de parsing métier depuis les textes ;
+- pas de seconde source de vérité ;
+- pas de correction manuelle de `route.json` ;
+- pas d'invention de PNJ, position ou prérequis ;
+- préserver Ocre / STOP / objets obligatoires / dialogues de sortie / ordre imposé ;
+- optimiser le confort réel du parcours, pas le nombre de cartes pour le chiffre.
