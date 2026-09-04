@@ -31,10 +31,11 @@ test('parallel groups remain active across unrelated cards until their finish ch
 
   const afterStart = getActiveParallelGroups(route, new Set(['a']));
   assert.equal(afterStart.length, 1);
-  assert.deepEqual(afterStart[0].members.map((step) => step.id), ['a', 'b']);
+  assert.deepEqual(afterStart[0].members.map((step) => step.id), ['a']);
 
   const beforeBoss = getActiveParallelGroups(route, new Set(['a', 'unrelated', 'b']));
   assert.equal(beforeBoss.length, 1);
+  assert.deepEqual(beforeBoss[0].members.map((step) => step.id), ['a', 'b']);
 
   const afterBoss = getActiveParallelGroups(route, new Set(['a', 'unrelated', 'b', 'boss']));
   assert.equal(afterBoss.length, 0);
