@@ -15,7 +15,7 @@ import {
   getSortedSteps,
   getStepIndex,
 } from './route/selectors';
-import type { StepType } from './route/types';
+import type { GuideItem, GuideItemAction, StepType } from './route/types';
 import { loadShortcutBindings, saveShortcutBindings } from './shortcuts/storage';
 import {
   defaultShortcutBindings,
@@ -53,8 +53,30 @@ const typeLabels: Record<StepType, string> = {
   finish: 'FIN',
 };
 
+const guideActionLabels: Record<GuideItemAction, string> = {
+  take: 'Vous devez maintenant prendre :',
+  advance: 'Vous devez maintenant avancer :',
+  finish: 'Vous devez maintenant terminer :',
+  do: 'Vous devez maintenant faire :',
+};
+
 function getResourceName(item: string): string {
   return item.replace(/^\d+\s*[×x]\s*/i, '').trim();
+}
+
+function groupGuideItems(items: GuideItem[]) {
+  const groups: Array<{ action: GuideItemAction; items: GuideItem[] }> = [];
+
+  for (const item of items) {
+    const currentGroup = groups.at(-1);
+    if (currentGroup?.action === item.action) {
+      currentGroup.items.push(item);
+    } else {
+      groups.push({ action: item.action, items: [item] });
+    }
+  }
+
+  return groups;
 }
 
 export function App() {
@@ -210,6 +232,8 @@ export function App() {
   const displayIndex = viewIndex + 1;
   const travelTarget = currentStep.destination ?? currentStep.location;
   const travelLabel = currentStep.destination ? 'Destination' : 'Lancement';
+  const hasGuideItems = Boolean(currentStep.guideItems?.length);
+  const guideGroups = currentStep.guideItems ? groupGuideItems(currentStep.guideItems) : [];
   const hasDistinctLaunchLocation =
     currentStep.location &&
     currentStep.destination &&
@@ -443,7 +467,39 @@ export function App() {
 
         {currentStep.action && <p className="action-label">{currentStep.action}</p>}
 
-        {travelTarget && (
+        {guideGroups.length > 0 && (
+          <div className="guide-items">
+            {guideGroups.map((group, groupIndex) => (
+              <div className="guide-items__group" key={`${group.action}-${groupIndex}`}>
+                <p className="guide-items__heading">{guideActionLabels[group.action]}</p>
+                <ul className="guide-items__list">
+                  {group.items.map((item, itemIndex) => (
+                    <li key={`${item.label}-${itemIndex}`}>
+                      <div className="guide-items__row">
+                        <strong>{item.label}</strong>
+                        {item.location && (
+                          <button
+                            className="guide-location-button"
+                            type="button"
+                            title={`Copier /travel ${item.location.x} ${item.location.y}`}
+                            onClick={() =>
+                              void copyToClipboard(`/travel ${item.location!.x} ${item.location!.y}`)
+                            }
+                          >
+                            [{item.location.x},{item.location.y}] · ⧉
+                          </button>
+                        )}
+                      </div>
+                      {item.note && <span className="guide-items__note">{item.note}</span>}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {travelTarget && !hasGuideItems && (
           <button
             className="travel-button"
             type="button"
@@ -455,7 +511,7 @@ export function App() {
           </button>
         )}
 
-        {hasDistinctLaunchLocation && currentStep.location && (
+        {hasDistinctLaunchLocation && currentStep.location && !hasGuideItems && (
           <div className="step-context step-context--launch">
             <strong>Lancement de la quête</strong>
             <span>[{currentStep.location.x},{currentStep.location.y}]</span>
