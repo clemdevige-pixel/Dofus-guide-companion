@@ -83,6 +83,9 @@ export function validateRoute(route: RouteDocument): RouteDocument {
 
   const stepIds = new Set<string>();
   const goalStates = new Map<string, GoalState>();
+  const momentBlocks = new Map<string, string>();
+  const closedMomentIds = new Set<string>();
+  let activeMomentId: string | undefined;
   let finishCount = 0;
 
   for (let index = 0; index < route.steps.length; index += 1) {
@@ -113,6 +116,28 @@ export function validateRoute(route: RouteDocument): RouteDocument {
         throw new Error(`${step.id}: source incomplète.`);
       }
       assertValidUrl(step.source.url, step.id);
+    }
+
+    if (step.momentId !== undefined) {
+      if (!isNonEmptyString(step.momentId)) {
+        throw new Error(`${step.id}: momentId vide.`);
+      }
+      const knownBlock = momentBlocks.get(step.momentId);
+      if (knownBlock && knownBlock !== step.blockId) {
+        throw new Error(`${step.id}: momentId ${step.momentId} traverse plusieurs blocs.`);
+      }
+      momentBlocks.set(step.momentId, step.blockId);
+
+      if (closedMomentIds.has(step.momentId)) {
+        throw new Error(`${step.id}: momentId non contigu (${step.momentId}).`);
+      }
+      if (activeMomentId && activeMomentId !== step.momentId) {
+        closedMomentIds.add(activeMomentId);
+      }
+      activeMomentId = step.momentId;
+    } else if (activeMomentId) {
+      closedMomentIds.add(activeMomentId);
+      activeMomentId = undefined;
     }
 
     assertValidCoordinate(step.location, step.id, 'position de lancement');
