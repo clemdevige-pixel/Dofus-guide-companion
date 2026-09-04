@@ -87,25 +87,24 @@ test('completed linked hard lock closes the goal', () => {
   );
 });
 
-test('ordinary quest, dungeon, alignment and order steps share one checklist', () => {
+test('steps without MOMENT_ID always remain standalone cards', () => {
   const groupedRoute: RouteDocument = {
     ...route,
     steps: [
-      { id: 'take', order: 1, blockId: 'block-01', type: 'quest', title: 'Quest A', action: 'LANCER' },
-      { id: 'dungeon', order: 2, blockId: 'block-01', type: 'dungeon', title: 'Dungeon A', action: 'FAIRE & VALIDER' },
-      { id: 'finish', order: 3, blockId: 'block-01', type: 'resume', title: 'Quest A', action: 'REPRENDRE / TERMINER' },
-      { id: 'alignment', order: 4, blockId: 'block-01', type: 'alignment', title: 'Alignement', action: 'TERMINER' },
-      { id: 'order', order: 5, blockId: 'block-01', type: 'order', title: 'Ordre', action: 'TERMINER' },
+      { id: 'quest-a', order: 1, blockId: 'block-01', type: 'quest', title: 'Quest A', action: 'TERMINER' },
+      { id: 'dungeon-a', order: 2, blockId: 'block-01', type: 'dungeon', title: 'Dungeon A', action: 'FAIRE' },
+      { id: 'quest-b', order: 3, blockId: 'block-01', type: 'resume', title: 'Quest B', action: 'TERMINER' },
     ],
   };
 
-  const groups = getStepGroups(groupedRoute);
-  assert.equal(groups.length, 1);
-  assert.equal(groups[0].isSequence, true);
-  assert.deepEqual(groups[0].steps.map((step) => step.id), ['take', 'dungeon', 'finish', 'alignment', 'order']);
+  assert.deepEqual(getStepGroups(groupedRoute).map((group) => group.steps.map((step) => step.id)), [
+    ['quest-a'],
+    ['dungeon-a'],
+    ['quest-b'],
+  ]);
 });
 
-test('STOP closes the current checklist instead of creating a useless standalone card', () => {
+test('STOP never creates an implicit grouping boundary', () => {
   const groupedRoute: RouteDocument = {
     ...route,
     steps: [
@@ -116,12 +115,13 @@ test('STOP closes the current checklist instead of creating a useless standalone
   };
 
   assert.deepEqual(getStepGroups(groupedRoute).map((group) => group.steps.map((step) => step.id)), [
-    ['take', 'advance-stop'],
+    ['take'],
+    ['advance-stop'],
     ['next'],
   ]);
 });
 
-test('STOP does not split an explicit route moment', () => {
+test('one explicit MOMENT_ID creates exactly one card', () => {
   const momentId = 'moment-a';
   const groupedRoute: RouteDocument = {
     ...route,
@@ -134,6 +134,7 @@ test('STOP does not split an explicit route moment', () => {
         title: 'Quest A',
         action: 'AVANCER / STOP',
         momentId,
+        displayRole: 'objective',
       },
       {
         id: 'dungeon',
@@ -141,8 +142,9 @@ test('STOP does not split an explicit route moment', () => {
         blockId: 'block-01',
         type: 'dungeon',
         title: 'Dungeon A',
-        action: 'FAIRE & VALIDER',
+        action: 'FAIRE',
         momentId,
+        displayRole: 'detail',
       },
       {
         id: 'finish',
@@ -150,15 +152,18 @@ test('STOP does not split an explicit route moment', () => {
         blockId: 'block-01',
         type: 'resume',
         title: 'Quest A',
-        action: 'REPRENDRE / TERMINER',
+        action: 'TERMINER',
         momentId,
+        displayRole: 'transition',
       },
     ],
   };
 
-  assert.deepEqual(getStepGroups(groupedRoute).map((group) => group.steps.map((step) => step.id)), [
-    ['advance-stop', 'dungeon', 'finish'],
-  ]);
+  const groups = getStepGroups(groupedRoute);
+  assert.equal(groups.length, 1);
+  assert.equal(groups[0].id, 'moment:moment-a');
+  assert.equal(groups[0].isSequence, true);
+  assert.deepEqual(groups[0].steps.map((step) => step.id), ['advance-stop', 'dungeon', 'finish']);
 });
 
 test('different explicit moments create different cards', () => {
@@ -166,167 +171,70 @@ test('different explicit moments create different cards', () => {
     ...route,
     steps: [
       {
-        id: 'take-a',
-        order: 1,
-        blockId: 'block-01',
-        type: 'quest',
-        title: 'Quest A',
-        action: 'LANCER',
-        momentId: 'moment-a',
+        id: 'quest-a', order: 1, blockId: 'block-01', type: 'quest', title: 'Quest A',
+        momentId: 'moment-a', displayRole: 'objective',
       },
       {
-        id: 'dungeon-a',
-        order: 2,
-        blockId: 'block-01',
-        type: 'dungeon',
-        title: 'Dungeon A',
-        action: 'FAIRE & VALIDER',
-        momentId: 'moment-a',
+        id: 'finish-a', order: 2, blockId: 'block-01', type: 'resume', title: 'Finish A',
+        momentId: 'moment-a', displayRole: 'transition',
       },
       {
-        id: 'finish-a-take-b',
-        order: 3,
-        blockId: 'block-01',
-        type: 'resume',
-        title: 'Finish A + take B',
-        action: 'REPRENDRE / TERMINER + LANCER',
-        momentId: 'moment-a',
-      },
-      {
-        id: 'dungeon-b',
-        order: 4,
-        blockId: 'block-01',
-        type: 'dungeon',
-        title: 'Dungeon B',
-        action: 'FAIRE & VALIDER',
-        momentId: 'moment-b',
-      },
-      {
-        id: 'finish-b',
-        order: 5,
-        blockId: 'block-01',
-        type: 'resume',
-        title: 'Finish B',
-        action: 'REPRENDRE / TERMINER',
-        momentId: 'moment-b',
+        id: 'quest-b', order: 3, blockId: 'block-01', type: 'quest', title: 'Quest B',
+        momentId: 'moment-b', displayRole: 'objective',
       },
     ],
   };
 
   assert.deepEqual(getStepGroups(groupedRoute).map((group) => group.steps.map((step) => step.id)), [
-    ['take-a', 'dungeon-a', 'finish-a-take-b'],
-    ['dungeon-b', 'finish-b'],
+    ['quest-a', 'finish-a'],
+    ['quest-b'],
   ]);
 });
 
-test('complex explicit moment becomes one checkbox per meaningful sub-objective', () => {
+test('DISPLAY_ROLE decides checkbox boundaries inside a moment', () => {
   const momentId = 'moment-a';
   const steps: RouteStep[] = [
     {
-      id: 'shin',
-      order: 1,
-      blockId: 'block-01',
-      type: 'resume',
-      title: 'Objectif Shin Larve',
-      action: 'REPRENDRE / FAIRE',
-      momentId,
+      id: 'shin', order: 1, blockId: 'block-01', type: 'resume', title: 'Shin Larve',
+      momentId, displayRole: 'objective', action: 'FAIRE',
     },
     {
-      id: 'larves',
-      order: 2,
-      blockId: 'block-01',
-      type: 'dungeon',
-      title: 'Donjon des Larves',
-      action: 'FAIRE & VALIDER',
-      momentId,
+      id: 'larves', order: 2, blockId: 'block-01', type: 'dungeon', title: 'Donjon des Larves',
+      momentId, displayRole: 'detail', action: 'FAIRE',
     },
     {
-      id: 'rakoopeur',
-      order: 3,
-      blockId: 'block-01',
-      type: 'resume',
-      title: 'Objectif Rakoopeur',
-      action: 'REPRENDRE / FAIRE',
-      momentId,
+      id: 'transition', order: 3, blockId: 'block-01', type: 'resume', title: 'Rendre puis reprendre',
+      momentId, displayRole: 'transition', action: 'TERMINER',
     },
     {
-      id: 'sylvestre',
-      order: 4,
-      blockId: 'block-01',
-      type: 'dungeon',
-      title: 'Refuge Sylvestre',
-      action: 'FAIRE & VALIDER',
-      momentId,
-    },
-    {
-      id: 'craqueleur',
-      order: 5,
-      blockId: 'block-01',
-      type: 'resume',
-      title: 'Objectif Craqueleur Légendaire',
-      action: 'REPRENDRE / STOP',
-      momentId,
+      id: 'rakoopeur', order: 4, blockId: 'block-01', type: 'resume', title: 'Rakoopeur',
+      momentId, displayRole: 'objective', action: 'FAIRE',
     },
   ];
 
   const objectives = getSequenceObjectives(steps);
   assert.deepEqual(
     objectives.map((objective) => objective.steps.map((step) => step.id)),
-    [['shin', 'larves'], ['rakoopeur', 'sylvestre'], ['craqueleur']],
+    [['shin', 'larves', 'transition'], ['rakoopeur']],
   );
   assert.equal(objectives.flatMap((objective) => objective.steps).some((step) => step.action), false);
 });
 
-test('matching external source urls do not create an implicit objective', () => {
+test('source equality never affects objective grouping', () => {
   const source = { label: 'DPLN', url: 'https://example.test/quest-a' };
   const steps: RouteStep[] = [
-    { id: 'a', order: 1, blockId: 'block-01', type: 'quest', title: 'A', source },
-    { id: 'b', order: 2, blockId: 'block-01', type: 'resume', title: 'B', source },
+    {
+      id: 'a', order: 1, blockId: 'block-01', type: 'quest', title: 'A', source,
+      momentId: 'moment-a', displayRole: 'objective',
+    },
+    {
+      id: 'b', order: 2, blockId: 'block-01', type: 'resume', title: 'B', source,
+      momentId: 'moment-a', displayRole: 'objective',
+    },
   ];
 
   assert.deepEqual(
     getSequenceObjectives(steps).map((objective) => objective.steps.map((step) => step.id)),
     [['a'], ['b']],
   );
-});
-
-test('structured and critical steps remain isolated', () => {
-  const groupedRoute: RouteDocument = {
-    ...route,
-    steps: [
-      { id: 'simple-a', order: 1, blockId: 'block-01', type: 'quest', title: 'Simple A', action: 'TERMINER' },
-      {
-        id: 'structured',
-        order: 2,
-        blockId: 'block-01',
-        type: 'major_step',
-        title: 'Structured',
-        action: 'AVANCER',
-        guideItems: [{ action: 'advance', label: 'Quest C' }],
-      },
-      { id: 'simple-b', order: 3, blockId: 'block-01', type: 'quest', title: 'Simple B', action: 'TERMINER' },
-    ],
-  };
-
-  assert.deepEqual(getStepGroups(groupedRoute).map((group) => group.steps.map((step) => step.id)), [
-    ['simple-a'],
-    ['structured'],
-    ['simple-b'],
-  ]);
-});
-
-test('checklist groups are capped to eight steps', () => {
-  const groupedRoute: RouteDocument = {
-    ...route,
-    steps: Array.from({ length: 10 }, (_, index) => ({
-      id: `quest-${index + 1}`,
-      order: index + 1,
-      blockId: 'block-01',
-      type: 'quest' as const,
-      title: `Quest ${index + 1}`,
-      action: 'TERMINER',
-    })),
-  };
-
-  assert.deepEqual(getStepGroups(groupedRoute).map((group) => group.steps.length), [8, 2]);
 });
