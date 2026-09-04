@@ -5,11 +5,12 @@ import type {
   RouteBlock,
   RouteDocument,
   RouteStep,
+  StepDisplayRole,
   StepType,
 } from '../src/route/types';
 import { validateRoute } from '../src/route/validation';
 
-const DEFAULT_RANGE = 'ROUTE!A5:S';
+const DEFAULT_RANGE = 'ROUTE!A5:T';
 const OUTPUT_PATH = resolve('data/route.json');
 
 const typeMap: Record<string, { type: StepType; displayType?: string }> = {
@@ -36,6 +37,12 @@ const guideItemActionMap: Record<string, GuideItemAction> = {
   AVANCER: 'advance',
   TERMINER: 'finish',
   FAIRE: 'do',
+};
+
+const displayRoleMap: Record<string, StepDisplayRole> = {
+  OBJECTIVE: 'objective',
+  TRANSITION: 'transition',
+  DETAIL: 'detail',
 };
 
 type SheetRow = string[];
@@ -90,6 +97,17 @@ function parseGoalPhase(rawPhase: string, sheetRow: number): GoalPhase | undefin
   if (!rawPhase) return undefined;
   if (rawPhase === 'start' || rawPhase === 'progress' || rawPhase === 'finish') return rawPhase;
   throw new Error(`Ligne Sheet ${sheetRow}: GOAL_PHASE inconnu « ${rawPhase} »`);
+}
+
+function parseDisplayRole(rawRole: string, sheetRow: number): StepDisplayRole | undefined {
+  if (!rawRole) return undefined;
+  const role = displayRoleMap[rawRole.toUpperCase()];
+  if (!role) {
+    throw new Error(
+      `Ligne Sheet ${sheetRow}: DISPLAY_ROLE inconnu « ${rawRole} », attendu OBJECTIVE, TRANSITION ou DETAIL.`,
+    );
+  }
+  return role;
 }
 
 function parseCoordinate(
@@ -186,10 +204,11 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
     cell(headers, 15) !== 'LANCEMENT_REQUIS' ||
     cell(headers, 16) !== 'DESTINATION' ||
     cell(headers, 17) !== 'GUIDE_ITEMS' ||
-    cell(headers, 18) !== 'MOMENT_ID'
+    cell(headers, 18) !== 'MOMENT_ID' ||
+    cell(headers, 19) !== 'DISPLAY_ROLE'
   ) {
     throw new Error(
-      'Colonnes ROUTE inattendues : TYPE, ÉTAPE, STEP_ID, GOAL_ID, GOAL_PHASE, POSITION, LANCEMENT, LANCEMENT_REQUIS, DESTINATION, GUIDE_ITEMS et MOMENT_ID sont obligatoires.',
+      'Colonnes ROUTE inattendues : TYPE, ÉTAPE, STEP_ID, GOAL_ID, GOAL_PHASE, POSITION, LANCEMENT, LANCEMENT_REQUIS, DESTINATION, GUIDE_ITEMS, MOMENT_ID et DISPLAY_ROLE sont obligatoires.',
     );
   }
 
@@ -246,6 +265,7 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
     const destination = parseCoordinate(cell(formatted, 16), sheetRow, 'DESTINATION');
     const guideItems = parseGuideItems(cell(formatted, 17), sheetRow);
     const momentId = cell(formatted, 18);
+    const displayRole = parseDisplayRole(cell(formatted, 19), sheetRow);
     const title = rawTitle.split('\n')[0]?.trim() || rawTitle;
 
     if (action.toUpperCase().includes('LANCER') && !launchRequired) {
@@ -256,6 +276,9 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
         `Ligne Sheet ${sheetRow}: lancement requis sans POSITION ni LANCEMENT pour « ${title} ».`,
       );
     }
+    if (displayRole && !momentId) {
+      throw new Error(`Ligne Sheet ${sheetRow}: DISPLAY_ROLE défini sans MOMENT_ID.`);
+    }
 
     stepOrder += 1;
     const step: RouteStep = {
@@ -264,6 +287,7 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
       blockId: currentBlock.id,
       type: mapping.type,
       ...(mapping.displayType ? { displayType: mapping.displayType } : {}),
+      ...(displayRole ? { displayRole } : {}),
       title,
       ...(action ? { action } : {}),
       ...(instruction ? { instruction } : {}),
