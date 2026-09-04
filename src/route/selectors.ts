@@ -28,11 +28,16 @@ function getRuleText(rule: RouteStep): string {
 }
 
 function toSequenceDisplayStep(step: RouteStep): RouteStep {
-  if (!step.action) {
-    return step;
+  const displayStep = { ...step };
+
+  if (
+    step.displayRole === 'transition' &&
+    !step.instruction &&
+    (step.action || step.title)
+  ) {
+    displayStep.instruction = [step.action, step.title].filter(Boolean).join(' — ');
   }
 
-  const displayStep = { ...step };
   delete displayStep.action;
   return displayStep;
 }
@@ -112,6 +117,9 @@ export function getStepGroups(route: RouteDocument): RouteStepGroup[] {
  * DISPLAY_ROLE is authoritative:
  * - objective => one checkbox;
  * - transition/detail => attached to the previous objective without checkbox.
+ * A transition without its own instruction receives a compact display fallback
+ * from its structured action + title so required administrative actions never
+ * become invisible inside a mutualized card.
  */
 export function getSequenceObjectives(steps: RouteStep[]): RouteSequenceObjective[] {
   const objectives: RouteSequenceObjective[] = [];
