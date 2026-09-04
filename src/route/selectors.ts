@@ -8,6 +8,12 @@ const sequenceStepTypes = new Set<RouteStep['type']>([
   'alignment',
   'order',
 ]);
+const sequenceDetailTypes = new Set<RouteStep['type']>([
+  'dungeon',
+  'milestone',
+  'long_running',
+  'hard_lock',
+]);
 
 export interface RouteStepGroup {
   id: string;
@@ -75,6 +81,16 @@ function isExplicitMomentStep(step: RouteStep): boolean {
 /** A STOP closes only an inferred checklist. Explicit moments are already bounded by momentId. */
 function closesSequence(step: RouteStep): boolean {
   return getStepContext(step).includes('STOP');
+}
+
+function toSequenceDisplayStep(step: RouteStep): RouteStep {
+  if (!step.action) {
+    return step;
+  }
+
+  const displayStep = { ...step };
+  delete displayStep.action;
+  return displayStep;
 }
 
 export function getSortedSteps(route: RouteDocument): RouteStep[] {
@@ -174,33 +190,29 @@ export function getStepGroups(route: RouteDocument): RouteStepGroup[] {
 }
 
 /**
- * Collapses technical RouteSteps carrying the same explicit editorial momentId into
- * one player-facing objective. The UI does not infer quest identity from titles,
- * instructions or external URLs.
+ * Builds player-facing checklist objectives inside an already bounded card.
+ * MOMENT_ID still defines the card boundary; inside that card, each actionable
+ * quest/resume/alignment/order/major step becomes one checkbox and technical detail
+ * rows (dungeon, milestone, goal transition, lock) stay attached to the preceding
+ * objective. This keeps large mutualised moments readable without re-splitting them
+ * into several cards or parsing quest names from display text.
  */
 export function getSequenceObjectives(steps: RouteStep[]): RouteSequenceObjective[] {
   const objectives: RouteSequenceObjective[] = [];
-  let index = 0;
 
-  while (index < steps.length) {
-    const first = steps[index];
-    const momentId = first.momentId;
+  for (const rawStep of steps) {
+    const step = toSequenceDisplayStep(rawStep);
+    const currentObjective = objectives.at(-1);
 
-    if (!momentId) {
-      objectives.push({ id: first.id, steps: [first] });
-      index += 1;
+    if (sequenceDetailTypes.has(step.type) && currentObjective) {
+      currentObjective.steps.push(step);
       continue;
     }
 
-    const members: RouteStep[] = [first];
-    let cursor = index + 1;
-    while (cursor < steps.length && steps[cursor].momentId === momentId) {
-      members.push(steps[cursor]);
-      cursor += 1;
-    }
-
-    objectives.push({ id: `moment:${momentId}`, steps: members });
-    index = cursor;
+    objectives.push({
+      id: rawStep.id,
+      steps: [step],
+    });
   }
 
   return objectives;
