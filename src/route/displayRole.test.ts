@@ -66,6 +66,46 @@ test('explicit display roles decide checkbox boundaries inside a moment', () => 
     ],
   );
   assert.equal(objectives.flatMap((objective) => objective.steps).some((step) => step.action), false);
+  assert.equal(
+    objectives[0]?.steps.find((step) => step.id === 'fraktale-transition')?.instruction,
+    'AVANCER / STOP — Reprendre vers Fraktale',
+  );
+  assert.equal(
+    objectives[1]?.steps.find((step) => step.id === 'finish-transition')?.instruction,
+    'TERMINER — Terminer la quête',
+  );
+});
+
+test('an explicit transition instruction stays authoritative', () => {
+  const momentId = 'moment-b';
+  const objectives = getSequenceObjectives([
+    {
+      id: 'objective',
+      order: 1,
+      blockId: 'block-01',
+      type: 'quest',
+      title: 'Objectif',
+      displayRole: 'objective',
+      momentId,
+    },
+    {
+      id: 'transition',
+      order: 2,
+      blockId: 'block-01',
+      type: 'resume',
+      title: 'Rendu technique',
+      action: 'TERMINER',
+      instruction: 'Retourne voir le PNJ puis prends immédiatement la suite.',
+      displayRole: 'transition',
+      momentId,
+    },
+  ]);
+
+  assert.equal(
+    objectives[0]?.steps[1]?.instruction,
+    'Retourne voir le PNJ puis prends immédiatement la suite.',
+  );
+  assert.equal(objectives[0]?.steps[1]?.action, undefined);
 });
 
 test('displayRole cannot exist outside an explicit moment', () => {
