@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { openUrl } from '@tauri-apps/plugin-opener';
 import { App } from './App';
 import './styles.css';
+import './sequence.css';
 
 const root = document.getElementById('root');
 
