@@ -121,8 +121,8 @@ test('STOP closes the current checklist instead of creating a useless standalone
   ]);
 });
 
-test('STOP does not split a quest that continues through its dungeon', () => {
-  const source = { label: 'DPLN', url: 'https://example.test/quest-a' };
+test('STOP does not split an explicit route moment', () => {
+  const momentId = 'moment-a';
   const groupedRoute: RouteDocument = {
     ...route,
     steps: [
@@ -133,7 +133,7 @@ test('STOP does not split a quest that continues through its dungeon', () => {
         type: 'quest',
         title: 'Quest A',
         action: 'AVANCER / STOP',
-        source,
+        momentId,
       },
       {
         id: 'dungeon',
@@ -142,6 +142,7 @@ test('STOP does not split a quest that continues through its dungeon', () => {
         type: 'dungeon',
         title: 'Dungeon A',
         action: 'FAIRE & VALIDER',
+        momentId,
       },
       {
         id: 'finish',
@@ -150,7 +151,7 @@ test('STOP does not split a quest that continues through its dungeon', () => {
         type: 'resume',
         title: 'Quest A',
         action: 'REPRENDRE / TERMINER',
-        source,
+        momentId,
       },
     ],
   };
@@ -160,8 +161,8 @@ test('STOP does not split a quest that continues through its dungeon', () => {
   ]);
 });
 
-test('same quest technical steps collapse into one player-facing objective', () => {
-  const source = { label: 'DPLN', url: 'https://example.test/quest-a' };
+test('technical steps with the same moment id collapse into one player-facing objective', () => {
+  const momentId = 'moment-a';
   const steps: RouteStep[] = [
     {
       id: 'advance',
@@ -170,7 +171,7 @@ test('same quest technical steps collapse into one player-facing objective', () 
       type: 'quest',
       title: 'Quest A',
       action: 'AVANCER / STOP',
-      source,
+      momentId,
     },
     {
       id: 'dungeon',
@@ -179,6 +180,7 @@ test('same quest technical steps collapse into one player-facing objective', () 
       type: 'dungeon',
       title: 'Dungeon A',
       action: 'FAIRE & VALIDER',
+      momentId,
     },
     {
       id: 'finish',
@@ -187,7 +189,7 @@ test('same quest technical steps collapse into one player-facing objective', () 
       type: 'resume',
       title: 'Quest A',
       action: 'REPRENDRE / TERMINER',
-      source,
+      momentId,
     },
     {
       id: 'quest-b',
@@ -196,13 +198,25 @@ test('same quest technical steps collapse into one player-facing objective', () 
       type: 'quest',
       title: 'Quest B',
       action: 'TERMINER',
-      source: { label: 'DPLN', url: 'https://example.test/quest-b' },
     },
   ];
 
   assert.deepEqual(
     getSequenceObjectives(steps).map((objective) => objective.steps.map((step) => step.id)),
     [['advance', 'dungeon', 'finish'], ['quest-b']],
+  );
+});
+
+test('matching external source urls do not create an implicit objective', () => {
+  const source = { label: 'DPLN', url: 'https://example.test/quest-a' };
+  const steps: RouteStep[] = [
+    { id: 'a', order: 1, blockId: 'block-01', type: 'quest', title: 'A', source },
+    { id: 'b', order: 2, blockId: 'block-01', type: 'resume', title: 'B', source },
+  ];
+
+  assert.deepEqual(
+    getSequenceObjectives(steps).map((objective) => objective.steps.map((step) => step.id)),
+    [['a'], ['b']],
   );
 });
 
