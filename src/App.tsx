@@ -553,7 +553,7 @@ export function App() {
       )}
 
       <section
-        className={`current-step current-step--${containsHardLock ? 'hard_lock' : isSequence ? 'sequence' : currentStep.type}`}
+        className={`current-step current-step--${containsHardLock ? 'hard_lock' : isSequence ? 'sequence' : currentStep.type}${isCurrentCompleted ? ' current-step--completed' : ''}`}
         aria-labelledby="current-step-title"
       >
         {!compact && <span className="type-badge">{typeLabel}</span>}

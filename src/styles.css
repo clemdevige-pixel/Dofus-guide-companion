@@ -755,3 +755,22 @@ button {
   border-color: #6a8f74;
   box-shadow: 0 0 0 2px rgba(106, 143, 116, 0.18);
 }
+
+
+/* Completion visuals */
+.sequence-item--completed .sequence-item__header strong,
+.sequence-item--completed .sequence-item__action,
+.sequence-item--completed .sequence-item__note {
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+.current-step--completed:not(.current-step--sequence) .step-title-row h1,
+.current-step--completed:not(.current-step--sequence) .action-label,
+.current-step--completed:not(.current-step--sequence) .instruction,
+.current-step--completed:not(.current-step--sequence) .guide-items__row strong,
+.current-step--completed:not(.current-step--sequence) .guide-items__note,
+.current-step--completed:not(.current-step--sequence) .preparation-list {
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
