@@ -53,16 +53,24 @@ Une ligne `RouteStep` n'équivaut pas nécessairement à une carte.
 
 Le contrat actuel distingue :
 - `STEP_ID` : identité d'une étape technique ;
-- `MOMENT_ID` : identité éditoriale d'un **moment joueur** pouvant regrouper plusieurs étapes techniques.
+- `MOMENT_ID` : identité éditoriale d'un **moment joueur** pouvant regrouper plusieurs étapes techniques ;
+- `DISPLAY_ROLE` : rôle d'une ligne à l'intérieur du moment (`OBJECTIVE`, `TRANSITION`, `DETAIL`).
 
 `getStepGroups()` applique la priorité suivante :
 1. `MOMENT_ID` explicite et contigu → frontière de carte autoritaire ;
 2. étapes ordinaires sans moment explicite → regroupement automatique de confort ;
 3. étapes spéciales / fils rouges / verrous / grosses étapes → carte propre selon leur contrat.
 
+Dans une carte mutualisée, `getSequenceObjectives()` utilise `DISPLAY_ROLE` quand il est présent :
+- `OBJECTIVE` crée une checkbox ;
+- `TRANSITION` reste visible dans l'objectif précédent sans checkbox ;
+- `DETAIL` reste attaché à l'objectif précédent sans checkbox.
+
+Le fallback historique par type ne sert que pour les moments pas encore migrés pendant la passe anti-redondance. La cible est de faire porter cette décision par `ROUTE`, pas par React.
+
 Le regroupement automatique est limité techniquement mais cette limite n'est pas une règle métier. Si un moment doit absolument être une seule carte, le Sheet doit fournir `MOMENT_ID`.
 
-Aucune logique React ne doit reconnaître des chaînes comme « Emma », « Tour du monde » ou `TERMINER + LANCER` par leur texte pour décider du regroupement.
+Aucune logique React ne doit reconnaître des chaînes comme « Emma », « Tour du monde » ou `TERMINER + LANCER` par leur texte pour décider du regroupement ou du rôle checkbox/transition.
 
 ## 6. Validation des moments
 
@@ -70,7 +78,9 @@ La validation refuse :
 - `momentId` vide ;
 - même `momentId` utilisé dans plusieurs blocs ;
 - même `momentId` réouvert après avoir été fermé ;
-- séquence non contiguë d'un même moment.
+- séquence non contiguë d'un même moment ;
+- `displayRole` inconnu ;
+- `displayRole` défini sans `momentId`.
 
 Cette validation protège le contrat Sheet → runtime → UI.
 
@@ -102,7 +112,8 @@ Les comportements suivants restent calculés depuis `route + completedStepIds` :
 - prochain verrou dur ;
 - préparation du bloc ;
 - étapes validées ;
-- groupes/cartes de route.
+- groupes/cartes de route ;
+- objectifs/checkpoints visibles d'un moment depuis `DISPLAY_ROLE`.
 
 Ne pas dupliquer ces vérités dans un store global supplémentaire.
 
@@ -116,6 +127,7 @@ Le chargement/export doit échouer clairement si :
 - lancement incomplet ;
 - goal incohérent ;
 - moment incohérent ;
+- display role incohérent ;
 - hard lock de niveau personnage ;
 - FIN absente, multiple ou non finale.
 
@@ -125,17 +137,18 @@ Un export invalide ne doit jamais produire silencieusement une route partielleme
 
 `scripts/export-route.ts` est le seul point de transformation éditorial → runtime.
 
-Plage actuelle : `ROUTE!A5:S`.
+Plage actuelle : `ROUTE!A5:T`.
 
-Colonnes techniques jusqu'à `MOMENT_ID` sont validées avant écriture de `data/route.json`.
+Colonnes techniques jusqu'à `DISPLAY_ROLE` sont validées avant écriture de `data/route.json`.
 
 ## 12. Anti-patterns interdits
 
 - logique spécifique par nom de quête ;
-- parsing `title` / `instruction` pour déduire comportement ou carte ;
+- parsing `title` / `instruction` pour déduire comportement, carte ou rôle de checkbox ;
 - index/numéro de ligne comme identité ;
 - route mock ou override parallèle ;
 - correction manuelle de `route.json` ;
 - utilisation de `POSITION` comme destination ;
 - nouveau store uniquement pour reproduire une donnée dérivable ;
-- moment éditorial laissé au regroupement automatique alors qu'il est connu dans le Sheet.
+- moment éditorial laissé au regroupement automatique alors qu'il est connu dans le Sheet ;
+- laisser React décider qu'une ligne est une checkbox uniquement à partir de son `type` lorsqu'un rôle éditorial est connu.
