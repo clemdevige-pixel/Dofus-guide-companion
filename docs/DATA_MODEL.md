@@ -49,6 +49,7 @@ interface GuideItem {
 }
 
 type StepDisplayRole = 'objective' | 'transition' | 'detail';
+type ParallelPhase = 'start' | 'progress' | 'finish';
 
 interface RouteStep {
   id: string;
@@ -68,6 +69,10 @@ interface RouteStep {
   };
 
   momentId?: string;
+  parallelGroup?: {
+    parallelId: string;
+    phase: ParallelPhase;
+  };
   location?: RouteCoordinate;
   destination?: RouteCoordinate;
   launchInstruction?: string;
@@ -110,10 +115,11 @@ Règles strictes :
 - une fois fermé, le même `momentId` ne réapparaît pas plus loin ;
 - chaque ligne possédant un `momentId` possède aussi un `displayRole` ;
 - le premier membre d'un `momentId` est toujours `objective` ;
+- une carte contient au maximum **5 lignes `OBJECTIVE`** ; `TRANSITION` et `DETAIL` ne comptent pas dans ce plafond ;
 - l'UI ne déduit jamais un moment depuis les titres, types ou verbes d'action ;
 - une ligne sans `momentId` est toujours une carte autonome.
 
-`getStepGroups()` applique uniquement ce contrat. Il n'existe plus de regroupement automatique, de limite `MAX_SEQUENCE_STEPS` ni de fallback heuristique.
+`getStepGroups()` applique uniquement ce contrat. Il n'existe plus de regroupement automatique, de limite implicite `MAX_SEQUENCE_STEPS` ni de fallback heuristique.
 
 ### 5.1 DISPLAY_ROLE — structure interne d'une carte
 
@@ -135,6 +141,32 @@ Pour l'affichage :
 - `TRANSITION` et `DETAIL` se rattachent au dernier objectif ;
 - une `TRANSITION` sans `instruction` reste visible grâce à un fallback compact construit uniquement depuis ses champs structurés `action + title` ;
 - une instruction explicite reste prioritaire sur ce fallback.
+
+### 5.2 PARALLEL_ID / PARALLEL_PHASE — quêtes à avancer ensemble
+
+`parallelGroup` représente une **salve de quêtes qui doit rester active et progresser conjointement**, éventuellement sur plusieurs cartes.
+
+Il ne remplace pas `MOMENT_ID` :
+- `MOMENT_ID` = composition d'une carte ;
+- `PARALLEL_ID` = continuité d'un groupe de quêtes entre plusieurs cartes ;
+- `PARALLEL_PHASE` = lifecycle du groupe.
+
+Lifecycle :
+
+```text
+start → progress* → finish
+```
+
+Règles strictes :
+- `PARALLEL_ID` et `PARALLEL_PHASE` sont toujours définis ensemble ;
+- une phase `start` ouvre exactement une fois le groupe ;
+- `progress` n'est valide que pour un groupe déjà ouvert ;
+- `finish` ferme le groupe et n'est valide qu'une fois ;
+- aucun groupe parallèle ne peut rester ouvert en fin de route ;
+- on ne crée un groupe que si plusieurs quêtes gagnent réellement à être gardées actives ensemble : mêmes monstres, mêmes drops, même donjon, même checkpoint ou même déplacement coûteux ;
+- une simple proximité éditoriale ou une capture Ocre seule ne suffit pas.
+
+Le texte joueur peut annoncer `QUÊTES À AVANCER ENSEMBLE`, mais le texte n'est jamais la source de vérité : seul `parallelGroup` pilote l'état du groupe.
 
 ## 6. Position de lancement vs destination
 
@@ -176,7 +208,9 @@ Colonnes techniques de `ROUTE` :
 - `DESTINATION` ;
 - `GUIDE_ITEMS` ;
 - `MOMENT_ID` ;
-- `DISPLAY_ROLE`.
+- `DISPLAY_ROLE` ;
+- `PARALLEL_ID` ;
+- `PARALLEL_PHASE`.
 
 `STEP_ID` représente un événement métier stable, jamais une ligne physique.
 
@@ -185,7 +219,9 @@ Conserver un ancien ID uniquement si l'événement métier reste réellement le 
 `MOMENT_ID` ne remplace pas `STEP_ID` :
 - `STEP_ID` = identité persistante d'une étape technique ;
 - `MOMENT_ID` = regroupement éditorial de plusieurs étapes en une carte ;
-- `DISPLAY_ROLE` = rôle visuel de la ligne à l'intérieur de cette carte.
+- `DISPLAY_ROLE` = rôle visuel de la ligne à l'intérieur de cette carte ;
+- `PARALLEL_ID` = groupe de quêtes maintenu actif au-delà d'une carte ;
+- `PARALLEL_PHASE` = phase de ce groupe.
 
 ## 9. Fils rouges et verrous
 
@@ -226,7 +262,7 @@ La préparation doit tenir compte des ressources fournies naturellement par la r
 - `FIL ROUGE` ;
 - `VERROU DUR`.
 
-L'application ne déduit jamais `type` ni `displayRole` depuis `action`.
+L'application ne déduit jamais `type`, `displayRole` ni `parallelGroup` depuis `action`.
 
 Une action contenant `LANCER` doit posséder une donnée de lancement structurée.
 
@@ -250,7 +286,7 @@ pnpm export:route
 Flux :
 
 ```text
-ROUTE (A:T)
+ROUTE (A:V)
    ↓
 scripts/export-route.ts
    ↓ validation stricte
@@ -268,8 +304,11 @@ L'export/validation échoue notamment si :
 - `DISPLAY_ROLE` est invalide ou défini hors `MOMENT_ID` ;
 - un `MOMENT_ID` est défini sans `DISPLAY_ROLE` ;
 - un moment commence par `TRANSITION` ou `DETAIL` ;
+- une carte expose plus de 5 `OBJECTIVE` ;
 - une prise n'a aucune donnée de lancement ;
 - un `MOMENT_ID` est vide, non contigu ou traverse plusieurs blocs ;
+- `PARALLEL_ID` / `PARALLEL_PHASE` sont incomplets ou ont un lifecycle invalide ;
+- un groupe parallèle reste actif en fin de route ;
 - un hard lock référence un goal jamais démarré ;
 - un hard lock de niveau personnage est introduit ;
 - une URL structurée est invalide.
