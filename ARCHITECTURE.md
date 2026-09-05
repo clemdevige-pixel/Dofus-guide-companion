@@ -71,7 +71,48 @@ Dans une carte mutualisée, `getSequenceObjectives()` utilise exclusivement `DIS
 
 Aucune logique React ne doit reconnaître des chaînes comme « Emma », « Tour du monde » ou `TERMINER + LANCER` par leur texte pour décider du regroupement ou du rôle checkbox/transition.
 
-## 6. Validation des moments
+## 6. Contexte joueur : prérequis et avertissements
+
+Deux champs éditoriaux du Sheet sont désormais des données runtime de première classe :
+
+- `PRÉREQUIS / RESSOURCES` → `RouteStep.prerequisites` pour les étapes non-PRÉPA ;
+- `À SAVOIR` → `RouteStep.warning`.
+
+Ils ne doivent jamais être fusionnés artificiellement dans `instruction`.
+
+Rôle attendu :
+- `prerequisites` = ce qui doit déjà être vrai/possédé **avant** d'exécuter la carte ;
+- `warning` = information critique ou contexte utile à lire **avant** l'action ;
+- `guideItems` = actions structurées courtes ;
+- `instruction` = suite/STOP/déroulé complémentaire.
+
+Hiérarchie UI cible :
+
+```text
+PRÉREQUIS
+↓
+À SAVOIR / ALERTE
+↓
+ACTIONS / GUIDE_ITEMS
+↓
+SUITE / STOP
+```
+
+Cette hiérarchie doit être identique sur carte simple et séquence.
+
+### Alerte de sortie de donjon
+
+La convention éditoriale :
+
+```text
+⚠ AVANT DE SORTIR DU DONJON — ...
+```
+
+signale une action post-boss dont l'oubli peut imposer un nouveau passage ou bloquer une quête.
+
+L'UI peut utiliser ce préfixe pour choisir une classe visuelle d'alerte forte. Cette détection reste purement présentationnelle : elle ne crée aucune logique métier et ne change jamais l'ordre/progression.
+
+## 7. Validation des moments
 
 La validation refuse :
 - `momentId` vide ;
@@ -86,7 +127,7 @@ La validation refuse :
 
 Cette validation protège le contrat Sheet → runtime → UI.
 
-## 7. Fils rouges, verrous et groupes parallèles
+## 8. Fils rouges, verrous et groupes parallèles
 
 Les fils rouges utilisent `GOAL_ID / GOAL_PHASE` exportés vers `longRunningGoal`.
 
@@ -102,7 +143,7 @@ Les vraies salves de quêtes conjointes utilisent `PARALLEL_ID / PARALLEL_PHASE`
 - le rappel UI n'est visible que lorsque la carte consultée appartient elle-même au groupe ;
 - aucune carte intermédiaire sans rapport ne doit afficher ce rappel.
 
-## 8. Lancements et déplacements
+## 9. Lancements et déplacements
 
 - `location` = position de prise de quête ;
 - `launchInstruction` = lancement sans coordonnée unique ;
@@ -111,7 +152,7 @@ Les vraies salves de quêtes conjointes utilisent `PARALLEL_ID / PARALLEL_PHASE`
 
 React ne parse jamais les textes pour reconstruire ces données.
 
-## 9. Sélecteurs dérivés
+## 10. Sélecteurs dérivés
 
 Les comportements suivants restent calculés depuis `route + completedStepIds` :
 - première étape non validée ;
@@ -126,7 +167,9 @@ Les comportements suivants restent calculés depuis `route + completedStepIds` :
 
 Ne pas dupliquer ces vérités dans un store global supplémentaire.
 
-## 10. Validation de données
+`prerequisites` et `warning` sont lus directement depuis le `RouteStep` courant ; ils ne nécessitent aucun store ni selector métier supplémentaire.
+
+## 11. Validation de données
 
 Le chargement/export doit échouer clairement si :
 - ID dupliqué ;
@@ -143,18 +186,49 @@ Le chargement/export doit échouer clairement si :
 
 Un export invalide ne doit jamais produire silencieusement une route partiellement cassée.
 
-## 11. Export Google Sheet
+## 12. Export Google Sheet
 
 `scripts/export-route.ts` est le seul point de transformation éditorial → runtime.
 
 Plage actuelle : `ROUTE!A5:V`.
 
-Les colonnes techniques jusqu'à `PARALLEL_PHASE` sont validées avant écriture de `data/route.json`.
+L'exporteur lit notamment :
+- colonnes D/E : `PRÉREQUIS / RESSOURCES`, `À SAVOIR` ;
+- colonnes techniques jusqu'à `PARALLEL_PHASE`.
 
-## 12. Anti-patterns interdits
+Pour une étape non-PRÉPA :
+- D → `prerequisites` ;
+- E → `warning`.
+
+Pour une ligne PRÉPA, D alimente `preparationItems`.
+
+## 13. État de synchronisation
+
+Le Sheet peut temporairement être en avance sur `data/route.json` pendant une passe éditoriale/certification.
+
+Ce n'est jamais une raison pour corriger le JSON à la main.
+
+Synchronisation officielle :
+
+```text
+ROUTE
+↓
+pnpm export:route
+↓
+pnpm test:route
+pnpm validate:route
+pnpm build
+↓
+commit data/route.json
+```
+
+Un état ne doit être annoncé « synchronisé » qu'après ce flux.
+
+## 14. Anti-patterns interdits
 
 - logique spécifique par nom de quête ;
 - parsing `title` / `instruction` pour déduire comportement, carte ou rôle de checkbox ;
+- recopier `warning` ou `prerequisites` dans `instruction` pour compenser une UI incomplète ;
 - index/numéro de ligne comme identité ;
 - route mock ou override parallèle ;
 - correction manuelle de `route.json` ;
@@ -163,4 +237,5 @@ Les colonnes techniques jusqu'à `PARALLEL_PHASE` sont validées avant écriture
 - regroupement automatique de lignes sans `MOMENT_ID` ;
 - `MOMENT_ID` sans `DISPLAY_ROLE` ;
 - laisser React décider qu'une ligne est une checkbox à partir de son `type` ;
-- afficher un groupe parallèle sur une carte qui n'en est pas un checkpoint.
+- afficher un groupe parallèle sur une carte qui n'en est pas un checkpoint ;
+- transformer tout post-boss Ganymède en alerte sans vérifier qu'il appartient à notre scope.
