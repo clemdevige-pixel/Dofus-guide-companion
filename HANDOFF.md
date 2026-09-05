@@ -1,6 +1,6 @@
 # HANDOFF — Dofus Guide Companion
 
-Date : 2026-09-04
+Date : 2026-09-05
 
 ## 1. Contexte
 
@@ -20,120 +20,122 @@ Avant toute intervention lire :
 6. `docs/ROUTE_OPTIMIZATION_WORKFLOW.md`
 7. `HANDOFF.md`
 
-## 2. Contrat data actuel
+## 2. Contrat data/UI actuel
 
 - `STEP_ID` = identité stable d'une étape technique ;
 - `MOMENT_ID` = unique frontière multi-step d'une carte ;
 - une ligne sans `MOMENT_ID` = une carte autonome ;
-- aucun regroupement automatique n'existe encore ;
-- `DISPLAY_ROLE` est obligatoire dans un moment : `OBJECTIVE`, `TRANSITION`, `DETAIL` ;
-- le premier membre d'un moment est toujours `OBJECTIVE` ;
-- `OBJECTIVE` crée une checkbox ;
-- `TRANSITION` / `DETAIL` se rattachent à l'objectif précédent ;
-- `completedStepIds` reste l'unique vérité de progression.
+- `DISPLAY_ROLE` dans un moment : `OBJECTIVE`, `TRANSITION`, `DETAIL` ;
+- premier membre d'un moment = `OBJECTIVE` ;
+- maximum **5 OBJECTIVE par carte** ;
+- `PARALLEL_ID / PARALLEL_PHASE` = lifecycle des vraies salves de quêtes à garder actives ensemble ;
+- un groupe parallèle peut rester actif en donnée, mais son rappel UI n'est affiché que sur les cartes qui appartiennent réellement à ce groupe ;
+- `completedStepIds` reste l'unique vérité de progression ;
+- aucune heuristique métier ne doit être reconstruite depuis les titres/instructions.
 
-## 3. État route
+## 3. État UX / progression intégré
 
-La passe globale anti-redondance / confort joueur a été réalisée sur toute la route.
+Déjà intégré sur la branche :
+- fenêtre stable, zone centrale scrollable, footer fixe ;
+- navigation directe par numéro de carte dans le header ;
+- cartes/sous-objectifs validés visuellement barrés depuis `completedStepIds` ;
+- hard lock mutualisé conservant son identité et sans auto-advance ;
+- validation d'une séquence ne peut plus déclencher un saut de **+2 cartes** : le side effect de navigation a été sorti de l'updater React ;
+- CI du fix `+2 cartes` : frontend + Tauri verts ;
+- rappel des quêtes parallèles corrigé : il n'est plus affiché sur les cartes intermédiaires sans rapport ;
+- ancien test qui protégeait ce mauvais comportement supprimé/remplacé ;
+- CI du nouveau contrat de rappel parallèle : verte au commit `bbb403a37a8677d0a8a449f36d039011e750c7ed`.
 
-État actuel du runtime synchronisé :
-- **20 blocs** ;
-- **986 étapes** ;
-- **328 cartes explicites** ;
-- **637 / 637** quêtes, reprises et fils rouges possèdent une source DPLN ;
-- les grosses séries d'alignement restent volontairement de grandes cartes à checkboxes : ne pas les éclater juste pour réduire leur taille.
+## 4. Audit éditorial / incohérences déjà corrigées
 
-Les audits de cohérence ont notamment vérifié/corrigé :
-- prérequis Émeraude / élevage ;
-- Carte de Cania / Primatons ;
-- Tablette de Totankama ;
-- Le mal a dit ;
-- post-Sylargh ;
-- chaînes Otomaï / Moon / Wabbit / Valonia / Prologue / Enutrosor ;
-- fin Sylvestre ;
-- liens DPLN ;
-- titres/instructions corrompus détectés pendant la passe.
+La passe récente a trouvé et corrigé plusieurs reliquats :
+- faux titre `Chaque chose en son temps` à l'Akadémie des Gobs ;
+- autres titres hérités de mutualisations remis sur le vrai passage/donjon ;
+- alignements mal nommés ou manquants, dont alignement 66 `Course-poursuite` ajouté ;
+- chaîne alignement 1→100 recontrôlée ;
+- `Mort au rat !` nettoyé : suppression du faux besoin de Lailait dans l'instruction ; la Limonade d'Incarnam reste une action de quête.
 
-## 4. Audit rendu UI effectué après la passe route
+## 5. Passe ressources — état actuel
 
-L'audit des 328 cartes a trouvé plusieurs défauts UI hérités de l'ancien système.
+**Passe toujours en cours. Ne pas considérer la route ressources comme terminée.**
 
-### 4.1 Transitions silencieuses
+Règle désormais officielle :
+- vérifier les besoins réels DPLN/Ganymède ;
+- distinguer ressource à apporter / objet obtenu pendant la quête / prérequis / aide externe ;
+- vérifier les **quantités cumulées jusqu'au premier usage** ;
+- une ressource déjà consommée ne couvre pas automatiquement un besoin futur ;
+- placer les ressources pré-farmables dans une `PRÉPA` avant consommation, de préférence localement quand l'ancien lot est trop éloigné ;
+- ne pas répéter une liste de ressources complète dans la description de quête.
 
-66 transitions n'avaient pas d'`instruction` propre. Comme le sélecteur retirait `action`, elles pouvaient devenir pratiquement invisibles dans une carte mutualisée.
+Corrections déjà appliquées dans le Sheet pendant cette passe :
+- Astrub : compléments manquants (Bière d'Astrub, Laine de Bouftou, etc.) ;
+- `Le nouveau monde` / accès Otomaï : création d'une **PRÉPA locale Otomaï** juste avant la quête avec 2 Miséricordes du Chafer d'Élite, 1 Oreille de Foufayteur, 1 Huile de Sésame, 1 Tronc de Kokoko, 1 Tranche de Nodkoko, 1 Kokopaille, 1 Coffret maudit du Flib ; Gros Boulet laissé dans le déroulé car obtenu après lancement ;
+- `L'île des naufragés` prise en compte dans ce lot local ;
+- Turquoise : plusieurs ressources DPLN manquantes ajoutées au complément de prépa ;
+- Émeraude : Dragodindes de génération 1 corrigées (plus les anciens libellés « sauvage ») ;
+- Frigost : `Hôtel de glace` possède maintenant **le détail complet des composants de craft**, pas seulement les quatre outils finis ;
+- Frigost : `La fonte des glaces` vérifiée complète sur ses quatre cartes PRÉPA ; 13 Oreilles de Kaniglou + 13 Poils de barbe du Shamansot prévus pour couvrir `La fonte` puis `L'ombre et la glace` sans compter deux fois des ressources consommées ;
+- plusieurs autres besoins déjà remontés : Bière du Chabrulé, lot `Faire le mort`, Chasseur de Renégats, L'arme fatale, Marteau-Aigri, Maître des Illusions, etc.
 
-Correction : `src/route/selectors.ts` fournit maintenant un fallback compact `action + title` uniquement pour une `TRANSITION` sans instruction explicite. Une instruction explicite reste prioritaire.
+## 6. Groupes parallèles
 
-### 4.2 Objectif donjon mal titré
+La route contient des groupes structurés `PARALLEL_ID / PARALLEL_PHASE` issus des convergences confirmées par la route/Ganymède.
 
-L'UI cherchait auparavant la première ligne « non-donjon » pour nommer une checkbox. Cela pouvait afficher une reprise de quête à la place du vrai donjon `OBJECTIVE`.
+Contrat UI actuel :
+- `start` ouvre le groupe ;
+- `progress` ajoute/rejoint les checkpoints ;
+- `finish` le ferme ;
+- le rappel `QUÊTES À AVANCER ENSEMBLE` n'est visible que sur une carte directement concernée par ce groupe ;
+- il ne doit pas polluer les cartes intermédiaires ;
+- revenir en arrière ne doit pas faire apparaître une info future.
 
-Correction : le premier step du bucket d'objectif est maintenant autoritaire, conformément à `DISPLAY_ROLE`.
+Le cas Blops vu sur la carte `Après lui, le déluge` était un exemple du mauvais comportement historique et a motivé cette correction générique.
 
-### 4.3 Séquences non stylées
+## 7. État Sheet / runtime IMPORTANT
 
-Les classes React `sequence-*` existaient sans CSS dédié.
+**Le Sheet est actuellement EN AVANCE sur `data/route.json`.**
 
-Correction : checklist compacte ajoutée dans `src/styles.css`, avec scroll interne pour les longues séquences afin de conserver la navigation accessible en mode compact et détaillé.
+Depuis le dernier export runtime, le Sheet a reçu plusieurs corrections ressources/éditoriales, dont :
+- prépa Otomaï locale ;
+- détails `Hôtel de glace` ;
+- corrections Turquoise / Émeraude / Frigost ;
+- corrections éditoriales citées plus haut.
 
-### 4.4 Verrou dur dans une séquence
-
-`L'Ombre et la proie` est actuellement le seul `hard_lock` appartenant à un moment mutualisé.
-
-Correction déjà intégrée : cocher l'objectif contenant ce hard lock ne déclenche plus d'avance automatique vers la carte suivante.
-
-Point à conserver : la consultation manuelle de la carte suivante reste autorisée ; seul l'auto-advance est interdit.
-
-## 5. Garde-fous ajoutés
-
-`validateRoute()` refuse désormais notamment :
-- `MOMENT_ID` sans `DISPLAY_ROLE` ;
-- `DISPLAY_ROLE` sans `MOMENT_ID` ;
-- moment non contigu ou multi-blocs ;
-- moment commençant par `TRANSITION` ou `DETAIL` ;
-- hard lock artificiel de niveau personnage ;
-- incohérences de goals ;
-- FIN absente/multiple/non finale.
-
-Tests dédiés ajoutés dans `src/route/displayRole.test.ts` pour :
-- frontières de checkbox ;
-- fallback de transition ;
-- priorité d'une instruction explicite ;
-- rejet d'un moment commençant par une transition.
-
-## 6. État CI
-
-Les commits fonctionnels récents ont passé côté frontend :
-- tests route ;
-- validation route ;
-- build frontend.
-
-Le check Tauri Windows doit toujours être regardé sur le dernier commit avant de déclarer un état complètement vert.
-
-## 7. Source/runtime
-
-Le dernier changement de route (`328 cartes`) a été poussé par l'utilisateur et `data/route.json` correspond au Sheet de cette passe.
-
-Les changements suivants ont ensuite porté sur le code UI / validation / documentation uniquement ; ils ne nécessitent pas de nouvel export du Sheet tant que `ROUTE` ne change pas.
+Donc au début du prochain chat :
+- **ne pas éditer `data/route.json` à la main** ;
+- poursuivre/terminer la passe ressources dans le Sheet ;
+- seulement ensuite exécuter un export final et synchroniser le runtime.
 
 ## 8. Prochain chantier exact
 
-Continuer l'audit du rendu réel, pas une nouvelle chasse mécanique au nombre de cartes.
+Ordre recommandé pour la prochaine passe :
 
-Priorités :
-1. vérifier visuellement les longues séquences en compact et détaillé ;
-2. vérifier le rendu spécifique du seul hard lock mutualisé `L'Ombre et la proie` ;
-3. vérifier que les transitions courtes restent lisibles sans recréer de bruit ;
-4. vérifier les liens DPLN internes et boutons `/travel` ;
-5. corriger uniquement les défauts reproduits, sans nouvelle heuristique métier ;
-6. garder `MOMENT_ID + DISPLAY_ROLE` comme seules vérités de présentation.
+1. **Continuer l'audit ressources exhaustif** sur le reste de la route, en particulier les blocs tardifs encore non clos : Turquoise restant à revalider après corrections, Ivoire/Ébène, Cauchemar/Réminiscence, Silvosse/Sylvestre, Valonia/Pandamonium et toute quête dont la colonne ressources mentionne `prévoir` sans PRÉPA locale suffisante.
+2. Pour chaque ressource, contrôler les **quantités réellement disponibles après les consommations précédentes**, pas seulement l'existence du nom dans une ancienne PRÉPA.
+3. Continuer le scan des descriptions de quêtes pour retirer les listes de ressources qui doublonnent une PRÉPA ; conserver uniquement les objets obtenus pendant la quête et les consignes contextuelles.
+4. Recontrôler les titres/étapes pseudo-meta hérités d'anciennes mutualisations, comme la passe qui a trouvé `Chaque chose en son temps` au mauvais endroit.
+5. Recontrôler les 24 groupes parallèles au rendu : aucun rappel sur une carte sans rapport, aucun membre futur affiché trop tôt.
+6. Une fois la passe Sheet fermée : exporter `ROUTE (A:V)` → `data/route.json`, lancer `pnpm test:route`, `pnpm validate:route`, `pnpm build`, puis vérifier Tauri.
+7. Refaire un audit visuel court sur quelques checkpoints sensibles après l'export : Otomaï, Blops, Frigost, Turquoise, fin Sylvestre.
 
-## 9. Interdictions à ne pas réintroduire
+## 9. Garde-fous à ne pas réintroduire
 
-- parsing du titre/instruction pour décider du regroupement ;
+- parsing du titre/instruction pour décider du comportement ;
 - regroupement automatique sans `MOMENT_ID` ;
-- heuristique UI par `type` pour choisir le vrai objectif ;
-- nouvelle source de vérité ;
+- plus de 5 `OBJECTIVE` dans une carte ;
+- rappel parallèle persistant sur des cartes intermédiaires sans rapport ;
+- liste de ressources cachée uniquement dans une description de quête alors qu'elle peut être préparée avant ;
+- compter comme « disponible » une ressource déjà consommée plus tôt ;
+- dupliquer une liste entière entre PRÉPA et instruction ;
 - correction manuelle de `data/route.json` ;
-- suppression d'une transition nécessaire au seul motif de compacter ;
-- éclatement arbitraire d'une grande série cohérente uniquement parce qu'elle contient beaucoup de checkboxes.
+- export du runtime avant fermeture de la passe Sheet en cours.
+
+## 10. Qualité / état CI
+
+Dernier contrat code vérifié :
+- tests route ✅
+- validation/build sur les états précédents ✅
+- Tauri ✅
+- correction rappel parallèle + nouveau test : CI ✅ (`bbb403a...`).
+
+Après les dernières modifications **Sheet**, le runtime n'est volontairement pas encore réexporté : la prochaine validation complète devra se faire après la fin de la passe ressources.
