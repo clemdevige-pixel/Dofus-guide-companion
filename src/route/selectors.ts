@@ -119,6 +119,8 @@ export function getActiveParallelGroups(
   const activeIds = new Set<string>();
   const memberIds = new Map<string, Set<string>>();
   const sortedSteps = getSortedSteps(route);
+  const currentStep = sortedSteps.find((step) => !completedStepIds.has(step.id));
+  const relevantParallelId = currentStep?.parallelGroup?.parallelId;
 
   for (const step of sortedSteps) {
     const parallel = step.parallelGroup;
@@ -143,11 +145,13 @@ export function getActiveParallelGroups(
     }
   }
 
-  return [...activeIds].map((parallelId) => {
-    const ids = memberIds.get(parallelId) ?? new Set<string>();
-    const members = sortedSteps.filter((step) => ids.has(step.id));
-    return { parallelId, members };
-  });
+  if (!relevantParallelId || !activeIds.has(relevantParallelId)) {
+    return [];
+  }
+
+  const ids = memberIds.get(relevantParallelId) ?? new Set<string>();
+  const members = sortedSteps.filter((step) => ids.has(step.id));
+  return [{ parallelId: relevantParallelId, members }];
 }
 
 export function getStepGroupIndex(route: RouteDocument, stepId: string): number {
