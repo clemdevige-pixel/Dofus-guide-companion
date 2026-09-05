@@ -3,6 +3,7 @@ import test from 'node:test';
 import type { RouteDocument, RouteStep } from './types';
 import {
   getActiveLongRunningGoals,
+  getActiveParallelGroups,
   getSequenceObjectives,
   getStepGroups,
 } from './selectors';
@@ -237,4 +238,45 @@ test('source equality never affects objective grouping', () => {
     getSequenceObjectives(steps).map((objective) => objective.steps.map((step) => step.id)),
     [['a'], ['b']],
   );
+});
+
+test('parallel reminder only appears on a card belonging to the active parallel group', () => {
+  const steps: RouteStep[] = [
+    {
+      id: 'parallel-start', order: 1, blockId: 'block-01', type: 'quest', title: 'Parallel start',
+      parallelGroup: { parallelId: 'parallel-a', phase: 'start' },
+    },
+    {
+      id: 'unrelated', order: 2, blockId: 'block-01', type: 'quest', title: 'Unrelated',
+    },
+    {
+      id: 'parallel-progress', order: 3, blockId: 'block-01', type: 'quest', title: 'Parallel progress',
+      parallelGroup: { parallelId: 'parallel-a', phase: 'progress' },
+    },
+    {
+      id: 'parallel-finish', order: 4, blockId: 'block-01', type: 'quest', title: 'Parallel finish',
+      parallelGroup: { parallelId: 'parallel-a', phase: 'finish' },
+    },
+  ];
+  const parallelRoute: RouteDocument = { ...route, steps };
+  const completed = new Set(['parallel-start']);
+
+  assert.deepEqual(getActiveParallelGroups(parallelRoute, completed, [steps[1]]), []);
+  assert.deepEqual(
+    getActiveParallelGroups(parallelRoute, completed, [steps[2]]).map((group) => ({
+      parallelId: group.parallelId,
+      memberIds: group.members.map((step) => step.id),
+    })),
+    [{ parallelId: 'parallel-a', memberIds: ['parallel-start'] }],
+  );
+});
+
+test('parallel reminder stays hidden before the group start is completed', () => {
+  const step: RouteStep = {
+    id: 'parallel-start', order: 1, blockId: 'block-01', type: 'quest', title: 'Parallel start',
+    parallelGroup: { parallelId: 'parallel-a', phase: 'start' },
+  };
+  const parallelRoute: RouteDocument = { ...route, steps: [step] };
+
+  assert.deepEqual(getActiveParallelGroups(parallelRoute, new Set(), [step]), []);
 });
