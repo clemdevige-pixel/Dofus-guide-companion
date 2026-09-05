@@ -180,7 +180,11 @@ export function App() {
 
   const progress = getProgress(route, completedStepIds);
   const activeGoals = getActiveLongRunningGoals(route, completedStepIds);
-  const activeParallelGroups = getActiveParallelGroups(route, completedStepIds);
+  const activeParallelGroups = getActiveParallelGroups(
+    route,
+    completedStepIds,
+    currentGroup?.steps ?? [],
+  );
   const nextHardLock = getNextHardLock(route, completedStepIds);
   const completedHistory = getCompletedSteps(route, completedStepIds);
   const isCurrentCompleted = currentGroup
