@@ -1,9 +1,13 @@
-import { Component, StrictMode, type ErrorInfo, type ReactNode } from 'react';
+import { Component, lazy, StrictMode, Suspense, type ErrorInfo, type ReactNode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { openUrl } from '@tauri-apps/plugin-opener';
-import { App } from './App';
 import './styles.css';
 import './sequence.css';
+
+const App = lazy(async () => {
+  const module = await import('./App');
+  return { default: module.App };
+});
 
 type AppErrorBoundaryState = {
   error: Error | null;
@@ -76,7 +80,9 @@ document.addEventListener('click', (event) => {
 createRoot(root).render(
   <StrictMode>
     <AppErrorBoundary>
-      <App />
+      <Suspense fallback={<main className="overlay">Chargement du guide…</main>}>
+        <App />
+      </Suspense>
     </AppErrorBoundary>
   </StrictMode>,
 );
