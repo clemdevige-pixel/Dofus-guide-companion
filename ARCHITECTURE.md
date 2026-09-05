@@ -60,14 +60,14 @@ Le contrat distingue :
 - plusieurs lignes contiguës partageant le même `MOMENT_ID` = une seule carte ;
 - une ligne sans `MOMENT_ID` = une carte autonome.
 
-Il n'existe plus de regroupement automatique fondé sur le type, l'action, la présence de `STOP` ou la proximité des lignes.
+Il n'existe aucun regroupement automatique fondé sur le type, l'action, la présence de `STOP` ou la proximité des lignes.
 
 Dans une carte mutualisée, `getSequenceObjectives()` utilise exclusivement `DISPLAY_ROLE` :
 - `OBJECTIVE` crée une checkbox ;
 - `TRANSITION` reste visible dans l'objectif précédent sans checkbox ;
 - `DETAIL` reste attaché à l'objectif précédent sans checkbox.
 
-`MOMENT_ID` et `DISPLAY_ROLE` sont donc les deux seules vérités de présentation métier d'une carte. React ne déduit jamais ces décisions depuis le texte ou le type technique.
+`MOMENT_ID` et `DISPLAY_ROLE` sont les deux seules vérités de présentation métier d'une carte. React ne déduit jamais ces décisions depuis le texte ou le type technique.
 
 Aucune logique React ne doit reconnaître des chaînes comme « Emma », « Tour du monde » ou `TERMINER + LANCER` par leur texte pour décider du regroupement ou du rôle checkbox/transition.
 
@@ -80,11 +80,13 @@ La validation refuse :
 - séquence non contiguë d'un même moment ;
 - `displayRole` inconnu ;
 - `displayRole` défini sans `momentId` ;
-- `momentId` défini sans `displayRole`.
+- `momentId` défini sans `displayRole` ;
+- moment commençant par autre chose que `objective` ;
+- plus de 5 objectifs dans une carte.
 
 Cette validation protège le contrat Sheet → runtime → UI.
 
-## 7. Fils rouges et verrous
+## 7. Fils rouges, verrous et groupes parallèles
 
 Les fils rouges utilisent `GOAL_ID / GOAL_PHASE` exportés vers `longRunningGoal`.
 
@@ -92,7 +94,13 @@ Lifecycle : `start → progress → finish`.
 
 Un hard lock est un blocage réel de progression, pas une simple recommandation.
 
-Un niveau personnage seul ne doit pas créer de `VERROU DUR`. Le validateur rejette explicitement les titres `NIVEAU <n>...` sur un hard lock afin d'éviter de transformer une recommandation ou un niveau de quête en faux mur de parcours.
+Un niveau personnage seul ne doit pas créer de `VERROU DUR`. Le validateur rejette explicitement les titres `NIVEAU <n>...` sur un hard lock.
+
+Les vraies salves de quêtes conjointes utilisent `PARALLEL_ID / PARALLEL_PHASE` :
+- lifecycle `start → progress* → finish` ;
+- le groupe peut rester actif dans la donnée pendant plusieurs cartes ;
+- le rappel UI n'est visible que lorsque la carte consultée appartient elle-même au groupe ;
+- aucune carte intermédiaire sans rapport ne doit afficher ce rappel.
 
 ## 8. Lancements et déplacements
 
@@ -113,7 +121,8 @@ Les comportements suivants restent calculés depuis `route + completedStepIds` :
 - préparation du bloc ;
 - étapes validées ;
 - groupes/cartes de route depuis `MOMENT_ID` ;
-- objectifs/checkpoints visibles d'un moment depuis `DISPLAY_ROLE`.
+- objectifs/checkpoints visibles d'un moment depuis `DISPLAY_ROLE` ;
+- rappels de groupes parallèles depuis `PARALLEL_ID` et la carte visible.
 
 Ne pas dupliquer ces vérités dans un store global supplémentaire.
 
@@ -128,6 +137,7 @@ Le chargement/export doit échouer clairement si :
 - goal incohérent ;
 - moment incohérent ;
 - display role incohérent ;
+- lifecycle parallèle incohérent ;
 - hard lock de niveau personnage ;
 - FIN absente, multiple ou non finale.
 
@@ -137,9 +147,9 @@ Un export invalide ne doit jamais produire silencieusement une route partielleme
 
 `scripts/export-route.ts` est le seul point de transformation éditorial → runtime.
 
-Plage actuelle : `ROUTE!A5:T`.
+Plage actuelle : `ROUTE!A5:V`.
 
-Les colonnes techniques jusqu'à `DISPLAY_ROLE` sont validées avant écriture de `data/route.json`.
+Les colonnes techniques jusqu'à `PARALLEL_PHASE` sont validées avant écriture de `data/route.json`.
 
 ## 12. Anti-patterns interdits
 
@@ -152,4 +162,5 @@ Les colonnes techniques jusqu'à `DISPLAY_ROLE` sont validées avant écriture d
 - nouveau store uniquement pour reproduire une donnée dérivable ;
 - regroupement automatique de lignes sans `MOMENT_ID` ;
 - `MOMENT_ID` sans `DISPLAY_ROLE` ;
-- laisser React décider qu'une ligne est une checkbox à partir de son `type`.
+- laisser React décider qu'une ligne est une checkbox à partir de son `type` ;
+- afficher un groupe parallèle sur une carte qui n'en est pas un checkpoint.
