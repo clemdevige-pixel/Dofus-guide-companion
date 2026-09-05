@@ -3,7 +3,7 @@ import test from 'node:test';
 import { getActiveParallelGroups } from './selectors';
 import type { RouteDocument } from './types';
 
-test('parallel groups remain active across unrelated cards until their finish checkpoint', () => {
+test('parallel reminders only appear when the current frontier belongs to the group', () => {
   const route: RouteDocument = {
     schemaVersion: 1,
     routeVersion: 'test',
@@ -30,8 +30,11 @@ test('parallel groups remain active across unrelated cards until their finish ch
   };
 
   const afterStart = getActiveParallelGroups(route, new Set(['a']));
-  assert.equal(afterStart.length, 1);
-  assert.deepEqual(afterStart[0].members.map((step) => step.id), ['a']);
+  assert.equal(afterStart.length, 0);
+
+  const beforeProgress = getActiveParallelGroups(route, new Set(['a', 'unrelated']));
+  assert.equal(beforeProgress.length, 1);
+  assert.deepEqual(beforeProgress[0].members.map((step) => step.id), ['a']);
 
   const beforeBoss = getActiveParallelGroups(route, new Set(['a', 'unrelated', 'b']));
   assert.equal(beforeBoss.length, 1);
