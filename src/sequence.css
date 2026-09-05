@@ -98,6 +98,7 @@
   color: #9eaea1;
   font-size: 11px;
   line-height: 1.35;
+  white-space: pre-line;
 }
 
 .overlay--compact .sequence-list {
