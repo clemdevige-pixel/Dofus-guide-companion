@@ -233,7 +233,9 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
     if (parallelId && !parallelPhase) throw new Error(`Ligne Sheet ${sheetRow}: PARALLEL_ID défini sans PARALLEL_PHASE.`);
 
     const hyperlink = parseHyperlinkFormula(cell(formula, 2));
-    const preparationText = cell(formatted, 3);
+    const prerequisites = cell(formatted, 3);
+    const warning = cell(formatted, 4);
+    const preparationText = prerequisites;
     const instruction = cell(formatted, 9);
     const location = parseCoordinate(cell(formatted, 13), sheetRow, 'POSITION');
     const launchInstruction = cell(formatted, 14);
@@ -257,6 +259,8 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
       ...(mapping.displayType ? { displayType: mapping.displayType } : {}),
       ...(displayRole ? { displayRole } : {}),
       title,
+      ...(mapping.type !== 'preparation' && prerequisites ? { prerequisites } : {}),
+      ...(warning ? { warning } : {}),
       ...(action ? { action } : {}),
       ...(instruction ? { instruction } : {}),
       ...(hyperlink ? { source: { label: 'DPLN', url: hyperlink.url } } : {}),
