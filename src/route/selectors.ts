@@ -115,12 +115,18 @@ export function getSequenceObjectives(steps: RouteStep[]): RouteSequenceObjectiv
 export function getActiveParallelGroups(
   route: RouteDocument,
   completedStepIds: ReadonlySet<string>,
+  visibleSteps: readonly RouteStep[],
 ): ActiveParallelGroup[] {
+  const relevantParallelIds = new Set(
+    visibleSteps
+      .map((step) => step.parallelGroup?.parallelId)
+      .filter((parallelId): parallelId is string => parallelId !== undefined),
+  );
+  if (relevantParallelIds.size === 0) return [];
+
   const activeIds = new Set<string>();
   const memberIds = new Map<string, Set<string>>();
   const sortedSteps = getSortedSteps(route);
-  const currentStep = sortedSteps.find((step) => !completedStepIds.has(step.id));
-  const relevantParallelId = currentStep?.parallelGroup?.parallelId;
 
   for (const step of sortedSteps) {
     const parallel = step.parallelGroup;
@@ -145,13 +151,15 @@ export function getActiveParallelGroups(
     }
   }
 
-  if (!relevantParallelId || !activeIds.has(relevantParallelId)) {
-    return [];
-  }
-
-  const ids = memberIds.get(relevantParallelId) ?? new Set<string>();
-  const members = sortedSteps.filter((step) => ids.has(step.id));
-  return [{ parallelId: relevantParallelId, members }];
+  return [...relevantParallelIds]
+    .filter((parallelId) => activeIds.has(parallelId))
+    .map((parallelId) => {
+      const ids = memberIds.get(parallelId) ?? new Set<string>();
+      return {
+        parallelId,
+        members: sortedSteps.filter((step) => ids.has(step.id)),
+      };
+    });
 }
 
 export function getStepGroupIndex(route: RouteDocument, stepId: string): number {
