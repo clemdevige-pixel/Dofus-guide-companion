@@ -110,13 +110,24 @@ Donc au début du prochain chat :
 
 Ordre recommandé pour la prochaine passe :
 
-1. **Continuer l'audit ressources exhaustif** sur le reste de la route, en particulier les blocs tardifs encore non clos : Turquoise restant à revalider après corrections, Ivoire/Ébène, Cauchemar/Réminiscence, Silvosse/Sylvestre, Valonia/Pandamonium et toute quête dont la colonne ressources mentionne `prévoir` sans PRÉPA locale suffisante.
-2. Pour chaque ressource, contrôler les **quantités réellement disponibles après les consommations précédentes**, pas seulement l'existence du nom dans une ancienne PRÉPA.
-3. Continuer le scan des descriptions de quêtes pour retirer les listes de ressources qui doublonnent une PRÉPA ; conserver uniquement les objets obtenus pendant la quête et les consignes contextuelles.
-4. Recontrôler les titres/étapes pseudo-meta hérités d'anciennes mutualisations, comme la passe qui a trouvé `Chaque chose en son temps` au mauvais endroit.
-5. Recontrôler les 24 groupes parallèles au rendu : aucun rappel sur une carte sans rapport, aucun membre futur affiché trop tôt.
-6. Une fois la passe Sheet fermée : exporter `ROUTE (A:V)` → `data/route.json`, lancer `pnpm test:route`, `pnpm validate:route`, `pnpm build`, puis vérifier Tauri.
-7. Refaire un audit visuel court sur quelques checkpoints sensibles après l'export : Otomaï, Blops, Frigost, Turquoise, fin Sylvestre.
+1. **Continuer l'audit ressources exhaustif** sur le reste de la route.
+2. Reprendre directement par **Ivoire / Ébène** : premières cartes PRÉPA repérées (`Blanc Ivoire`, `Noir d'ébène`) mais l'audit exhaustif DPLN/quantités n'est pas encore clos.
+3. Enchaîner sur **Cauchemar / Réminiscence**, puis **Silvosse / Sylvestre**, puis **Valonia / Pandamonium**.
+4. Revalider ensuite Turquoise après les ajouts déjà faits, pour vérifier les quantités cumulées après consommations antérieures.
+5. Pour chaque ressource, contrôler les **quantités réellement disponibles après les consommations précédentes**, pas seulement l'existence du nom dans une ancienne PRÉPA.
+6. Continuer le scan des descriptions de quêtes pour retirer les listes de ressources qui doublonnent une PRÉPA ; conserver uniquement les objets obtenus pendant la quête et les consignes contextuelles.
+7. Recontrôler les titres/étapes pseudo-meta hérités d'anciennes mutualisations, comme la passe qui a trouvé `Chaque chose en son temps` au mauvais endroit.
+8. Recontrôler les 24 groupes parallèles au rendu : aucun rappel sur une carte sans rapport, aucun membre futur affiché trop tôt.
+9. Une fois la passe Sheet fermée : exporter `ROUTE (A:V)` → `data/route.json`, lancer `pnpm test:route`, `pnpm validate:route`, `pnpm build`, puis vérifier Tauri.
+10. Refaire un audit visuel court sur quelques checkpoints sensibles après l'export : Otomaï, Blops, Frigost, Turquoise, fin Sylvestre.
+
+### Dernier état de reprise avant changement de chat
+
+Le dernier balayage a confirmé que :
+- le bloc Ivoire possède déjà une PRÉPA `Blanc Ivoire`, mais elle doit encore être comparée intégralement aux besoins DPLN des quêtes réellement parcourues ;
+- le bloc Ébène possède une PRÉPA `Noir d'ébène`, même statut : présente mais audit de suffisance/quantités non clos ;
+- la grosse PRÉPA `Qui nous protège` en fin de parcours contient déjà un lot très large de ressources et clefs : ne pas la dupliquer ailleurs sans vérifier les consommations et checkpoints précédents ;
+- aucune nouvelle correction Sheet n'a été appliquée après ces derniers repérages : la prochaine passe peut reprendre directement sur l'analyse Ivoire/Ébène.
 
 ## 9. Garde-fous à ne pas réintroduire
 
