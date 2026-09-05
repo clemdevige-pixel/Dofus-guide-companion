@@ -3,7 +3,7 @@ import test from 'node:test';
 import { getActiveParallelGroups } from './selectors';
 import type { RouteDocument } from './types';
 
-test('parallel reminders only appear when the current frontier belongs to the group', () => {
+test('parallel reminders only appear when the visible card belongs to the group', () => {
   const route: RouteDocument = {
     schemaVersion: 1,
     routeVersion: 'test',
@@ -29,17 +29,21 @@ test('parallel reminders only appear when the current frontier belongs to the gr
     ],
   };
 
-  const afterStart = getActiveParallelGroups(route, new Set(['a']));
+  const afterStart = getActiveParallelGroups(route, new Set(['a']), [route.steps[1]]);
   assert.equal(afterStart.length, 0);
 
-  const beforeProgress = getActiveParallelGroups(route, new Set(['a', 'unrelated']));
+  const beforeProgress = getActiveParallelGroups(route, new Set(['a', 'unrelated']), [route.steps[2]]);
   assert.equal(beforeProgress.length, 1);
   assert.deepEqual(beforeProgress[0].members.map((step) => step.id), ['a']);
 
-  const beforeBoss = getActiveParallelGroups(route, new Set(['a', 'unrelated', 'b']));
+  const beforeBoss = getActiveParallelGroups(route, new Set(['a', 'unrelated', 'b']), [route.steps[3]]);
   assert.equal(beforeBoss.length, 1);
   assert.deepEqual(beforeBoss[0].members.map((step) => step.id), ['a', 'b']);
 
-  const afterBoss = getActiveParallelGroups(route, new Set(['a', 'unrelated', 'b', 'boss']));
+  const afterBoss = getActiveParallelGroups(
+    route,
+    new Set(['a', 'unrelated', 'b', 'boss']),
+    [route.steps[4]],
+  );
   assert.equal(afterBoss.length, 0);
 });
