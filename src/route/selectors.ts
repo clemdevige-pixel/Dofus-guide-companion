@@ -35,20 +35,6 @@ function getRuleText(rule: RouteStep): string {
   return `⚠ ${title} — ${instruction}`;
 }
 
-function formatStepContext(step: RouteStep): string | undefined {
-  const parts: string[] = [];
-  if (step.type !== 'preparation' && step.prerequisites) {
-    parts.push(`PRÉREQUIS — ${step.prerequisites}`);
-  }
-  if (step.warning) {
-    parts.push(`À SAVOIR — ${step.warning}`);
-  }
-  if (step.instruction) {
-    parts.push(step.instruction);
-  }
-  return parts.length > 0 ? parts.join('\n') : undefined;
-}
-
 function formatSequenceGuideItems(step: RouteStep): string | undefined {
   if (!step.guideItems?.length) return undefined;
 
@@ -89,13 +75,13 @@ export function getSortedSteps(route: RouteDocument): RouteStep[] {
       pendingRules.push(step);
       continue;
     }
-
-    const ruleContext = pendingRules.length > 0 ? pendingRules.map(getRuleText).join('\n') : undefined;
-    const instruction = [ruleContext, formatStepContext(step)].filter(Boolean).join('\n');
-    visibleSteps.push({
-      ...step,
-      ...(instruction ? { instruction } : { instruction: undefined }),
-    });
+    if (pendingRules.length === 0) {
+      visibleSteps.push(step);
+      continue;
+    }
+    const ruleContext = pendingRules.map(getRuleText).join('\n');
+    const instruction = [ruleContext, step.instruction].filter(Boolean).join('\n');
+    visibleSteps.push({ ...step, instruction });
     pendingRules.length = 0;
   }
 
