@@ -53,3 +53,32 @@ test('GUIDE_ITEMS keep the existing instruction after the structured actions', (
   const [objective] = getSequenceObjectives(steps);
   assert.equal(objective.steps[0].instruction, 'PRENDRE — Quest\nGarde la quête active.');
 });
+
+test('sequence objectives keep an explicit action when no GUIDE_ITEMS or instruction exist', () => {
+  const steps: RouteStep[] = [
+    {
+      id: 'quest',
+      order: 1,
+      blockId: 'block-01',
+      type: 'quest',
+      title: 'La terre banquise',
+      action: 'TERMINER',
+      momentId: 'moment-frigost',
+      displayRole: 'objective',
+    },
+    {
+      id: 'transition',
+      order: 2,
+      blockId: 'block-01',
+      type: 'resume',
+      title: 'Retourner voir le PNJ',
+      action: 'TERMINER',
+      momentId: 'moment-frigost',
+      displayRole: 'transition',
+    },
+  ];
+
+  const [objective] = getSequenceObjectives(steps);
+  assert.equal(objective.steps[0].instruction, 'TERMINER');
+  assert.equal(objective.steps[1].instruction, 'TERMINER — Retourner voir le PNJ');
+});
