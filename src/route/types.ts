@@ -44,6 +44,10 @@ export interface RouteStep {
   /** Rôle éditorial dans une carte mutualisée : checkbox, transition sans checkbox ou détail technique. */
   displayRole?: StepDisplayRole;
   title: string;
+  /** Conditions / ressources à avoir avant d'exécuter l'étape. */
+  prerequisites?: string;
+  /** Information importante affichée avant l'action ; source = colonne « À SAVOIR » du Sheet. */
+  warning?: string;
   action?: string;
   instruction?: string;
   source?: {
