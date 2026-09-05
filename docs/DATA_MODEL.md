@@ -8,7 +8,7 @@ La route optimisée n'est pas une simple liste « une quête = une ligne ». Une
 
 Voir aussi :
 - `docs/ROUTE_OPTIMIZATION.md` : doctrine métier ;
-- `docs/ROUTE_OPTIMIZATION_WORKFLOW.md` : procédure de passe/audit.
+- `docs/ROUTE_OPTIMIZATION_WORKFLOW.md` : procédure de passe/audit/certification.
 
 ## 2. Route
 
@@ -60,6 +60,13 @@ interface RouteStep {
   displayRole?: StepDisplayRole;
 
   title: string;
+
+  /** Conditions / ressources à posséder avant d'exécuter l'étape. */
+  prerequisites?: string;
+
+  /** Information importante à voir avant l'action. Source = colonne À SAVOIR. */
+  warning?: string;
+
   action?: string;
   instruction?: string;
 
@@ -98,6 +105,64 @@ interface RouteStep {
 - `objective` : sous-objectif significatif avec checkbox ;
 - `transition` : action intermédiaire visible sans checkbox ;
 - `detail` : information technique attachée à l'objectif précédent sans checkbox.
+
+### 4.1 PRÉREQUIS / RESSOURCES → `prerequisites`
+
+Pour une étape non-PRÉPA, la colonne Sheet `PRÉREQUIS / RESSOURCES` est exportée vers `RouteStep.prerequisites`.
+
+Ce champ répond uniquement à : **« qu'est-ce qui doit déjà être vrai / disponible avant de commencer cette carte ? »**
+
+Il peut contenir :
+- quêtes/succès réellement terminés ;
+- métier réellement requis ;
+- ressources à avoir en inventaire ;
+- état/objet nécessaire ;
+- condition réelle de lancement.
+
+Il ne doit pas contenir :
+- le déroulé de la quête ;
+- une action à faire pendant le donjon ;
+- un commentaire d'audit ;
+- une référence à « la ligne suivante », « le bloc X », « la route » ;
+- un simple niveau conseillé présenté comme verrou factuel.
+
+Pour une ligne `PRÉPA`, la même colonne alimente `preparationItems` au lieu de `prerequisites`.
+
+### 4.2 À SAVOIR → `warning`
+
+La colonne Sheet `À SAVOIR` est exportée vers `RouteStep.warning`.
+
+Le champ sert au **contexte ou avertissement utile avant l'action**, pas à répéter `instruction` ou `guideItems`.
+
+Cas typiques :
+- ordre obligatoire ;
+- piège irréversible ;
+- timer ;
+- objet à conserver ;
+- condition particulière du combat ;
+- interaction critique en fin de donjon.
+
+### 4.3 Convention `⚠ AVANT DE SORTIR DU DONJON`
+
+Lorsqu'une action oubliée après le boss / dans la salle de sortie peut obliger à refaire le donjon ou empêcher la progression, `warning` commence par :
+
+```text
+⚠ AVANT DE SORTIR DU DONJON — <action critique>
+```
+
+Exemples de bonnes alertes :
+- parler au PNJ de sortie obligatoire ;
+- cliquer un élément interactif post-boss ;
+- récupérer un objet non automatique ;
+- effectuer un dialogue avant qu'un autre PNJ ne téléporte hors du donjon.
+
+Ne pas utiliser cette convention pour :
+- drop automatique du boss ;
+- tâche appartenant uniquement à une branche hors scope ;
+- idole/objet à activer **avant** le combat ;
+- conseil facultatif.
+
+L'UI peut styliser ce préfixe comme une alerte forte. Elle ne doit cependant pas reconstruire une logique métier depuis ce texte : `warning` reste la donnée autoritaire.
 
 ## 5. MOMENT_ID — frontière de carte autoritaire
 
@@ -201,9 +266,22 @@ Actions autorisées :
 - `TERMINER` → `finish` ;
 - `FAIRE` → `do`.
 
-`GUIDE_ITEMS` sert aux actions courtes. Les explications longues, STOP, ordre obligatoire et cas particuliers restent dans `instruction`.
+`GUIDE_ITEMS` sert aux actions courtes. Les explications longues, STOP, ordre obligatoire et cas particuliers restent dans `instruction` ou `warning` selon leur nature.
+
+`GUIDE_ITEMS` doit être rendu aussi bien sur une carte simple que dans un `MOMENT_ID` mutualisé.
 
 ## 8. Identité stable dans le Sheet
+
+Colonnes éditoriales/runtime :
+- `TYPE` ;
+- `ÉTAPE` ;
+- `PRÉREQUIS / RESSOURCES` ;
+- `À SAVOIR` ;
+- `SOURCE` ;
+- `NOTE` ;
+- `LANCEMENT?` ;
+- `ACTION` ;
+- `SUITE / STOP`.
 
 Colonnes techniques de `ROUTE` :
 - `STEP_ID` ;
@@ -285,7 +363,29 @@ L'application ne déduit jamais `type`, `displayRole` ni `parallelGroup` depuis 
 
 Une action contenant `LANCER` doit posséder une donnée de lancement structurée.
 
-## 12. Données volontairement absentes
+## 12. Hiérarchie de rendu cible
+
+La hiérarchie visuelle cible d'une carte détaillée est :
+
+```text
+PRÉREQUIS
+prerequisites
+
+À SAVOIR / ⚠ AVANT DE SORTIR DU DONJON
+warning
+
+ACTIONS STRUCTURÉES
+GUIDE_ITEMS / action
+
+SUITE / STOP
+instruction
+```
+
+Cette hiérarchie vaut sur cartes simples et séquences.
+
+Interdit : recopier `prerequisites` ou `warning` dans `instruction` uniquement pour contourner un manque du composant UI.
+
+## 13. Données volontairement absentes
 
 Ne pas exporter si elles ne servent pas à l'application :
 - numéro de ligne Google Sheet ;
@@ -294,7 +394,7 @@ Ne pas exporter si elles ne servent pas à l'application :
 - formules ;
 - règles implicites reconstituables uniquement en lisant le texte.
 
-## 13. Export depuis le Sheet
+## 14. Export depuis le Sheet
 
 Commande :
 
@@ -312,6 +412,11 @@ scripts/export-route.ts
    ↓
 data/route.json
 ```
+
+L'exporteur lit actuellement :
+- `PRÉREQUIS / RESSOURCES` → `prerequisites` pour les étapes non-PRÉPA ;
+- `À SAVOIR` → `warning` ;
+- les colonnes techniques jusqu'à `PARALLEL_PHASE`.
 
 L'export/validation échoue notamment si :
 - `TYPE` est inconnu ;
