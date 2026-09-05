@@ -252,27 +252,25 @@ export function App() {
     const containsHardLock = currentGroup.steps.some(
       (step) => stepIds.includes(step.id) && step.type === 'hard_lock',
     );
+    const wasCompleted = stepIds.every((stepId) => completedStepIds.has(stepId));
+    const nextCompletedStepIds = new Set(completedStepIds);
 
-    setCompletedStepIds((previous) => {
-      const next = new Set(previous);
-      const wasCompleted = stepIds.every((stepId) => next.has(stepId));
-
-      for (const stepId of stepIds) {
-        if (wasCompleted) {
-          next.delete(stepId);
-        } else {
-          next.add(stepId);
-        }
+    for (const stepId of stepIds) {
+      if (wasCompleted) {
+        nextCompletedStepIds.delete(stepId);
+      } else {
+        nextCompletedStepIds.add(stepId);
       }
+    }
 
-      const completesSequence =
-        !wasCompleted && currentGroup.steps.every((step) => next.has(step.id));
-      if (completesSequence && !containsHardLock && viewIndex < stepGroups.length - 1) {
-        setViewIndex((index) => index + 1);
-      }
+    const completesSequence =
+      !wasCompleted && currentGroup.steps.every((step) => nextCompletedStepIds.has(step.id));
 
-      return next;
-    });
+    setCompletedStepIds(nextCompletedStepIds);
+
+    if (completesSequence && !containsHardLock && viewIndex < stepGroups.length - 1) {
+      setViewIndex((index) => index + 1);
+    }
   }
 
   async function copyToClipboard(text: string) {
