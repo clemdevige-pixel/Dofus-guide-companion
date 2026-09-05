@@ -166,7 +166,14 @@ Règles strictes :
 - on ne crée un groupe que si plusieurs quêtes gagnent réellement à être gardées actives ensemble : mêmes monstres, mêmes drops, même donjon, même checkpoint ou même déplacement coûteux ;
 - une simple proximité éditoriale ou une capture Ocre seule ne suffit pas.
 
-Le texte joueur peut annoncer `QUÊTES À AVANCER ENSEMBLE`, mais le texte n'est jamais la source de vérité : seul `parallelGroup` pilote l'état du groupe.
+Le groupe peut rester **actif en donnée** pendant plusieurs cartes sans rapport direct. En revanche, son rappel UI est **contextuel** :
+- il est visible sur la carte de `start` ;
+- il réapparaît sur une carte `progress` / checkpoint appartenant au groupe ;
+- il n'est pas affiché sur les cartes intermédiaires sans rapport ;
+- il disparaît après `finish` ;
+- revenir en arrière dans le guide ne doit jamais faire apparaître un rappel futur sur une ancienne carte.
+
+Le texte joueur peut annoncer `QUÊTES À AVANCER ENSEMBLE`, mais le texte n'est jamais la source de vérité : seul `parallelGroup` pilote le lifecycle ; la position courante pilote la visibilité du rappel.
 
 ## 6. Position de lancement vs destination
 
@@ -247,7 +254,19 @@ Le validateur rejette explicitement un `VERROU DUR` dont le titre commence par `
 
 Une `PRÉPA` devient `preparationItems` quand des lignes à puce sont disponibles.
 
-La préparation doit tenir compte des ressources fournies naturellement par la route avant leur consommation. Ne pas transformer un niveau conseillé en prérequis bloquant dans une PRÉPA.
+La préparation est un **contrat d'exécutabilité** : avant d'arriver sur une quête, toutes les ressources pré-farmables réellement nécessaires doivent avoir été annoncées dans une `PRÉPA` antérieure et actionnable.
+
+Règles :
+- distinguer **ressource à apporter**, **objet/drop obtenu pendant la quête**, **prérequis**, **aide externe** ;
+- ne pas déplacer en PRÉPA un objet obtenu naturellement pendant la quête ;
+- vérifier les **quantités cumulées** jusqu'au premier usage : une ressource préparée mais déjà consommée ne couvre pas automatiquement une quête suivante ;
+- lorsqu'un lot ancien est trop éloigné pour être fiable ou mémorisable, créer une PRÉPA locale juste avant la consommation ;
+- les composants réels de craft sont préférés aux objets finis lorsque la route veut explicitement faire préparer le craft ;
+- une instruction de quête ne doit pas répéter une longue liste déjà présente en PRÉPA ; elle garde seulement le déroulé, les STOP et les objets/actions obtenus pendant la quête ;
+- la préparation doit tenir compte des ressources fournies naturellement par la route avant leur consommation ;
+- ne pas transformer un niveau conseillé en prérequis bloquant dans une PRÉPA.
+
+Exemple de distinction : un objet à 100 % de drop après lancement reste dans le déroulé de la quête ; les autres composants achetables/craftables nécessaires avant le départ vont en PRÉPA.
 
 ## 11. Action
 
