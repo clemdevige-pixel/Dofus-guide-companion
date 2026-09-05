@@ -1,4 +1,4 @@
-import type { RouteDocument, RouteStep } from './types';
+import type { GuideItemAction, RouteDocument, RouteStep } from './types';
 
 export interface RouteStepGroup {
   id: string;
@@ -17,6 +17,13 @@ export interface ActiveParallelGroup {
   members: RouteStep[];
 }
 
+const sequenceGuideActionLabels: Record<GuideItemAction, string> = {
+  take: 'PRENDRE',
+  advance: 'AVANCER',
+  finish: 'TERMINER',
+  do: 'FAIRE',
+};
+
 function getRawSortedSteps(route: RouteDocument): RouteStep[] {
   return [...route.steps].sort((a, b) => a.order - b.order);
 }
@@ -28,11 +35,29 @@ function getRuleText(rule: RouteStep): string {
   return `⚠ ${title} — ${instruction}`;
 }
 
+function formatSequenceGuideItems(step: RouteStep): string | undefined {
+  if (!step.guideItems?.length) return undefined;
+
+  return step.guideItems
+    .map((item) => {
+      const location = item.location ? ` [${item.location.x},${item.location.y}]` : '';
+      const note = item.note ? ` — ${item.note}` : '';
+      return `${sequenceGuideActionLabels[item.action]} — ${item.label}${location}${note}`;
+    })
+    .join('\n');
+}
+
 function toSequenceDisplayStep(step: RouteStep): RouteStep {
   const displayStep = { ...step };
-  if (step.displayRole === 'transition' && !step.instruction && (step.action || step.title)) {
-    displayStep.instruction = [step.action, step.title].filter(Boolean).join(' — ');
-  }
+  const guideInstruction = formatSequenceGuideItems(step);
+  const fallbackTransitionInstruction =
+    step.displayRole === 'transition' && !step.instruction && (step.action || step.title)
+      ? [step.action, step.title].filter(Boolean).join(' — ')
+      : undefined;
+
+  displayStep.instruction = [guideInstruction, step.instruction, fallbackTransitionInstruction]
+    .filter(Boolean)
+    .join('\n');
   delete displayStep.action;
   return displayStep;
 }
