@@ -181,10 +181,10 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
 
   const headers = formattedRows[0] ?? [];
   const expectedHeaders: Array<[number, string]> = [
-    [1, 'TYPE'], [2, 'ÉTAPE'], [10, 'STEP_ID'], [11, 'GOAL_ID'], [12, 'GOAL_PHASE'],
-    [13, 'POSITION'], [14, 'LANCEMENT'], [15, 'LANCEMENT_REQUIS'], [16, 'DESTINATION'],
-    [17, 'GUIDE_ITEMS'], [18, 'MOMENT_ID'], [19, 'DISPLAY_ROLE'], [20, 'PARALLEL_ID'],
-    [21, 'PARALLEL_PHASE'],
+    [1, 'TYPE'], [2, 'ÉTAPE'], [3, 'PRÉREQUIS / RESSOURCES'], [4, '⚠️ À SAVOIR'],
+    [10, 'STEP_ID'], [11, 'GOAL_ID'], [12, 'GOAL_PHASE'], [13, 'POSITION'], [14, 'LANCEMENT'],
+    [15, 'LANCEMENT_REQUIS'], [16, 'DESTINATION'], [17, 'GUIDE_ITEMS'], [18, 'MOMENT_ID'],
+    [19, 'DISPLAY_ROLE'], [20, 'PARALLEL_ID'], [21, 'PARALLEL_PHASE'],
   ];
   if (expectedHeaders.some(([index, label]) => cell(headers, index) !== label)) {
     throw new Error('Colonnes ROUTE inattendues : les colonnes techniques jusqu’à PARALLEL_PHASE sont obligatoires.');
@@ -233,7 +233,8 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
     if (parallelId && !parallelPhase) throw new Error(`Ligne Sheet ${sheetRow}: PARALLEL_ID défini sans PARALLEL_PHASE.`);
 
     const hyperlink = parseHyperlinkFormula(cell(formula, 2));
-    const preparationText = cell(formatted, 3);
+    const prerequisites = cell(formatted, 3);
+    const warning = cell(formatted, 4);
     const instruction = cell(formatted, 9);
     const location = parseCoordinate(cell(formatted, 13), sheetRow, 'POSITION');
     const launchInstruction = cell(formatted, 14);
@@ -258,6 +259,8 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
       ...(displayRole ? { displayRole } : {}),
       title,
       ...(action ? { action } : {}),
+      ...(prerequisites ? { prerequisites } : {}),
+      ...(warning ? { warning } : {}),
       ...(instruction ? { instruction } : {}),
       ...(hyperlink ? { source: { label: 'DPLN', url: hyperlink.url } } : {}),
       ...(momentId ? { momentId } : {}),
@@ -266,7 +269,7 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
       ...(destination ? { destination } : {}),
       ...(launchInstruction ? { launchInstruction } : {}),
       ...(guideItems ? { guideItems } : {}),
-      ...(mapping.type === 'preparation' ? { preparationItems: parsePreparationItems(preparationText || rawTitle) } : {}),
+      ...(mapping.type === 'preparation' ? { preparationItems: parsePreparationItems(prerequisites || rawTitle) } : {}),
       ...(goalId && goalPhase ? { longRunningGoal: { goalId, phase: goalPhase } } : {}),
       ...(mapping.type === 'hard_lock' ? { hardLock: { ...(goalId ? { goalId } : {}), message: instruction || title } } : {}),
     };
