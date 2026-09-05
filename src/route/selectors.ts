@@ -47,15 +47,19 @@ function formatSequenceGuideItems(step: RouteStep): string | undefined {
     .join('\n');
 }
 
+function getSequenceFallbackInstruction(step: RouteStep): string | undefined {
+  if (step.guideItems?.length || step.instruction || !step.action) return undefined;
+  if (step.displayRole === 'transition') return `${step.action} — ${step.title}`;
+  return step.action;
+}
+
 function toSequenceDisplayStep(step: RouteStep): RouteStep {
   const displayStep = { ...step };
-  const guideInstruction = formatSequenceGuideItems(step);
-  const fallbackTransitionInstruction =
-    step.displayRole === 'transition' && !step.instruction && (step.action || step.title)
-      ? [step.action, step.title].filter(Boolean).join(' — ')
-      : undefined;
-
-  displayStep.instruction = [guideInstruction, step.instruction, fallbackTransitionInstruction]
+  displayStep.instruction = [
+    formatSequenceGuideItems(step),
+    step.instruction,
+    getSequenceFallbackInstruction(step),
+  ]
     .filter(Boolean)
     .join('\n');
   delete displayStep.action;
