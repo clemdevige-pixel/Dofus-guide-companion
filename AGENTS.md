@@ -25,10 +25,12 @@ Ne pas coder depuis une supposition si la doc ou la donnée existante permet de 
 - `STEP_ID` stable et indépendant des lignes Sheet.
 - `MOMENT_ID` explicite pour les moments joueur devant former une seule carte.
 - `DISPLAY_ROLE` explicite quand une ligne d'un moment doit être `OBJECTIVE`, `TRANSITION` ou `DETAIL`.
+- `PARALLEL_ID` / `PARALLEL_PHASE` explicites pour les vraies salves de quêtes à garder actives ensemble.
 - Réutiliser l'existant avant de créer une couche.
 - Toute réécriture complexe se fait par paquet indivisible.
 - Après linéarisation locale, exécuter aussi des passes globales sur toute la route.
 - Une information utile ne doit apparaître qu'une fois dans le flux joueur.
+- Une information future ne doit jamais apparaître sur une carte antérieure ou intermédiaire sans rapport.
 
 ## 3. Interdictions explicites
 
@@ -58,7 +60,10 @@ Interdit également :
 - commencer un `MOMENT_ID` par `TRANSITION` ou `DETAIL` : le premier membre doit être `OBJECTIVE` ;
 - conserver une carte autonome uniquement pour répéter « rendre », « reprendre », « terminer », « lancer » si cette transition peut être intégrée au moment adjacent ;
 - répéter dans la carte suivante la fin déjà explicitée dans la carte précédente ;
-- afficher toutes les micro-étapes techniques comme autant d'objectifs joueur.
+- afficher toutes les micro-étapes techniques comme autant d'objectifs joueur ;
+- afficher un rappel de groupe parallèle sur une carte qui n'est pas elle-même un checkpoint de ce groupe ;
+- considérer qu'une ressource citée très loin en amont suffit si elle a pu être consommée depuis ; les quantités doivent être vérifiées jusqu'au premier usage ;
+- laisser une ressource pré-farmable uniquement dans le texte d'une quête si une `PRÉPA` locale peut la rendre visible avant consommation.
 
 ## 4. Stack V1
 
@@ -79,7 +84,8 @@ Doivent rester dérivés :
 - fils rouges actifs ;
 - prochain verrou dur ;
 - bloc courant ;
-- groupes/cartes visibles.
+- groupes/cartes visibles ;
+- groupes parallèles actifs et leur rappel contextuel.
 
 `getStepGroups()` suit une règle unique :
 - plusieurs lignes contiguës partageant le même `MOMENT_ID` = une carte ;
@@ -92,6 +98,12 @@ Dans un moment explicite, `DISPLAY_ROLE` est autoritaire :
 
 Le premier membre d'un moment doit toujours être `OBJECTIVE`.
 
+Pour les groupes parallèles :
+- le lifecycle data reste `start → progress* → finish` ;
+- le groupe peut rester actif en donnée à travers plusieurs cartes ;
+- le rappel UI n'est visible que lorsque la carte courante est elle-même un checkpoint du groupe ;
+- une carte intermédiaire sans rapport ne doit jamais afficher le rappel du groupe.
+
 ## 6. UI — contrat de lisibilité
 
 Priorités : lisibilité, faible encombrement, navigation immédiate, resize fiable.
@@ -100,12 +112,16 @@ Une carte représente un **moment joueur**, pas nécessairement une ligne Sheet.
 
 Rendu cible des cartes mutualisées :
 - **1 checkbox = 1 sous-objectif significatif** (quête réelle, donjon, combat, étape majeure) ;
+- **maximum 5 `OBJECTIVE` par carte** ; au-delà, scinder sur une frontière logique ;
 - **1 ligne de transition sans checkbox** quand il faut réellement rendre/prendre/avancer/parler/donner/récupérer quelque chose entre deux objectifs ;
 - une transition doit nommer l'action, le PNJ et la position quand la donnée existe ;
 - une transition sans `instruction` propre doit rester visible via un fallback compact construit uniquement depuis ses champs structurés `action + title` ;
 - les notes critiques restent visibles : Ocre/capture, STOP, objet requis, ordre obligatoire, condition de sortie ;
 - les libellés techniques répétitifs (`REPRENDRE / FAIRE`, `FAIRE & VALIDER`, etc.) ne doivent pas dominer le rendu ;
-- la carte suivante commence sur la nouvelle action, sans réexpliquer la fin de la précédente.
+- la carte suivante commence sur la nouvelle action, sans réexpliquer la fin de la précédente ;
+- la fenêtre ne change pas de taille selon la carte ; la zone centrale peut scroller, le footer reste stable ;
+- une carte validée et ses sous-objectifs validés doivent être visuellement barrés à partir de `completedStepIds` ;
+- la navigation directe par numéro de carte reste disponible dans le header.
 
 Ne jamais reconstruire les cartes depuis des mots présents dans `title` ou `instruction`. Les regroupements et rôles internes doivent venir de la donnée structurée (`MOMENT_ID`, `DISPLAY_ROLE`, `GUIDE_ITEMS`, positions, types, destinations, etc.).
 
@@ -117,7 +133,7 @@ Flux :
 Google Sheet → scripts/export-route.ts → validation stricte → data/route.json
 ```
 
-Plage technique actuelle : `ROUTE!A5:T`.
+Plage technique actuelle : `ROUTE!A5:V`.
 
 L'export/validation doit échouer sur :
 - type/ID/block invalide ;
@@ -128,6 +144,8 @@ L'export/validation doit échouer sur :
 - `DISPLAY_ROLE` inconnu ou défini sans `MOMENT_ID` ;
 - `MOMENT_ID` défini sans `DISPLAY_ROLE` ;
 - moment commençant par autre chose que `OBJECTIVE` ;
+- carte contenant plus de 5 `OBJECTIVE` ;
+- lifecycle `PARALLEL_ID / PARALLEL_PHASE` invalide ;
 - `VERROU DUR` de niveau personnage ;
 - route sans une unique `FIN` finale.
 
@@ -143,9 +161,19 @@ Pour chaque paquet :
 7. distinguer objectifs joueur et transitions obligatoires ;
 8. supprimer les redondances intra-carte et inter-cartes ;
 9. écrire en une passe ;
-10. relire les colonnes techniques jusqu'à `DISPLAY_ROLE` ;
+10. relire les colonnes techniques jusqu'à `PARALLEL_PHASE` ;
 11. nettoyer les résidus ;
 12. contrôler mécaniquement.
+
+### Audit ressources obligatoire
+
+Pour toute passe ressources :
+1. vérifier les besoins réels de la quête avec DPLN/Ganymède si nécessaire ;
+2. distinguer ressource à apporter, objet obtenu naturellement pendant la quête, prérequis et aide externe ;
+3. vérifier les **quantités cumulées** jusqu'au premier usage : une ressource déjà consommée ne couvre pas un besoin plus tard ;
+4. placer les ressources pré-farmables dans une `PRÉPA` située avant la consommation et suffisamment proche pour être actionnable ;
+5. garder dans l'instruction uniquement les objets/actions obtenus pendant la quête ou les avertissements contextuels ;
+6. ne pas dupliquer une liste de ressources entre `PRÉPA` et description de quête.
 
 Après les paquets/blocs, exécuter les passes globales définies dans `docs/ROUTE_OPTIMIZATION_WORKFLOW.md`, notamment la passe finale **anti-redondance / confort joueur** sur toute la route.
 
@@ -173,4 +201,5 @@ Un handoff doit indiquer précisément :
 - ce qui reste à auditer ;
 - si le Sheet et `route.json` sont synchronisés ou non ;
 - état réel des tests/validation/build ;
-- état de la passe anti-redondance globale.
+- état de la passe anti-redondance globale ;
+- état de la passe ressources et des corrections éditoriales en cours.
