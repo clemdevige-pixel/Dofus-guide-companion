@@ -32,20 +32,22 @@ const route: RouteDocument = {
   ],
 };
 
-test('prerequisites and warnings become visible context on normal cards', () => {
+test('prerequisites and warnings stay separate from the instruction', () => {
   const [quest] = getSortedSteps(route);
-  assert.equal(
-    quest.instruction,
-    'PRÉREQUIS — Niveau 50\nÀ SAVOIR — Ne quitte pas la salle.\nParle au PNJ.',
-  );
+  assert.equal(quest.prerequisites, 'Niveau 50');
+  assert.equal(quest.warning, 'Ne quitte pas la salle.');
+  assert.equal(quest.instruction, 'Parle au PNJ.');
 });
 
-test('preparation resources are not duplicated as prerequisites', () => {
+test('preparation resources remain available without duplicating the instruction', () => {
   const [, prep] = getSortedSteps(route);
-  assert.equal(prep.instruction, 'À SAVOIR — Conserve le surplus.');
+  assert.equal(prep.prerequisites, '• 10 Fer');
+  assert.deepEqual(prep.preparationItems, ['10 Fer']);
+  assert.equal(prep.warning, 'Conserve le surplus.');
+  assert.equal(prep.instruction, undefined);
 });
 
-test('sequence objectives preserve projected context', () => {
+test('sequence objectives preserve context fields while projecting GUIDE_ITEMS', () => {
   const sequenceRoute: RouteDocument = {
     ...route,
     steps: [
@@ -58,6 +60,7 @@ test('sequence objectives preserve projected context', () => {
         momentId: 'moment-a',
         displayRole: 'objective',
         prerequisites: 'Clef du donjon',
+        warning: 'Ne quitte pas la salle.',
         guideItems: [{ action: 'do', label: 'Donjon' }],
       },
     ],
@@ -65,5 +68,7 @@ test('sequence objectives preserve projected context', () => {
 
   const [step] = getSortedSteps(sequenceRoute);
   const [objective] = getSequenceObjectives([step]);
-  assert.equal(objective.steps[0].instruction, 'FAIRE — Donjon\nPRÉREQUIS — Clef du donjon');
+  assert.equal(objective.steps[0].prerequisites, 'Clef du donjon');
+  assert.equal(objective.steps[0].warning, 'Ne quitte pas la salle.');
+  assert.equal(objective.steps[0].instruction, 'FAIRE — Donjon');
 });
