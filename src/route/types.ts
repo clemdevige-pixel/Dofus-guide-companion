@@ -45,6 +45,10 @@ export interface RouteStep {
   displayRole?: StepDisplayRole;
   title: string;
   action?: string;
+  /** Prérequis joueur issus de la colonne PRÉREQUIS / RESSOURCES du Sheet. */
+  prerequisites?: string;
+  /** Avertissement/contexte joueur issu de la colonne À SAVOIR du Sheet. */
+  warning?: string;
   instruction?: string;
   source?: {
     label: string;
