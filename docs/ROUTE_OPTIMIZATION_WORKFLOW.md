@@ -71,7 +71,7 @@ Règles :
 - même bloc ;
 - un moment fermé ne réapparaît pas ;
 - pas de `MOMENT_ID` inventé côté React ;
-- ne jamais se reposer sur le fallback `MAX_SEQUENCE_STEPS=8` pour une carte voulue explicitement.
+- une ligne sans `MOMENT_ID` est explicitement une carte autonome.
 
 `MOMENT_ID` définit la carte, mais **ne signifie pas que chaque ligne du moment doit devenir une checkbox ou être affichée textuellement telle quelle**.
 
@@ -129,8 +129,8 @@ Pour la passe confort joueur, privilégier la donnée structurée existante pour
 `updateCells` ne vide pas les cellules techniques omises.
 
 Après toute réécriture importante :
-1. relire la plage complète jusqu'à `MOMENT_ID` ;
-2. vérifier explicitement `STEP_ID` → `MOMENT_ID` ;
+1. relire la plage complète jusqu'à `PARALLEL_PHASE` ;
+2. vérifier explicitement `STEP_ID` → `PARALLEL_PHASE` ;
 3. vider les anciennes valeurs techniques résiduelles ;
 4. ne jamais supposer que les anciens numéros de ligne sont encore valides après insertion/suppression.
 
@@ -144,13 +144,14 @@ Une requête batch rejetée doit être considérée comme non appliquée jusqu'�
 4. vérifier `POSITION` / `DESTINATION` ;
 5. vérifier `GUIDE_ITEMS` ;
 6. vérifier `GOAL_ID / GOAL_PHASE` ;
-7. vérifier `MOMENT_ID` : contigu, même bloc, sémantiquement cohérent ;
-8. rechercher l'ancienne prise/fin ailleurs ;
-9. vérifier le hors-scope ;
-10. relire la carte telle qu'un joueur la verra ;
-11. vérifier que chaque checkbox correspond à un objectif significatif ;
-12. vérifier que chaque transition obligatoire reste explicitement visible ;
-13. supprimer toute redite restante dans la carte.
+7. vérifier `MOMENT_ID / DISPLAY_ROLE` : contigu, même bloc, sémantiquement cohérent ;
+8. vérifier `PARALLEL_ID / PARALLEL_PHASE` si présent ;
+9. rechercher l'ancienne prise/fin ailleurs ;
+10. vérifier le hors-scope ;
+11. relire la carte telle qu'un joueur la verra ;
+12. vérifier que chaque checkbox correspond à un objectif significatif ;
+13. vérifier que chaque transition obligatoire reste explicitement visible ;
+14. supprimer toute redite restante dans la carte.
 
 ## 9. Passes globales après la linéarisation
 
@@ -186,39 +187,19 @@ Vérifier `start → progress → finish`, les verrous associés et l'ordre rée
 Parcourir la route comme un joueur : aucune règle implicite ne doit être nécessaire pour comprendre quand reprendre une quête ou quand lancer sa suite.
 
 ### Passe 7 — anti-redondance / confort joueur
-**Cette passe est désormais obligatoire et doit couvrir la route complète.**
+Cette passe est obligatoire **lors d'une vraie réécriture structurelle**. Elle ne doit pas être relancée mécaniquement sur une route déjà close sans défaut joueur concret.
 
-#### A. Audit intra-carte
-Pour chaque carte/moment :
-1. lister les sous-objectifs réellement significatifs ;
+Pour une carte ou un paquet réellement problématique :
+1. lister les sous-objectifs significatifs ;
 2. conserver une checkbox par sous-objectif ;
 3. transformer les rendus/prises/avancées nécessaires en transitions sans checkbox ;
 4. supprimer les labels techniques et phrases qui répètent les objectifs ;
 5. conserver Ocre/STOP/objet/ordre/condition critique ;
-6. vérifier qu'une lecture rapide suffit pour jouer.
+6. vérifier qu'une lecture rapide suffit pour jouer ;
+7. comparer la fin de la carte N avec le début de N+1 ;
+8. absorber les cartes purement administratives quand cela reste un seul moment joueur.
 
-#### B. Audit inter-cartes
-Pour chaque paire `carte N → carte N+1` :
-1. comparer la fin de N avec le début de N+1 ;
-2. supprimer toute reprise textuelle du même rendu, retour PNJ, prise ou état ;
-3. si N+1 n'est qu'une transition administrative, l'absorber dans N ou dans le prochain moment cohérent ;
-4. s'assurer que N+1 commence sur une **nouvelle action joueur**.
-
-#### C. Critère de suppression d'une carte
-Une carte doit disparaître comme carte autonome si elle ne contient qu'une information absorbable telle que :
-- rendre une quête ;
-- reprendre la même quête ;
-- prendre immédiatement la suivante ;
-- constater qu'un objectif est validé ;
-- rappeler un état déjà affiché.
-
-Exception : garder une carte si cette transition constitue réellement une décision, un STOP, un changement de phase important ou une action autonome nécessaire.
-
-#### D. Critère de réussite
-La passe est réussie uniquement si elle donne à la fois :
-- moins de cartes ;
-- moins de texte ;
-- aucune disparition d'une transition nécessaire entre deux donjons/objectifs.
+Critère de réussite : moins de bruit sans perte d'action nécessaire.
 
 ## 10. Validation mécanique globale minimale
 
@@ -229,10 +210,11 @@ Avant régénération finale :
 - 0 lancement incomplet ;
 - 0 position/destination invalide ;
 - 0 `MOMENT_ID` non contigu ou multi-blocs ;
+- 0 `DISPLAY_ROLE` incohérent ;
+- 0 groupe parallèle au lifecycle incomplet ;
 - 0 hard lock de niveau personnage ;
 - cycles de goals cohérents ;
-- exactement 1 `FIN`, dernière étape métier ;
-- passe anti-redondance terminée jusqu'à la dernière carte.
+- exactement 1 `FIN`, dernière étape métier.
 
 Puis :
 
@@ -257,29 +239,3 @@ Une mutualisation exige :
 - absence de répétition inutile avec la carte précédente/suivante.
 
 Si l'information manque : ne pas inventer.
-
-## 12. Scope
-
-Avant d'importer une étape Ganymède :
-
-```text
-quête déjà présente dans ROUTE ?
-├─ oui → IN_SCOPE
-└─ non → SUPPORT nécessaire / EXCEPTION_PARANGON / OUT_OF_SCOPE
-```
-
-Ne jamais importer automatiquement tout ce que GP0 fait au passage.
-
-## 13. Handoff obligatoire
-
-Un handoff de chantier route doit préciser :
-- dernière passe/paquet réellement intégré ;
-- prochains motifs à auditer ;
-- anomalies détectées ;
-- fichiers de code/doc modifiés ;
-- état de `ROUTE` ;
-- état du dernier export/tests/validation/build ;
-- position exacte dans la passe anti-redondance globale ;
-- exemples de rendu cible utilisés comme référence.
-
-Ne jamais écrire « presque fini » sans état exact.
