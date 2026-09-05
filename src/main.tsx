@@ -1,9 +1,49 @@
-import { StrictMode } from 'react';
+import { Component, StrictMode, type ErrorInfo, type ReactNode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { openUrl } from '@tauri-apps/plugin-opener';
 import { App } from './App';
 import './styles.css';
 import './sequence.css';
+
+type AppErrorBoundaryState = {
+  error: Error | null;
+};
+
+class AppErrorBoundary extends Component<{ children: ReactNode }, AppErrorBoundaryState> {
+  state: AppErrorBoundaryState = { error: null };
+
+  static getDerivedStateFromError(error: Error): AppErrorBoundaryState {
+    return { error };
+  }
+
+  componentDidCatch(error: Error, info: ErrorInfo) {
+    console.error('Erreur React non gérée.', error, info);
+  }
+
+  render() {
+    if (!this.state.error) {
+      return this.props.children;
+    }
+
+    return (
+      <main className="overlay">
+        <section className="current-step current-step--hard_lock" aria-labelledby="app-error-title">
+          <span className="type-badge">ERREUR</span>
+          <div className="step-title-row">
+            <h1 id="app-error-title">Le guide n’a pas pu s’afficher</h1>
+          </div>
+          <p className="instruction">
+            Une erreur inattendue a interrompu l’interface. Ta progression locale n’a pas été supprimée.
+          </p>
+          <p className="instruction">{this.state.error.message}</p>
+          <button className="complete-button" type="button" onClick={() => window.location.reload()}>
+            RECHARGER L’INTERFACE
+          </button>
+        </section>
+      </main>
+    );
+  }
+}
 
 const root = document.getElementById('root');
 
@@ -35,6 +75,8 @@ document.addEventListener('click', (event) => {
 
 createRoot(root).render(
   <StrictMode>
-    <App />
+    <AppErrorBoundary>
+      <App />
+    </AppErrorBoundary>
   </StrictMode>,
 );
