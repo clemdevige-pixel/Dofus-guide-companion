@@ -12,7 +12,8 @@ La route doit minimiser :
 - les rendus qui provoquent un retour immédiat ;
 - la fragmentation artificielle d'un même moment joueur en plusieurs cartes ;
 - les redites intra-carte ;
-- les redites entre cartes adjacentes.
+- les redites entre cartes adjacentes ;
+- les erreurs factuelles pouvant provoquer un blocage ou un nouveau passage de donjon.
 
 Le résultat attendu est un parcours linéaire :
 
@@ -26,18 +27,22 @@ prises compatibles
 → nouvelles prises
 ```
 
+Une route optimisée n'est pas automatiquement une route **certifiée** : la certification factuelle exhaustive est une passe finale distincte.
+
 ## 2. Sources et responsabilités
 
 ### Scope
 Le Google Sheet `Roadmap ULTIMATE V2 — Astrub → Dofus Sylvestre`, onglet `ROUTE`, définit ce qui appartient à la progression.
 
-### Optimisation
+### Optimisation / trame
 Ganymède (GP0 + guides spécialisés) sert à déterminer l'ordre de parcours, les prises anticipées, les quêtes à garder actives, les mutualisations et les rendus différés.
 
-### Vérification factuelle
-DofusPourLesNoobs et sources fiables équivalentes servent à confirmer prérequis, PNJ, positions, drops, conditions et ordre obligatoire.
+Ganymède est un **squelette d'ordre**, pas un template à copier. Le Companion conserve son wording, sa granularité et son scope.
 
-Ne jamais reconstruire un ordre depuis la mémoire de l'agent.
+### Vérification factuelle
+DofusPourLesNoobs et sources fiables équivalentes servent à confirmer prérequis, PNJ, positions, drops, ressources, conditions de combat, interactions de sortie et ordre obligatoire.
+
+Ne jamais reconstruire un ordre ou une donnée factuelle depuis la mémoire de l'agent.
 
 ## 3. Unité d'optimisation : le moment joueur
 
@@ -72,9 +77,17 @@ Il n'existe plus de regroupement automatique : une ligne sans `MOMENT_ID` est un
 
 ## 4. Rendu cible d'une carte mutualisée
 
-Une carte mutualisée contient **deux niveaux**, pas une reproduction des micro-étapes techniques.
+Une carte mutualisée ne reproduit pas les micro-étapes techniques.
 
-### 4.1 Objectifs principaux
+### 4.1 Contexte avant action
+
+Avant les objectifs, afficher seulement lorsque pertinent :
+- `PRÉREQUIS` : ce qui doit déjà être vrai / possédé ;
+- `À SAVOIR` : contrainte ou avertissement utile avant l'action.
+
+Ces deux informations sont des données séparées. Elles ne doivent pas être recopiées dans `SUITE / STOP` uniquement parce que l'UI ne les affiche pas encore correctement.
+
+### 4.2 Objectifs principaux
 
 Un objectif principal est une action significative à cocher :
 - faire un donjon ;
@@ -96,7 +109,7 @@ Exemple cible :
 ☐ Craqueleur Légendaire — prendre l’objectif puis STOP
 ```
 
-### 4.2 Transitions obligatoires
+### 4.3 Transitions obligatoires
 
 Une transition est affichée **sans checkbox** uniquement si le joueur doit réellement faire quelque chose entre deux objectifs :
 - rendre une quête ;
@@ -114,7 +127,7 @@ La transition doit, quand la donnée existe, préciser :
 
 Une transition sans `instruction` explicite doit rester visible via ses champs structurés `action + title` ; l'UI ne doit jamais la faire disparaître silencieusement.
 
-### 4.3 Informations critiques à conserver
+### 4.4 Informations critiques à conserver
 
 Toujours conserver quand pertinent :
 - capture Ocre ;
@@ -125,7 +138,22 @@ Toujours conserver quand pertinent :
 - condition réelle de progression ;
 - action qui doit impérativement être faite avant le prochain donjon.
 
-### 4.4 Informations à supprimer
+### 4.5 Convention sortie de donjon
+
+Quand une action oubliée après le boss / dans la salle de sortie peut forcer un nouveau passage ou bloquer la progression, `À SAVOIR` commence par :
+
+```text
+⚠ AVANT DE SORTIR DU DONJON — ...
+```
+
+Cette convention n'est utilisée que si l'action :
+- appartient à notre scope ;
+- n'est pas automatique ;
+- doit réellement être faite avant de quitter.
+
+Ne pas importer une interaction post-boss Ganymède si elle ne sert qu'à une branche optionnelle hors scope.
+
+### 4.6 Informations à supprimer
 
 Supprimer toute information qui ne fait que répéter une information déjà visible ou évidente :
 - `REPRENDRE / FAIRE` si l'objectif indique déjà quoi faire ;
@@ -133,7 +161,8 @@ Supprimer toute information qui ne fait que répéter une information déjà vis
 - « quête terminée » sans action supplémentaire ;
 - « retourne voir X » répété dans deux lignes successives ;
 - une carte autonome de rendu/reprise si elle peut devenir une transition dans la carte adjacente ;
-- la fin d'une carte répétée au début de la suivante.
+- la fin d'une carte répétée au début de la suivante ;
+- commentaires d'audit ou références internes à Ganymède/blocs/lignes.
 
 **Une information utile ne doit apparaître qu'une fois dans le flux joueur.**
 
@@ -166,7 +195,8 @@ Après la première linéarisation, la route doit être auditée par **passes gl
 ### Passe C — donjons / mutualisations
 - pour chaque donjon, lister toutes les quêtes pouvant exploiter le même passage ;
 - justifier explicitement chaque repassage restant ;
-- vérifier captures Ocre, idoles, dialogues de sortie, drops et sauvegardes.
+- vérifier captures Ocre, idoles, dialogues de sortie, drops et sauvegardes ;
+- confronter chaque mutualisation à l'ordre Ganymède pour éviter les dépendances circulaires.
 
 ### Passe D — moments / cartes
 - inspecter tous les `TERMINER + LANCER` ;
@@ -204,6 +234,33 @@ Cette passe vise simultanément :
 - **moins de texte** ;
 - **aucune perte d'action nécessaire**.
 
+### Passe H — certification factuelle exhaustive
+
+Cette passe est obligatoire avant de qualifier la route de « certifiée ».
+
+Pour **chaque carte**, contrôler au minimum :
+- prérequis réellement disponibles à cet instant ;
+- ressources / quantités / consommation ;
+- lancement ;
+- checkpoint ;
+- boss/donjon ;
+- action avant boss ;
+- action post-boss / sortie ;
+- capture Ocre réellement utile ;
+- rendu ;
+- mutualisation et repassages ;
+- compatibilité avec la trame Ganymède ;
+- scope ;
+- placement de chaque information dans le bon champ.
+
+Priorité absolue aux erreurs qui peuvent provoquer :
+- blocage ;
+- donjon à refaire ;
+- pierre d'âme gaspillée ;
+- ressource consommée trop tôt ;
+- quête lancée/rendue au mauvais moment ;
+- mutualisation impossible.
+
 ## 7. Règles de réécriture
 
 ### 7.1 Prises anticipées
@@ -226,8 +283,12 @@ Ces états techniques ne sont pas forcément des cartes ou checkboxes : ils peuv
 ### 7.4 Donjons
 Le donjon n'est fait que lorsque les fils compatibles sont prêts, sauf repassage structurel documenté.
 
+Ne jamais fusionner deux passages uniquement parce que les boss sont identiques : les quêtes doivent réellement pouvoir coexister au moment concerné.
+
 ### 7.5 Ressources
 Avant tout achat/farm, vérifier si une quête précédente fournit la ressource naturellement.
+
+Vérifier les quantités **cumulées jusqu'au point de consommation** : une ressource préparée puis consommée plus tôt n'est plus disponible pour une quête tardive.
 
 ### 7.6 Rendus
 Différer un rendu s'il évite un retour sans bloquer la suite. Si le rendu est nécessaire entre deux objectifs, le présenter comme transition compacte plutôt que comme carte autonome lorsque possible.
@@ -244,7 +305,17 @@ Règles :
 - une ligne sans `MOMENT_ID` reste une carte autonome ;
 - ne jamais reconstruire le regroupement depuis le texte, le type ou la proximité côté React.
 
-### 7.8 Scope
+### 7.8 PRÉREQUIS / À SAVOIR
+
+`PRÉREQUIS / RESSOURCES` = conditions déjà satisfaites avant la carte.  
+`À SAVOIR` = contexte/alerte avant action.
+
+Ne pas y laisser :
+- commentaires d'audit ;
+- références à des numéros de bloc/ligne ;
+- actions principales qui devraient être dans `GUIDE_ITEMS` ou `SUITE / STOP`.
+
+### 7.9 Scope
 Classer les éléments Ganymède :
 - `IN_SCOPE` ;
 - `SUPPORT` ;
@@ -267,11 +338,35 @@ Une mutualisation est acceptée seulement si :
 - la route reste exécutable ligne par ligne ;
 - lancements/destinations restent structurés ;
 - les transitions obligatoires restent visibles ;
-- aucune redite inutile n'est ajoutée.
+- aucune redite inutile n'est ajoutée ;
+- la trame Ganymède ne place pas le second objectif derrière la fermeture obligatoire du premier.
 
 En cas de doute : conserver l'ordre sûr et documenter le point au lieu d'inventer.
 
-## 10. Contrôle final global
+## 10. Décisions certifiées à ne pas rouvrir sans preuve
+
+### Totems de Maïmane
+- Joie = Klime dédié ;
+- Peur = Koutoulou dédié ;
+- Colère = Dazak dédié ;
+- Dégoût = Nileza dédié ;
+- Tristesse = Vortex mutualisé ;
+- Surprise = Comte Harebourg mutualisé.
+
+4 repassages dédiés restent nécessaires dans la trame actuelle.
+
+### Forgerons / Bworks
+Optimum : **1 Donjon des Forgerons + 1 Donjon des Bworks**.
+
+Le Liquide des Forgerons est précollecté pendant l'unique passage Forgerons et conservé pour l'alignement ultérieur.
+
+### Minotoror
+Ne pas capturer le Minotoror au passage : prendre la sauvegarde vers Minotot.
+
+### Grand Ougah
+Attendre la convergence `Assassin Suprême + Un pouvoir mérydique` et ne faire qu'un passage partagé.
+
+## 11. Contrôle final global
 
 Après les 20 blocs :
 - vérifier scope complet ;
@@ -282,9 +377,11 @@ Après les 20 blocs :
 - vérifier tous les hard locks ;
 - vérifier les fils rouges ;
 - faire la passe anti-redondance carte par carte et entre cartes adjacentes ;
+- faire la **certification factuelle exhaustive** ;
+- vérifier les alertes `⚠ AVANT DE SORTIR DU DONJON` ;
 - vérifier le rendu réel des transitions et des objectifs-donjons ;
 - vérifier la continuité jusqu'au vrai Dofus Sylvestre ;
 - régénérer `data/route.json` uniquement depuis le Sheet ;
-- lancer tests, validation et build.
+- lancer tests, validation, build et check Tauri.
 
 Le Google Sheet reste l'unique source éditoriale. `data/route.json` n'est jamais corrigé manuellement.
