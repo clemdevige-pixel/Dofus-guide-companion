@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "routeVersion": "2026-09-07",
+  "routeVersion": "2026-09-14",
   "title": "Astrub → Dofus Sylvestre",
   "blocks": [
     {
@@ -61,12 +61,12 @@
     {
       "id": "block-12",
       "order": 12,
-      "title": "Ilyzaelle + Merkator + Sufokia + pré-Ivoire"
+      "title": "Ilyzaelle + Merkator + pré-Ivoire"
     },
     {
       "id": "block-13",
       "order": 13,
-      "title": "Dofus Ivoire"
+      "title": "Dofus Ivoire + Abyssal"
     },
     {
       "id": "block-14",
@@ -76,7 +76,7 @@
     {
       "id": "block-15",
       "order": 15,
-      "title": "Six sur six + Argenté Scintillant"
+      "title": "Tacheté + Après la pluie + Cavaliers + Valonia 3"
     },
     {
       "id": "block-16",
@@ -13164,204 +13164,8 @@
       }
     },
     {
-      "id": "route-step-0767",
-      "order": 560,
-      "blockId": "block-09",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Touchez pas à Grisebigle",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/touchez-pas-a-grisebigle.html"
-      },
-      "momentId": "moment-enutrosor-galeries-a",
-      "location": {
-        "x": -22,
-        "y": -24
-      }
-    },
-    {
-      "id": "route-step-0768",
-      "order": 561,
-      "blockId": "block-09",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Échantillonnage",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/eacutechantillonnage.html"
-      },
-      "momentId": "moment-enutrosor-galeries-b",
-      "location": {
-        "x": -22,
-        "y": -24
-      }
-    },
-    {
-      "id": "route-step-0769",
-      "order": 562,
-      "blockId": "block-09",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Le silence est d'or",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/le-silence-est-dor.html"
-      },
-      "momentId": "moment-enutrosor-galeries-b",
-      "location": {
-        "x": -1,
-        "y": -1
-      }
-    },
-    {
-      "id": "route-step-0770",
-      "order": 563,
-      "blockId": "block-09",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Espionnage industriel",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/espionnage-industriel.html"
-      },
-      "momentId": "moment-enutrosor-galeries-b",
-      "location": {
-        "x": -8,
-        "y": -5
-      }
-    },
-    {
-      "id": "route-step-0771",
-      "order": 564,
-      "blockId": "block-09",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Prise d'otages",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/prise-dotages.html"
-      },
-      "momentId": "moment-enutrosor-galeries-b",
-      "location": {
-        "x": -8,
-        "y": -5
-      }
-    },
-    {
-      "id": "route-step-0772",
-      "order": 565,
-      "blockId": "block-09",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "La grève de la fin",
-      "prerequisites": "Prise d'otages terminée ; 3 000 points de succès minimum ; 200 000 kamas disponibles sur soi (non consommés) ; au moins 1 métier niveau 200.",
-      "warning": "Les trois contrôles (succès, kamas, métier 200) sont demandés pendant la quête. Prépare-les avant d'entrer dans la Koffrérie pour éviter un aller-retour.",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/la-gregraveve-de-la-fin.html"
-      },
-      "momentId": "moment-enutrosor-galeries-c",
-      "location": {
-        "x": -8,
-        "y": -5
-      }
-    },
-    {
-      "id": "route-step-0773",
-      "order": 566,
-      "blockId": "block-09",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Malle des profondeurs — avancer jusqu'à la Fabrique de Malléfisk",
-      "prerequisites": "La grève de la fin terminée.",
-      "warning": "Le donjon Malléfisk coupe réellement la quête.",
-      "action": "AVANCER / STOP",
-      "instruction": "AVANCE Malle des profondeurs jusqu'à devoir refaire la Fabrique de Malléfisk puis STOP devant le donjon.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/malle-des-profondeurs.html"
-      },
-      "momentId": "moment-enutrosor-galeries-c",
-      "location": {
-        "x": -1,
-        "y": -1
-      }
-    },
-    {
-      "id": "route-step-0774",
-      "order": 567,
-      "blockId": "block-09",
-      "type": "dungeon",
-      "displayRole": "detail",
-      "title": "◆ Fabrique de Malléfisk — MALLE DES PROFONDEURS",
-      "prerequisites": "Malle des profondeurs au checkpoint donjon.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — parle à Malléfisk dans la dernière salle, complimente-le puis accuse-le pour déclencher le combat solo contre son âme. Ne quitte pas avant d'avoir fait cette séquence.",
-      "action": "FAIRE",
-      "instruction": "Vaincs Malléfisk. AVANT DE SORTIR, parle-lui, complimente-le puis accuse-le d'être responsable de la narcolepsie des gardes afin de déclencher et gagner le combat solo contre l'âme de Malléfisk.",
-      "momentId": "moment-enutrosor-galeries-c"
-    },
-    {
-      "id": "route-step-0775",
-      "order": 568,
-      "blockId": "block-09",
-      "type": "resume",
-      "displayRole": "transition",
-      "title": "Malle des profondeurs",
-      "prerequisites": "Malléfisk + combat post-donjon validés.",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/malle-des-profondeurs.html"
-      },
-      "momentId": "moment-enutrosor-galeries-c"
-    },
-    {
-      "id": "route-step-0776",
-      "order": 569,
-      "blockId": "block-09",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Reconnaissance de dettes",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/reconnaissance-de-dettes.html"
-      },
-      "momentId": "moment-enutrosor-galeries-c",
-      "location": {
-        "x": -7,
-        "y": -6
-      }
-    },
-    {
-      "id": "route-step-0777",
-      "order": 570,
-      "blockId": "block-09",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Laissé en plan",
-      "prerequisites": "Malle des profondeurs terminée ; niveau recommandé 200.",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/laisseacute-en-plan.html"
-      },
-      "momentId": "moment-enutrosor-galeries-c",
-      "location": {
-        "x": -9,
-        "y": -5
-      }
-    },
-    {
       "id": "route-step-0531",
-      "order": 571,
+      "order": 560,
       "blockId": "block-09",
       "type": "quest",
       "displayRole": "objective",
@@ -13379,7 +13183,7 @@
     },
     {
       "id": "route-step-0532",
-      "order": 572,
+      "order": 561,
       "blockId": "block-09",
       "type": "quest",
       "displayRole": "objective",
@@ -13403,7 +13207,7 @@
     },
     {
       "id": "route-step-0533",
-      "order": 573,
+      "order": 562,
       "blockId": "block-09",
       "type": "dungeon",
       "displayRole": "detail",
@@ -13420,7 +13224,7 @@
     },
     {
       "id": "route-step-0534",
-      "order": 574,
+      "order": 563,
       "blockId": "block-09",
       "type": "resume",
       "displayRole": "transition",
@@ -13435,7 +13239,7 @@
     },
     {
       "id": "route-step-0535",
-      "order": 575,
+      "order": 564,
       "blockId": "block-09",
       "type": "preparation",
       "title": "Alignement 71→80 — 1/2",
@@ -13461,7 +13265,7 @@
     },
     {
       "id": "route-step-0536",
-      "order": 576,
+      "order": 565,
       "blockId": "block-09",
       "type": "preparation",
       "title": "Alignement 71→85 — 2/2",
@@ -13493,7 +13297,7 @@
     },
     {
       "id": "route-step-0537",
-      "order": 577,
+      "order": 566,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13514,7 +13318,7 @@
     },
     {
       "id": "route-step-0506",
-      "order": 578,
+      "order": 567,
       "blockId": "block-09",
       "type": "quest",
       "displayRole": "objective",
@@ -13538,7 +13342,7 @@
     },
     {
       "id": "route-step-0507",
-      "order": 579,
+      "order": 568,
       "blockId": "block-09",
       "type": "dungeon",
       "displayRole": "detail",
@@ -13551,7 +13355,7 @@
     },
     {
       "id": "route-step-0508",
-      "order": 580,
+      "order": 569,
       "blockId": "block-09",
       "type": "resume",
       "displayRole": "transition",
@@ -13566,7 +13370,7 @@
     },
     {
       "id": "route-step-0538",
-      "order": 581,
+      "order": 570,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13585,7 +13389,7 @@
     },
     {
       "id": "route-step-0539",
-      "order": 582,
+      "order": 571,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13604,7 +13408,7 @@
     },
     {
       "id": "route-step-0540",
-      "order": 583,
+      "order": 572,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13623,7 +13427,7 @@
     },
     {
       "id": "route-step-0541",
-      "order": 584,
+      "order": 573,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13643,7 +13447,7 @@
     },
     {
       "id": "route-step-0542",
-      "order": 585,
+      "order": 574,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13663,7 +13467,7 @@
     },
     {
       "id": "route-step-0543",
-      "order": 586,
+      "order": 575,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13682,7 +13486,7 @@
     },
     {
       "id": "route-step-0544",
-      "order": 587,
+      "order": 576,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13701,7 +13505,7 @@
     },
     {
       "id": "route-step-0545",
-      "order": 588,
+      "order": 577,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13721,7 +13525,7 @@
     },
     {
       "id": "route-step-0546",
-      "order": 589,
+      "order": 578,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13740,7 +13544,7 @@
     },
     {
       "id": "route-step-0547",
-      "order": 590,
+      "order": 579,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13759,7 +13563,7 @@
     },
     {
       "id": "route-step-0548",
-      "order": 591,
+      "order": 580,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13775,7 +13579,7 @@
     },
     {
       "id": "route-step-0549",
-      "order": 592,
+      "order": 581,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13795,7 +13599,7 @@
     },
     {
       "id": "route-step-0550",
-      "order": 593,
+      "order": 582,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13815,7 +13619,7 @@
     },
     {
       "id": "route-step-0551",
-      "order": 594,
+      "order": 583,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13840,7 +13644,7 @@
     },
     {
       "id": "route-step-0552",
-      "order": 595,
+      "order": 584,
       "blockId": "block-09",
       "type": "order",
       "title": "Apprentissage : Assassin Suprême — avancer jusqu'au Grand Ougah",
@@ -13865,7 +13669,7 @@
     },
     {
       "id": "route-step-1206",
-      "order": 596,
+      "order": 585,
       "blockId": "block-09",
       "type": "dungeon",
       "displayRole": "detail",
@@ -13882,7 +13686,7 @@
     },
     {
       "id": "route-step-1207",
-      "order": 597,
+      "order": 586,
       "blockId": "block-09",
       "type": "resume",
       "displayRole": "transition",
@@ -13898,7 +13702,7 @@
     },
     {
       "id": "route-step-0556",
-      "order": 598,
+      "order": 587,
       "blockId": "block-09",
       "type": "quest",
       "displayRole": "objective",
@@ -13919,7 +13723,7 @@
     },
     {
       "id": "route-step-0557",
-      "order": 599,
+      "order": 588,
       "blockId": "block-09",
       "type": "dungeon",
       "displayRole": "detail",
@@ -13932,7 +13736,7 @@
     },
     {
       "id": "route-step-0558",
-      "order": 600,
+      "order": 589,
       "blockId": "block-09",
       "type": "resume",
       "displayRole": "transition",
@@ -13948,7 +13752,7 @@
     },
     {
       "id": "route-step-0559",
-      "order": 601,
+      "order": 590,
       "blockId": "block-09",
       "type": "quest",
       "title": "Les rescapés du Village Enseveli",
@@ -13971,7 +13775,7 @@
     },
     {
       "id": "route-step-0560",
-      "order": 602,
+      "order": 591,
       "blockId": "block-09",
       "type": "quest",
       "displayRole": "objective",
@@ -13992,7 +13796,7 @@
     },
     {
       "id": "route-step-0561",
-      "order": 603,
+      "order": 592,
       "blockId": "block-09",
       "type": "quest",
       "displayRole": "objective",
@@ -14012,7 +13816,7 @@
     },
     {
       "id": "route-step-0562",
-      "order": 604,
+      "order": 593,
       "blockId": "block-09",
       "type": "dungeon",
       "displayRole": "detail",
@@ -14025,7 +13829,7 @@
     },
     {
       "id": "route-step-0563",
-      "order": 605,
+      "order": 594,
       "blockId": "block-09",
       "type": "resume",
       "displayRole": "transition",
@@ -14041,7 +13845,7 @@
     },
     {
       "id": "route-step-0564",
-      "order": 606,
+      "order": 595,
       "blockId": "block-09",
       "type": "dungeon",
       "displayRole": "objective",
@@ -14054,7 +13858,7 @@
     },
     {
       "id": "route-step-0565",
-      "order": 607,
+      "order": 596,
       "blockId": "block-09",
       "type": "resume",
       "displayRole": "transition",
@@ -14071,7 +13875,7 @@
     },
     {
       "id": "route-step-0566",
-      "order": 608,
+      "order": 597,
       "blockId": "block-09",
       "type": "resume",
       "displayRole": "transition",
@@ -14087,7 +13891,7 @@
     },
     {
       "id": "route-step-0568",
-      "order": 609,
+      "order": 598,
       "blockId": "block-09",
       "type": "quest",
       "displayRole": "objective",
@@ -14108,7 +13912,7 @@
     },
     {
       "id": "route-step-0569",
-      "order": 610,
+      "order": 599,
       "blockId": "block-09",
       "type": "quest",
       "displayRole": "objective",
@@ -14132,7 +13936,7 @@
     },
     {
       "id": "route-step-0505",
-      "order": 611,
+      "order": 600,
       "blockId": "block-09",
       "type": "quest",
       "title": "Quand les esprits s'échauffent — jusqu'à Demeure des Esprits",
@@ -14159,7 +13963,7 @@
     },
     {
       "id": "route-step-0509",
-      "order": 612,
+      "order": 601,
       "blockId": "block-09",
       "type": "quest",
       "displayRole": "objective",
@@ -14188,7 +13992,7 @@
     },
     {
       "id": "route-step-0510",
-      "order": 613,
+      "order": 602,
       "blockId": "block-09",
       "type": "dungeon",
       "displayRole": "detail",
@@ -14205,7 +14009,7 @@
     },
     {
       "id": "route-step-0511",
-      "order": 614,
+      "order": 603,
       "blockId": "block-09",
       "type": "quest",
       "displayRole": "objective",
@@ -14231,7 +14035,7 @@
     },
     {
       "id": "route-step-0512",
-      "order": 615,
+      "order": 604,
       "blockId": "block-09",
       "type": "resume",
       "displayRole": "transition",
@@ -14247,7 +14051,7 @@
     },
     {
       "id": "route-step-0513",
-      "order": 616,
+      "order": 605,
       "blockId": "block-09",
       "type": "resume",
       "displayRole": "transition",
@@ -14262,7 +14066,7 @@
     },
     {
       "id": "route-step-0514",
-      "order": 617,
+      "order": 606,
       "blockId": "block-09",
       "type": "hard_lock",
       "title": "VERROU DUR — OCRE D'AMBRE",
@@ -14281,7 +14085,7 @@
     },
     {
       "id": "route-step-0515",
-      "order": 618,
+      "order": 607,
       "blockId": "block-09",
       "type": "quest",
       "title": "Le serment de l'ambre",
@@ -14298,7 +14102,7 @@
     },
     {
       "id": "route-step-0516",
-      "order": 619,
+      "order": 608,
       "blockId": "block-09",
       "type": "preparation",
       "title": "Si loin, si proches",
@@ -14314,7 +14118,7 @@
     },
     {
       "id": "route-step-0517",
-      "order": 620,
+      "order": 609,
       "blockId": "block-09",
       "type": "quest",
       "title": "Si loin, si proches",
@@ -14332,7 +14136,7 @@
     },
     {
       "id": "route-step-0571",
-      "order": 621,
+      "order": 610,
       "blockId": "block-09",
       "type": "quest",
       "displayRole": "objective",
@@ -14356,7 +14160,7 @@
     },
     {
       "id": "route-step-0572",
-      "order": 622,
+      "order": 611,
       "blockId": "block-09",
       "type": "quest",
       "displayRole": "objective",
@@ -14381,7 +14185,7 @@
     },
     {
       "id": "route-step-0573",
-      "order": 623,
+      "order": 612,
       "blockId": "block-09",
       "type": "dungeon",
       "displayRole": "detail",
@@ -14398,7 +14202,7 @@
     },
     {
       "id": "route-step-0574",
-      "order": 624,
+      "order": 613,
       "blockId": "block-09",
       "type": "resume",
       "displayRole": "transition",
@@ -14415,7 +14219,7 @@
     },
     {
       "id": "route-step-0575",
-      "order": 625,
+      "order": 614,
       "blockId": "block-09",
       "type": "resume",
       "displayRole": "transition",
@@ -14430,7 +14234,7 @@
     },
     {
       "id": "route-step-0576",
-      "order": 626,
+      "order": 615,
       "blockId": "block-09",
       "type": "resume",
       "displayRole": "transition",
@@ -14445,7 +14249,7 @@
     },
     {
       "id": "route-step-0577",
-      "order": 627,
+      "order": 616,
       "blockId": "block-09",
       "type": "quest",
       "title": "Là-haut sur la montagne — avancer jusqu'au Kolosso",
@@ -14463,7 +14267,7 @@
     },
     {
       "id": "route-step-0578",
-      "order": 628,
+      "order": 617,
       "blockId": "block-09",
       "type": "resume",
       "displayRole": "objective",
@@ -14484,7 +14288,7 @@
     },
     {
       "id": "route-step-0579",
-      "order": 629,
+      "order": 618,
       "blockId": "block-09",
       "type": "resume",
       "displayRole": "transition",
@@ -14500,7 +14304,7 @@
     },
     {
       "id": "route-step-0580",
-      "order": 630,
+      "order": 619,
       "blockId": "block-09",
       "type": "quest",
       "title": "Une âme en colère — TERMINER / obtenir le Dofus Turquoise",
@@ -14518,7 +14322,7 @@
     },
     {
       "id": "route-step-0461",
-      "order": 631,
+      "order": 620,
       "blockId": "block-09",
       "type": "resume",
       "displayRole": "objective",
@@ -14530,7 +14334,7 @@
     },
     {
       "id": "route-step-0462",
-      "order": 632,
+      "order": 621,
       "blockId": "block-09",
       "type": "dungeon",
       "displayRole": "detail",
@@ -14542,7 +14346,7 @@
     },
     {
       "id": "route-step-0463",
-      "order": 633,
+      "order": 622,
       "blockId": "block-09",
       "type": "resume",
       "displayRole": "transition",
@@ -14558,7 +14362,7 @@
     },
     {
       "id": "route-step-0581",
-      "order": 634,
+      "order": 623,
       "blockId": "block-09",
       "type": "quest",
       "displayRole": "objective",
@@ -14579,7 +14383,7 @@
     },
     {
       "id": "route-step-0582",
-      "order": 635,
+      "order": 624,
       "blockId": "block-09",
       "type": "dungeon",
       "displayRole": "detail",
@@ -14592,7 +14396,7 @@
     },
     {
       "id": "route-step-0583",
-      "order": 636,
+      "order": 625,
       "blockId": "block-09",
       "type": "resume",
       "displayRole": "transition",
@@ -14609,7 +14413,7 @@
     },
     {
       "id": "route-step-0584",
-      "order": 637,
+      "order": 626,
       "blockId": "block-09",
       "type": "quest",
       "displayRole": "objective",
@@ -14628,7 +14432,7 @@
     },
     {
       "id": "route-step-0585",
-      "order": 638,
+      "order": 627,
       "blockId": "block-09",
       "type": "resume",
       "displayRole": "transition",
@@ -14648,7 +14452,7 @@
     },
     {
       "id": "route-step-0589",
-      "order": 639,
+      "order": 628,
       "blockId": "block-09",
       "type": "quest",
       "displayRole": "objective",
@@ -14673,7 +14477,7 @@
     },
     {
       "id": "route-step-0586",
-      "order": 640,
+      "order": 629,
       "blockId": "block-09",
       "type": "resume",
       "displayRole": "transition",
@@ -14698,7 +14502,7 @@
     },
     {
       "id": "route-step-0590",
-      "order": 641,
+      "order": 630,
       "blockId": "block-09",
       "type": "dungeon",
       "displayRole": "detail",
@@ -14715,7 +14519,7 @@
     },
     {
       "id": "route-step-0587",
-      "order": 642,
+      "order": 631,
       "blockId": "block-09",
       "type": "resume",
       "displayRole": "transition",
@@ -14734,7 +14538,7 @@
     },
     {
       "id": "route-step-0588",
-      "order": 643,
+      "order": 632,
       "blockId": "block-09",
       "type": "quest",
       "displayRole": "objective",
@@ -14753,7 +14557,7 @@
     },
     {
       "id": "route-step-0644",
-      "order": 644,
+      "order": 633,
       "blockId": "block-09",
       "type": "quest",
       "title": "Donjons et trouffions",
@@ -14772,7 +14576,7 @@
     },
     {
       "id": "route-step-0591",
-      "order": 645,
+      "order": 634,
       "blockId": "block-09",
       "type": "preparation",
       "title": "Alignement 86→90",
@@ -14787,7 +14591,7 @@
     },
     {
       "id": "route-step-0592",
-      "order": 646,
+      "order": 635,
       "blockId": "block-09",
       "type": "preparation",
       "title": "Alignement 91→100",
@@ -14805,7 +14609,7 @@
     },
     {
       "id": "route-step-0593",
-      "order": 647,
+      "order": 636,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -14823,7 +14627,7 @@
     },
     {
       "id": "route-step-0594",
-      "order": 648,
+      "order": 637,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -14842,7 +14646,7 @@
     },
     {
       "id": "route-step-0595",
-      "order": 649,
+      "order": 638,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -14861,7 +14665,7 @@
     },
     {
       "id": "route-step-0596",
-      "order": 650,
+      "order": 639,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -14880,7 +14684,7 @@
     },
     {
       "id": "route-step-0597",
-      "order": 651,
+      "order": 640,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -14901,7 +14705,7 @@
     },
     {
       "id": "route-step-0598",
-      "order": 652,
+      "order": 641,
       "blockId": "block-09",
       "type": "dungeon",
       "displayRole": "detail",
@@ -14914,7 +14718,7 @@
     },
     {
       "id": "route-step-0599",
-      "order": 653,
+      "order": 642,
       "blockId": "block-09",
       "type": "resume",
       "displayRole": "transition",
@@ -14929,7 +14733,7 @@
     },
     {
       "id": "route-step-0645",
-      "order": 654,
+      "order": 643,
       "blockId": "block-09",
       "type": "quest",
       "title": "Au fion du trou",
@@ -14955,7 +14759,7 @@
     },
     {
       "id": "route-step-0600",
-      "order": 655,
+      "order": 644,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -14974,7 +14778,7 @@
     },
     {
       "id": "route-step-0601",
-      "order": 656,
+      "order": 645,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -14993,7 +14797,7 @@
     },
     {
       "id": "route-step-0602",
-      "order": 657,
+      "order": 646,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -15013,7 +14817,7 @@
     },
     {
       "id": "route-step-0603",
-      "order": 658,
+      "order": 647,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -15032,7 +14836,7 @@
     },
     {
       "id": "route-step-0604",
-      "order": 659,
+      "order": 648,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -15051,7 +14855,7 @@
     },
     {
       "id": "route-step-0606",
-      "order": 660,
+      "order": 649,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -15071,7 +14875,7 @@
     },
     {
       "id": "route-step-0607",
-      "order": 661,
+      "order": 650,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -15096,7 +14900,7 @@
     },
     {
       "id": "route-step-0652",
-      "order": 662,
+      "order": 651,
       "blockId": "block-10",
       "type": "preparation",
       "title": "Avant La chasse aux chasseurs",
@@ -15119,7 +14923,7 @@
     },
     {
       "id": "route-step-1163",
-      "order": 663,
+      "order": 652,
       "blockId": "block-10",
       "type": "quest",
       "displayRole": "objective",
@@ -15148,7 +14952,7 @@
     },
     {
       "id": "route-step-0654",
-      "order": 664,
+      "order": 653,
       "blockId": "block-10",
       "type": "quest",
       "displayRole": "objective",
@@ -15173,7 +14977,7 @@
     },
     {
       "id": "route-step-0655",
-      "order": 665,
+      "order": 654,
       "blockId": "block-10",
       "type": "resume",
       "displayRole": "transition",
@@ -15198,7 +15002,7 @@
     },
     {
       "id": "route-step-0656",
-      "order": 666,
+      "order": 655,
       "blockId": "block-10",
       "type": "quest",
       "displayRole": "objective",
@@ -15222,7 +15026,7 @@
     },
     {
       "id": "route-step-1164",
-      "order": 667,
+      "order": 656,
       "blockId": "block-10",
       "type": "quest",
       "displayRole": "objective",
@@ -15251,7 +15055,7 @@
     },
     {
       "id": "route-step-1165",
-      "order": 668,
+      "order": 657,
       "blockId": "block-10",
       "type": "quest",
       "displayRole": "objective",
@@ -15280,7 +15084,7 @@
     },
     {
       "id": "route-step-1166",
-      "order": 669,
+      "order": 658,
       "blockId": "block-10",
       "type": "quest",
       "displayRole": "objective",
@@ -15309,7 +15113,7 @@
     },
     {
       "id": "route-step-0657",
-      "order": 670,
+      "order": 659,
       "blockId": "block-10",
       "type": "resume",
       "displayRole": "transition",
@@ -15334,7 +15138,7 @@
     },
     {
       "id": "route-step-1167",
-      "order": 671,
+      "order": 660,
       "blockId": "block-10",
       "type": "quest",
       "displayRole": "objective",
@@ -15363,7 +15167,7 @@
     },
     {
       "id": "route-step-0658",
-      "order": 672,
+      "order": 661,
       "blockId": "block-10",
       "type": "resume",
       "displayRole": "transition",
@@ -15388,7 +15192,7 @@
     },
     {
       "id": "route-step-0659",
-      "order": 673,
+      "order": 662,
       "blockId": "block-10",
       "type": "resume",
       "displayRole": "transition",
@@ -15413,7 +15217,7 @@
     },
     {
       "id": "route-step-0661",
-      "order": 674,
+      "order": 663,
       "blockId": "block-10",
       "type": "quest",
       "displayRole": "objective",
@@ -15439,7 +15243,7 @@
     },
     {
       "id": "route-step-0660",
-      "order": 675,
+      "order": 664,
       "blockId": "block-10",
       "type": "resume",
       "displayRole": "transition",
@@ -15464,7 +15268,7 @@
     },
     {
       "id": "route-step-0662",
-      "order": 676,
+      "order": 665,
       "blockId": "block-10",
       "type": "dungeon",
       "displayRole": "objective",
@@ -15477,7 +15281,7 @@
     },
     {
       "id": "route-step-0663",
-      "order": 677,
+      "order": 666,
       "blockId": "block-10",
       "type": "resume",
       "displayRole": "transition",
@@ -15497,7 +15301,7 @@
     },
     {
       "id": "route-step-0784",
-      "order": 678,
+      "order": 667,
       "blockId": "block-10",
       "type": "quest",
       "displayRole": "objective",
@@ -15517,7 +15321,7 @@
     },
     {
       "id": "route-step-0785",
-      "order": 679,
+      "order": 668,
       "blockId": "block-10",
       "type": "quest",
       "displayRole": "objective",
@@ -15536,7 +15340,7 @@
     },
     {
       "id": "route-step-0786",
-      "order": 680,
+      "order": 669,
       "blockId": "block-10",
       "type": "quest",
       "displayRole": "objective",
@@ -15555,7 +15359,7 @@
     },
     {
       "id": "route-step-0787",
-      "order": 681,
+      "order": 670,
       "blockId": "block-10",
       "type": "quest",
       "displayRole": "objective",
@@ -15574,7 +15378,7 @@
     },
     {
       "id": "route-step-0788",
-      "order": 682,
+      "order": 671,
       "blockId": "block-10",
       "type": "quest",
       "displayRole": "objective",
@@ -15594,7 +15398,7 @@
     },
     {
       "id": "route-step-0789",
-      "order": 683,
+      "order": 672,
       "blockId": "block-10",
       "type": "quest",
       "displayRole": "objective",
@@ -15613,7 +15417,7 @@
     },
     {
       "id": "route-step-0790",
-      "order": 684,
+      "order": 673,
       "blockId": "block-10",
       "type": "quest",
       "displayRole": "objective",
@@ -15633,7 +15437,7 @@
     },
     {
       "id": "route-step-0791",
-      "order": 685,
+      "order": 674,
       "blockId": "block-10",
       "type": "dungeon",
       "displayRole": "detail",
@@ -15646,7 +15450,7 @@
     },
     {
       "id": "route-step-0792",
-      "order": 686,
+      "order": 675,
       "blockId": "block-10",
       "type": "resume",
       "displayRole": "transition",
@@ -15661,7 +15465,7 @@
     },
     {
       "id": "route-step-0793",
-      "order": 687,
+      "order": 676,
       "blockId": "block-10",
       "type": "quest",
       "displayRole": "objective",
@@ -15680,7 +15484,7 @@
     },
     {
       "id": "route-step-0794",
-      "order": 688,
+      "order": 677,
       "blockId": "block-10",
       "type": "quest",
       "displayRole": "objective",
@@ -15699,7 +15503,7 @@
     },
     {
       "id": "route-step-0675",
-      "order": 689,
+      "order": 678,
       "blockId": "block-10",
       "type": "preparation",
       "title": "Eliocalypse : Résonance",
@@ -15723,7 +15527,7 @@
     },
     {
       "id": "route-step-0676",
-      "order": 690,
+      "order": 679,
       "blockId": "block-10",
       "type": "quest",
       "title": "Barnabé dans l'espace",
@@ -15741,7 +15545,7 @@
     },
     {
       "id": "route-step-0677",
-      "order": 691,
+      "order": 680,
       "blockId": "block-10",
       "type": "quest",
       "title": "Chaque chose en son temps",
@@ -15760,7 +15564,7 @@
     },
     {
       "id": "route-step-0678",
-      "order": 692,
+      "order": 681,
       "blockId": "block-10",
       "type": "quest",
       "displayRole": "objective",
@@ -15778,7 +15582,7 @@
     },
     {
       "id": "route-step-0679",
-      "order": 693,
+      "order": 682,
       "blockId": "block-10",
       "type": "quest",
       "displayRole": "objective",
@@ -15796,7 +15600,7 @@
     },
     {
       "id": "route-step-1170",
-      "order": 694,
+      "order": 683,
       "blockId": "block-10",
       "type": "quest",
       "displayRole": "objective",
@@ -15840,7 +15644,7 @@
     },
     {
       "id": "route-step-1171",
-      "order": 695,
+      "order": 684,
       "blockId": "block-10",
       "type": "long_running",
       "displayRole": "objective",
@@ -15869,7 +15673,7 @@
     },
     {
       "id": "route-step-0680",
-      "order": 696,
+      "order": 685,
       "blockId": "block-10",
       "type": "quest",
       "displayRole": "objective",
@@ -15887,7 +15691,7 @@
     },
     {
       "id": "route-step-0681",
-      "order": 697,
+      "order": 686,
       "blockId": "block-10",
       "type": "quest",
       "displayRole": "objective",
@@ -15906,7 +15710,7 @@
     },
     {
       "id": "route-step-0682",
-      "order": 698,
+      "order": 687,
       "blockId": "block-10",
       "type": "quest",
       "displayRole": "objective",
@@ -15925,7 +15729,7 @@
     },
     {
       "id": "route-step-0683",
-      "order": 699,
+      "order": 688,
       "blockId": "block-10",
       "type": "quest",
       "displayRole": "objective",
@@ -15944,7 +15748,7 @@
     },
     {
       "id": "route-step-0684",
-      "order": 700,
+      "order": 689,
       "blockId": "block-10",
       "type": "quest",
       "displayRole": "objective",
@@ -15963,7 +15767,7 @@
     },
     {
       "id": "route-step-0685",
-      "order": 701,
+      "order": 690,
       "blockId": "block-10",
       "type": "quest",
       "displayRole": "transition",
@@ -15983,7 +15787,7 @@
     },
     {
       "id": "route-step-0609",
-      "order": 702,
+      "order": 691,
       "blockId": "block-11",
       "type": "preparation",
       "title": "Frigost III",
@@ -16002,7 +15806,7 @@
     },
     {
       "id": "route-step-0611",
-      "order": 703,
+      "order": 692,
       "blockId": "block-11",
       "type": "quest",
       "displayRole": "objective",
@@ -16027,7 +15831,7 @@
     },
     {
       "id": "route-step-0612",
-      "order": 704,
+      "order": 693,
       "blockId": "block-11",
       "type": "quest",
       "displayRole": "objective",
@@ -16046,7 +15850,7 @@
     },
     {
       "id": "route-step-0613",
-      "order": 705,
+      "order": 694,
       "blockId": "block-11",
       "type": "long_running",
       "displayRole": "objective",
@@ -16070,7 +15874,7 @@
     },
     {
       "id": "route-step-0614",
-      "order": 706,
+      "order": 695,
       "blockId": "block-11",
       "type": "long_running",
       "displayRole": "objective",
@@ -16094,7 +15898,7 @@
     },
     {
       "id": "route-step-0615",
-      "order": 707,
+      "order": 696,
       "blockId": "block-11",
       "type": "quest",
       "displayRole": "objective",
@@ -16143,7 +15947,7 @@
     },
     {
       "id": "route-step-0616",
-      "order": 708,
+      "order": 697,
       "blockId": "block-11",
       "type": "resume",
       "displayRole": "transition",
@@ -16160,7 +15964,7 @@
     },
     {
       "id": "route-step-0617",
-      "order": 709,
+      "order": 698,
       "blockId": "block-11",
       "type": "quest",
       "displayRole": "objective",
@@ -16179,7 +15983,7 @@
     },
     {
       "id": "route-step-0618",
-      "order": 710,
+      "order": 699,
       "blockId": "block-11",
       "type": "quest",
       "displayRole": "objective",
@@ -16198,7 +16002,7 @@
     },
     {
       "id": "route-step-0619",
-      "order": 711,
+      "order": 700,
       "blockId": "block-11",
       "type": "resume",
       "displayRole": "transition",
@@ -16217,7 +16021,7 @@
     },
     {
       "id": "route-step-0620",
-      "order": 712,
+      "order": 701,
       "blockId": "block-11",
       "type": "quest",
       "displayRole": "objective",
@@ -16241,7 +16045,7 @@
     },
     {
       "id": "route-step-0621",
-      "order": 713,
+      "order": 702,
       "blockId": "block-11",
       "type": "quest",
       "displayRole": "objective",
@@ -16257,7 +16061,7 @@
     },
     {
       "id": "route-step-0622",
-      "order": 714,
+      "order": 703,
       "blockId": "block-11",
       "type": "dungeon",
       "displayRole": "detail",
@@ -16270,7 +16074,7 @@
     },
     {
       "id": "route-step-0623",
-      "order": 715,
+      "order": 704,
       "blockId": "block-11",
       "type": "resume",
       "displayRole": "transition",
@@ -16285,7 +16089,7 @@
     },
     {
       "id": "route-step-0624",
-      "order": 716,
+      "order": 705,
       "blockId": "block-11",
       "type": "resume",
       "displayRole": "transition",
@@ -16305,7 +16109,7 @@
     },
     {
       "id": "route-step-0625",
-      "order": 717,
+      "order": 706,
       "blockId": "block-11",
       "type": "quest",
       "displayRole": "objective",
@@ -16329,7 +16133,7 @@
     },
     {
       "id": "route-step-0626",
-      "order": 718,
+      "order": 707,
       "blockId": "block-11",
       "type": "dungeon",
       "displayRole": "detail",
@@ -16342,7 +16146,7 @@
     },
     {
       "id": "route-step-0627",
-      "order": 719,
+      "order": 708,
       "blockId": "block-11",
       "type": "resume",
       "displayRole": "transition",
@@ -16357,7 +16161,7 @@
     },
     {
       "id": "route-step-0628",
-      "order": 720,
+      "order": 709,
       "blockId": "block-11",
       "type": "quest",
       "displayRole": "objective",
@@ -16381,7 +16185,7 @@
     },
     {
       "id": "route-step-0629",
-      "order": 721,
+      "order": 710,
       "blockId": "block-11",
       "type": "dungeon",
       "displayRole": "detail",
@@ -16394,7 +16198,7 @@
     },
     {
       "id": "route-step-0630",
-      "order": 722,
+      "order": 711,
       "blockId": "block-11",
       "type": "resume",
       "displayRole": "transition",
@@ -16409,7 +16213,7 @@
     },
     {
       "id": "route-step-0631",
-      "order": 723,
+      "order": 712,
       "blockId": "block-11",
       "type": "quest",
       "displayRole": "objective",
@@ -16437,7 +16241,7 @@
     },
     {
       "id": "route-step-0632",
-      "order": 724,
+      "order": 713,
       "blockId": "block-11",
       "type": "dungeon",
       "displayRole": "detail",
@@ -16454,7 +16258,7 @@
     },
     {
       "id": "route-step-0633",
-      "order": 725,
+      "order": 714,
       "blockId": "block-11",
       "type": "resume",
       "displayRole": "transition",
@@ -16470,7 +16274,7 @@
     },
     {
       "id": "route-step-0634",
-      "order": 726,
+      "order": 715,
       "blockId": "block-11",
       "type": "resume",
       "displayRole": "objective",
@@ -16490,7 +16294,7 @@
     },
     {
       "id": "route-step-0636",
-      "order": 727,
+      "order": 716,
       "blockId": "block-11",
       "type": "quest",
       "displayRole": "objective",
@@ -16511,7 +16315,7 @@
     },
     {
       "id": "route-step-0637",
-      "order": 728,
+      "order": 717,
       "blockId": "block-11",
       "type": "resume",
       "displayRole": "transition",
@@ -16531,7 +16335,7 @@
     },
     {
       "id": "route-step-0638",
-      "order": 729,
+      "order": 718,
       "blockId": "block-11",
       "type": "resume",
       "displayRole": "transition",
@@ -16547,7 +16351,7 @@
     },
     {
       "id": "route-step-0639",
-      "order": 730,
+      "order": 719,
       "blockId": "block-11",
       "type": "resume",
       "displayRole": "transition",
@@ -16563,7 +16367,7 @@
     },
     {
       "id": "route-step-0640",
-      "order": 731,
+      "order": 720,
       "blockId": "block-11",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -16583,7 +16387,7 @@
     },
     {
       "id": "route-step-0641",
-      "order": 732,
+      "order": 721,
       "blockId": "block-11",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -16608,7 +16412,7 @@
     },
     {
       "id": "route-step-1208",
-      "order": 733,
+      "order": 722,
       "blockId": "block-11",
       "type": "dungeon",
       "displayRole": "detail",
@@ -16621,7 +16425,7 @@
     },
     {
       "id": "route-step-0806",
-      "order": 734,
+      "order": 723,
       "blockId": "block-11",
       "type": "resume",
       "displayRole": "transition",
@@ -16638,7 +16442,7 @@
     },
     {
       "id": "route-step-0643",
-      "order": 735,
+      "order": 724,
       "blockId": "block-11",
       "type": "quest",
       "displayRole": "objective",
@@ -16667,7 +16471,7 @@
     },
     {
       "id": "route-step-0646",
-      "order": 736,
+      "order": 725,
       "blockId": "block-11",
       "type": "dungeon",
       "displayRole": "detail",
@@ -16683,7 +16487,7 @@
     },
     {
       "id": "route-step-0647",
-      "order": 737,
+      "order": 726,
       "blockId": "block-11",
       "type": "resume",
       "displayRole": "transition",
@@ -16699,7 +16503,7 @@
     },
     {
       "id": "route-step-0648",
-      "order": 738,
+      "order": 727,
       "blockId": "block-11",
       "type": "resume",
       "displayRole": "transition",
@@ -16715,7 +16519,7 @@
     },
     {
       "id": "route-step-0650",
-      "order": 739,
+      "order": 728,
       "blockId": "block-11",
       "type": "quest",
       "title": "La garde meurt mais ne se rend pas",
@@ -16733,7 +16537,7 @@
     },
     {
       "id": "route-step-0807",
-      "order": 740,
+      "order": 729,
       "blockId": "block-12",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -16754,7 +16558,7 @@
     },
     {
       "id": "route-step-1203",
-      "order": 741,
+      "order": 730,
       "blockId": "block-12",
       "type": "preparation",
       "title": "Ordre 5 — complément ressources",
@@ -16765,7 +16569,7 @@
     },
     {
       "id": "route-step-0808",
-      "order": 742,
+      "order": 731,
       "blockId": "block-12",
       "type": "order",
       "displayRole": "objective",
@@ -16786,7 +16590,7 @@
     },
     {
       "id": "route-step-0809",
-      "order": 743,
+      "order": 732,
       "blockId": "block-12",
       "type": "dungeon",
       "displayRole": "detail",
@@ -16799,7 +16603,7 @@
     },
     {
       "id": "route-step-0810",
-      "order": 744,
+      "order": 733,
       "blockId": "block-12",
       "type": "resume",
       "displayRole": "transition",
@@ -16815,7 +16619,7 @@
     },
     {
       "id": "route-step-0811",
-      "order": 745,
+      "order": 734,
       "blockId": "block-12",
       "type": "hard_lock",
       "title": "VERROU DUR — ALIGNEMENT 100 + ORDRE 5",
@@ -16833,288 +16637,8 @@
       }
     },
     {
-      "id": "route-step-0666",
-      "order": 746,
-      "blockId": "block-12",
-      "type": "preparation",
-      "title": "La mer en héritage",
-      "warning": "Le Volant hydraulique du succès complet n'est pas requis pour atteindre Son nom est Personne ; ne pas l'acheter prématurément.",
-      "action": "PRÉPARER",
-      "instruction": "Choisis achat du Sceau OU craft, puis prépare l'option choisie.",
-      "preparationItems": [
-        "Acheter 1 Sceau des fondateurs",
-        "50 Bave de Mol Usk",
-        "50 Pince de Crabe Yoloniste",
-        "50 Écaille de Gambaf",
-        "10 Écume de mer",
-        "20 Patelle",
-        "20 Quisnoa",
-        "1 Ambre de muldo",
-        "Bijoutier 200"
-      ]
-    },
-    {
-      "id": "route-step-0668",
-      "order": 747,
-      "blockId": "block-12",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "La pêche aux infos",
-      "prerequisites": "Niveau minimum 190.",
-      "warning": "Chaîne Sufokia strictement séquentielle : cette quête débloque Il y a de l'électricité dans l'eau.",
-      "action": "LANCER / TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/la-pecircche-aux-infos.html"
-      },
-      "momentId": "moment-sufokia-meno1",
-      "location": {
-        "x": 23,
-        "y": 24
-      },
-      "destination": {
-        "x": 23,
-        "y": 24
-      },
-      "guideItems": [
-        {
-          "action": "take",
-          "label": "La pêche aux infos",
-          "location": {
-            "x": 23,
-            "y": 24
-          },
-          "note": "Pollie Perkine."
-        },
-        {
-          "action": "finish",
-          "label": "La pêche aux infos",
-          "location": {
-            "x": 23,
-            "y": 24
-          }
-        }
-      ]
-    },
-    {
-      "id": "route-step-0669",
-      "order": 748,
-      "blockId": "block-12",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Il y a de l'électricité dans l'eau",
-      "prerequisites": "La pêche aux infos terminée.",
-      "warning": "Débloque Topo le petit robot.",
-      "action": "LANCER / TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/il-y-a-de-leacutelectriciteacute-dans-leau.html"
-      },
-      "momentId": "moment-sufokia-meno1",
-      "location": {
-        "x": 22,
-        "y": 28
-      },
-      "destination": {
-        "x": 22,
-        "y": 28
-      },
-      "guideItems": [
-        {
-          "action": "take",
-          "label": "Il y a de l'électricité dans l'eau",
-          "location": {
-            "x": 22,
-            "y": 28
-          },
-          "note": "Prosper Meraimée."
-        },
-        {
-          "action": "finish",
-          "label": "Il y a de l'électricité dans l'eau",
-          "location": {
-            "x": 22,
-            "y": 28
-          }
-        }
-      ]
-    },
-    {
-      "id": "route-step-0670",
-      "order": 749,
-      "blockId": "block-12",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Topo le petit robot",
-      "prerequisites": "Il y a de l'électricité dans l'eau terminé ; Sceau des fondateurs disponible.",
-      "warning": "Ignore les quêtes de zone optionnelles proposées pendant l'escorte : elles ne sont pas nécessaires pour ce parcours.",
-      "action": "LANCER / TERMINER",
-      "instruction": "→ [22,30] : prendre Topo le petit robot, terminer l'escorte puis enchaîner sur Piège de crystal.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/topo-le-petit-robot.html"
-      },
-      "momentId": "moment-sufokia-meno1",
-      "location": {
-        "x": 22,
-        "y": 30
-      },
-      "destination": {
-        "x": 22,
-        "y": 28
-      },
-      "guideItems": [
-        {
-          "action": "take",
-          "label": "Topo le petit robot",
-          "location": {
-            "x": 22,
-            "y": 30
-          }
-        },
-        {
-          "action": "finish",
-          "label": "Topo le petit robot",
-          "location": {
-            "x": 22,
-            "y": 28
-          },
-          "note": "Fin de l'escorte."
-        }
-      ]
-    },
-    {
-      "id": "route-step-0671",
-      "order": 750,
-      "blockId": "block-12",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Piège de crystal — jusqu'au Vaisseau du Capitaine Meno",
-      "prerequisites": "Topo le petit robot terminé.",
-      "warning": "Premier et unique passage Meno nécessaire pour cette chaîne à ce stade.",
-      "action": "LANCER / AVANCER / STOP",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/piegravege-de-crystal.html"
-      },
-      "momentId": "moment-sufokia-meno1",
-      "location": {
-        "x": 22,
-        "y": 28
-      },
-      "destination": {
-        "x": 24,
-        "y": 27
-      },
-      "guideItems": [
-        {
-          "action": "take",
-          "label": "Piège de crystal",
-          "location": {
-            "x": 22,
-            "y": 28
-          },
-          "note": "Parle à Prosper Meraimée."
-        },
-        {
-          "action": "advance",
-          "label": "Piège de crystal",
-          "location": {
-            "x": 24,
-            "y": 27
-          },
-          "note": "Va jusqu'au Vaisseau du Capitaine Meno puis STOP."
-        }
-      ]
-    },
-    {
-      "id": "route-step-0672",
-      "order": 751,
-      "blockId": "block-12",
-      "type": "dungeon",
-      "displayRole": "detail",
-      "title": "Vaisseau du Capitaine Meno — PASSAGE #1",
-      "prerequisites": "Piège de crystal actif.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après avoir vaincu Meno, parle au Capitaine Meno dans la salle de fin avant de quitter le vaisseau : ce dialogue ferme Piège de crystal et ouvre Son nom est Personne.",
-      "action": "FAIRE",
-      "instruction": "☐ Capitaine Meno — vaincre le boss puis parler à Meno avant de sortir.",
-      "momentId": "moment-sufokia-meno1"
-    },
-    {
-      "id": "route-step-0673",
-      "order": 752,
-      "blockId": "block-12",
-      "type": "resume",
-      "displayRole": "transition",
-      "title": "Piège de crystal → Son nom est Personne — avant de sortir",
-      "prerequisites": "Capitaine Meno vaincu ; dialogue de Piège de crystal effectué.",
-      "warning": "Son nom est Personne se lance auprès de Meno dans la salle de sortie. Ne quitte pas le vaisseau entre les deux quêtes.",
-      "action": "TERMINER + LANCER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/piegravege-de-crystal.html"
-      },
-      "momentId": "moment-sufokia-meno1",
-      "location": {
-        "x": 24,
-        "y": 27
-      },
-      "destination": {
-        "x": 23,
-        "y": 24
-      },
-      "launchInstruction": "À la suite de Piège de crystal, parle de nouveau au Capitaine Meno dans la salle de sortie pour lancer Son nom est Personne.",
-      "guideItems": [
-        {
-          "action": "finish",
-          "label": "Piège de crystal",
-          "location": {
-            "x": 24,
-            "y": 27
-          },
-          "note": "Parle à Meno après la victoire."
-        },
-        {
-          "action": "take",
-          "label": "Son nom est Personne",
-          "location": {
-            "x": 24,
-            "y": 27
-          },
-          "note": "Reparle immédiatement à Meno."
-        }
-      ],
-      "longRunningGoal": {
-        "goalId": "son-nom-est-personne",
-        "phase": "start"
-      }
-    },
-    {
-      "id": "route-step-0674",
-      "order": 753,
-      "blockId": "block-12",
-      "type": "resume",
-      "title": "Son nom est Personne",
-      "prerequisites": "Quête déjà lancée auprès de Meno dans la salle de sortie.",
-      "warning": "Le retour auprès de Meno se fait via son Pichon kloune : aucun second donjon n'est requis.",
-      "action": "TERMINER",
-      "instruction": "☐ Son nom est Personne — faire Deks, Docteur Hou et Jelus Vern ; utiliser le Pichon kloune pour revenir à Meno sans refaire le donjon, puis rendre à Prosper.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/son-nom-est-personne.html"
-      },
-      "destination": {
-        "x": 22,
-        "y": 28
-      },
-      "longRunningGoal": {
-        "goalId": "son-nom-est-personne",
-        "phase": "finish"
-      }
-    },
-    {
       "id": "route-step-0747",
-      "order": 754,
+      "order": 735,
       "blockId": "block-12",
       "type": "preparation",
       "title": "Le pays des Vermeils",
@@ -17138,7 +16662,7 @@
     },
     {
       "id": "route-step-0783",
-      "order": 755,
+      "order": 736,
       "blockId": "block-12",
       "type": "preparation",
       "title": "Convergence Ilyzaelle",
@@ -17160,7 +16684,7 @@
     },
     {
       "id": "route-step-0887",
-      "order": 756,
+      "order": 737,
       "blockId": "block-12",
       "type": "hard_lock",
       "title": "VERROU DUR — L'ÉTERNELLE MOISSON",
@@ -17179,7 +16703,7 @@
     },
     {
       "id": "route-step-0888",
-      "order": 757,
+      "order": 738,
       "blockId": "block-12",
       "type": "resume",
       "displayRole": "objective",
@@ -17196,7 +16720,7 @@
     },
     {
       "id": "route-step-0889",
-      "order": 758,
+      "order": 739,
       "blockId": "block-12",
       "type": "dungeon",
       "displayRole": "detail",
@@ -17213,7 +16737,7 @@
     },
     {
       "id": "route-step-0890",
-      "order": 759,
+      "order": 740,
       "blockId": "block-12",
       "type": "resume",
       "displayRole": "transition",
@@ -17232,7 +16756,7 @@
     },
     {
       "id": "route-step-0814",
-      "order": 760,
+      "order": 741,
       "blockId": "block-13",
       "type": "preparation",
       "title": "Blanc Ivoire",
@@ -17256,7 +16780,7 @@
     },
     {
       "id": "route-step-0816",
-      "order": 761,
+      "order": 742,
       "blockId": "block-13",
       "type": "quest",
       "displayRole": "objective",
@@ -17280,7 +16804,7 @@
     },
     {
       "id": "route-step-0817",
-      "order": 762,
+      "order": 743,
       "blockId": "block-13",
       "type": "dungeon",
       "displayRole": "detail",
@@ -17293,7 +16817,7 @@
     },
     {
       "id": "route-step-0818",
-      "order": 763,
+      "order": 744,
       "blockId": "block-13",
       "type": "resume",
       "displayRole": "transition",
@@ -17308,7 +16832,7 @@
     },
     {
       "id": "route-step-0819",
-      "order": 764,
+      "order": 745,
       "blockId": "block-13",
       "type": "quest",
       "displayRole": "objective",
@@ -17332,7 +16856,7 @@
     },
     {
       "id": "route-step-0820",
-      "order": 765,
+      "order": 746,
       "blockId": "block-13",
       "type": "dungeon",
       "displayRole": "detail",
@@ -17345,7 +16869,7 @@
     },
     {
       "id": "route-step-0821",
-      "order": 766,
+      "order": 747,
       "blockId": "block-13",
       "type": "resume",
       "displayRole": "transition",
@@ -17359,8 +16883,204 @@
       "momentId": "moment-route-step-0819"
     },
     {
+      "id": "route-step-0767",
+      "order": 748,
+      "blockId": "block-13",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Touchez pas à Grisebigle",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/touchez-pas-a-grisebigle.html"
+      },
+      "momentId": "moment-enutrosor3-a",
+      "location": {
+        "x": -22,
+        "y": -24
+      }
+    },
+    {
+      "id": "route-step-0768",
+      "order": 749,
+      "blockId": "block-13",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Échantillonnage",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/eacutechantillonnage.html"
+      },
+      "momentId": "moment-enutrosor3-b",
+      "location": {
+        "x": -22,
+        "y": -24
+      }
+    },
+    {
+      "id": "route-step-0769",
+      "order": 750,
+      "blockId": "block-13",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Le silence est d'or",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/le-silence-est-dor.html"
+      },
+      "momentId": "moment-enutrosor3-b",
+      "location": {
+        "x": -1,
+        "y": -1
+      }
+    },
+    {
+      "id": "route-step-0770",
+      "order": 751,
+      "blockId": "block-13",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Espionnage industriel",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/espionnage-industriel.html"
+      },
+      "momentId": "moment-enutrosor3-b",
+      "location": {
+        "x": -8,
+        "y": -5
+      }
+    },
+    {
+      "id": "route-step-0771",
+      "order": 752,
+      "blockId": "block-13",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Prise d'otages",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/prise-dotages.html"
+      },
+      "momentId": "moment-enutrosor3-b",
+      "location": {
+        "x": -8,
+        "y": -5
+      }
+    },
+    {
+      "id": "route-step-0772",
+      "order": 753,
+      "blockId": "block-13",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "La grève de la fin",
+      "prerequisites": "Prise d'otages terminée ; 3 000 points de succès minimum ; 200 000 kamas disponibles sur soi (non consommés) ; au moins 1 métier niveau 200.",
+      "warning": "Les trois contrôles (succès, kamas, métier 200) sont demandés pendant la quête. Prépare-les avant d'entrer dans la Koffrérie pour éviter un aller-retour.",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/la-gregraveve-de-la-fin.html"
+      },
+      "momentId": "moment-enutrosor3-c",
+      "location": {
+        "x": -8,
+        "y": -5
+      }
+    },
+    {
+      "id": "route-step-0773",
+      "order": 754,
+      "blockId": "block-13",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Malle des profondeurs — avancer jusqu'à la Fabrique de Malléfisk",
+      "prerequisites": "La grève de la fin terminée.",
+      "warning": "Le donjon Malléfisk coupe réellement la quête.",
+      "action": "AVANCER / STOP",
+      "instruction": "AVANCE Malle des profondeurs jusqu'à devoir refaire la Fabrique de Malléfisk puis STOP devant le donjon.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/malle-des-profondeurs.html"
+      },
+      "momentId": "moment-enutrosor3-c",
+      "location": {
+        "x": -1,
+        "y": -1
+      }
+    },
+    {
+      "id": "route-step-0774",
+      "order": 755,
+      "blockId": "block-13",
+      "type": "dungeon",
+      "displayRole": "detail",
+      "title": "◆ Fabrique de Malléfisk — MALLE DES PROFONDEURS",
+      "prerequisites": "Malle des profondeurs au checkpoint donjon.",
+      "warning": "⚠ AVANT DE SORTIR DU DONJON — parle à Malléfisk dans la dernière salle, complimente-le puis accuse-le pour déclencher le combat solo contre son âme. Ne quitte pas avant d'avoir fait cette séquence.",
+      "action": "FAIRE",
+      "instruction": "Vaincs Malléfisk. AVANT DE SORTIR, parle-lui, complimente-le puis accuse-le d'être responsable de la narcolepsie des gardes afin de déclencher et gagner le combat solo contre l'âme de Malléfisk.",
+      "momentId": "moment-enutrosor3-c"
+    },
+    {
+      "id": "route-step-0775",
+      "order": 756,
+      "blockId": "block-13",
+      "type": "resume",
+      "displayRole": "transition",
+      "title": "Malle des profondeurs",
+      "prerequisites": "Malléfisk + combat post-donjon validés.",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/malle-des-profondeurs.html"
+      },
+      "momentId": "moment-enutrosor3-c"
+    },
+    {
+      "id": "route-step-0776",
+      "order": 757,
+      "blockId": "block-13",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Reconnaissance de dettes",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/reconnaissance-de-dettes.html"
+      },
+      "momentId": "moment-enutrosor3-c",
+      "location": {
+        "x": -7,
+        "y": -6
+      }
+    },
+    {
+      "id": "route-step-0777",
+      "order": 758,
+      "blockId": "block-13",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Laissé en plan",
+      "prerequisites": "Malle des profondeurs terminée ; niveau recommandé 200.",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/laisseacute-en-plan.html"
+      },
+      "momentId": "moment-enutrosor3-c",
+      "location": {
+        "x": -9,
+        "y": -5
+      }
+    },
+    {
       "id": "route-step-0778",
-      "order": 767,
+      "order": 759,
       "blockId": "block-13",
       "type": "quest",
       "displayRole": "objective",
@@ -17379,7 +17099,7 @@
     },
     {
       "id": "route-step-0779",
-      "order": 768,
+      "order": 760,
       "blockId": "block-13",
       "type": "quest",
       "displayRole": "objective",
@@ -17398,7 +17118,7 @@
     },
     {
       "id": "route-step-0780",
-      "order": 769,
+      "order": 761,
       "blockId": "block-13",
       "type": "quest",
       "displayRole": "objective",
@@ -17417,7 +17137,7 @@
     },
     {
       "id": "route-step-0781",
-      "order": 770,
+      "order": 762,
       "blockId": "block-13",
       "type": "quest",
       "displayRole": "objective",
@@ -17441,7 +17161,7 @@
     },
     {
       "id": "route-step-0782",
-      "order": 771,
+      "order": 763,
       "blockId": "block-13",
       "type": "quest",
       "displayRole": "objective",
@@ -17465,7 +17185,7 @@
     },
     {
       "id": "route-step-0822",
-      "order": 772,
+      "order": 764,
       "blockId": "block-13",
       "type": "quest",
       "displayRole": "objective",
@@ -17484,7 +17204,7 @@
     },
     {
       "id": "route-step-0823",
-      "order": 773,
+      "order": 765,
       "blockId": "block-13",
       "type": "quest",
       "displayRole": "objective",
@@ -17512,7 +17232,7 @@
     },
     {
       "id": "route-step-0824",
-      "order": 774,
+      "order": 766,
       "blockId": "block-13",
       "type": "dungeon",
       "displayRole": "detail",
@@ -17529,7 +17249,7 @@
     },
     {
       "id": "route-step-0825",
-      "order": 775,
+      "order": 767,
       "blockId": "block-13",
       "type": "resume",
       "displayRole": "transition",
@@ -17545,7 +17265,7 @@
     },
     {
       "id": "route-step-0826",
-      "order": 776,
+      "order": 768,
       "blockId": "block-13",
       "type": "resume",
       "displayRole": "transition",
@@ -17561,7 +17281,7 @@
     },
     {
       "id": "route-step-0827",
-      "order": 777,
+      "order": 769,
       "blockId": "block-13",
       "type": "resume",
       "displayRole": "transition",
@@ -17577,7 +17297,7 @@
     },
     {
       "id": "route-step-0828",
-      "order": 778,
+      "order": 770,
       "blockId": "block-13",
       "type": "quest",
       "displayRole": "objective",
@@ -17597,7 +17317,7 @@
     },
     {
       "id": "route-step-0829",
-      "order": 779,
+      "order": 771,
       "blockId": "block-13",
       "type": "milestone",
       "displayRole": "transition",
@@ -17609,7 +17329,7 @@
     },
     {
       "id": "route-step-0830",
-      "order": 780,
+      "order": 772,
       "blockId": "block-13",
       "type": "quest",
       "displayRole": "objective",
@@ -17633,7 +17353,7 @@
     },
     {
       "id": "route-step-0831",
-      "order": 781,
+      "order": 773,
       "blockId": "block-13",
       "type": "dungeon",
       "displayRole": "detail",
@@ -17646,7 +17366,7 @@
     },
     {
       "id": "route-step-0832",
-      "order": 782,
+      "order": 774,
       "blockId": "block-13",
       "type": "resume",
       "displayRole": "transition",
@@ -17662,7 +17382,7 @@
     },
     {
       "id": "route-step-0893",
-      "order": 783,
+      "order": 775,
       "blockId": "block-13",
       "type": "preparation",
       "title": "Branche dragons",
@@ -17690,7 +17410,7 @@
     },
     {
       "id": "route-step-0895",
-      "order": 784,
+      "order": 776,
       "blockId": "block-13",
       "type": "hard_lock",
       "displayRole": "objective",
@@ -17711,7 +17431,7 @@
     },
     {
       "id": "route-step-0896",
-      "order": 785,
+      "order": 777,
       "blockId": "block-13",
       "type": "resume",
       "displayRole": "transition",
@@ -17731,7 +17451,7 @@
     },
     {
       "id": "route-step-0897",
-      "order": 786,
+      "order": 778,
       "blockId": "block-13",
       "type": "quest",
       "displayRole": "objective",
@@ -17755,7 +17475,7 @@
     },
     {
       "id": "route-step-0898",
-      "order": 787,
+      "order": 779,
       "blockId": "block-13",
       "type": "dungeon",
       "displayRole": "detail",
@@ -17768,7 +17488,7 @@
     },
     {
       "id": "route-step-0899",
-      "order": 788,
+      "order": 780,
       "blockId": "block-13",
       "type": "resume",
       "displayRole": "transition",
@@ -17783,7 +17503,7 @@
     },
     {
       "id": "route-step-0900",
-      "order": 789,
+      "order": 781,
       "blockId": "block-13",
       "type": "quest",
       "displayRole": "objective",
@@ -17807,7 +17527,7 @@
     },
     {
       "id": "route-step-0901",
-      "order": 790,
+      "order": 782,
       "blockId": "block-13",
       "type": "dungeon",
       "displayRole": "detail",
@@ -17820,7 +17540,7 @@
     },
     {
       "id": "route-step-0902",
-      "order": 791,
+      "order": 783,
       "blockId": "block-13",
       "type": "resume",
       "displayRole": "transition",
@@ -17835,7 +17555,7 @@
     },
     {
       "id": "route-step-0903",
-      "order": 792,
+      "order": 784,
       "blockId": "block-13",
       "type": "quest",
       "displayRole": "objective",
@@ -17859,7 +17579,7 @@
     },
     {
       "id": "route-step-0904",
-      "order": 793,
+      "order": 785,
       "blockId": "block-13",
       "type": "dungeon",
       "displayRole": "detail",
@@ -17872,7 +17592,7 @@
     },
     {
       "id": "route-step-0905",
-      "order": 794,
+      "order": 786,
       "blockId": "block-13",
       "type": "resume",
       "displayRole": "transition",
@@ -17887,7 +17607,7 @@
     },
     {
       "id": "route-step-0906",
-      "order": 795,
+      "order": 787,
       "blockId": "block-13",
       "type": "quest",
       "displayRole": "objective",
@@ -17911,7 +17631,7 @@
     },
     {
       "id": "route-step-0907",
-      "order": 796,
+      "order": 788,
       "blockId": "block-13",
       "type": "dungeon",
       "displayRole": "detail",
@@ -17924,7 +17644,7 @@
     },
     {
       "id": "route-step-0908",
-      "order": 797,
+      "order": 789,
       "blockId": "block-13",
       "type": "resume",
       "displayRole": "transition",
@@ -17941,7 +17661,7 @@
     },
     {
       "id": "route-step-0909",
-      "order": 798,
+      "order": 790,
       "blockId": "block-13",
       "type": "quest",
       "displayRole": "objective",
@@ -18008,7 +17728,7 @@
     },
     {
       "id": "route-step-0910",
-      "order": 799,
+      "order": 791,
       "blockId": "block-13",
       "type": "resume",
       "displayRole": "objective",
@@ -18024,7 +17744,7 @@
     },
     {
       "id": "route-step-0911",
-      "order": 800,
+      "order": 792,
       "blockId": "block-13",
       "type": "resume",
       "displayRole": "objective",
@@ -18040,7 +17760,7 @@
     },
     {
       "id": "route-step-0912",
-      "order": 801,
+      "order": 793,
       "blockId": "block-13",
       "type": "resume",
       "displayRole": "objective",
@@ -18056,7 +17776,7 @@
     },
     {
       "id": "route-step-0913",
-      "order": 802,
+      "order": 794,
       "blockId": "block-13",
       "type": "resume",
       "displayRole": "transition",
@@ -18068,6 +17788,286 @@
         "url": "https://www.dofuspourlesnoobs.com/un-remede-draconien.html"
       },
       "momentId": "moment-route-step-0909"
+    },
+    {
+      "id": "route-step-0666",
+      "order": 795,
+      "blockId": "block-13",
+      "type": "preparation",
+      "title": "La mer en héritage",
+      "warning": "Le Volant hydraulique du succès complet n'est pas requis pour atteindre Son nom est Personne ; ne pas l'acheter prématurément.",
+      "action": "PRÉPARER",
+      "instruction": "Choisis achat du Sceau OU craft, puis prépare l'option choisie.",
+      "preparationItems": [
+        "Acheter 1 Sceau des fondateurs",
+        "50 Bave de Mol Usk",
+        "50 Pince de Crabe Yoloniste",
+        "50 Écaille de Gambaf",
+        "10 Écume de mer",
+        "20 Patelle",
+        "20 Quisnoa",
+        "1 Ambre de muldo",
+        "Bijoutier 200"
+      ]
+    },
+    {
+      "id": "route-step-0668",
+      "order": 796,
+      "blockId": "block-13",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "La pêche aux infos",
+      "prerequisites": "Niveau minimum 190.",
+      "warning": "Chaîne Sufokia strictement séquentielle : cette quête débloque Il y a de l'électricité dans l'eau.",
+      "action": "LANCER / TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/la-pecircche-aux-infos.html"
+      },
+      "momentId": "moment-sufokia-meno1",
+      "location": {
+        "x": 23,
+        "y": 24
+      },
+      "destination": {
+        "x": 23,
+        "y": 24
+      },
+      "guideItems": [
+        {
+          "action": "take",
+          "label": "La pêche aux infos",
+          "location": {
+            "x": 23,
+            "y": 24
+          },
+          "note": "Pollie Perkine."
+        },
+        {
+          "action": "finish",
+          "label": "La pêche aux infos",
+          "location": {
+            "x": 23,
+            "y": 24
+          }
+        }
+      ]
+    },
+    {
+      "id": "route-step-0669",
+      "order": 797,
+      "blockId": "block-13",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Il y a de l'électricité dans l'eau",
+      "prerequisites": "La pêche aux infos terminée.",
+      "warning": "Débloque Topo le petit robot.",
+      "action": "LANCER / TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/il-y-a-de-leacutelectriciteacute-dans-leau.html"
+      },
+      "momentId": "moment-sufokia-meno1",
+      "location": {
+        "x": 22,
+        "y": 28
+      },
+      "destination": {
+        "x": 22,
+        "y": 28
+      },
+      "guideItems": [
+        {
+          "action": "take",
+          "label": "Il y a de l'électricité dans l'eau",
+          "location": {
+            "x": 22,
+            "y": 28
+          },
+          "note": "Prosper Meraimée."
+        },
+        {
+          "action": "finish",
+          "label": "Il y a de l'électricité dans l'eau",
+          "location": {
+            "x": 22,
+            "y": 28
+          }
+        }
+      ]
+    },
+    {
+      "id": "route-step-0670",
+      "order": 798,
+      "blockId": "block-13",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Topo le petit robot",
+      "prerequisites": "Il y a de l'électricité dans l'eau terminé ; Sceau des fondateurs disponible.",
+      "warning": "Ignore les quêtes de zone optionnelles proposées pendant l'escorte : elles ne sont pas nécessaires pour ce parcours.",
+      "action": "LANCER / TERMINER",
+      "instruction": "→ [22,30] : prendre Topo le petit robot, terminer l'escorte puis enchaîner sur Piège de crystal.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/topo-le-petit-robot.html"
+      },
+      "momentId": "moment-sufokia-meno1",
+      "location": {
+        "x": 22,
+        "y": 30
+      },
+      "destination": {
+        "x": 22,
+        "y": 28
+      },
+      "guideItems": [
+        {
+          "action": "take",
+          "label": "Topo le petit robot",
+          "location": {
+            "x": 22,
+            "y": 30
+          }
+        },
+        {
+          "action": "finish",
+          "label": "Topo le petit robot",
+          "location": {
+            "x": 22,
+            "y": 28
+          },
+          "note": "Fin de l'escorte."
+        }
+      ]
+    },
+    {
+      "id": "route-step-0671",
+      "order": 799,
+      "blockId": "block-13",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Piège de crystal — jusqu'au Vaisseau du Capitaine Meno",
+      "prerequisites": "Topo le petit robot terminé.",
+      "warning": "Premier et unique passage Meno nécessaire pour cette chaîne à ce stade.",
+      "action": "LANCER / AVANCER / STOP",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/piegravege-de-crystal.html"
+      },
+      "momentId": "moment-sufokia-meno1",
+      "location": {
+        "x": 22,
+        "y": 28
+      },
+      "destination": {
+        "x": 24,
+        "y": 27
+      },
+      "guideItems": [
+        {
+          "action": "take",
+          "label": "Piège de crystal",
+          "location": {
+            "x": 22,
+            "y": 28
+          },
+          "note": "Parle à Prosper Meraimée."
+        },
+        {
+          "action": "advance",
+          "label": "Piège de crystal",
+          "location": {
+            "x": 24,
+            "y": 27
+          },
+          "note": "Va jusqu'au Vaisseau du Capitaine Meno puis STOP."
+        }
+      ]
+    },
+    {
+      "id": "route-step-0672",
+      "order": 800,
+      "blockId": "block-13",
+      "type": "dungeon",
+      "displayRole": "detail",
+      "title": "Vaisseau du Capitaine Meno — PASSAGE #1",
+      "prerequisites": "Piège de crystal actif.",
+      "warning": "⚠ AVANT DE SORTIR DU DONJON — après avoir vaincu Meno, parle au Capitaine Meno dans la salle de fin avant de quitter le vaisseau : ce dialogue ferme Piège de crystal et ouvre Son nom est Personne.",
+      "action": "FAIRE",
+      "instruction": "☐ Capitaine Meno — vaincre le boss puis parler à Meno avant de sortir.",
+      "momentId": "moment-sufokia-meno1"
+    },
+    {
+      "id": "route-step-0673",
+      "order": 801,
+      "blockId": "block-13",
+      "type": "resume",
+      "displayRole": "transition",
+      "title": "Piège de crystal → Son nom est Personne — avant de sortir",
+      "prerequisites": "Capitaine Meno vaincu ; dialogue de Piège de crystal effectué.",
+      "warning": "Son nom est Personne se lance auprès de Meno dans la salle de sortie. Ne quitte pas le vaisseau entre les deux quêtes.",
+      "action": "TERMINER + LANCER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/piegravege-de-crystal.html"
+      },
+      "momentId": "moment-sufokia-meno1",
+      "location": {
+        "x": 24,
+        "y": 27
+      },
+      "destination": {
+        "x": 23,
+        "y": 24
+      },
+      "launchInstruction": "À la suite de Piège de crystal, parle de nouveau au Capitaine Meno dans la salle de sortie pour lancer Son nom est Personne.",
+      "guideItems": [
+        {
+          "action": "finish",
+          "label": "Piège de crystal",
+          "location": {
+            "x": 24,
+            "y": 27
+          },
+          "note": "Parle à Meno après la victoire."
+        },
+        {
+          "action": "take",
+          "label": "Son nom est Personne",
+          "location": {
+            "x": 24,
+            "y": 27
+          },
+          "note": "Reparle immédiatement à Meno."
+        }
+      ],
+      "longRunningGoal": {
+        "goalId": "son-nom-est-personne",
+        "phase": "start"
+      }
+    },
+    {
+      "id": "route-step-0674",
+      "order": 802,
+      "blockId": "block-13",
+      "type": "resume",
+      "title": "Son nom est Personne",
+      "prerequisites": "Quête déjà lancée auprès de Meno dans la salle de sortie.",
+      "warning": "Le retour auprès de Meno se fait via son Pichon kloune : aucun second donjon n'est requis.",
+      "action": "TERMINER",
+      "instruction": "☐ Son nom est Personne — faire Deks, Docteur Hou et Jelus Vern ; utiliser le Pichon kloune pour revenir à Meno sans refaire le donjon, puis rendre à Prosper.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/son-nom-est-personne.html"
+      },
+      "destination": {
+        "x": 22,
+        "y": 28
+      },
+      "longRunningGoal": {
+        "goalId": "son-nom-est-personne",
+        "phase": "finish"
+      }
     },
     {
       "id": "route-step-0914",
@@ -18583,9 +18583,908 @@
       }
     },
     {
-      "id": "route-step-0714",
+      "id": "route-step-0733",
       "order": 831,
       "blockId": "block-13",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "La colère des dieux",
+      "prerequisites": "Niveau recommandé : 200.",
+      "warning": "Cette quête débloque l'accès aux zones Épaves Silencieuses et Marches Magmatiques et ouvre L'arme fatale.",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/la-colere-des-dieux.html"
+      },
+      "momentId": "moment-route-step-0733",
+      "launchInstruction": "Dans ton temple de classe, parle au maître de ta classe, évoque les Tours de la Fratrie des Oubliés puis confirme que tu es prêt à affronter leurs soldats."
+    },
+    {
+      "id": "route-step-1202",
+      "order": 832,
+      "blockId": "block-13",
+      "type": "preparation",
+      "title": "L'arme fatale / Mort et renouveau — ressources",
+      "action": "PRÉPARER",
+      "preparationItems": [
+        "5 × Écume de mer",
+        "5 × Salikrone",
+        "5 × Patelle",
+        "5 × Bois d'Aquajou",
+        "5 × Quisnoa",
+        "3 × Pierre Angulaire",
+        "3 × Sel de Baleine",
+        "2 × Étoffe de la Cour Sombre",
+        "80 × Eau Potable — Mort et renouveau"
+      ]
+    },
+    {
+      "id": "route-step-0734",
+      "order": 833,
+      "blockId": "block-13",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "L'arme fatale",
+      "prerequisites": "La colère des dieux terminée. Prévoir 5 Écume de mer, 5 Salikrone, 5 Patelle, 5 Bois d'Aquajou, 5 Quisnoa, 3 Pierre Angulaire, 3 Sel de Baleine, 2 Étoffe de la Cour Sombre + les 4 Sacrifices de zones.",
+      "action": "TERMINER",
+      "instruction": "TERMINE L'arme fatale maintenant et obtiens le sort permanent Nécronyx. Il sera requis pour Bethel et Solar.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/l-arme-fatale.html"
+      },
+      "momentId": "moment-route-step-0734",
+      "launchInstruction": "Depuis ton temple de classe, utilise ta statue pour rejoindre le Domaine des dieux, descends au sous-sol puis parle à Gobanos le forgeron."
+    },
+    {
+      "id": "route-step-0865",
+      "order": 834,
+      "blockId": "block-14",
+      "type": "major_step",
+      "title": "Jusqu'au bout du rêve",
+      "prerequisites": "12 apparitions Crocobur ; 6 dernières en Rêve III+ jusqu'au palier V.",
+      "warning": "Pendant cette session : conserve au moins 600 Reflets oniriques au total pour S'armer contre le destin et récupère 1 Rêve d'harmonie en Rêve III+ pour Le poids de son regard.",
+      "action": "TERMINER"
+    },
+    {
+      "id": "route-step-0866",
+      "order": 835,
+      "blockId": "block-14",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "À la recherche de Crocoburio — avancer jusqu'à Bethel",
+      "prerequisites": "Jusqu'au bout du rêve terminé ; La colère des dieux terminée ; sort Nécronyx disponible.",
+      "warning": "La quête mène à la Tour de Bethel.",
+      "action": "LANCER / AVANCER / STOP",
+      "instruction": "En [-6,-3], LANCE À la recherche de Crocoburio et AVANCE jusqu'à la Tour de Bethel puis STOP devant le donjon.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/a-la-recherche-de-crocoburio.html"
+      },
+      "momentId": "moment-route-step-0866",
+      "location": {
+        "x": -6,
+        "y": -3
+      },
+      "destination": {
+        "x": -6,
+        "y": -3
+      }
+    },
+    {
+      "id": "route-step-0867",
+      "order": 836,
+      "blockId": "block-14",
+      "type": "dungeon",
+      "displayRole": "detail",
+      "title": "◆ Tour de Bethel — À LA RECHERCHE DE CROCOBURIO",
+      "prerequisites": "À la recherche de Crocoburio au checkpoint Bethel ; Nécronyx disponible.",
+      "warning": "Bethel donne automatiquement la Coquille d’âme corrompue nécessaire à À la recherche de Crocoburio. Aucune interaction post-boss n’est nécessaire pour cette quête.",
+      "action": "FAIRE",
+      "instruction": "Vaincs Bethel Akarna avec Nécronyx disponible. La Coquille d’âme corrompue est obtenue automatiquement ; retourne ensuite voir Sramsara pour poursuivre À la recherche de Crocoburio.",
+      "momentId": "moment-route-step-0866"
+    },
+    {
+      "id": "route-step-0868",
+      "order": 837,
+      "blockId": "block-14",
+      "type": "resume",
+      "displayRole": "transition",
+      "title": "À la recherche de Crocoburio",
+      "prerequisites": "Bethel vaincue ; poursuivre jusqu'à identifier Léane et la ramener à Mériana.",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/a-la-recherche-de-crocoburio.html"
+      },
+      "momentId": "moment-route-step-0866"
+    },
+    {
+      "id": "route-step-0869",
+      "order": 838,
+      "blockId": "block-14",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Le creuset de Mériana — avancer jusqu'à Koutoulou",
+      "prerequisites": "À la recherche de Crocoburio terminée ; Un pendule pour guider ses pas terminé ; ressources préparées.",
+      "warning": "Le vrai checkpoint donjon est le Temple de Koutoulou.",
+      "action": "LANCER / AVANCER / STOP",
+      "instruction": "En [-6,-3], LANCE Le creuset de Mériana et AVANCE jusqu'au Temple de Koutoulou puis STOP devant le donjon.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/le-creuset-de-meriana.html"
+      },
+      "momentId": "moment-route-step-0869",
+      "location": {
+        "x": -6,
+        "y": -3
+      },
+      "destination": {
+        "x": -6,
+        "y": -3
+      }
+    },
+    {
+      "id": "route-step-0870",
+      "order": 839,
+      "blockId": "block-14",
+      "type": "dungeon",
+      "displayRole": "detail",
+      "title": "◆ Temple de Koutoulou — LE CREUSET DE MÉRIANA",
+      "prerequisites": "Le creuset de Mériana au checkpoint Koutoulou.",
+      "warning": "La Larve de Koutoulou donne automatiquement l’Huile immiscible et indicible requise par Le creuset de Mériana. Les tâches post-boss indiquées par le GP0 concernent la branche Abyssal hors scope et ne sont pas requises ici.",
+      "action": "FAIRE",
+      "instruction": "Vaincs la Larve de Koutoulou. L’Huile immiscible et indicible est obtenue automatiquement ; aucune interaction post-boss supplémentaire n’est nécessaire pour Le creuset de Mériana.",
+      "momentId": "moment-route-step-0869"
+    },
+    {
+      "id": "route-step-0871",
+      "order": 840,
+      "blockId": "block-14",
+      "type": "resume",
+      "displayRole": "transition",
+      "title": "Le creuset de Mériana",
+      "prerequisites": "Huile récupérée ; autres composants du rituel préparés.",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/le-creuset-de-meriana.html"
+      },
+      "momentId": "moment-route-step-0869"
+    },
+    {
+      "id": "route-step-0872",
+      "order": 841,
+      "blockId": "block-14",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Une douloureuse séparation",
+      "prerequisites": "Le creuset de Mériana terminé ; 1 Corde d'escalade.",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/une-douloureuse-separation.html"
+      },
+      "momentId": "moment-ebene-dazak",
+      "location": {
+        "x": -6,
+        "y": -3
+      }
+    },
+    {
+      "id": "route-step-0873",
+      "order": 842,
+      "blockId": "block-14",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Le dragon noir — avancer jusqu'au Roi Dazak",
+      "prerequisites": "Une douloureuse séparation terminée ; De Brikke et de Brokke terminé ou au checkpoint Dazak.",
+      "action": "LANCER / AVANCER / STOP",
+      "instruction": "En [-25,-52], LANCE Le dragon noir et AVANCE jusqu'à devoir rencontrer Dazak puis STOP devant la Brasserie.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/le-dragon-noir.html"
+      },
+      "momentId": "moment-ebene-dazak",
+      "parallelGroup": {
+        "parallelId": "parallel-dazak",
+        "phase": "progress"
+      },
+      "location": {
+        "x": -25,
+        "y": -52
+      },
+      "destination": {
+        "x": -25,
+        "y": -52
+      }
+    },
+    {
+      "id": "route-step-0874",
+      "order": 843,
+      "blockId": "block-14",
+      "type": "dungeon",
+      "displayRole": "detail",
+      "title": "◆ Brasserie du Roi Dazak — LE DRAGON NOIR",
+      "prerequisites": "Le dragon noir + De Brikke et de Brokke au Roi Dazak.",
+      "warning": "⚠ AVANT DE SORTIR DU DONJON — après Dazak, parle-lui avant de quitter la zone.",
+      "action": "FAIRE",
+      "instruction": "Après Dazak, parle-lui avant de quitter la zone.",
+      "momentId": "moment-ebene-dazak",
+      "parallelGroup": {
+        "parallelId": "parallel-dazak",
+        "phase": "finish"
+      }
+    },
+    {
+      "id": "route-step-0875",
+      "order": 844,
+      "blockId": "block-14",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "La bible des rancunes",
+      "prerequisites": "De Brikke et de Brokke au passage Dazak ; quête lancée après le boss.",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/la-bible-des-rancunes.html"
+      },
+      "momentId": "moment-ebene-dazak",
+      "location": {
+        "x": -62,
+        "y": -70
+      }
+    },
+    {
+      "id": "route-step-0876",
+      "order": 845,
+      "blockId": "block-14",
+      "type": "resume",
+      "displayRole": "transition",
+      "title": "De Brikke et de Brokke",
+      "prerequisites": "Dazak vaincu + La bible des rancunes terminée.",
+      "action": "TERMINER",
+      "instruction": "→ Après La bible des rancunes, termine De Brikke et de Brokke.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/de-brikke-et-de-brokke.html"
+      },
+      "momentId": "moment-ebene-dazak"
+    },
+    {
+      "id": "route-step-0877",
+      "order": 846,
+      "blockId": "block-14",
+      "type": "resume",
+      "displayRole": "objective",
+      "title": "Le dragon noir — REPRENDRE jusqu'à Klime",
+      "prerequisites": "Dazak validé ; préparer le cadeau et la vision du portail Nimbos.",
+      "action": "AVANCER / STOP",
+      "instruction": "REPRENDS Le dragon noir et AVANCE jusqu'à Klime puis STOP devant le donjon.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/le-dragon-noir.html"
+      },
+      "momentId": "moment-route-step-0877"
+    },
+    {
+      "id": "route-step-0878",
+      "order": 847,
+      "blockId": "block-14",
+      "type": "dungeon",
+      "displayRole": "detail",
+      "title": "◆ Salons privés de Klime — LE DRAGON NOIR",
+      "prerequisites": "Le dragon noir au checkpoint Klime.",
+      "warning": "⚠ AVANT DE SORTIR DU DONJON — reparle à Klime pour faire fabriquer le Sac en peau de crocodaille.",
+      "action": "FAIRE",
+      "instruction": "Après Klime, parle-lui pour faire fabriquer le Sac en peau de crocodaille.",
+      "momentId": "moment-route-step-0877"
+    },
+    {
+      "id": "route-step-0879",
+      "order": 848,
+      "blockId": "block-14",
+      "type": "resume",
+      "displayRole": "transition",
+      "title": "Le dragon noir",
+      "prerequisites": "Dazak + Klime validés ; Sac en peau de crocodaille obtenu.",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/le-dragon-noir.html"
+      },
+      "momentId": "moment-route-step-0877"
+    },
+    {
+      "id": "route-step-0880",
+      "order": 849,
+      "blockId": "block-14",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "La vengeance du dernier empereur",
+      "prerequisites": "20 500 kamas ; 2 combats solo.",
+      "warning": "Puis L'œuf de Crocabulia.",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/la-vengeance-du-dernier-empereur.html"
+      },
+      "momentId": "moment-ebene-crocabulia",
+      "location": {
+        "x": -82,
+        "y": 6
+      }
+    },
+    {
+      "id": "route-step-0881",
+      "order": 850,
+      "blockId": "block-14",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "L'œuf de Crocabulia — avancer jusqu'à la Reine des Voleurs",
+      "prerequisites": "La vengeance du dernier empereur terminée ; accès Srambad.",
+      "warning": "Le checkpoint donjon est le Trône de la Cour Sombre.",
+      "action": "LANCER / AVANCER / STOP",
+      "instruction": "En [-6,-3], LANCE L'œuf de Crocabulia et AVANCE jusqu'à devoir récupérer le Coffret verrouillé puis STOP devant la Reine des Voleurs.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/l-oeuf-de-crocabulia.html"
+      },
+      "momentId": "moment-ebene-crocabulia",
+      "location": {
+        "x": -6,
+        "y": -3
+      },
+      "destination": {
+        "x": -6,
+        "y": -3
+      }
+    },
+    {
+      "id": "route-step-0882",
+      "order": 851,
+      "blockId": "block-14",
+      "type": "dungeon",
+      "displayRole": "detail",
+      "title": "◆ Trône de la Cour Sombre — REINE DES VOLEURS",
+      "prerequisites": "L'œuf de Crocabulia au checkpoint Reine des Voleurs.",
+      "warning": "⚠ AVANT DE SORTIR DU DONJON — monte les escaliers et parle à la Reine des Voleurs dans la salle de sortie après le combat.",
+      "action": "FAIRE",
+      "instruction": "Vaincs la Reine des Voleurs puis monte les escaliers et parle-lui dans la salle de sortie avant de partir.",
+      "momentId": "moment-ebene-crocabulia"
+    },
+    {
+      "id": "route-step-0883",
+      "order": 852,
+      "blockId": "block-14",
+      "type": "resume",
+      "displayRole": "transition",
+      "title": "L'œuf de Crocabulia",
+      "prerequisites": "Coffret verrouillé récupéré.",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/l-oeuf-de-crocabulia.html"
+      },
+      "momentId": "moment-ebene-crocabulia"
+    },
+    {
+      "id": "route-step-0884",
+      "order": 853,
+      "blockId": "block-14",
+      "type": "quest",
+      "displayRole": "transition",
+      "title": "Un nouvel héritier — avancer jusqu'à Solar",
+      "prerequisites": "L'œuf de Crocabulia terminé ; 20 Âmes de Calciné à récupérer hors donjon ; Nécronyx disponible.",
+      "warning": "Le checkpoint donjon est la Tour de Solar.",
+      "action": "LANCER / AVANCER / STOP",
+      "instruction": "En [-6,-3], LANCE Un nouvel héritier, récupère/utilise les 20 Âmes de Calciné puis STOP devant la Tour de Solar.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/un-nouvel-heritier.html"
+      },
+      "momentId": "moment-ebene-crocabulia",
+      "location": {
+        "x": -6,
+        "y": -3
+      },
+      "destination": {
+        "x": -6,
+        "y": -3
+      }
+    },
+    {
+      "id": "route-step-0885",
+      "order": 854,
+      "blockId": "block-14",
+      "type": "dungeon",
+      "displayRole": "objective",
+      "title": "◆ Tour de Solar — UN NOUVEL HÉRITIER",
+      "prerequisites": "Un nouvel héritier au checkpoint Solar ; Nécronyx disponible.",
+      "warning": "⚠ AVANT DE SORTIR DU DONJON — après Solar, monte les escaliers, clique sur la sphère puis parle au Dieu Sram avant de quitter la Tour.",
+      "action": "FAIRE",
+      "instruction": "Vaincs Solar puis, AVANT DE SORTIR, monte les escaliers, clique sur la sphère et parle au Dieu Sram pour poursuivre Un nouvel héritier.",
+      "momentId": "moment-route-step-0884"
+    },
+    {
+      "id": "route-step-0886",
+      "order": 855,
+      "blockId": "block-14",
+      "type": "resume",
+      "displayRole": "transition",
+      "title": "Un nouvel héritier",
+      "prerequisites": "Solar vaincu.",
+      "warning": "La fin de cette quête donne le Dofus Ébène.",
+      "action": "TERMINER",
+      "instruction": "Libère puis réincarne Crocoburio et TERMINE auprès de Grougalorasalar pour obtenir le Dofus Ébène.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/un-nouvel-heritier.html"
+      },
+      "momentId": "moment-route-step-0884"
+    },
+    {
+      "id": "route-step-0918",
+      "order": 856,
+      "blockId": "block-15",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Dans la gueule du dragon — avancer jusqu'après Rathrosk",
+      "prerequisites": "Quatre sur six + Blanc ivoire + Noir d'ébène + 6 Primordiaux + À la croisée des mondes.",
+      "warning": "STOP juste après avoir vaincu Rathrosk : Le silence est d'Aure devient disponible.",
+      "action": "LANCER / AVANCER / STOP",
+      "instruction": "En [-6,-3], LANCE Dans la gueule du dragon et AVANCE jusqu'après Rathrosk puis STOP pour ouvrir Le silence est d'Aure.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/dans-la-gueule-du-dragon.html"
+      },
+      "momentId": "moment-quatre-sur-six-cloture",
+      "location": {
+        "x": -6,
+        "y": -3
+      },
+      "destination": {
+        "x": -6,
+        "y": -3
+      }
+    },
+    {
+      "id": "route-step-0919",
+      "order": 857,
+      "blockId": "block-15",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Le silence est d'Aure",
+      "prerequisites": "Dans la gueule avancée après Rathrosk ; D'incarnam à Astrub ; Le pays des Vermeils ; Dofus Argenté en inventaire.",
+      "warning": "La fin de cette quête donne le Dofus Argenté Scintillant.",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/le-silence-est-d-aure.html"
+      },
+      "momentId": "moment-quatre-sur-six-cloture",
+      "location": {
+        "x": -5,
+        "y": -9
+      }
+    },
+    {
+      "id": "route-step-0920",
+      "order": 858,
+      "blockId": "block-15",
+      "type": "resume",
+      "displayRole": "transition",
+      "title": "Dans la gueule du dragon — TERMINER",
+      "prerequisites": "Le silence est d'Aure terminé.",
+      "warning": "Fermer la quête puis ouvrir S'armer contre le destin.",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/dans-la-gueule-du-dragon.html"
+      },
+      "momentId": "moment-quatre-sur-six-cloture"
+    },
+    {
+      "id": "route-step-0690",
+      "order": 859,
+      "blockId": "block-15",
+      "type": "preparation",
+      "title": "Un rêve en clair-obscur — prérequis",
+      "action": "PRÉPARER",
+      "preparationItems": [
+        "Domakuro en inventaire",
+        "Dorigami en inventaire",
+        "Paysan 20 minimum"
+      ]
+    },
+    {
+      "id": "route-step-0691",
+      "order": 860,
+      "blockId": "block-15",
+      "type": "preparation",
+      "title": "Un rêve en clair-obscur — 1/2",
+      "action": "PRÉPARER",
+      "preparationItems": [
+        "100 Riz",
+        "20 Bois de Bambou Sacré",
+        "10 Pwimen",
+        "10 de chaque Artefact Pandawushu : Bois / Feu / Eau / Vent / Roc",
+        "5 Bière Tsingtawo",
+        "2 Pizwa",
+        "1 Limo d'Grobe",
+        "1 Pandneken"
+      ]
+    },
+    {
+      "id": "route-step-0692",
+      "order": 861,
+      "blockId": "block-15",
+      "type": "preparation",
+      "title": "Un rêve en clair-obscur — 2/2",
+      "action": "PRÉPARER",
+      "preparationItems": [
+        "1 Pandazahi",
+        "1 Épice",
+        "1 Pétale Papier",
+        "1 Pétale encre",
+        "1 Umeshushu",
+        "1 Gnôle de Grobe",
+        "1 Bière forte légère",
+        "1 Alcool à 99% OU 1 000 kamas",
+        "6 lots de 5 ressources récoltables des Royaumes de Papier/Encre au choix",
+        "2 lots de 2 ressources de Yokianzhi au choix (zones Wukin/Wukang)",
+        "12 Fer",
+        "10 Pichon d'encre",
+        "5 Étain",
+        "2 Planche de Toilette",
+        "Bricoleur 30+"
+      ]
+    },
+    {
+      "id": "route-step-0693",
+      "order": 862,
+      "blockId": "block-15",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Main dans la main — jusqu'à la chope de bière en métal",
+      "prerequisites": "Requiem pour un Yokai terminé ; Domakuro + Dorigami en inventaire.",
+      "warning": "L'épopée du moine pèlerin bloque une étape plus loin, pas le lancement de Main dans la main.",
+      "action": "LANCER / AVANCER / STOP",
+      "instruction": "Imagiro/Orukam [21,-33] : prendre Main dans la main, obtenir la chope de bière en métal et ouvrir la Taverne interdite, puis STOP.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/main-dans-la-main.html"
+      },
+      "momentId": "moment-tachete-reunification-a",
+      "location": {
+        "x": 21,
+        "y": -33
+      },
+      "destination": {
+        "x": 23,
+        "y": -32
+      }
+    },
+    {
+      "id": "route-step-0694",
+      "order": 863,
+      "blockId": "block-15",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "De l'encre spectaculaire",
+      "prerequisites": "Main dans la main avancé jusqu'à la chope de bière en métal ; Bricoleur 30+ ; ressources préparées.",
+      "warning": "Quête indépendante à fermer avant de poursuivre la réunification.",
+      "action": "LANCER / TERMINER",
+      "instruction": "→ Pandawayang [19,-21] : prendre puis terminer De l'encre spectaculaire.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/de-l-encre-spectaculaire.html"
+      },
+      "momentId": "moment-tachete-reunification-a",
+      "location": {
+        "x": 19,
+        "y": -21
+      },
+      "destination": {
+        "x": 19,
+        "y": -21
+      }
+    },
+    {
+      "id": "route-step-0695",
+      "order": 864,
+      "blockId": "block-15",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "L'épopée du moine pèlerin",
+      "prerequisites": "Main dans la main avancé jusqu'à récupérer la chope de bière en métal et accès à la Taverne interdite.",
+      "action": "LANCER / TERMINER",
+      "instruction": "→ Taverne interdite [23,-32] : prendre puis terminer L'épopée du moine pèlerin.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/l-epopee-du-moine-pelerin.html"
+      },
+      "momentId": "moment-tachete-reunification-a",
+      "location": {
+        "x": 23,
+        "y": -32
+      }
+    },
+    {
+      "id": "route-step-0696",
+      "order": 865,
+      "blockId": "block-15",
+      "type": "resume",
+      "displayRole": "transition",
+      "title": "Main dans la main — jusqu'à Deux souffles, une inspiration",
+      "prerequisites": "L'épopée du moine pèlerin terminée.",
+      "action": "AVANCER / STOP",
+      "instruction": "→ Reprendre Main dans la main jusqu'à l'objectif des deux souffles, puis STOP.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/main-dans-la-main.html"
+      },
+      "momentId": "moment-tachete-reunification-a"
+    },
+    {
+      "id": "route-step-0697",
+      "order": 866,
+      "blockId": "block-15",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Deux souffles, une inspiration — jusqu'au Roi Imagami",
+      "prerequisites": "Main dans la main au verrou des deux souffles ; Domakuro + Dorigami en inventaire.",
+      "warning": "La quête se lance seulement lorsque Main dans la main atteint ce checkpoint.",
+      "action": "LANCER / AVANCER / STOP",
+      "instruction": "→ [23,-32] : prendre Deux souffles, une inspiration, avancer jusqu'à la Mémoire d'Orukam puis STOP.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/deux-souffles-une-inspiration.html"
+      },
+      "momentId": "moment-tachete-reunification-b",
+      "location": {
+        "x": 23,
+        "y": -32
+      },
+      "destination": {
+        "x": 2,
+        "y": 0
+      }
+    },
+    {
+      "id": "route-step-0698",
+      "order": 867,
+      "blockId": "block-15",
+      "type": "dungeon",
+      "displayRole": "detail",
+      "title": "◆ Mémoire d'Orukam — ROI IMAGAMI",
+      "prerequisites": "Deux souffles, une inspiration au checkpoint Mémoire d'Orukam.",
+      "warning": "⚠ AVANT DE SORTIR DU DONJON — après le Roi Imagami, reparle à Imetsu, Imushi, Imiyama, Imorok, Imafugo et Imagami, puis parle à Imihasu en dernier pour obtenir l'Origami du Wukin.",
+      "action": "FAIRE",
+      "instruction": "Dans la première salle, parle aux cinq Yokianzhi puis à Imagami en dernier avant le combat. Vaincs le Roi Imagami. AVANT DE SORTIR, reparle aux cinq Yokianzhi + Imagami, puis à Imihasu en dernier pour récupérer l'Origami du Wukin.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/memoire-d-orukam.html"
+      },
+      "momentId": "moment-tachete-reunification-b"
+    },
+    {
+      "id": "route-step-0699",
+      "order": 868,
+      "blockId": "block-15",
+      "type": "resume",
+      "displayRole": "transition",
+      "title": "Deux souffles, une inspiration — jusqu'à la Reine Amirukam",
+      "prerequisites": "Roi Imagami vaincu ; dialogues de sortie effectués.",
+      "action": "AVANCER / STOP",
+      "instruction": "→ Reprendre Deux souffles, une inspiration jusqu'au Souvenir d'Imagiro, puis STOP.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/deux-souffles-une-inspiration.html"
+      },
+      "momentId": "moment-tachete-reunification-b"
+    },
+    {
+      "id": "route-step-0700",
+      "order": 869,
+      "blockId": "block-15",
+      "type": "dungeon",
+      "displayRole": "objective",
+      "title": "◆ Souvenir d'Imagiro — REINE AMIRUKAM",
+      "prerequisites": "Deux souffles, une inspiration au checkpoint Souvenir d'Imagiro.",
+      "warning": "⚠ AVANT DE SORTIR DU DONJON — après la Reine Amirukam, reparle à Tsunam, Shinlam, Mabram, Rokoram, Fugokam et Amirukam, puis parle à Sulianam en dernier pour obtenir la Silhouette du Wukang.",
+      "action": "FAIRE",
+      "instruction": "Dans la première salle, parle aux cinq Yokianzhi puis à Amirukam en dernier avant le combat. Vaincs la Reine Amirukam. AVANT DE SORTIR, reparle aux cinq Yokianzhi + Amirukam, puis à Sulianam en dernier pour récupérer la Silhouette du Wukang.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/souvenir-d-imagiro.html"
+      },
+      "momentId": "moment-tachete-reunification-b"
+    },
+    {
+      "id": "route-step-0701",
+      "order": 870,
+      "blockId": "block-15",
+      "type": "resume",
+      "displayRole": "transition",
+      "title": "Deux souffles, une inspiration",
+      "prerequisites": "Roi Imagami + Reine Amirukam validés ; formes Wukin/Wukang récupérées.",
+      "action": "TERMINER",
+      "instruction": "→ Terminer Deux souffles, une inspiration avec les deux formes obtenues.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/deux-souffles-une-inspiration.html"
+      },
+      "momentId": "moment-tachete-reunification-b"
+    },
+    {
+      "id": "route-step-0702",
+      "order": 871,
+      "blockId": "block-15",
+      "type": "resume",
+      "displayRole": "transition",
+      "title": "Main dans la main",
+      "prerequisites": "Deux souffles, une inspiration terminé.",
+      "action": "TERMINER",
+      "instruction": "→ Terminer Main dans la main.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/main-dans-la-main.html"
+      },
+      "momentId": "moment-tachete-reunification-b"
+    },
+    {
+      "id": "route-step-0703",
+      "order": 872,
+      "blockId": "block-15",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "En ce jardin qui nous unit — Dofus Tacheté",
+      "prerequisites": "Main dans la main terminée ; Deux souffles, une inspiration terminé ; Domakuro + Dorigami en inventaire.",
+      "warning": "Dernière quête du succès Un rêve en clair-obscur.",
+      "action": "LANCER / TERMINER",
+      "instruction": "☐ En ce jardin qui nous unit — [23,-32] : prendre, terminer, récupérer le Dofus Tacheté et le garder en inventaire.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/en-ce-jardin-qui-nous-unit.html"
+      },
+      "momentId": "moment-tachete-reunification-b",
+      "location": {
+        "x": 23,
+        "y": -32
+      },
+      "destination": {
+        "x": 23,
+        "y": -32
+      }
+    },
+    {
+      "id": "route-step-0704",
+      "order": 873,
+      "blockId": "block-15",
+      "type": "preparation",
+      "title": "Après la pluie",
+      "action": "PRÉPARER",
+      "preparationItems": [
+        "200 Pépite",
+        "50 Riz",
+        "40 Bois de Bambou Sacré",
+        "20 Dolomite",
+        "10 Bois de Bambou OU Bambou Sombre",
+        "5 Pétale d'encre",
+        "5 Pétale de Papier",
+        "6 Bière forte légère",
+        "5 Yokayu",
+        "5 Nectar de l'Orient",
+        "1 Gnôle de Grobe",
+        "1 Diacritique de la Reine Amirukam",
+        "1 Diacritique du Roi Imagami",
+        "1 Cristal pliable + 1 Cristal liquide OU 1 Bière du Grand Pouddah",
+        "1 Umeshushu",
+        "1 Carré de Chocolat au Lait",
+        "1 Sirop de Yuzuzu",
+        "1 Pizwa",
+        "Dofus Tacheté en inventaire",
+        "Sculpteur 180+"
+      ]
+    },
+    {
+      "id": "route-step-0705",
+      "order": 874,
+      "blockId": "block-15",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Quand l'éveil n'est qu'un songe",
+      "prerequisites": "La source de tous les maux + En ce jardin qui nous unit / Dofus Tacheté.",
+      "warning": "La quête exige ensuite trois missions : Par ce serment, Le dernier rempart, Une bien étrange prophétie.",
+      "action": "LANCER",
+      "instruction": "LANCE Quand l'éveil n'est qu'un songe.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/quand-leveil-nest-quun-songe.html"
+      },
+      "momentId": "moment-route-step-0705",
+      "location": {
+        "x": 21,
+        "y": -33
+      }
+    },
+    {
+      "id": "route-step-0706",
+      "order": 875,
+      "blockId": "block-15",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Par ce serment s'écrit le monde",
+      "prerequisites": "Quand l'éveil n'est qu'un songe lancée ; Le Saule du Promeneur + L'art de la langue de bois + Infâme pourriture terminés ; ressources Après la pluie préparées.",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/par-ce-serment-s-ecrit-le-monde.html"
+      },
+      "momentId": "moment-route-step-0705",
+      "location": {
+        "x": 23,
+        "y": -32
+      }
+    },
+    {
+      "id": "route-step-0707",
+      "order": 876,
+      "blockId": "block-15",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Le dernier rempart",
+      "prerequisites": "Quand l'éveil n'est qu'un songe lancée ; Si loin, si proches terminé ; ressources Après la pluie préparées.",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/le-dernier-rempart.html"
+      },
+      "momentId": "moment-route-step-0705",
+      "location": {
+        "x": 22,
+        "y": -29
+      }
+    },
+    {
+      "id": "route-step-0708",
+      "order": 877,
+      "blockId": "block-15",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Une bien étrange prophétie",
+      "prerequisites": "Quand l'éveil n'est qu'un songe lancée ; De l'encre spectaculaire + Barnabé dans l'espace terminés ; Dofus Tacheté en inventaire ; ressources Après la pluie préparées.",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/une-bien-etrange-prophetie.html"
+      },
+      "momentId": "moment-route-step-0705",
+      "location": {
+        "x": 20,
+        "y": -27
+      }
+    },
+    {
+      "id": "route-step-0709",
+      "order": 878,
+      "blockId": "block-15",
+      "type": "resume",
+      "displayRole": "transition",
+      "title": "Quand l'éveil n'est qu'un songe",
+      "prerequisites": "Les trois missions terminées.",
+      "action": "TERMINER",
+      "instruction": "REPRENDS Draconiros et TERMINE Quand l'éveil n'est qu'un songe.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/quand-l-eveil-n-est-qu-un-songe.html"
+      },
+      "momentId": "moment-route-step-0705"
+    },
+    {
+      "id": "route-step-0714",
+      "order": 879,
+      "blockId": "block-15",
       "type": "quest",
       "displayRole": "objective",
       "title": "Les sentiers de la guerre",
@@ -18595,7 +19494,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-sentiers-de-la-guerre.html"
       },
-      "momentId": "moment-route-step-0711",
+      "momentId": "moment-route-step-0714",
       "location": {
         "x": -13,
         "y": -22
@@ -18603,8 +19502,8 @@
     },
     {
       "id": "route-step-0715",
-      "order": 832,
-      "blockId": "block-13",
+      "order": 880,
+      "blockId": "block-15",
       "type": "preparation",
       "title": "Cavaliers — Guerre + Servitude",
       "warning": "Prépare ces ressources avant d'ouvrir les branches Guerre et Servitude pour pouvoir les enchaîner sans détour d'achat.",
@@ -18631,8 +19530,8 @@
     },
     {
       "id": "route-step-0716",
-      "order": 833,
-      "blockId": "block-13",
+      "order": 881,
+      "blockId": "block-15",
       "type": "preparation",
       "title": "Cavaliers — Misère + Corruption + L'avenir du futur",
       "warning": "Couvre les branches Misère/Corruption et le Gâteau Royal de La guerre de Cania n'aura pas lieu.",
@@ -18665,8 +19564,8 @@
     },
     {
       "id": "route-step-0717",
-      "order": 834,
-      "blockId": "block-13",
+      "order": 882,
+      "blockId": "block-15",
       "type": "quest",
       "displayRole": "objective",
       "title": "Les quatre volontés",
@@ -18686,8 +19585,8 @@
     },
     {
       "id": "route-step-0718",
-      "order": 835,
-      "blockId": "block-13",
+      "order": 883,
+      "blockId": "block-15",
       "type": "quest",
       "displayRole": "objective",
       "title": "Le jour le plus long — jusqu'au Trône de Sang",
@@ -18711,8 +19610,8 @@
     },
     {
       "id": "route-step-0719",
-      "order": 836,
-      "blockId": "block-13",
+      "order": 884,
+      "blockId": "block-15",
       "type": "dungeon",
       "displayRole": "detail",
       "title": "◆ Trône de Sang — GUERRE",
@@ -18724,8 +19623,8 @@
     },
     {
       "id": "route-step-0720",
-      "order": 837,
-      "blockId": "block-13",
+      "order": 885,
+      "blockId": "block-15",
       "type": "resume",
       "displayRole": "transition",
       "title": "Le jour le plus long",
@@ -18739,8 +19638,8 @@
     },
     {
       "id": "route-step-0721",
-      "order": 838,
-      "blockId": "block-13",
+      "order": 886,
+      "blockId": "block-15",
       "type": "quest",
       "displayRole": "objective",
       "title": "Au-delà de la gloire",
@@ -18757,8 +19656,8 @@
     },
     {
       "id": "route-step-0722",
-      "order": 839,
-      "blockId": "block-13",
+      "order": 887,
+      "blockId": "block-15",
       "type": "quest",
       "displayRole": "objective",
       "title": "Voyage au bout de l'Externam",
@@ -18776,8 +19675,8 @@
     },
     {
       "id": "route-step-0723",
-      "order": 840,
-      "blockId": "block-13",
+      "order": 888,
+      "blockId": "block-15",
       "type": "quest",
       "displayRole": "objective",
       "title": "Le navire aux esclaves",
@@ -18801,8 +19700,8 @@
     },
     {
       "id": "route-step-0724",
-      "order": 841,
-      "blockId": "block-13",
+      "order": 889,
+      "blockId": "block-15",
       "type": "quest",
       "displayRole": "objective",
       "title": "Briser ses chaînes — jusqu'aux Fers de la Tyrannie",
@@ -18826,8 +19725,8 @@
     },
     {
       "id": "route-step-0725",
-      "order": 842,
-      "blockId": "block-13",
+      "order": 890,
+      "blockId": "block-15",
       "type": "dungeon",
       "displayRole": "detail",
       "title": "◆ Fers de la Tyrannie — SERVITUDE",
@@ -18838,8 +19737,8 @@
     },
     {
       "id": "route-step-0726",
-      "order": 843,
-      "blockId": "block-13",
+      "order": 891,
+      "blockId": "block-15",
       "type": "resume",
       "displayRole": "transition",
       "title": "Briser ses chaînes",
@@ -18854,8 +19753,8 @@
     },
     {
       "id": "route-step-0727",
-      "order": 844,
-      "blockId": "block-13",
+      "order": 892,
+      "blockId": "block-15",
       "type": "quest",
       "displayRole": "objective",
       "title": "Une boîte pour les asservir tous",
@@ -18874,8 +19773,8 @@
     },
     {
       "id": "route-step-0728",
-      "order": 845,
-      "blockId": "block-13",
+      "order": 893,
+      "blockId": "block-15",
       "type": "quest",
       "displayRole": "objective",
       "title": "Le vent se lève",
@@ -18892,8 +19791,8 @@
     },
     {
       "id": "route-step-0729",
-      "order": 846,
-      "blockId": "block-13",
+      "order": 894,
+      "blockId": "block-15",
       "type": "quest",
       "displayRole": "objective",
       "title": "Tournent les vents",
@@ -18910,8 +19809,8 @@
     },
     {
       "id": "route-step-0730",
-      "order": 847,
-      "blockId": "block-13",
+      "order": 895,
+      "blockId": "block-15",
       "type": "quest",
       "displayRole": "objective",
       "title": "Avis de tempête — jusqu'à Sentence de la Balance",
@@ -18935,8 +19834,8 @@
     },
     {
       "id": "route-step-0731",
-      "order": 848,
-      "blockId": "block-13",
+      "order": 896,
+      "blockId": "block-15",
       "type": "dungeon",
       "displayRole": "detail",
       "title": "◆ Sentence de la Balance — MISÈRE",
@@ -18948,8 +19847,8 @@
     },
     {
       "id": "route-step-0732",
-      "order": 849,
-      "blockId": "block-13",
+      "order": 897,
+      "blockId": "block-15",
       "type": "resume",
       "displayRole": "transition",
       "title": "Avis de tempête",
@@ -18963,62 +19862,9 @@
       "momentId": "moment-cavalier-misere"
     },
     {
-      "id": "route-step-0733",
-      "order": 850,
-      "blockId": "block-13",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "La colère des dieux",
-      "prerequisites": "Niveau recommandé : 200.",
-      "warning": "Cette quête débloque l'accès aux zones Épaves Silencieuses et Marches Magmatiques et ouvre L'arme fatale.",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/la-colere-des-dieux.html"
-      },
-      "momentId": "moment-route-step-0733",
-      "launchInstruction": "Dans ton temple de classe, parle au maître de ta classe, évoque les Tours de la Fratrie des Oubliés puis confirme que tu es prêt à affronter leurs soldats."
-    },
-    {
-      "id": "route-step-1202",
-      "order": 851,
-      "blockId": "block-13",
-      "type": "preparation",
-      "title": "L'arme fatale / Mort et renouveau — ressources",
-      "action": "PRÉPARER",
-      "preparationItems": [
-        "5 × Écume de mer",
-        "5 × Salikrone",
-        "5 × Patelle",
-        "5 × Bois d'Aquajou",
-        "5 × Quisnoa",
-        "3 × Pierre Angulaire",
-        "3 × Sel de Baleine",
-        "2 × Étoffe de la Cour Sombre",
-        "80 × Eau Potable — Mort et renouveau"
-      ]
-    },
-    {
-      "id": "route-step-0734",
-      "order": 852,
-      "blockId": "block-13",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "L'arme fatale",
-      "prerequisites": "La colère des dieux terminée. Prévoir 5 Écume de mer, 5 Salikrone, 5 Patelle, 5 Bois d'Aquajou, 5 Quisnoa, 3 Pierre Angulaire, 3 Sel de Baleine, 2 Étoffe de la Cour Sombre + les 4 Sacrifices de zones.",
-      "action": "TERMINER",
-      "instruction": "TERMINE L'arme fatale maintenant et obtiens le sort permanent Nécronyx. Il sera requis pour Bethel et Solar.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/l-arme-fatale.html"
-      },
-      "momentId": "moment-route-step-0734",
-      "launchInstruction": "Depuis ton temple de classe, utilise ta statue pour rejoindre le Domaine des dieux, descends au sous-sol puis parle à Gobanos le forgeron."
-    },
-    {
       "id": "route-step-0735",
-      "order": 853,
-      "blockId": "block-13",
+      "order": 898,
+      "blockId": "block-15",
       "type": "quest",
       "displayRole": "objective",
       "title": "Les racines du mal",
@@ -19030,7 +19876,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-racines-du-mal.html"
       },
-      "momentId": "moment-route-step-0734",
+      "momentId": "moment-route-step-0735",
       "location": {
         "x": -1,
         "y": 2
@@ -19042,8 +19888,8 @@
     },
     {
       "id": "route-step-0736",
-      "order": 854,
-      "blockId": "block-13",
+      "order": 899,
+      "blockId": "block-15",
       "type": "quest",
       "displayRole": "objective",
       "title": "Un pouvoir mérydique — jusqu'au Kimbo",
@@ -19067,8 +19913,8 @@
     },
     {
       "id": "route-step-0737",
-      "order": 855,
-      "blockId": "block-13",
+      "order": 900,
+      "blockId": "block-15",
       "type": "dungeon",
       "displayRole": "detail",
       "title": "◆ Canopée du Kimbo — MÉRYDIQUE",
@@ -19080,8 +19926,8 @@
     },
     {
       "id": "route-step-0738",
-      "order": 856,
-      "blockId": "block-13",
+      "order": 901,
+      "blockId": "block-15",
       "type": "dungeon",
       "displayRole": "objective",
       "title": "◆ Clairière du Chêne Mou — MÉRYDIQUE",
@@ -19093,8 +19939,8 @@
     },
     {
       "id": "route-step-1204",
-      "order": 857,
-      "blockId": "block-13",
+      "order": 902,
+      "blockId": "block-15",
       "type": "dungeon",
       "displayRole": "objective",
       "title": "◆ Temple du Grand Ougah",
@@ -19106,8 +19952,8 @@
     },
     {
       "id": "route-step-0741",
-      "order": 858,
-      "blockId": "block-13",
+      "order": 903,
+      "blockId": "block-15",
       "type": "resume",
       "displayRole": "transition",
       "title": "Un pouvoir mérydique",
@@ -19122,8 +19968,8 @@
     },
     {
       "id": "route-step-0742",
-      "order": 859,
-      "blockId": "block-13",
+      "order": 904,
+      "blockId": "block-15",
       "type": "quest",
       "displayRole": "objective",
       "title": "Mort et renouveau — jusqu'à l'Arbre de mort",
@@ -19147,8 +19993,8 @@
     },
     {
       "id": "route-step-0743",
-      "order": 860,
-      "blockId": "block-13",
+      "order": 905,
+      "blockId": "block-15",
       "type": "dungeon",
       "displayRole": "detail",
       "title": "◆ Arbre de mort — CORRUPTION",
@@ -19160,8 +20006,8 @@
     },
     {
       "id": "route-step-0744",
-      "order": 861,
-      "blockId": "block-13",
+      "order": 906,
+      "blockId": "block-15",
       "type": "resume",
       "displayRole": "transition",
       "title": "Mort et renouveau",
@@ -19176,8 +20022,8 @@
     },
     {
       "id": "route-step-0745",
-      "order": 862,
-      "blockId": "block-13",
+      "order": 907,
+      "blockId": "block-15",
       "type": "resume",
       "displayRole": "objective",
       "title": "Les quatre volontés",
@@ -19192,456 +20038,8 @@
       "momentId": "moment-cavaliers-cloture"
     },
     {
-      "id": "route-step-0865",
-      "order": 863,
-      "blockId": "block-14",
-      "type": "major_step",
-      "title": "Jusqu'au bout du rêve",
-      "prerequisites": "12 apparitions Crocobur ; 6 dernières en Rêve III+ jusqu'au palier V.",
-      "warning": "Pendant cette session : conserve au moins 600 Reflets oniriques au total pour S'armer contre le destin et récupère 1 Rêve d'harmonie en Rêve III+ pour Le poids de son regard.",
-      "action": "TERMINER"
-    },
-    {
-      "id": "route-step-0866",
-      "order": 864,
-      "blockId": "block-14",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "À la recherche de Crocoburio — avancer jusqu'à Bethel",
-      "prerequisites": "Jusqu'au bout du rêve terminé ; La colère des dieux terminée ; sort Nécronyx disponible.",
-      "warning": "La quête mène à la Tour de Bethel.",
-      "action": "LANCER / AVANCER / STOP",
-      "instruction": "En [-6,-3], LANCE À la recherche de Crocoburio et AVANCE jusqu'à la Tour de Bethel puis STOP devant le donjon.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/a-la-recherche-de-crocoburio.html"
-      },
-      "momentId": "moment-route-step-0866",
-      "location": {
-        "x": -6,
-        "y": -3
-      },
-      "destination": {
-        "x": -6,
-        "y": -3
-      }
-    },
-    {
-      "id": "route-step-0867",
-      "order": 865,
-      "blockId": "block-14",
-      "type": "dungeon",
-      "displayRole": "detail",
-      "title": "◆ Tour de Bethel — À LA RECHERCHE DE CROCOBURIO",
-      "prerequisites": "À la recherche de Crocoburio au checkpoint Bethel ; Nécronyx disponible.",
-      "warning": "Bethel donne automatiquement la Coquille d’âme corrompue nécessaire à À la recherche de Crocoburio. Aucune interaction post-boss n’est nécessaire pour cette quête.",
-      "action": "FAIRE",
-      "instruction": "Vaincs Bethel Akarna avec Nécronyx disponible. La Coquille d’âme corrompue est obtenue automatiquement ; retourne ensuite voir Sramsara pour poursuivre À la recherche de Crocoburio.",
-      "momentId": "moment-route-step-0866"
-    },
-    {
-      "id": "route-step-0868",
-      "order": 866,
-      "blockId": "block-14",
-      "type": "resume",
-      "displayRole": "transition",
-      "title": "À la recherche de Crocoburio",
-      "prerequisites": "Bethel vaincue ; poursuivre jusqu'à identifier Léane et la ramener à Mériana.",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/a-la-recherche-de-crocoburio.html"
-      },
-      "momentId": "moment-route-step-0866"
-    },
-    {
-      "id": "route-step-0869",
-      "order": 867,
-      "blockId": "block-14",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Le creuset de Mériana — avancer jusqu'à Koutoulou",
-      "prerequisites": "À la recherche de Crocoburio terminée ; Un pendule pour guider ses pas terminé ; ressources préparées.",
-      "warning": "Le vrai checkpoint donjon est le Temple de Koutoulou.",
-      "action": "LANCER / AVANCER / STOP",
-      "instruction": "En [-6,-3], LANCE Le creuset de Mériana et AVANCE jusqu'au Temple de Koutoulou puis STOP devant le donjon.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/le-creuset-de-meriana.html"
-      },
-      "momentId": "moment-route-step-0869",
-      "location": {
-        "x": -6,
-        "y": -3
-      },
-      "destination": {
-        "x": -6,
-        "y": -3
-      }
-    },
-    {
-      "id": "route-step-0870",
-      "order": 868,
-      "blockId": "block-14",
-      "type": "dungeon",
-      "displayRole": "detail",
-      "title": "◆ Temple de Koutoulou — LE CREUSET DE MÉRIANA",
-      "prerequisites": "Le creuset de Mériana au checkpoint Koutoulou.",
-      "warning": "La Larve de Koutoulou donne automatiquement l’Huile immiscible et indicible requise par Le creuset de Mériana. Les tâches post-boss indiquées par le GP0 concernent la branche Abyssal hors scope et ne sont pas requises ici.",
-      "action": "FAIRE",
-      "instruction": "Vaincs la Larve de Koutoulou. L’Huile immiscible et indicible est obtenue automatiquement ; aucune interaction post-boss supplémentaire n’est nécessaire pour Le creuset de Mériana.",
-      "momentId": "moment-route-step-0869"
-    },
-    {
-      "id": "route-step-0871",
-      "order": 869,
-      "blockId": "block-14",
-      "type": "resume",
-      "displayRole": "transition",
-      "title": "Le creuset de Mériana",
-      "prerequisites": "Huile récupérée ; autres composants du rituel préparés.",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/le-creuset-de-meriana.html"
-      },
-      "momentId": "moment-route-step-0869"
-    },
-    {
-      "id": "route-step-0872",
-      "order": 870,
-      "blockId": "block-14",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Une douloureuse séparation",
-      "prerequisites": "Le creuset de Mériana terminé ; 1 Corde d'escalade.",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/une-douloureuse-separation.html"
-      },
-      "momentId": "moment-ebene-dazak",
-      "location": {
-        "x": -6,
-        "y": -3
-      }
-    },
-    {
-      "id": "route-step-0873",
-      "order": 871,
-      "blockId": "block-14",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Le dragon noir — avancer jusqu'au Roi Dazak",
-      "prerequisites": "Une douloureuse séparation terminée ; De Brikke et de Brokke terminé ou au checkpoint Dazak.",
-      "action": "LANCER / AVANCER / STOP",
-      "instruction": "En [-25,-52], LANCE Le dragon noir et AVANCE jusqu'à devoir rencontrer Dazak puis STOP devant la Brasserie.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/le-dragon-noir.html"
-      },
-      "momentId": "moment-ebene-dazak",
-      "parallelGroup": {
-        "parallelId": "parallel-dazak",
-        "phase": "progress"
-      },
-      "location": {
-        "x": -25,
-        "y": -52
-      },
-      "destination": {
-        "x": -25,
-        "y": -52
-      }
-    },
-    {
-      "id": "route-step-0874",
-      "order": 872,
-      "blockId": "block-14",
-      "type": "dungeon",
-      "displayRole": "detail",
-      "title": "◆ Brasserie du Roi Dazak — LE DRAGON NOIR",
-      "prerequisites": "Le dragon noir + De Brikke et de Brokke au Roi Dazak.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après Dazak, parle-lui avant de quitter la zone.",
-      "action": "FAIRE",
-      "instruction": "Après Dazak, parle-lui avant de quitter la zone.",
-      "momentId": "moment-ebene-dazak",
-      "parallelGroup": {
-        "parallelId": "parallel-dazak",
-        "phase": "finish"
-      }
-    },
-    {
-      "id": "route-step-0875",
-      "order": 873,
-      "blockId": "block-14",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "La bible des rancunes",
-      "prerequisites": "De Brikke et de Brokke au passage Dazak ; quête lancée après le boss.",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/la-bible-des-rancunes.html"
-      },
-      "momentId": "moment-ebene-dazak",
-      "location": {
-        "x": -62,
-        "y": -70
-      }
-    },
-    {
-      "id": "route-step-0876",
-      "order": 874,
-      "blockId": "block-14",
-      "type": "resume",
-      "displayRole": "transition",
-      "title": "De Brikke et de Brokke",
-      "prerequisites": "Dazak vaincu + La bible des rancunes terminée.",
-      "action": "TERMINER",
-      "instruction": "→ Après La bible des rancunes, termine De Brikke et de Brokke.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/de-brikke-et-de-brokke.html"
-      },
-      "momentId": "moment-ebene-dazak"
-    },
-    {
-      "id": "route-step-0877",
-      "order": 875,
-      "blockId": "block-14",
-      "type": "resume",
-      "displayRole": "objective",
-      "title": "Le dragon noir — REPRENDRE jusqu'à Klime",
-      "prerequisites": "Dazak validé ; préparer le cadeau et la vision du portail Nimbos.",
-      "action": "AVANCER / STOP",
-      "instruction": "REPRENDS Le dragon noir et AVANCE jusqu'à Klime puis STOP devant le donjon.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/le-dragon-noir.html"
-      },
-      "momentId": "moment-route-step-0877"
-    },
-    {
-      "id": "route-step-0878",
-      "order": 876,
-      "blockId": "block-14",
-      "type": "dungeon",
-      "displayRole": "detail",
-      "title": "◆ Salons privés de Klime — LE DRAGON NOIR",
-      "prerequisites": "Le dragon noir au checkpoint Klime.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — reparle à Klime pour faire fabriquer le Sac en peau de crocodaille.",
-      "action": "FAIRE",
-      "instruction": "Après Klime, parle-lui pour faire fabriquer le Sac en peau de crocodaille.",
-      "momentId": "moment-route-step-0877"
-    },
-    {
-      "id": "route-step-0879",
-      "order": 877,
-      "blockId": "block-14",
-      "type": "resume",
-      "displayRole": "transition",
-      "title": "Le dragon noir",
-      "prerequisites": "Dazak + Klime validés ; Sac en peau de crocodaille obtenu.",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/le-dragon-noir.html"
-      },
-      "momentId": "moment-route-step-0877"
-    },
-    {
-      "id": "route-step-0880",
-      "order": 878,
-      "blockId": "block-14",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "La vengeance du dernier empereur",
-      "prerequisites": "20 500 kamas ; 2 combats solo.",
-      "warning": "Puis L'œuf de Crocabulia.",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/la-vengeance-du-dernier-empereur.html"
-      },
-      "momentId": "moment-ebene-crocabulia",
-      "location": {
-        "x": -82,
-        "y": 6
-      }
-    },
-    {
-      "id": "route-step-0881",
-      "order": 879,
-      "blockId": "block-14",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "L'œuf de Crocabulia — avancer jusqu'à la Reine des Voleurs",
-      "prerequisites": "La vengeance du dernier empereur terminée ; accès Srambad.",
-      "warning": "Le checkpoint donjon est le Trône de la Cour Sombre.",
-      "action": "LANCER / AVANCER / STOP",
-      "instruction": "En [-6,-3], LANCE L'œuf de Crocabulia et AVANCE jusqu'à devoir récupérer le Coffret verrouillé puis STOP devant la Reine des Voleurs.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/l-oeuf-de-crocabulia.html"
-      },
-      "momentId": "moment-ebene-crocabulia",
-      "location": {
-        "x": -6,
-        "y": -3
-      },
-      "destination": {
-        "x": -6,
-        "y": -3
-      }
-    },
-    {
-      "id": "route-step-0882",
-      "order": 880,
-      "blockId": "block-14",
-      "type": "dungeon",
-      "displayRole": "detail",
-      "title": "◆ Trône de la Cour Sombre — REINE DES VOLEURS",
-      "prerequisites": "L'œuf de Crocabulia au checkpoint Reine des Voleurs.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — monte les escaliers et parle à la Reine des Voleurs dans la salle de sortie après le combat.",
-      "action": "FAIRE",
-      "instruction": "Vaincs la Reine des Voleurs puis monte les escaliers et parle-lui dans la salle de sortie avant de partir.",
-      "momentId": "moment-ebene-crocabulia"
-    },
-    {
-      "id": "route-step-0883",
-      "order": 881,
-      "blockId": "block-14",
-      "type": "resume",
-      "displayRole": "transition",
-      "title": "L'œuf de Crocabulia",
-      "prerequisites": "Coffret verrouillé récupéré.",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/l-oeuf-de-crocabulia.html"
-      },
-      "momentId": "moment-ebene-crocabulia"
-    },
-    {
-      "id": "route-step-0884",
-      "order": 882,
-      "blockId": "block-14",
-      "type": "quest",
-      "displayRole": "transition",
-      "title": "Un nouvel héritier — avancer jusqu'à Solar",
-      "prerequisites": "L'œuf de Crocabulia terminé ; 20 Âmes de Calciné à récupérer hors donjon ; Nécronyx disponible.",
-      "warning": "Le checkpoint donjon est la Tour de Solar.",
-      "action": "LANCER / AVANCER / STOP",
-      "instruction": "En [-6,-3], LANCE Un nouvel héritier, récupère/utilise les 20 Âmes de Calciné puis STOP devant la Tour de Solar.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/un-nouvel-heritier.html"
-      },
-      "momentId": "moment-ebene-crocabulia",
-      "location": {
-        "x": -6,
-        "y": -3
-      },
-      "destination": {
-        "x": -6,
-        "y": -3
-      }
-    },
-    {
-      "id": "route-step-0885",
-      "order": 883,
-      "blockId": "block-14",
-      "type": "dungeon",
-      "displayRole": "objective",
-      "title": "◆ Tour de Solar — UN NOUVEL HÉRITIER",
-      "prerequisites": "Un nouvel héritier au checkpoint Solar ; Nécronyx disponible.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après Solar, monte les escaliers, clique sur la sphère puis parle au Dieu Sram avant de quitter la Tour.",
-      "action": "FAIRE",
-      "instruction": "Vaincs Solar puis, AVANT DE SORTIR, monte les escaliers, clique sur la sphère et parle au Dieu Sram pour poursuivre Un nouvel héritier.",
-      "momentId": "moment-route-step-0884"
-    },
-    {
-      "id": "route-step-0886",
-      "order": 884,
-      "blockId": "block-14",
-      "type": "resume",
-      "displayRole": "transition",
-      "title": "Un nouvel héritier",
-      "prerequisites": "Solar vaincu.",
-      "warning": "La fin de cette quête donne le Dofus Ébène.",
-      "action": "TERMINER",
-      "instruction": "Libère puis réincarne Crocoburio et TERMINE auprès de Grougalorasalar pour obtenir le Dofus Ébène.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/un-nouvel-heritier.html"
-      },
-      "momentId": "moment-route-step-0884"
-    },
-    {
-      "id": "route-step-0918",
-      "order": 885,
-      "blockId": "block-15",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Dans la gueule du dragon — avancer jusqu'après Rathrosk",
-      "prerequisites": "Quatre sur six + Blanc ivoire + Noir d'ébène + 6 Primordiaux + À la croisée des mondes.",
-      "warning": "STOP juste après avoir vaincu Rathrosk : Le silence est d'Aure devient disponible.",
-      "action": "LANCER / AVANCER / STOP",
-      "instruction": "En [-6,-3], LANCE Dans la gueule du dragon et AVANCE jusqu'après Rathrosk puis STOP pour ouvrir Le silence est d'Aure.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/dans-la-gueule-du-dragon.html"
-      },
-      "momentId": "moment-quatre-sur-six-cloture",
-      "location": {
-        "x": -6,
-        "y": -3
-      },
-      "destination": {
-        "x": -6,
-        "y": -3
-      }
-    },
-    {
-      "id": "route-step-0919",
-      "order": 886,
-      "blockId": "block-15",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Le silence est d'Aure",
-      "prerequisites": "Dans la gueule avancée après Rathrosk ; D'incarnam à Astrub ; Le pays des Vermeils ; Dofus Argenté en inventaire.",
-      "warning": "La fin de cette quête donne le Dofus Argenté Scintillant.",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/le-silence-est-d-aure.html"
-      },
-      "momentId": "moment-quatre-sur-six-cloture",
-      "location": {
-        "x": -5,
-        "y": -9
-      }
-    },
-    {
-      "id": "route-step-0920",
-      "order": 887,
-      "blockId": "block-15",
-      "type": "resume",
-      "displayRole": "transition",
-      "title": "Dans la gueule du dragon — TERMINER",
-      "prerequisites": "Le silence est d'Aure terminé.",
-      "warning": "Fermer la quête puis ouvrir S'armer contre le destin.",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/dans-la-gueule-du-dragon.html"
-      },
-      "momentId": "moment-quatre-sur-six-cloture"
-    },
-    {
       "id": "route-step-0921",
-      "order": 888,
+      "order": 908,
       "blockId": "block-15",
       "type": "quest",
       "displayRole": "objective",
@@ -19653,7 +20051,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/prise-de-conscience.html"
       },
-      "momentId": "moment-quatre-sur-six-cloture",
+      "momentId": "moment-route-step-0921",
       "location": {
         "x": -10,
         "y": -31
@@ -19661,7 +20059,7 @@
     },
     {
       "id": "route-step-0923",
-      "order": 889,
+      "order": 909,
       "blockId": "block-15",
       "type": "quest",
       "displayRole": "objective",
@@ -19685,7 +20083,7 @@
     },
     {
       "id": "route-step-0924",
-      "order": 890,
+      "order": 910,
       "blockId": "block-15",
       "type": "dungeon",
       "displayRole": "objective",
@@ -19698,7 +20096,7 @@
     },
     {
       "id": "route-step-0925",
-      "order": 891,
+      "order": 911,
       "blockId": "block-15",
       "type": "resume",
       "displayRole": "transition",
@@ -19714,7 +20112,7 @@
     },
     {
       "id": "route-step-0926",
-      "order": 892,
+      "order": 912,
       "blockId": "block-15",
       "type": "dungeon",
       "displayRole": "objective",
@@ -19727,7 +20125,7 @@
     },
     {
       "id": "route-step-0927",
-      "order": 893,
+      "order": 913,
       "blockId": "block-15",
       "type": "resume",
       "displayRole": "transition",
@@ -19743,7 +20141,7 @@
     },
     {
       "id": "route-step-0928",
-      "order": 894,
+      "order": 914,
       "blockId": "block-15",
       "type": "quest",
       "displayRole": "objective",
@@ -19767,7 +20165,7 @@
     },
     {
       "id": "route-step-0929",
-      "order": 895,
+      "order": 915,
       "blockId": "block-15",
       "type": "quest",
       "displayRole": "transition",
@@ -19784,7 +20182,7 @@
     },
     {
       "id": "route-step-0930",
-      "order": 896,
+      "order": 916,
       "blockId": "block-15",
       "type": "dungeon",
       "displayRole": "objective",
@@ -19797,7 +20195,7 @@
     },
     {
       "id": "route-step-0931",
-      "order": 897,
+      "order": 917,
       "blockId": "block-15",
       "type": "resume",
       "displayRole": "objective",
@@ -19811,404 +20209,6 @@
         "url": "https://www.dofuspourlesnoobs.com/prise-de-conscience.html"
       },
       "momentId": "moment-prise-conscience-finish"
-    },
-    {
-      "id": "route-step-0690",
-      "order": 898,
-      "blockId": "block-15",
-      "type": "preparation",
-      "title": "Un rêve en clair-obscur — prérequis",
-      "action": "PRÉPARER",
-      "preparationItems": [
-        "Domakuro en inventaire",
-        "Dorigami en inventaire",
-        "Paysan 20 minimum"
-      ]
-    },
-    {
-      "id": "route-step-0691",
-      "order": 899,
-      "blockId": "block-15",
-      "type": "preparation",
-      "title": "Un rêve en clair-obscur — 1/2",
-      "action": "PRÉPARER",
-      "preparationItems": [
-        "100 Riz",
-        "20 Bois de Bambou Sacré",
-        "10 Pwimen",
-        "10 de chaque Artefact Pandawushu : Bois / Feu / Eau / Vent / Roc",
-        "5 Bière Tsingtawo",
-        "2 Pizwa",
-        "1 Limo d'Grobe",
-        "1 Pandneken"
-      ]
-    },
-    {
-      "id": "route-step-0692",
-      "order": 900,
-      "blockId": "block-15",
-      "type": "preparation",
-      "title": "Un rêve en clair-obscur — 2/2",
-      "action": "PRÉPARER",
-      "preparationItems": [
-        "1 Pandazahi",
-        "1 Épice",
-        "1 Pétale Papier",
-        "1 Pétale encre",
-        "1 Umeshushu",
-        "1 Gnôle de Grobe",
-        "1 Bière forte légère",
-        "1 Alcool à 99% OU 1 000 kamas",
-        "6 lots de 5 ressources récoltables des Royaumes de Papier/Encre au choix",
-        "2 lots de 2 ressources de Yokianzhi au choix (zones Wukin/Wukang)",
-        "12 Fer",
-        "10 Pichon d'encre",
-        "5 Étain",
-        "2 Planche de Toilette",
-        "Bricoleur 30+"
-      ]
-    },
-    {
-      "id": "route-step-0693",
-      "order": 901,
-      "blockId": "block-15",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Main dans la main — jusqu'à la chope de bière en métal",
-      "prerequisites": "Requiem pour un Yokai terminé ; Domakuro + Dorigami en inventaire.",
-      "warning": "L'épopée du moine pèlerin bloque une étape plus loin, pas le lancement de Main dans la main.",
-      "action": "LANCER / AVANCER / STOP",
-      "instruction": "Imagiro/Orukam [21,-33] : prendre Main dans la main, obtenir la chope de bière en métal et ouvrir la Taverne interdite, puis STOP.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/main-dans-la-main.html"
-      },
-      "momentId": "moment-tachete-reunification-a",
-      "location": {
-        "x": 21,
-        "y": -33
-      },
-      "destination": {
-        "x": 23,
-        "y": -32
-      }
-    },
-    {
-      "id": "route-step-0694",
-      "order": 902,
-      "blockId": "block-15",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "De l'encre spectaculaire",
-      "prerequisites": "Main dans la main avancé jusqu'à la chope de bière en métal ; Bricoleur 30+ ; ressources préparées.",
-      "warning": "Quête indépendante à fermer avant de poursuivre la réunification.",
-      "action": "LANCER / TERMINER",
-      "instruction": "→ Pandawayang [19,-21] : prendre puis terminer De l'encre spectaculaire.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/de-l-encre-spectaculaire.html"
-      },
-      "momentId": "moment-tachete-reunification-a",
-      "location": {
-        "x": 19,
-        "y": -21
-      },
-      "destination": {
-        "x": 19,
-        "y": -21
-      }
-    },
-    {
-      "id": "route-step-0695",
-      "order": 903,
-      "blockId": "block-15",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "L'épopée du moine pèlerin",
-      "prerequisites": "Main dans la main avancé jusqu'à récupérer la chope de bière en métal et accès à la Taverne interdite.",
-      "action": "LANCER / TERMINER",
-      "instruction": "→ Taverne interdite [23,-32] : prendre puis terminer L'épopée du moine pèlerin.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/l-epopee-du-moine-pelerin.html"
-      },
-      "momentId": "moment-tachete-reunification-a",
-      "location": {
-        "x": 23,
-        "y": -32
-      }
-    },
-    {
-      "id": "route-step-0696",
-      "order": 904,
-      "blockId": "block-15",
-      "type": "resume",
-      "displayRole": "transition",
-      "title": "Main dans la main — jusqu'à Deux souffles, une inspiration",
-      "prerequisites": "L'épopée du moine pèlerin terminée.",
-      "action": "AVANCER / STOP",
-      "instruction": "→ Reprendre Main dans la main jusqu'à l'objectif des deux souffles, puis STOP.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/main-dans-la-main.html"
-      },
-      "momentId": "moment-tachete-reunification-a"
-    },
-    {
-      "id": "route-step-0697",
-      "order": 905,
-      "blockId": "block-15",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Deux souffles, une inspiration — jusqu'au Roi Imagami",
-      "prerequisites": "Main dans la main au verrou des deux souffles ; Domakuro + Dorigami en inventaire.",
-      "warning": "La quête se lance seulement lorsque Main dans la main atteint ce checkpoint.",
-      "action": "LANCER / AVANCER / STOP",
-      "instruction": "→ [23,-32] : prendre Deux souffles, une inspiration, avancer jusqu'à la Mémoire d'Orukam puis STOP.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/deux-souffles-une-inspiration.html"
-      },
-      "momentId": "moment-tachete-reunification-b",
-      "location": {
-        "x": 23,
-        "y": -32
-      },
-      "destination": {
-        "x": 2,
-        "y": 0
-      }
-    },
-    {
-      "id": "route-step-0698",
-      "order": 906,
-      "blockId": "block-15",
-      "type": "dungeon",
-      "displayRole": "detail",
-      "title": "◆ Mémoire d'Orukam — ROI IMAGAMI",
-      "prerequisites": "Deux souffles, une inspiration au checkpoint Mémoire d'Orukam.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après le Roi Imagami, reparle à Imetsu, Imushi, Imiyama, Imorok, Imafugo et Imagami, puis parle à Imihasu en dernier pour obtenir l'Origami du Wukin.",
-      "action": "FAIRE",
-      "instruction": "Dans la première salle, parle aux cinq Yokianzhi puis à Imagami en dernier avant le combat. Vaincs le Roi Imagami. AVANT DE SORTIR, reparle aux cinq Yokianzhi + Imagami, puis à Imihasu en dernier pour récupérer l'Origami du Wukin.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/memoire-d-orukam.html"
-      },
-      "momentId": "moment-tachete-reunification-b"
-    },
-    {
-      "id": "route-step-0699",
-      "order": 907,
-      "blockId": "block-15",
-      "type": "resume",
-      "displayRole": "transition",
-      "title": "Deux souffles, une inspiration — jusqu'à la Reine Amirukam",
-      "prerequisites": "Roi Imagami vaincu ; dialogues de sortie effectués.",
-      "action": "AVANCER / STOP",
-      "instruction": "→ Reprendre Deux souffles, une inspiration jusqu'au Souvenir d'Imagiro, puis STOP.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/deux-souffles-une-inspiration.html"
-      },
-      "momentId": "moment-tachete-reunification-b"
-    },
-    {
-      "id": "route-step-0700",
-      "order": 908,
-      "blockId": "block-15",
-      "type": "dungeon",
-      "displayRole": "objective",
-      "title": "◆ Souvenir d'Imagiro — REINE AMIRUKAM",
-      "prerequisites": "Deux souffles, une inspiration au checkpoint Souvenir d'Imagiro.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après la Reine Amirukam, reparle à Tsunam, Shinlam, Mabram, Rokoram, Fugokam et Amirukam, puis parle à Sulianam en dernier pour obtenir la Silhouette du Wukang.",
-      "action": "FAIRE",
-      "instruction": "Dans la première salle, parle aux cinq Yokianzhi puis à Amirukam en dernier avant le combat. Vaincs la Reine Amirukam. AVANT DE SORTIR, reparle aux cinq Yokianzhi + Amirukam, puis à Sulianam en dernier pour récupérer la Silhouette du Wukang.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/souvenir-d-imagiro.html"
-      },
-      "momentId": "moment-tachete-reunification-b"
-    },
-    {
-      "id": "route-step-0701",
-      "order": 909,
-      "blockId": "block-15",
-      "type": "resume",
-      "displayRole": "transition",
-      "title": "Deux souffles, une inspiration",
-      "prerequisites": "Roi Imagami + Reine Amirukam validés ; formes Wukin/Wukang récupérées.",
-      "action": "TERMINER",
-      "instruction": "→ Terminer Deux souffles, une inspiration avec les deux formes obtenues.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/deux-souffles-une-inspiration.html"
-      },
-      "momentId": "moment-tachete-reunification-b"
-    },
-    {
-      "id": "route-step-0702",
-      "order": 910,
-      "blockId": "block-15",
-      "type": "resume",
-      "displayRole": "transition",
-      "title": "Main dans la main",
-      "prerequisites": "Deux souffles, une inspiration terminé.",
-      "action": "TERMINER",
-      "instruction": "→ Terminer Main dans la main.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/main-dans-la-main.html"
-      },
-      "momentId": "moment-tachete-reunification-b"
-    },
-    {
-      "id": "route-step-0703",
-      "order": 911,
-      "blockId": "block-15",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "En ce jardin qui nous unit — Dofus Tacheté",
-      "prerequisites": "Main dans la main terminée ; Deux souffles, une inspiration terminé ; Domakuro + Dorigami en inventaire.",
-      "warning": "Dernière quête du succès Un rêve en clair-obscur.",
-      "action": "LANCER / TERMINER",
-      "instruction": "☐ En ce jardin qui nous unit — [23,-32] : prendre, terminer, récupérer le Dofus Tacheté et le garder en inventaire.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/en-ce-jardin-qui-nous-unit.html"
-      },
-      "momentId": "moment-tachete-reunification-b",
-      "location": {
-        "x": 23,
-        "y": -32
-      },
-      "destination": {
-        "x": 23,
-        "y": -32
-      }
-    },
-    {
-      "id": "route-step-0704",
-      "order": 912,
-      "blockId": "block-15",
-      "type": "preparation",
-      "title": "Après la pluie",
-      "action": "PRÉPARER",
-      "preparationItems": [
-        "200 Pépite",
-        "50 Riz",
-        "40 Bois de Bambou Sacré",
-        "20 Dolomite",
-        "10 Bois de Bambou OU Bambou Sombre",
-        "5 Pétale d'encre",
-        "5 Pétale de Papier",
-        "6 Bière forte légère",
-        "5 Yokayu",
-        "5 Nectar de l'Orient",
-        "1 Gnôle de Grobe",
-        "1 Diacritique de la Reine Amirukam",
-        "1 Diacritique du Roi Imagami",
-        "1 Cristal pliable + 1 Cristal liquide OU 1 Bière du Grand Pouddah",
-        "1 Umeshushu",
-        "1 Carré de Chocolat au Lait",
-        "1 Sirop de Yuzuzu",
-        "1 Pizwa",
-        "Dofus Tacheté en inventaire",
-        "Sculpteur 180+"
-      ]
-    },
-    {
-      "id": "route-step-0705",
-      "order": 913,
-      "blockId": "block-15",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Quand l'éveil n'est qu'un songe",
-      "prerequisites": "La source de tous les maux + En ce jardin qui nous unit / Dofus Tacheté.",
-      "warning": "La quête exige ensuite trois missions : Par ce serment, Le dernier rempart, Une bien étrange prophétie.",
-      "action": "LANCER",
-      "instruction": "LANCE Quand l'éveil n'est qu'un songe.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/quand-leveil-nest-quun-songe.html"
-      },
-      "momentId": "moment-route-step-0705",
-      "location": {
-        "x": 21,
-        "y": -33
-      }
-    },
-    {
-      "id": "route-step-0706",
-      "order": 914,
-      "blockId": "block-15",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Par ce serment s'écrit le monde",
-      "prerequisites": "Quand l'éveil n'est qu'un songe lancée ; Le Saule du Promeneur + L'art de la langue de bois + Infâme pourriture terminés ; ressources Après la pluie préparées.",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/par-ce-serment-s-ecrit-le-monde.html"
-      },
-      "momentId": "moment-route-step-0705",
-      "location": {
-        "x": 23,
-        "y": -32
-      }
-    },
-    {
-      "id": "route-step-0707",
-      "order": 915,
-      "blockId": "block-15",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Le dernier rempart",
-      "prerequisites": "Quand l'éveil n'est qu'un songe lancée ; Si loin, si proches terminé ; ressources Après la pluie préparées.",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/le-dernier-rempart.html"
-      },
-      "momentId": "moment-route-step-0705",
-      "location": {
-        "x": 22,
-        "y": -29
-      }
-    },
-    {
-      "id": "route-step-0708",
-      "order": 916,
-      "blockId": "block-15",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Une bien étrange prophétie",
-      "prerequisites": "Quand l'éveil n'est qu'un songe lancée ; De l'encre spectaculaire + Barnabé dans l'espace terminés ; Dofus Tacheté en inventaire ; ressources Après la pluie préparées.",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/une-bien-etrange-prophetie.html"
-      },
-      "momentId": "moment-route-step-0705",
-      "location": {
-        "x": 20,
-        "y": -27
-      }
-    },
-    {
-      "id": "route-step-0709",
-      "order": 917,
-      "blockId": "block-15",
-      "type": "resume",
-      "displayRole": "transition",
-      "title": "Quand l'éveil n'est qu'un songe",
-      "prerequisites": "Les trois missions terminées.",
-      "action": "TERMINER",
-      "instruction": "REPRENDS Draconiros et TERMINE Quand l'éveil n'est qu'un songe.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/quand-l-eveil-n-est-qu-un-songe.html"
-      },
-      "momentId": "moment-route-step-0705"
     },
     {
       "id": "route-step-0795",
