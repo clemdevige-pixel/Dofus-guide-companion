@@ -13,6 +13,7 @@ test('explicit display roles decide checkbox boundaries inside a moment', () => 
       blockId: 'block-01',
       type: 'quest',
       title: 'Avancer jusqu’au Skeunk',
+      action: 'AVANCER / STOP',
       displayRole: 'objective',
       momentId,
     },
@@ -22,6 +23,7 @@ test('explicit display roles decide checkbox boundaries inside a moment', () => 
       blockId: 'block-01',
       type: 'dungeon',
       title: 'Repaire de Skeunk',
+      action: 'FAIRE',
       displayRole: 'detail',
       momentId,
     },
@@ -41,6 +43,7 @@ test('explicit display roles decide checkbox boundaries inside a moment', () => 
       blockId: 'block-01',
       type: 'dungeon',
       title: 'Mégalithe de Fraktale',
+      action: 'FAIRE',
       displayRole: 'objective',
       momentId,
     },
@@ -65,7 +68,9 @@ test('explicit display roles decide checkbox boundaries inside a moment', () => 
       ['fraktale-objective', 'finish-transition'],
     ],
   );
-  assert.equal(objectives.flatMap((objective) => objective.steps).some((step) => step.action), false);
+  assert.equal(objectives[0]?.steps[0]?.action, 'AVANCER / STOP');
+  assert.equal(objectives[0]?.steps[1]?.action, undefined);
+  assert.equal(objectives[1]?.steps[0]?.action, 'FAIRE');
   assert.equal(
     objectives[0]?.steps.find((step) => step.id === 'fraktale-transition')?.instruction,
     'AVANCER / STOP — Reprendre vers Fraktale',
