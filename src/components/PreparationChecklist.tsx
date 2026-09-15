@@ -1,6 +1,5 @@
 import {
   getPreparationItemKey,
-  normalizePreparationItem,
   preparationRequirementLabels,
 } from '../route/preparation';
 import type { PreparationItem } from '../route/types';
@@ -21,12 +20,9 @@ export function PreparationChecklist({
   onToggleItem,
   onCopyName,
 }: PreparationChecklistProps) {
-  const normalizedItems = items.map((item, itemIndex) => ({
-    item: normalizePreparationItem(item),
-    itemIndex,
-  }));
-  const resources = normalizedItems.filter(({ item }) => item.kind === 'resource');
-  const requirements = normalizedItems.filter(({ item }) => item.kind !== 'resource');
+  const indexedItems = items.map((item, itemIndex) => ({ item, itemIndex }));
+  const resources = indexedItems.filter(({ item }) => item.kind === 'resource');
+  const requirements = indexedItems.filter(({ item }) => item.kind !== 'resource');
 
   return (
     <div className="preparation-checklist">
@@ -80,12 +76,11 @@ export function PreparationChecklist({
             {requirements.map(({ item, itemIndex }) => {
               if (item.kind === 'resource') return null;
               const itemId = getPreparationItemKey(stepId, itemIndex);
-              const label = preparationRequirementLabels[item.kind];
 
               return (
                 <li className="preparation-checklist__requirement" key={itemId}>
                   <span className={`preparation-checklist__requirement-kind preparation-checklist__requirement-kind--${item.kind}`}>
-                    {label}
+                    {preparationRequirementLabels[item.kind]}
                   </span>
                   <span>{item.text}</span>
                 </li>
