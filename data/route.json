@@ -5616,7 +5616,6 @@
       "displayType": "ALIGN.",
       "displayRole": "objective",
       "prerequisites": "10 Bâtons de Boisaille + 1 Bakélélite préparés ; Les sbires du maître au checkpoint Bworkette.",
-      "warning": "Les deux fils doivent être prêts avant d'entrer : ce passage Bworks valide l'alignement ET Les sbires du maître.",
       "action": "AVANCER / STOP",
       "instruction": "AVANCE Du repos mais pas trop jusqu'à devoir récupérer la bière de Bworkette, puis STOP devant le Donjon des Bworks. Les sbires du maître doit déjà être à Bworkette.",
       "momentId": "moment-route-step-0148",
@@ -5633,7 +5632,7 @@
       "title": "◆ Donjon des Bworks — PASSAGE UNIQUE",
       "displayRole": "detail",
       "prerequisites": "Du repos mais pas trop + Les sbires du maître au checkpoint Bworkette ; L'éternelle moisson active.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après Bworkette, parle à Magobwork et récupère la Bière de Bworkette avant de quitter. Ce passage valide Les sbires du maître + alignement 11.",
+      "warning": "⚠ AVANT DE SORTIR DU DONJON — après Bworkette, parle à Magobwork et récupère la Bière de Bworkette avant de quitter.",
       "action": "FAIRE / CAPTURER / VALIDER",
       "instruction": "Fais le Donjon des Bworks et capture la Bworkette avec une pierre d'âme adaptée. Ce même boss valide Les sbires du maître.",
       "momentId": "moment-route-step-0148"
@@ -5646,7 +5645,6 @@
       "title": "Du repos mais pas trop + Pat Akess → Shin Larve",
       "displayRole": "transition",
       "prerequisites": "Bière de Bworkette récupérée ; Bworkette vaincue pour Les sbires du maître.",
-      "warning": "Pas de second Donjon des Bworks : les deux objectifs viennent d'être validés sur le même passage.",
       "action": "TERMINER / REPRENDRE / STOP",
       "instruction": "TERMINE Du repos mais pas trop, puis retourne voir Pat Akess en [5,0], valide Bworkette et prends l'objectif Shin Larve. STOP avant le Donjon des Larves.",
       "momentId": "moment-route-step-0148"
@@ -5660,7 +5658,6 @@
       "displayType": "ALIGN.",
       "displayRole": "objective",
       "prerequisites": "Liquide des Forgerons déjà récupéré lors du passage unique Forgerons.",
-      "warning": "Aucun second Donjon des Forgerons : utilise le Liquide précollecté, poursuis les étapes de réparation du katana puis rends-le à Amayiro.",
       "action": "TERMINER",
       "instruction": "REPRENDS Recouvrement de dette à la Tabasse avec le Liquide des Forgerons déjà en inventaire, fais réparer le katana puis rends-le à Amayiro et TERMINE la quête.",
       "momentId": "moment-route-step-0151",
@@ -5899,7 +5896,6 @@
       "title": "Comme un corbac sur sa branche — jusqu'à Reine Nyée",
       "displayRole": "objective",
       "prerequisites": "30 Ambre ; 6 Ambre d'Abraknyde ; 6 Ambre d'Abraknyde Sombre ; 6 Métaria jaune ; 1 Substrat de Futaie.",
-      "warning": "STOP devant Reine Nyée : attends d'avoir aussi Silvosse, Tour et Ocre prêts sur ce boss.",
       "action": "LANCER / AVANCER / STOP",
       "instruction": "Avance jusqu'à Reine Nyée puis STOP. Garde la quête active jusqu'au passage Reine Nyée.",
       "source": {
@@ -7710,7 +7706,6 @@
       "type": "quest",
       "title": "Tour du propriétaire — Reine Nyée",
       "displayRole": "objective",
-      "warning": "Attendre Arak-haï en pagaille + Comme un corbac sur sa branche avant d'entrer.",
       "action": "AVANCER / STOP",
       "instruction": "Prends l’objectif Reine Nyée puis GARDE Tour du propriétaire active jusqu’à la convergence prévue.",
       "source": {
@@ -7812,7 +7807,6 @@
       "type": "quest",
       "title": "Munster lève le mystère — jusqu'au Domaine Ancestral",
       "prerequisites": "6 × Glande d'Arak-haï.",
-      "warning": "Attendre aussi Un juge hystérique + Vengeance par procuration.",
       "action": "LANCER / AVANCER / STOP",
       "instruction": "Lance Munster lève le mystère en [-6,-10], avance jusqu'à l'Abraknyde Ancestral puis STOP.",
       "source": {
@@ -8366,7 +8360,6 @@
       "title": "Plongeon et dragon — jusqu'au Chêne Mou",
       "displayRole": "transition",
       "prerequisites": "Dragon Cochon validé.",
-      "warning": "La quête Turquoise attend désormais le Chêne Mou.",
       "action": "AVANCER / STOP",
       "instruction": "Après le Dragon Cochon, reprends Plongeon et dragon puis STOP au checkpoint Chêne Mou.",
       "source": {
@@ -8687,7 +8680,6 @@
       "type": "quest",
       "title": "Allumer le feu — jusqu'au Meulou",
       "displayRole": "objective",
-      "warning": "À attendre avec Un juge hystérique + Draconanthropie + capture Ocre.",
       "action": "LANCER / AVANCER / STOP",
       "instruction": "En [-26,-5], LANCE Allumer le feu et AVANCE jusqu'à l'Os de fer du Meulou puis STOP devant la Tanière.",
       "source": {
@@ -8715,7 +8707,6 @@
       "type": "quest",
       "title": "Draconanthropie — jusqu'au Meulou",
       "displayRole": "objective",
-      "warning": "Objectif Meulou Émeraude ; attendre Allumer le feu + Un juge hystérique + Ocre.",
       "action": "LANCER / AVANCER / STOP",
       "instruction": "En [-6,-3], LANCE Draconanthropie et AVANCE jusqu'à la Bague enchantée du Meulou puis STOP devant la Tanière.",
       "source": {
@@ -8932,7 +8923,7 @@
       "title": "◆ Sousouricière du Rat Noir",
       "displayRole": "detail",
       "prerequisites": "Un juge hystérique au Rat Noir.",
-      "warning": "NE CAPTURE PAS le Rat Noir pour l'Ocre : sa capture sera couverte plus tard par le groupe du Sphincter Cell. Les dialogues Stanis Ast/Rat Noir ne sont pas nécessaires pour cette progression.",
+      "warning": "NE CAPTURE PAS le Rat Noir pour l'Ocre : sa capture sera couverte plus tard par le groupe du Sphincter Cell.",
       "action": "FAIRE",
       "instruction": "Vaincs le Rat Noir pour Un juge hystérique.",
       "momentId": "moment-route-step-0326"
@@ -9005,7 +8996,6 @@
       "type": "quest",
       "title": "Le livre des Taures — jusqu'au Maître Corbac",
       "displayRole": "objective",
-      "warning": "Attendre Des donjons, encore des donjons au même boss.",
       "action": "LANCER / AVANCER / STOP",
       "instruction": "En [-6,-3], LANCE Le livre des Taures puis AVANCE jusqu'au Maître Corbac et enchaîne le donjon avec Des donjons, encore des donjons actif.",
       "source": {
@@ -9607,7 +9597,6 @@
       "type": "quest",
       "title": "Taures et détours — avancer jusqu'au Minotoror",
       "displayRole": "objective",
-      "warning": "Attends Royalmouth #1 : Des donjons, encore des donjons doit aussi être au Minotoror avant de faire le Labyrinthe.",
       "action": "LANCER / AVANCER / STOP",
       "instruction": "En [-6,-3], LANCE Taures et détours puis AVANCE jusqu'au Minotoror et STOP. Ne fais pas le Labyrinthe avant Royalmouth #1.",
       "source": {
@@ -9631,7 +9620,6 @@
       "type": "quest",
       "title": "L'art de la langue de bois — avancer jusqu'au Chêne Mou",
       "displayRole": "objective",
-      "warning": "Prépare le futur Chêne Mou pour Silvosse ; Plongeon et dragon y attend déjà aussi.",
       "action": "LANCER / AVANCER / STOP",
       "instruction": "LANCE L'art de la langue de bois et avance jusqu'au Chêne Mou, puis STOP devant le donjon.",
       "source": {
@@ -10048,7 +10036,6 @@
       "title": "En semant, se ment",
       "displayRole": "objective",
       "prerequisites": "Niveau recommandé 110 ; 10 Frostiz + drops/récoltes des Champs de glace.",
-      "warning": "Voie minimale choisie pour le bloqueur Agriculture ou alchimie de Le mal a dit ; inutile de terminer toute la série.",
       "action": "LANCER / TERMINER",
       "instruction": "En [-82,-48], LANCE En semant, se ment et TERMINE la quête. Cela suffit pour le futur bloqueur Agriculture ou alchimie de Le mal a dit.",
       "source": {
@@ -11151,7 +11138,6 @@
       "title": "◆ Excavation du Mansot Royal — FRIGOST / ACCÈS #1",
       "displayRole": "detail",
       "prerequisites": "L'ombre et la glace + Les joyeux de la couronne + Les chasseurs + Pêche en eaux gelées.",
-      "warning": "Premier passage Mansot Royal : il sert aux chaînes Frigost et à l'accès. La bénédiction de Viti n'est pas encore lançable à ce stade.",
       "action": "FAIRE",
       "instruction": "Entre quand les quatre quêtes Frigost sont au Mansot, puis vaincs le Mansot Royal. Ne cherche pas à valider Viti ici : un second passage avec l'Idole de Viti Glacée sera fait après Chêne Mou.",
       "momentId": "moment-mansot-pass",
@@ -11239,7 +11225,6 @@
       "title": "◆ Épave du Grolandais violent — ACCÈS / FAIS DODO #1",
       "displayRole": "detail",
       "prerequisites": "Fais dodo, t'auras du gâteau active.",
-      "warning": "Premier passage Ben le Ripate : il débloque la progression vers les Larmes d'Ouronigride. La bénédiction de Thomahon n'est pas encore lançable.",
       "action": "FAIRE",
       "instruction": "Vaincs Ben le Ripate pour Fais dodo, t'auras du gâteau et capture-le pour l'Ocre. Récupère les éléments demandés par la quête puis retourne auprès de Fantômahawk.",
       "momentId": "moment-ben-acces"
@@ -12663,7 +12648,7 @@
       "title": "◆ Atelier du Tanukouï San — AU NOM DE L’ART + LA VOIE",
       "displayRole": "detail",
       "prerequisites": "Au nom de l’Art + La voie du guerrier au checkpoint Tanukouï San.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — parle au Tanukouï San après le boss pour Au nom de l’Art. La tactique des gens d’armes n’est pas encore active : l’échelle de la salle 4 sera faite plus tard sans refaire le boss.",
+      "warning": "⚠ AVANT DE SORTIR DU DONJON — parle au Tanukouï San après le boss pour Au nom de l’Art.",
       "action": "FAIRE",
       "instruction": "Vaincs et capture Tanukouï San avec Au nom de l'Art + La voie du guerrier actives.",
       "momentId": "moment-route-step-0275"
@@ -12690,7 +12675,6 @@
       "type": "resume",
       "title": "La voie du guerrier — Tanukouï San",
       "displayRole": "transition",
-      "warning": "Aucun second passage Tanukouï n’est nécessaire.",
       "action": "REPRENDRE / AVANCER",
       "momentId": "moment-route-step-0275",
       "guideItems": [
@@ -12721,7 +12705,7 @@
       "type": "dungeon",
       "title": "◆ Fabrique de foux d'artifice — LA VOIE DU GUERRIER #1",
       "prerequisites": "La voie du guerrier au checkpoint Founoroshi.",
-      "warning": "Premier passage Founoroshi : Viti n'est pas encore lançable. Capture Founoroshi pour l'Ocre ici.",
+      "warning": "Capture Founoroshi pour l'Ocre pendant ce passage.",
       "action": "FAIRE",
       "instruction": "Vaincs et capture Founoroshi pour l'Ocre avec La voie du guerrier active. Ensuite retourne voir le Maître des clefs, valide Founoroshi et prends Chêne Mou. Ne tente pas de mutualiser Viti ici : son lancement dépend de la fin de Plongeon et dragon après Chêne Mou."
     },
@@ -12733,7 +12717,7 @@
       "title": "◆ Clairière du Chêne Mou — PASSAGE UNIQUE",
       "displayRole": "objective",
       "prerequisites": "Plongeon et dragon + L'art de la langue de bois + La voie du guerrier au checkpoint Chêne Mou.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — passe par la salle annexe, récupère l'accès au Bosquet désenchanté et parle au Chêne Mou avant de partir. Ce passage valide les trois chaînes actives.",
+      "warning": "⚠ AVANT DE SORTIR DU DONJON — passe par la salle annexe, récupère l'accès au Bosquet désenchanté et parle au Chêne Mou avant de partir.",
       "action": "FAIRE",
       "instruction": "Vaincs le Chêne Mou avec les trois chaînes actives et capture-le pour l'Ocre.",
       "momentId": "moment-route-step-0353",
@@ -12782,7 +12766,6 @@
       "title": "La voie du guerrier — Chêne Mou",
       "displayRole": "transition",
       "prerequisites": "Chêne Mou vaincu pendant le passage partagé.",
-      "warning": "Le prochain objectif de La voie du guerrier est le Minotot.",
       "action": "REPRENDRE / STOP",
       "momentId": "moment-route-step-0353",
       "guideItems": [
@@ -13040,7 +13023,7 @@
       "title": "◆ Fabrique de foux d'artifice — VITI + FESTIVAL #2",
       "displayRole": "detail",
       "prerequisites": "La bénédiction de Viti + Le festival de la lanterne au checkpoint Founoroshi ; idole de Viti Roussie prête.",
-      "warning": "⚠ SECOND PASSAGE FOUNOROSHI — active l'Idole de Viti Roussie avant le combat. Après le boss, parle à Founoroshi pour Le festival de la lanterne et récupère le Mortier enchanté AVANT DE SORTIR.",
+      "warning": "⚠ AVANT DE SORTIR DU DONJON — active l'Idole de Viti Roussie avant le combat. Après le boss, parle à Founoroshi pour Le festival de la lanterne et récupère le Mortier enchanté avant de sortir.",
       "action": "FAIRE",
       "instruction": "Vaincs Founoroshi avec l'Idole de Viti Roussie et Le festival de la lanterne actif. Ce second passage est distinct du passage La voie du guerrier effectué avant Chêne Mou.",
       "momentId": "moment-viti-2boss"
@@ -13136,7 +13119,7 @@
       "type": "dungeon",
       "title": "◆ Excavation du Mansot Royal — VITI #2",
       "prerequisites": "La bénédiction de Viti active ; Idole de Viti Glacée prête.",
-      "warning": "⚠ SECOND PASSAGE MANSOT — double-clique l'Idole de Viti Glacée AVANT chaque tentative, sinon la validation Turquoise ne compte pas.",
+      "warning": "⚠ AVANT LE COMBAT — double-clique l'Idole de Viti Glacée avant chaque tentative, sinon la validation Turquoise ne compte pas.",
       "action": "FAIRE",
       "instruction": "Vaincs le Mansot Royal avec l'Idole de Viti Glacée. Ce passage est distinct du premier Mansot Frigost effectué avant que Viti soit lançable."
     },
@@ -13700,7 +13683,7 @@
       "title": "◆ Épave du Grolandais violent — THOMAHON #2",
       "displayRole": "objective",
       "prerequisites": "La bénédiction de Thomahon active + Idole de Thomahon Marine ; Larmes d'Ouronigride déjà débloquées via Fais dodo, t'auras du gâteau.",
-      "warning": "⚠ SECOND PASSAGE BEN LE RIPATE — double-clique l'Idole de Thomahon Marine AVANT chaque tentative. Fais dodo a déjà été terminée lors du premier passage d'accès.",
+      "warning": "⚠ AVANT LE COMBAT — double-clique l'Idole de Thomahon Marine avant chaque tentative.",
       "action": "FAIRE",
       "instruction": "Vaincs Ben le Ripate avec l'Idole de Thomahon Marine. Ce second passage est distinct du premier Ben effectué pour Fais dodo et l'accès aux Larmes d'Ouronigride.",
       "momentId": "moment-route-step-0488"
@@ -14242,7 +14225,6 @@
       "type": "quest",
       "title": "À qui profite le Boufmouth — TERMINER",
       "displayRole": "objective",
-      "warning": "Cette quête ne demande PAS le Tengu. Elle ferme la 7e composante de Les rescapés de Frigost.",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
@@ -14532,7 +14514,6 @@
       "title": "Enutrosor — terminer la boucle des 4 quêtes",
       "displayRole": "objective",
       "prerequisites": "La quatrième dimension + Crache Test + Déphorrestation + La meilleure défense, c'est l'attaque actives.",
-      "warning": "Fais la boucle commune une seule fois : ne retourne pas aux PNJ de lancement entre les objectifs.",
       "action": "TERMINER LES 4",
       "instruction": "TERMINE les quatre quêtes pendant la même boucle Enutrosor. Coche chaque fermeture au fur et à mesure ; la grappe n'est terminée que lorsque les quatre sont rendues.",
       "momentId": "moment-route-step-1168",
@@ -15384,7 +15365,6 @@
       "title": "Apprentissage : Assassin Suprême — jusqu'au Grand Ougah",
       "displayRole": "objective",
       "prerequisites": "1 000 kamas ; 4 personnages minimum pour la salle 4 du Grand Ougah.",
-      "warning": "L'Ordre 4 doit être terminé avant l'Ordre 5. Fais le Grand Ougah maintenant : ne le repousse plus jusqu'à Un pouvoir mérydique.",
       "action": "AVANCER / STOP",
       "instruction": "AVANCE Apprentissage : Assassin Suprême jusqu'au Grand Ougah puis STOP devant le Temple. Le donjon est fait immédiatement à l'étape suivante afin de terminer l'Ordre 4.",
       "momentId": "moment-order4-assassin",
@@ -15959,7 +15939,6 @@
       "title": "Gelé à pierre fendre",
       "displayRole": "transition",
       "prerequisites": "Korriandre vaincu avec Gelé à pierre fendre au checkpoint.",
-      "warning": "Fermer explicitement l'alignement avant L'ascension de Qu'Tan.",
       "action": "TERMINER",
       "instruction": "Après le passage post-boss Silvosse, quitte le donjon avec la Fleur de Korriandre. Fabrique 1 Dissolvant phosphorescent (Alchimiste 185+) avec : 1 Fleur de Korriandre, 2 Lamelle de Mérulette, 3 Volve de Fongeur, 35 Mandragore, 2 Pépite, 10 Dolomite, 1 Blague de Soufre. Retourne à l'entrée, demande à Sylvie Barbe de te conduire au fond, utilise le dissolvant sur la toile, gagne le combat solo, récupère la dernière Pierre Sacrée d'Araknas puis rends-la à Amayiro pour TERMINER.",
       "source": {
@@ -16023,7 +16002,6 @@
       "title": "La bénédiction de Foluk",
       "displayRole": "objective",
       "prerequisites": "1 Pain d'Incarnam ; 25 Bois de Tremble ; 35 Bois de Tremble réservés depuis Pêche en eaux gelées ; 6 000 kamas.",
-      "warning": "Permet de terminer Il était une foi dans l'Ouest.",
       "action": "TERMINER",
       "instruction": "→ Disciple de Foluk [-57,12] : rendre La bénédiction de Foluk.",
       "source": {
@@ -16945,7 +16923,6 @@
       "type": "quest",
       "title": "Il a fui, il a tout compris",
       "displayRole": "objective",
-      "warning": "Cette quête est indépendante de Shyriiwook et À armes égales : inutile d'attendre leur fin.",
       "action": "LANCER / FIL ROUGE",
       "instruction": "En [-62,30], LANCE Il a fui, il a tout compris et GARDE-la active pendant que tu termines Shyriiwook et À armes égales.",
       "source": {
@@ -16974,7 +16951,6 @@
       "title": "Shyriiwook",
       "displayRole": "transition",
       "prerequisites": "Shyriiwook déjà active depuis [-64,29].",
-      "warning": "Profite de la même boucle Nimotopia ; À armes égales reste active.",
       "action": "TERMINER",
       "instruction": "TERMINE Shyriiwook en gardant À armes égales et Il a fui, il a tout compris actifs.",
       "source": {
@@ -18758,7 +18734,6 @@
       "title": "Topo le petit robot",
       "displayRole": "objective",
       "prerequisites": "Sceau des fondateurs disponible.",
-      "warning": "Ignore les quêtes de zone optionnelles proposées pendant l'escorte : elles ne sont pas nécessaires pour ce parcours.",
       "action": "LANCER / TERMINER",
       "instruction": "→ [22,30] : prendre Topo le petit robot, terminer l'escorte puis enchaîner sur Piège de crystal.",
       "source": {
@@ -18905,7 +18880,7 @@
       "type": "resume",
       "title": "Son nom est Personne",
       "prerequisites": "6 666 kamas.",
-      "warning": "Le retour auprès de Meno se fait via son Pichon kloune : aucun second donjon n'est requis.",
+      "warning": "Retourne auprès de Meno via son Pichon kloune.",
       "action": "TERMINER",
       "instruction": "☐ Son nom est Personne — faire Deks, Docteur Hou et Jelus Vern ; utiliser le Pichon kloune pour revenir à Meno sans refaire le donjon, puis rendre à Prosper.",
       "source": {
@@ -20013,7 +19988,7 @@
       "title": "◆ Temple du Grand Ougah — LES COÛTS DU SORT",
       "displayRole": "detail",
       "prerequisites": "Les coûts du sort au checkpoint Ougah.",
-      "warning": "Le donjon exige au minimum 4 personnages pour franchir une salle. L'Ordre 4 est déjà terminé à ce stade : aucun dialogue Dike Tarak n'est requis pour Assassin Suprême ici.",
+      "warning": "Le donjon exige au minimum 4 personnages pour franchir une salle.",
       "action": "FAIRE",
       "instruction": "Vaincs le Grand Ougah pour Les coûts du sort ; le Champignon psychotrope est obtenu sur le boss.",
       "momentId": "moment-route-step-0900"
@@ -21446,7 +21421,6 @@
       "title": "Un pouvoir mérydique — jusqu'au Kimbo",
       "displayRole": "objective",
       "prerequisites": "Alchimiste 40.",
-      "warning": "Ordre imposé : Kimbo → Chêne Mou → Grand Ougah.",
       "action": "LANCER / AVANCER / STOP",
       "instruction": "En [0,0], LANCE Un pouvoir mérydique et AVANCE jusqu'au Kimbo puis STOP avant le boss.",
       "source": {
@@ -22970,7 +22944,6 @@
       "title": "Une dernière volonté — avancer jusqu'à Ilyzaelle",
       "displayRole": "objective",
       "prerequisites": "Par l'héritage qui vous lie + Deux souffles, une inspiration ; 10 Cristal liquide + 10 Cristal pliable.",
-      "warning": "STOP devant le Belvédère d'Ilyzaelle pour fusionner avec l'alignement.",
       "action": "AVANCER / STOP",
       "instruction": "AVANCE Une dernière volonté jusqu'à Ilyzaelle puis STOP.",
       "source": {
@@ -23295,7 +23268,6 @@
       "title": "Les totems de Maïmane",
       "displayRole": "objective",
       "prerequisites": "Un héritage au checkpoint rune.",
-      "warning": "Sur une progression vierge, quatre repassages sont inévitables. Garde Vortex et Comte pour les faire avec S'armer contre le destin.",
       "action": "LANCER / FIL ROUGE",
       "instruction": "LANCE les Totems puis collecte les six émotions lors des passages dédiés. Garde la quête active : S'armer contre le destin rejoindra ce groupe au Vortex.",
       "source": {
@@ -23372,7 +23344,6 @@
       "title": "S'armer contre le destin — avancer jusqu'au Vortex",
       "displayRole": "objective",
       "prerequisites": "métier de récolte 200 ; ressources de quête.",
-      "warning": "Le Comte DDG a déjà été fait plus tôt. Ce second passage est réservé à S'armer contre le destin + Totem Surprise.",
       "action": "LANCER / AVANCER / STOP",
       "instruction": "En [38,-21], LANCE S'armer contre le destin et AVANCE jusqu'à l'Œil de Vortex puis STOP.",
       "source": {
@@ -24099,7 +24070,7 @@
       "title": "Parangon de puissance",
       "displayRole": "detail",
       "prerequisites": "La mère des Dragoeufs est restée active depuis le checkpoint Parangon pendant les gardiens de donjon niveau 200.",
-      "warning": "Cette étape clôt uniquement le suivi du Companion. Si le Parangon n'est pas tombé, garde La mère des Dragoeufs active et ne poursuis pas la branche Vulbis ici.",
+      "warning": "Si le Parangon n'est pas tombé, garde La mère des Dragoeufs active et ne poursuis pas la branche Vulbis.",
       "action": "FIN DU SUIVI",
       "instruction": "Clôture le suivi Parangon dans Companion. Aucun farm supplémentaire ni aucune suite Vulbis ne sont ajoutés ici.",
       "momentId": "moment-sylvestre-final",
