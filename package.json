@@ -8,7 +8,6 @@
     "build": "tsc -b && vite build",
     "test:route": "tsx --test src/route/*.test.ts src/progress/*.test.ts",
     "validate:route": "tsx scripts/validate-route.ts",
-    "migrate:preparation": "tsx scripts/migrate-preparation-data.ts",
     "export:route": "tsx scripts/export-route.ts",
     "preview": "vite preview",
     "tauri": "tauri"
