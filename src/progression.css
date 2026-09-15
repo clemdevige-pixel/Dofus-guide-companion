@@ -1,29 +1,52 @@
 .app-header--dense {
+  min-width: 0;
   padding-bottom: 8px;
 }
 
 .app-header__context {
   min-width: 0;
-  flex: 1;
+  flex: 1 1 auto;
+  overflow: hidden;
 }
 
 .header-block-line {
+  display: flex;
+  min-width: 0;
+  align-items: baseline;
+  gap: 4px;
   margin: 0 0 2px;
-  overflow: hidden;
   color: #93a396;
   font-size: 11px;
   line-height: 1.2;
-  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.header-block-line strong {
+.header-block-line__index,
+.header-block-line__progress {
+  flex: 0 0 auto;
+}
+
+.header-block-line__title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.header-block-line__title strong {
   color: #dce7de;
   font-weight: 800;
 }
 
+.header-block-line__progress {
+  color: #b9e7c1;
+  font-weight: 800;
+}
+
 .app-header--dense .card-jump {
+  min-width: 0;
   margin-top: 0;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .context-panel--progress {
@@ -168,11 +191,46 @@
   font-size: 10px;
 }
 
-@media (max-width: 330px) {
+@media (max-width: 430px) {
+  .app-header--dense {
+    gap: 7px;
+  }
+
+  .app-header--dense .icon-button {
+    flex: 0 0 auto;
+  }
+
   .header-block-line {
     font-size: 10px;
   }
 
+  .app-header--dense .card-jump {
+    gap: 3px;
+    font-size: 11px;
+  }
+
+  .app-header--dense .card-jump input {
+    width: 40px;
+  }
+}
+
+@media (max-width: 350px) {
+  .header-block-line__title {
+    display: none;
+  }
+
+  .header-block-line__progress::before {
+    content: 'Bloc ';
+    color: #93a396;
+    font-weight: 700;
+  }
+
+  .app-header--dense .card-jump > span:first-child {
+    display: none;
+  }
+}
+
+@media (max-width: 330px) {
   .progression-summary {
     align-items: flex-start;
     flex-direction: column;
