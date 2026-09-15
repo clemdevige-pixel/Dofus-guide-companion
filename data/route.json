@@ -114,16 +114,56 @@
       "warning": "La Ferrite et la Planche Agglomérée ne sont pas à acheter ici : elles seront fabriquées pendant La hache et la pioche puis conservées pour Préparation au combat.",
       "action": "PRÉPARER",
       "preparationItems": [
-        "18 × Blé",
-        "8 × Goujon",
-        "13 × Ortie",
-        "10 × Fer",
-        "10 × Bois de frêne",
-        "11 × Cendres éternelles",
-        "2 × Feu intérieur",
-        "2 × Laine céleste",
-        "2 × Peau de Gloot",
-        "2 × Pétale diaphane"
+        {
+          "kind": "resource",
+          "quantity": 18,
+          "name": "Blé"
+        },
+        {
+          "kind": "resource",
+          "quantity": 8,
+          "name": "Goujon"
+        },
+        {
+          "kind": "resource",
+          "quantity": 13,
+          "name": "Ortie"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Fer"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Bois de frêne"
+        },
+        {
+          "kind": "resource",
+          "quantity": 11,
+          "name": "Cendres éternelles"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Feu intérieur"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Laine céleste"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Peau de Gloot"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Pétale diaphane"
+        }
       ]
     },
     {
@@ -134,13 +174,41 @@
       "title": "Ressources à prévoir — 2/2",
       "action": "PRÉPARER",
       "preparationItems": [
-        "2 × Plume chimérique",
-        "4 × Viande Intangible",
-        "3 × Relique d'Incarnam",
-        "4 × Poudre de Perlinpainpain",
-        "4 × Bave de Bouftou",
-        "2 × Œuf chimérique",
-        "1 × Lailait"
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Plume chimérique"
+        },
+        {
+          "kind": "resource",
+          "quantity": 4,
+          "name": "Viande Intangible"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Relique d'Incarnam"
+        },
+        {
+          "kind": "resource",
+          "quantity": 4,
+          "name": "Poudre de Perlinpainpain"
+        },
+        {
+          "kind": "resource",
+          "quantity": 4,
+          "name": "Bave de Bouftou"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Œuf chimérique"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Lailait"
+        }
       ]
     },
     {
@@ -1729,16 +1797,55 @@
       "title": "Ressources à prévoir — 1/2",
       "action": "PRÉPARER",
       "preparationItems": [
-        "5 × Fer",
-        "2 × Huile de sésame",
-        "180 × Kamas",
-        "8 × Eau potable",
-        "1 × Fleur de pissenlit diabolique",
-        "1 × Pétale de rose démoniaque",
-        "1 × Pétale de tournesol sauvage",
-        "1 × Langue d'épouvanteur",
-        "1 × Couteau de chasse",
-        "1 × Ferrite"
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Fer"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Huile de sésame"
+        },
+        {
+          "kind": "note",
+          "text": "180 × Kamas"
+        },
+        {
+          "kind": "resource",
+          "quantity": 8,
+          "name": "Eau potable"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Fleur de pissenlit diabolique"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Pétale de rose démoniaque"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Pétale de tournesol sauvage"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Langue d'épouvanteur"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Couteau de chasse"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Ferrite"
+        }
       ]
     },
     {
@@ -1749,16 +1856,56 @@
       "title": "Ressources à prévoir — 2/2",
       "action": "PRÉPARER",
       "preparationItems": [
-        "1 × Serviette de plage",
-        "1 × Cuir de scélérat strubien",
-        "1 × Planche Contreplaquée",
-        "1 × Lailait",
-        "1 × Goujon",
-        "1 × Baguette rikiki",
-        "3 × Poudre de Perlinpainpain",
-        "3 × Ortie",
-        "3 × Sauge",
-        "3 × Trèfle à 5 feuilles"
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Serviette de plage"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Cuir de scélérat strubien"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Planche Contreplaquée"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Lailait"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Goujon"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Baguette rikiki"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Poudre de Perlinpainpain"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Ortie"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Sauge"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Trèfle à 5 feuilles"
+        }
       ]
     },
     {
@@ -1769,8 +1916,16 @@
       "title": "Astrub — complément ressources",
       "action": "PRÉPARER",
       "preparationItems": [
-        "1 × Bière d'Astrub",
-        "5 × Laine de Bouftou"
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Bière d'Astrub"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Laine de Bouftou"
+        }
       ]
     },
     {
@@ -4345,11 +4500,31 @@
       "title": "Lancement Ocre d'ambre",
       "action": "PRÉPARER",
       "preparationItems": [
-        "30 Ambre",
-        "6 Ambre d'Abraknyde",
-        "6 Ambre d'Abraknyde Sombre",
-        "6 Métaria jaune",
-        "1 Substrat de Futaie"
+        {
+          "kind": "resource",
+          "quantity": 30,
+          "name": "Ambre"
+        },
+        {
+          "kind": "resource",
+          "quantity": 6,
+          "name": "Ambre d'Abraknyde"
+        },
+        {
+          "kind": "resource",
+          "quantity": 6,
+          "name": "Ambre d'Abraknyde Sombre"
+        },
+        {
+          "kind": "resource",
+          "quantity": 6,
+          "name": "Métaria jaune"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Substrat de Futaie"
+        }
       ]
     },
     {
@@ -4455,16 +4630,55 @@
       "title": "Ressources à prévoir",
       "action": "PRÉPARER",
       "preparationItems": [
-        "50 × Ortie",
-        "5 × Laine de Boufton Noir",
-        "1 × Ailes de Scarafeuille Bleu",
-        "1 × Ailes de Scarafeuille Blanc",
-        "1 × Ailes de Scarafeuille Vert",
-        "1 × Ailes de Scarafeuille Rouge",
-        "500 × Kamas",
-        "1 × Chaînes brisées",
-        "1 × Ébonite",
-        "1 × Scalp de Bwork Archer"
+        {
+          "kind": "resource",
+          "quantity": 50,
+          "name": "Ortie"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Laine de Boufton Noir"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Ailes de Scarafeuille Bleu"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Ailes de Scarafeuille Blanc"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Ailes de Scarafeuille Vert"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Ailes de Scarafeuille Rouge"
+        },
+        {
+          "kind": "note",
+          "text": "500 × Kamas"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Chaînes brisées"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Ébonite"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Scalp de Bwork Archer"
+        }
       ]
     },
     {
@@ -4634,12 +4848,35 @@
       "title": "Ressources à prévoir",
       "action": "PRÉPARER",
       "preparationItems": [
-        "10 × Épée de Boisaille",
-        "20 × Fougasse",
-        "1 × Bière de Feubuk",
-        "1 000 × Kamas",
-        "10 × Bâton de Boisaille",
-        "1 × Bakélélite"
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Épée de Boisaille"
+        },
+        {
+          "kind": "resource",
+          "quantity": 20,
+          "name": "Fougasse"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Bière de Feubuk"
+        },
+        {
+          "kind": "note",
+          "text": "1 000 × Kamas"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Bâton de Boisaille"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Bakélélite"
+        }
       ]
     },
     {
@@ -5154,14 +5391,47 @@
       "warning": "Le Gros Boulet ne se préachète pas : récupère-le sur un Raul Mops après avoir lancé Le nouveau monde.",
       "action": "PRÉPARER",
       "preparationItems": [
-        "2 × Miséricorde du Chafer d’Élite",
-        "1 × Oreille de Foufayteur",
-        "1 × Huile de Sésame",
-        "1 × Tronc de Kokoko",
-        "1 × Tranche de Nodkoko",
-        "1 × Kokopaille",
-        "1 × Coffret maudit du Flib",
-        "1 × Gros Boulet — drop 100 % sur Raul Mops une fois la quête lancée"
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Miséricorde du Chafer d’Élite"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Oreille de Foufayteur"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Huile de Sésame"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Tronc de Kokoko"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Tranche de Nodkoko"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Kokopaille"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Coffret maudit du Flib"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Gros Boulet",
+          "note": "drop 100 % sur Raul Mops une fois la quête lancée"
+        }
       ]
     },
     {
@@ -5613,16 +5883,55 @@
       "title": "Alignement 13→22 + accès",
       "action": "PRÉPARER",
       "preparationItems": [
-        "1 700 kamas minimum — 700 Foire + 1 000 Partir un jour sans retour",
-        "1 × Ticket de la Foire du Trool",
-        "1 × Casque",
-        "1 × Ailes en bois",
-        "1 × Bout de Blop Coco",
-        "1 × Bout de Blop Griotte",
-        "1 × Bout de Blop Indigo",
-        "1 × Bout de Blop Reinette",
-        "1 × Pelle de Boisaille",
-        "20 × Anneau d'Agilité"
+        {
+          "kind": "note",
+          "text": "1 700 kamas minimum — 700 Foire + 1 000 Partir un jour sans retour"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Ticket de la Foire du Trool"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Casque"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Ailes en bois"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Bout de Blop Coco"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Bout de Blop Griotte"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Bout de Blop Indigo"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Bout de Blop Reinette"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Pelle de Boisaille"
+        },
+        {
+          "kind": "resource",
+          "quantity": 20,
+          "name": "Anneau d'Agilité"
+        }
       ]
     },
     {
@@ -5841,15 +6150,49 @@
       "title": "Émeraude — 1/3",
       "action": "PRÉPARER",
       "preparationItems": [
-        "10 Plumes de Kwak de Vent",
-        "8 Graines de la Discorde",
-        "6 Ailes de Scarafeuille Blanc",
-        "4 Résines",
-        "2 Pierres d'Émeraude",
-        "1 Dragodinde Rousse",
-        "1 Dragodinde Amande",
-        "1 Dragodinde Dorée",
-        "Pierres d'âme adaptées — Boostache, Kanniboul Ebil, Draegnerys, Nelween, Wa Wobot"
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Plumes de Kwak de Vent"
+        },
+        {
+          "kind": "resource",
+          "quantity": 8,
+          "name": "Graines de la Discorde"
+        },
+        {
+          "kind": "resource",
+          "quantity": 6,
+          "name": "Ailes de Scarafeuille Blanc"
+        },
+        {
+          "kind": "note",
+          "text": "4 Résines"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Pierres d'Émeraude"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Dragodinde Rousse"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Dragodinde Amande"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Dragodinde Dorée"
+        },
+        {
+          "kind": "note",
+          "text": "Pierres d'âme adaptées — Boostache, Kanniboul Ebil, Draegnerys, Nelween, Wa Wobot"
+        }
       ]
     },
     {
@@ -6529,16 +6872,52 @@
       "warning": "Ces deux succès d'élevage + Éleveur 20 sont des prérequis réels de Naissance d'une vocation. Ne les laisse pas pour le dernier moment.",
       "action": "PRÉPARER",
       "preparationItems": [
-        "1 100 kamas",
-        "10 Capes Bontariennes",
-        "1 Emballage de félicitations",
-        "25 Pommes de terre",
-        "4 Ailes de Dragodinde",
-        "4 Ailes de Dragodinde Rousse sauvage",
-        "5 Bouts de Blop Reinette",
-        "Succès « Ce n'est qu'un prélèvement »",
-        "Succès « Elle a peut-être trop mangé ? »",
-        "Éleveur niveau 20 minimum"
+        {
+          "kind": "note",
+          "text": "1 100 kamas"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Cape Bontarienne"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Emballage de félicitations"
+        },
+        {
+          "kind": "resource",
+          "quantity": 25,
+          "name": "Pommes de terre"
+        },
+        {
+          "kind": "resource",
+          "quantity": 4,
+          "name": "Ailes de Dragodinde"
+        },
+        {
+          "kind": "resource",
+          "quantity": 4,
+          "name": "Ailes de Dragodinde Rousse sauvage"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Bouts de Blop Reinette"
+        },
+        {
+          "kind": "note",
+          "text": "Succès « Ce n'est qu'un prélèvement »"
+        },
+        {
+          "kind": "note",
+          "text": "Succès « Elle a peut-être trop mangé ? »"
+        },
+        {
+          "kind": "note",
+          "text": "Éleveur niveau 20 minimum"
+        }
       ]
     },
     {
@@ -6549,13 +6928,39 @@
       "title": "Émeraude — 3/3",
       "action": "PRÉPARER",
       "preparationItems": [
-        "1 Bol",
-        "3 Cerises",
-        "10 Graines de Scorbute",
-        "5 Viandes avariées",
-        "6 Glandes d'Arak-haï",
-        "5 000 kamas OU 2 Œils de Cocholou",
-        "Pierres d'âme adaptées"
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Bol"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Cerise"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Graines de Scorbute"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Viande Avariée"
+        },
+        {
+          "kind": "resource",
+          "quantity": 6,
+          "name": "Glandes d'Arak-haï"
+        },
+        {
+          "kind": "note",
+          "text": "5 000 kamas OU 2 Œils de Cocholou"
+        },
+        {
+          "kind": "note",
+          "text": "Pierres d'âme adaptées"
+        }
       ]
     },
     {
@@ -6583,14 +6988,43 @@
       "title": "Alignement 23→50 — complément ressources",
       "action": "PRÉPARER",
       "preparationItems": [
-        "1 × Gland",
-        "1 × Bière du Chabrulé",
-        "3 × Bière Atolmond",
-        "15 × Trèfle à 5 feuilles",
-        "3 × Mâchoire de Chafer Draugr",
-        "5 000 kamas OU 2 × Œil de Cocholou",
-        "1 000 kamas — Mission de reconnaissance au cimetière",
-        "1 100 kamas — Ultime réminiscence"
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Gland"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Bière du Chabrulé"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Bière Atolmond"
+        },
+        {
+          "kind": "resource",
+          "quantity": 15,
+          "name": "Trèfle à 5 feuilles"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Mâchoire de Chafer Draugr"
+        },
+        {
+          "kind": "note",
+          "text": "5 000 kamas OU 2 × Œil de Cocholou"
+        },
+        {
+          "kind": "note",
+          "text": "1 000 kamas — Mission de reconnaissance au cimetière"
+        },
+        {
+          "kind": "note",
+          "text": "1 100 kamas — Ultime réminiscence"
+        }
       ]
     },
     {
@@ -7709,15 +8143,50 @@
       "title": "Domakuro + Plantala — 1/2",
       "action": "PRÉPARER",
       "preparationItems": [
-        "100 Graine de Sésame",
-        "100 Riz",
-        "50 Ortie",
-        "50 Haricot",
-        "20 Bois de Bambou",
-        "20 Eau Potable",
-        "2 de chaque Artefact Pandawushu : Roc / Vent / Bois / Feu / Eau",
-        "8 Bananagrume",
-        "5 Laine de Boufton Noir"
+        {
+          "kind": "resource",
+          "quantity": 100,
+          "name": "Graine de Sésame"
+        },
+        {
+          "kind": "resource",
+          "quantity": 100,
+          "name": "Riz"
+        },
+        {
+          "kind": "resource",
+          "quantity": 50,
+          "name": "Ortie"
+        },
+        {
+          "kind": "resource",
+          "quantity": 50,
+          "name": "Haricot"
+        },
+        {
+          "kind": "resource",
+          "quantity": 20,
+          "name": "Bois de Bambou"
+        },
+        {
+          "kind": "resource",
+          "quantity": 20,
+          "name": "Eau Potable"
+        },
+        {
+          "kind": "note",
+          "text": "2 de chaque Artefact Pandawushu : Roc / Vent / Bois / Feu / Eau"
+        },
+        {
+          "kind": "resource",
+          "quantity": 8,
+          "name": "Bananagrume"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Laine de Boufton Noir"
+        }
       ]
     },
     {
@@ -7728,15 +8197,49 @@
       "title": "Domakuro + Plantala — 2/2",
       "action": "PRÉPARER",
       "preparationItems": [
-        "3 Poils magiques de Tanuki",
-        "3 Fraise",
-        "3 Viscères de Scarafeuille",
-        "1 Pandaburg",
-        "2 Pandazahi ou Pandaporo",
-        "1 Huile de Riz",
-        "Prévoir 1 115 kamas au total sur la chaîne Domakuro (dont les 1 000 kamas déjà indiqués à Sang d'encre)",
-        "5 Eau Potable",
-        "1 Huile de Koode"
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Poils magiques de Tanuki"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Fraise"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Viscères de Scarafeuille"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Pandaburg"
+        },
+        {
+          "kind": "note",
+          "text": "2 Pandazahi ou Pandaporo"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Huile de Riz"
+        },
+        {
+          "kind": "note",
+          "text": "Prévoir 1 115 kamas au total sur la chaîne Domakuro (dont les 1 000 kamas déjà indiqués à Sang d'encre)"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Eau Potable"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Huile de Koode"
+        }
       ]
     },
     {
@@ -9027,8 +9530,16 @@
       "warning": "Conserve la sauvegarde Blop Multicolore.",
       "action": "PRÉPARER",
       "preparationItems": [
-        "1 Tige de Bambouto",
-        "1 Tête de mort"
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Tige de Bambouto"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Tête de mort"
+        }
       ]
     },
     {
@@ -9279,41 +9790,182 @@
       "warning": "Conserve tous les drops de monstres de la Bourgade, des Champs de glace, de la Forêt des pins perdus et du Lac gelé : ils seront réutilisés en Frigost II. Ne les vends pas et ne les détruis pas.",
       "action": "PRÉPARER",
       "preparationItems": [
-        "1 Huile de Mamansot",
-        "5 Poil de Smilomouth",
-        "5 Cuir du Sanglacier",
-        "1 Gland de l'Ecumouth",
-        "10 Eau Calme",
-        "5 Frigrowka",
-        "5 Friswein",
-        "10 Frostiz — En semant, se ment",
-        "150 Fer",
-        "75 Étain",
-        "50 Charbon",
-        "50 Poil de Chachachovage",
-        "50 Poil de barbe du Shamansot",
-        "50 Poil de Smilomouth",
-        "50 Manganèse",
-        "35 Bois de Tremble",
-        "25 Kobalte",
-        "25 Duvet de Mamansot",
-        "25 Laine de Boufmouth légendaire",
-        "25 Laine de Boufmouth",
-        "20 Plume du Timansot",
-        "20 Cuir de Bouftonmouth",
-        "20 Cuir du Sanglacier",
-        "15 Bec du Timansot",
-        "10 Plume de Gélikan",
-        "10 Oreille de Kaniglou",
-        "10 Aile de Mansobèse",
-        "10 Queue d'Ecumouth",
-        "10 Pince de Crabe Hijacob",
-        "5 Huile de Mamansot",
-        "5 Kriptonite",
-        "5 Griffe de Dragoeuf Albâtre",
-        "5 Aluminite",
-        "5 Blague de Soufre",
-        "5 Nacre"
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Huile de Mamansot"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Poil de Smilomouth"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Cuir du Sanglacier"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Gland de l'Ecumouth"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Eau Calme"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Frigrowka"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Friswein"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Frostiz",
+          "note": "En semant, se ment"
+        },
+        {
+          "kind": "resource",
+          "quantity": 150,
+          "name": "Fer"
+        },
+        {
+          "kind": "resource",
+          "quantity": 75,
+          "name": "Étain"
+        },
+        {
+          "kind": "resource",
+          "quantity": 50,
+          "name": "Charbon"
+        },
+        {
+          "kind": "resource",
+          "quantity": 50,
+          "name": "Poil de Chachachovage"
+        },
+        {
+          "kind": "resource",
+          "quantity": 50,
+          "name": "Poil de barbe du Shamansot"
+        },
+        {
+          "kind": "resource",
+          "quantity": 50,
+          "name": "Poil de Smilomouth"
+        },
+        {
+          "kind": "resource",
+          "quantity": 50,
+          "name": "Manganèse"
+        },
+        {
+          "kind": "resource",
+          "quantity": 35,
+          "name": "Bois de Tremble"
+        },
+        {
+          "kind": "resource",
+          "quantity": 25,
+          "name": "Kobalte"
+        },
+        {
+          "kind": "resource",
+          "quantity": 25,
+          "name": "Duvet de Mamansot"
+        },
+        {
+          "kind": "resource",
+          "quantity": 25,
+          "name": "Laine de Boufmouth légendaire"
+        },
+        {
+          "kind": "resource",
+          "quantity": 25,
+          "name": "Laine de Boufmouth"
+        },
+        {
+          "kind": "resource",
+          "quantity": 20,
+          "name": "Plume du Timansot"
+        },
+        {
+          "kind": "resource",
+          "quantity": 20,
+          "name": "Cuir de Bouftonmouth"
+        },
+        {
+          "kind": "resource",
+          "quantity": 20,
+          "name": "Cuir du Sanglacier"
+        },
+        {
+          "kind": "resource",
+          "quantity": 15,
+          "name": "Bec du Timansot"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Plume de Gélikan"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Oreille de Kaniglou"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Aile de Mansobèse"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Queue d'Ecumouth"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Pince de Crabe Hijacob"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Huile de Mamansot"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Kriptonite"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Griffe de Dragoeuf Albâtre"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Aluminite"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Blague de Soufre"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Nacre"
+        }
       ]
     },
     {
@@ -10186,13 +10838,41 @@
       "warning": "Bricole Girl doit être terminée avant l'étape atelier.",
       "action": "PRÉPARER",
       "preparationItems": [
-        "70 Bois de Tremble (35 pour Pêche en eaux gelées + 35 À RÉSERVER pour Un ami qui ne vous veut pas que du bien)",
-        "30 Laine de Boufmouth",
-        "15 Laine de Boufmouth légendaire",
-        "1 Laine du Royalmouth",
-        "5 Défense du Sanglacier",
-        "5 Dent de Smilomouth",
-        "50 Graisses de Mansot à drop"
+        {
+          "kind": "note",
+          "text": "70 Bois de Tremble (35 pour Pêche en eaux gelées + 35 À RÉSERVER pour Un ami qui ne vous veut pas que du bien)"
+        },
+        {
+          "kind": "resource",
+          "quantity": 30,
+          "name": "Laine de Boufmouth"
+        },
+        {
+          "kind": "resource",
+          "quantity": 15,
+          "name": "Laine de Boufmouth légendaire"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Laine du Royalmouth"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Défense du Sanglacier"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Dent de Smilomouth"
+        },
+        {
+          "kind": "resource",
+          "quantity": 50,
+          "name": "Graisse de mansot",
+          "note": "À récupérer sur les Mansots ; non achetable en HDV."
+        }
       ]
     },
     {
@@ -10254,21 +10934,79 @@
       "title": "La fonte des glaces — base",
       "action": "PRÉPARER",
       "preparationItems": [
-        "80 Bois de Bambou",
-        "11 Poil de Chachachovage",
-        "13 Poil de barbe du Shamansot — 10 pour La fonte + 3 À CONSERVER pour L'ombre et la glace",
-        "13 Oreille de Kaniglou — 10 pour La fonte + 3 À CONSERVER pour L'ombre et la glace",
-        "Duvet de Mamansot",
-        "Cuir du Sanglacier",
-        "Étoffe de Rat Bougri",
-        "Oreille percée du Fricochère",
-        "Pince de Crabe Hijacob",
-        "Poil de Smilomouth",
-        "Plume du Timansot",
-        "Plume de Gélikan",
-        "Queue du Fu Mansot",
-        "Queue d'Ecumouth",
-        "Peau de Mansobèse"
+        {
+          "kind": "resource",
+          "quantity": 80,
+          "name": "Bois de Bambou"
+        },
+        {
+          "kind": "resource",
+          "quantity": 11,
+          "name": "Poil de Chachachovage"
+        },
+        {
+          "kind": "note",
+          "text": "13 Poil de barbe du Shamansot — 10 pour La fonte + 3 À CONSERVER pour L'ombre et la glace"
+        },
+        {
+          "kind": "note",
+          "text": "13 Oreille de Kaniglou — 10 pour La fonte + 3 À CONSERVER pour L'ombre et la glace"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Duvet de Mamansot"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Cuir du Sanglacier"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Étoffe de Rat Bougri"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Oreille percée du Fricochère"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Pince de Crabe Hijacob"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Poil de Smilomouth"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Plume du Timansot"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Plume de Gélikan"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Queue du Fu Mansot"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Queue d'Ecumouth"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Peau de Mansobèse"
+        }
       ]
     },
     {
@@ -10279,17 +11017,61 @@
       "title": "La fonte des glaces — 1/2",
       "action": "PRÉPARER",
       "preparationItems": [
-        "2 Gland d'Ecumouth",
-        "2 Œil torve de Fricochère",
-        "2 Œil de Crabe Hijacob",
-        "2 Huile de Mamansot",
-        "2 Bec de Gélikan",
-        "2 Arête géante du Shamansot",
-        "2 Sternum de Chachachovage",
-        "2 Bec du Timansot",
-        "2 Défense du Sanglacier",
-        "2 Aile de Mansobèse",
-        "2 Dent de Smilomouth"
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Gland d'Ecumouth"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Œil torve de Fricochère"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Œil de Crabe Hijacob"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Huile de Mamansot"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Bec de Gélikan"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Arête géante du Shamansot"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Sternum de Chachachovage"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Bec du Timansot"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Défense du Sanglacier"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Aile de Mansobèse"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Dent de Smilomouth"
+        }
       ]
     },
     {
@@ -10300,17 +11082,60 @@
       "title": "La fonte des glaces — 2/2",
       "action": "PRÉPARER",
       "preparationItems": [
-        "2 Patte de Rat Bougri",
-        "2 Oreille du Fu Mansot",
-        "2 Étoffe de Kaniglou",
-        "2 Serviette de Plage",
-        "2 Chaînes Brisées",
-        "2 Chaîne de Robot Fléau",
-        "2 Carapace Verte",
-        "2 Bois de Tronknyde",
-        "2 Trident Cassé",
-        "2 Noix de Cajou",
-        "2 Lamelle de Champa Bleu"
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Patte de Rat Bougri"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Oreille du Fu Mansot"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Étoffe de Kaniglou"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Serviette de Plage"
+        },
+        {
+          "kind": "note",
+          "text": "2 Chaînes Brisées"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Chaîne de Robot Fléau"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Carapace Verte"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Bois de Tronknyde"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Trident Cassé"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Noix de Cajou"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Lamelle de Champa Bleu"
+        }
       ]
     },
     {
@@ -10321,14 +11146,45 @@
       "title": "La fonte des glaces — fin + métier",
       "action": "PRÉPARER",
       "preparationItems": [
-        "Bout Blop Coco",
-        "Écaille Dragoss Calcaire",
-        "Patte Corbac",
-        "Écaille Ouroboulos",
-        "Œuf Dragoeuf Ardoise",
-        "Papatte Croc Gland",
-        "Tissu Pourpre",
-        "Bricoleur 100"
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Bout Blop Coco"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Écaille Dragoss Calcaire"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Patte Corbac"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Écaille Ouroboulos"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Œuf Dragoeuf Ardoise"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Papatte Croc Gland"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Tissu Pourpre"
+        },
+        {
+          "kind": "note",
+          "text": "Bricoleur 100"
+        }
       ]
     },
     {
@@ -10754,19 +11610,68 @@
       "title": "Noir d'ébène",
       "action": "PRÉPARER",
       "preparationItems": [
-        "18 Mesure de sel",
-        "36 Poudre de Perlinpainpain",
-        "18 Seigle",
-        "10 Obsidienne",
-        "10 Dolomite",
-        "10 Écume de mer",
-        "1 Corde d'escalade",
-        "10 Saucisse Fumée",
-        "5 Barbarbe",
-        "20 Perce-Neige",
-        "20 500 kamas",
-        "Paysan 80",
-        "Mineur 20"
+        {
+          "kind": "resource",
+          "quantity": 18,
+          "name": "Mesure de sel"
+        },
+        {
+          "kind": "resource",
+          "quantity": 36,
+          "name": "Poudre de Perlinpainpain"
+        },
+        {
+          "kind": "resource",
+          "quantity": 18,
+          "name": "Seigle"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Obsidienne"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Dolomite"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Écume de mer"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Corde d'escalade"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Saucisse Fumée"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Barbarbe"
+        },
+        {
+          "kind": "resource",
+          "quantity": 20,
+          "name": "Perce-Neige"
+        },
+        {
+          "kind": "note",
+          "text": "20 500 kamas"
+        },
+        {
+          "kind": "note",
+          "text": "Paysan 80"
+        },
+        {
+          "kind": "note",
+          "text": "Mineur 20"
+        }
       ]
     },
     {
@@ -11173,16 +12078,56 @@
       "title": "Turquoise — 1/8",
       "action": "PRÉPARER",
       "preparationItems": [
-        "3 × Corne de dragoss calcaire",
-        "3 × Corne de rhinoferoce",
-        "5 × Substrat de fascine",
-        "1 × Groin de dragon cochon",
-        "3 × Echasse de molette",
-        "10 × Poils de smilomouth",
-        "10 × Carpelle de brouture",
-        "600 × Pepite",
-        "10 × Croupion de truchmuche",
-        "14 × Kriptonite"
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Corne de dragoss calcaire"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Corne de rhinoferoce"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Substrat de fascine"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Groin de dragon cochon"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Echasse de molette"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Poils de smilomouth"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Carpelle de brouture"
+        },
+        {
+          "kind": "resource",
+          "quantity": 600,
+          "name": "Pepite"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Croupion de truchmuche"
+        },
+        {
+          "kind": "resource",
+          "quantity": 14,
+          "name": "Kriptonite"
+        }
       ]
     },
     {
@@ -11193,16 +12138,56 @@
       "title": "Turquoise — 2/8",
       "action": "PRÉPARER",
       "preparationItems": [
-        "1 × Laine du royalmouth",
-        "5 × Substrat de fourre",
-        "10 × Calumet zoth",
-        "3 × Morpion de truchideur",
-        "3 × Arete geante du shamansot",
-        "1 × Pixel de fraktale",
-        "5 × Magnesite",
-        "10 × Aile de dragodinde",
-        "10 × Poil de rat d'egoutant",
-        "10 × Fleur de gloutoblop"
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Laine du royalmouth"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Substrat de fourre"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Calumet zoth"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Morpion de truchideur"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Arete geante du shamansot"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Pixel de fraktale"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Magnesite"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Aile de dragodinde"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Poil de rat d'egoutant"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Fleur de gloutoblop"
+        }
       ]
     },
     {
@@ -11213,16 +12198,56 @@
       "title": "Turquoise — 3/8",
       "action": "PRÉPARER",
       "preparationItems": [
-        "1 × Carniflore",
-        "5 × Kouartz",
-        "10 × Peau de don dorgan",
-        "10 × Moustache du mufafah",
-        "10 × Oreille de rhinoferoce",
-        "1 × Chaussette trouée de dramak",
-        "3 × Rotule du disciple zoth",
-        "3 × Aile atrophiée de tofu dodu",
-        "1 × Feuille de blop multicolore royal",
-        "10 × Duvet de truchon"
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Carniflore"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Kouartz"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Peau de don dorgan"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Moustache du mufafah"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Oreille de rhinoferoce"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Chaussette trouée de dramak"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Rotule du disciple zoth"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Aile atrophiée de tofu dodu"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Feuille de blop multicolore royal"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Duvet de truchon"
+        }
       ]
     },
     {
@@ -11233,16 +12258,56 @@
       "title": "Turquoise — 4/8",
       "action": "PRÉPARER",
       "preparationItems": [
-        "5 × Ebonite",
-        "10 × Tronc de kokoko",
-        "5 × Lait de tortue",
-        "10 × Casque cassé du chafer",
-        "1 × Plume du kwakwa",
-        "8 × Bois d'erable",
-        "12 × Bois de frene",
-        "8 × Poils d'arakne malade",
-        "2 × Defense du sanglier",
-        "1 × Biere du chabrule"
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Ebonite"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Tronc de kokoko"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Lait de tortue"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Casque cassé du chafer"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Plume du kwakwa"
+        },
+        {
+          "kind": "resource",
+          "quantity": 8,
+          "name": "Bois d'erable"
+        },
+        {
+          "kind": "resource",
+          "quantity": 12,
+          "name": "Bois de frene"
+        },
+        {
+          "kind": "resource",
+          "quantity": 8,
+          "name": "Poils d'arakne malade"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Defense du sanglier"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Biere du chabrule"
+        }
       ]
     },
     {
@@ -11253,16 +12318,55 @@
       "title": "Turquoise — 5/8",
       "action": "PRÉPARER",
       "preparationItems": [
-        "1 × Aile de raie",
-        "1 × Dragofesse en cuir violet de bwork",
-        "1 × Slip de Rechange du Captain Chafer",
-        "3500 × Kamas",
-        "2 × Defense de sanglier",
-        "26 × Bois de noisetier",
-        "1 × Blague de soufre",
-        "2 × Etoffe zoth",
-        "2 × Carapace de scarafeuille blanc",
-        "2 × Carapace de scarafeuille rouge"
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Aile de raie"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Dragofesse en cuir violet de bwork"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Slip de Rechange du Captain Chafer"
+        },
+        {
+          "kind": "note",
+          "text": "3500 × Kamas"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Defense de sanglier"
+        },
+        {
+          "kind": "resource",
+          "quantity": 26,
+          "name": "Bois de noisetier"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Blague de soufre"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Etoffe zoth"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Carapace de scarafeuille blanc"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Carapace de scarafeuille rouge"
+        }
       ]
     },
     {
@@ -11273,16 +12377,56 @@
       "title": "Turquoise — 6/8",
       "action": "PRÉPARER",
       "preparationItems": [
-        "1 × Poudre de perlinpainpain",
-        "1 × Patte d'arakne majeure",
-        "1 × Ambre",
-        "1 × Griffe de phorreveur",
-        "1 × Peau de metaphorreur",
-        "1 × Corne de pere phorreur",
-        "1 × Oeil de phozami",
-        "1 × Fourbacoiffe",
-        "3 × Bouteille de gloutoburg",
-        "12 × Requin marteau facille"
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Poudre de perlinpainpain"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Patte d'arakne majeure"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Ambre"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Griffe de phorreveur"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Peau de metaphorreur"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Corne de pere phorreur"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Oeil de phozami"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Fourbacoiffe"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Bouteille de gloutoburg"
+        },
+        {
+          "kind": "resource",
+          "quantity": 12,
+          "name": "Requin marteau facille"
+        }
       ]
     },
     {
@@ -11293,16 +12437,56 @@
       "title": "Turquoise — 7/8",
       "action": "PRÉPARER",
       "preparationItems": [
-        "3 × Baton de crabe",
-        "2 × Citron",
-        "4 × Feuille de salace",
-        "1 × Huile de fantimonier",
-        "10 × Cerise",
-        "1 × Corde d'escalade",
-        "5 × Etoffe de kurookin",
-        "5 × Concombre",
-        "3 × Duvet du kilibriss",
-        "1 × Etoffe de firefoux"
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Baton de crabe"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Citron"
+        },
+        {
+          "kind": "resource",
+          "quantity": 4,
+          "name": "Feuille de salace"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Huile de fantimonier"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Cerise"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Corde d'escalade"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Etoffe de kurookin"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Concombre"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Duvet du kilibriss"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Etoffe de firefoux"
+        }
       ]
     },
     {
@@ -11313,35 +12497,153 @@
       "title": "Turquoise — 8/8",
       "action": "PRÉPARER",
       "preparationItems": [
-        "1 × Fil de soie",
-        "1 × Teinture magique de rougeur",
-        "1 × Teinture magique orange",
-        "1 × Sang de wabbit garou",
-        "30 × Lotte",
-        "5 × Poison cinglant",
-        "20 × Graine de scorbute",
-        "1 × Pain trepide",
-        "15 × Os de Sramouraï",
-        "10 × Plume de Gobvious",
-        "10 × Peau de Don Duss Ang",
-        "10 × Corne de Berserkoffre",
-        "10 × Canine de Mergranlou",
-        "10 × Coquille de Dragoss Charbon",
-        "8 × Estomac de Black Wo Wabbit",
-        "5 × Pierre de Topaze",
-        "5 × Substrat de Bosquet",
-        "5 × Bakélélite",
-        "5 × Kouartz supplémentaires — 10 au total sur le guide",
-        "3 × Coquille de Dragoss Ardoise",
-        "3 × Laine de Dardalaine",
-        "3 × Écorce de Liroye Merline",
-        "1 × Chaussette trouée de Dramak supplémentaire — 2 au total sur le guide",
-        "1 × Étoffe de Kaniglou",
-        "1 × Bière du Feubuk",
-        "1 × Oreille du Fu Mansot",
-        "1 × Talon d'Achille de l'Abrakleur sombre",
-        "1 × Peau de Moon",
-        "1 × Carapace du Mantiscore"
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Fil de soie"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Teinture magique de rougeur"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Teinture magique orange"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Sang de wabbit garou"
+        },
+        {
+          "kind": "resource",
+          "quantity": 30,
+          "name": "Lotte"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Poison cinglant"
+        },
+        {
+          "kind": "resource",
+          "quantity": 20,
+          "name": "Graine de scorbute"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Pain trepide"
+        },
+        {
+          "kind": "resource",
+          "quantity": 15,
+          "name": "Os de Sramouraï"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Plume de Gobvious"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Peau de Don Duss Ang"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Corne de Berserkoffre"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Canine de Mergranlou"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Coquille de Dragoss Charbon"
+        },
+        {
+          "kind": "resource",
+          "quantity": 8,
+          "name": "Estomac de Black Wo Wabbit"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Pierre de Topaze"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Substrat de Bosquet"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Bakélélite"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Kouartz",
+          "note": "10 au total sur le guide"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Coquille de Dragoss Ardoise"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Laine de Dardalaine"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Écorce de Liroye Merline"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Chaussette trouée de Dramak",
+          "note": "2 au total sur le guide"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Étoffe de Kaniglou"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Bière du Feubuk"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Oreille du Fu Mansot"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Talon d'Achille de l'Abrakleur sombre"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Peau de Moon"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Carapace du Mantiscore"
+        }
       ]
     },
     {
@@ -11352,12 +12654,36 @@
       "title": "Ordres / Cania — complément ressources",
       "action": "PRÉPARER",
       "preparationItems": [
-        "1 × Pandaburg OU 1 × Pandapils — Chauffage à moindre frais",
-        "2 × Viande Macérée",
-        "16 × Pomme de Terre",
-        "2 × Haricot — Chasseur de Renégats",
-        "1 × Pain d'Incarnam — Chachyène de vie",
-        "1 000 kamas — Apprentissage : Assassin Suprême"
+        {
+          "kind": "note",
+          "text": "1 × Pandaburg OU 1 × Pandapils — Chauffage à moindre frais"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Viande Macérée"
+        },
+        {
+          "kind": "resource",
+          "quantity": 16,
+          "name": "Pomme de Terre"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Haricot",
+          "note": "Chasseur de Renégats"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Pain d'Incarnam",
+          "note": "Chachyène de vie"
+        },
+        {
+          "kind": "note",
+          "text": "1 000 kamas — Apprentissage : Assassin Suprême"
+        }
       ]
     },
     {
@@ -12463,21 +13789,78 @@
       "title": "Grobe / Dorigami",
       "action": "PRÉPARER",
       "preparationItems": [
-        "12 Ginseng",
-        "8 Bananagrume",
-        "5 Bauxite",
-        "4 Étoffe de Samouraï fantôme (+4 si Lanterne non acquise)",
-        "3 Fraise",
-        "3 Viscères de Scarafeuille",
-        "3 Planche de Gravure",
-        "2 Malt",
-        "1 Pandaclier",
-        "1 Pandazahi/Pandaporo",
-        "1 Dernière pour la route OU 2 000 kamas",
-        "1 Diamant",
-        "4 444 kamas",
-        "Forgeron 140",
-        "Alchimiste 140"
+        {
+          "kind": "resource",
+          "quantity": 12,
+          "name": "Ginseng"
+        },
+        {
+          "kind": "resource",
+          "quantity": 8,
+          "name": "Bananagrume"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Bauxite"
+        },
+        {
+          "kind": "resource",
+          "quantity": 4,
+          "name": "Étoffe de Samouraï fantôme",
+          "note": "+4 si Lanterne non acquise"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Fraise"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Viscères de Scarafeuille"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Planche de Gravure"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Malt"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Pandaclier"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Pandazahi/Pandaporo"
+        },
+        {
+          "kind": "note",
+          "text": "1 Dernière pour la route OU 2 000 kamas"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Diamant"
+        },
+        {
+          "kind": "note",
+          "text": "4 444 kamas"
+        },
+        {
+          "kind": "note",
+          "text": "Forgeron 140"
+        },
+        {
+          "kind": "note",
+          "text": "Alchimiste 140"
+        }
       ]
     },
     {
@@ -12488,10 +13871,26 @@
       "title": "Ocre d'ambre",
       "action": "PRÉPARER",
       "preparationItems": [
-        "2 Enchanterelles",
-        "12 Épices",
-        "12 Viande Saignante",
-        "12 Riz"
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Enchanterelle"
+        },
+        {
+          "kind": "resource",
+          "quantity": 12,
+          "name": "Épices"
+        },
+        {
+          "kind": "resource",
+          "quantity": 12,
+          "name": "Viande Saignante"
+        },
+        {
+          "kind": "resource",
+          "quantity": 12,
+          "name": "Riz"
+        }
       ]
     },
     {
@@ -12503,27 +13902,105 @@
       "warning": "Pour Les derniers d'entre nous, l'Essence de Sylvesprit ne devient craftable qu'après avoir parlé à Sylvie Barbe devant le Korriandre. Prépare ses composants en amont et fabrique-la avant d'entrer. Alternative : utilise directement 1 Essence du Korriandre.",
       "action": "PRÉPARER",
       "preparationItems": [
-        "4 Métaria Mage : jaune / rouge / verte / bleue",
-        "4 Métaria normales : jaune / rouge / verte / bleue",
-        "Pierres d'âme adaptées",
-        "1 Essence du Korriandre",
-        "20 Eau Calme",
-        "4 Volve de Fistulor",
-        "4 Lamelle de Dramanite",
-        "4 Lamelle de Mérulette",
-        "4 Volve de Fongeur",
-        "4 Écorce d'Abrazif",
-        "Alchimiste 180+",
-        "5 Laine de Yokaï Givrefoux",
-        "5 Malléole de Yomi Givrefoux",
-        "1 Queue de Yomi Givrefoux",
-        "5 Laine de Maho Givrefoux",
-        "1 Cuir de Maho Givrefoux",
-        "5 Lamelle de Dramanite",
-        "1 Pédoncule de Fongeur",
-        "1 slip compatible",
-        "29 999 kamas",
-        "1 Slip Iholo"
+        {
+          "kind": "note",
+          "text": "4 Métaria Mage : jaune / rouge / verte / bleue"
+        },
+        {
+          "kind": "note",
+          "text": "4 Métaria normales : jaune / rouge / verte / bleue"
+        },
+        {
+          "kind": "note",
+          "text": "Pierres d'âme adaptées"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Essence du Korriandre"
+        },
+        {
+          "kind": "resource",
+          "quantity": 20,
+          "name": "Eau Calme"
+        },
+        {
+          "kind": "resource",
+          "quantity": 4,
+          "name": "Volve de Fistulor"
+        },
+        {
+          "kind": "resource",
+          "quantity": 4,
+          "name": "Lamelle de Dramanite"
+        },
+        {
+          "kind": "resource",
+          "quantity": 4,
+          "name": "Lamelle de Mérulette"
+        },
+        {
+          "kind": "resource",
+          "quantity": 4,
+          "name": "Volve de Fongeur"
+        },
+        {
+          "kind": "resource",
+          "quantity": 4,
+          "name": "Écorce d'Abrazif"
+        },
+        {
+          "kind": "note",
+          "text": "Alchimiste 180+"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Laine de Yokaï Givrefoux"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Malléole de Yomi Givrefoux"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Queue de Yomi Givrefoux"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Laine de Maho Givrefoux"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Cuir de Maho Givrefoux"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Lamelle de Dramanite"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Pédoncule de Fongeur"
+        },
+        {
+          "kind": "note",
+          "text": "1 slip compatible"
+        },
+        {
+          "kind": "note",
+          "text": "29 999 kamas"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Slip Iholo"
+        }
       ]
     },
     {
@@ -13159,21 +14636,78 @@
       "warning": "Préparation des quêtes 72→76 ; aide de 3 personnages pour Si j'avais un marteau / Esprit, es-tu là ?. L'alternative de De drôles de témoins évite tout STOP horaire.",
       "action": "PRÉPARER",
       "preparationItems": [
-        "1 Mauvaise Pioche (ou 10 Bois de Frêne + 5 Fer)",
-        "80 Bois de Bombu",
-        "3 Ébonite",
-        "1 Marteau de Raclage (ou 1 Sourcil de Moskito + 3 Plume de Piou Vert)",
-        "500 kamas",
-        "1 Dent en Or de Craqueleur",
-        "10 Poudre Temporelle",
-        "1 Pièce du Trésor du Badoul",
-        "35 Or",
-        "35 Maïs",
-        "1 Cuir de Maho Givrefoux",
-        "10 Laine de Yokaï Givrefoux",
-        "2 Viande Gâtée",
-        "14 Tanche",
-        "14 Millet"
+        {
+          "kind": "note",
+          "text": "1 Mauvaise Pioche (ou 10 Bois de Frêne + 5 Fer)"
+        },
+        {
+          "kind": "resource",
+          "quantity": 80,
+          "name": "Bois de Bombu"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Ébonite"
+        },
+        {
+          "kind": "note",
+          "text": "1 Marteau de Raclage (ou 1 Sourcil de Moskito + 3 Plume de Piou Vert)"
+        },
+        {
+          "kind": "note",
+          "text": "500 kamas"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Dent en Or de Craqueleur"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Poudre Temporelle"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Pièce du Trésor du Badoul"
+        },
+        {
+          "kind": "resource",
+          "quantity": 35,
+          "name": "Or"
+        },
+        {
+          "kind": "resource",
+          "quantity": 35,
+          "name": "Maïs"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Cuir de Maho Givrefoux"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Laine de Yokaï Givrefoux"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Viande Gâtée"
+        },
+        {
+          "kind": "resource",
+          "quantity": 14,
+          "name": "Tanche"
+        },
+        {
+          "kind": "resource",
+          "quantity": 14,
+          "name": "Millet"
+        }
       ]
     },
     {
@@ -13185,27 +14719,107 @@
       "warning": "Ces ressources couvrent Vol du Temps → Gelé à pierre fendre et évitent les blocages de craft/capture.",
       "action": "PRÉPARER",
       "preparationItems": [
-        "4 Énorme pierre d'âme + sort Capture d'âmes",
-        "5 Larme d'Eniripsa",
-        "5 Pain des Champs",
-        "1 Corde d'escalade",
-        "1 Planche à Pain",
-        "4 Pyrute",
-        "1 Aigue-Marine",
-        "1 Clochettes",
-        "20 Fibre de Chanvre",
-        "20 Cuir de Bouftou Noir",
-        "1 Caleçon Brun",
-        "5 Volve de Fongeur",
-        "2 Lamelle de Mérulette",
-        "50 Mandragore",
-        "2 Pépite",
-        "10 Dolomite",
-        "1 Blague de Soufre",
-        "5 000 kamas",
-        "Bricoleur 184+",
-        "Alchimiste 185+",
-        "1 Pandawa pour Pense-bête"
+        {
+          "kind": "note",
+          "text": "4 Énorme pierre d'âme + sort Capture d'âmes"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Larme d'Eniripsa"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Pain des Champs"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Corde d'escalade"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Planche à Pain"
+        },
+        {
+          "kind": "resource",
+          "quantity": 4,
+          "name": "Pyrute"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Aigue-Marine"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Clochettes"
+        },
+        {
+          "kind": "resource",
+          "quantity": 20,
+          "name": "Fibre de Chanvre"
+        },
+        {
+          "kind": "resource",
+          "quantity": 20,
+          "name": "Cuir de Bouftou Noir"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Caleçon Brun"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Volve de Fongeur"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Lamelle de Mérulette"
+        },
+        {
+          "kind": "resource",
+          "quantity": 50,
+          "name": "Mandragore"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Pépite"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Dolomite"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Blague de Soufre"
+        },
+        {
+          "kind": "note",
+          "text": "5 000 kamas"
+        },
+        {
+          "kind": "note",
+          "text": "Bricoleur 184+"
+        },
+        {
+          "kind": "note",
+          "text": "Alchimiste 185+"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Pandawa pour Pense-bête"
+        }
       ]
     },
     {
@@ -14072,12 +15686,35 @@
       "title": "Si loin, si proches",
       "action": "PRÉPARER",
       "preparationItems": [
-        "2 000 kamas",
-        "5 Substrat de Bosquet",
-        "1 Cœur du Capitaine Ekarlatte",
-        "10 Antenne de Trésantène",
-        "10 Peau de Mandrine",
-        "3 Coco du Bitouf des Plaines"
+        {
+          "kind": "note",
+          "text": "2 000 kamas"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Substrat de Bosquet"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Cœur du Capitaine Ekarlatte"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Antenne de Trésantène"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Peau de Mandrine"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Coco du Bitouf des Plaines"
+        }
       ]
     },
     {
@@ -14597,10 +16234,22 @@
       "warning": "Évite les retours HDV et sécurise les prérequis externes de 86→90.",
       "action": "PRÉPARER",
       "preparationItems": [
-        "L'ascension de Qu'Tan : team conseillée ; les accompagnants qui n'ont pas la quête peuvent avoir besoin d'une clef du temple maudit (10 Millet, 10 Mandragore, 10 Bois d'Orme, 10 Tanche, 1 Viande gâtée, 10 Dolomite ; Bricoleur 186)",
-        "On se calme : Balade en forêt TERMINÉE ; 7 Millet, 5 Aubergine, 5 Mesure de poivre, 1 Viande gâtée, 1 Eau potable, 1 Bière d'Amakna, 5 Épice, livre « L'Invasion d'Uk'Not'Allag »",
-        "Tout est bien qui finit mal : 150 000 kamas OU 1 Venin d'Éperfide + 1 Pince de Lucrane ; 1 Oreille de Blérice ; 1 Saphir",
-        "Ça fait froid dans le dos : 1 Rossignol + 1 Fragment de pépite de Sakaï"
+        {
+          "kind": "note",
+          "text": "L'ascension de Qu'Tan : team conseillée ; les accompagnants qui n'ont pas la quête peuvent avoir besoin d'une clef du temple maudit (10 Millet, 10 Mandragore, 10 Bois d'Orme, 10 Tanche, 1 Viande gâtée, 10 Dolomite ; Bricoleur 186)"
+        },
+        {
+          "kind": "note",
+          "text": "On se calme : Balade en forêt TERMINÉE ; 7 Millet, 5 Aubergine, 5 Mesure de poivre, 1 Viande gâtée, 1 Eau potable, 1 Bière d'Amakna, 5 Épice, livre « L'Invasion d'Uk'Not'Allag »"
+        },
+        {
+          "kind": "note",
+          "text": "Tout est bien qui finit mal : 150 000 kamas OU 1 Venin d'Éperfide + 1 Pince de Lucrane ; 1 Oreille de Blérice ; 1 Saphir"
+        },
+        {
+          "kind": "note",
+          "text": "Ça fait froid dans le dos : 1 Rossignol + 1 Fragment de pépite de Sakaï"
+        }
       ]
     },
     {
@@ -14611,13 +16260,34 @@
       "title": "Alignement 91→100",
       "action": "PRÉPARER",
       "preparationItems": [
-        "Cambriolage à durée déterminée : 100 kamas",
-        "Je panse donc j'essuie : 5 Œil de Verminocule, 5 Antenne de Bacterrib, 3 Perce-Neige, 3 Écume de mer, 1 Sel de Baleine",
-        "Un chemin tout tracé : Faire le mort TERMINÉ ; 1 Breuvage d'Erazal (5 Trèfle à 5 feuilles + 1 Bière Atolmond + 1 Mâchoire du Chafer Draugr) ; 5 000 kamas",
-        "Enigma : niveau 190 + 5 personnages au total pour les dalles",
-        "À l'ombre des murs : 500 ou 3 000 kamas + accès Srambad",
-        "Fée d'hiver : 1 Passe pour l'îlot Estitch",
-        "L'exorciste : 11 000 kamas + accès Srambad"
+        {
+          "kind": "note",
+          "text": "Cambriolage à durée déterminée : 100 kamas"
+        },
+        {
+          "kind": "note",
+          "text": "Je panse donc j'essuie : 5 Œil de Verminocule, 5 Antenne de Bacterrib, 3 Perce-Neige, 3 Écume de mer, 1 Sel de Baleine"
+        },
+        {
+          "kind": "note",
+          "text": "Un chemin tout tracé : Faire le mort TERMINÉ ; 1 Breuvage d'Erazal (5 Trèfle à 5 feuilles + 1 Bière Atolmond + 1 Mâchoire du Chafer Draugr) ; 5 000 kamas"
+        },
+        {
+          "kind": "note",
+          "text": "Enigma : niveau 190 + 5 personnages au total pour les dalles"
+        },
+        {
+          "kind": "note",
+          "text": "À l'ombre des murs : 500 ou 3 000 kamas + accès Srambad"
+        },
+        {
+          "kind": "note",
+          "text": "Fée d'hiver : 1 Passe pour l'îlot Estitch"
+        },
+        {
+          "kind": "note",
+          "text": "L'exorciste : 11 000 kamas + accès Srambad"
+        }
       ]
     },
     {
@@ -14930,19 +16600,70 @@
       "title": "Avant La chasse aux chasseurs",
       "action": "PRÉPARER",
       "preparationItems": [
-        "32 Bois d'Orme",
-        "20 Eau Potable",
-        "16 Dolomite",
-        "8 Mandragore",
-        "7 Bois de Bambou Sacré",
-        "7 Bière d'Amakna",
-        "5 Brioche Dorée",
-        "5 Espadon Poêlé",
-        "5 Andouillette de Gibier",
-        "2 Cawotte",
-        "1 Pyrute",
-        "1 Viande Noire",
-        "220 kamas"
+        {
+          "kind": "resource",
+          "quantity": 32,
+          "name": "Bois d'Orme"
+        },
+        {
+          "kind": "resource",
+          "quantity": 20,
+          "name": "Eau Potable"
+        },
+        {
+          "kind": "resource",
+          "quantity": 16,
+          "name": "Dolomite"
+        },
+        {
+          "kind": "resource",
+          "quantity": 8,
+          "name": "Mandragore"
+        },
+        {
+          "kind": "resource",
+          "quantity": 7,
+          "name": "Bois de Bambou Sacré"
+        },
+        {
+          "kind": "resource",
+          "quantity": 7,
+          "name": "Bière d'Amakna"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Brioche Dorée"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Espadon Poêlé"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Andouillette de Gibier"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Cawotte"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Pyrute"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Viande Noire"
+        },
+        {
+          "kind": "note",
+          "text": "220 kamas"
+        }
       ]
     },
     {
@@ -15436,19 +17157,70 @@
       "warning": "La source de tous les maux sera requise pour Quand l'éveil n'est qu'un songe et Prise de conscience.",
       "action": "PRÉPARER",
       "preparationItems": [
-        "100 Pépite",
-        "20 Bois de Noyer",
-        "10 Sauge",
-        "8 Charbon",
-        "6 Fil de Soie",
-        "4 Eau Potable",
-        "2 Galet Saisonnier",
-        "2 Huile de Koode",
-        "1 Pierre d'Émeraude",
-        "1 Pierre de Saphir",
-        "1 Pierre de Cristal",
-        "1 Pierre de Rubis",
-        "Alchimiste 20 minimum"
+        {
+          "kind": "resource",
+          "quantity": 100,
+          "name": "Pépite"
+        },
+        {
+          "kind": "resource",
+          "quantity": 20,
+          "name": "Bois de Noyer"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Sauge"
+        },
+        {
+          "kind": "resource",
+          "quantity": 8,
+          "name": "Charbon"
+        },
+        {
+          "kind": "resource",
+          "quantity": 6,
+          "name": "Fil de Soie"
+        },
+        {
+          "kind": "resource",
+          "quantity": 4,
+          "name": "Eau Potable"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Galet Saisonnier"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Huile de Koode"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Pierre d'Émeraude"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Pierre de Saphir"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Pierre de Cristal"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Pierre de Rubis"
+        },
+        {
+          "kind": "note",
+          "text": "Alchimiste 20 minimum"
+        }
       ]
     },
     {
@@ -15712,14 +17484,43 @@
       "warning": "Garde Au fion du trou active pendant Frigost III et réserve Grolloum pour La machine à démonter le temps. Ne fais pas les boss au fil de l'accès : pousse d'abord leurs quêtes dédiées jusqu'au boss.",
       "action": "PRÉPARER",
       "preparationItems": [
-        "Pierres d'âme adaptées",
-        "2 emplacements de capture libres pour les Frimar des salles 2 et 3 de Missiz Frizz",
-        "3 000 kamas minimum pour la traduction de Les desseins de Sylargh",
-        "3 Plume de Dodox",
-        "3 Sang de Karkanik",
-        "3 Cuir d'Empaillé",
-        "3 Larme de Givrefoux",
-        "3 Volve de Mérulor"
+        {
+          "kind": "note",
+          "text": "Pierres d'âme adaptées"
+        },
+        {
+          "kind": "note",
+          "text": "2 emplacements de capture libres pour les Frimar des salles 2 et 3 de Missiz Frizz"
+        },
+        {
+          "kind": "note",
+          "text": "3 000 kamas minimum pour la traduction de Les desseins de Sylargh"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Plume de Dodox"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Sang de Karkanik"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Cuir d'Empaillé"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Larme de Givrefoux"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Volve de Mérulor"
+        }
       ]
     },
     {
@@ -16480,7 +18281,10 @@
       "title": "Ordre 5 — complément ressources",
       "action": "PRÉPARER",
       "preparationItems": [
-        "1 × Accélérateur de propulsion — Apprentissage : Maître des Illusions"
+        {
+          "kind": "note",
+          "text": "1 × Accélérateur de propulsion — Apprentissage : Maître des Illusions"
+        }
       ]
     },
     {
@@ -16559,19 +18363,70 @@
       "warning": "Le pays des Vermeils sera requis par Le silence est d'Aure. Conserve les Orichor utiles pendant la progression.",
       "action": "PRÉPARER",
       "preparationItems": [
-        "3 000 points de succès minimum",
-        "1 métier niveau 200 (requis par Raisons de retraite)",
-        "200 000 kamas disponibles (non consommés)",
-        "Pour Après les phorreurs : satisfaire au moins un test de caractéristiques/succès (>600 Agi/Chance/Force/Intel, ou >700 Vita, ou succès L'éleveur c'est moi, ou Ma petite entreprise) ; attention aux builds full sagesse",
-        "1 Clef Galerie du Phossile",
-        "1 Clef Palais du Roi Nidas",
-        "2 Clefs Fabrique de Malléfisk (Malladie + Malle des profondeurs ; trousseau inutilisable en dimension)",
-        "1 kama — Malladie",
-        "1 Moyenne pierre d'âme — Koffrologie",
-        "1 Corne de Kamasterisk — Coiffeur de génie",
-        "1 Sourcil de Barbétoal — Coiffeur de génie",
-        "1 Dent de Lévitrof — Coiffeur de génie",
-        "1 Morceau de clef de Paspartou — Coiffeur de génie"
+        {
+          "kind": "note",
+          "text": "3 000 points de succès minimum"
+        },
+        {
+          "kind": "note",
+          "text": "1 métier niveau 200 (requis par Raisons de retraite)"
+        },
+        {
+          "kind": "note",
+          "text": "200 000 kamas disponibles (non consommés)"
+        },
+        {
+          "kind": "note",
+          "text": "Pour Après les phorreurs : satisfaire au moins un test de caractéristiques/succès (>600 Agi/Chance/Force/Intel, ou >700 Vita, ou succès L'éleveur c'est moi, ou Ma petite entreprise) ; attention aux builds full sagesse"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Clef Galerie du Phossile"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Clef Palais du Roi Nidas"
+        },
+        {
+          "kind": "note",
+          "text": "2 Clefs Fabrique de Malléfisk (Malladie + Malle des profondeurs ; trousseau inutilisable en dimension)"
+        },
+        {
+          "kind": "note",
+          "text": "1 kama — Malladie"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Moyenne pierre d'âme",
+          "note": "Koffrologie"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Corne de Kamasterisk",
+          "note": "Coiffeur de génie"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Sourcil de Barbétoal",
+          "note": "Coiffeur de génie"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Dent de Lévitrof",
+          "note": "Coiffeur de génie"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Morceau de clef de Paspartou",
+          "note": "Coiffeur de génie"
+        }
       ]
     },
     {
@@ -16583,17 +18438,56 @@
       "warning": "Un clan hétéroclite impose une attente réelle de 2 minutes.",
       "action": "PRÉPARER",
       "preparationItems": [
-        "10 Cristal liquide",
-        "10 Cristal pliable",
-        "10 Chanvre",
-        "10 Sauge",
-        "1 Élixir des Trépasseurs",
-        "1 Ardonite",
-        "120 kamas",
-        "10 Bières aigrisantes OU 5 000 kamas — Marteau-Aigri",
-        "Sort Flamiche",
-        "Alignement 85→99 au verrou Ilyzaelle",
-        "Deux souffles, une inspiration terminé"
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Cristal liquide"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Cristal pliable"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Chanvre"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Sauge"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Élixir des Trépasseurs"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Ardonite"
+        },
+        {
+          "kind": "note",
+          "text": "120 kamas"
+        },
+        {
+          "kind": "note",
+          "text": "10 Bières aigrisantes OU 5 000 kamas — Marteau-Aigri"
+        },
+        {
+          "kind": "note",
+          "text": "Sort Flamiche"
+        },
+        {
+          "kind": "note",
+          "text": "Alignement 85→99 au verrou Ilyzaelle"
+        },
+        {
+          "kind": "note",
+          "text": "Deux souffles, une inspiration terminé"
+        }
       ]
     },
     {
@@ -16674,19 +18568,69 @@
       "warning": "Donjons : Chaloeil, Protozorreur, Nidas, Tal Kasha, Nileza #2, Meno #2 obligatoire, Katrepat, Sylargh.",
       "action": "PRÉPARER",
       "preparationItems": [
-        "50 Graisse Gélatineuse",
-        "50 Frostiz",
-        "15 Obsidienne",
-        "1 Pic du Nocturlabe",
-        "1 Peau de Crocabulia",
-        "1 Corde du Fancrôme",
-        "5 Moustache de Rilur",
-        "15 Perce-Neige",
-        "20 Blague de Soufre",
-        "1 Baguette Rikiki",
-        "1 Corde d'escalade",
-        "4 010 kamas",
-        "Alignement 100"
+        {
+          "kind": "resource",
+          "quantity": 50,
+          "name": "Graisse Gélatineuse"
+        },
+        {
+          "kind": "resource",
+          "quantity": 50,
+          "name": "Frostiz"
+        },
+        {
+          "kind": "resource",
+          "quantity": 15,
+          "name": "Obsidienne"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Pic du Nocturlabe"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Peau de Crocabulia"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Corde du Fancrôme"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Moustache de Rilur"
+        },
+        {
+          "kind": "resource",
+          "quantity": 15,
+          "name": "Perce-Neige"
+        },
+        {
+          "kind": "resource",
+          "quantity": 20,
+          "name": "Blague de Soufre"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Baguette Rikiki"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Corde d'escalade"
+        },
+        {
+          "kind": "note",
+          "text": "4 010 kamas"
+        },
+        {
+          "kind": "note",
+          "text": "Alignement 100"
+        }
       ]
     },
     {
@@ -17286,24 +19230,89 @@
       "title": "Branche dragons",
       "action": "PRÉPARER",
       "preparationItems": [
-        "6 Dofus Primordiaux en inventaire",
-        "25 Éklâme majestueuse",
-        "5 Potion minérale",
-        "5 Potion d'altération",
-        "1 Cuir de Bouftou Royal",
-        "1 Petit Chienchien Noir",
-        "2 Ticket de la Foire du Trool",
-        "600 kamas",
-        "Mineur 20 minimum",
-        "Plus de 600 Force pour l'épreuve de Gobrikol",
-        "Métier de récolte 200",
-        "600 Reflets oniriques — déjà réservés pendant Jusqu'au bout du rêve",
-        "1 Framboise OU 10 Carrés de Chocolat au Lait",
-        "1 Carré de Chocolat Noir",
-        "1 Oignon",
-        "1 Baguette Rikiki",
-        "1 kama",
-        "Jusqu'à 120 000 kamas — Le poids de son regard, uniquement si tu ne réunis pas 12 classes"
+        {
+          "kind": "note",
+          "text": "6 Dofus Primordiaux en inventaire"
+        },
+        {
+          "kind": "resource",
+          "quantity": 25,
+          "name": "Éklâme majestueuse"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Potion minérale"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Potion d'altération"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Cuir de Bouftou Royal"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Petit Chienchien Noir"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Ticket de la Foire du Trool"
+        },
+        {
+          "kind": "note",
+          "text": "600 kamas"
+        },
+        {
+          "kind": "note",
+          "text": "Mineur 20 minimum"
+        },
+        {
+          "kind": "note",
+          "text": "Plus de 600 Force pour l'épreuve de Gobrikol"
+        },
+        {
+          "kind": "note",
+          "text": "Métier de récolte 200"
+        },
+        {
+          "kind": "resource",
+          "quantity": 600,
+          "name": "Reflets oniriques",
+          "note": "déjà réservés pendant Jusqu'au bout du rêve"
+        },
+        {
+          "kind": "note",
+          "text": "1 Framboise OU 10 Carrés de Chocolat au Lait"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Carré de Chocolat Noir"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Oignon"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Baguette Rikiki"
+        },
+        {
+          "kind": "note",
+          "text": "1 kama"
+        },
+        {
+          "kind": "note",
+          "text": "Jusqu'à 120 000 kamas — Le poids de son regard, uniquement si tu ne réunis pas 12 classes"
+        }
       ]
     },
     {
@@ -17685,15 +19694,49 @@
       "action": "PRÉPARER",
       "instruction": "Choisis achat du Sceau OU craft, puis prépare l'option choisie.",
       "preparationItems": [
-        "Acheter 1 Sceau des fondateurs",
-        "50 Bave de Mol Usk",
-        "50 Pince de Crabe Yoloniste",
-        "50 Écaille de Gambaf",
-        "10 Écume de mer",
-        "20 Patelle",
-        "20 Quisnoa",
-        "1 Ambre de muldo",
-        "Bijoutier 200"
+        {
+          "kind": "note",
+          "text": "Acheter 1 Sceau des fondateurs"
+        },
+        {
+          "kind": "resource",
+          "quantity": 50,
+          "name": "Bave de Mol Usk"
+        },
+        {
+          "kind": "resource",
+          "quantity": 50,
+          "name": "Pince de Crabe Yoloniste"
+        },
+        {
+          "kind": "resource",
+          "quantity": 50,
+          "name": "Écaille de Gambaf"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Écume de mer"
+        },
+        {
+          "kind": "resource",
+          "quantity": 20,
+          "name": "Patelle"
+        },
+        {
+          "kind": "resource",
+          "quantity": 20,
+          "name": "Quisnoa"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Ambre de muldo"
+        },
+        {
+          "kind": "note",
+          "text": "Bijoutier 200"
+        }
       ]
     },
     {
@@ -18382,12 +20425,35 @@
       "title": "Avant le Pandamonium",
       "action": "PRÉPARER",
       "preparationItems": [
-        "6 Vodkawa",
-        "6 Umeshushu",
-        "6 Shaké à haute fermentation OU 6 Artefacts Pandawushu de chaque élément",
-        "1 Clef du Ventre de la Baleine",
-        "1 Saucisson de Porkania OU 2 000 kamas",
-        "1 Ticket de la Foire du Trool — Les sentiers de la guerre"
+        {
+          "kind": "resource",
+          "quantity": 6,
+          "name": "Vodkawa"
+        },
+        {
+          "kind": "resource",
+          "quantity": 6,
+          "name": "Umeshushu"
+        },
+        {
+          "kind": "note",
+          "text": "6 Shaké à haute fermentation OU 6 Artefacts Pandawushu de chaque élément"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Clef du Ventre de la Baleine"
+        },
+        {
+          "kind": "note",
+          "text": "1 Saucisson de Porkania OU 2 000 kamas"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Ticket de la Foire du Trool",
+          "note": "Les sentiers de la guerre"
+        }
       ]
     },
     {
@@ -18468,15 +20534,52 @@
       "title": "L'arme fatale / Mort et renouveau — ressources",
       "action": "PRÉPARER",
       "preparationItems": [
-        "5 × Écume de mer",
-        "5 × Salikrone",
-        "5 × Patelle",
-        "5 × Bois d'Aquajou",
-        "5 × Quisnoa",
-        "3 × Pierre Angulaire",
-        "3 × Sel de Baleine",
-        "2 × Étoffe de la Cour Sombre",
-        "80 × Eau Potable — Mort et renouveau"
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Écume de mer"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Salikrone"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Patelle"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Bois d'Aquajou"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Quisnoa"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Pierre Angulaire"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Sel de Baleine"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Étoffe de la Cour Sombre"
+        },
+        {
+          "kind": "resource",
+          "quantity": 80,
+          "name": "Eau Potable",
+          "note": "Mort et renouveau"
+        }
       ]
     },
     {
@@ -18933,9 +21036,18 @@
       "title": "Un rêve en clair-obscur — prérequis",
       "action": "PRÉPARER",
       "preparationItems": [
-        "Domakuro en inventaire",
-        "Dorigami en inventaire",
-        "Paysan 20 minimum"
+        {
+          "kind": "note",
+          "text": "Domakuro en inventaire"
+        },
+        {
+          "kind": "note",
+          "text": "Dorigami en inventaire"
+        },
+        {
+          "kind": "note",
+          "text": "Paysan 20 minimum"
+        }
       ]
     },
     {
@@ -18946,14 +21058,45 @@
       "title": "Un rêve en clair-obscur — 1/2",
       "action": "PRÉPARER",
       "preparationItems": [
-        "100 Riz",
-        "20 Bois de Bambou Sacré",
-        "10 Pwimen",
-        "10 de chaque Artefact Pandawushu : Bois / Feu / Eau / Vent / Roc",
-        "5 Bière Tsingtawo",
-        "2 Pizwa",
-        "1 Limo d'Grobe",
-        "1 Pandneken"
+        {
+          "kind": "resource",
+          "quantity": 100,
+          "name": "Riz"
+        },
+        {
+          "kind": "resource",
+          "quantity": 20,
+          "name": "Bois de Bambou Sacré"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Pwimen"
+        },
+        {
+          "kind": "note",
+          "text": "10 de chaque Artefact Pandawushu : Bois / Feu / Eau / Vent / Roc"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Bière Tsingtawo"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Pizwa"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Limo d'Grobe"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Pandneken"
+        }
       ]
     },
     {
@@ -18964,21 +21107,77 @@
       "title": "Un rêve en clair-obscur — 2/2",
       "action": "PRÉPARER",
       "preparationItems": [
-        "1 Pandazahi",
-        "1 Épice",
-        "1 Pétale Papier",
-        "1 Pétale encre",
-        "1 Umeshushu",
-        "1 Gnôle de Grobe",
-        "1 Bière forte légère",
-        "1 Alcool à 99% OU 1 000 kamas",
-        "6 lots de 5 ressources récoltables des Royaumes de Papier/Encre au choix",
-        "2 lots de 2 ressources de Yokianzhi au choix (zones Wukin/Wukang)",
-        "12 Fer",
-        "10 Pichon d'encre",
-        "5 Étain",
-        "2 Planche de Toilette",
-        "Bricoleur 30+"
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Pandazahi"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Épice"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Pétale Papier"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Pétale encre"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Umeshushu"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Gnôle de Grobe"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Bière forte légère"
+        },
+        {
+          "kind": "note",
+          "text": "1 Alcool à 99% OU 1 000 kamas"
+        },
+        {
+          "kind": "note",
+          "text": "6 lots de 5 ressources récoltables des Royaumes de Papier/Encre au choix"
+        },
+        {
+          "kind": "note",
+          "text": "2 lots de 2 ressources de Yokianzhi au choix (zones Wukin/Wukang)"
+        },
+        {
+          "kind": "resource",
+          "quantity": 12,
+          "name": "Fer"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Pichon d'encre"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Étain"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Planche de Toilette"
+        },
+        {
+          "kind": "note",
+          "text": "Bricoleur 30+"
+        }
       ]
     },
     {
@@ -19201,26 +21400,102 @@
       "title": "Après la pluie",
       "action": "PRÉPARER",
       "preparationItems": [
-        "200 Pépite",
-        "50 Riz",
-        "40 Bois de Bambou Sacré",
-        "20 Dolomite",
-        "10 Bois de Bambou OU Bambou Sombre",
-        "5 Pétale d'encre",
-        "5 Pétale de Papier",
-        "6 Bière forte légère",
-        "5 Yokayu",
-        "5 Nectar de l'Orient",
-        "1 Gnôle de Grobe",
-        "1 Diacritique de la Reine Amirukam",
-        "1 Diacritique du Roi Imagami",
-        "1 Cristal pliable + 1 Cristal liquide OU 1 Bière du Grand Pouddah",
-        "1 Umeshushu",
-        "1 Carré de Chocolat au Lait",
-        "1 Sirop de Yuzuzu",
-        "1 Pizwa",
-        "Dofus Tacheté en inventaire",
-        "Sculpteur 180+"
+        {
+          "kind": "resource",
+          "quantity": 200,
+          "name": "Pépite"
+        },
+        {
+          "kind": "resource",
+          "quantity": 50,
+          "name": "Riz"
+        },
+        {
+          "kind": "resource",
+          "quantity": 40,
+          "name": "Bois de Bambou Sacré"
+        },
+        {
+          "kind": "resource",
+          "quantity": 20,
+          "name": "Dolomite"
+        },
+        {
+          "kind": "note",
+          "text": "10 Bois de Bambou OU Bambou Sombre"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Pétale d'encre"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Pétale de Papier"
+        },
+        {
+          "kind": "resource",
+          "quantity": 6,
+          "name": "Bière forte légère"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Yokayu"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Nectar de l'Orient"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Gnôle de Grobe"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Diacritique de la Reine Amirukam"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Diacritique du Roi Imagami"
+        },
+        {
+          "kind": "note",
+          "text": "1 Cristal pliable + 1 Cristal liquide OU 1 Bière du Grand Pouddah"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Umeshushu"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Carré de Chocolat au Lait"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Sirop de Yuzuzu"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Pizwa"
+        },
+        {
+          "kind": "note",
+          "text": "Dofus Tacheté en inventaire"
+        },
+        {
+          "kind": "note",
+          "text": "Sculpteur 180+"
+        }
       ]
     },
     {
@@ -19343,23 +21618,91 @@
       "warning": "Prépare ces ressources avant d'ouvrir les branches Guerre et Servitude pour pouvoir les enchaîner sans détour d'achat.",
       "action": "PRÉPARER",
       "preparationItems": [
-        "5 Ardonite",
-        "1 Diamant",
-        "2 Éclat temporel",
-        "600 Pépite",
-        "5 Huile de Frostiz",
-        "50 Chanvre",
-        "10 Lanière en cuir de Gliglitch",
-        "100 Éklâme suprême",
-        "20 Artefact Pandawushu",
-        "20 Potion d'altération",
-        "3 Galet Solaire",
-        "1 Galet brasillant",
-        "Mineur 40+",
-        "1 Grande fiole",
-        "10 Blague de Soufre",
-        "3 Substrat de Sylve — 2 pour Servitude, 1 À CONSERVER pour La bête au bois dormant",
-        "1 Marteau de Boisaille"
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Ardonite"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Diamant"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Éclat temporel"
+        },
+        {
+          "kind": "resource",
+          "quantity": 600,
+          "name": "Pépite"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Huile de Frostiz"
+        },
+        {
+          "kind": "resource",
+          "quantity": 50,
+          "name": "Chanvre"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Lanière en cuir de Gliglitch"
+        },
+        {
+          "kind": "resource",
+          "quantity": 100,
+          "name": "Éklâme suprême"
+        },
+        {
+          "kind": "resource",
+          "quantity": 20,
+          "name": "Artefact Pandawushu"
+        },
+        {
+          "kind": "resource",
+          "quantity": 20,
+          "name": "Potion d'altération"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Galet Solaire"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Galet brasillant"
+        },
+        {
+          "kind": "note",
+          "text": "Mineur 40+"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Grande fiole"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Blague de Soufre"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Substrat de Sylve",
+          "note": "2 pour Servitude, 1 À CONSERVER pour La bête au bois dormant"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Marteau de Boisaille"
+        }
       ]
     },
     {
@@ -19371,29 +21714,119 @@
       "warning": "Couvre les branches Misère/Corruption et le Gâteau Royal de La guerre de Cania n'aura pas lieu.",
       "action": "PRÉPARER",
       "preparationItems": [
-        "16 Planche de Salut",
-        "16 Planche de Gravure",
-        "16 Planche de Surf",
-        "16 Planche de Toilette",
-        "1 Corde d'escalade",
-        "35 000 kamas",
-        "10 Germes corrompus",
-        "5 Tentacule de Tentaclaque",
-        "20 Fleur de Kaliptus",
-        "1 Élixir uchronique mineur",
-        "10 Poudre Temporelle",
-        "1 Potion de Foyer",
-        "10 Patte de Nheur'Gueule",
-        "10 Bois de Bambou Sacré",
-        "10 Peau pourrie de Dolid",
-        "10 Pétale de Gangredogue",
-        "10 Mycoses gelées",
-        "80 Eau Potable",
-        "20 Seigle",
-        "15 Noix de Kokoko",
-        "10 Eau Potable",
-        "1 Sucre d'Orge",
-        "Paysan 100+"
+        {
+          "kind": "resource",
+          "quantity": 16,
+          "name": "Planche de Salut"
+        },
+        {
+          "kind": "resource",
+          "quantity": 16,
+          "name": "Planche de Gravure"
+        },
+        {
+          "kind": "resource",
+          "quantity": 16,
+          "name": "Planche de Surf"
+        },
+        {
+          "kind": "resource",
+          "quantity": 16,
+          "name": "Planche de Toilette"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Corde d'escalade"
+        },
+        {
+          "kind": "note",
+          "text": "35 000 kamas"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Germes corrompus"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Tentacule de Tentaclaque"
+        },
+        {
+          "kind": "resource",
+          "quantity": 20,
+          "name": "Fleur de Kaliptus"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Élixir uchronique mineur"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Poudre Temporelle"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Potion de Foyer"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Patte de Nheur'Gueule"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Bois de Bambou Sacré"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Peau pourrie de Dolid"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Pétale de Gangredogue"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Mycoses gelées"
+        },
+        {
+          "kind": "resource",
+          "quantity": 80,
+          "name": "Eau Potable"
+        },
+        {
+          "kind": "resource",
+          "quantity": 20,
+          "name": "Seigle"
+        },
+        {
+          "kind": "resource",
+          "quantity": 15,
+          "name": "Noix de Kokoko"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Eau Potable"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Sucre d'Orge"
+        },
+        {
+          "kind": "note",
+          "text": "Paysan 100+"
+        }
       ]
     },
     {
@@ -20023,14 +22456,49 @@
       "warning": "Ne préachète pas le Casque de Statulipe, la Liane de Soldalia ni l'Épine d'Armuguet : La sorcière exilée puis La graine de la révolte les fournissent avant le craft de la Fleur de Cendrepierre.",
       "action": "PRÉPARER",
       "preparationItems": [
-        "7 Belladone",
-        "7 Cendrepierre",
-        "1 Mousse de Caméliache",
-        "1 Fleur des protecteurs",
-        "1 Poing de Coquelicogne",
-        "1 Casque de Statulipe — À RÉCUPÉRER PENDANT LA CHAÎNE",
-        "1 Liane de Soldalia — À RÉCUPÉRER PENDANT LA CHAÎNE",
-        "1 Épine d'Armuguet — À RÉCUPÉRER PENDANT LA CHAÎNE"
+        {
+          "kind": "resource",
+          "quantity": 7,
+          "name": "Belladone"
+        },
+        {
+          "kind": "resource",
+          "quantity": 7,
+          "name": "Cendrepierre"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Mousse de Caméliache"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Fleur des protecteurs"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Poing de Coquelicogne"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Casque de Statulipe",
+          "note": "À RÉCUPÉRER PENDANT LA CHAÎNE"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Liane de Soldalia",
+          "note": "À RÉCUPÉRER PENDANT LA CHAÎNE"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Épine d'Armuguet",
+          "note": "À RÉCUPÉRER PENDANT LA CHAÎNE"
+        }
       ]
     },
     {
@@ -20381,28 +22849,112 @@
       "warning": "Prise de conscience + Mort et renouveau + Descendre aux cendres terminés. Prévoir un équipement permettant 800 Force minimum et 0 Sagesse pour l'étape qui le demande.",
       "action": "PRÉPARER",
       "preparationItems": [
-        "200 Pépite",
-        "10 Artefact Pandawushu Roc",
-        "5 Artefact Pandawushu Vent",
-        "5 Artefact Pandawushu Bois",
-        "5 Artefact Pandawushu Feu",
-        "5 Artefact Pandawushu Eau",
-        "4 Métaria Mage jaune",
-        "4 Métaria Mage rouge",
-        "4 Métaria Mage verte",
-        "4 Métaria Mage bleue",
-        "2 Rune astrale majeure",
-        "1 Totem de l'équilibre — À OBTENIR VIA Les totems de Maïmane",
-        "1 Harmonie (amulette)",
-        "1 Boufballe dédicacée de Brâkmar",
-        "1 Boufballe dédicacée de Bonta",
-        "1 Blopisier empoisonné",
-        "1 Pain de Frostiz OU 1 Pain Tahde",
-        "1 Eau Potable OU 1 Lailait",
-        "10 000 kamas",
-        "Mineur 10+",
-        "800 Force minimum",
-        "0 Sagesse au moment du test concerné"
+        {
+          "kind": "resource",
+          "quantity": 200,
+          "name": "Pépite"
+        },
+        {
+          "kind": "resource",
+          "quantity": 10,
+          "name": "Artefact Pandawushu Roc"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Artefact Pandawushu Vent"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Artefact Pandawushu Bois"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Artefact Pandawushu Feu"
+        },
+        {
+          "kind": "resource",
+          "quantity": 5,
+          "name": "Artefact Pandawushu Eau"
+        },
+        {
+          "kind": "resource",
+          "quantity": 4,
+          "name": "Métaria Mage jaune"
+        },
+        {
+          "kind": "resource",
+          "quantity": 4,
+          "name": "Métaria Mage rouge"
+        },
+        {
+          "kind": "resource",
+          "quantity": 4,
+          "name": "Métaria Mage verte"
+        },
+        {
+          "kind": "resource",
+          "quantity": 4,
+          "name": "Métaria Mage bleue"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Rune astrale majeure"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Totem de l'équilibre",
+          "note": "À OBTENIR VIA Les totems de Maïmane"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Harmonie",
+          "note": "amulette"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Boufballe dédicacée de Brâkmar"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Boufballe dédicacée de Bonta"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Blopisier empoisonné"
+        },
+        {
+          "kind": "note",
+          "text": "1 Pain de Frostiz OU 1 Pain Tahde"
+        },
+        {
+          "kind": "note",
+          "text": "1 Eau Potable OU 1 Lailait"
+        },
+        {
+          "kind": "note",
+          "text": "10 000 kamas"
+        },
+        {
+          "kind": "note",
+          "text": "Mineur 10+"
+        },
+        {
+          "kind": "note",
+          "text": "800 Force minimum"
+        },
+        {
+          "kind": "note",
+          "text": "0 Sagesse au moment du test concerné"
+        }
       ]
     },
     {
@@ -20796,16 +23348,53 @@
       "title": "Gobstination",
       "action": "PRÉPARER",
       "preparationItems": [
-        "90 Dorade Grise",
-        "90 Lotte",
-        "90 Raie Bleue",
-        "30 Croissant Tsukinochi",
-        "30 Plastron Tambouraï",
-        "30 Fleur Onabu-Geisha",
-        "30 Os Jiangshi-Nobi",
-        "30 Blague de Soufre OU 30 000 kamas",
-        "Paysan 140+ (aide possible)",
-        "Bricoleur 1+ sur le personnage — craft coopératif impossible"
+        {
+          "kind": "resource",
+          "quantity": 90,
+          "name": "Dorade Grise"
+        },
+        {
+          "kind": "resource",
+          "quantity": 90,
+          "name": "Lotte"
+        },
+        {
+          "kind": "resource",
+          "quantity": 90,
+          "name": "Raie Bleue"
+        },
+        {
+          "kind": "resource",
+          "quantity": 30,
+          "name": "Croissant Tsukinochi"
+        },
+        {
+          "kind": "resource",
+          "quantity": 30,
+          "name": "Plastron Tambouraï"
+        },
+        {
+          "kind": "resource",
+          "quantity": 30,
+          "name": "Fleur Onabu-Geisha"
+        },
+        {
+          "kind": "resource",
+          "quantity": 30,
+          "name": "Os Jiangshi-Nobi"
+        },
+        {
+          "kind": "note",
+          "text": "30 Blague de Soufre OU 30 000 kamas"
+        },
+        {
+          "kind": "note",
+          "text": "Paysan 140+ (aide possible)"
+        },
+        {
+          "kind": "note",
+          "text": "Bricoleur 1+ sur le personnage — craft coopératif impossible"
+        }
       ]
     },
     {
@@ -20817,32 +23406,132 @@
       "warning": "Les ressources déjà consommées plus tôt ont été retirées de cette prépa : 6 Glandes d'Arak-haï (Munster), Essence de Sylvesprit/Korriandre (Les derniers d'entre nous), Jus de cawotte + Élixir des Trépasseurs (Cultures).",
       "action": "PRÉPARER",
       "preparationItems": [
-        "500 Pépites",
-        "31 Ailes de Moskito",
-        "24 Métronomes du Début-Temps (ou 24 Orichor)",
-        "12 Poudre de Perlinpainpain",
-        "12 Capsule Explosive",
-        "12 Poudre d’Artifice",
-        "12 Goulobule rouge",
-        "6 Citron",
-        "6 Fil de Néfileuse",
-        "6 Résine",
-        "6 Kouartz",
-        "4 Tourmaline",
-        "4 Œil de Cycloïde",
-        "3 Huile de Koode",
-        "2 Queue de Mantaze",
-        "2 Fragment d’anomalie",
-        "2 Ardonite",
-        "2 Galet Solaire",
-        "1 Galet Lunaire",
-        "1 Substrat de Forêt vierge",
-        "1 Clef Clairière du Chêne Mou",
-        "1 Dague de Will Killson OU 20 Kama de glace",
-        "1 Essence de Torkélonia",
-        "1 Essence de Tal Kasha",
-        "1 000 kamas",
-        "Clefs : Nidas / Bataille de l’Aurore Pourpre / Solar"
+        {
+          "kind": "resource",
+          "quantity": 500,
+          "name": "Pépite"
+        },
+        {
+          "kind": "resource",
+          "quantity": 31,
+          "name": "Ailes de Moskito"
+        },
+        {
+          "kind": "note",
+          "text": "24 Métronomes du Début-Temps (ou 24 Orichor)"
+        },
+        {
+          "kind": "resource",
+          "quantity": 12,
+          "name": "Poudre de Perlinpainpain"
+        },
+        {
+          "kind": "resource",
+          "quantity": 12,
+          "name": "Capsule Explosive"
+        },
+        {
+          "kind": "resource",
+          "quantity": 12,
+          "name": "Poudre d’Artifice"
+        },
+        {
+          "kind": "resource",
+          "quantity": 12,
+          "name": "Goulobule rouge"
+        },
+        {
+          "kind": "resource",
+          "quantity": 6,
+          "name": "Citron"
+        },
+        {
+          "kind": "resource",
+          "quantity": 6,
+          "name": "Fil de Néfileuse"
+        },
+        {
+          "kind": "resource",
+          "quantity": 6,
+          "name": "Résine"
+        },
+        {
+          "kind": "resource",
+          "quantity": 6,
+          "name": "Kouartz"
+        },
+        {
+          "kind": "resource",
+          "quantity": 4,
+          "name": "Tourmaline"
+        },
+        {
+          "kind": "resource",
+          "quantity": 4,
+          "name": "Œil de Cycloïde"
+        },
+        {
+          "kind": "resource",
+          "quantity": 3,
+          "name": "Huile de Koode"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Queue de Mantaze"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Fragment d’anomalie"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Ardonite"
+        },
+        {
+          "kind": "resource",
+          "quantity": 2,
+          "name": "Galet Solaire"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Galet Lunaire"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Substrat de Forêt vierge"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Clef Clairière du Chêne Mou"
+        },
+        {
+          "kind": "note",
+          "text": "1 Dague de Will Killson OU 20 Kama de glace"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Essence de Torkélonia"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Essence de Tal Kasha"
+        },
+        {
+          "kind": "note",
+          "text": "1 000 kamas"
+        },
+        {
+          "kind": "note",
+          "text": "Clefs : Nidas / Bataille de l’Aurore Pourpre / Solar"
+        }
       ]
     },
     {
@@ -21017,10 +23706,23 @@
       "warning": "Pendant La bête au bois dormant, récupère 1 Enchanterelle sur les Malters si tu n'as plus le buff Au-delà des apparences.",
       "action": "PRÉPARER",
       "preparationItems": [
-        "Entretemps, une renaissance terminé",
-        "Le serment de l'ambre terminé",
-        "6 Primordiaux en inventaire",
-        "1 Substrat de Sylve réservé depuis Servitude"
+        {
+          "kind": "note",
+          "text": "Entretemps, une renaissance terminé"
+        },
+        {
+          "kind": "note",
+          "text": "Le serment de l'ambre terminé"
+        },
+        {
+          "kind": "note",
+          "text": "6 Primordiaux en inventaire"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Substrat de Sylve réservé depuis Servitude"
+        }
       ]
     },
     {
