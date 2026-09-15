@@ -1,6 +1,9 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { classifyPreparationRequirement } from '../src/route/preparation';
+import {
+  classifyPreparationRequirement,
+  getTypedPreparationRequirement,
+} from '../src/route/preparation';
 import type { RouteDocument, StructuredPreparationItem } from '../src/route/types';
 
 const routePath = resolve(process.cwd(), 'data/route.json');
@@ -49,7 +52,7 @@ const ambiguousResourceNames = new Set([
 ]);
 
 function asRequirement(text: string): StructuredPreparationItem {
-  return { kind: classifyPreparationRequirement(text), text };
+  return getTypedPreparationRequirement(text) ?? { kind: classifyPreparationRequirement(text), text };
 }
 
 function splitEditorialAnnotation(name: string): { name: string; note?: string } {
@@ -74,6 +77,9 @@ function migrateLegacyString(stepId: string, rawItem: string): StructuredPrepara
   if (implicitSingleResources.get(stepId)?.has(trimmed)) {
     return { kind: 'resource', quantity: 1, name: trimmed };
   }
+
+  const typedRequirement = getTypedPreparationRequirement(trimmed);
+  if (typedRequirement) return typedRequirement;
 
   const match = trimmed.match(quantityPattern);
   if (!match) return asRequirement(trimmed);
@@ -116,6 +122,7 @@ function migrateLegacyString(stepId: string, rawItem: string): StructuredPrepara
 
 let migratedStrings = 0;
 let reclassifiedNotes = 0;
+let reclassifiedResources = 0;
 const counts = new Map<string, number>();
 
 for (const step of route.steps) {
@@ -130,6 +137,14 @@ for (const step of route.steps) {
     } else if (item.kind === 'note') {
       reclassifiedNotes += 1;
       structured = asRequirement(item.text);
+    } else if (item.kind === 'resource') {
+      const typedRequirement = getTypedPreparationRequirement(`${item.quantity} × ${item.name}`);
+      if (typedRequirement) {
+        reclassifiedResources += 1;
+        structured = typedRequirement;
+      } else {
+        structured = item;
+      }
     } else {
       structured = item;
     }
@@ -141,4 +156,6 @@ for (const step of route.steps) {
 
 writeFileSync(routePath, `${JSON.stringify(route, null, 2)}\n`, 'utf8');
 const summary = [...counts.entries()].map(([kind, count]) => `${kind}=${count}`).join(', ');
-console.log(`Preparation data migrated: ${migratedStrings} legacy strings, ${reclassifiedNotes} legacy notes. ${summary}`);
+console.log(
+  `Preparation data migrated: ${migratedStrings} legacy strings, ${reclassifiedNotes} legacy notes, ${reclassifiedResources} misclassified resources. ${summary}`,
+);
