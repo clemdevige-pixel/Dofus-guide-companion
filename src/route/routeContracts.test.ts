@@ -32,27 +32,27 @@ function normalizeObjectiveTitle(title: string): string {
   return title.trim().replace(/\s+/g, ' ').toLocaleLowerCase('fr-FR');
 }
 
-test('contrat route — un moment ne contient pas deux fois le même objectif métier', () => {
-  const objectiveKeysByMoment = new Map<string, Map<string, string>>();
+test('contrat route — un moment ne contient pas deux fois le même objectif éditorial', () => {
+  const objectiveTitlesByMoment = new Map<string, Map<string, string>>();
 
   for (const step of route.steps) {
     if (!step.momentId || step.displayRole !== 'objective') continue;
 
     // Lint éditorial uniquement : cette clé ne pilote aucun comportement runtime.
-    // Une URL source identique est la meilleure identité disponible pour une même quête ;
-    // le titre normalisé sert uniquement de fallback lorsque la source structurée est absente.
-    const objectiveKey = step.source?.url || `title:${normalizeObjectiveTitle(step.title)}`;
-    const keys = objectiveKeysByMoment.get(step.momentId) ?? new Map<string, string>();
-    const existingStepId = keys.get(objectiveKey);
+    // Deux checkpoints distincts d'une même quête peuvent partager la même URL DPLN ;
+    // on interdit uniquement deux objectifs affichés avec le même titre dans une même carte.
+    const objectiveKey = normalizeObjectiveTitle(step.title);
+    const titles = objectiveTitlesByMoment.get(step.momentId) ?? new Map<string, string>();
+    const existingStepId = titles.get(objectiveKey);
 
     assert.equal(
       existingStepId,
       undefined,
-      `${step.momentId}: objectif métier dupliqué entre ${existingStepId ?? 'inconnu'} et ${step.id} (${step.title}).`,
+      `${step.momentId}: objectif éditorial dupliqué entre ${existingStepId ?? 'inconnu'} et ${step.id} (${step.title}).`,
     );
 
-    keys.set(objectiveKey, step.id);
-    objectiveKeysByMoment.set(step.momentId, keys);
+    titles.set(objectiveKey, step.id);
+    objectiveTitlesByMoment.set(step.momentId, titles);
   }
 });
 
