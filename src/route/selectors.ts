@@ -17,6 +17,13 @@ export interface ActiveParallelGroup {
   members: RouteStep[];
 }
 
+const dungeonExitWarningPrefix = '⚠ AVANT DE SORTIR DU DONJON —';
+const semanticStopWords = new Set([
+  'avec', 'dans', 'pour', 'puis', 'apres', 'avant', 'cette', 'depuis', 'entre', 'faire',
+  'fais', 'fait', 'jusqu', 'mais', 'plus', 'sans', 'salle', 'sortir', 'termine', 'terminer',
+  'vers', 'votre', 'quand', 'reste', 'restez', 'apres', 'avant', 'donjon',
+]);
+
 function getRawSortedSteps(route: RouteDocument): RouteStep[] {
   return [...route.steps].sort((a, b) => a.order - b.order);
 }
@@ -28,11 +35,109 @@ function getRuleText(rule: RouteStep): string {
   return `⚠ ${title} — ${instruction}`;
 }
 
-function toSequenceDisplayStep(step: RouteStep): RouteStep {
+function normalizeSemanticText(value: string): string {
+  return value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[’']/g, ' ')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function getSemanticTokens(value: string): Set<string> {
+  return new Set(
+    normalizeSemanticText(value)
+      .split(' ')
+      .filter((token) => token.length >= 4 && !semanticStopWords.has(token)),
+  );
+}
+
+function getTokenOverlap(left: string, right: string): number {
+  const leftTokens = getSemanticTokens(left);
+  const rightTokens = getSemanticTokens(right);
+  if (leftTokens.size === 0 || rightTokens.size === 0) return 0;
+  let common = 0;
+  for (const token of leftTokens) {
+    if (rightTokens.has(token)) common += 1;
+  }
+  return common / Math.min(leftTokens.size, rightTokens.size);
+}
+
+function trimTrailingConnector(value: string): string {
+  return value
+    .replace(/(?:\s+(?:et|puis))?\s*[,;:\-–—]*\s*$/i, '')
+    .trim();
+}
+
+function removeCriticalWarningDuplicate(instruction: string | undefined, warning: string | undefined): string | undefined {
+  if (!instruction || !warning?.startsWith(dungeonExitWarningPrefix)) return instruction;
+
+  const warningContent = warning.slice(dungeonExitWarningPrefix.length).trim();
+  const sentences = instruction.split(/(?<=[.!?])\s+|\n+/).map((sentence) => sentence.trim()).filter(Boolean);
+  const cleaned: string[] = [];
+
+  for (const sentence of sentences) {
+    const overlap = getTokenOverlap(sentence, warningContent);
+    const cue = sentence.search(/\b(?:avant de sortir|avant de partir|dans la salle de sortie|dans la salle de fin)\b/i);
+
+    if (cue >= 0 && overlap >= 0.25) {
+      const prefix = trimTrailingConnector(sentence.slice(0, cue));
+      if (prefix) cleaned.push(prefix.endsWith('.') ? prefix : `${prefix}.`);
+      continue;
+    }
+
+    if (overlap >= 0.72) continue;
+    cleaned.push(sentence);
+  }
+
+  const result = cleaned.join(' ').replace(/\s+/g, ' ').trim();
+  return result || undefined;
+}
+
+function getCoreStepTitle(title: string): string {
+  return title
+    .replace(/^◆\s*/, '')
+    .split(/\s+—\s+/)[0]
+    .trim();
+}
+
+function isPrerequisiteCoveredByEarlierStep(prerequisite: string | undefined, earlierSteps: readonly RouteStep[]): boolean {
+  if (!prerequisite) return false;
+  const normalizedPrerequisite = normalizeSemanticText(prerequisite);
+
+  return earlierSteps.some((step) => {
+    const title = normalizeSemanticText(getCoreStepTitle(step.title));
+    return title.length >= 6 && normalizedPrerequisite.includes(title);
+  });
+}
+
+function isRewardWarningDuplicatedByInstruction(warning: string | undefined, instruction: string | undefined): boolean {
+  if (!warning || !instruction || warning.startsWith(dungeonExitWarningPrefix)) return false;
+  const match = warning.match(/^Récompense(?: notamment)? (?:la |le |les )?(.+?) (?:requise?|requis|nécessaire|nécessaires)\b/i);
+  if (!match) return false;
+  const reward = normalizeSemanticText(match[1]);
+  return reward.length >= 5 && normalizeSemanticText(instruction).includes(reward);
+}
+
+function toSequenceDisplayStep(step: RouteStep, earlierSteps: readonly RouteStep[]): RouteStep {
   const displayStep = { ...step };
+
   if (step.displayRole === 'transition' && !step.instruction && (step.action || step.title)) {
     displayStep.instruction = [step.action, step.title].filter(Boolean).join(' — ');
   }
+
+  displayStep.instruction = removeCriticalWarningDuplicate(displayStep.instruction, displayStep.warning);
+
+  if (isPrerequisiteCoveredByEarlierStep(displayStep.prerequisites, earlierSteps)) {
+    delete displayStep.prerequisites;
+  }
+
+  if (isRewardWarningDuplicatedByInstruction(displayStep.warning, displayStep.instruction)) {
+    delete displayStep.warning;
+  }
+
   delete displayStep.action;
   return displayStep;
 }
@@ -97,17 +202,20 @@ export function getStepGroups(route: RouteDocument): RouteStepGroup[] {
 
 export function getSequenceObjectives(steps: RouteStep[]): RouteSequenceObjective[] {
   const objectives: RouteSequenceObjective[] = [];
+  const earlierSteps: RouteStep[] = [];
+
   for (const rawStep of steps) {
-    const step = toSequenceDisplayStep(rawStep);
+    const step = toSequenceDisplayStep(rawStep, earlierSteps);
     const currentObjective = objectives.at(-1);
     if (
       (rawStep.displayRole === 'transition' || rawStep.displayRole === 'detail') &&
       currentObjective
     ) {
       currentObjective.steps.push(step);
-      continue;
+    } else {
+      objectives.push({ id: rawStep.id, steps: [step] });
     }
-    objectives.push({ id: rawStep.id, steps: [step] });
+    earlierSteps.push(rawStep);
   }
   return objectives;
 }
