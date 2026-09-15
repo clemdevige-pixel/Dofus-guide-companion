@@ -56,10 +56,10 @@ const typeLabels: Record<StepType, string> = {
 };
 
 const guideActionLabels: Record<GuideItemAction, string> = {
-  take: 'Vous devez maintenant prendre :',
-  advance: 'Vous devez maintenant avancer :',
-  finish: 'Vous devez maintenant terminer :',
-  do: 'Vous devez maintenant faire :',
+  take: 'PRENDRE',
+  advance: 'AVANCER',
+  finish: 'TERMINER',
+  do: 'FAIRE',
 };
 
 function getResourceName(item: string): string {
@@ -97,6 +97,20 @@ function getObjectiveDisplayStep(steps: RouteStep[]): RouteStep {
 
 function getParallelGroupLabel(steps: RouteStep[]): string {
   return [...new Set(steps.map((step) => step.title))].join(' + ');
+}
+
+const dungeonExitWarningPrefix = '⚠ AVANT DE SORTIR DU DONJON —';
+
+function getWarningLabel(warning: string): string {
+  return warning.startsWith(dungeonExitWarningPrefix)
+    ? '⚠ AVANT DE SORTIR DU DONJON'
+    : '⚠ À SAVOIR';
+}
+
+function getWarningContent(warning: string): string {
+  return warning.startsWith(dungeonExitWarningPrefix)
+    ? warning.slice(dungeonExitWarningPrefix.length).trim()
+    : warning;
 }
 
 export function App() {
@@ -621,6 +635,18 @@ export function App() {
                         const coordinate = getSequenceCoordinate(step);
                         return (
                           <div className="sequence-item__detail" key={step.id}>
+                            {step.prerequisites && (
+                              <div className="step-context step-context--launch">
+                                <strong>PRÉREQUIS</strong>
+                                <span>{step.prerequisites}</span>
+                              </div>
+                            )}
+                            {step.warning && (
+                              <div className="step-context step-context--lock">
+                                <strong>{getWarningLabel(step.warning)}</strong>
+                                <span>{getWarningContent(step.warning)}</span>
+                              </div>
+                            )}
                             <div className="sequence-item__header">
                               <div>
                                 {step.action && <span className="sequence-item__action">{step.action}</span>}
@@ -678,6 +704,20 @@ export function App() {
                 </button>
               )}
             </div>
+
+            {currentStep.prerequisites && (
+              <div className="step-context step-context--launch">
+                <strong>PRÉREQUIS</strong>
+                <span>{currentStep.prerequisites}</span>
+              </div>
+            )}
+
+            {currentStep.warning && (
+              <div className="step-context step-context--lock">
+                <strong>{getWarningLabel(currentStep.warning)}</strong>
+                <span>{getWarningContent(currentStep.warning)}</span>
+              </div>
+            )}
 
             {currentStep.action && <p className="action-label">{currentStep.action}</p>}
 
