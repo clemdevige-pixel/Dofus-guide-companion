@@ -27,19 +27,30 @@
 }
 
 .context-panel--progress {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
   min-height: 0;
   max-height: calc(100vh - 112px);
   overflow: hidden;
 }
 
+.context-panel--progress .context-panel__header {
+  flex: 0 0 auto;
+}
+
 .context-panel--progress .context-panel__body {
+  flex: 1 1 auto;
   min-height: 0;
+  overflow: hidden;
 }
 
 .progression-dashboard {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
   gap: 10px;
+  height: 100%;
+  min-height: 0;
 }
 
 .progression-summary {
@@ -69,7 +80,9 @@
   gap: 6px;
   min-height: 0;
   overflow-y: auto;
-  padding-right: 2px;
+  overscroll-behavior: contain;
+  padding-right: 4px;
+  scrollbar-gutter: stable;
 }
 
 .progression-block {
