@@ -782,7 +782,6 @@
       "displayRole": "objective",
       "title": "Le métier des aventuriers",
       "prerequisites": "Le métier des aventuriers actif.",
-      "warning": "Équipe le couteau de chasse de Berb pendant les combats.",
       "action": "AVANCER",
       "instruction": "Va en [-1,-2], équipe le couteau de chasse de Berb, récupère les Viandes Intangibles demandées puis fabrique le Bouillon de Chair.",
       "momentId": "moment-incarnam-metiers-paturages",
@@ -1298,7 +1297,6 @@
       "displayRole": "objective",
       "title": "Vu du ciel",
       "prerequisites": "Télescope de Matu Vuh observé.",
-      "warning": "Passe par Galilea avant Ternette.",
       "action": "TERMINER",
       "instruction": "Passe par Galilea en [-1,1] avant de rendre la quête à Ternette.",
       "source": {
@@ -1543,7 +1541,6 @@
       "displayRole": "objective",
       "title": "Dans la gueule du Milimilou — crypte",
       "prerequisites": "Accès ouvert par Kardorim ; Pot de Confiture Maison conservé.",
-      "warning": "Utilise le Pot de Confiture Maison pour éviter le combat solo contre Milimilou.",
       "action": "REPRENDRE / AVANCER",
       "instruction": "Va en [4,-1], utilise le Pot de Confiture Maison pour contourner le combat solo du Milimilou, puis parle à Hargnok et poursuis la quête.",
       "momentId": "moment-incarnam-fin-1",
@@ -1692,7 +1689,6 @@
       "type": "resume",
       "displayRole": "objective",
       "title": "Destination Astrub",
-      "warning": "Passe par Maître Anemo et le portail, puis valide à Astrub.",
       "action": "TERMINER",
       "instruction": "Passe par Maître Anemo en [4,-3], emprunte le portail puis valide Destination Astrub en [6,-19].",
       "source": {
@@ -1784,7 +1780,6 @@
       "type": "quest",
       "title": "Donjon en mousse",
       "prerequisites": "Niveau > 19.",
-      "warning": "À ouvrir avant le Château Ensablé.",
       "action": "LANCER / STOP",
       "instruction": "En [1,-15], parle à Emma Tompouce et LANCE Donjon en mousse. GARDE-la active jusqu'au Château Ensablé.",
       "source": {
@@ -1976,8 +1971,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/ca-sent-le-gaz.html"
       },
-      "momentId": "moment-route-step-0048",
-      "launchInstruction": "Parle à ton chef de classe et choisis « Demander s'il a encore besoin de vous ». La position dépend de ta classe."
+      "momentId": "moment-route-step-0048"
     },
     {
       "id": "route-step-1131",
@@ -3448,7 +3442,6 @@
       "type": "quest",
       "displayRole": "transition",
       "title": "Le repos est dans le champ",
-      "warning": "Cette quête reste active bien après la première boucle du cimetière.",
       "action": "LANCER / STOP",
       "source": {
         "label": "DPLN",
@@ -3978,7 +3971,7 @@
       "displayRole": "objective",
       "title": "Milice d'Astrub — Le rebelle + Tel est pris",
       "action": "AVANCER LES 2",
-      "instruction": "Profite de ce passage pour conserver Tel est pris au bon checkpoint ; ne la termine pas encore.",
+      "instruction": "Profite de ce passage pour avancer Tel est pris, puis ne la termine pas encore.",
       "momentId": "moment-route-step-1157",
       "destination": {
         "x": 5,
@@ -4972,7 +4965,6 @@
       "type": "dungeon",
       "displayRole": "objective",
       "title": "◆ Akadémie des Gobs",
-      "warning": "Dans la salle 1, entre dans le casier pour apprendre Foudroiement de Grunob avant de poursuivre le donjon.",
       "action": "FAIRE",
       "instruction": "Dans la salle 1, entre dans le casier et récupère Foudroiement de Grunob, puis termine l'Akadémie des Gobs avec Donjon éducatif actif.",
       "momentId": "moment-route-step-0098"
@@ -5316,7 +5308,7 @@
       "title": "Du repos mais pas trop — convergence Bworkette",
       "prerequisites": "10 Bâtons de Boisaille + 1 Bakélélite préparés.",
       "action": "AVANCER / STOP",
-      "instruction": "AVANCE Du repos mais pas trop jusqu'à devoir récupérer la bière de Bworkette, puis STOP devant le Donjon des Bworks. Les sbires du maître doit déjà être à Bworkette.",
+      "instruction": "AVANCE Du repos mais pas trop jusqu'à devoir récupérer la bière de Bworkette, puis STOP devant le Donjon des Bworks.",
       "momentId": "moment-route-step-0148",
       "location": {
         "x": -32,
@@ -5330,7 +5322,6 @@
       "type": "dungeon",
       "displayRole": "detail",
       "title": "◆ Donjon des Bworks — PASSAGE UNIQUE",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après Bworkette, parle à Magobwork et récupère la Bière de Bworkette avant de quitter.",
       "action": "FAIRE / CAPTURER / VALIDER",
       "instruction": "Fais le Donjon des Bworks. Parle à Magobwork avant de sortir, récupère la bière de Bworkette et capture la Bworkette avec une pierre d'âme adaptée. Ce même boss valide Les sbires du maître.",
       "momentId": "moment-route-step-0148"
@@ -5386,7 +5377,7 @@
       "displayRole": "transition",
       "title": "Pat Akess — Shin Larve → Rakoopeur",
       "action": "REPRENDRE / STOP",
-      "instruction": "Retourne voir Pat Akess en [5,0], valide Shin Larve et prends l'objectif Rakoopeur, puis STOP. Le Refuge Sylvestre est fait sur la carte suivante.",
+      "instruction": "Retourne voir Pat Akess en [5,0], valide Shin Larve, prends l'objectif Rakoopeur puis STOP.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-sbires-du-maitre.html"
@@ -5782,7 +5773,6 @@
       "type": "dungeon",
       "displayRole": "detail",
       "title": "◆ Clos des Blops",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après le Blop Royal, entre dans la salle du Blop Multicolore pour enregistrer la sauvegarde avant de quitter le Clos des Blops.",
       "action": "FAIRE",
       "instruction": "Vaincs un Blop Royal : valide l'huile de l'alignement ET Entre quatre Blops. Entre ensuite dans la salle du Blop Multicolore pour prendre la sauvegarde avant de sortir.\nOCRE — Tu dois aussi obtenir les captures des 4 Blops Royaux : Coco, Griotte, Indigo et Reinette.",
       "momentId": "moment-route-step-0178",
@@ -6577,7 +6567,7 @@
       "prerequisites": "Objectif obligatoire avant Les bandits de Cania : terminer et remettre à la justice 9 avis de recherche de niveau 120 ou moins, puis récupérer 9 Primatons auprès du Chasseur de primes en [5,-6].",
       "warning": "Ce n'est plus un objectif opportuniste : depuis la mise à jour 3.4, la Carte de Cania exige obligatoirement les Primatons. Profite des zones traversées, mais assure-toi d'avoir rendu 9 avis éligibles avant le verrou.",
       "action": "FIL ROUGE",
-      "instruction": "FIL ROUGE — Termine 9 avis de recherche de niveau ≤120 et rends-les à la justice. Va ensuite voir le Chasseur de primes en [5,-6] pour récupérer 9 Primatons. Tu peux étaler ces captures jusqu'au verrou Carte de Cania.",
+      "instruction": "Termine 9 avis de recherche de niveau ≤120, rends-les à la justice puis récupère 9 Primatons auprès du Chasseur de primes en [5,-6]. Tu peux étaler ces captures.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-bandits-de-cania.html"
@@ -6829,7 +6819,6 @@
       "type": "dungeon",
       "displayRole": "detail",
       "title": "◆ Cimetière des Mastodontes — MANTISCORE",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — clique sur l'os de la salle de fin pour récupérer le Parchemin du Mantiscroc, puis utilise-le depuis les consommables.",
       "action": "FAIRE",
       "instruction": "Vaincs le Mantiscore. Dans la salle de fin, AVANT DE SORTIR, clique sur l'os pour récupérer le Parchemin du Mantiscroc puis double-clique le parchemin dans tes consommables pour apprendre le sort et sa variante.",
       "momentId": "moment-route-step-0235"
@@ -7029,7 +7018,7 @@
       "prerequisites": "9 avis de recherche de niveau ≤120 rendus à la justice ; 9 Primatons récupérés en [5,-6] ; acheter les 3 fragments différents (3 Primatons chacun) puis assembler la Carte de Cania à la Malle aux Trésors.",
       "warning": "La Carte de Cania est désormais obligatoire pour poursuivre Les bandits de Cania.",
       "action": "VERROU DUR",
-      "instruction": "Si tu n'as pas encore la Carte de Cania : STOP et termine le fil rouge Primatons maintenant.",
+      "instruction": "Si tu n'as pas encore la Carte de Cania : STOP et termine les 9 Primatons maintenant.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-bandits-de-cania.html"
@@ -7098,7 +7087,6 @@
       "type": "quest",
       "displayRole": "objective",
       "title": "Arak-haï en pagaille — jusqu'à Reine Nyée",
-      "warning": "Ne pas entrer au donjon avant Tour du propriétaire.",
       "action": "LANCER / AVANCER / STOP",
       "instruction": "En [5,-6], LANCE Arak-haï en pagaille et AVANCE jusqu'à l'objectif Reine Nyée, puis STOP. Ne fais pas le donjon avant Tour du propriétaire.",
       "source": {
@@ -7142,7 +7130,7 @@
       "displayRole": "detail",
       "title": "◆ Bateau du Chouque — LE CHOUQUE",
       "action": "FAIRE",
-      "instruction": "Vaincs Le Chouque pour C'est du bateau, puis poursuis le rendu indiqué sur la carte suivante.",
+      "instruction": "Vaincs Le Chouque pour C'est du bateau.",
       "momentId": "moment-route-step-0241"
     },
     {
@@ -7266,7 +7254,6 @@
       "type": "dungeon",
       "displayRole": "detail",
       "title": "Antre de la Reine Nyée",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — parle à la Reine Nyée après la victoire : ce dialogue est obligatoire pour Arak-haï en pagaille.",
       "action": "FAIRE",
       "instruction": "Entre avec Arak-haï en pagaille + Tour du propriétaire + Comme un corbac sur sa branche + L'éternelle moisson actifs. Vaincs et capture la Reine Nyée pour l'Ocre. AVANT DE SORTIR, parle à la Reine Nyée pour valider le dialogue d'Arak-haï en pagaille.",
       "momentId": "moment-route-step-0247",
@@ -7476,7 +7463,6 @@
       "type": "dungeon",
       "displayRole": "detail",
       "title": "◆ Domaine Ancestral",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — parle à l'Abraknyde Ancestral au sujet des Arak-haï : ce dialogue fait partie de Munster lève le mystère.",
       "action": "FAIRE",
       "instruction": "Vaincs l'Abraknyde Ancestral avec Munster lève le mystère + Vengeance par procuration + Un juge hystérique actifs et capture-le pour l'Ocre. AVANT DE SORTIR, parle à l'Abraknyde Ancestral au sujet des Arak-haï pour Munster lève le mystère.",
       "momentId": "moment-route-step-0294",
@@ -7681,7 +7667,7 @@
       "displayRole": "detail",
       "title": "◆ Repaire du Kharnozor — TOUR D'HONNEUR",
       "action": "FAIRE",
-      "instruction": "Vaincs le Kharnozor pour Tour d'honneur, puis poursuis le rendu indiqué sur la carte suivante.",
+      "instruction": "Vaincs le Kharnozor pour Tour d'honneur.",
       "momentId": "moment-route-step-0253"
     },
     {
@@ -7913,7 +7899,7 @@
       "title": "Plongeon et dragon — jusqu'au Chêne Mou",
       "warning": "La quête Turquoise attend désormais le Chêne Mou.",
       "action": "AVANCER / STOP",
-      "instruction": "Après le Dragon Cochon, reprends Plongeon et dragon puis STOP au checkpoint Chêne Mou.",
+      "instruction": "Après le Dragon Cochon, reprends Plongeon et dragon puis STOP devant le Chêne Mou.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/plongeon-et-dragon.html"
@@ -8442,7 +8428,7 @@
       "title": "Un juge hystérique — Rat Noir",
       "prerequisites": "Rat Blanc vaincu.",
       "action": "REPRENDRE / STOP",
-      "instruction": "Valide Rat Blanc auprès de Chris de Naire, prends l'objectif Rat Noir puis STOP devant la Sousouricière. Le donjon est fait sur la carte suivante.",
+      "instruction": "Valide Rat Blanc auprès de Chris de Naire, prends l'objectif Rat Noir puis STOP devant la Sousouricière.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/un-juge-hysterique.html"
@@ -8477,7 +8463,6 @@
       "displayRole": "detail",
       "title": "◆ Sousouricière du Rat Noir",
       "prerequisites": "Un juge hystérique au Rat Noir.",
-      "warning": "NE CAPTURE PAS le Rat Noir pour l'Ocre : le futur Sphincter Cell couvrira Rat Noir + Rat Blanc.",
       "action": "FAIRE",
       "instruction": "Vaincs le Rat Noir pour Un juge hystérique. NE LE CAPTURE PAS pour l'Ocre : le futur Sphincter Cell couvrira aussi Rat Noir et Rat Blanc.",
       "momentId": "moment-route-step-0326"
@@ -9044,7 +9029,7 @@
       "blockId": "block-07",
       "type": "preparation",
       "title": "Branche Pourpre",
-      "warning": "Conserve la sauvegarde Blop Multicolore déjà obtenue : elle sera utilisée plus tard dans la branche Pourpre.",
+      "warning": "Conserve la sauvegarde Blop Multicolore.",
       "action": "PRÉPARER",
       "preparationItems": [
         "1 Tige de Bambouto",
@@ -9555,7 +9540,7 @@
       "prerequisites": "Niveau recommandé 110 ; 10 Frostiz + drops/récoltes des Champs de glace.",
       "warning": "Inutile de terminer toute la série : arrête-toi dès que le bloqueur Agriculture ou alchimie est levé.",
       "action": "LANCER / TERMINER",
-      "instruction": "En [-82,-48], LANCE En semant, se ment et TERMINE la quête. Cela suffit pour le futur bloqueur Agriculture ou alchimie de Le mal a dit.",
+      "instruction": "En [-82,-48], LANCE En semant, se ment et TERMINE la quête.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/en-semant-se-ment.html"
@@ -9576,7 +9561,7 @@
       "blockId": "block-08",
       "type": "dungeon",
       "displayRole": "objective",
-      "title": "Serre du Royalmouth — PASSAGE #1",
+      "title": "Serre du Royalmouth",
       "prerequisites": "Des donjons, encore des donjons au Royalmouth. Antiroyaliste se lance automatiquement à l'entrée.",
       "warning": "Royalmouth #1 = Tour du Monde + accès Frigost. Le Pourpre n'est pas encore prêt à ce stade.",
       "action": "FAIRE",
@@ -9630,7 +9615,7 @@
       "displayRole": "objective",
       "title": "Taures et détours — Minotoror",
       "action": "REPRENDRE / AVANCER",
-      "instruction": "REPRENDS Taures et détours au checkpoint Minotoror puis enchaîne sur le Labyrinthe avec Des donjons, encore des donjons actif.",
+      "instruction": "REPRENDS Taures et détours au Minotoror puis enchaîne sur le Labyrinthe avec Des donjons, encore des donjons actif.",
       "momentId": "moment-route-step-0377",
       "parallelGroup": {
         "parallelId": "parallel-minotoror",
@@ -9713,7 +9698,6 @@
       "type": "dungeon",
       "displayRole": "detail",
       "title": "◆ Volière de la Haute Truche — Comment perdre ses plumes",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — parle à Janseb après la Haute Truche pour valider Comment perdre ses plumes.",
       "action": "FAIRE",
       "instruction": "Vaincs et capture la Haute Truche pour l'Ocre puis, AVANT DE SORTIR, parle à Janseb pour valider Comment perdre ses plumes.",
       "momentId": "moment-route-step-0381"
@@ -9744,7 +9728,7 @@
       "prerequisites": "niveau >89.",
       "warning": "Ne lance le Rasboul que lorsque Comment perdre ses plumes est prête à y être avancée.",
       "action": "AVANCER / STOP",
-      "instruction": "AVANCE Tour à tour jusqu'au Rasboul Majeur puis STOP devant le Goulet. Comment perdre ses plumes doit déjà être au même checkpoint.",
+      "instruction": "AVANCE Tour à tour jusqu'au Rasboul Majeur puis STOP devant le Goulet.",
       "momentId": "moment-route-step-0384"
     },
     {
@@ -9816,7 +9800,7 @@
       "title": "Des donjons, encore des donjons — jusqu'au Tofu Royal",
       "prerequisites": "Minotoror vaincu.",
       "action": "REPRENDRE / STOP",
-      "instruction": "Auprès de Kal Vissi, prends l'objectif Tofu Royal puis STOP. Comment perdre ses plumes est déjà au même boss ; le donjon est fait sur la carte suivante.",
+      "instruction": "Auprès de Kal Vissi, prends l'objectif Tofu Royal puis STOP devant le donjon.",
       "momentId": "moment-route-step-0389",
       "guideItems": [
         {
@@ -9872,7 +9856,7 @@
       "prerequisites": "Comment perdre ses plumes terminé. Il faut 25 Trésors archéologiques pour acheter les 5 morceaux de tablette (5 Trésors par morceau).",
       "warning": "Deux méthodes cumulables : la quête Chasse au trésor archéologique donne 5 Trésors et est limitée à 1 fois/jour ; chaque boss de donjon niveau 120–130 donne automatiquement 1 Trésor en donjon (pas en arène).",
       "action": "FIL ROUGE",
-      "instruction": "FIL ROUGE — Accumule 25 Trésors archéologiques. Fais la chasse archéologique quotidienne quand utile et profite des boss 120–130 rencontrés pendant la progression. Ne bloque pas ici : le verrou reste juste avant la remise du Trésor de Totankama.",
+      "instruction": "Accumule 25 Trésors archéologiques. Fais la chasse archéologique quotidienne quand utile et profite des boss 120–130 rencontrés pendant la progression.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/comment-perdre-ses-plumes.html"
@@ -10009,7 +9993,6 @@
       "displayRole": "detail",
       "title": "◆ Ring du Capitaine Ekarlatte — Dofus Pourpre",
       "prerequisites": "L'anneau de Tot au Capitaine Ekarlatte.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — parle au Capitaine Ekarlatte après le combat pour valider les chaînes actives.",
       "action": "FAIRE",
       "instruction": "Vaincs le Capitaine Ekarlatte puis, AVANT DE SORTIR, parle-lui pour valider la progression du Pourpre et des chaînes actives.",
       "momentId": "moment-route-step-0398"
@@ -10037,7 +10020,6 @@
       "type": "hard_lock",
       "title": "VERROU DUR — TABLETTE DE TOTANKAMA",
       "prerequisites": "25 Trésors archéologiques réunis ; 5 morceaux achetés ; Tablette assemblée.",
-      "warning": "Le farm pouvait rester en fil rouge jusque-là ; la Tablette devient obligatoire uniquement avant de rendre Le trésor de Totankama.",
       "action": "VERROU DUR",
       "instruction": "Si la Tablette n'est pas assemblée : STOP ici, complète les Trésors manquants puis assemble-la avant de continuer.",
       "longRunningGoal": {
@@ -10264,7 +10246,6 @@
       "displayRole": "objective",
       "title": "La marche de l'impératrice",
       "prerequisites": "Pêche en eaux gelées active avec le farm des 50 Mansots en cours.",
-      "warning": "Chaque combat contenant une Mamansot compte aussi dans les 50 Mansots de Pêche. La Mamansot devient suiveuse : livre-la à Ken Tucky puis recommence 6 fois.",
       "action": "LANCER / TERMINER / AVANCER",
       "instruction": "LANCE La marche de l'impératrice puis profite du même farm que Pêche en eaux gelées : chaque combat contenant une Mamansot compte aussi pour les 50 Mansots. Livre la Mamansot à Ken Tucky et recommence 6 fois.",
       "momentId": "moment-frigost-peche-mansot",
@@ -10661,9 +10642,8 @@
       "displayRole": "objective",
       "title": "Lumière sur l'ombre",
       "prerequisites": "1 combat de groupe contre le Craqueleur de Glace.",
-      "warning": "Doit être TERMINÉE : prérequis dur futur de Le givre des révélations.",
       "action": "LANCER / TERMINER",
-      "instruction": "En [-64,-55], LANCE Lumière sur l'ombre et TERMINE-la : cette quête est un prérequis dur futur de Le givre des révélations.",
+      "instruction": "En [-64,-55], LANCE Lumière sur l'ombre et TERMINE-la.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/lumiegravere-sur-lombre.html"
@@ -11061,7 +11041,7 @@
       "title": "Des donjons, encore des donjons — jusqu'à Crocabulia",
       "prerequisites": "Tofu Royal vaincu.",
       "action": "REPRENDRE / STOP",
-      "instruction": "Auprès de Kal Vissi, prends l'objectif Crocabulia puis STOP. Le forgeur de légende doit déjà être au même checkpoint.",
+      "instruction": "Auprès de Kal Vissi, prends l'objectif Crocabulia puis STOP.",
       "momentId": "moment-route-step-0405",
       "guideItems": [
         {
@@ -11150,7 +11130,7 @@
       "displayRole": "objective",
       "title": "La voie du guerrier — jusqu'au Repaire de Skeunk",
       "action": "REPRENDRE / STOP",
-      "instruction": "Auprès du Maître des clefs, prends l'objectif Skeunk puis STOP devant le Repaire. Le donjon est exécuté uniquement sur la carte suivante.",
+      "instruction": "Auprès du Maître des clefs, prends l'objectif Skeunk puis STOP devant le Repaire.",
       "momentId": "moment-route-step-0408",
       "parallelGroup": {
         "parallelId": "parallel-founoroshi",
@@ -11419,7 +11399,6 @@
       "displayRole": "transition",
       "title": "Infâme pourriture",
       "prerequisites": "Damadrya vaincue ; Mildiou accumulés pendant toute la boucle Plantala.",
-      "warning": "Complète seulement le reliquat jusqu'à 20 Mildiou puis retourne voir Phang.",
       "action": "TERMINER",
       "instruction": "Après Dites-le avec des fleurs + Le Saule du Promeneur + le passage Damadrya, complète uniquement les Mildiou manquants jusqu'à 20, retourne voir Phang en [23,-29] et TERMINE Infâme pourriture.",
       "source": {
@@ -11439,9 +11418,8 @@
       "type": "dungeon",
       "displayRole": "detail",
       "title": "◆ Atelier du Tanukouï San — AU NOM DE L’ART + LA VOIE",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — parle au Tanukouï San après le boss pour Au nom de l’Art.",
       "action": "FAIRE",
-      "instruction": "Vaincs et capture Tanukouï San avec Au nom de l'Art + La voie du guerrier actives puis, AVANT DE SORTIR, parle au Tanukouï San. Ne fais pas l’échelle d’alignement ici : La tactique des gens d’armes sera active plus tard et ne demandera qu’un retour en salle 4, sans tuer le boss.",
+      "instruction": "Vaincs et capture Tanukouï San avec Au nom de l'Art + La voie du guerrier actives puis, AVANT DE SORTIR, parle au Tanukouï San.",
       "momentId": "moment-route-step-0275"
     },
     {
@@ -11516,7 +11494,6 @@
       "type": "dungeon",
       "displayRole": "detail",
       "title": "◆ Vallée de la Dame des Eaux — NAGATE",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — parle à Nagate la Dame des Eaux puis à Kwatalo dans la salle de fin.",
       "action": "FAIRE",
       "instruction": "Vaincs Nagate puis, AVANT DE SORTIR, parle à Nagate la Dame des Eaux et ensuite à Kwatalo pour valider La jetée des enfants perdus.",
       "momentId": "moment-route-step-0277"
@@ -11544,7 +11521,7 @@
       "displayRole": "objective",
       "title": "Le festival de la lanterne — avancer jusqu’au Founoroshi",
       "action": "AVANCER / STOP",
-      "instruction": "LANCE Le festival de la lanterne immédiatement après La jetée des enfants perdus et AVANCE jusqu’à devoir vaincre Founoroshi, puis STOP devant la Fabrique. Ce passage sera mutualisé avec La bénédiction de Viti + La voie du guerrier.",
+      "instruction": "LANCE Le festival de la lanterne immédiatement après La jetée des enfants perdus et AVANCE jusqu'à devoir vaincre Founoroshi, puis STOP devant la Fabrique.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-festival-de-la-lanterne.html"
@@ -11583,7 +11560,6 @@
       "displayRole": "detail",
       "title": "◆ Fabrique de foux d'artifice — VITI + LA VOIE + FESTIVAL",
       "prerequisites": "idole de Viti Roussie prête.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — active l'Idole de Viti Roussie avant le combat. Après le boss, parle à Founoroshi pour Le festival de la lanterne et récupère le Mortier enchanté avant de sortir.",
       "action": "FAIRE",
       "instruction": "Utilise l'Idole de Viti Roussie puis vaincs et capture Founoroshi pour l'Ocre avec La bénédiction de Viti + La voie du guerrier + Le festival de la lanterne actifs. AVANT DE SORTIR, parle à Founoroshi et récupère le Mortier enchanté. Ensuite retourne voir le Maître des clefs, valide Founoroshi et prends Chêne Mou.",
       "momentId": "moment-viti-2boss"
@@ -11597,7 +11573,7 @@
       "title": "Le festival de la lanterne",
       "prerequisites": "Mortier enchanté en inventaire.",
       "action": "TERMINER",
-      "instruction": "REPRENDS Le festival de la lanterne après le passage mutualisé Founoroshi, poursuis le choix de camp demandé puis TERMINE la quête.",
+      "instruction": "REPRENDS Le festival de la lanterne, poursuis le choix de camp demandé puis TERMINE la quête.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-festival-de-la-lanterne.html"
@@ -11728,7 +11704,7 @@
       "displayRole": "objective",
       "title": "Tour de passe-passe — jusqu'au Laboratoire du Tynril",
       "action": "AVANCER / STOP",
-      "instruction": "AVANCE Tour de passe-passe jusqu'au Laboratoire du Tynril puis STOP. La bénédiction de Viti doit déjà être active avec l'idole Végétale prête.",
+      "instruction": "AVANCE Tour de passe-passe jusqu'au Laboratoire du Tynril puis STOP.",
       "momentId": "moment-route-step-0464"
     },
     {
@@ -12416,7 +12392,7 @@
       "displayRole": "objective",
       "title": "La voie du guerrier — jusqu'au Minotot",
       "action": "REPRENDRE / STOP",
-      "instruction": "REPRENDS La voie du guerrier au checkpoint Minotot. Utilise la sauvegarde du Minotoror si elle est encore disponible puis STOP devant la Salle du Minotot ; le boss est fait sur la carte suivante.",
+      "instruction": "REPRENDS La voie du guerrier au Minotot. Utilise la sauvegarde du Minotoror si elle est encore disponible puis STOP devant la Salle du Minotot.",
       "momentId": "moment-voie-guerrier-minotot"
     },
     {
@@ -13030,7 +13006,6 @@
       "displayRole": "detail",
       "title": "◆ Galerie du Phossile — FOLUK + LA PELLE DE LA PHORRÉE",
       "prerequisites": "Idole de Foluk Dorée.",
-      "warning": "Passage unique pour les deux objectifs. Double-clique l'Idole de Foluk Dorée AVANT chaque tentative contre Phossile.",
       "action": "FAIRE",
       "instruction": "Dans la salle finale, utilise l'Idole de Foluk Dorée puis vaincs Phossile. À la sortie, poursuis La pelle de la phorrée auprès de Dyane.",
       "momentId": "moment-enutrosor-phorreurs"
@@ -13298,7 +13273,6 @@
       "type": "dungeon",
       "displayRole": "detail",
       "title": "◆ Tombe du Shogun Tofugawa — MAUDITE DISPARITION",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après le Shogun Tofugawa, parle-lui au sujet de la crypte du Dorigami avant de quitter la Tombe.",
       "action": "FAIRE",
       "instruction": "Vaincs le Shogun Tofugawa puis, AVANT DE SORTIR, parle-lui au sujet de la crypte où se trouvait le Dorigami pour mettre à jour Maudite disparition.",
       "momentId": "moment-route-step-0506"
@@ -13685,7 +13659,6 @@
       "displayRole": "detail",
       "title": "◆ Temple du Grand Ougah — ASSASSIN SUPRÊME",
       "prerequisites": "4 personnages minimum pour la salle 4.",
-      "warning": "⚠ AVANT DE SORTIR — parle à Dike Tarak après le Grand Ougah.",
       "action": "FAIRE",
       "instruction": "Vaincs le Grand Ougah, puis parle à Dike Tarak avant de sortir.",
       "momentId": "moment-assassin-ougah",
@@ -13967,7 +13940,7 @@
       "displayRole": "objective",
       "title": "Jusqu'à leur dernier soupir",
       "prerequisites": "ressources Grobe préparées ; Alchimiste 140.",
-      "warning": "Cette quête bloque la suite de Requiem et doit être terminée avant de reprendre le Dorigami.",
+      "warning": "TERMINE cette quête avant de reprendre Requiem pour un Yokai.",
       "action": "LANCER / TERMINER",
       "instruction": "À la suite du dialogue avec Koumiho en [39,-44], LANCE Jusqu'à leur dernier soupir. TERMINE toute la quête, puis reviens reprendre Requiem pour un Yokai.",
       "source": {
@@ -14345,7 +14318,7 @@
       "title": "La voie du guerrier — jusqu'au Bworker",
       "prerequisites": "Minotot vaincu.",
       "action": "REPRENDRE / STOP",
-      "instruction": "Auprès du Maître des clefs, prends l'objectif Bworker puis STOP devant la Grotte du Bworker. Le boss est exécuté uniquement sur la carte suivante.",
+      "instruction": "Auprès du Maître des clefs, prends l'objectif Bworker puis STOP devant la Grotte du Bworker.",
       "momentId": "moment-voie-guerrier-bworker"
     },
     {
@@ -14686,7 +14659,7 @@
       "title": "L'ascension de Qu'Tan — avancer jusqu'au checkpoint Missiz Frizz",
       "prerequisites": "Prévoir une team ; les accompagnants sans la quête peuvent avoir besoin de la clef du temple maudit.",
       "action": "AVANCER / STOP",
-      "instruction": "AVANCE la série jusqu'au checkpoint Missiz Frizz puis STOP. Ne considère pas L'ascension de Qu'Tan comme terminée à ce stade.",
+      "instruction": "AVANCE la série jusqu'à Missiz Frizz puis STOP.",
       "momentId": "moment-alignement-86-90",
       "location": {
         "x": -32,
@@ -14949,7 +14922,7 @@
       "displayRole": "objective",
       "title": "À glacer le sang — avancer jusqu'à Missiz Frizz",
       "action": "AVANCER / STOP",
-      "instruction": "AVANCE À glacer le sang jusqu'à Missiz Frizz puis STOP devant la Forgefroide. Garde la quête active jusqu'à ce que La dernière carte rejoigne ce checkpoint.",
+      "instruction": "AVANCE À glacer le sang jusqu'à Missiz Frizz puis STOP devant la Forgefroide.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/a-glacer-le-sang.html"
@@ -15213,7 +15186,6 @@
         "x": -63,
         "y": 29
       },
-      "launchInstruction": "Obtiens 1 Manuel Scolaire sur les monstres de Nimotopia, puis double-clique le Manuel Scolaire dans ton inventaire pour lancer la quête.",
       "longRunningGoal": {
         "goalId": "nimotopia-valse",
         "phase": "start"
@@ -16559,7 +16531,6 @@
       "displayRole": "detail",
       "title": "◆ Aquadôme de Merkator — MAÎTRE DES ILLUSIONS",
       "prerequisites": "prévoir 1 membre de chacun des trois ordres, Bonta ou Brâkmar.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après Merkator, interroge-le pour localiser le puits de pouvoir englouti avant de quitter l'Aquadôme.",
       "action": "FAIRE",
       "instruction": "Vaincs Merkator puis, AVANT DE SORTIR, interroge-le pour localiser le puits de pouvoir englouti et valider Apprentissage : Maître des Illusions.",
       "momentId": "moment-route-step-0808"
@@ -16689,7 +16660,6 @@
       "displayRole": "detail",
       "title": "◆ Antre du Kralamoure Géant — ULTIME ÉPREUVE",
       "prerequisites": "L'éternelle moisson à l'étape 19 ; pierre d'âme spéciale reçue ; ouverture de l'Antre organisée.",
-      "warning": "Équipe la Gargantuesque pierre d'âme parfaite AVANT le Kralamoure Géant : cette capture est requise pour terminer L'éternelle moisson.",
       "action": "FAIRE",
       "instruction": "Avant le boss, équipe la Gargantuesque pierre d'âme parfaite reçue pour L'éternelle moisson. Vaincs puis capture le Kralamoure Géant avec cette pierre spéciale.",
       "source": {
@@ -16771,7 +16741,6 @@
       "type": "dungeon",
       "displayRole": "detail",
       "title": "◆ Défi du Chaloeil — LE DRAGON BLANC",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — entre dans la salle secrète par la bouche du gros chat, clique la ronce qui retient le Dofus Ivoire et parle à Dardondakal.",
       "action": "FAIRE",
       "instruction": "Vaincs le Chaloeil. NE SORS PAS : entre dans la salle secrète par la bouche du gros chat, clique la ronce qui retient le Dofus Ivoire pour faire apparaître Dardondakal, puis parle-lui jusqu'à terminer Le dragon blanc.",
       "momentId": "moment-route-step-0816"
@@ -17192,7 +17161,6 @@
       "type": "dungeon",
       "displayRole": "detail",
       "title": "◆ Palais du Roi Nidas",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après Nidas, parle au Coffret précieux puis au Roi Nidas dans la salle de sortie avant de partir.",
       "action": "FAIRE",
       "instruction": "Fais le Palais du Roi Nidas avec Casse en Enutrosor + Un morceau de roi + Coiffeur de génie actifs. Après le boss, parle au Coffret précieux puis au Roi Nidas dans la salle de sortie avant de partir.",
       "momentId": "moment-route-step-0823",
@@ -17257,7 +17225,7 @@
       "displayRole": "objective",
       "title": "Prime de lèche-majesté",
       "action": "TERMINER",
-      "instruction": "Un morceau de roi terminé : TERMINE Prime de lèche-majesté avant de valider le jalon Enutrosor.",
+      "instruction": "Un morceau de roi terminé : TERMINE Prime de lèche-majesté.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/prime-de-leche-majeste.html"
@@ -17311,7 +17279,6 @@
       "type": "dungeon",
       "displayRole": "detail",
       "title": "◆ Chambre de Tal Kasha — NORDALIE",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — parle à Hem le Maudit dans la salle de sortie et épuise son dialogue sur le destin.",
       "action": "FAIRE",
       "instruction": "Vaincs Tal Kasha. Dans la salle de sortie, AVANT DE PARTIR, parle à Hem le Maudit et épuise son dialogue sur le destin ; puis poursuis Nordalie.",
       "momentId": "moment-nordalie-tal-kasha"
@@ -17532,7 +17499,6 @@
       "displayRole": "detail",
       "title": "◆ Pyramide d'Ombre — UNE OMBRE AU TABLEAU",
       "prerequisites": "bénédiction de Rimanda présente ; Pierre d'âme élémentale disponible.",
-      "warning": "⚠ SALLE DE SORTIE — après le donjon, équipe la Pierre d'âme élémentale AVANT de parler à Nabrisa. Le dialogue lance le combat contre l'Âme d'Ombre, obligatoire pour Une ombre au tableau.",
       "action": "FAIRE",
       "instruction": "Vaincs Ombre avec la bénédiction de Rimanda active. Dans la salle de sortie, NE PARS PAS : équipe la Pierre d'âme élémentale puis parle à Nabrisa pour lancer et gagner le combat contre l'Âme d'Ombre. Poursuis ensuite les dialogues de la quête.",
       "momentId": "moment-route-step-0903"
@@ -17598,7 +17564,7 @@
       "prerequisites": "Nectar céleste obtenu sur Glourséleste.",
       "warning": "La quête exige maintenant les sangs des quatre dragons ; elle ne peut pas encore être terminée.",
       "action": "REPRENDRE / AVANCER",
-      "instruction": "REPRENDS Un remède draconien après Glourséleste et AVANCE jusqu'au checkpoint des quatre sangs. Ne cherche pas à terminer la quête ici.",
+      "instruction": "REPRENDS Un remède draconien après Glourséleste et AVANCE jusqu'aux quatre sangs, puis STOP.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/un-remede-draconien.html"
@@ -17694,7 +17660,6 @@
       "displayRole": "objective",
       "title": "Le dragon des flammes",
       "prerequisites": "1 Ticket Foire du Trool.",
-      "warning": "La quête passe par la première salle de l'Obsidiantre mais ne demande pas de refaire le boss.",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
@@ -18050,7 +18015,6 @@
       "displayRole": "transition",
       "title": "Mississitudes",
       "prerequisites": "information de Lisette récupérée.",
-      "warning": "Le Petit Chienchien Noir est requis pour l'affrontement des Miss.",
       "action": "TERMINER",
       "instruction": "TERMINE l'affrontement des Miss avec le Petit Chienchien Noir.",
       "source": {
@@ -18236,7 +18200,6 @@
       "type": "dungeon",
       "displayRole": "detail",
       "title": "◆ Manoir des Katrepat — LE MORT DANS L’ÂME",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après Anerice, parle à Anerice la Shushess pour lui présenter Funestaro, puis parle à Funestaro avant de partir.",
       "action": "FAIRE",
       "instruction": "Vaincs Anerice. Dans la salle de sortie, AVANT DE PARTIR, parle à Anerice la Shushess pour lui présenter Funestaro puis parle à Funestaro. Ensuite seulement retourne auprès d'Atroskulda pour terminer Le mort dans l'âme.",
       "momentId": "moment-nordalie-katrepat"
@@ -18648,7 +18611,6 @@
       "type": "dungeon",
       "displayRole": "detail",
       "title": "◆ Temple de Koutoulou — LE CREUSET DE MÉRIANA",
-      "warning": "La Larve de Koutoulou donne automatiquement l’Huile immiscible et indicible requise par Le creuset de Mériana.",
       "action": "FAIRE",
       "instruction": "Vaincs la Larve de Koutoulou. L’Huile immiscible et indicible est obtenue automatiquement ; aucune interaction post-boss supplémentaire n’est nécessaire pour Le creuset de Mériana.",
       "momentId": "moment-route-step-0869"
@@ -18722,7 +18684,6 @@
       "displayRole": "detail",
       "title": "◆ Brasserie du Roi Dazak — LE DRAGON NOIR",
       "prerequisites": "Le dragon noir + De Brikke et de Brokke au Roi Dazak.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après Dazak, parle-lui avant de quitter la zone.",
       "action": "FAIRE",
       "instruction": "Après Dazak, parle-lui avant de quitter la zone.",
       "momentId": "moment-ebene-dazak",
@@ -18788,7 +18749,6 @@
       "type": "dungeon",
       "displayRole": "detail",
       "title": "◆ Salons privés de Klime — LE DRAGON NOIR",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — reparle à Klime pour faire fabriquer le Sac en peau de crocodaille.",
       "action": "FAIRE",
       "instruction": "Après Klime, parle-lui pour faire fabriquer le Sac en peau de crocodaille.",
       "momentId": "moment-route-step-0877"
@@ -18910,7 +18870,6 @@
       "displayRole": "objective",
       "title": "◆ Tour de Solar — UN NOUVEL HÉRITIER",
       "prerequisites": "Nécronyx disponible.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après Solar, monte les escaliers, clique sur la sphère puis parle au Dieu Sram avant de quitter la Tour.",
       "action": "FAIRE",
       "instruction": "Vaincs Solar puis, AVANT DE SORTIR, monte les escaliers, clique sur la sphère et parle au Dieu Sram pour poursuivre Un nouvel héritier.",
       "momentId": "moment-route-step-0884"
@@ -19511,7 +19470,6 @@
       "type": "dungeon",
       "displayRole": "detail",
       "title": "◆ Trône de Sang — GUERRE",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après Guerre, reparle-lui avant de quitter le Trône de Sang.",
       "action": "FAIRE",
       "instruction": "Vaincs Guerre au Trône de Sang puis, AVANT DE SORTIR, reparle-lui jusqu'à terminer Le jour le plus long et débloquer Au-delà de la gloire.",
       "momentId": "moment-cavalier-guerre"
@@ -19804,7 +19762,6 @@
       "displayRole": "detail",
       "title": "◆ Canopée du Kimbo — MÉRYDIQUE",
       "prerequisites": "Un pouvoir mérydique au Kimbo + idole Mérydique.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après le Kimbo, parle au Bourgeon parasite et utilise l'idole Mérydique pour le détruire, puis parle au Kimbo avant de partir.",
       "action": "FAIRE",
       "instruction": "Vaincs le Kimbo avec l'altération de l'idole Mérydique. AVANT DE SORTIR, parle au Bourgeon parasite, utilise l'idole pour le détruire puis parle au Kimbo.",
       "momentId": "moment-route-step-0736"
@@ -19817,7 +19774,6 @@
       "displayRole": "objective",
       "title": "◆ Clairière du Chêne Mou — MÉRYDIQUE",
       "prerequisites": "Un pouvoir mérydique après Kimbo + idole Mérydique.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après le Chêne Mou, parle au Bourgeon parasite et utilise l'idole Mérydique pour le détruire, puis parle au Chêne Mou avant de partir.",
       "action": "FAIRE",
       "instruction": "Vaincs le Chêne Mou avec l'altération de l'idole Mérydique. AVANT DE SORTIR, parle au Bourgeon parasite, utilise l'idole pour le détruire puis parle au Chêne Mou.",
       "momentId": "moment-route-step-0736"
@@ -19830,7 +19786,6 @@
       "displayRole": "objective",
       "title": "◆ Temple du Grand Ougah",
       "prerequisites": "Un pouvoir mérydique au Grand Ougah + idole Mérydique.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après le Grand Ougah, parle au Bourgeon parasite et utilise l'idole Mérydique pour le détruire. Le donjon exige aussi au minimum 4 personnages pour franchir la salle 4.",
       "action": "FAIRE",
       "instruction": "Vaincs le Grand Ougah avec l'altération de l'idole Mérydique. AVANT DE SORTIR, parle au Bourgeon parasite et utilise l'idole pour le détruire. Prévois au moins 4 personnages pour la salle 4.",
       "momentId": "moment-route-step-0736"
@@ -19882,7 +19837,6 @@
       "type": "dungeon",
       "displayRole": "detail",
       "title": "◆ Arbre de mort — CORRUPTION",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après Corruption, double-clique le Pouvoir de Kernuros dans ton inventaire, puis parle à Corruption et aux différentes apparitions de Kernuros avant de quitter.",
       "action": "FAIRE",
       "instruction": "Vaincs Corruption. AVANT DE SORTIR, double-clique le Pouvoir de Kernuros dans ton inventaire, puis parle à Corruption, à Kernuros, au grand Kernuros et de nouveau à Corruption jusqu'à terminer Mort et renouveau.",
       "momentId": "moment-route-step-0742"
@@ -19982,7 +19936,7 @@
       "title": "L'avis de la Mort — jusqu'au Bouftou Royal",
       "prerequisites": "Feu dévoreur remis au Maître Corbac ; progression via Mériana/Chatan/Rathrosk.",
       "action": "REPRENDRE / AVANCER / STOP",
-      "instruction": "REPRENDS L'avis de la Mort et AVANCE jusqu'au checkpoint Bouftou Royal, puis STOP devant la Cour. Le donjon est exécuté sur la carte suivante.",
+      "instruction": "REPRENDS L'avis de la Mort et AVANCE jusqu'au Bouftou Royal, puis STOP devant la Cour.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/lavis-de-la-mort.html"
@@ -19996,7 +19950,6 @@
       "type": "dungeon",
       "displayRole": "objective",
       "title": "◆ Cour du Bouftou Royal — L'AVIS DE LA MORT",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après le Bouftou Royal, clique sur le sac de laine entouré de chachas noirs.",
       "action": "FAIRE",
       "instruction": "Vaincs le Bouftou Royal puis, AVANT DE SORTIR, clique sur le sac de laine entouré de chachas noirs dans la dernière salle pour poursuivre L'avis de la Mort.",
       "momentId": "moment-prise-conscience-ouverture"
@@ -20406,7 +20359,6 @@
       "type": "dungeon",
       "displayRole": "detail",
       "title": "◆ Bataille de l'Aurore Pourpre — LA DANSE DE LA DISSONANCE",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après l’Éternel Conflit, parle au Cauchemar des Ravageurs. Cette interaction est obligatoire pour La danse de la dissonance.",
       "action": "FAIRE",
       "instruction": "Vaincs l’Éternel Conflit avec La danse de la dissonance active. AVANT DE SORTIR, parle au Cauchemar des Ravageurs et poursuis le dialogue jusqu’à la mise à jour de la quête.",
       "momentId": "moment-reminiscence"
@@ -20485,7 +20437,7 @@
       "title": "Un héritage tourmenté — jusqu'à la rune d'Harmonie",
       "prerequisites": "Prise de conscience + Descendre aux cendres ; Mort et renouveau bloque une étape.",
       "action": "LANCER / AVANCER / STOP",
-      "instruction": "En [21,-33], LANCE Un héritage tourmenté et AVANCE jusqu'au checkpoint rune d'Harmonie puis STOP pour lancer Les totems de Maïmane.",
+      "instruction": "En [21,-33], LANCE Un héritage tourmenté et AVANCE jusqu'à la rune d'Harmonie puis STOP pour lancer Les totems de Maïmane.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/un-heritage-tourmente.html"
@@ -20509,7 +20461,7 @@
       "title": "Les totems de Maïmane",
       "warning": "Sur une progression vierge, quatre repassages sont inévitables. Garde Vortex et Comte pour les faire avec S'armer contre le destin.",
       "action": "LANCER / FIL ROUGE",
-      "instruction": "LANCE les Totems puis collecte les six émotions ci-dessous. Garde la quête active : S'armer contre le destin rejoindra ce groupe au Vortex.",
+      "instruction": "LANCE les Totems puis collecte les six émotions indiquées.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-totems-de-maimane.html"
@@ -20612,7 +20564,6 @@
       "type": "dungeon",
       "displayRole": "detail",
       "title": "Œil de Vortex — TOTEM TRISTESSE",
-      "warning": "Le Totem de la tristesse et l’Éclat de destin brisé tombent automatiquement sur le Vortex.",
       "action": "FAIRE",
       "instruction": "Vaincs le Vortex avec S’armer contre le destin + Les totems de Maïmane actifs. Récupère automatiquement l’Éclat de destin brisé et le Totem de la tristesse, puis poursuis.",
       "momentId": "moment-vortex-convergence",
@@ -20644,9 +20595,8 @@
       "type": "quest",
       "displayRole": "objective",
       "title": "Le givre des révélations — jusqu'au Comte Harebourg",
-      "warning": "STOP devant le Comte ; S'armer doit aussi être au Comte.",
       "action": "LANCER / AVANCER / STOP",
-      "instruction": "En [-59,-74], LANCE Le givre des révélations et AVANCE jusqu'au Comte Harebourg puis STOP. S'armer doit déjà être au même checkpoint.",
+      "instruction": "En [-59,-74], LANCE Le givre des révélations et AVANCE jusqu'au Comte Harebourg puis STOP.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-givre-des-revelations.html"
@@ -20686,8 +20636,7 @@
       "blockId": "block-16",
       "type": "dungeon",
       "displayRole": "objective",
-      "title": "Comte Harebourg — PASSAGE UNIQUE + TOTEM SURPRISE",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après le Comte : parle-lui et manipule la montre pour Le givre des révélations, clique le socle du Dofus des Glaces pour prélever le liquide de la Clepsydre, puis termine les dialogues Jiva/Djaul. S’armer contre le destin exige aussi le dialogue avec Djaul. Le Totem de la surprise tombe automatiquement.",
+      "title": "Comte Harebourg + Totem de la surprise",
       "action": "FAIRE",
       "instruction": "Vaincs le Comte avec Le givre des révélations + S’armer contre le destin + Les totems de Maïmane actifs. AVANT DE SORTIR : parle au Comte, donne puis récupère la montre en marche, clique le socle du Dofus des Glaces pour obtenir le Liquide de la Clepsydre, poursuis les dialogues requis avec le Comte puis Jiva/Djaul. Le Totem de la surprise et l’Éclat de destin brisé sont obtenus pendant ce passage.",
       "momentId": "moment-comte-convergence"
@@ -21010,7 +20959,6 @@
       "type": "dungeon",
       "displayRole": "objective",
       "title": "◆ Palais du Roi Nidas — SIGIL DE SUMENS",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après Nidas, parle à Sumens dans la salle de fin pour obtenir son sigil.",
       "action": "FAIRE",
       "instruction": "Vaincs le Roi Nidas. AVANT DE SORTIR, parle à Sumens dans la salle de fin et termine son dialogue pour obtenir le Sigil de Sumens.",
       "momentId": "moment-sigils-donjons"
@@ -21023,7 +20971,6 @@
       "displayRole": "objective",
       "title": "◆ Bataille de l'Aurore Pourpre — SIGIL DE RAVAL",
       "prerequisites": "500 Pépites en inventaire.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — Raval se rencontre salle 4 puis après le boss : reparle-lui et remets 500 Pépites avant de partir.",
       "action": "FAIRE",
       "instruction": "Parle à Raval salle 4, termine le donjon, reparle-lui après le boss et remets 500 Pépites pour obtenir son sigil.",
       "momentId": "moment-sigils-donjons"
@@ -21036,7 +20983,6 @@
       "displayType": "OPTI ALIGNEMENT",
       "displayRole": "transition",
       "title": "Préparer le sigil de Djaul — passage Brâkmar",
-      "warning": "Passe Brâkmarien puis récupère les Âmes de Possédé requises avant Solar.",
       "action": "REPRENDRE / AVANCER",
       "instruction": "→ Passe Brâkmarien si ce n'est pas déjà fait, farm les Âmes de Possédé requises pour Djaul puis avance jusqu'à devoir rejoindre Djaul auprès de Solar.",
       "momentId": "moment-sigils-donjons"
@@ -21175,7 +21121,7 @@
       "prerequisites": "• Dom de Pin\n• 6 Primordiaux en inventaire\n• Clef Chambre des Maléfices",
       "warning": "Prévoir les Dofus requis par les dialogues/rituels de Flovoraison.",
       "action": "VERROU DUR / PRÉPARER",
-      "instruction": "STOP si Qui nous protège n'est pas encore au checkpoint Elya Wood ou si Dom de Pin / la clef manquent. Flovoraison ne commence qu'après validation de ce verrou.",
+      "instruction": "STOP si Qui nous protège n'est pas encore à Elya Wood ou si Dom de Pin / la clef manquent.",
       "hardLock": {
         "message": "STOP si Qui nous protège n'est pas encore au checkpoint Elya Wood ou si Dom de Pin / la clef manquent. Flovoraison ne commence qu'après validation de ce verrou."
       }
@@ -21207,7 +21153,6 @@
       "type": "dungeon",
       "displayRole": "detail",
       "title": "◆ Chambre des Maléfices — FLOVORAISON",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après Belladone, équipe le Dofus Ébène et effectue le dialogue requis avant de quitter la Chambre des Maléfices.",
       "action": "FAIRE",
       "instruction": "Vaincs Belladone ; avant de sortir, équipe le Dofus Ébène et effectue le dialogue requis.",
       "momentId": "moment-sylvestre-final"
@@ -21252,9 +21197,8 @@
       "type": "resume",
       "displayRole": "detail",
       "title": "Parangon de puissance",
-      "warning": "Cette étape clôt uniquement le suivi du Companion. Si le Parangon n'est pas tombé, garde La mère des Dragoeufs active et ne poursuis pas la branche Vulbis ici.",
       "action": "FIN DU SUIVI",
-      "instruction": "Clôture le suivi Parangon dans Companion. Aucun farm supplémentaire ni aucune suite Vulbis ne sont ajoutés ici.",
+      "instruction": "Si le Parangon n'est pas tombé, garde La mère des Dragoeufs active et STOP ici.",
       "momentId": "moment-sylvestre-final",
       "longRunningGoal": {
         "goalId": "parangon-puissance",
