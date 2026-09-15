@@ -1,26 +1,16 @@
-export interface ParsedPreparationResource {
-  kind: 'resource';
-  quantity: number;
-  name: string;
-}
-
-export interface ParsedPreparationNote {
-  kind: 'note';
-  text: string;
-}
-
-export type ParsedPreparationItem = ParsedPreparationResource | ParsedPreparationNote;
+import type { PreparationItem, StructuredPreparationItem } from './types';
 
 const nonResourcePattern = /\b(kamas?|succ[eè]s|niveau|minimum|au choix|de chaque|emplacements?|points? de succ[eè]s|disponibles?|inventaire|sort)\b|\bOU\b|pierres? d['’]âme adaptées?|artefacts? pandawushu\s*:/i;
 const annotatedRequirementPattern = /[—+():/]/;
 
 /**
- * preparationItems reste la source de vérité de la route.
- * Ce parseur sépare uniquement la quantité du nom pour l'UI et le presse-papier.
- * Il ne singularise et ne réécrit jamais un nom de ressource : le texte de la route
- * doit déjà correspondre au nom exact en jeu.
+ * Adaptateur temporaire pendant la migration de route.json.
+ * Les entrées déjà structurées sont rendues telles quelles.
+ * Les anciennes chaînes ne sont jamais singularisées ni réécrites.
  */
-export function parsePreparationItem(item: string): ParsedPreparationItem {
+export function normalizePreparationItem(item: PreparationItem): StructuredPreparationItem {
+  if (typeof item !== 'string') return item;
+
   const trimmed = item.trim();
   const match = trimmed.match(/^([\d\s]+)\s*(?:[×x]\s*)?(.+?)\s*$/i);
 
