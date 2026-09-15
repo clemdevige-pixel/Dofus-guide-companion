@@ -1,14 +1,21 @@
 # DATA MODEL — Dofus Guide Companion
 
-## 1. Objectif
+## 1. Source de vérité
 
-Définir un format de route indépendant de l'UI. Le Google Sheet reste la source éditoriale ; l'application consomme uniquement des champs structurés exportés vers `data/route.json`.
+Le Google Sheet `ROUTE` est la source éditoriale. `data/route.json` est un artefact généré et validé.
 
-La route optimisée n'est pas une simple liste « une quête = une ligne ». Une ou plusieurs lignes techniques peuvent appartenir à un même **moment joueur** affiché comme une seule carte.
+Flux officiel :
 
-Voir aussi :
-- `docs/ROUTE_OPTIMIZATION.md` : doctrine métier ;
-- `docs/ROUTE_OPTIMIZATION_WORKFLOW.md` : procédure de passe/audit/certification.
+```text
+Google Sheet ROUTE
+→ scripts/export-route.ts
+→ validation stricte
+→ data/route.json
+→ loader / selectors
+→ UI
+```
+
+Aucune logique métier spécifique à une quête ne doit être reconstruite dans React.
 
 ## 2. Route
 
@@ -22,8 +29,6 @@ interface RouteDocument {
 }
 ```
 
-## 3. Bloc
-
 ```ts
 interface RouteBlock {
   id: string;
@@ -33,7 +38,7 @@ interface RouteBlock {
 }
 ```
 
-## 4. Étape
+## 3. Étape
 
 ```ts
 interface RouteCoordinate {
@@ -41,15 +46,15 @@ interface RouteCoordinate {
   y: number;
 }
 
+type StepDisplayRole = 'objective' | 'transition' | 'detail';
+type ParallelPhase = 'start' | 'progress' | 'finish';
+
 interface GuideItem {
   action: 'take' | 'advance' | 'finish' | 'do';
   label: string;
   location?: RouteCoordinate;
   note?: string;
 }
-
-type StepDisplayRole = 'objective' | 'transition' | 'detail';
-type ParallelPhase = 'start' | 'progress' | 'finish';
 
 interface RouteStep {
   id: string;
@@ -60,13 +65,10 @@ interface RouteStep {
   displayRole?: StepDisplayRole;
 
   title: string;
+  dofusSeries?: string;
 
-  /** Conditions / ressources à posséder avant d'exécuter l'étape. */
   prerequisites?: string;
-
-  /** Information importante à voir avant l'action. Source = colonne À SAVOIR. */
   warning?: string;
-
   action?: string;
   instruction?: string;
 
@@ -80,12 +82,12 @@ interface RouteStep {
     parallelId: string;
     phase: ParallelPhase;
   };
+
   location?: RouteCoordinate;
   destination?: RouteCoordinate;
   launchInstruction?: string;
-
   guideItems?: GuideItem[];
-  preparationItems?: string[];
+  preparationItems?: PreparationItem[];
 
   longRunningGoal?: {
     goalId: string;
@@ -99,122 +101,40 @@ interface RouteStep {
 }
 ```
 
-`displayType` conserve un libellé éditorial utile (`TOUR`, `TURQUOISE`, `ALIGN.`...) sans multiplier les types comportementaux.
+## 4. Identités et regroupements
 
-`displayRole` ne s'applique qu'aux lignes appartenant à un `momentId` explicite. Il indique comment la ligne participe à la carte :
-- `objective` : sous-objectif significatif avec checkbox ;
-- `transition` : action intermédiaire visible sans checkbox ;
-- `detail` : information technique attachée à l'objectif précédent sans checkbox.
+### `STEP_ID`
 
-### 4.1 PRÉREQUIS / RESSOURCES → `prerequisites`
+Identité métier stable d’une étape technique. Il ne dépend jamais du numéro de ligne Sheet.
 
-Pour une étape non-PRÉPA, la colonne Sheet `PRÉREQUIS / RESSOURCES` est exportée vers `RouteStep.prerequisites`.
+Conserver un ID uniquement si l’événement métier reste le même.
 
-Ce champ répond uniquement à : **« qu'est-ce qui doit déjà être vrai / disponible avant de commencer cette carte ? »**
+### `MOMENT_ID`
 
-Il peut contenir :
-- quêtes/succès réellement terminés ;
-- métier réellement requis ;
-- ressources à avoir en inventaire ;
-- état/objet nécessaire ;
-- condition réelle de lancement.
+Frontière autoritaire d’une carte multi-step.
 
-Il ne doit pas contenir :
-- le déroulé de la quête ;
-- une action à faire pendant le donjon ;
-- un commentaire d'audit ;
-- une référence à « la ligne suivante », « le bloc X », « la route » ;
-- un simple niveau conseillé présenté comme verrou factuel.
+Règles :
+- lignes contiguës ;
+- même bloc ;
+- un moment fermé ne réapparaît pas ;
+- une ligne sans `MOMENT_ID` reste une carte autonome ;
+- chaque ligne d’un moment possède un `DISPLAY_ROLE` ;
+- le premier membre est `OBJECTIVE` ;
+- maximum 5 `OBJECTIVE` par carte.
 
-Pour une ligne `PRÉPA`, la même colonne alimente `preparationItems` au lieu de `prerequisites`.
+L’UI ne déduit jamais un moment depuis le titre, l’action ou le type.
 
-### 4.2 À SAVOIR → `warning`
+### `DISPLAY_ROLE`
 
-La colonne Sheet `À SAVOIR` est exportée vers `RouteStep.warning`.
+- `OBJECTIVE` → checkbox / sous-objectif significatif ;
+- `TRANSITION` → action intermédiaire sans checkbox ;
+- `DETAIL` → information rattachée au dernier objectif.
 
-Le champ sert au **contexte ou avertissement utile avant l'action**, pas à répéter `instruction` ou `guideItems`.
+Les `action` restent visibles sur les vrais `OBJECTIVE`. Elles ne doivent pas être réintroduites sur `TRANSITION` / `DETAIL` comme doublon visuel.
 
-Cas typiques :
-- ordre obligatoire ;
-- piège irréversible ;
-- timer ;
-- objet à conserver ;
-- condition particulière du combat ;
-- interaction critique en fin de donjon.
+## 5. Groupes parallèles et fils rouges
 
-### 4.3 Convention `⚠ AVANT DE SORTIR DU DONJON`
-
-Lorsqu'une action oubliée après le boss / dans la salle de sortie peut obliger à refaire le donjon ou empêcher la progression, `warning` commence par :
-
-```text
-⚠ AVANT DE SORTIR DU DONJON — <action critique>
-```
-
-Exemples de bonnes alertes :
-- parler au PNJ de sortie obligatoire ;
-- cliquer un élément interactif post-boss ;
-- récupérer un objet non automatique ;
-- effectuer un dialogue avant qu'un autre PNJ ne téléporte hors du donjon.
-
-Ne pas utiliser cette convention pour :
-- drop automatique du boss ;
-- tâche appartenant uniquement à une branche hors scope ;
-- idole/objet à activer **avant** le combat ;
-- conseil facultatif.
-
-L'UI peut styliser ce préfixe comme une alerte forte. Elle ne doit cependant pas reconstruire une logique métier depuis ce texte : `warning` reste la donnée autoritaire.
-
-## 5. MOMENT_ID — frontière de carte autoritaire
-
-`momentId` représente un **moment joueur indivisible**. Plusieurs `RouteStep` techniques partageant le même `momentId` contigu sont rendus comme **une seule carte**.
-
-Cas typiques :
-- terminer une quête puis lancer immédiatement sa suite auprès du même PNJ ;
-- donjon → dialogue de sortie → rendu/reprise immédiate ;
-- passage mutualisé où plusieurs lignes techniques forment un seul déplacement logique ;
-- chaîne `TERMINER + LANCER` qui ne doit jamais être éclatée en plusieurs cartes.
-
-Règles strictes :
-- un `momentId` ne traverse pas deux blocs ;
-- toutes ses lignes sont contiguës ;
-- une fois fermé, le même `momentId` ne réapparaît pas plus loin ;
-- chaque ligne possédant un `momentId` possède aussi un `displayRole` ;
-- le premier membre d'un `momentId` est toujours `objective` ;
-- une carte contient au maximum **5 lignes `OBJECTIVE`** ; `TRANSITION` et `DETAIL` ne comptent pas dans ce plafond ;
-- l'UI ne déduit jamais un moment depuis les titres, types ou verbes d'action ;
-- une ligne sans `momentId` est toujours une carte autonome.
-
-`getStepGroups()` applique uniquement ce contrat. Il n'existe plus de regroupement automatique, de limite implicite `MAX_SEQUENCE_STEPS` ni de fallback heuristique.
-
-### 5.1 DISPLAY_ROLE — structure interne d'une carte
-
-`DISPLAY_ROLE` complète `MOMENT_ID` :
-- `MOMENT_ID` répond à **« quelles lignes forment la même carte ? »** ;
-- `DISPLAY_ROLE` répond à **« cette ligne crée-t-elle une checkbox ou complète-t-elle un objectif ? »**.
-
-Valeurs Sheet autorisées :
-- `OBJECTIVE` → `objective` ;
-- `TRANSITION` → `transition` ;
-- `DETAIL` → `detail`.
-
-Un `DISPLAY_ROLE` sans `MOMENT_ID` est invalide.
-Un `MOMENT_ID` sans `DISPLAY_ROLE` est invalide.
-Le premier membre d'un moment doit être `OBJECTIVE`.
-
-Pour l'affichage :
-- `OBJECTIVE` définit toujours le titre de sa checkbox, même lorsqu'il s'agit d'un donjon ;
-- `TRANSITION` et `DETAIL` se rattachent au dernier objectif ;
-- une `TRANSITION` sans `instruction` reste visible grâce à un fallback compact construit uniquement depuis ses champs structurés `action + title` ;
-- une instruction explicite reste prioritaire sur ce fallback.
-
-### 5.2 PARALLEL_ID / PARALLEL_PHASE — quêtes à avancer ensemble
-
-`parallelGroup` représente une **salve de quêtes qui doit rester active et progresser conjointement**, éventuellement sur plusieurs cartes.
-
-Il ne remplace pas `MOMENT_ID` :
-- `MOMENT_ID` = composition d'une carte ;
-- `PARALLEL_ID` = continuité d'un groupe de quêtes entre plusieurs cartes ;
-- `PARALLEL_PHASE` = lifecycle du groupe.
+### `PARALLEL_ID / PARALLEL_PHASE`
 
 Lifecycle :
 
@@ -222,37 +142,68 @@ Lifecycle :
 start → progress* → finish
 ```
 
-Règles strictes :
-- `PARALLEL_ID` et `PARALLEL_PHASE` sont toujours définis ensemble ;
-- une phase `start` ouvre exactement une fois le groupe ;
-- `progress` n'est valide que pour un groupe déjà ouvert ;
-- `finish` ferme le groupe et n'est valide qu'une fois ;
-- aucun groupe parallèle ne peut rester ouvert en fin de route ;
-- on ne crée un groupe que si plusieurs quêtes gagnent réellement à être gardées actives ensemble : mêmes monstres, mêmes drops, même donjon, même checkpoint ou même déplacement coûteux ;
-- une simple proximité éditoriale ou une capture Ocre seule ne suffit pas.
+Ils représentent des quêtes réellement gardées actives ensemble au-delà d’une seule carte.
 
-Le groupe peut rester **actif en donnée** pendant plusieurs cartes sans rapport direct. En revanche, son rappel UI est **contextuel** :
-- il est visible sur la carte de `start` ;
-- il réapparaît sur une carte `progress` / checkpoint appartenant au groupe ;
-- il n'est pas affiché sur les cartes intermédiaires sans rapport ;
-- il disparaît après `finish` ;
-- revenir en arrière dans le guide ne doit jamais faire apparaître un rappel futur sur une ancienne carte.
+Le rappel UI n’apparaît que sur une carte appartenant au groupe, jamais sur une carte intermédiaire sans rapport.
 
-Le texte joueur peut annoncer `QUÊTES À AVANCER ENSEMBLE`, mais le texte n'est jamais la source de vérité : seul `parallelGroup` pilote le lifecycle ; la position courante pilote la visibilité du rappel.
+### `GOAL_ID / GOAL_PHASE`
 
-## 6. Position de lancement vs destination
+Lifecycle des fils rouges :
 
-`location` représente uniquement la position où une ou plusieurs quêtes sont lancées (`POSITION` dans le Sheet).
+```text
+start → progress* → finish
+```
 
-`destination` représente le point vers lequel le joueur doit se rendre pour exécuter le moment courant (`DESTINATION`).
+Un hard lock peut fermer un goal lorsque le contrat de route le prévoit.
 
-Quand une quête n'a pas de position de lancement unique correcte, `launchInstruction` décrit explicitement comment la lancer.
+## 6. Prérequis, warnings et préparation
 
-Interdit : détourner `POSITION` pour obtenir un bouton `/travel` vers un farm, un rendu ou un donjon.
+### `prerequisites`
 
-## 7. Roadbook structuré : GUIDE_ITEMS
+Donnée éditoriale de cohérence : ce qui doit déjà être vrai ou disponible avant l’étape.
 
-Les moments mutualisés peuvent exposer `guideItems` pour répondre directement à « quoi faire maintenant, et où ? ».
+Elle est conservée pour audit/validation mais **n’est pas rendue dans les cartes joueur**.
+
+Les besoins actionnables doivent passer par :
+- une carte `PRÉPA` ;
+- `warning` si critique ;
+- `instruction` / champs structurés si nécessaire.
+
+### `warning`
+
+Information réellement utile avant l’action :
+- ordre obligatoire ;
+- objet à conserver ;
+- timer ;
+- condition particulière ;
+- interaction critique de sortie.
+
+Les commentaires de routing, d’audit ou d’historique n’ont rien à faire dans `warning`.
+
+Convention forte :
+
+```text
+⚠ AVANT DE SORTIR DU DONJON — <action critique>
+```
+
+uniquement lorsqu’un oubli peut imposer un nouveau passage ou bloquer la progression.
+
+### `preparationItems`
+
+Checklist structurée des ressources/conditions réellement préparables avant consommation.
+
+Ne pas y déplacer un objet obtenu naturellement pendant la quête.
+
+## 7. Lancement et déplacement
+
+- `location` = position de lancement/prise ;
+- `launchInstruction` = méthode de lancement lorsqu’il n’existe pas de coordonnée unique ;
+- `destination` = prochain lieu utile ;
+- `LANCEMENT_REQUIS=TRUE` doit accompagner une vraie prise.
+
+Ne jamais utiliser `POSITION` comme simple destination.
+
+## 8. `GUIDE_ITEMS`
 
 Format Sheet :
 
@@ -260,30 +211,67 @@ Format Sheet :
 ACTION :: LIBELLÉ :: [x,y] :: NOTE OPTIONNELLE
 ```
 
-Actions autorisées :
-- `PRENDRE` → `take` ;
-- `AVANCER` → `advance` ;
-- `TERMINER` → `finish` ;
-- `FAIRE` → `do`.
+Actions autorisées : `PRENDRE`, `AVANCER`, `TERMINER`, `FAIRE`.
 
-`GUIDE_ITEMS` sert aux actions courtes. Les explications longues, STOP, ordre obligatoire et cas particuliers restent dans `instruction` ou `warning` selon leur nature.
+`GUIDE_ITEMS` reste une donnée structurée utile pour les actions courtes et les cartes simples qui en ont besoin.
 
-`GUIDE_ITEMS` doit être rendu aussi bien sur une carte simple que dans un `MOMENT_ID` mutualisé.
+Décision UX V1 : **ne pas afficher automatiquement `GUIDE_ITEMS` dans les séquences `MOMENT_ID` uniquement pour recopier le déroulé fin déjà disponible sur DPLN**.
 
-## 8. Identité stable dans le Sheet
+Dans une séquence, conserver en priorité :
+- objectif ;
+- action structurante ;
+- transition indispensable ;
+- warning/STOP ;
+- position utile ;
+- message de hard lock.
 
-Colonnes éditoriales/runtime :
-- `TYPE` ;
-- `ÉTAPE` ;
-- `PRÉREQUIS / RESSOURCES` ;
-- `À SAVOIR` ;
-- `SOURCE` ;
-- `NOTE` ;
-- `LANCEMENT?` ;
-- `ACTION` ;
-- `SUITE / STOP`.
+DPLN reste la source du détail fin d’exécution d’une quête.
 
-Colonnes techniques de `ROUTE` :
+## 9. Titres éditoriaux vs titres joueur
+
+`RouteStep.title` conserve le titre éditorial complet dans la donnée brute.
+
+Après validation, `src/route/loader.ts` applique `getPlayerFacingStepTitle()` depuis `src/route/displayTitle.ts` pour produire un titre joueur plus court.
+
+Exemples :
+
+```text
+Dépôt de ravitaillement — avancer jusqu'au verrou ...
+→ Dépôt de ravitaillement
+
+◆ Serre du Royalmouth — PASSAGE #3
+→ Serre du Royalmouth
+```
+
+Une carte composite significative peut conserver son suffixe.
+
+Important : les lints éditoriaux / anti-doublons doivent auditer **la donnée brute avant normalisation UI**.
+
+## 10. Marqueurs visuels
+
+`dofusSeries?: string` indique qu’une étape appartient directement à une série d’obtention de Dofus.
+
+Source Sheet : colonne `DOFUS_SERIES`.
+
+Rendu :
+- `type === 'alignment'` → bouclier ;
+- `dofusSeries` présent → œuf/Dofus ;
+- `type === 'dungeon'` → château ;
+- maximum 2 marqueurs visibles devant un titre.
+
+Ne pas créer de métadonnées redondantes pour Alignement ou Donjon : leur `type` existe déjà.
+
+## 11. Hard locks
+
+Un `VERROU DUR` représente un blocage réel de progression, pas une recommandation.
+
+Le validateur rejette un hard lock dont le titre commence par `NIVEAU <nombre>`.
+
+Dans une séquence, le message métier de `hardLock.message` doit rester visible.
+
+## 12. Colonnes techniques du Sheet
+
+Colonnes structurantes actuellement utilisées :
 - `STEP_ID` ;
 - `GOAL_ID` ;
 - `GOAL_PHASE` ;
@@ -295,146 +283,24 @@ Colonnes techniques de `ROUTE` :
 - `MOMENT_ID` ;
 - `DISPLAY_ROLE` ;
 - `PARALLEL_ID` ;
-- `PARALLEL_PHASE`.
+- `PARALLEL_PHASE` ;
+- `DOFUS_SERIES`.
 
-`STEP_ID` représente un événement métier stable, jamais une ligne physique.
+La plage d’export couvre désormais `ROUTE!A5:W`.
 
-Conserver un ancien ID uniquement si l'événement métier reste réellement le même. Une nouvelle prise anticipée, un nouveau checkpoint ou un nouveau moment reçoit un nouvel ID.
+## 13. Validation
 
-`MOMENT_ID` ne remplace pas `STEP_ID` :
-- `STEP_ID` = identité persistante d'une étape technique ;
-- `MOMENT_ID` = regroupement éditorial de plusieurs étapes en une carte ;
-- `DISPLAY_ROLE` = rôle visuel de la ligne à l'intérieur de cette carte ;
-- `PARALLEL_ID` = groupe de quêtes maintenu actif au-delà d'une carte ;
-- `PARALLEL_PHASE` = phase de ce groupe.
+L’export/chargement doit échouer notamment si :
+- ID dupliqué ;
+- type ou bloc invalide ;
+- URL structurée invalide ;
+- coordonnées invalides ;
+- lancement incomplet ;
+- lifecycle goal/parallèle incohérent ;
+- `MOMENT_ID` non contigu, multi-bloc ou sans `DISPLAY_ROLE` ;
+- moment commençant par autre chose que `OBJECTIVE` ;
+- plus de 5 `OBJECTIVE` dans une carte ;
+- hard lock de niveau personnage ;
+- `FIN` absente, multiple ou non terminale.
 
-## 9. Fils rouges et verrous
-
-Un fil rouge et son verrou sont liés par `goalId`, jamais par leur titre.
-
-Lifecycle :
-
-```text
-start → progress* → finish
-```
-
-Un verrou peut fermer le suivi d'un goal lorsque le contrat de la route le prévoit.
-
-### Interdiction des faux verrous de niveau personnage
-
-Un simple niveau recommandé ou niveau minimum de personnage ne crée pas automatiquement une carte `VERROU DUR`.
-
-Les hard locks doivent représenter un blocage réel de progression dans notre route : quête obligatoire, métier requis, timer, objet/état nécessaire, succès, accès, etc.
-
-Le validateur rejette explicitement un `VERROU DUR` dont le titre commence par `NIVEAU <nombre>`.
-
-## 10. Préparation
-
-Une `PRÉPA` devient `preparationItems` quand des lignes à puce sont disponibles.
-
-La préparation est un **contrat d'exécutabilité** : avant d'arriver sur une quête, toutes les ressources pré-farmables réellement nécessaires doivent avoir été annoncées dans une `PRÉPA` antérieure et actionnable.
-
-Règles :
-- distinguer **ressource à apporter**, **objet/drop obtenu pendant la quête**, **prérequis**, **aide externe** ;
-- ne pas déplacer en PRÉPA un objet obtenu naturellement pendant la quête ;
-- vérifier les **quantités cumulées** jusqu'au premier usage : une ressource préparée mais déjà consommée ne couvre pas automatiquement une quête suivante ;
-- lorsqu'un lot ancien est trop éloigné pour être fiable ou mémorisable, créer une PRÉPA locale juste avant la consommation ;
-- les composants réels de craft sont préférés aux objets finis lorsque la route veut explicitement faire préparer le craft ;
-- une instruction de quête ne doit pas répéter une longue liste déjà présente en PRÉPA ; elle garde seulement le déroulé, les STOP et les objets/actions obtenus pendant la quête ;
-- la préparation doit tenir compte des ressources fournies naturellement par la route avant leur consommation ;
-- ne pas transformer un niveau conseillé en prérequis bloquant dans une PRÉPA.
-
-Exemple de distinction : un objet à 100 % de drop après lancement reste dans le déroulé de la quête ; les autres composants achetables/craftables nécessaires avant le départ vont en PRÉPA.
-
-## 11. Action
-
-`action` reste principalement une donnée d'affichage :
-- `LANCER` ;
-- `LANCER / STOP` ;
-- `TERMINER` ;
-- `AVANCER / STOP` ;
-- `REPRENDRE / AVANCER` ;
-- `FAIRE LE LOT` ;
-- `PRÉPARER` ;
-- `FIL ROUGE` ;
-- `VERROU DUR`.
-
-L'application ne déduit jamais `type`, `displayRole` ni `parallelGroup` depuis `action`.
-
-Une action contenant `LANCER` doit posséder une donnée de lancement structurée.
-
-## 12. Hiérarchie de rendu cible
-
-La hiérarchie visuelle cible d'une carte détaillée est :
-
-```text
-PRÉREQUIS
-prerequisites
-
-À SAVOIR / ⚠ AVANT DE SORTIR DU DONJON
-warning
-
-ACTIONS STRUCTURÉES
-GUIDE_ITEMS / action
-
-SUITE / STOP
-instruction
-```
-
-Cette hiérarchie vaut sur cartes simples et séquences.
-
-Interdit : recopier `prerequisites` ou `warning` dans `instruction` uniquement pour contourner un manque du composant UI.
-
-## 13. Données volontairement absentes
-
-Ne pas exporter si elles ne servent pas à l'application :
-- numéro de ligne Google Sheet ;
-- notes d'audit historiques ;
-- couleurs ;
-- formules ;
-- règles implicites reconstituables uniquement en lisant le texte.
-
-## 14. Export depuis le Sheet
-
-Commande :
-
-```bash
-pnpm export:route
-```
-
-Flux :
-
-```text
-ROUTE (A:V)
-   ↓
-scripts/export-route.ts
-   ↓ validation stricte
-   ↓
-data/route.json
-```
-
-L'exporteur lit actuellement :
-- `PRÉREQUIS / RESSOURCES` → `prerequisites` pour les étapes non-PRÉPA ;
-- `À SAVOIR` → `warning` ;
-- les colonnes techniques jusqu'à `PARALLEL_PHASE`.
-
-L'export/validation échoue notamment si :
-- `TYPE` est inconnu ;
-- `STEP_ID` manque ou est dupliqué ;
-- un bloc est absent ;
-- `GOAL_PHASE` est invalide ;
-- `POSITION` / `DESTINATION` sont invalides ;
-- `GUIDE_ITEMS` est invalide ;
-- `DISPLAY_ROLE` est invalide ou défini hors `MOMENT_ID` ;
-- un `MOMENT_ID` est défini sans `DISPLAY_ROLE` ;
-- un moment commence par `TRANSITION` ou `DETAIL` ;
-- une carte expose plus de 5 `OBJECTIVE` ;
-- une prise n'a aucune donnée de lancement ;
-- un `MOMENT_ID` est vide, non contigu ou traverse plusieurs blocs ;
-- `PARALLEL_ID` / `PARALLEL_PHASE` sont incomplets ou ont un lifecycle invalide ;
-- un groupe parallèle reste actif en fin de route ;
-- un hard lock référence un goal jamais démarré ;
-- un hard lock de niveau personnage est introduit ;
-- une URL structurée est invalide.
-
-`data/route.json` reste un artefact généré. Toute correction éditoriale se fait dans le Sheet puis passe par l'exporteur.
+`data/route.json` reste un artefact généré. Toute correction éditoriale se fait d’abord dans le Sheet.
