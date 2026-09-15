@@ -27,6 +27,7 @@ import {
 } from './shortcuts/types';
 import { useGlobalShortcuts } from './shortcuts/useGlobalShortcuts';
 import { restoreAndPersistWindowGeometry } from './window/persistence';
+import './progression.css';
 
 const route = loadBundledRoute();
 const shortcutActions = Object.keys(defaultShortcutBindings) as ShortcutAction[];
@@ -213,6 +214,21 @@ export function App() {
   const currentGoalLock = currentStep?.longRunningGoal
     ? getHardLockForGoal(route, currentStep.longRunningGoal.goalId)
     : undefined;
+  const blockProgress = useMemo(
+    () => route.blocks.map((block) => {
+      const blockSteps = route.steps.filter((step) => step.blockId === block.id);
+      const completed = blockSteps.filter((step) => completedStepIds.has(step.id)).length;
+      const total = blockSteps.length;
+      return {
+        ...block,
+        completed,
+        total,
+        percentage: total === 0 ? 0 : Math.round((completed / total) * 100),
+        firstCardIndex: stepGroups.findIndex((group) => group.blockId === block.id),
+      };
+    }),
+    [completedStepIds, stepGroups],
+  );
 
   function goPrevious() {
     setSecondaryView(null);
@@ -236,6 +252,15 @@ export function App() {
     setSecondaryView(null);
     setViewIndex(targetCard - 1);
     setCardJumpValue(String(targetCard));
+  }
+
+  function jumpToBlock(firstCardIndex: number) {
+    if (firstCardIndex < 0) {
+      return;
+    }
+    setDrawerOpen(false);
+    setSecondaryView(null);
+    setViewIndex(firstCardIndex);
   }
 
   function toggleCurrentStep() {
@@ -357,7 +382,7 @@ export function App() {
   return (
     <main className={`overlay ${compact ? 'overlay--compact' : ''}`}>
       {!compact && (
-        <header className="app-header">
+        <header className="app-header app-header--dense">
           <button
             className="icon-button"
             type="button"
@@ -366,8 +391,12 @@ export function App() {
           >
             ☰
           </button>
-          <div>
-            <p className="eyebrow">Dofus Guide Companion</p>
+          <div className="app-header__context">
+            {currentBlock && (
+              <p className="header-block-line">
+                Bloc {currentBlock.order}/{route.blocks.length} · <strong>{currentBlock.title}</strong>
+              </p>
+            )}
             <form
               className="card-jump"
               onSubmit={(event) => {
@@ -406,7 +435,9 @@ export function App() {
       {compact && (
         <div className="compact-header">
           <span>
-            {displayIndex} / {stepGroups.length} · {typeLabel}
+            {displayIndex}/{stepGroups.length}
+            {currentBlock ? ` · B${currentBlock.order}/${route.blocks.length}` : ''}
+            {' · '}{typeLabel}
           </span>
           <button
             className="icon-button"
@@ -416,13 +447,6 @@ export function App() {
           >
             +
           </button>
-        </div>
-      )}
-
-      {currentBlock && (
-        <div className="block-banner">
-          <span>Bloc {currentBlock.order} / {route.blocks.length}</span>
-          <strong>{currentBlock.title}</strong>
         </div>
       )}
 
@@ -438,7 +462,7 @@ export function App() {
       )}
 
       {secondaryView && !compact && (
-        <section className="context-panel" aria-label="Vue secondaire">
+        <section className={`context-panel${secondaryView === 'progress' ? ' context-panel--progress' : ''}`} aria-label="Vue secondaire">
           <div className="context-panel__header">
             <p className="eyebrow">
               {secondaryView === 'progress' && 'Progression'}
@@ -459,10 +483,36 @@ export function App() {
           </div>
 
           {secondaryView === 'progress' && (
-            <div className="context-panel__body">
-              <p>{progress.completed} / {progress.total} étapes validées · {progress.percentage}%</p>
-              <p>{stepGroups.length} cartes après mutualisation.</p>
-              {currentBlock && <p>Bloc courant : {currentBlock.title}</p>}
+            <div className="context-panel__body progression-dashboard">
+              <div className="progression-summary">
+                <strong>{progress.percentage}%</strong>
+                <span>{progress.completed} / {progress.total} étapes · {stepGroups.length} cartes</span>
+              </div>
+              <div className="progression-blocks">
+                {blockProgress.map((block) => {
+                  const isCurrent = block.id === currentBlock?.id;
+                  return (
+                    <button
+                      className={`progression-block${isCurrent ? ' progression-block--current' : ''}`}
+                      type="button"
+                      key={block.id}
+                      onClick={() => jumpToBlock(block.firstCardIndex)}
+                    >
+                      <div className="progression-block__header">
+                        <span className="progression-block__title">
+                          <b>{block.order}</b>
+                          <span>{block.title}</span>
+                        </span>
+                        <strong>{block.percentage}%</strong>
+                      </div>
+                      <div className="progression-block__bar" aria-hidden="true">
+                        <span style={{ width: `${block.percentage}%` }} />
+                      </div>
+                      <span className="progression-block__meta">{block.completed} / {block.total} étapes</span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           )}
 
