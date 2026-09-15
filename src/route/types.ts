@@ -35,6 +35,27 @@ export interface GuideItem {
   note?: string;
 }
 
+export interface PreparationResource {
+  kind: 'resource';
+  quantity: number;
+  /** Nom exact de l'objet en jeu, sans quantité ni annotation éditoriale. */
+  name: string;
+  note?: string;
+}
+
+export interface PreparationNote {
+  kind: 'note';
+  text: string;
+}
+
+export type StructuredPreparationItem = PreparationResource | PreparationNote;
+
+/**
+ * Les chaînes sont conservées temporairement pour migrer route.json sans casser la branche.
+ * Une fois la migration data terminée, PreparationItem deviendra strictement structuré.
+ */
+export type PreparationItem = StructuredPreparationItem | string;
+
 export interface RouteStep {
   id: string;
   order: number;
@@ -68,7 +89,7 @@ export interface RouteStep {
   launchInstruction?: string;
   /** Actions courtes du roadbook : quoi prendre/avancer/terminer et où. */
   guideItems?: GuideItem[];
-  preparationItems?: string[];
+  preparationItems?: PreparationItem[];
   longRunningGoal?: {
     goalId: string;
     phase: 'start' | 'progress' | 'finish';
