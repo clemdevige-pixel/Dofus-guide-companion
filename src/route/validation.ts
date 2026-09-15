@@ -2,6 +2,7 @@ import type {
   GuideItemAction,
   ParallelPhase,
   PreparationItem,
+  PreparationRequirementKind,
   RouteDocument,
   StepDisplayRole,
   StepType,
@@ -14,6 +15,9 @@ const supportedTypes = new Set<StepType>([
 const supportedGuideItemActions = new Set<GuideItemAction>(['take', 'advance', 'finish', 'do']);
 const supportedDisplayRoles = new Set<StepDisplayRole>(['objective', 'transition', 'detail']);
 const supportedParallelPhases = new Set<ParallelPhase>(['start', 'progress', 'finish']);
+const supportedPreparationRequirementKinds = new Set<PreparationRequirementKind>([
+  'kamas', 'profession', 'party', 'class', 'requirement',
+]);
 const MAX_OBJECTIVES_PER_CARD = 5;
 
 type GoalState = 'active' | 'finished';
@@ -68,6 +72,13 @@ function assertValidPreparationItem(item: PreparationItem, context: string) {
   if (item.kind === 'note') {
     if (!isNonEmptyString(item.text)) {
       throw new Error(`${context}: note de préparation vide.`);
+    }
+    return;
+  }
+
+  if (supportedPreparationRequirementKinds.has(item.kind)) {
+    if (!isNonEmptyString(item.text)) {
+      throw new Error(`${context}: prérequis de préparation vide.`);
     }
     return;
   }
