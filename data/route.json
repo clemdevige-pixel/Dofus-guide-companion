@@ -1808,7 +1808,7 @@
           "name": "Huile de sésame"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "180 × Kamas"
         },
         {
@@ -4661,7 +4661,7 @@
           "name": "Ailes de Scarafeuille Rouge"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "500 × Kamas"
         },
         {
@@ -4864,7 +4864,7 @@
           "name": "Bière de Feubuk"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "1 000 × Kamas"
         },
         {
@@ -5884,7 +5884,7 @@
       "action": "PRÉPARER",
       "preparationItems": [
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "1 700 kamas minimum — 700 Foire + 1 000 Partir un jour sans retour"
         },
         {
@@ -6166,7 +6166,7 @@
           "name": "Ailes de Scarafeuille Blanc"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "4 Résines"
         },
         {
@@ -6190,7 +6190,7 @@
           "name": "Dragodinde Dorée"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "Pierres d'âme adaptées — Boostache, Kanniboul Ebil, Draegnerys, Nelween, Wa Wobot"
         }
       ]
@@ -6873,7 +6873,7 @@
       "action": "PRÉPARER",
       "preparationItems": [
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "1 100 kamas"
         },
         {
@@ -6907,15 +6907,15 @@
           "name": "Bouts de Blop Reinette"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "Succès « Ce n'est qu'un prélèvement »"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "Succès « Elle a peut-être trop mangé ? »"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "Éleveur niveau 20 minimum"
         }
       ]
@@ -6954,11 +6954,11 @@
           "name": "Glandes d'Arak-haï"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "5 000 kamas OU 2 Œils de Cocholou"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "Pierres d'âme adaptées"
         }
       ]
@@ -7014,15 +7014,15 @@
           "name": "Mâchoire de Chafer Draugr"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "5 000 kamas OU 2 × Œil de Cocholou"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "1 000 kamas — Mission de reconnaissance au cimetière"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "1 100 kamas — Ultime réminiscence"
         }
       ]
@@ -8174,7 +8174,7 @@
           "name": "Eau Potable"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "2 de chaque Artefact Pandawushu : Roc / Vent / Bois / Feu / Eau"
         },
         {
@@ -8218,7 +8218,7 @@
           "name": "Pandaburg"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "2 Pandazahi ou Pandaporo"
         },
         {
@@ -8227,7 +8227,7 @@
           "name": "Huile de Riz"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "Prévoir 1 115 kamas au total sur la chaîne Domakuro (dont les 1 000 kamas déjà indiqués à Sang d'encre)"
         },
         {
@@ -10839,7 +10839,7 @@
       "action": "PRÉPARER",
       "preparationItems": [
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "70 Bois de Tremble (35 pour Pêche en eaux gelées + 35 À RÉSERVER pour Un ami qui ne vous veut pas que du bien)"
         },
         {
@@ -10945,11 +10945,11 @@
           "name": "Poil de Chachachovage"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "13 Poil de barbe du Shamansot — 10 pour La fonte + 3 À CONSERVER pour L'ombre et la glace"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "13 Oreille de Kaniglou — 10 pour La fonte + 3 À CONSERVER pour L'ombre et la glace"
         },
         {
@@ -11103,7 +11103,7 @@
           "name": "Serviette de Plage"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "2 Chaînes Brisées"
         },
         {
@@ -11182,7 +11182,7 @@
           "name": "Tissu Pourpre"
         },
         {
-          "kind": "note",
+          "kind": "profession",
           "text": "Bricoleur 100"
         }
       ]
@@ -11661,15 +11661,15 @@
           "name": "Perce-Neige"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "20 500 kamas"
         },
         {
-          "kind": "note",
+          "kind": "profession",
           "text": "Paysan 80"
         },
         {
-          "kind": "note",
+          "kind": "profession",
           "text": "Mineur 20"
         }
       ]
@@ -12334,7 +12334,7 @@
           "name": "Slip de Rechange du Captain Chafer"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "3500 × Kamas"
         },
         {
@@ -12655,7 +12655,7 @@
       "action": "PRÉPARER",
       "preparationItems": [
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "1 × Pandaburg OU 1 × Pandapils — Chauffage à moindre frais"
         },
         {
@@ -12681,7 +12681,7 @@
           "note": "Chachyène de vie"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "1 000 kamas — Apprentissage : Assassin Suprême"
         }
       ]
@@ -13841,7 +13841,7 @@
           "name": "Pandazahi/Pandaporo"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "1 Dernière pour la route OU 2 000 kamas"
         },
         {
@@ -13850,15 +13850,15 @@
           "name": "Diamant"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "4 444 kamas"
         },
         {
-          "kind": "note",
+          "kind": "profession",
           "text": "Forgeron 140"
         },
         {
-          "kind": "note",
+          "kind": "profession",
           "text": "Alchimiste 140"
         }
       ]
@@ -13903,15 +13903,15 @@
       "action": "PRÉPARER",
       "preparationItems": [
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "4 Métaria Mage : jaune / rouge / verte / bleue"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "4 Métaria normales : jaune / rouge / verte / bleue"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "Pierres d'âme adaptées"
         },
         {
@@ -13950,7 +13950,7 @@
           "name": "Écorce d'Abrazif"
         },
         {
-          "kind": "note",
+          "kind": "profession",
           "text": "Alchimiste 180+"
         },
         {
@@ -13989,11 +13989,11 @@
           "name": "Pédoncule de Fongeur"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "1 slip compatible"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "29 999 kamas"
         },
         {
@@ -14637,7 +14637,7 @@
       "action": "PRÉPARER",
       "preparationItems": [
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "1 Mauvaise Pioche (ou 10 Bois de Frêne + 5 Fer)"
         },
         {
@@ -14651,11 +14651,11 @@
           "name": "Ébonite"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "1 Marteau de Raclage (ou 1 Sourcil de Moskito + 3 Plume de Piou Vert)"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "500 kamas"
         },
         {
@@ -14720,7 +14720,7 @@
       "action": "PRÉPARER",
       "preparationItems": [
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "4 Énorme pierre d'âme + sort Capture d'âmes"
         },
         {
@@ -14804,15 +14804,15 @@
           "name": "Blague de Soufre"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "5 000 kamas"
         },
         {
-          "kind": "note",
+          "kind": "profession",
           "text": "Bricoleur 184+"
         },
         {
-          "kind": "note",
+          "kind": "profession",
           "text": "Alchimiste 185+"
         },
         {
@@ -15687,7 +15687,7 @@
       "action": "PRÉPARER",
       "preparationItems": [
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "2 000 kamas"
         },
         {
@@ -16235,19 +16235,19 @@
       "action": "PRÉPARER",
       "preparationItems": [
         {
-          "kind": "note",
+          "kind": "profession",
           "text": "L'ascension de Qu'Tan : team conseillée ; les accompagnants qui n'ont pas la quête peuvent avoir besoin d'une clef du temple maudit (10 Millet, 10 Mandragore, 10 Bois d'Orme, 10 Tanche, 1 Viande gâtée, 10 Dolomite ; Bricoleur 186)"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "On se calme : Balade en forêt TERMINÉE ; 7 Millet, 5 Aubergine, 5 Mesure de poivre, 1 Viande gâtée, 1 Eau potable, 1 Bière d'Amakna, 5 Épice, livre « L'Invasion d'Uk'Not'Allag »"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "Tout est bien qui finit mal : 150 000 kamas OU 1 Venin d'Éperfide + 1 Pince de Lucrane ; 1 Oreille de Blérice ; 1 Saphir"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "Ça fait froid dans le dos : 1 Rossignol + 1 Fragment de pépite de Sakaï"
         }
       ]
@@ -16261,31 +16261,31 @@
       "action": "PRÉPARER",
       "preparationItems": [
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "Cambriolage à durée déterminée : 100 kamas"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "Je panse donc j'essuie : 5 Œil de Verminocule, 5 Antenne de Bacterrib, 3 Perce-Neige, 3 Écume de mer, 1 Sel de Baleine"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "Un chemin tout tracé : Faire le mort TERMINÉ ; 1 Breuvage d'Erazal (5 Trèfle à 5 feuilles + 1 Bière Atolmond + 1 Mâchoire du Chafer Draugr) ; 5 000 kamas"
         },
         {
-          "kind": "note",
+          "kind": "party",
           "text": "Enigma : niveau 190 + 5 personnages au total pour les dalles"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "À l'ombre des murs : 500 ou 3 000 kamas + accès Srambad"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "Fée d'hiver : 1 Passe pour l'îlot Estitch"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "L'exorciste : 11 000 kamas + accès Srambad"
         }
       ]
@@ -16661,7 +16661,7 @@
           "name": "Viande Noire"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "220 kamas"
         }
       ]
@@ -17218,7 +17218,7 @@
           "name": "Pierre de Rubis"
         },
         {
-          "kind": "note",
+          "kind": "profession",
           "text": "Alchimiste 20 minimum"
         }
       ]
@@ -17485,15 +17485,15 @@
       "action": "PRÉPARER",
       "preparationItems": [
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "Pierres d'âme adaptées"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "2 emplacements de capture libres pour les Frimar des salles 2 et 3 de Missiz Frizz"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "3 000 kamas minimum pour la traduction de Les desseins de Sylargh"
         },
         {
@@ -18282,7 +18282,7 @@
       "action": "PRÉPARER",
       "preparationItems": [
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "1 × Accélérateur de propulsion — Apprentissage : Maître des Illusions"
         }
       ]
@@ -18364,19 +18364,19 @@
       "action": "PRÉPARER",
       "preparationItems": [
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "3 000 points de succès minimum"
         },
         {
-          "kind": "note",
+          "kind": "profession",
           "text": "1 métier niveau 200 (requis par Raisons de retraite)"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "200 000 kamas disponibles (non consommés)"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "Pour Après les phorreurs : satisfaire au moins un test de caractéristiques/succès (>600 Agi/Chance/Force/Intel, ou >700 Vita, ou succès L'éleveur c'est moi, ou Ma petite entreprise) ; attention aux builds full sagesse"
         },
         {
@@ -18390,11 +18390,11 @@
           "name": "Clef Palais du Roi Nidas"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "2 Clefs Fabrique de Malléfisk (Malladie + Malle des profondeurs ; trousseau inutilisable en dimension)"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "1 kama — Malladie"
         },
         {
@@ -18469,23 +18469,23 @@
           "name": "Ardonite"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "120 kamas"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "10 Bières aigrisantes OU 5 000 kamas — Marteau-Aigri"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "Sort Flamiche"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "Alignement 85→99 au verrou Ilyzaelle"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "Deux souffles, une inspiration terminé"
         }
       ]
@@ -18624,11 +18624,11 @@
           "name": "Corde d'escalade"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "4 010 kamas"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "Alignement 100"
         }
       ]
@@ -19231,7 +19231,7 @@
       "action": "PRÉPARER",
       "preparationItems": [
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "6 Dofus Primordiaux en inventaire"
         },
         {
@@ -19265,19 +19265,19 @@
           "name": "Ticket de la Foire du Trool"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "600 kamas"
         },
         {
-          "kind": "note",
+          "kind": "profession",
           "text": "Mineur 20 minimum"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "Plus de 600 Force pour l'épreuve de Gobrikol"
         },
         {
-          "kind": "note",
+          "kind": "profession",
           "text": "Métier de récolte 200"
         },
         {
@@ -19287,7 +19287,7 @@
           "note": "déjà réservés pendant Jusqu'au bout du rêve"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "1 Framboise OU 10 Carrés de Chocolat au Lait"
         },
         {
@@ -19306,11 +19306,11 @@
           "name": "Baguette Rikiki"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "1 kama"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "Jusqu'à 120 000 kamas — Le poids de son regard, uniquement si tu ne réunis pas 12 classes"
         }
       ]
@@ -19695,7 +19695,7 @@
       "instruction": "Choisis achat du Sceau OU craft, puis prépare l'option choisie.",
       "preparationItems": [
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "Acheter 1 Sceau des fondateurs"
         },
         {
@@ -19734,7 +19734,7 @@
           "name": "Ambre de muldo"
         },
         {
-          "kind": "note",
+          "kind": "profession",
           "text": "Bijoutier 200"
         }
       ]
@@ -20436,7 +20436,7 @@
           "name": "Umeshushu"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "6 Shaké à haute fermentation OU 6 Artefacts Pandawushu de chaque élément"
         },
         {
@@ -20445,7 +20445,7 @@
           "name": "Clef du Ventre de la Baleine"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "1 Saucisson de Porkania OU 2 000 kamas"
         },
         {
@@ -21037,15 +21037,15 @@
       "action": "PRÉPARER",
       "preparationItems": [
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "Domakuro en inventaire"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "Dorigami en inventaire"
         },
         {
-          "kind": "note",
+          "kind": "profession",
           "text": "Paysan 20 minimum"
         }
       ]
@@ -21074,7 +21074,7 @@
           "name": "Pwimen"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "10 de chaque Artefact Pandawushu : Bois / Feu / Eau / Vent / Roc"
         },
         {
@@ -21143,15 +21143,15 @@
           "name": "Bière forte légère"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "1 Alcool à 99% OU 1 000 kamas"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "6 lots de 5 ressources récoltables des Royaumes de Papier/Encre au choix"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "2 lots de 2 ressources de Yokianzhi au choix (zones Wukin/Wukang)"
         },
         {
@@ -21175,7 +21175,7 @@
           "name": "Planche de Toilette"
         },
         {
-          "kind": "note",
+          "kind": "profession",
           "text": "Bricoleur 30+"
         }
       ]
@@ -21421,7 +21421,7 @@
           "name": "Dolomite"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "10 Bois de Bambou OU Bambou Sombre"
         },
         {
@@ -21465,7 +21465,7 @@
           "name": "Diacritique du Roi Imagami"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "1 Cristal pliable + 1 Cristal liquide OU 1 Bière du Grand Pouddah"
         },
         {
@@ -21489,11 +21489,11 @@
           "name": "Pizwa"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "Dofus Tacheté en inventaire"
         },
         {
-          "kind": "note",
+          "kind": "profession",
           "text": "Sculpteur 180+"
         }
       ]
@@ -21679,7 +21679,7 @@
           "name": "Galet brasillant"
         },
         {
-          "kind": "note",
+          "kind": "profession",
           "text": "Mineur 40+"
         },
         {
@@ -21740,7 +21740,7 @@
           "name": "Corde d'escalade"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "35 000 kamas"
         },
         {
@@ -21824,7 +21824,7 @@
           "name": "Sucre d'Orge"
         },
         {
-          "kind": "note",
+          "kind": "profession",
           "text": "Paysan 100+"
         }
       ]
@@ -22932,27 +22932,27 @@
           "name": "Blopisier empoisonné"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "1 Pain de Frostiz OU 1 Pain Tahde"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "1 Eau Potable OU 1 Lailait"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "10 000 kamas"
         },
         {
-          "kind": "note",
+          "kind": "profession",
           "text": "Mineur 10+"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "800 Force minimum"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "0 Sagesse au moment du test concerné"
         }
       ]
@@ -23384,15 +23384,15 @@
           "name": "Os Jiangshi-Nobi"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "30 Blague de Soufre OU 30 000 kamas"
         },
         {
-          "kind": "note",
+          "kind": "profession",
           "text": "Paysan 140+ (aide possible)"
         },
         {
-          "kind": "note",
+          "kind": "profession",
           "text": "Bricoleur 1+ sur le personnage — craft coopératif impossible"
         }
       ]
@@ -23417,7 +23417,7 @@
           "name": "Ailes de Moskito"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "24 Métronomes du Début-Temps (ou 24 Orichor)"
         },
         {
@@ -23511,7 +23511,7 @@
           "name": "Clef Clairière du Chêne Mou"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "1 Dague de Will Killson OU 20 Kama de glace"
         },
         {
@@ -23525,11 +23525,11 @@
           "name": "Essence de Tal Kasha"
         },
         {
-          "kind": "note",
+          "kind": "kamas",
           "text": "1 000 kamas"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "Clefs : Nidas / Bataille de l’Aurore Pourpre / Solar"
         }
       ]
@@ -23707,15 +23707,15 @@
       "action": "PRÉPARER",
       "preparationItems": [
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "Entretemps, une renaissance terminé"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "Le serment de l'ambre terminé"
         },
         {
-          "kind": "note",
+          "kind": "requirement",
           "text": "6 Primordiaux en inventaire"
         },
         {
