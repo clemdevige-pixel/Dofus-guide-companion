@@ -49,16 +49,18 @@
   white-space: nowrap;
 }
 
-.context-panel--progress {
+.context-panel--progress,
+.context-panel:not(.context-panel--progress) {
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
   min-height: 0;
-  max-height: calc(100vh - 112px);
+  max-height: calc(100vh - 106px);
   overflow: hidden;
 }
 
-.context-panel--progress .context-panel__header {
+.context-panel--progress .context-panel__header,
+.context-panel:not(.context-panel--progress) .context-panel__header {
   flex: 0 0 auto;
 }
 
@@ -68,10 +70,18 @@
   overflow: hidden;
 }
 
+.context-panel:not(.context-panel--progress) .context-panel__body {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 3px;
+  scrollbar-gutter: stable;
+}
+
 .progression-dashboard {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
-  gap: 10px;
+  gap: 8px;
   height: 100%;
   min-height: 0;
 }
@@ -80,16 +90,16 @@
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 12px;
-  padding: 9px 10px;
+  gap: 10px;
+  padding: 8px 9px;
   border: 1px solid #334139;
-  border-radius: 9px;
+  border-radius: 8px;
   background: #111913;
 }
 
 .progression-summary strong {
   color: #b9e7c1;
-  font-size: 18px;
+  font-size: 17px;
 }
 
 .progression-summary span {
@@ -100,7 +110,7 @@
 
 .progression-blocks {
   display: grid;
-  gap: 6px;
+  gap: 5px;
   min-height: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -110,18 +120,20 @@
 
 .progression-block {
   display: grid;
-  gap: 6px;
+  gap: 5px;
   width: 100%;
-  padding: 8px 9px;
+  padding: 7px 8px;
   border: 1px solid #2f3d34;
-  border-radius: 9px;
+  border-radius: 8px;
   background: #111913;
   color: #dce7de;
   cursor: pointer;
   text-align: left;
+  transition: border-color 120ms ease, background 120ms ease;
 }
 
-.progression-block:hover {
+.progression-block:hover,
+.progression-block:focus-visible {
   border-color: #476451;
   background: #152019;
 }
@@ -135,7 +147,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 10px;
+  gap: 8px;
 }
 
 .progression-block__title {
@@ -191,39 +203,18 @@
   font-size: 10px;
 }
 
-.context-panel:not(.context-panel--progress) {
-  display: flex;
-  flex: 1 1 auto;
-  flex-direction: column;
-  min-height: 0;
-  max-height: calc(100vh - 112px);
-  overflow: hidden;
-}
-
-.context-panel:not(.context-panel--progress) .context-panel__header {
-  flex: 0 0 auto;
-}
-
-.context-panel:not(.context-panel--progress) .context-panel__body {
-  min-height: 0;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  padding-right: 3px;
-  scrollbar-gutter: stable;
-}
-
 .context-panel__body > ul {
   display: grid;
-  gap: 6px;
+  gap: 5px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .context-panel__body > ul > li {
-  padding: 9px 10px;
+  padding: 8px 9px;
   border: 1px solid #2f3d34;
-  border-radius: 9px;
+  border-radius: 8px;
   background: #111913;
   color: #dce7de;
   font-size: 12px;
@@ -232,15 +223,15 @@
 }
 
 .context-panel__body > strong + p {
-  margin: 6px 0 0;
-  padding: 9px 10px;
+  margin: 5px 0 0;
+  padding: 8px 9px;
   border: 1px solid #765038;
-  border-radius: 9px;
+  border-radius: 8px;
   background: #241b15;
   color: #ffd1aa;
   font-size: 12px;
   font-weight: 700;
-  line-height: 1.4;
+  line-height: 1.38;
 }
 
 .context-panel__body > strong {
@@ -251,25 +242,17 @@
 
 .preparation-dashboard {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .preparation-group {
   display: grid;
-  gap: 7px;
+  gap: 6px;
 }
 
 .preparation-group > strong {
   color: #eef4ef;
   font-size: 12px;
-}
-
-.preparation-checklist {
-  display: grid;
-  gap: 5px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
 }
 
 .preparation-checklist__resource {
@@ -285,6 +268,7 @@
   border-radius: 7px;
   background: #111913;
   color: #dce7de;
+  transition: border-color 120ms ease, background 120ms ease, opacity 120ms ease;
 }
 
 .preparation-checklist__check {
@@ -308,7 +292,9 @@
 }
 
 .preparation-checklist__resource:hover .preparation-checklist__check,
-.preparation-checklist__copy:hover {
+.preparation-checklist__copy:hover,
+.preparation-checklist__check:focus-visible,
+.preparation-checklist__copy:focus-visible {
   border-color: #476451;
   background: #152019;
 }
@@ -356,17 +342,9 @@
   line-height: 1.3;
 }
 
-.preparation-checklist__note {
-  padding: 6px 8px;
-  border-left: 2px solid #4c5b51;
-  color: #9eaba1;
-  font-size: 11px;
-  line-height: 1.35;
-}
-
 .history-list--detailed {
   display: grid;
-  gap: 6px;
+  gap: 5px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -375,7 +353,7 @@
 .history-list--detailed li {
   display: grid;
   gap: 3px;
-  padding: 8px 9px;
+  padding: 7px 8px;
   border: 1px solid #2f3d34;
   border-radius: 8px;
   background: #111913;
@@ -416,6 +394,16 @@
   .app-header--dense .card-jump input {
     width: 40px;
   }
+
+  .context-panel--progress,
+  .context-panel:not(.context-panel--progress) {
+    max-height: calc(100vh - 96px);
+  }
+
+  .preparation-checklist__copy {
+    gap: 5px;
+    padding-inline: 7px;
+  }
 }
 
 @media (max-width: 350px) {
@@ -432,6 +420,15 @@
   .app-header--dense .card-jump > span:first-child {
     display: none;
   }
+
+  .preparation-checklist__resource {
+    grid-template-columns: 26px minmax(0, 1fr);
+    gap: 5px;
+  }
+
+  .preparation-checklist__name {
+    white-space: normal;
+  }
 }
 
 @media (max-width: 330px) {
@@ -443,5 +440,9 @@
 
   .progression-summary span {
     text-align: left;
+  }
+
+  .progression-block__header {
+    gap: 6px;
   }
 }
