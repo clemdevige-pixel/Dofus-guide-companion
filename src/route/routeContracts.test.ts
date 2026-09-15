@@ -1,9 +1,13 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { loadBundledRoute } from './loader';
+import routeData from '../../data/route.json';
+import type { RouteDocument } from './types';
+import { validateRoute } from './validation';
 
-const route = loadBundledRoute();
+// Les contrats éditoriaux doivent auditer la donnée source brute.
+// loadBundledRoute() normalise volontairement certains titres pour l'affichage joueur.
+const route = validateRoute(routeData as RouteDocument);
 const orderById = new Map(route.steps.map((step) => [step.id, step.order]));
 
 function requireOrder(stepId: string): number {
@@ -32,15 +36,14 @@ function normalizeObjectiveTitle(title: string): string {
   return title.trim().replace(/\s+/g, ' ').toLocaleLowerCase('fr-FR');
 }
 
-test('contrat route — un moment ne contient pas deux fois le même objectif éditorial', () => {
+test('contrat route — un moment ne contient pas deux fois le même objectif éditorial brut', () => {
   const objectiveTitlesByMoment = new Map<string, Map<string, string>>();
 
   for (const step of route.steps) {
     if (!step.momentId || step.displayRole !== 'objective') continue;
 
-    // Lint éditorial uniquement : cette clé ne pilote aucun comportement runtime.
-    // Deux checkpoints distincts d'une même quête peuvent partager la même URL DPLN ;
-    // on interdit uniquement deux objectifs affichés avec le même titre dans une même carte.
+    // Lint éditorial de la donnée source uniquement : les suffixes de checkpoint restent
+    // disponibles ici même s'ils sont masqués ensuite par le renderer joueur.
     const objectiveKey = normalizeObjectiveTitle(step.title);
     const titles = objectiveTitlesByMoment.get(step.momentId) ?? new Map<string, string>();
     const existingStepId = titles.get(objectiveKey);
@@ -48,7 +51,7 @@ test('contrat route — un moment ne contient pas deux fois le même objectif é
     assert.equal(
       existingStepId,
       undefined,
-      `${step.momentId}: objectif éditorial dupliqué entre ${existingStepId ?? 'inconnu'} et ${step.id} (${step.title}).`,
+      `${step.momentId}: objectif éditorial brut dupliqué entre ${existingStepId ?? 'inconnu'} et ${step.id} (${step.title}).`,
     );
 
     titles.set(objectiveKey, step.id);
