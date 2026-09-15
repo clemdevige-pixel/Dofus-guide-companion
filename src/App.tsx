@@ -3,6 +3,7 @@ import { getCurrentWindow } from '@tauri-apps/api/window';
 import { writeText } from '@tauri-apps/plugin-clipboard-manager';
 import { openUrl } from '@tauri-apps/plugin-opener';
 import { PreparationChecklist } from './components/PreparationChecklist';
+import { StepMarkers } from './components/StepMarkers';
 import { loadProgress, saveProgress } from './progress/storage';
 import { loadBundledRoute } from './route/loader';
 import {
@@ -687,18 +688,21 @@ export function App() {
                     <div className="sequence-item__content">
                       <div className="sequence-item__header">
                         <strong>
-                          {displayStep.source ? (
-                            <button
-                              className="source-title-button"
-                              type="button"
-                              title={`Ouvrir ${displayStep.source.label}`}
-                              onClick={() => void openExternalSource(displayStep.source!.url)}
-                            >
-                              {displayStep.title}
-                            </button>
-                          ) : (
-                            displayStep.title
-                          )}
+                          <span className="title-with-markers">
+                            <StepMarkers step={displayStep} />
+                            {displayStep.source ? (
+                              <button
+                                className="source-title-button"
+                                type="button"
+                                title={`Ouvrir ${displayStep.source.label}`}
+                                onClick={() => void openExternalSource(displayStep.source!.url)}
+                              >
+                                {displayStep.title}
+                              </button>
+                            ) : (
+                              displayStep.title
+                            )}
+                          </span>
                         </strong>
                       </div>
 
@@ -720,18 +724,21 @@ export function App() {
                                 {step.action && <span className="sequence-item__action">{step.action}</span>}
                                 {step !== displayStep && (step.type === 'dungeon' || hasDistinctSource) && (
                                   <strong>
-                                    {step.source ? (
-                                      <button
-                                        className="source-title-button"
-                                        type="button"
-                                        title={`Ouvrir ${step.source.label}`}
-                                        onClick={() => void openExternalSource(step.source!.url)}
-                                      >
-                                        {step.title}
-                                      </button>
-                                    ) : (
-                                      step.title
-                                    )}
+                                    <span className="title-with-markers">
+                                      <StepMarkers step={step} />
+                                      {step.source ? (
+                                        <button
+                                          className="source-title-button"
+                                          type="button"
+                                          title={`Ouvrir ${step.source.label}`}
+                                          onClick={() => void openExternalSource(step.source!.url)}
+                                        >
+                                          {step.title}
+                                        </button>
+                                      ) : (
+                                        step.title
+                                      )}
+                                    </span>
                                   </strong>
                                 )}
                               </div>
@@ -767,18 +774,21 @@ export function App() {
           <>
             <div className="step-title-row">
               <h1 id="current-step-title">
-                {currentStep.source ? (
-                  <button
-                    className="source-title-button source-title-button--main"
-                    type="button"
-                    title={`Ouvrir ${currentStep.source.label}`}
-                    onClick={() => void openExternalSource(currentStep.source!.url)}
-                  >
-                    {currentStep.title}
-                  </button>
-                ) : (
-                  currentStep.title
-                )}
+                <span className="title-with-markers">
+                  <StepMarkers step={currentStep} />
+                  {currentStep.source ? (
+                    <button
+                      className="source-title-button source-title-button--main"
+                      type="button"
+                      title={`Ouvrir ${currentStep.source.label}`}
+                      onClick={() => void openExternalSource(currentStep.source!.url)}
+                    >
+                      {currentStep.title}
+                    </button>
+                  ) : (
+                    currentStep.title
+                  )}
+                </span>
               </h1>
             </div>
 
