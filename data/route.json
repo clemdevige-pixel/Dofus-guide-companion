@@ -13566,8 +13566,74 @@
       "momentId": "moment-route-step-0506"
     },
     {
-      "id": "route-step-0538",
+      "id": "route-step-audit-gant-graine",
       "order": 580,
+      "blockId": "block-09",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Gant graine",
+      "action": "TERMINER",
+      "momentId": "moment-route-step-0556",
+      "prerequisites": "Champ Pomy terminé.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/agriculture-ou-alchimie.html"
+      },
+      "instruction": "Termine Gant graine pendant le passage Crevasse Perge / Tanière Givrefoux."
+    },
+    {
+      "id": "route-step-0556",
+      "order": 581,
+      "blockId": "block-09",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "C'est frais, mais c'est pas grave — avancer jusqu'au Tengu Givrefoux",
+      "prerequisites": "Objectifs de la quête effectués jusqu'au boss.",
+      "warning": "C'est cette quête — et non À qui profite le Boufmouth — qui doit être empilée sur le Tengu.",
+      "action": "AVANCER / STOP",
+      "instruction": "AVANCE jusqu'au Tengu puis STOP devant la Tanière.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/cest-frais-mais-cest-pas-grave.html"
+      },
+      "momentId": "moment-route-step-0556",
+      "location": {
+        "x": -76,
+        "y": -75
+      }
+    },
+    {
+      "id": "route-step-0557",
+      "order": 582,
+      "blockId": "block-09",
+      "type": "dungeon",
+      "displayRole": "detail",
+      "title": "Tanière Givrefoux",
+      "prerequisites": "C'est frais, mais c'est pas grave au checkpoint Tengu Givrefoux.",
+      "warning": "Passage Tengu de la chaîne Frigost II.",
+      "action": "FAIRE",
+      "instruction": "Vaincs le Tengu Givrefoux pour C'est frais, mais c'est pas grave.",
+      "momentId": "moment-route-step-0556"
+    },
+    {
+      "id": "route-step-0558",
+      "order": 583,
+      "blockId": "block-09",
+      "type": "resume",
+      "displayRole": "transition",
+      "title": "C'est frais, mais c'est pas grave",
+      "prerequisites": "Tengu Givrefoux vaincu.",
+      "action": "TERMINER",
+      "instruction": "À la fin du combat, sors par l'un des trous de la salle, traverse la grotte jusqu'à découvrir la Forêt Pétrifiée et le Village Enseveli : la quête se termine alors. Fais-le AVANT Sans ma barbe, quelle barbe et Les derniers d'entre nous.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/cest-frais-mais-cest-pas-grave.html"
+      },
+      "momentId": "moment-route-step-0556"
+    },
+    {
+      "id": "route-step-0538",
+      "order": 584,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13586,7 +13652,7 @@
     },
     {
       "id": "route-step-0539",
-      "order": 581,
+      "order": 585,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13605,7 +13671,7 @@
     },
     {
       "id": "route-step-0540",
-      "order": 582,
+      "order": 586,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13624,13 +13690,13 @@
     },
     {
       "id": "route-step-0541",
-      "order": 583,
+      "order": 587,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
       "displayRole": "objective",
       "title": "Si j'avais un marteau",
-      "prerequisites": "Prévoir l'aide de 3 personnages pour la dalle + le combat.",
+      "prerequisites": "Sram d'Égoutant terminé ; Forêt Pétrifiée accessible après avoir vaincu le Tengu Givrefoux et terminé C'est frais, mais c'est pas grave ; prévoir l'aide de 3 personnages pour la dalle + le combat.",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
@@ -13644,13 +13710,13 @@
     },
     {
       "id": "route-step-0542",
-      "order": 584,
+      "order": 588,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
       "displayRole": "objective",
       "title": "Esprit, es-tu là ?",
-      "prerequisites": "Prévoir l'aide de 3 personnages pour ouvrir les coffres.",
+      "prerequisites": "Si j'avais un marteau terminé ; prévoir l'aide de 3 personnages pour ouvrir les coffres.",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
@@ -13664,7 +13730,7 @@
     },
     {
       "id": "route-step-0543",
-      "order": 585,
+      "order": 589,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13679,11 +13745,12 @@
       "location": {
         "x": -32,
         "y": -57
-      }
+      },
+      "prerequisites": "Esprit, es-tu là ? terminé ; 4 Énormes pierres d'âme + sort Capture d'âmes."
     },
     {
       "id": "route-step-0544",
-      "order": 586,
+      "order": 590,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13698,17 +13765,18 @@
       "location": {
         "x": -36,
         "y": -60
-      }
+      },
+      "prerequisites": "Vol du Temps terminé ; ressources de la quête préparées."
     },
     {
       "id": "route-step-0545",
-      "order": 587,
+      "order": 591,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
       "displayRole": "objective",
       "title": "Pense-bête",
-      "prerequisites": "Prévoir un Pandawa.",
+      "prerequisites": "La mémoire en lambeaux terminée ; prévoir un Pandawa.",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
@@ -13722,7 +13790,7 @@
     },
     {
       "id": "route-step-0546",
-      "order": 588,
+      "order": 592,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13737,11 +13805,12 @@
       "location": {
         "x": -36,
         "y": -60
-      }
+      },
+      "prerequisites": "Pense-bête terminé."
     },
     {
       "id": "route-step-0547",
-      "order": 589,
+      "order": 593,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13756,11 +13825,12 @@
       "location": {
         "x": -32,
         "y": -57
-      }
+      },
+      "prerequisites": "L'Éclat de l'Aube terminé."
     },
     {
       "id": "route-step-0548",
-      "order": 590,
+      "order": 594,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13772,11 +13842,12 @@
         "url": "https://www.dofuspourlesnoobs.com/petites-faveurs-entre-amis.html"
       },
       "momentId": "moment-alignement-81-85",
-      "launchInstruction": "Selon ton choix dans Au service de Danathor : si tu as empoisonné Rimaraf, parle à Danathor en [-36,-60] ; sinon parle à Amayiro en [-32,-57]."
+      "launchInstruction": "Selon ton choix dans Au service de Danathor : si tu as empoisonné Rimaraf, parle à Danathor en [-36,-60] ; sinon parle à Amayiro en [-32,-57].",
+      "prerequisites": "Ingérence en Amakna terminée."
     },
     {
       "id": "route-step-0549",
-      "order": 591,
+      "order": 595,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13796,7 +13867,7 @@
     },
     {
       "id": "route-step-0550",
-      "order": 592,
+      "order": 596,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13816,7 +13887,7 @@
     },
     {
       "id": "route-step-0551",
-      "order": 593,
+      "order": 597,
       "blockId": "block-09",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13841,7 +13912,7 @@
     },
     {
       "id": "route-step-0552",
-      "order": 594,
+      "order": 598,
       "blockId": "block-09",
       "type": "order",
       "title": "Apprentissage : Assassin Suprême — avancer jusqu'au Grand Ougah",
@@ -13866,7 +13937,7 @@
     },
     {
       "id": "route-step-1206",
-      "order": 595,
+      "order": 599,
       "blockId": "block-09",
       "type": "dungeon",
       "displayRole": "detail",
@@ -13883,7 +13954,7 @@
     },
     {
       "id": "route-step-1207",
-      "order": 596,
+      "order": 600,
       "blockId": "block-09",
       "type": "resume",
       "displayRole": "transition",
@@ -13897,72 +13968,6 @@
         "url": "https://www.dofuspourlesnoobs.com/apprentissage-assassin-supreme.html"
       },
       "warning": "Après Dike Tarak, Assassin Suprême n'est pas terminée : il reste la mission de la Statuette de Sumens."
-    },
-    {
-      "id": "route-step-audit-gant-graine",
-      "order": 597,
-      "blockId": "block-09",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Gant graine",
-      "action": "TERMINER",
-      "momentId": "moment-route-step-0556",
-      "prerequisites": "Champ Pomy terminé.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/agriculture-ou-alchimie.html"
-      },
-      "instruction": "Termine Gant graine pendant le passage Crevasse Perge / Tanière Givrefoux."
-    },
-    {
-      "id": "route-step-0556",
-      "order": 598,
-      "blockId": "block-09",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "C'est frais, mais c'est pas grave — avancer jusqu'au Tengu Givrefoux",
-      "prerequisites": "Objectifs de la quête effectués jusqu'au boss.",
-      "warning": "C'est cette quête — et non À qui profite le Boufmouth — qui doit être empilée sur le Tengu.",
-      "action": "AVANCER / STOP",
-      "instruction": "AVANCE jusqu'au Tengu puis STOP devant la Tanière.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/cest-frais-mais-cest-pas-grave.html"
-      },
-      "momentId": "moment-route-step-0556",
-      "location": {
-        "x": -76,
-        "y": -75
-      }
-    },
-    {
-      "id": "route-step-0557",
-      "order": 599,
-      "blockId": "block-09",
-      "type": "dungeon",
-      "displayRole": "detail",
-      "title": "Tanière Givrefoux",
-      "prerequisites": "C'est frais, mais c'est pas grave au checkpoint Tengu Givrefoux.",
-      "warning": "Passage Tengu de la chaîne Frigost II.",
-      "action": "FAIRE",
-      "instruction": "Vaincs le Tengu Givrefoux pour C'est frais, mais c'est pas grave.",
-      "momentId": "moment-route-step-0556"
-    },
-    {
-      "id": "route-step-0558",
-      "order": 600,
-      "blockId": "block-09",
-      "type": "resume",
-      "displayRole": "transition",
-      "title": "C'est frais, mais c'est pas grave",
-      "prerequisites": "Tengu Givrefoux vaincu.",
-      "action": "TERMINER",
-      "instruction": "À la fin du combat, sors par l'un des trous de la salle, traverse la grotte jusqu'à découvrir la Forêt Pétrifiée et le Village Enseveli : la quête se termine alors. Fais-le AVANT Sans ma barbe, quelle barbe et Les derniers d'entre nous.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/cest-frais-mais-cest-pas-grave.html"
-      },
-      "momentId": "moment-route-step-0556"
     },
     {
       "id": "route-step-0559",
