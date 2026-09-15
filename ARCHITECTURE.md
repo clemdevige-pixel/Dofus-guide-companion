@@ -73,7 +73,7 @@ Aucune logique React ne doit reconnaître des chaînes comme « Emma », « Tour
 
 ## 6. Contexte joueur : prérequis et avertissements
 
-Deux champs éditoriaux du Sheet sont désormais des données runtime de première classe :
+Deux champs éditoriaux du Sheet sont des données runtime de première classe :
 
 - `PRÉREQUIS / RESSOURCES` → `RouteStep.prerequisites` pour les étapes non-PRÉPA ;
 - `À SAVOIR` → `RouteStep.warning`.
@@ -81,7 +81,7 @@ Deux champs éditoriaux du Sheet sont désormais des données runtime de premiè
 Ils ne doivent jamais être fusionnés artificiellement dans `instruction`.
 
 Rôle attendu :
-- `prerequisites` = ce qui doit déjà être vrai/possédé **avant** d'exécuter la carte ;
+- `prerequisites` = donnée éditoriale conservée pour audit, cohérence et validation de la route, mais **non affichée sur les cartes joueur** ;
 - `warning` = information critique ou contexte utile à lire **avant** l'action ;
 - `guideItems` = actions structurées courtes ;
 - `instruction` = suite/STOP/déroulé complémentaire.
@@ -89,8 +89,6 @@ Rôle attendu :
 Hiérarchie UI cible :
 
 ```text
-PRÉREQUIS
-↓
 À SAVOIR / ALERTE
 ↓
 ACTIONS / GUIDE_ITEMS
@@ -98,7 +96,7 @@ ACTIONS / GUIDE_ITEMS
 SUITE / STOP
 ```
 
-Cette hiérarchie doit être identique sur carte simple et séquence.
+Les blocs génériques `PRÉREQUIS` ne sont pas rendus sur les cartes simples ni dans les séquences. Les véritables besoins actionnables doivent apparaître via les cartes `PRÉPA`, les avertissements critiques ou les instructions structurées appropriées.
 
 ### Alerte de sortie de donjon
 
@@ -167,7 +165,7 @@ Les comportements suivants restent calculés depuis `route + completedStepIds` :
 
 Ne pas dupliquer ces vérités dans un store global supplémentaire.
 
-`prerequisites` et `warning` sont lus directement depuis le `RouteStep` courant ; ils ne nécessitent aucun store ni selector métier supplémentaire.
+`warning` est lu directement depuis le `RouteStep` courant pour l'affichage. `prerequisites` reste disponible dans la donnée pour les audits et contrôles, sans être rendu dans l'UI joueur.
 
 ## 11. Validation de données
 
