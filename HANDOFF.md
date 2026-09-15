@@ -6,14 +6,18 @@ Date : 2026-09-16
 
 Branche active : `agent/initial-scaffold`.
 
-La route Astrub → Dofus Sylvestre est certifiée sur son périmètre métier et contient toujours :
-- **1009 étapes** ;
-- **20 blocs** ;
-- ordre métier certifié ;
-- anti-régressions route actifs ;
-- `PRÉREQUIS` conservés dans la donnée mais masqués côté joueur.
+État courant :
+- route Astrub → Dofus Sylvestre certifiée sur son périmètre métier ;
+- **1009 étapes / 20 blocs** ;
+- `pnpm.cmd test:route` vert (**48/48**) ;
+- `pnpm.cmd validate:route` vert ;
+- `pnpm.cmd build` vert ;
+- anti-régressions métier actifs ;
+- `PRÉREQUIS` conservés en donnée mais non affichés côté joueur ;
+- nettoyage UX des titres et commentaires intégré ;
+- marqueurs visuels Alignement / Dofus / Donjon intégrés.
 
-Le chantier restant avant clôture V1 n'est plus une reconstruction de route. Il reste une **recette runtime / UX finale**, une vérification de synchronisation Sheet → JSON pour les nouveaux marqueurs, puis un audit release-readiness court.
+Le chantier route n’est plus à rouvrir globalement. Il reste uniquement la **recette release-readiness V1** puis le gel de la version.
 
 ## 1. Sources de vérité
 
@@ -24,158 +28,157 @@ Branche : `agent/initial-scaffold`
 Source éditoriale : Google Sheet **Roadmap ULTIMATE V2 — Astrub → Dofus Sylvestre**, onglet `ROUTE`.  
 ID : `1l1eYM3T708s5j74LmsUi4wyzg6sM9xShPzS_ToBtVYg`
 
-Runtime : `data/route.json`.
+Runtime : `data/route.json`, généré depuis le Sheet.
 
 Références métier :
-- Ganymède GP0 + guides spécialisés = ordre relatif / fenêtres / mutualisations ;
-- DofusPourLesNoobs = détail de quête, position, interaction, prérequis factuel.
+- Ganymède GP0 + guides spécialisés : ordre relatif, fenêtres, mutualisations ;
+- DofusPourLesNoobs : détail de quête, positions, interactions et prérequis factuels.
 
-Ne pas réordonner la route par intuition.
+Ne jamais reconstruire ou réordonner la route depuis la mémoire ou l’intuition.
 
-## 2. État route métier
+## 2. Contrat route actuel
 
-Certification clôturée sur le scope actuel. Les gros points déjà sécurisés comprennent notamment :
-- Alignement 75→100 ;
-- Ordres 4→5 ;
-- Tengu / Forêt Pétrifiée / `Si j'avais un marteau` ;
-- Fratrie / Ébène / Gang des Toxines ;
-- Enutrosor 2 / Enutrosor 3 ;
-- Turquoise et ses repassages nécessaires ;
-- DDG avec deux passages Comte distincts lorsque requis ;
-- Ivoire / Ébène / Six sur six ;
-- Tour du Monde jusqu'à Ougah → Merkator → Kralamoure ;
-- Valonia / Ilyzaelle ;
-- Dom de Pin / Dofus Sylvestre.
+- `STEP_ID` = identité métier stable ;
+- `MOMENT_ID` = frontière autoritaire d’une carte multi-step ;
+- `DISPLAY_ROLE` = `OBJECTIVE`, `TRANSITION`, `DETAIL` ;
+- une ligne sans `MOMENT_ID` reste une carte autonome ;
+- maximum 5 `OBJECTIVE` par carte ;
+- `PARALLEL_ID / PARALLEL_PHASE` = lifecycle des vraies quêtes à garder actives ensemble ;
+- `GOAL_ID / GOAL_PHASE` = lifecycle des fils rouges ;
+- `completedStepIds` = unique vérité de progression ;
+- aucune logique spécifique à une quête dans React.
+
+La certification métier couvre notamment : Alignement 75→100, Ordres 4→5, Tengu / Forêt Pétrifiée, Fratrie / Ébène / Gang des Toxines, Enutrosor 2/3, Turquoise, DDG, Ivoire, Ébène, Tour du Monde, Valonia / Ilyzaelle et fin Dom de Pin → Sylvestre.
 
 `src/route/routeContracts.test.ts` protège les dépendances sensibles.
 
-## 3. Nettoyage UX déjà fait
-
-### Cartes
-
-- blocs `PRÉREQUIS` masqués côté joueur ;
-- commentaires internes / notes de routing purgés ;
-- message métier des `VERROU DUR` conservé dans les séquences ;
-- actions `LANCER / AVANCER / TERMINER / STOP` conservées sur les vrais `OBJECTIVE` des `MOMENT_ID` ;
-- `GUIDE_ITEMS` ne sont pas ajoutés dans les séquences juste pour détailler DPLN : le lien DPLN reste la source du déroulé fin.
+## 3. Contrat UX actuel
 
 ### Titres joueur
 
-Nouveau contrat : **la donnée conserve les titres éditoriaux complets**, mais l'UI affiche un titre canonique court.
+La donnée conserve le titre éditorial complet. Le runtime applique `getPlayerFacingStepTitle()` après validation pour afficher un titre court.
+
+Exemples :
+- `Dépôt de ravitaillement — avancer jusqu'au verrou ...` → `Dépôt de ravitaillement` ;
+- `◆ Serre du Royalmouth — PASSAGE #3` → `Serre du Royalmouth`.
+
+Les cartes composites réellement significatives gardent leur suffixe.
 
 Implémentation :
 - `src/route/displayTitle.ts` ;
-- `src/route/loader.ts` applique `getPlayerFacingStepTitle()` au runtime après validation de la donnée brute.
+- `src/route/loader.ts`.
 
-Exemples :
-- `Dépôt de ravitaillement — avancer jusqu'au verrou Chaud du S.L.I.P.` → `Dépôt de ravitaillement` ;
-- `◆ Serre du Royalmouth — PASSAGE #3` → `Serre du Royalmouth`.
+Les tests éditoriaux doivent auditer la donnée brute, pas les titres normalisés pour l’UI.
 
-Les cartes composites significatives comme `Enutrosor — La quatrième dimension + Crache Test` gardent leur suffixe.
-
-Important : les tests éditoriaux doivent auditer `data/route.json` **avant** cette normalisation UI.
-
-## 4. Marqueurs visuels
+### Marqueurs visuels
 
 Direction validée :
-- Alignement → icône bouclier ;
-- quête directement rattachée à une série Dofus → icône œuf/Dofus custom ;
-- donjon → icône château ;
+- Alignement → bouclier ;
+- série Dofus → œuf/Dofus custom ;
+- Donjon → château ;
 - maximum 2 marqueurs visibles devant un titre.
 
 Implémentation :
 - `src/components/StepMarkers.tsx` ;
 - `src/step-markers.css` ;
 - `RouteStep.dofusSeries?: string` ;
-- `type === 'alignment'` et `type === 'dungeon'` sont réutilisés directement : ne pas créer de tags redondants.
+- colonne Sheet `DOFUS_SERIES` ;
+- export via `scripts/export-route.ts`.
 
-La colonne `DOFUS_SERIES` a été ajoutée à la source Sheet et `scripts/export-route.ts` sait l'exporter.
+`type === 'alignment'` et `type === 'dungeon'` sont réutilisés directement : ne pas ajouter de tags redondants.
 
-**À vérifier une dernière fois avant gel V1 :** la parité complète entre les valeurs `DOFUS_SERIES` du Sheet et `data/route.json`. Le runtime actuel contient les marqueurs utilisés pour le test visuel, mais le prochain agent doit considérer le Sheet comme source éditoriale finale.
+### Prérequis / GUIDE_ITEMS / warnings
 
-## 5. Deux tests qui étaient rouges et viennent d'être corrigés
+- `prerequisites` reste disponible pour audit/validation mais n’est pas rendu sur les cartes ;
+- `warning` sert uniquement aux informations réellement utiles au joueur ;
+- les commentaires internes de routing ont été purgés ;
+- `GUIDE_ITEMS` reste une donnée structurée utile, mais n’est **pas affiché automatiquement dans les séquences** uniquement pour recopier le déroulé DPLN ;
+- le lien DPLN reste la source du détail fin d’une quête ;
+- les actions `LANCER / AVANCER / TERMINER / STOP` restent visibles sur les vrais `OBJECTIVE` d’un `MOMENT_ID` ;
+- le message métier d’un `VERROU DUR` reste visible dans une séquence.
 
-Le dernier run utilisateur montrait 46/48 tests verts, avec deux faux échecs :
-
-1. `Flovoraison` apparaissait deux fois après normalisation UI du titre.  
-   Cause : `routeContracts.test.ts` utilisait `loadBundledRoute()`, donc auditait les titres déjà nettoyés.  
-   Correction poussée : le test audite maintenant directement `data/route.json` validé, donc les checkpoints éditoriaux distincts restent distinguables.
-
-2. `DISPLAY_ROLE decides checkbox boundaries...` attendait encore qu'aucune action ne survive dans une séquence.  
-   Cause : ancien contrat de test.  
-   Correction poussée : les actions restent sur les `OBJECTIVE`, mais sont supprimées des `DETAIL` / `TRANSITION`.
-
-Après pull, repasser :
-
-```powershell
-pnpm.cmd test:route
-pnpm.cmd validate:route
-pnpm.cmd build
-```
-
-État attendu : **48/48 tests verts**, route valide, build vert.
-
-Le warning Vite `chunk > 500 kB` n'est pas un échec.
-
-## 6. Ce qu'il reste avant clôture V1
-
-### A — Validation immédiate
-
-1. Pull les derniers commits distants.
-2. Repasser les 3 commandes ci-dessus.
-3. Vérifier visuellement au moins :
-   - une quête d'Alignement avec bouclier ;
-   - une quête Dofus avec œuf ;
-   - un donjon avec château ;
-   - un titre `— avancer jusqu'à...` affiché sans suffixe ;
-   - un donjon `— PASSAGE #N` affiché sans suffixe ;
-   - une carte composite qui garde son suffixe utile.
-
-### B — Vérification source → runtime
-
-Faire une dernière comparaison `ROUTE!DOFUS_SERIES` → `data/route.json` puis réexporter depuis le Sheet si nécessaire.
-
-Flux officiel :
+## 4. Flux officiel de modification de route
 
 ```text
 Google Sheet ROUTE
 → scripts/export-route.ts
 → data/route.json
-→ test:route
-→ validate:route
-→ build
+→ pnpm.cmd test:route
+→ pnpm.cmd validate:route
+→ pnpm.cmd build
+→ commit / push
 ```
 
-Ne pas maintenir une version JSON manuelle différente du Sheet.
+Ne jamais maintenir une version JSON manuelle divergente du Sheet.
 
-### C — Audit release-readiness court
+## 5. Ce qu’il reste avant gel V1
 
-Une fois A+B verts :
-- vérifier persistence/reprise de progression après fermeture ;
-- vérifier navigation précédent/suivant + saut de carte + progression par bloc ;
-- vérifier mode compact ;
-- vérifier ouverture DPLN et copie `/travel` ;
-- vérifier absence d'erreur console bloquante ;
-- décider si `tsconfig.tsbuildinfo` doit rester suivi ou être ignoré ;
-- ne traiter le warning bundle >500 kB que si une vraie raison performance existe, pas juste pour faire disparaître le warning.
+### A — Recette visuelle finale
 
-### D — Gel V1
+Contrôler dans l’application :
+- une quête Alignement avec bouclier ;
+- une quête Dofus avec œuf ;
+- un donjon avec château ;
+- une carte pouvant cumuler 2 marqueurs ;
+- titres `— avancer jusqu’à...` sans suffixe visible ;
+- titres donjon `— PASSAGE #N` sans suffixe visible ;
+- cartes composites gardant leur suffixe utile ;
+- warnings / hard locks / transitions restant lisibles.
 
-Quand A+B+C sont verts :
+### B — Parité Sheet → JSON
+
+Vérifier une dernière fois la parité complète de `DOFUS_SERIES` entre le Sheet et `data/route.json` puis, si nécessaire, réexporter depuis le Sheet.
+
+Le Sheet reste la source éditoriale finale.
+
+### C — Release-readiness runtime
+
+Tester :
+- persistance/reprise de progression après fermeture ;
+- navigation précédent/suivant ;
+- saut direct par numéro de carte ;
+- progression globale et par bloc ;
+- validation/dévalidation d’une carte et de ses sous-objectifs ;
+- mode compact / détaillé ;
+- ouverture DPLN ;
+- copie `/travel` ;
+- raccourcis globaux ;
+- restauration taille/position de fenêtre ;
+- absence d’erreur console bloquante ;
+- build Tauri si l’environnement le permet.
+
+Le warning Vite `chunk > 500 kB` n’est pas bloquant en soi. Ne pas modifier l’architecture uniquement pour faire disparaître ce warning.
+
+### D — Hygiène repo
+
+Décider avant gel V1 si `tsconfig.tsbuildinfo` doit rester suivi. Aujourd’hui il est généré par TypeScript et provoque régulièrement des blocages de `git pull --rebase` lorsqu’il est modifié localement.
+
+### E — Gel V1
+
+Quand A+B+C+D sont validés :
 - figer la route V1 ;
-- mettre à jour ce handoff avec le commit/tag de référence ;
-- ne plus modifier la route sans bug concret ou nouvelle exigence métier ;
-- passer aux évolutions produit post-V1.
+- créer le commit/tag de référence ;
+- mettre à jour ce handoff avec cette référence ;
+- ne plus réoptimiser la route sans bug concret ou nouvelle exigence métier ;
+- passer aux évolutions post-V1.
 
-## 7. Règles pour le prochain agent
+## 6. Règles pour le prochain agent
 
-- Ne jamais certifier une modification de route après quelques checks ciblés seulement.
-- Ne jamais déplacer une chaîne juste parce qu'elle diffère de Ganymède.
-- Ne pas dupliquer de logique métier dans React.
-- Réutiliser les champs data existants avant d'ajouter une nouvelle métadonnée.
-- Le titre éditorial complet reste dans la source ; le titre joueur court est un concern de présentation.
-- `STEP_ID` reste l'identité stable.
-- `MOMENT_ID` reste la seule frontière de carte multi-step.
-- `completedStepIds` reste l'unique vérité de progression.
+Avant intervention lire :
+1. `AGENTS.md`
+2. `SPEC.md`
+3. `ARCHITECTURE.md`
+4. `docs/DATA_MODEL.md`
+5. `docs/ROUTE_OPTIMIZATION.md` si la route est réellement rouverte
+6. `docs/ROUTE_OPTIMIZATION_WORKFLOW.md` pour une correction métier de route
+7. `HANDOFF.md`
 
-État de reprise attendu : **route métier figée, nettoyage UX presque terminé, tests à repasser après les deux corrections ci-dessus, puis recette finale et gel V1**.
+Ne pas :
+- rouvrir la certification globale sans défaut concret ;
+- déplacer une chaîne uniquement parce qu’elle diffère de Ganymède ;
+- parser un titre/instruction pour déduire une règle métier ;
+- dupliquer des vérités déjà présentes dans la donnée ;
+- réintroduire des commentaires de routing visibles joueur ;
+- considérer une optimisation locale comme preuve d’une route à nouveau « certifiée » sans contrôler le paquet impacté.
+
+État de reprise attendu : **route métier figée, 48/48 tests verts, validation/build verts, recette release-readiness V1 à terminer**.
