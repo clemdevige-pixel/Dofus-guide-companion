@@ -64,6 +64,8 @@ export interface RouteStep {
   blockId: string;
   type: StepType;
   displayType?: string;
+  /** Série de Dofus à laquelle cette étape appartient directement, si applicable. */
+  dofusSeries?: string;
   /** Rôle éditorial dans une carte mutualisée : checkbox, transition sans checkbox ou détail technique. */
   displayRole?: StepDisplayRole;
   title: string;
