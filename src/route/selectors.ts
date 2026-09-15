@@ -67,8 +67,7 @@ function getTokenOverlap(left: string, right: string): number {
 
 function trimTrailingConnector(value: string): string {
   return value
-    .replace(/\s*[,;:\-–—]+\s*$/g, '')
-    .replace(/\s+(?:et|puis)\s*$/i, '')
+    .replace(/(?:\s+|^)(?:et|puis)\s*[,;:\-–—]*\s*$/i, '')
     .trim();
 }
 
