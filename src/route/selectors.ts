@@ -30,7 +30,9 @@ function getRuleText(rule: RouteStep): string {
 
 function toSequenceDisplayStep(step: RouteStep): RouteStep {
   const displayStep = { ...step };
-  if (step.displayRole === 'transition' && !step.instruction && (step.action || step.title)) {
+  if (step.type === 'hard_lock' && step.hardLock?.message) {
+    displayStep.instruction = step.hardLock.message;
+  } else if (step.displayRole === 'transition' && !step.instruction && (step.action || step.title)) {
     displayStep.instruction = [step.action, step.title].filter(Boolean).join(' — ');
   }
   delete displayStep.action;
