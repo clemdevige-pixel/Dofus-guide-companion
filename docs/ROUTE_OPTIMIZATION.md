@@ -1,387 +1,189 @@
 # ROUTE OPTIMIZATION — Dofus Guide Companion
 
-## 1. Objectif
+## 1. Statut actuel
 
-Transformer la route Astrub → Dofus Sylvestre en script de progression réellement optimisé, sans changer son scope fonctionnel ni créer une seconde vérité.
+La route Astrub → Dofus Sylvestre est **certifiée sur son périmètre métier** et ne doit plus être réoptimisée globalement sans défaut joueur concret.
 
-La route doit minimiser :
-- les allers-retours inutiles ;
-- les prises tardives ;
-- les donjons refaits inutilement ;
-- les farms/achats évitables ;
-- les rendus qui provoquent un retour immédiat ;
-- la fragmentation artificielle d'un même moment joueur en plusieurs cartes ;
-- les redites intra-carte ;
-- les redites entre cartes adjacentes ;
-- les erreurs factuelles pouvant provoquer un blocage ou un nouveau passage de donjon.
+Ce document devient une **doctrine de maintenance** : il explique comment préserver la cohérence si une correction route est réellement nécessaire.
 
-Le résultat attendu est un parcours linéaire :
+État de référence :
+- 1009 étapes ;
+- 20 blocs ;
+- ordre métier certifié ;
+- anti-régressions actifs ;
+- source éditoriale = Google Sheet `ROUTE` ;
+- runtime = `data/route.json` généré.
 
-```text
-prises compatibles
-→ déplacement unique
-→ objectifs croisés / drops partagés
-→ donjon ou combat mutualisé
-→ transitions obligatoires uniquement
-→ rendus / reprises au point optimal
-→ nouvelles prises
-```
+## 2. Objectif d’une optimisation
 
-Une route optimisée n'est pas automatiquement une route **certifiée** : la certification factuelle exhaustive est une passe finale distincte.
+Une optimisation doit réduire au moins un coût réel :
+- aller-retour inutile ;
+- donjon refait évitable ;
+- prise tardive ;
+- rendu/reprise artificiellement séparé ;
+- carte administrative sans valeur joueur ;
+- texte redondant ;
+- erreur factuelle pouvant provoquer un blocage.
 
-## 2. Sources et responsabilités
+Une différence avec Ganymède n’est pas automatiquement une erreur.
 
-### Scope
-Le Google Sheet `Roadmap ULTIMATE V2 — Astrub → Dofus Sylvestre`, onglet `ROUTE`, définit ce qui appartient à la progression.
+Une modification n’est acceptable que si elle reste compatible avec :
+- prérequis réels ;
+- ordre relatif Ganymède ;
+- mutualisations déjà validées ;
+- Ocre / Alignement / Ordres / Dofus concernés ;
+- nombre réel de passages donjon ;
+- continuité stricte du guide.
 
-### Optimisation / trame
-Ganymède (GP0 + guides spécialisés) sert à déterminer l'ordre de parcours, les prises anticipées, les quêtes à garder actives, les mutualisations et les rendus différés.
+## 3. Sources
 
-Ganymède est un **squelette d'ordre**, pas un template à copier. Le Companion conserve son wording, sa granularité et son scope.
+### Scope / intégration
+Google Sheet `ROUTE`.
+
+### Ordre / fenêtres / mutualisations
+Ganymède GP0 + guides spécialisés.
 
 ### Vérification factuelle
-DofusPourLesNoobs et sources fiables équivalentes servent à confirmer prérequis, PNJ, positions, drops, ressources, conditions de combat, interactions de sortie et ordre obligatoire.
+DofusPourLesNoobs et sources fiables équivalentes.
 
-Ne jamais reconstruire un ordre ou une donnée factuelle depuis la mémoire de l'agent.
+Ne jamais reconstruire un ordre, prérequis ou checkpoint depuis la mémoire de l’agent.
 
-## 3. Unité d'optimisation : le moment joueur
+## 4. Unité de travail : le moment joueur
 
-L'unité de travail n'est plus « une quête » ni « une ligne Sheet », mais un **moment joueur**.
+Une carte représente un **moment joueur**, pas nécessairement une ligne Sheet.
 
-Un moment peut contenir :
-- une ou plusieurs prises ;
-- plusieurs checkpoints ;
-- un donjon ;
-- plusieurs rendus/reprises ;
-- un lancement immédiat de la suite ;
-- plusieurs lignes techniques nécessaires au suivi stable.
-
-Quand plusieurs lignes appartiennent à un même moment, elles partagent explicitement le même `MOMENT_ID`.
-
-### Règle cardinale
-
-**Une carte UI doit correspondre à un moment joueur, pas à une ligne technique.**
-
-Exemple :
-
-```text
-DONJON
-→ parler au PNJ de sortie
-→ terminer la quête
-→ lancer immédiatement la suivante
-```
-
-Si, pour le joueur, cet enchaînement est indivisible, les lignes techniques doivent partager un `MOMENT_ID` commun.
-
-Il n'existe plus de regroupement automatique : une ligne sans `MOMENT_ID` est une carte autonome. Toute mutualisation voulue doit être explicite dans `ROUTE`.
-
-## 4. Rendu cible d'une carte mutualisée
-
-Une carte mutualisée ne reproduit pas les micro-étapes techniques.
-
-### 4.1 Contexte avant action
-
-Avant les objectifs, afficher seulement lorsque pertinent :
-- `PRÉREQUIS` : ce qui doit déjà être vrai / possédé ;
-- `À SAVOIR` : contrainte ou avertissement utile avant l'action.
-
-Ces deux informations sont des données séparées. Elles ne doivent pas être recopiées dans `SUITE / STOP` uniquement parce que l'UI ne les affiche pas encore correctement.
-
-### 4.2 Objectifs principaux
-
-Un objectif principal est une action significative à cocher :
-- faire un donjon ;
-- terminer une vraie étape de quête ;
-- faire un combat/objectif majeur ;
-- accomplir une action structurante.
-
-**1 checkbox = 1 sous-objectif significatif.**
-
-Le premier membre d'un `MOMENT_ID` est toujours `OBJECTIVE`. Chaque nouvel `OBJECTIVE` ouvre une nouvelle checkbox ; `TRANSITION` et `DETAIL` se rattachent à l'objectif précédent.
-
-Exemple cible :
-
-```text
-☐ Shin Larve — Donjon des Larves · capturer pour l’Ocre
-→ Retourner voir Pat Akess [x,y] — rendre Shin Larve puis prendre Rakoopeur
-☐ Rakoopeur — Refuge Sylvestre · capturer pour l’Ocre
-→ Retourner voir Pat Akess [x,y] — rendre Rakoopeur puis prendre Craqueleur Légendaire
-☐ Craqueleur Légendaire — prendre l’objectif puis STOP
-```
-
-### 4.3 Transitions obligatoires
-
-Une transition est affichée **sans checkbox** uniquement si le joueur doit réellement faire quelque chose entre deux objectifs :
-- rendre une quête ;
-- prendre la suivante ;
-- avancer une quête ;
-- parler à un PNJ ;
-- donner/récupérer un objet ;
-- effectuer une action de sortie indispensable ;
-- changer de zone/PNJ si cela est nécessaire à la compréhension.
-
-La transition doit, quand la donnée existe, préciser :
-- l'action ;
-- le PNJ ;
-- la position.
-
-Une transition sans `instruction` explicite doit rester visible via ses champs structurés `action + title` ; l'UI ne doit jamais la faire disparaître silencieusement.
-
-### 4.4 Informations critiques à conserver
-
-Toujours conserver quand pertinent :
-- capture Ocre ;
-- STOP ;
-- objet requis ;
-- ordre obligatoire ;
-- dialogue de sortie ;
-- condition réelle de progression ;
-- action qui doit impérativement être faite avant le prochain donjon.
-
-### 4.5 Convention sortie de donjon
-
-Quand une action oubliée après le boss / dans la salle de sortie peut forcer un nouveau passage ou bloquer la progression, `À SAVOIR` commence par :
-
-```text
-⚠ AVANT DE SORTIR DU DONJON — ...
-```
-
-Cette convention n'est utilisée que si l'action :
-- appartient à notre scope ;
-- n'est pas automatique ;
-- doit réellement être faite avant de quitter.
-
-Ne pas importer une interaction post-boss Ganymède si elle ne sert qu'à une branche optionnelle hors scope.
-
-### 4.6 Informations à supprimer
-
-Supprimer toute information qui ne fait que répéter une information déjà visible ou évidente :
-- `REPRENDRE / FAIRE` si l'objectif indique déjà quoi faire ;
-- `FAIRE & VALIDER` si le donjon est déjà nommé comme objectif ;
-- « quête terminée » sans action supplémentaire ;
-- « retourne voir X » répété dans deux lignes successives ;
-- une carte autonome de rendu/reprise si elle peut devenir une transition dans la carte adjacente ;
-- la fin d'une carte répétée au début de la suivante ;
-- commentaires d'audit ou références internes à Ganymède/blocs/lignes.
-
-**Une information utile ne doit apparaître qu'une fois dans le flux joueur.**
-
-## 5. Frontières de blocs
-
-Les blocs sont éditoriaux, pas des barrières d'optimisation.
-
-Une quête déjà IN_SCOPE peut être lancée plus tôt si :
-1. elle est réellement disponible ;
-2. son lancement précoce apporte un gain ;
-3. aucun prérequis/état n'est cassé ;
-4. l'ancienne prise est transformée en reprise au lieu d'être dupliquée.
-
-## 6. Passes globales obligatoires
-
-Après la première linéarisation, la route doit être auditée par **passes globales**, et pas seulement bloc par bloc.
-
-### Passe A — scope / prérequis réels
-- supprimer les faux bloqueurs ;
-- distinguer niveau recommandé, niveau minimum réel et verrou réellement structurant ;
-- ne jamais créer un `VERROU DUR` uniquement parce qu'un niveau personnage est indiqué ;
-- vérifier métier, timer, succès, accès, objet, état de quête et conditions réellement bloquantes.
-
-### Passe B — prises / reprises
-- chercher les prises qui doivent être avancées ;
-- chercher les quêtes lancées deux fois ;
-- vérifier tous les `LANCER`, `LANCER LES 2/4`, objets de lancement et salles de sortie ;
-- conserver les `STEP_ID` sur le même événement métier uniquement.
-
-### Passe C — donjons / mutualisations
-- pour chaque donjon, lister toutes les quêtes pouvant exploiter le même passage ;
-- justifier explicitement chaque repassage restant ;
-- vérifier captures Ocre, idoles, dialogues de sortie, drops et sauvegardes ;
-- confronter chaque mutualisation à l'ordre Ganymède pour éviter les dépendances circulaires.
-
-### Passe D — moments / cartes
-- inspecter tous les `TERMINER + LANCER` ;
-- inspecter `donjon → reprise → suite` ;
-- inspecter les chaînes Tour/Emma/Alain/Thelma/Anne/Lorie et équivalentes ;
-- ajouter `MOMENT_ID` lorsqu'un seul moment joueur est encore fragmenté en plusieurs lignes ;
-- vérifier que tout `MOMENT_ID` commence par `OBJECTIVE` et que chaque ligne du moment possède un `DISPLAY_ROLE`.
-
-### Passe E — fils rouges / verrous
-- vérifier `start → progress → finish` ;
-- vérifier les hard locks associés ;
-- détecter les goals ouverts sans fermeture ou fermés avant usage ;
-- vérifier qu'un verrou arrive au dernier moment utile, pas trop tôt ;
-- conserver le comportement de verrou même lorsqu'un hard lock appartient à une carte mutualisée.
-
-### Passe F — continuité finale
-- vérifier qu'une ligne peut être suivie strictement sans interprétation externe ;
-- vérifier qu'aucune instruction « fais X puis reprends Y plus tard » n'est laissée sans étapes explicites ;
-- vérifier la continuité jusqu'au Dofus Sylvestre final.
-
-### Passe G — anti-redondance / confort joueur
-Cette passe est obligatoire après la mutualisation structurelle.
-
-Pour **chaque carte** puis **chaque paire de cartes adjacentes** :
-1. identifier les objectifs significatifs ;
-2. convertir les rendus/prises/avancées indispensables en transitions compactes ;
-3. supprimer les cartes purement administratives absorbables ;
-4. supprimer les phrases doublonnées dans une même carte ;
-5. supprimer toute répétition de la fin de la carte N au début de N+1 ;
-6. conserver uniquement les notes critiques ;
-7. vérifier que le joueur sait toujours exactement quoi faire entre deux donjons.
-
-Cette passe vise simultanément :
-- **moins de cartes** ;
-- **moins de texte** ;
-- **aucune perte d'action nécessaire**.
-
-### Passe H — certification factuelle exhaustive
-
-Cette passe est obligatoire avant de qualifier la route de « certifiée ».
-
-Pour **chaque carte**, contrôler au minimum :
-- prérequis réellement disponibles à cet instant ;
-- ressources / quantités / consommation ;
-- lancement ;
-- checkpoint ;
-- boss/donjon ;
-- action avant boss ;
-- action post-boss / sortie ;
-- capture Ocre réellement utile ;
-- rendu ;
-- mutualisation et repassages ;
-- compatibilité avec la trame Ganymède ;
-- scope ;
-- placement de chaque information dans le bon champ.
-
-Priorité absolue aux erreurs qui peuvent provoquer :
-- blocage ;
-- donjon à refaire ;
-- pierre d'âme gaspillée ;
-- ressource consommée trop tôt ;
-- quête lancée/rendue au mauvais moment ;
-- mutualisation impossible.
-
-## 7. Règles de réécriture
-
-### 7.1 Prises anticipées
-Toute prise utilise `POSITION` ou `LANCEMENT`, avec `LANCEMENT_REQUIS=TRUE`.
-
-### 7.2 Destination
-`POSITION` = prise de quête.
-`DESTINATION` = prochain lieu utile du moment.
-
-Ne jamais détourner `POSITION` pour un farm, atelier, rendu ou donjon.
-
-### 7.3 Quêtes parallèles
-Une quête laissée active doit être représentée explicitement :
-- `LANCER / STOP` ou `LANCER / FIL ROUGE` ;
-- `REPRENDRE / AVANCER` ;
-- `REPRENDRE / TERMINER`.
-
-Ces états techniques ne sont pas forcément des cartes ou checkboxes : ils peuvent être rendus comme transitions si c'est plus lisible.
-
-### 7.4 Donjons
-Le donjon n'est fait que lorsque les fils compatibles sont prêts, sauf repassage structurel documenté.
-
-Ne jamais fusionner deux passages uniquement parce que les boss sont identiques : les quêtes doivent réellement pouvoir coexister au moment concerné.
-
-### 7.5 Ressources
-Avant tout achat/farm, vérifier si une quête précédente fournit la ressource naturellement.
-
-Vérifier les quantités **cumulées jusqu'au point de consommation** : une ressource préparée puis consommée plus tôt n'est plus disponible pour une quête tardive.
-
-### 7.6 Rendus
-Différer un rendu s'il évite un retour sans bloquer la suite. Si le rendu est nécessaire entre deux objectifs, le présenter comme transition compacte plutôt que comme carte autonome lorsque possible.
-
-### 7.7 MOMENT_ID
-Attribuer un `MOMENT_ID` partagé lorsque plusieurs lignes techniques représentent un seul moment joueur.
+Si plusieurs lignes techniques forment un seul moment indivisible, utiliser explicitement :
+- `MOMENT_ID` ;
+- `DISPLAY_ROLE`.
 
 Règles :
-- contigu ;
-- même bloc ;
-- pas de réutilisation plus loin ;
-- chaque membre possède un `DISPLAY_ROLE` ;
-- le premier membre est `OBJECTIVE` ;
-- une ligne sans `MOMENT_ID` reste une carte autonome ;
-- ne jamais reconstruire le regroupement depuis le texte, le type ou la proximité côté React.
+- `OBJECTIVE` = sous-objectif significatif / checkbox ;
+- `TRANSITION` = action intermédiaire nécessaire ;
+- `DETAIL` = information attachée à l’objectif précédent ;
+- maximum 5 `OBJECTIVE` par carte ;
+- une ligne sans `MOMENT_ID` reste autonome.
 
-### 7.8 PRÉREQUIS / À SAVOIR
+Aucun regroupement heuristique côté React.
 
-`PRÉREQUIS / RESSOURCES` = conditions déjà satisfaites avant la carte.  
-`À SAVOIR` = contexte/alerte avant action.
+## 5. Anti-redondance joueur
 
-Ne pas y laisser :
-- commentaires d'audit ;
-- références à des numéros de bloc/ligne ;
-- actions principales qui devraient être dans `GUIDE_ITEMS` ou `SUITE / STOP`.
+Une information utile ne doit apparaître qu’une fois.
 
-### 7.9 Scope
-Classer les éléments Ganymède :
-- `IN_SCOPE` ;
-- `SUPPORT` ;
-- `OUT_OF_SCOPE` ;
-- `EXCEPTION_PARANGON`.
+À supprimer :
+- commentaires de routing/audit ;
+- répétition de `LANCER / TERMINER / AVANCER` dans le titre alors que l’action est déjà affichée ;
+- suffixes éditoriaux de passage/checkpoint dans le titre joueur ;
+- “PASSAGE #N” affiché au joueur ;
+- rappel de la fin de la carte précédente ;
+- carte autonome purement administrative absorbable dans le moment voisin.
 
-## 8. Exception Vulbis / Parangon
+À conserver :
+- STOP ;
+- capture Ocre réellement utile ;
+- interaction critique de sortie ;
+- objet à conserver ;
+- condition de combat ;
+- transition indispensable ;
+- position utile.
 
-L'exception reste limitée au strict nécessaire pour rendre le Parangon de puissance droppable, puis la quête reste active pendant les gardiens 200 de la route.
+Le détail fin de quête reste sur DPLN. Le Companion ne cherche pas à recopier tout le walkthrough.
 
-Ne pas poursuivre le Vulbis dans cette roadmap.
+## 6. Titres
 
-## 9. Critères de validation d'une mutualisation
+La donnée brute peut conserver un titre éditorial descriptif.
 
-Une mutualisation est acceptée seulement si :
-- les quêtes peuvent être actives simultanément ;
-- aucun prérequis n'est déplacé après usage ;
-- aucun rendu ne ferme une autre branche ;
-- le gain est réel ;
-- la route reste exécutable ligne par ligne ;
-- lancements/destinations restent structurés ;
-- les transitions obligatoires restent visibles ;
-- aucune redite inutile n'est ajoutée ;
-- la trame Ganymède ne place pas le second objectif derrière la fermeture obligatoire du premier.
+Le titre joueur est normalisé au runtime par `getPlayerFacingStepTitle()`.
 
-En cas de doute : conserver l'ordre sûr et documenter le point au lieu d'inventer.
+Ne pas réécrire massivement les titres du Sheet uniquement pour un besoin d’affichage.
 
-## 10. Décisions certifiées à ne pas rouvrir sans preuve
+Les cartes composites réellement significatives gardent leur suffixe.
 
-### Totems de Maïmane
-- Joie = Klime dédié ;
-- Peur = Koutoulou dédié ;
-- Colère = Dazak dédié ;
-- Dégoût = Nileza dédié ;
-- Tristesse = Vortex mutualisé ;
-- Surprise = Comte Harebourg mutualisé.
+## 7. Donjons / mutualisations
 
-4 repassages dédiés restent nécessaires dans la trame actuelle.
+Ne fusionner deux passages que si les quêtes peuvent réellement coexister au même moment.
 
-### Forgerons / Bworks
-Optimum : **1 Donjon des Forgerons + 1 Donjon des Bworks**.
+Pour chaque repassage envisagé :
+- vérifier les prérequis ;
+- vérifier les quêtes actives ;
+- vérifier captures/idoles/items ;
+- vérifier interactions post-boss ;
+- vérifier sauvegardes/checkpoints ;
+- vérifier la fenêtre Ganymède.
 
-Le Liquide des Forgerons est précollecté pendant l'unique passage Forgerons et conservé pour l'alignement ultérieur.
+Un même boss ne suffit jamais à prouver qu’un passage peut être fusionné.
 
-### Minotoror
-Ne pas capturer le Minotoror au passage : prendre la sauvegarde vers Minotot.
+## 8. Ressources / préparation
 
-### Grand Ougah
-Attendre la convergence `Assassin Suprême + Un pouvoir mérydique` et ne faire qu'un passage partagé.
+Distinguer :
+- ressource à apporter ;
+- objet obtenu pendant la quête ;
+- prérequis ;
+- aide externe.
 
-## 11. Contrôle final global
+Les ressources pré-farmables doivent être annoncées dans une `PRÉPA` actionnable avant consommation.
 
-Après les 20 blocs :
-- vérifier scope complet ;
-- vérifier doubles lancements et prises déplacées ;
-- vérifier tous les repassages de donjon ;
-- vérifier tous les `MOMENT_ID` / `DISPLAY_ROLE` ;
-- vérifier tous les `TERMINER + LANCER` ;
-- vérifier tous les hard locks ;
-- vérifier les fils rouges ;
-- faire la passe anti-redondance carte par carte et entre cartes adjacentes ;
-- faire la **certification factuelle exhaustive** ;
-- vérifier les alertes `⚠ AVANT DE SORTIR DU DONJON` ;
-- vérifier le rendu réel des transitions et des objectifs-donjons ;
-- vérifier la continuité jusqu'au vrai Dofus Sylvestre ;
-- régénérer `data/route.json` uniquement depuis le Sheet ;
-- lancer tests, validation, build et check Tauri.
+Vérifier les quantités cumulées jusqu’au premier usage.
 
-Le Google Sheet reste l'unique source éditoriale. `data/route.json` n'est jamais corrigé manuellement.
+Ne pas transformer un niveau conseillé en hard lock.
+
+## 9. Prérequis / warnings / GUIDE_ITEMS
+
+### `prerequisites`
+Conservé pour audit/validation, non rendu dans les cartes joueur.
+
+### `warning`
+Réservé aux informations critiques réellement utiles.
+
+### `GUIDE_ITEMS`
+Donnée structurée d’action courte. Ne pas l’afficher automatiquement dans une séquence uniquement pour recopier DPLN.
+
+### `instruction`
+STOP, transition ou déroulé complémentaire réellement nécessaire.
+
+## 10. Hard locks / fils rouges / groupes parallèles
+
+- `GOAL_ID / GOAL_PHASE` = fils rouges ;
+- `PARALLEL_ID / PARALLEL_PHASE` = vraies quêtes à garder actives ensemble ;
+- hard lock = blocage réel, jamais simple recommandation.
+
+Le rappel d’un groupe parallèle ne doit apparaître que sur une carte appartenant au groupe.
+
+Le message métier d’un hard lock doit rester visible dans une séquence.
+
+## 11. Marqueurs visuels
+
+Les marqueurs ne modifient pas la route :
+- Alignement → `type === 'alignment'` ;
+- Donjon → `type === 'dungeon'` ;
+- série Dofus → `dofusSeries` / colonne `DOFUS_SERIES`.
+
+Aucune détection par titre.
+
+## 12. Certification
+
+Ne jamais déclarer une route “certifiée” après quelques contrôles ciblés.
+
+Si une correction métier rouvre un paquet :
+1. identifier précisément le défaut ;
+2. cartographier le paquet complet ;
+3. vérifier Ganymède + source factuelle ;
+4. corriger la source Sheet ;
+5. adapter un test anti-régression si généralisable ;
+6. réexporter ;
+7. repasser tests/validation/build ;
+8. certifier uniquement le périmètre réellement recontrôlé.
+
+La certification globale actuelle ne doit être rouverte que si un défaut concret la remet en cause.
+
+## 13. Flux obligatoire
+
+```text
+Google Sheet ROUTE
+→ pnpm export:route
+→ pnpm test:route
+→ pnpm validate:route
+→ pnpm build
+→ commit / push
+```
+
+Ne jamais corriger `data/route.json` comme source éditoriale.
