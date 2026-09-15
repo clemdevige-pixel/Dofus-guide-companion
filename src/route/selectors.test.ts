@@ -280,3 +280,49 @@ test('parallel reminder stays hidden before the group start is completed', () =>
 
   assert.deepEqual(getActiveParallelGroups(parallelRoute, new Set(), [step]), []);
 });
+
+test('sequence presentation removes repeated dungeon warning copy and satisfied prerequisites', () => {
+  const momentId = 'moment-slip';
+  const steps: RouteStep[] = [
+    {
+      id: 'obsidiantre',
+      order: 1,
+      blockId: 'block-01',
+      type: 'dungeon',
+      displayRole: 'objective',
+      title: "◆ Hypogée de l'Obsidiantre — PASSAGE #2",
+      warning: "⚠ AVANT DE SORTIR DU DONJON — après l'Obsidiantre, récupère la plante de Chaud du S.L.I.P. dans la salle précédant la sortie. Ne quitte pas l'Hypogée sans elle.",
+      instruction: "Vaincs l'Obsidiantre pour Chaud du S.L.I.P. puis, AVANT DE SORTIR, récupère la plante de quête dans la salle de fin. Poursuis ensuite la quête.",
+      momentId,
+    },
+    {
+      id: 'chaud',
+      order: 2,
+      blockId: 'block-01',
+      type: 'resume',
+      displayRole: 'transition',
+      title: 'Chaud du S.L.I.P.',
+      warning: 'Récompense notamment la Potion du S.L.I.P. requise pour Dépôt de ravitaillement.',
+      action: 'TERMINER',
+      instruction: "REPRENDS et TERMINE Chaud du S.L.I.P. afin d'obtenir la Potion du S.L.I.P.",
+      momentId,
+    },
+    {
+      id: 'depot',
+      order: 3,
+      blockId: 'block-01',
+      type: 'resume',
+      displayRole: 'transition',
+      title: 'Dépôt de ravitaillement',
+      prerequisites: 'Potion du S.L.I.P. obtenue via Chaud du S.L.I.P.',
+      action: 'TERMINER',
+      instruction: 'REPRENDS Dépôt, montre la potion, libère les bûcherons demandés puis TERMINE la quête.',
+      momentId,
+    },
+  ];
+
+  const displaySteps = getSequenceObjectives(steps).flatMap((objective) => objective.steps);
+  assert.equal(displaySteps[0].instruction, "Vaincs l'Obsidiantre pour Chaud du S.L.I.P. Poursuis ensuite la quête.");
+  assert.equal(displaySteps[1].warning, undefined);
+  assert.equal(displaySteps[2].prerequisites, undefined);
+});
