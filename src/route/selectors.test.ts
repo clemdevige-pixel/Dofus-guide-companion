@@ -218,7 +218,12 @@ test('DISPLAY_ROLE decides checkbox boundaries inside a moment', () => {
     objectives.map((objective) => objective.steps.map((step) => step.id)),
     [['shin', 'larves', 'transition'], ['rakoopeur']],
   );
-  assert.equal(objectives.flatMap((objective) => objective.steps).some((step) => step.action), false);
+
+  const displayedSteps = objectives.flatMap((objective) => objective.steps);
+  assert.equal(displayedSteps.find((step) => step.id === 'shin')?.action, 'FAIRE');
+  assert.equal(displayedSteps.find((step) => step.id === 'rakoopeur')?.action, 'FAIRE');
+  assert.equal(displayedSteps.find((step) => step.id === 'larves')?.action, undefined);
+  assert.equal(displayedSteps.find((step) => step.id === 'transition')?.action, undefined);
 });
 
 test('source equality never affects objective grouping', () => {
