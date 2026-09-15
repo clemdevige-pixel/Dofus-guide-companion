@@ -39,3 +39,9 @@
 .sequence-item--completed .source-title-button:focus-visible {
   text-decoration: line-through underline;
 }
+
+/* A hard lock has one authoritative blocking message: the lock panel itself. */
+.current-step--hard_lock > .action-label,
+.current-step--hard_lock > .instruction {
+  display: none;
+}
