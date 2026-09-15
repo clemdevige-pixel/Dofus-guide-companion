@@ -56,22 +56,7 @@ export interface PreparationRequirement {
   text: string;
 }
 
-/** Legacy temporaire : les anciennes notes sont reclassées par le script de migration. */
-export interface PreparationNote {
-  kind: 'note';
-  text: string;
-}
-
-export type StructuredPreparationItem =
-  | PreparationResource
-  | PreparationRequirement
-  | PreparationNote;
-
-/**
- * Les chaînes sont conservées temporairement pour migrer route.json sans casser la branche.
- * Une fois la migration data terminée, PreparationItem deviendra strictement structuré.
- */
-export type PreparationItem = StructuredPreparationItem | string;
+export type PreparationItem = PreparationResource | PreparationRequirement;
 
 export interface RouteStep {
   id: string;
