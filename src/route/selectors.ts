@@ -21,7 +21,7 @@ const dungeonExitWarningPrefix = '⚠ AVANT DE SORTIR DU DONJON —';
 const semanticStopWords = new Set([
   'avec', 'dans', 'pour', 'puis', 'apres', 'avant', 'cette', 'depuis', 'entre', 'faire',
   'fais', 'fait', 'jusqu', 'mais', 'plus', 'sans', 'salle', 'sortir', 'termine', 'terminer',
-  'vers', 'votre', 'quand', 'reste', 'restez', 'apres', 'avant', 'donjon',
+  'vers', 'votre', 'quand', 'reste', 'restez', 'donjon',
 ]);
 
 function getRawSortedSteps(route: RouteDocument): RouteStep[] {
@@ -80,7 +80,7 @@ function removeCriticalWarningDuplicate(instruction: string | undefined, warning
 
   for (const sentence of sentences) {
     const overlap = getTokenOverlap(sentence, warningContent);
-    const cue = sentence.search(/\b(?:avant de sortir|avant de partir|dans la salle de sortie|dans la salle de fin)\b/i);
+    const cue = sentence.search(/\b(?:avant de sortir|avant de partir|avant de quitter|dans la salle de sortie|dans la salle de fin)\b/i);
 
     if (cue >= 0 && overlap >= 0.25) {
       const prefix = trimTrailingConnector(sentence.slice(0, cue));
@@ -109,7 +109,26 @@ function isPrerequisiteCoveredByEarlierStep(prerequisite: string | undefined, ea
 
   return earlierSteps.some((step) => {
     const title = normalizeSemanticText(getCoreStepTitle(step.title));
-    return title.length >= 6 && normalizedPrerequisite.includes(title);
+    if (title.length < 6) return false;
+
+    const obtainedVia = [
+      `obtenu via ${title}`,
+      `obtenue via ${title}`,
+      `obtenus via ${title}`,
+      `obtenues via ${title}`,
+      `recu via ${title}`,
+      `recue via ${title}`,
+    ];
+    if (obtainedVia.some((phrase) => normalizedPrerequisite.includes(phrase))) return true;
+
+    return [
+      `${title} termine`,
+      `${title} terminee`,
+      `${title} vaincu`,
+      `${title} vaincue`,
+      `${title} valide`,
+      `${title} validee`,
+    ].includes(normalizedPrerequisite);
   });
 }
 
