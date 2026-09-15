@@ -108,6 +108,39 @@ test('an explicit transition instruction stays authoritative', () => {
   assert.equal(objectives[0]?.steps[1]?.action, undefined);
 });
 
+test('a hard lock keeps its business message inside a sequence', () => {
+  const momentId = 'moment-hard-lock';
+  const objectives = getSequenceObjectives([
+    {
+      id: 'objective',
+      order: 1,
+      blockId: 'block-01',
+      type: 'quest',
+      title: 'Objectif',
+      displayRole: 'objective',
+      momentId,
+    },
+    {
+      id: 'hard-lock',
+      order: 2,
+      blockId: 'block-01',
+      type: 'hard_lock',
+      title: 'Verrou',
+      instruction: 'Instruction générique',
+      hardLock: {
+        message: 'Termine maintenant la quête requise avant de poursuivre.',
+      },
+      displayRole: 'transition',
+      momentId,
+    },
+  ]);
+
+  assert.equal(
+    objectives[0]?.steps[1]?.instruction,
+    'Termine maintenant la quête requise avant de poursuivre.',
+  );
+});
+
 test('displayRole cannot exist outside an explicit moment', () => {
   const route: RouteDocument = {
     schemaVersion: 1,
