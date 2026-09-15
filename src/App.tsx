@@ -229,6 +229,9 @@ export function App() {
     }),
     [completedStepIds, stepGroups],
   );
+  const currentBlockProgress = currentBlock
+    ? blockProgress.find((block) => block.id === currentBlock.id)
+    : undefined;
 
   function goPrevious() {
     setSecondaryView(null);
@@ -394,7 +397,9 @@ export function App() {
           <div className="app-header__context">
             {currentBlock && (
               <p className="header-block-line">
-                Bloc {currentBlock.order}/{route.blocks.length} · <strong>{currentBlock.title}</strong>
+                <span className="header-block-line__index">Bloc {currentBlock.order}/{route.blocks.length}</span>
+                <span className="header-block-line__title">· <strong>{currentBlock.title}</strong></span>
+                <span className="header-block-line__progress">· {currentBlockProgress?.percentage ?? 0}%</span>
               </p>
             )}
             <form
@@ -436,7 +441,7 @@ export function App() {
         <div className="compact-header">
           <span>
             {displayIndex}/{stepGroups.length}
-            {currentBlock ? ` · B${currentBlock.order}/${route.blocks.length}` : ''}
+            {currentBlock ? ` · B${currentBlock.order}/${route.blocks.length} · ${currentBlockProgress?.percentage ?? 0}%` : ''}
             {' · '}{typeLabel}
           </span>
           <button
