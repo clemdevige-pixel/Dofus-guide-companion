@@ -1,8 +1,9 @@
-import { getPreparationItemKey, parsePreparationItem } from '../route/preparation';
+import { getPreparationItemKey, normalizePreparationItem } from '../route/preparation';
+import type { PreparationItem } from '../route/types';
 
 interface PreparationChecklistProps {
   stepId: string;
-  items: string[];
+  items: PreparationItem[];
   checkedItemIds: ReadonlySet<string>;
   onToggleItem: (itemId: string) => void;
   onCopyName: (name: string) => void;
@@ -17,14 +18,14 @@ export function PreparationChecklist({
 }: PreparationChecklistProps) {
   return (
     <ul className="preparation-checklist">
-      {items.map((rawItem, itemIndex) => {
-        const parsed = parsePreparationItem(rawItem);
+      {items.map((item, itemIndex) => {
+        const normalized = normalizePreparationItem(item);
         const itemId = getPreparationItemKey(stepId, itemIndex);
 
-        if (parsed.kind === 'note') {
+        if (normalized.kind === 'note') {
           return (
             <li className="preparation-checklist__note" key={itemId}>
-              {parsed.text}
+              {normalized.text}
             </li>
           );
         }
@@ -39,7 +40,7 @@ export function PreparationChecklist({
             <button
               className="preparation-checklist__check"
               type="button"
-              aria-label={checked ? `Décocher ${parsed.name}` : `Cocher ${parsed.name}`}
+              aria-label={checked ? `Décocher ${normalized.name}` : `Cocher ${normalized.name}`}
               aria-pressed={checked}
               onClick={() => onToggleItem(itemId)}
             >
@@ -48,13 +49,16 @@ export function PreparationChecklist({
             <button
               className="preparation-checklist__copy"
               type="button"
-              title={`Copier ${parsed.name}`}
-              onClick={() => onCopyName(parsed.name)}
+              title={`Copier ${normalized.name}`}
+              onClick={() => onCopyName(normalized.name)}
             >
-              <span className="preparation-checklist__quantity">{parsed.quantity} ×</span>
-              <span className="preparation-checklist__name">{parsed.name}</span>
+              <span className="preparation-checklist__quantity">{normalized.quantity} ×</span>
+              <span className="preparation-checklist__name">{normalized.name}</span>
               <span className="preparation-checklist__copy-icon" aria-hidden="true">⧉</span>
             </button>
+            {normalized.note && (
+              <span className="preparation-checklist__resource-note">{normalized.note}</span>
+            )}
           </li>
         );
       })}
