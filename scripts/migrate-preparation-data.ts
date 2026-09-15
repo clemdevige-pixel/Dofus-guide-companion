@@ -33,6 +33,10 @@ const implicitSingleResources = new Map<string, Set<string>>([
   ])],
 ]);
 
+const explicitResourceNames = new Map<string, { name: string; note?: string }>([
+  ['Graisses de Mansot à drop', { name: 'Graisse de mansot', note: 'À récupérer sur les Mansots ; non achetable en HDV.' }],
+]);
+
 function splitEditorialAnnotation(name: string): { name: string; note?: string } {
   if (name.includes(' — ')) {
     const [resourceName, ...noteParts] = name.split(' — ');
@@ -61,6 +65,15 @@ function migrateItem(stepId: string, rawItem: string): StructuredPreparationItem
 
   const quantity = Number.parseInt(match[1].replace(/\s/g, ''), 10);
   const rawName = match[2].trim();
+  const explicit = explicitResourceNames.get(rawName);
+  if (explicit) {
+    return {
+      kind: 'resource',
+      quantity,
+      name: explicit.name,
+      ...(explicit.note ? { note: explicit.note } : {}),
+    };
+  }
 
   if (
     !Number.isInteger(quantity) ||
