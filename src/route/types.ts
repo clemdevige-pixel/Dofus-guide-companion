@@ -43,12 +43,29 @@ export interface PreparationResource {
   note?: string;
 }
 
+export type PreparationRequirementKind =
+  | 'kamas'
+  | 'profession'
+  | 'party'
+  | 'class'
+  | 'requirement';
+
+export interface PreparationRequirement {
+  kind: PreparationRequirementKind;
+  /** Texte joueur conservé tel quel ; seul le type sert au regroupement UI. */
+  text: string;
+}
+
+/** Legacy temporaire : les anciennes notes sont reclassées par le script de migration. */
 export interface PreparationNote {
   kind: 'note';
   text: string;
 }
 
-export type StructuredPreparationItem = PreparationResource | PreparationNote;
+export type StructuredPreparationItem =
+  | PreparationResource
+  | PreparationRequirement
+  | PreparationNote;
 
 /**
  * Les chaînes sont conservées temporairement pour migrer route.json sans casser la branche.
