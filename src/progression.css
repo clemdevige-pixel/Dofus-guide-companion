@@ -348,6 +348,14 @@
   font-size: 11px;
 }
 
+.preparation-checklist__resource-note {
+  grid-column: 2;
+  margin: -2px 2px 2px;
+  color: #839187;
+  font-size: 10px;
+  line-height: 1.3;
+}
+
 .preparation-checklist__note {
   padding: 6px 8px;
   border-left: 2px solid #4c5b51;
