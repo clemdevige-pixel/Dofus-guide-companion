@@ -35,7 +35,9 @@ function toSequenceDisplayStep(step: RouteStep): RouteStep {
   } else if (step.displayRole === 'transition' && !step.instruction && (step.action || step.title)) {
     displayStep.instruction = [step.action, step.title].filter(Boolean).join(' — ');
   }
-  delete displayStep.action;
+  if (step.displayRole !== 'objective') {
+    delete displayStep.action;
+  }
   return displayStep;
 }
 
