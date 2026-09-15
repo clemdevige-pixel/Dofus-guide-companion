@@ -5,6 +5,7 @@ import './styles.css';
 import './sequence.css';
 import './compact.css';
 import './title-links.css';
+import './step-markers.css';
 
 const App = lazy(async () => {
   const module = await import('./App');
