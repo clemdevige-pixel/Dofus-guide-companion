@@ -35,6 +35,16 @@ const implicitSingleResources = new Map<string, Set<string>>([
 
 const explicitResourceNames = new Map<string, { name: string; note?: string }>([
   ['Graisses de Mansot à drop', { name: 'Graisse de mansot', note: 'À récupérer sur les Mansots ; non achetable en HDV.' }],
+  ['Capes Bontariennes', { name: 'Cape Bontarienne' }],
+  ['Cerises', { name: 'Cerise' }],
+  ['Viandes avariées', { name: 'Viande Avariée' }],
+  ['Enchanterelles', { name: 'Enchanterelle' }],
+  ['Pépites', { name: 'Pépite' }],
+]);
+
+const ambiguousResourceNames = new Set([
+  'Résines',
+  'Chaînes Brisées',
 ]);
 
 function splitEditorialAnnotation(name: string): { name: string; note?: string } {
@@ -79,6 +89,7 @@ function migrateItem(stepId: string, rawItem: string): StructuredPreparationItem
     !Number.isInteger(quantity) ||
     quantity <= 0 ||
     nonResourcePattern.test(rawName) ||
+    ambiguousResourceNames.has(rawName) ||
     rawName.includes(' / ') ||
     rawName.includes(' + ') ||
     rawName.includes(':') ||
