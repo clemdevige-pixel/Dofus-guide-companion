@@ -11,7 +11,8 @@ export interface ParsedPreparationNote {
 
 export type ParsedPreparationItem = ParsedPreparationResource | ParsedPreparationNote;
 
-const nonResourcePattern = /\b(kamas?|succ[eè]s|niveau|minimum|au choix|de chaque)\b|\bOU\b|pierres? d['’]âme adaptées?|artefacts? pandawushu\s*:/i;
+const nonResourcePattern = /\b(kamas?|succ[eè]s|niveau|minimum|au choix|de chaque|emplacements?|points? de succ[eè]s|disponibles?|inventaire|sort)\b|\bOU\b|pierres? d['’]âme adaptées?|artefacts? pandawushu\s*:/i;
+const annotatedRequirementPattern = /[—+():/]/;
 
 /**
  * preparationItems reste la source de vérité de la route.
@@ -28,7 +29,13 @@ export function parsePreparationItem(item: string): ParsedPreparationItem {
   const quantity = Number.parseInt(match[1].replace(/\s/g, ''), 10);
   const name = match[2].trim();
 
-  if (!Number.isFinite(quantity) || quantity <= 0 || !name || nonResourcePattern.test(name)) {
+  if (
+    !Number.isFinite(quantity) ||
+    quantity <= 0 ||
+    !name ||
+    nonResourcePattern.test(name) ||
+    annotatedRequirementPattern.test(name)
+  ) {
     return { kind: 'note', text: trimmed };
   }
 
