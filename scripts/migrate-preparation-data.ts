@@ -1,5 +1,6 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { classifyPreparationRequirement } from '../src/route/preparation';
 import type { RouteDocument, StructuredPreparationItem } from '../src/route/types';
 
 const routePath = resolve(process.cwd(), 'data/route.json');
@@ -47,6 +48,10 @@ const ambiguousResourceNames = new Set([
   'Chaînes Brisées',
 ]);
 
+function asRequirement(text: string): StructuredPreparationItem {
+  return { kind: classifyPreparationRequirement(text), text };
+}
+
 function splitEditorialAnnotation(name: string): { name: string; note?: string } {
   if (name.includes(' — ')) {
     const [resourceName, ...noteParts] = name.split(' — ');
@@ -64,14 +69,14 @@ function splitEditorialAnnotation(name: string): { name: string; note?: string }
   return { name: name.trim() };
 }
 
-function migrateItem(stepId: string, rawItem: string): StructuredPreparationItem {
+function migrateLegacyString(stepId: string, rawItem: string): StructuredPreparationItem {
   const trimmed = rawItem.trim();
   if (implicitSingleResources.get(stepId)?.has(trimmed)) {
     return { kind: 'resource', quantity: 1, name: trimmed };
   }
 
   const match = trimmed.match(quantityPattern);
-  if (!match) return { kind: 'note', text: trimmed };
+  if (!match) return asRequirement(trimmed);
 
   const quantity = Number.parseInt(match[1].replace(/\s/g, ''), 10);
   const rawName = match[2].trim();
@@ -95,11 +100,11 @@ function migrateItem(stepId: string, rawItem: string): StructuredPreparationItem
     rawName.includes(':') ||
     /^slip compatible$/i.test(rawName)
   ) {
-    return { kind: 'note', text: trimmed };
+    return asRequirement(trimmed);
   }
 
   const { name, note } = splitEditorialAnnotation(rawName);
-  if (!name || nonResourcePattern.test(name)) return { kind: 'note', text: trimmed };
+  if (!name || nonResourcePattern.test(name)) return asRequirement(trimmed);
 
   return {
     kind: 'resource',
@@ -109,22 +114,31 @@ function migrateItem(stepId: string, rawItem: string): StructuredPreparationItem
   };
 }
 
-let migrated = 0;
-let resources = 0;
-let notes = 0;
+let migratedStrings = 0;
+let reclassifiedNotes = 0;
+const counts = new Map<string, number>();
 
 for (const step of route.steps) {
   if (!step.preparationItems) continue;
 
   step.preparationItems = step.preparationItems.map((item) => {
-    if (typeof item !== 'string') return item;
-    migrated += 1;
-    const structured = migrateItem(step.id, item);
-    if (structured.kind === 'resource') resources += 1;
-    else notes += 1;
+    let structured: StructuredPreparationItem;
+
+    if (typeof item === 'string') {
+      migratedStrings += 1;
+      structured = migrateLegacyString(step.id, item);
+    } else if (item.kind === 'note') {
+      reclassifiedNotes += 1;
+      structured = asRequirement(item.text);
+    } else {
+      structured = item;
+    }
+
+    counts.set(structured.kind, (counts.get(structured.kind) ?? 0) + 1);
     return structured;
   });
 }
 
 writeFileSync(routePath, `${JSON.stringify(route, null, 2)}\n`, 'utf8');
-console.log(`Preparation data migrated: ${migrated} legacy entries -> ${resources} resources + ${notes} notes.`);
+const summary = [...counts.entries()].map(([kind, count]) => `${kind}=${count}`).join(', ');
+console.log(`Preparation data migrated: ${migratedStrings} legacy strings, ${reclassifiedNotes} legacy notes. ${summary}`);
