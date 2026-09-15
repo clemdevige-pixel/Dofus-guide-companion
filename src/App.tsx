@@ -709,12 +709,6 @@ export function App() {
                         );
                         return (
                           <div className="sequence-item__detail" key={step.id}>
-                            {step.prerequisites && (
-                              <div className="step-context step-context--launch">
-                                <strong>PRÉREQUIS</strong>
-                                <span>{step.prerequisites}</span>
-                              </div>
-                            )}
                             {step.warning && (
                               <div className="step-context step-context--lock">
                                 <strong>{getWarningLabel(step.warning)}</strong>
@@ -787,13 +781,6 @@ export function App() {
                 )}
               </h1>
             </div>
-
-            {currentStep.prerequisites && (
-              <div className="step-context step-context--launch">
-                <strong>PRÉREQUIS</strong>
-                <span>{currentStep.prerequisites}</span>
-              </div>
-            )}
 
             {currentStep.warning && (
               <div className="step-context step-context--lock">
