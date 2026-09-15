@@ -5857,13 +5857,13 @@
       "order": 214,
       "blockId": "block-05",
       "type": "hard_lock",
-      "title": "ÉMERAUDE — 1 MÉTIER NIVEAU 50",
+      "title": "Émeraude — métier niveau 50",
       "prerequisites": "Un métier niveau 50 minimum.",
       "action": "VERROU DUR",
-      "instruction": "Si aucun de tes métiers n'est encore niveau 50 : STOP et monte-en un à 50 avant de poursuivre. Ce niveau est de toute façon obligatoire pour la chaîne Émeraude.",
       "hardLock": {
-        "message": "Si aucun de tes métiers n'est encore niveau 50 : STOP et monte-en un à 50 avant de poursuivre. Ce niveau est de toute façon obligatoire pour la chaîne Émeraude."
-      }
+        "message": "STOP tant qu'aucun métier n'est niveau 50."
+      },
+      "instruction": "Monte au moins un métier niveau 50 avant de poursuivre."
     },
     {
       "id": "route-step-0215",
@@ -5966,9 +5966,8 @@
       "order": 217,
       "blockId": "block-05",
       "type": "long_running",
-      "title": "Le voleur d'âmes — captures au fil de la route",
-      "prerequisites": "sort Capture d'âmes.",
-      "warning": "Captures requises : Boostache, Kanniboul Ebil, Draegnerys, Nelween, Wa Wobot.",
+      "title": "Le voleur d'âmes",
+      "warning": "Captures à réunir : Boostache, Kanniboul Ebil, Draegnerys, Nelween et Wa Wobot.",
       "action": "LANCER / FIL ROUGE",
       "instruction": "En [27,-28], parle à Toungousa et LANCE Le voleur d'âmes. GARDE la quête active et capture chaque boss lors de son passage dédié.",
       "source": {
@@ -6564,11 +6563,9 @@
       "order": 245,
       "blockId": "block-06",
       "type": "long_running",
-      "title": "Carte de Cania — 9 PRIMATONS / FIL ROUGE",
-      "prerequisites": "Objectif obligatoire avant Les bandits de Cania : terminer et remettre à la justice 9 avis de recherche de niveau 120 ou moins, puis récupérer 9 Primatons auprès du Chasseur de primes en [5,-6].",
-      "warning": "Ce n'est plus un objectif opportuniste : depuis la mise à jour 3.4, la Carte de Cania exige obligatoirement les Primatons. Profite des zones traversées, mais assure-toi d'avoir rendu 9 avis éligibles avant le verrou.",
+      "title": "Carte de Cania — 9 Primatons",
       "action": "FIL ROUGE",
-      "instruction": "Termine 9 avis de recherche de niveau ≤120, rends-les à la justice puis récupère 9 Primatons auprès du Chasseur de primes en [5,-6]. Tu peux étaler ces captures.",
+      "instruction": "Termine 9 avis de recherche de niveau ≤120, rends-les à la justice puis récupère 9 Primatons auprès du Chasseur de primes en [5,-6].",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-bandits-de-cania.html"
@@ -7015,11 +7012,10 @@
       "order": 266,
       "blockId": "block-06",
       "type": "hard_lock",
-      "title": "Carte de Cania — 9 Primatons",
+      "title": "Carte de Cania",
       "prerequisites": "9 avis de recherche de niveau ≤120 rendus à la justice ; 9 Primatons récupérés en [5,-6] ; acheter les 3 fragments différents (3 Primatons chacun) puis assembler la Carte de Cania à la Malle aux Trésors.",
-      "warning": "La Carte de Cania est désormais obligatoire pour poursuivre Les bandits de Cania.",
       "action": "VERROU DUR",
-      "instruction": "Si tu n'as pas encore la Carte de Cania : STOP et termine les 9 Primatons maintenant.",
+      "instruction": "Assemble la Carte de Cania avant de poursuivre.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-bandits-de-cania.html"
@@ -7030,7 +7026,7 @@
       },
       "hardLock": {
         "goalId": "cartes-cania",
-        "message": "Si tu n'as pas encore la Carte de Cania : STOP et termine le fil rouge Primatons maintenant."
+        "message": "STOP tant que la Carte de Cania n'est pas assemblée."
       }
     },
     {
@@ -8834,11 +8830,9 @@
       "order": 354,
       "blockId": "block-06",
       "type": "quest",
-      "title": "Pas de fumée sans feu — jusqu'à Arrête-la si tu peux",
-      "prerequisites": "Arrête-la si tu peux bloquera une étape.",
-      "warning": "Ne pas la repousser à la fin : elle est un prérequis direct de Qui nous protège du Protecteur ?.",
+      "title": "Pas de fumée sans feu",
       "action": "LANCER / STOP",
-      "instruction": "LANCE Pas de fumée sans feu maintenant et AVANCE jusqu'au verrou Arrête-la si tu peux, puis garde la quête active.",
+      "instruction": "LANCE Pas de fumée sans feu et AVANCE jusqu'à Arrête-la si tu peux, puis garde la quête active.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/pas-de-fumee-sans-feu.html"
@@ -9184,10 +9178,8 @@
       "type": "long_running",
       "displayRole": "objective",
       "title": "L'Ombre et la proie",
-      "prerequisites": "On dirait le Sud au passage chez Joris.",
-      "warning": "L'Ombre et la proie doit rester active jusqu'à son verrou pendant la progression de On dirait le Sud.",
       "action": "LANCER / FIL ROUGE",
-      "instruction": "LANCE L'Ombre et la proie à ce passage.",
+      "instruction": "LANCE L'Ombre et la proie et garde-la active.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/lombre-et-la-proie.html"
@@ -9853,11 +9845,10 @@
       "order": 403,
       "blockId": "block-08",
       "type": "long_running",
-      "title": "Tablette de Totankama — 25 TRÉSORS / FIL ROUGE",
-      "prerequisites": "Comment perdre ses plumes terminé. Il faut 25 Trésors archéologiques pour acheter les 5 morceaux de tablette (5 Trésors par morceau).",
-      "warning": "Deux méthodes cumulables : la quête Chasse au trésor archéologique donne 5 Trésors et est limitée à 1 fois/jour ; chaque boss de donjon niveau 120–130 donne automatiquement 1 Trésor en donjon (pas en arène).",
+      "title": "Tablette de Totankama — 25 Trésors",
+      "warning": "La chasse archéologique donne 5 Trésors une fois par jour ; chaque boss de donjon niveau 120–130 donne 1 Trésor en donjon.",
       "action": "FIL ROUGE",
-      "instruction": "Accumule 25 Trésors archéologiques. Fais la chasse archéologique quotidienne quand utile et profite des boss 120–130 rencontrés pendant la progression.",
+      "instruction": "Accumule 25 Trésors archéologiques puis achète les 5 morceaux de tablette.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/comment-perdre-ses-plumes.html"
@@ -10019,17 +10010,17 @@
       "order": 412,
       "blockId": "block-08",
       "type": "hard_lock",
-      "title": "VERROU DUR — TABLETTE DE TOTANKAMA",
+      "title": "Tablette de Totankama",
       "prerequisites": "25 Trésors archéologiques réunis ; 5 morceaux achetés ; Tablette assemblée.",
       "action": "VERROU DUR",
-      "instruction": "Si la Tablette n'est pas assemblée : STOP ici, complète les Trésors manquants puis assemble-la avant de continuer.",
+      "instruction": "Assemble la Tablette de Totankama avant de poursuivre.",
       "longRunningGoal": {
         "goalId": "tablette-totankama",
         "phase": "finish"
       },
       "hardLock": {
         "goalId": "tablette-totankama",
-        "message": "Si la Tablette n'est pas assemblée : STOP ici, complète les Trésors manquants puis assemble-la avant de continuer."
+        "message": "STOP tant que la Tablette de Totankama n'est pas assemblée."
       }
     },
     {
@@ -10689,11 +10680,10 @@
       "order": 445,
       "blockId": "block-08",
       "type": "long_running",
-      "title": "Le mal a dit — VERROU TIMER / avancer jusqu'au Royalmouth",
+      "title": "Le mal a dit",
       "prerequisites": "vaccin temporaire des Monologues du vaccin expiré depuis 1 semaine.",
-      "warning": "Le mal a dit ne peut pas être lancé tant que le vaccin temporaire est actif. Les autres quêtes bloquantes requises sont déjà terminées.",
       "action": "LANCER / AVANCER / STOP",
-      "instruction": "Si le vaccin temporaire est encore actif : STOP. Sinon LANCE Le mal a dit et AVANCE jusqu'à devoir vaincre le Royalmouth, puis STOP devant la Serre.",
+      "instruction": "Si le vaccin temporaire est encore actif : STOP. Sinon LANCE Le mal a dit et AVANCE jusqu'au Royalmouth.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-mal-a-dit.html"
@@ -10867,9 +10857,8 @@
       "blockId": "block-09",
       "type": "quest",
       "displayRole": "objective",
-      "title": "Ne tirez pas sur le messager — jusqu'au Muldobus",
+      "title": "Ne tirez pas sur le messager",
       "prerequisites": "niveau >29.",
-      "warning": "La quête se lance avant À plus dans l'muldobus, mais son accès Nimotopia la bloque ensuite. Ne cherche pas à la terminer avant d'avoir ouvert le Muldobus.",
       "action": "LANCER / AVANCER / STOP",
       "instruction": "En [8,-67], LANCE Ne tirez pas sur le messager auprès de Chalcas. Avance via Kerubim jusqu'à l'étape qui demande de prendre le Muldobus vers Nimotopia, puis STOP : fais À plus dans l'muldobus maintenant.",
       "source": {
@@ -10921,7 +10910,6 @@
       "displayRole": "transition",
       "title": "Ne tirez pas sur le messager",
       "prerequisites": "accès Nimotopia ouvert.",
-      "warning": "La quête était déjà active avant le Muldobus.",
       "action": "TERMINER",
       "instruction": "REPRENDS Ne tirez pas sur le messager : prends le Muldobus, poursuis le parcours Nimotopia jusqu'à Coqueline et TERMINE la quête.",
       "source": {
@@ -12820,9 +12808,8 @@
       "displayRole": "objective",
       "title": "Enutrosor — La quatrième dimension + Crache Test",
       "prerequisites": "Accès à la Tour des Voyageurs.",
-      "warning": "La quatrième dimension et Crache Test doivent être actives avant d'entrer dans Enutrosor.",
       "action": "LANCER LES 2 / STOP",
-      "instruction": "Ne termine pas ces deux quêtes séparément : pars ensuite en Enutrosor ouvrir la seconde paire.",
+      "instruction": "LANCE La quatrième dimension et Crache Test avant d'entrer dans Enutrosor.",
       "momentId": "moment-route-step-1168",
       "location": {
         "x": -22,
@@ -12865,9 +12852,8 @@
       "displayType": "QUÊTES PARALLÈLES",
       "displayRole": "transition",
       "title": "Enutrosor — Déphorrestation + La meilleure défense, c'est l'attaque",
-      "warning": "Ouvre les deux missions locales dès l'arrivée dans l'avant-poste.",
       "action": "LANCER LES 2 / STOP",
-      "instruction": "Les quatre quêtes Enutrosor sont maintenant actives ; profite des mêmes déplacements.",
+      "instruction": "LANCE Déphorrestation et La meilleure défense, c'est l'attaque.",
       "momentId": "moment-route-step-1168",
       "location": {
         "x": -1,
@@ -12909,9 +12895,8 @@
       "type": "major_step",
       "displayRole": "objective",
       "title": "Enutrosor — terminer la boucle des 4 quêtes",
-      "warning": "Fais la boucle commune une seule fois : ne retourne pas aux PNJ de lancement entre les objectifs.",
       "action": "TERMINER LES 4",
-      "instruction": "TERMINE les quatre quêtes pendant la même boucle Enutrosor. Coche chaque fermeture au fur et à mesure ; la grappe n'est terminée que lorsque les quatre sont rendues.",
+      "instruction": "TERMINE les quatre quêtes pendant la même boucle Enutrosor.",
       "momentId": "moment-route-step-1168",
       "destination": {
         "x": 0,
@@ -13848,7 +13833,7 @@
       "title": "Mission solution",
       "prerequisites": "1 Slip Iholo ; 29 999 kamas ; créneau 20h–8h.",
       "action": "LANCER",
-      "instruction": "Lance Mission solution puis poursuis la progression.",
+      "instruction": "LANCE Mission solution et garde-la active.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/mission-solution.html"
@@ -13993,18 +13978,17 @@
       "order": 617,
       "blockId": "block-09",
       "type": "hard_lock",
-      "title": "VERROU DUR — OCRE D'AMBRE",
+      "title": "Ocre d'ambre",
       "prerequisites": "Anneau Ocre disponible.",
-      "warning": "Le serment de l'ambre exige l'état final de l'Ocre d'ambre.",
       "action": "VERROU DUR",
-      "instruction": "Si la chaîne Ocre d'ambre n'est pas fermée : STOP ici et termine-la avant Le serment de l'ambre.",
+      "instruction": "Termine la chaîne Ocre d'ambre avant Le serment de l'ambre.",
       "longRunningGoal": {
         "goalId": "ocre-ambre",
         "phase": "finish"
       },
       "hardLock": {
         "goalId": "ocre-ambre",
-        "message": "Si la chaîne Ocre d'ambre n'est pas fermée : STOP ici et termine-la avant Le serment de l'ambre."
+        "message": "STOP tant que la chaîne Ocre d'ambre n'est pas terminée."
       }
     },
     {
@@ -14993,9 +14977,8 @@
       "displayRole": "objective",
       "title": "Nos amies les bêtes",
       "prerequisites": "ressources Nimotopia préparées.",
-      "warning": "Première branche de la boucle Nimotopia. Ne la termine pas isolément avant d'avoir ouvert Shyriiwook et À armes égales.",
       "action": "LANCER / FIL ROUGE",
-      "instruction": "En [-66,30], LANCE Nos amies les bêtes et GARDE-la active. Ouvre Shyriiwook et À armes égales avant de poursuivre les objectifs de zone.",
+      "instruction": "En [-66,30], LANCE Nos amies les bêtes et garde-la active. Ouvre ensuite Shyriiwook et À armes égales.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/nos-amies-les-betes.html"
@@ -15050,9 +15033,8 @@
       "displayRole": "objective",
       "title": "À armes égales",
       "prerequisites": "2 Cawottes ; ressources de pièges préparées.",
-      "warning": "Troisième quête indépendante à ouvrir avant de parcourir Nimotopia.",
       "action": "LANCER / FIL ROUGE",
-      "instruction": "En [-65,33], LANCE À armes égales. Les trois quêtes sont maintenant actives : fais leurs objectifs pendant les mêmes déplacements et combats de Nimotopia.",
+      "instruction": "En [-65,33], LANCE À armes égales puis réalise les objectifs des trois quêtes pendant la même boucle Nimotopia.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/a-armes-egales.html"
@@ -15128,7 +15110,6 @@
       "type": "resume",
       "displayRole": "transition",
       "title": "Shyriiwook",
-      "warning": "Profite de la même boucle Nimotopia ; À armes égales reste active.",
       "action": "TERMINER",
       "instruction": "TERMINE Shyriiwook en gardant À armes égales et Il a fui, il a tout compris actifs.",
       "source": {
@@ -15200,9 +15181,8 @@
       "type": "resume",
       "displayRole": "transition",
       "title": "Il a fui, il a tout compris",
-      "warning": "Les positions/indices peuvent varier : suis DPLN pour les variantes.",
       "action": "TERMINER",
-      "instruction": "REPRENDS Il a fui, il a tout compris et TERMINE la quête selon DPLN. La valse des manuels reste active pour le passage Razof juste après.",
+      "instruction": "REPRENDS Il a fui, il a tout compris et TERMINE la quête selon DPLN.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/il-a-fui-il-a-tout-compris.html"
@@ -15592,11 +15572,10 @@
       "blockId": "block-10",
       "type": "long_running",
       "displayRole": "objective",
-      "title": "La mère des Dragoeufs AU PARANGON",
+      "title": "La mère des Dragoeufs — Parangon de puissance",
       "prerequisites": "niveau recommandé 200.",
-      "warning": "Avance uniquement jusqu'à l'objectif « Obtenir un Parangon de puissance ». Le Parangon pourra ensuite tomber naturellement sur les gardiens de donjon niveau 200. Ne poursuis pas la branche Vulbis après le drop.",
       "action": "LANCER / FIL ROUGE / STOP",
-      "instruction": "En [1,6], LANCE La mère des Dragoeufs auprès de Doc Emiette Borgne. Fais l'enquête initiale et les combats jusqu'au moment où la quête demande d'OBTENIR UN PARANGON DE PUISSANCE, puis STOP. Poursuis les autres objectifs avec cette étape active : chaque gardien de donjon niveau 200 devient une chance de drop.",
+      "instruction": "LANCE La mère des Dragoeufs et AVANCE jusqu'à l'objectif « Obtenir un Parangon de puissance », puis STOP. Garde cette étape active pendant les donjons niveau 200.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-mere-des-dragoeufs.html"
@@ -16558,18 +16537,17 @@
       "order": 752,
       "blockId": "block-12",
       "type": "hard_lock",
-      "title": "VERROU DUR — ALIGNEMENT 100 + ORDRE 5",
+      "title": "Alignement 100 + Ordre 5",
       "prerequisites": "Alignement 100 + Ordre 5 terminés ; prévoir 1 personnage de chacun des 3 ordres bontariens pour les puits.",
-      "warning": "Blanc Ivoire ne doit pas commencer avant Alignement 100 + Ordre 5.",
       "action": "VERROU DUR",
-      "instruction": "Si alignement 100 ou Ordre 5 manque : STOP ici. Termine-les avant de commencer l'Ivoire.",
+      "instruction": "Termine Alignement 100 + Ordre 5 avant de commencer l'Ivoire.",
       "longRunningGoal": {
         "goalId": "alignement-ordres",
         "phase": "finish"
       },
       "hardLock": {
         "goalId": "alignement-ordres",
-        "message": "Si alignement 100 ou Ordre 5 manque : STOP ici. Termine-les avant de commencer l'Ivoire."
+        "message": "STOP tant que Alignement 100 + Ordre 5 ne sont pas terminés."
       }
     },
     {
@@ -16623,18 +16601,17 @@
       "order": 755,
       "blockId": "block-12",
       "type": "hard_lock",
-      "title": "VERROU DUR — L'ÉTERNELLE MOISSON",
+      "title": "L'Éternelle Moisson — étapes 1 à 18",
       "prerequisites": "Étapes 1 à 18 complètes : captures de boss et archimonstres rendues.",
-      "warning": "L'Éternelle Moisson doit être terminée avant le Kralamoure.",
       "action": "VERROU DUR",
-      "instruction": "Si les étapes 1 à 18 ne sont pas terminées : STOP et complète les captures manquantes avant de prendre l'étape Kralamoure.",
+      "instruction": "Termine les étapes 1 à 18 avant l'étape Kralamoure.",
       "longRunningGoal": {
         "goalId": "eternelle-moisson",
         "phase": "progress"
       },
       "hardLock": {
         "goalId": "eternelle-moisson",
-        "message": "Si les étapes 1 à 18 ne sont pas terminées : STOP et complète les captures manquantes avant de prendre l'étape Kralamoure."
+        "message": "STOP tant que les étapes 1 à 18 de L'Éternelle Moisson ne sont pas terminées."
       }
     },
     {
@@ -17335,10 +17312,9 @@
       "blockId": "block-13",
       "type": "hard_lock",
       "displayRole": "objective",
-      "title": "VERROU DUR — L'OMBRE ET LA PROIE",
-      "warning": "Une ombre au tableau exige de terminer L'Ombre et la proie.",
+      "title": "L'Ombre et la proie",
       "action": "VERROU DUR",
-      "instruction": "TERMINE maintenant L'Ombre et la proie avant de poursuivre la branche Quatre sur six.",
+      "instruction": "TERMINE L'Ombre et la proie avant Une ombre au tableau.",
       "momentId": "moment-route-step-0895",
       "longRunningGoal": {
         "goalId": "ombre-et-proie",
@@ -17346,7 +17322,7 @@
       },
       "hardLock": {
         "goalId": "ombre-et-proie",
-        "message": "TERMINE maintenant L'Ombre et la proie avant de poursuivre la branche Quatre sur six."
+        "message": "STOP tant que L'Ombre et la proie n'est pas terminée."
       }
     },
     {
@@ -17356,7 +17332,6 @@
       "type": "resume",
       "displayRole": "transition",
       "title": "L'ombre et la proie",
-      "warning": "Doit être terminée avant Une ombre au tableau.",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
@@ -20461,9 +20436,8 @@
       "type": "long_running",
       "displayRole": "objective",
       "title": "Les totems de Maïmane",
-      "warning": "Sur une progression vierge, quatre repassages sont inévitables. Garde Vortex et Comte pour les faire avec S'armer contre le destin.",
       "action": "LANCER / FIL ROUGE",
-      "instruction": "LANCE les Totems puis collecte les six émotions indiquées.",
+      "instruction": "LANCE Les totems de Maïmane puis collecte les six émotions demandées.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-totems-de-maimane.html"
@@ -20936,10 +20910,10 @@
       "blockId": "block-17",
       "type": "long_running",
       "displayRole": "objective",
-      "title": "Qui nous protège du Protecteur ? — sigils hors donjons",
-      "warning": "Maïmane donne son sigil au lancement. Respecte Ulgrude AVANT Hécate et fais Jiva avant le changement d'alignement prévu.",
+      "title": "Qui nous protège du Protecteur ?",
+      "warning": "Respecte Ulgrude avant Hécate et fais Jiva avant le changement d'alignement.",
       "action": "LANCER / FIL ROUGE / AVANCER",
-      "instruction": "LANCE la quête. Récupère les sigils hors donjons accessibles (Jiva, Silvosse, Ulgrude, Silouate, Rosal, Hécate, Pouchecot, Brumaire), en respectant Ulgrude avant Hécate. STOP avant les trois sigils de donjon.",
+      "instruction": "LANCE la quête et récupère les sigils hors donjons accessibles. STOP avant les trois sigils de donjon.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/qui-nous-protege-du-protecteur.html"
@@ -21119,13 +21093,13 @@
       "order": 995,
       "blockId": "block-20",
       "type": "hard_lock",
-      "title": "VERROU DUR — Avant Flovoraison",
+      "title": "Avant Flovoraison",
       "prerequisites": "• Dom de Pin\n• 6 Primordiaux en inventaire\n• Clef Chambre des Maléfices",
-      "warning": "Prévoir les Dofus requis par les dialogues/rituels de Flovoraison.",
+      "warning": "Prévois les Dofus requis pour les dialogues et rituels de Flovoraison.",
       "action": "VERROU DUR / PRÉPARER",
-      "instruction": "STOP si Qui nous protège n'est pas encore à Elya Wood ou si Dom de Pin / la clef manquent.",
+      "instruction": "Vérifie Dom de Pin, les 6 Primordiaux et la Clef Chambre des Maléfices avant de poursuivre.",
       "hardLock": {
-        "message": "STOP si Qui nous protège n'est pas encore au checkpoint Elya Wood ou si Dom de Pin / la clef manquent. Flovoraison ne commence qu'après validation de ce verrou."
+        "message": "STOP tant que les prérequis de Flovoraison ne sont pas réunis."
       }
     },
     {
