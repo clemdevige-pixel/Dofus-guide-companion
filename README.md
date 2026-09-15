@@ -4,19 +4,28 @@ Companion desktop léger pour suivre une roadmap Dofus étape par étape en over
 
 ## État actuel
 
-La V1 est fonctionnelle sur la branche active `agent/initial-scaffold` :
+La V1 est en **release-readiness final** sur `agent/initial-scaffold`.
 
+État validé :
 - route réelle chargée depuis `data/route.json` ;
+- **1009 étapes / 20 blocs** ;
+- route certifiée sur son périmètre métier ;
+- `pnpm.cmd test:route` : **48/48 verts** ;
+- `pnpm.cmd validate:route` : vert ;
+- `pnpm.cmd build` : vert ;
 - progression locale persistée ;
-- navigation précédente / suivante et navigation directe par numéro de carte ;
-- validation des cartes et sous-objectifs ;
-- regroupement explicite des moments via `MOMENT_ID` / `DISPLAY_ROLE` ;
-- quêtes parallèles structurées via `PARALLEL_ID` / `PARALLEL_PHASE` ;
-- fils rouges et verrous dérivés de la route ;
+- navigation précédente / suivante + saut direct par carte ;
+- cartes mutualisées via `MOMENT_ID / DISPLAY_ROLE` ;
+- quêtes parallèles via `PARALLEL_ID / PARALLEL_PHASE` ;
+- fils rouges et hard locks dérivés de la route ;
 - raccourcis globaux configurables ;
 - taille et position de fenêtre persistées ;
 - overlay Tauri always-on-top ;
+- titres joueur nettoyés au runtime ;
+- marqueurs Alignement / Dofus / Donjon ;
 - liens DofusPourLesNoobs ouverts dans le navigateur système.
+
+Le chantier restant avant gel V1 est décrit dans `HANDOFF.md`.
 
 ## Source de vérité
 
@@ -24,7 +33,7 @@ La roadmap éditoriale reste le Google Sheet :
 
 `Roadmap ULTIMATE V2 — Astrub → Dofus Sylvestre`
 
-L'application ne duplique jamais la logique des quêtes dans le code. Le runtime consommé par l'application est un export structuré :
+Flux :
 
 ```text
 Google Sheet ROUTE
@@ -35,12 +44,12 @@ validation stricte
     ↓
 data/route.json
     ↓
-selectors
+loader / selectors
     ↓
 UI Tauri / React
 ```
 
-`data/route.json` est un artefact généré : toute correction éditoriale doit être faite dans le Sheet puis réexportée.
+`data/route.json` est un artefact généré. Toute correction éditoriale doit être faite dans le Sheet puis réexportée.
 
 ## Stack V1
 
@@ -53,61 +62,52 @@ UI Tauri / React
 
 ## Démarrage développeur
 
-Prérequis Tauri : Rust, Node.js et les dépendances système de la plateforme.
-
 ```bash
 pnpm install
 pnpm tauri dev
 ```
 
-Build front seul :
-
-```bash
-pnpm build
-```
-
-Build desktop :
-
-```bash
-pnpm tauri build
-```
-
-Contrôles route :
+Contrôles :
 
 ```bash
 pnpm test:route
 pnpm validate:route
+pnpm build
+pnpm tauri build
 ```
 
-Export depuis le Google Sheet :
+Sous PowerShell Windows, utiliser `pnpm.cmd` si `pnpm.ps1` est bloqué par l’ExecutionPolicy.
+
+Export depuis le Sheet :
 
 ```bash
 pnpm export:route
 ```
 
-L'export nécessite `GOOGLE_ACCESS_TOKEN` ou `GOOGLE_SHEETS_API_KEY`.
+L’export nécessite `GOOGLE_ACCESS_TOKEN` ou `GOOGLE_SHEETS_API_KEY`.
 
 ## Principes
 
-- zéro logique de quête hardcodée dans l'UI ;
-- `completedStepIds` est l'unique vérité de progression ;
-- `MOMENT_ID` définit les frontières de cartes mutualisées ;
-- `DISPLAY_ROLE` définit checkbox / transition / détail ;
-- `PARALLEL_ID` définit les vraies salves de quêtes parallèles ;
-- aucune lecture mémoire de Dofus ;
-- aucun OCR en V1 ;
-- aucune automatisation d'input ;
-- fonctionnement hors ligne avec une route déjà exportée ;
-- l'overlay doit rester plus simple à utiliser que le Google Sheet.
+- zéro logique de quête hardcodée dans l’UI ;
+- `completedStepIds` = unique vérité de progression ;
+- `MOMENT_ID` = frontière des cartes mutualisées ;
+- `DISPLAY_ROLE` = objectif / transition / détail ;
+- `PARALLEL_ID` = vraies salves de quêtes parallèles ;
+- `DOFUS_SERIES` = métadonnée source des marqueurs Dofus ;
+- titres complets conservés en donnée, titres courts dérivés pour l’affichage ;
+- aucun OCR / bot / automatisation d’input en V1 ;
+- fonctionnement hors ligne avec route exportée ;
+- l’overlay doit rester plus simple à utiliser que le Google Sheet.
 
-## Contrat agents
+## Documentation
 
-Avant toute modification, lire dans cet ordre :
-
+Lire dans cet ordre :
 1. `AGENTS.md`
 2. `SPEC.md`
 3. `ARCHITECTURE.md`
 4. `docs/DATA_MODEL.md`
-5. `docs/ROUTE_OPTIMIZATION.md` pour les chantiers route
-6. `docs/ROUTE_OPTIMIZATION_WORKFLOW.md` pour les audits/réécritures de route
+5. `docs/ROUTE_OPTIMIZATION.md` uniquement si la route est rouverte
+6. `docs/ROUTE_OPTIMIZATION_WORKFLOW.md` pour une correction métier de route
 7. `HANDOFF.md`
+
+`HANDOFF.md` est l’unique handoff opérationnel du repo.
