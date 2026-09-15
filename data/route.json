@@ -1966,12 +1966,13 @@
       "title": "Ça sent le gaz",
       "warning": "Position de lancement dépendante de la classe.",
       "action": "LANCER / STOP",
-      "instruction": "Parle à ton chef de classe et choisis « Demander s'il a encore besoin de vous » pour LANCER Ça sent le gaz, puis GARDE-la active. La position dépend de ta classe.",
+      "instruction": "LANCE Ça sent le gaz puis GARDE-la active. La position dépend de ta classe.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/ca-sent-le-gaz.html"
       },
-      "momentId": "moment-route-step-0048"
+      "momentId": "moment-route-step-0048",
+      "launchInstruction": "Parle à ton chef de classe et choisis « Demander s'il a encore besoin de vous »."
     },
     {
       "id": "route-step-1131",
@@ -15176,7 +15177,7 @@
       "title": "La valse des manuels — Manuel Scolaire → Comte Razof",
       "prerequisites": "Aucun prérequis de quête ; il faut uniquement obtenir 1 Manuel Scolaire sur les monstres de Nimotopia.",
       "action": "OBTENIR / LANCER / AVANCER / STOP",
-      "instruction": "VÉRIFIE ton inventaire : si tu as déjà 1 Manuel Scolaire, ne farm rien. Sinon, combats les monstres de Nimotopia jusqu'à l'obtenir. Double-clique ensuite le Manuel pour LANCER La valse des manuels, parle à Coqueline en [-63,29], puis AVANCE jusqu'au Camp du Comte Razof et STOP devant le donjon.",
+      "instruction": "Si tu n'as pas encore 1 Manuel Scolaire, combats les monstres de Nimotopia jusqu'à l'obtenir. Parle ensuite à Coqueline en [-63,29], puis AVANCE jusqu'au Camp du Comte Razof et STOP devant le donjon.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-valse-des-manuels.html"
@@ -15189,7 +15190,8 @@
       "longRunningGoal": {
         "goalId": "nimotopia-valse",
         "phase": "start"
-      }
+      },
+      "launchInstruction": "Double-clique le Manuel Scolaire pour lancer La valse des manuels."
     },
     {
       "id": "route-step-0660",
