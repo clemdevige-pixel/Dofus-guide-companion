@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { openUrl } from '@tauri-apps/plugin-opener';
 import './styles.css';
 import './sequence.css';
+import './compact.css';
 
 const App = lazy(async () => {
   const module = await import('./App');
