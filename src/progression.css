@@ -249,6 +249,144 @@
   line-height: 1.3;
 }
 
+.preparation-dashboard {
+  display: grid;
+  gap: 10px;
+}
+
+.preparation-group {
+  display: grid;
+  gap: 7px;
+}
+
+.preparation-group > strong {
+  color: #eef4ef;
+  font-size: 12px;
+}
+
+.preparation-checklist {
+  display: grid;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.preparation-checklist__resource {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 6px;
+  align-items: stretch;
+}
+
+.preparation-checklist__check,
+.preparation-checklist__copy {
+  border: 1px solid #2f3d34;
+  border-radius: 7px;
+  background: #111913;
+  color: #dce7de;
+}
+
+.preparation-checklist__check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.preparation-checklist__copy {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 7px;
+  align-items: center;
+  min-width: 0;
+  padding: 6px 8px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.preparation-checklist__resource:hover .preparation-checklist__check,
+.preparation-checklist__copy:hover {
+  border-color: #476451;
+  background: #152019;
+}
+
+.preparation-checklist__resource--checked {
+  opacity: 0.62;
+}
+
+.preparation-checklist__resource--checked .preparation-checklist__check {
+  border-color: #578366;
+  background: #17241b;
+  color: #b9e7c1;
+}
+
+.preparation-checklist__resource--checked .preparation-checklist__name {
+  text-decoration: line-through;
+}
+
+.preparation-checklist__quantity {
+  color: #93a396;
+  font-size: 10px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.preparation-checklist__name {
+  min-width: 0;
+  overflow: hidden;
+  font-size: 12px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.preparation-checklist__copy-icon {
+  color: #839187;
+  font-size: 11px;
+}
+
+.preparation-checklist__note {
+  padding: 6px 8px;
+  border-left: 2px solid #4c5b51;
+  color: #9eaba1;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.history-list--detailed {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.history-list--detailed li {
+  display: grid;
+  gap: 3px;
+  padding: 8px 9px;
+  border: 1px solid #2f3d34;
+  border-radius: 8px;
+  background: #111913;
+}
+
+.history-list__meta {
+  color: #839187;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.history-list--detailed strong {
+  color: #dce7de;
+  font-size: 11px;
+  line-height: 1.3;
+}
+
 @media (max-width: 430px) {
   .app-header--dense {
     gap: 7px;
