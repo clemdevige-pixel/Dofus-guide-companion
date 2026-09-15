@@ -20594,28 +20594,13 @@
       "type": "quest",
       "title": "Frappez, ami, et entrez",
       "displayRole": "objective",
-      "prerequisites": "Niveau recommandé 200.",
-      "action": "TERMINER",
+      "prerequisites": "Niveau recommandé 200 ; accès Forêt Pétrifiée.",
+      "action": "LANCER / TERMINER",
+      "instruction": "En [-69,-71], parle à Deor Morfont, accomplis les étapes d'accès au Royaume des Martegel puis TERMINE Frappez, ami, et entrez. Cette quête débloque De Brikke et de Brokke.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/frappez-ami-et-entrez.html"
       },
-      "momentId": "moment-route-step-0849",
-      "location": {
-        "x": -69,
-        "y": -71
-      }
-    },
-    {
-      "id": "route-step-audit-frappez-ami-entrez",
-      "order": 853,
-      "blockId": "block-13",
-      "type": "quest",
-      "title": "Frappez, ami, et entrez",
-      "displayRole": "objective",
-      "prerequisites": "Niveau recommandé 200 ; accès Forêt Pétrifiée.",
-      "action": "LANCER / TERMINER",
-      "instruction": "En [-69,-71], parle à Deor Morfont, accomplis les étapes d'accès au Royaume des Martegel puis TERMINE Frappez, ami, et entrez. Cette quête débloque De Brikke et de Brokke.",
       "momentId": "moment-route-step-0849",
       "location": {
         "x": -69,
@@ -20628,7 +20613,7 @@
     },
     {
       "id": "route-step-0849",
-      "order": 854,
+      "order": 853,
       "blockId": "block-13",
       "type": "quest",
       "title": "De Brikke et de Brokke — avancer jusqu'aux ennemis",
@@ -20647,7 +20632,7 @@
     },
     {
       "id": "route-step-0850",
-      "order": 855,
+      "order": 854,
       "blockId": "block-13",
       "type": "quest",
       "title": "Les ennemis de mes ennemis sont mes ennemis",
@@ -20666,7 +20651,7 @@
     },
     {
       "id": "route-step-0851",
-      "order": 856,
+      "order": 855,
       "blockId": "block-13",
       "type": "resume",
       "title": "De Brikke et de Brokke — reprendre jusqu'aux Ninsoumis",
@@ -20681,7 +20666,7 @@
     },
     {
       "id": "route-step-0852",
-      "order": 857,
+      "order": 856,
       "blockId": "block-13",
       "type": "quest",
       "title": "Les Ninsoumis",
@@ -20700,7 +20685,7 @@
     },
     {
       "id": "route-step-0853",
-      "order": 858,
+      "order": 857,
       "blockId": "block-13",
       "type": "resume",
       "title": "De Brikke et de Brokke — avancer jusqu'au Roi Dazak",
@@ -20720,7 +20705,7 @@
     },
     {
       "id": "route-step-0710",
-      "order": 859,
+      "order": 858,
       "blockId": "block-13",
       "type": "preparation",
       "title": "Avant le Pandamonium",
@@ -20759,7 +20744,7 @@
     },
     {
       "id": "route-step-0711",
-      "order": 860,
+      "order": 859,
       "blockId": "block-13",
       "type": "quest",
       "title": "Toute possession dépossède",
@@ -20777,7 +20762,7 @@
     },
     {
       "id": "route-step-0712",
-      "order": 861,
+      "order": 860,
       "blockId": "block-13",
       "type": "quest",
       "title": "Le chant du Pandamonium",
@@ -20795,7 +20780,7 @@
     },
     {
       "id": "route-step-0713",
-      "order": 862,
+      "order": 861,
       "blockId": "block-13",
       "type": "quest",
       "title": "Le début de la fin",
@@ -20813,7 +20798,7 @@
     },
     {
       "id": "route-step-0714",
-      "order": 863,
+      "order": 862,
       "blockId": "block-13",
       "type": "quest",
       "title": "Les sentiers de la guerre",
@@ -20832,7 +20817,7 @@
     },
     {
       "id": "route-step-0715",
-      "order": 864,
+      "order": 863,
       "blockId": "block-13",
       "type": "preparation",
       "title": "Cavaliers — Guerre + Servitude",
@@ -20927,7 +20912,7 @@
     },
     {
       "id": "route-step-0716",
-      "order": 865,
+      "order": 864,
       "blockId": "block-13",
       "type": "preparation",
       "title": "Cavaliers — Misère + Corruption + L'avenir du futur",
@@ -21050,7 +21035,7 @@
     },
     {
       "id": "route-step-0717",
-      "order": 866,
+      "order": 865,
       "blockId": "block-13",
       "type": "quest",
       "title": "Les quatre volontés",
@@ -21070,7 +21055,7 @@
     },
     {
       "id": "route-step-0718",
-      "order": 867,
+      "order": 866,
       "blockId": "block-13",
       "type": "quest",
       "title": "Le jour le plus long — jusqu'au Trône de Sang",
@@ -21094,7 +21079,7 @@
     },
     {
       "id": "route-step-0719",
-      "order": 868,
+      "order": 867,
       "blockId": "block-13",
       "type": "dungeon",
       "title": "◆ Trône de Sang — GUERRE",
@@ -21107,7 +21092,7 @@
     },
     {
       "id": "route-step-0720",
-      "order": 869,
+      "order": 868,
       "blockId": "block-13",
       "type": "resume",
       "title": "Le jour le plus long",
@@ -21122,7 +21107,7 @@
     },
     {
       "id": "route-step-0721",
-      "order": 870,
+      "order": 869,
       "blockId": "block-13",
       "type": "quest",
       "title": "Au-delà de la gloire",
@@ -21140,7 +21125,7 @@
     },
     {
       "id": "route-step-0722",
-      "order": 871,
+      "order": 870,
       "blockId": "block-13",
       "type": "quest",
       "title": "Voyage au bout de l'Externam",
@@ -21159,7 +21144,7 @@
     },
     {
       "id": "route-step-0723",
-      "order": 872,
+      "order": 871,
       "blockId": "block-13",
       "type": "quest",
       "title": "Le navire aux esclaves",
@@ -21183,7 +21168,7 @@
     },
     {
       "id": "route-step-0724",
-      "order": 873,
+      "order": 872,
       "blockId": "block-13",
       "type": "quest",
       "title": "Briser ses chaînes — jusqu'aux Fers de la Tyrannie",
@@ -21206,7 +21191,7 @@
     },
     {
       "id": "route-step-0725",
-      "order": 874,
+      "order": 873,
       "blockId": "block-13",
       "type": "dungeon",
       "title": "◆ Fers de la Tyrannie — SERVITUDE",
@@ -21218,7 +21203,7 @@
     },
     {
       "id": "route-step-0726",
-      "order": 875,
+      "order": 874,
       "blockId": "block-13",
       "type": "resume",
       "title": "Briser ses chaînes",
@@ -21234,7 +21219,7 @@
     },
     {
       "id": "route-step-0727",
-      "order": 876,
+      "order": 875,
       "blockId": "block-13",
       "type": "quest",
       "title": "Une boîte pour les asservir tous",
@@ -21254,7 +21239,7 @@
     },
     {
       "id": "route-step-0728",
-      "order": 877,
+      "order": 876,
       "blockId": "block-13",
       "type": "quest",
       "title": "Le vent se lève",
@@ -21272,7 +21257,7 @@
     },
     {
       "id": "route-step-0729",
-      "order": 878,
+      "order": 877,
       "blockId": "block-13",
       "type": "quest",
       "title": "Tournent les vents",
@@ -21290,7 +21275,7 @@
     },
     {
       "id": "route-step-0730",
-      "order": 879,
+      "order": 878,
       "blockId": "block-13",
       "type": "quest",
       "title": "Avis de tempête — jusqu'à Sentence de la Balance",
@@ -21314,7 +21299,7 @@
     },
     {
       "id": "route-step-0731",
-      "order": 880,
+      "order": 879,
       "blockId": "block-13",
       "type": "dungeon",
       "title": "◆ Sentence de la Balance — MISÈRE",
@@ -21327,7 +21312,7 @@
     },
     {
       "id": "route-step-0732",
-      "order": 881,
+      "order": 880,
       "blockId": "block-13",
       "type": "resume",
       "title": "Avis de tempête",
@@ -21343,7 +21328,7 @@
     },
     {
       "id": "route-step-0733",
-      "order": 882,
+      "order": 881,
       "blockId": "block-13",
       "type": "quest",
       "title": "La colère des dieux",
@@ -21359,7 +21344,7 @@
     },
     {
       "id": "route-step-1202",
-      "order": 883,
+      "order": 882,
       "blockId": "block-13",
       "type": "preparation",
       "title": "L'arme fatale / Mort et renouveau — ressources",
@@ -21414,7 +21399,7 @@
     },
     {
       "id": "route-step-0734",
-      "order": 884,
+      "order": 883,
       "blockId": "block-13",
       "type": "quest",
       "title": "L'arme fatale",
@@ -21431,7 +21416,7 @@
     },
     {
       "id": "route-step-0735",
-      "order": 885,
+      "order": 884,
       "blockId": "block-13",
       "type": "quest",
       "title": "Les racines du mal",
@@ -21455,7 +21440,7 @@
     },
     {
       "id": "route-step-0736",
-      "order": 886,
+      "order": 885,
       "blockId": "block-13",
       "type": "quest",
       "title": "Un pouvoir mérydique — jusqu'au Kimbo",
@@ -21480,7 +21465,7 @@
     },
     {
       "id": "route-step-0737",
-      "order": 887,
+      "order": 886,
       "blockId": "block-13",
       "type": "dungeon",
       "title": "◆ Canopée du Kimbo — MÉRYDIQUE",
@@ -21493,7 +21478,7 @@
     },
     {
       "id": "route-step-0738",
-      "order": 888,
+      "order": 887,
       "blockId": "block-13",
       "type": "dungeon",
       "title": "◆ Clairière du Chêne Mou — MÉRYDIQUE",
@@ -21506,7 +21491,7 @@
     },
     {
       "id": "route-step-1204",
-      "order": 889,
+      "order": 888,
       "blockId": "block-13",
       "type": "dungeon",
       "title": "◆ Temple du Grand Ougah",
@@ -21519,7 +21504,7 @@
     },
     {
       "id": "route-step-0741",
-      "order": 890,
+      "order": 889,
       "blockId": "block-13",
       "type": "resume",
       "title": "Un pouvoir mérydique",
@@ -21535,7 +21520,7 @@
     },
     {
       "id": "route-step-0742",
-      "order": 891,
+      "order": 890,
       "blockId": "block-13",
       "type": "quest",
       "title": "Mort et renouveau — jusqu'à l'Arbre de mort",
@@ -21559,7 +21544,7 @@
     },
     {
       "id": "route-step-0743",
-      "order": 892,
+      "order": 891,
       "blockId": "block-13",
       "type": "dungeon",
       "title": "◆ Arbre de mort — CORRUPTION",
@@ -21572,7 +21557,7 @@
     },
     {
       "id": "route-step-0744",
-      "order": 893,
+      "order": 892,
       "blockId": "block-13",
       "type": "resume",
       "title": "Mort et renouveau",
@@ -21588,7 +21573,7 @@
     },
     {
       "id": "route-step-0745",
-      "order": 894,
+      "order": 893,
       "blockId": "block-13",
       "type": "resume",
       "title": "Les quatre volontés",
@@ -21605,7 +21590,7 @@
     },
     {
       "id": "route-step-0865",
-      "order": 895,
+      "order": 894,
       "blockId": "block-14",
       "type": "major_step",
       "title": "Jusqu'au bout du rêve",
@@ -21615,7 +21600,7 @@
     },
     {
       "id": "route-step-0866",
-      "order": 896,
+      "order": 895,
       "blockId": "block-14",
       "type": "quest",
       "title": "À la recherche de Crocoburio — avancer jusqu'à Bethel",
@@ -21639,7 +21624,7 @@
     },
     {
       "id": "route-step-0867",
-      "order": 897,
+      "order": 896,
       "blockId": "block-14",
       "type": "dungeon",
       "title": "◆ Tour de Bethel — À LA RECHERCHE DE CROCOBURIO",
@@ -21651,7 +21636,7 @@
     },
     {
       "id": "route-step-0868",
-      "order": 898,
+      "order": 897,
       "blockId": "block-14",
       "type": "resume",
       "title": "À la recherche de Crocoburio",
@@ -21666,7 +21651,7 @@
     },
     {
       "id": "route-step-0869",
-      "order": 899,
+      "order": 898,
       "blockId": "block-14",
       "type": "quest",
       "title": "Le creuset de Mériana — avancer jusqu'à Koutoulou",
@@ -21690,7 +21675,7 @@
     },
     {
       "id": "route-step-0870",
-      "order": 900,
+      "order": 899,
       "blockId": "block-14",
       "type": "dungeon",
       "title": "◆ Temple de Koutoulou — LE CREUSET DE MÉRIANA",
@@ -21702,7 +21687,7 @@
     },
     {
       "id": "route-step-0871",
-      "order": 901,
+      "order": 900,
       "blockId": "block-14",
       "type": "resume",
       "title": "Le creuset de Mériana",
@@ -21717,7 +21702,7 @@
     },
     {
       "id": "route-step-0872",
-      "order": 902,
+      "order": 901,
       "blockId": "block-14",
       "type": "quest",
       "title": "Une douloureuse séparation",
@@ -21736,7 +21721,7 @@
     },
     {
       "id": "route-step-0873",
-      "order": 903,
+      "order": 902,
       "blockId": "block-14",
       "type": "quest",
       "title": "Le dragon noir — avancer jusqu'au Roi Dazak",
@@ -21763,7 +21748,7 @@
     },
     {
       "id": "route-step-0874",
-      "order": 904,
+      "order": 903,
       "blockId": "block-14",
       "type": "dungeon",
       "title": "◆ Brasserie du Roi Dazak — LE DRAGON NOIR",
@@ -21780,7 +21765,7 @@
     },
     {
       "id": "route-step-0875",
-      "order": 905,
+      "order": 904,
       "blockId": "block-14",
       "type": "quest",
       "title": "La bible des rancunes",
@@ -21799,7 +21784,7 @@
     },
     {
       "id": "route-step-0876",
-      "order": 906,
+      "order": 905,
       "blockId": "block-14",
       "type": "resume",
       "title": "De Brikke et de Brokke",
@@ -21814,7 +21799,7 @@
     },
     {
       "id": "route-step-0877",
-      "order": 907,
+      "order": 906,
       "blockId": "block-14",
       "type": "resume",
       "title": "Le dragon noir — REPRENDRE jusqu'à Klime",
@@ -21830,7 +21815,7 @@
     },
     {
       "id": "route-step-0878",
-      "order": 908,
+      "order": 907,
       "blockId": "block-14",
       "type": "dungeon",
       "title": "◆ Salons privés de Klime — LE DRAGON NOIR",
@@ -21843,7 +21828,7 @@
     },
     {
       "id": "route-step-0879",
-      "order": 909,
+      "order": 908,
       "blockId": "block-14",
       "type": "resume",
       "title": "Le dragon noir",
@@ -21858,7 +21843,7 @@
     },
     {
       "id": "route-step-0880",
-      "order": 910,
+      "order": 909,
       "blockId": "block-14",
       "type": "quest",
       "title": "La vengeance du dernier empereur",
@@ -21877,7 +21862,7 @@
     },
     {
       "id": "route-step-0881",
-      "order": 911,
+      "order": 910,
       "blockId": "block-14",
       "type": "quest",
       "title": "L'œuf de Crocabulia — avancer jusqu'à la Reine des Voleurs",
@@ -21901,7 +21886,7 @@
     },
     {
       "id": "route-step-0882",
-      "order": 912,
+      "order": 911,
       "blockId": "block-14",
       "type": "dungeon",
       "title": "◆ Trône de la Cour Sombre — REINE DES VOLEURS",
@@ -21914,7 +21899,7 @@
     },
     {
       "id": "route-step-0883",
-      "order": 913,
+      "order": 912,
       "blockId": "block-14",
       "type": "resume",
       "title": "L'œuf de Crocabulia",
@@ -21929,7 +21914,7 @@
     },
     {
       "id": "route-step-0884",
-      "order": 914,
+      "order": 913,
       "blockId": "block-14",
       "type": "quest",
       "title": "Un nouvel héritier — avancer jusqu'à Solar",
@@ -21953,7 +21938,7 @@
     },
     {
       "id": "route-step-0885",
-      "order": 915,
+      "order": 914,
       "blockId": "block-14",
       "type": "dungeon",
       "title": "◆ Tour de Solar — UN NOUVEL HÉRITIER",
@@ -21966,7 +21951,7 @@
     },
     {
       "id": "route-step-0886",
-      "order": 916,
+      "order": 915,
       "blockId": "block-14",
       "type": "resume",
       "title": "Un nouvel héritier",
@@ -21982,7 +21967,7 @@
     },
     {
       "id": "route-step-0918",
-      "order": 917,
+      "order": 916,
       "blockId": "block-15",
       "type": "quest",
       "title": "Dans la gueule du dragon — avancer jusqu'après Rathrosk",
@@ -22007,7 +21992,7 @@
     },
     {
       "id": "route-step-0919",
-      "order": 918,
+      "order": 917,
       "blockId": "block-15",
       "type": "quest",
       "title": "Le silence est d'Aure",
@@ -22026,7 +22011,7 @@
     },
     {
       "id": "route-step-0920",
-      "order": 919,
+      "order": 918,
       "blockId": "block-15",
       "type": "resume",
       "title": "Dans la gueule du dragon — TERMINER",
@@ -22040,7 +22025,7 @@
     },
     {
       "id": "route-step-0921",
-      "order": 920,
+      "order": 919,
       "blockId": "block-15",
       "type": "quest",
       "title": "Prise de conscience",
@@ -22059,7 +22044,7 @@
     },
     {
       "id": "route-step-0923",
-      "order": 921,
+      "order": 920,
       "blockId": "block-15",
       "type": "quest",
       "title": "L'avis de la Mort — jusqu'à Ilyzaelle",
@@ -22083,7 +22068,7 @@
     },
     {
       "id": "route-step-0924",
-      "order": 922,
+      "order": 921,
       "blockId": "block-15",
       "type": "dungeon",
       "title": "◆ Belvédère d'Ilyzaelle — L'AVIS DE LA MORT",
@@ -22095,7 +22080,7 @@
     },
     {
       "id": "route-step-0925",
-      "order": 923,
+      "order": 922,
       "blockId": "block-15",
       "type": "resume",
       "title": "L'avis de la Mort — jusqu'au Bouftou Royal",
@@ -22111,7 +22096,7 @@
     },
     {
       "id": "route-step-0926",
-      "order": 924,
+      "order": 923,
       "blockId": "block-15",
       "type": "dungeon",
       "title": "◆ Cour du Bouftou Royal — L'AVIS DE LA MORT",
@@ -22124,7 +22109,7 @@
     },
     {
       "id": "route-step-0927",
-      "order": 925,
+      "order": 924,
       "blockId": "block-15",
       "type": "resume",
       "title": "L'avis de la Mort",
@@ -22139,7 +22124,7 @@
     },
     {
       "id": "route-step-0928",
-      "order": 926,
+      "order": 925,
       "blockId": "block-15",
       "type": "quest",
       "title": "La guerre de Cania n'aura pas lieu",
@@ -22163,7 +22148,7 @@
     },
     {
       "id": "route-step-0929",
-      "order": 927,
+      "order": 926,
       "blockId": "block-15",
       "type": "quest",
       "title": "Prise de conscience — jusqu'à la Tempête de l'Eliocalypse",
@@ -22179,7 +22164,7 @@
     },
     {
       "id": "route-step-0930",
-      "order": 928,
+      "order": 927,
       "blockId": "block-15",
       "type": "dungeon",
       "title": "◆ Tempête de l'Eliocalypse — PRISE DE CONSCIENCE",
@@ -22191,7 +22176,7 @@
     },
     {
       "id": "route-step-0931",
-      "order": 929,
+      "order": 928,
       "blockId": "block-15",
       "type": "resume",
       "title": "Prise de conscience",
@@ -22206,7 +22191,7 @@
     },
     {
       "id": "route-step-0690",
-      "order": 930,
+      "order": 929,
       "blockId": "block-15",
       "type": "preparation",
       "title": "Un rêve en clair-obscur — prérequis",
@@ -22228,7 +22213,7 @@
     },
     {
       "id": "route-step-0691",
-      "order": 931,
+      "order": 930,
       "blockId": "block-15",
       "type": "preparation",
       "title": "Un rêve en clair-obscur — 1/2",
@@ -22277,7 +22262,7 @@
     },
     {
       "id": "route-step-0692",
-      "order": 932,
+      "order": 931,
       "blockId": "block-15",
       "type": "preparation",
       "title": "Un rêve en clair-obscur — 2/2",
@@ -22360,7 +22345,7 @@
     },
     {
       "id": "route-step-0693",
-      "order": 933,
+      "order": 932,
       "blockId": "block-15",
       "type": "quest",
       "title": "Main dans la main — jusqu'à la chope de bière en métal",
@@ -22384,7 +22369,7 @@
     },
     {
       "id": "route-step-0694",
-      "order": 934,
+      "order": 933,
       "blockId": "block-15",
       "type": "quest",
       "title": "De l'encre spectaculaire",
@@ -22408,7 +22393,7 @@
     },
     {
       "id": "route-step-0695",
-      "order": 935,
+      "order": 934,
       "blockId": "block-15",
       "type": "quest",
       "title": "L'épopée du moine pèlerin",
@@ -22428,7 +22413,7 @@
     },
     {
       "id": "route-step-0696",
-      "order": 936,
+      "order": 935,
       "blockId": "block-15",
       "type": "resume",
       "title": "Main dans la main — jusqu'à Deux souffles, une inspiration",
@@ -22443,7 +22428,7 @@
     },
     {
       "id": "route-step-0697",
-      "order": 937,
+      "order": 936,
       "blockId": "block-15",
       "type": "quest",
       "title": "Deux souffles, une inspiration — jusqu'au Roi Imagami",
@@ -22467,7 +22452,7 @@
     },
     {
       "id": "route-step-0698",
-      "order": 938,
+      "order": 937,
       "blockId": "block-15",
       "type": "dungeon",
       "title": "◆ Mémoire d'Orukam — ROI IMAGAMI",
@@ -22484,7 +22469,7 @@
     },
     {
       "id": "route-step-0699",
-      "order": 939,
+      "order": 938,
       "blockId": "block-15",
       "type": "resume",
       "title": "Deux souffles, une inspiration — jusqu'à la Reine Amirukam",
@@ -22500,7 +22485,7 @@
     },
     {
       "id": "route-step-0700",
-      "order": 940,
+      "order": 939,
       "blockId": "block-15",
       "type": "dungeon",
       "title": "◆ Souvenir d'Imagiro — REINE AMIRUKAM",
@@ -22517,7 +22502,7 @@
     },
     {
       "id": "route-step-0701",
-      "order": 941,
+      "order": 940,
       "blockId": "block-15",
       "type": "resume",
       "title": "Deux souffles, une inspiration",
@@ -22533,7 +22518,7 @@
     },
     {
       "id": "route-step-0702",
-      "order": 942,
+      "order": 941,
       "blockId": "block-15",
       "type": "resume",
       "title": "Main dans la main",
@@ -22548,7 +22533,7 @@
     },
     {
       "id": "route-step-0703",
-      "order": 943,
+      "order": 942,
       "blockId": "block-15",
       "type": "quest",
       "title": "En ce jardin qui nous unit — Dofus Tacheté",
@@ -22572,7 +22557,7 @@
     },
     {
       "id": "route-step-0704",
-      "order": 944,
+      "order": 943,
       "blockId": "block-15",
       "type": "preparation",
       "title": "Après la pluie",
@@ -22679,7 +22664,7 @@
     },
     {
       "id": "route-step-0705",
-      "order": 945,
+      "order": 944,
       "blockId": "block-15",
       "type": "quest",
       "title": "Quand l'éveil n'est qu'un songe",
@@ -22699,7 +22684,7 @@
     },
     {
       "id": "route-step-0706",
-      "order": 946,
+      "order": 945,
       "blockId": "block-15",
       "type": "quest",
       "title": "Par ce serment s'écrit le monde",
@@ -22718,7 +22703,7 @@
     },
     {
       "id": "route-step-0707",
-      "order": 947,
+      "order": 946,
       "blockId": "block-15",
       "type": "quest",
       "title": "Le dernier rempart",
@@ -22737,7 +22722,7 @@
     },
     {
       "id": "route-step-0708",
-      "order": 948,
+      "order": 947,
       "blockId": "block-15",
       "type": "quest",
       "title": "Une bien étrange prophétie",
@@ -22756,7 +22741,7 @@
     },
     {
       "id": "route-step-0709",
-      "order": 949,
+      "order": 948,
       "blockId": "block-15",
       "type": "resume",
       "title": "Quand l'éveil n'est qu'un songe",
@@ -22771,7 +22756,7 @@
     },
     {
       "id": "route-step-0795",
-      "order": 950,
+      "order": 949,
       "blockId": "block-15",
       "type": "preparation",
       "title": "Bouquet final / Cire Momore",
@@ -22822,7 +22807,7 @@
     },
     {
       "id": "route-step-0796",
-      "order": 951,
+      "order": 950,
       "blockId": "block-15",
       "type": "quest",
       "title": "Les risques du métier",
@@ -22841,7 +22826,7 @@
     },
     {
       "id": "route-step-0797",
-      "order": 952,
+      "order": 951,
       "blockId": "block-15",
       "type": "quest",
       "title": "La sorcière exilée — avancer jusqu'à la Chambre des Maléfices",
@@ -22860,7 +22845,7 @@
     },
     {
       "id": "route-step-0798",
-      "order": 953,
+      "order": 952,
       "blockId": "block-15",
       "type": "dungeon",
       "title": "◆ Chambre des Maléfices — LA SORCIÈRE EXILÉE",
@@ -22872,7 +22857,7 @@
     },
     {
       "id": "route-step-0799",
-      "order": 954,
+      "order": 953,
       "blockId": "block-15",
       "type": "resume",
       "title": "La sorcière exilée",
@@ -22887,7 +22872,7 @@
     },
     {
       "id": "route-step-0800",
-      "order": 955,
+      "order": 954,
       "blockId": "block-15",
       "type": "quest",
       "title": "La graine de la révolte + Pour que la flamme vacille",
@@ -22923,7 +22908,7 @@
     },
     {
       "id": "route-step-0801",
-      "order": 956,
+      "order": 955,
       "blockId": "block-15",
       "type": "resume",
       "title": "La graine de la révolte",
@@ -22944,7 +22929,7 @@
     },
     {
       "id": "route-step-1001",
-      "order": 957,
+      "order": 956,
       "blockId": "block-15",
       "type": "resume",
       "title": "Pour que la flamme vacille",
@@ -22961,7 +22946,7 @@
     },
     {
       "id": "route-step-0802",
-      "order": 958,
+      "order": 957,
       "blockId": "block-15",
       "type": "quest",
       "title": "Par l'héritage qui vous lie",
@@ -22979,7 +22964,7 @@
     },
     {
       "id": "route-step-0803",
-      "order": 959,
+      "order": 958,
       "blockId": "block-15",
       "type": "quest",
       "title": "Une dernière volonté — avancer jusqu'à Ilyzaelle",
@@ -23000,7 +22985,7 @@
     },
     {
       "id": "route-step-0804",
-      "order": 960,
+      "order": 959,
       "blockId": "block-15",
       "type": "dungeon",
       "title": "Belvédère d'Ilyzaelle — UNE DERNIÈRE VOLONTÉ #3",
@@ -23013,7 +22998,7 @@
     },
     {
       "id": "route-step-0805",
-      "order": 961,
+      "order": 960,
       "blockId": "block-15",
       "type": "resume",
       "title": "Une dernière volonté",
@@ -23029,7 +23014,7 @@
     },
     {
       "id": "route-step-0982",
-      "order": 962,
+      "order": 961,
       "blockId": "block-15",
       "type": "quest",
       "title": "L'heure des adieux — avancer jusqu'à Cire Momore",
@@ -23048,7 +23033,7 @@
     },
     {
       "id": "route-step-0983",
-      "order": 963,
+      "order": 962,
       "blockId": "block-15",
       "type": "dungeon",
       "title": "◆ Caverne de Cire Momore — L'HEURE DES ADIEUX",
@@ -23060,7 +23045,7 @@
     },
     {
       "id": "route-step-0984",
-      "order": 964,
+      "order": 963,
       "blockId": "block-15",
       "type": "resume",
       "title": "L'heure des adieux",
@@ -23075,7 +23060,7 @@
     },
     {
       "id": "route-step-0932",
-      "order": 965,
+      "order": 964,
       "blockId": "block-15",
       "type": "quest",
       "title": "Le poids de son regard",
@@ -23094,7 +23079,7 @@
     },
     {
       "id": "route-step-0933",
-      "order": 966,
+      "order": 965,
       "blockId": "block-15",
       "type": "quest",
       "title": "La danse de la dissonance — avancer jusqu'à Bataille de l'Aurore Pourpre",
@@ -23118,7 +23103,7 @@
     },
     {
       "id": "route-step-0934",
-      "order": 967,
+      "order": 966,
       "blockId": "block-15",
       "type": "dungeon",
       "title": "◆ Bataille de l'Aurore Pourpre — LA DANSE DE LA DISSONANCE",
@@ -23131,7 +23116,7 @@
     },
     {
       "id": "route-step-0935",
-      "order": 968,
+      "order": 967,
       "blockId": "block-15",
       "type": "resume",
       "title": "La danse de la dissonance",
@@ -23146,7 +23131,7 @@
     },
     {
       "id": "route-step-0936",
-      "order": 969,
+      "order": 968,
       "blockId": "block-15",
       "type": "quest",
       "title": "Descendre aux cendres",
@@ -23164,7 +23149,7 @@
     },
     {
       "id": "route-step-0937",
-      "order": 970,
+      "order": 969,
       "blockId": "block-15",
       "type": "preparation",
       "title": "Un héritage tourmenté / Totems",
@@ -23281,7 +23266,7 @@
     },
     {
       "id": "route-step-0938",
-      "order": 971,
+      "order": 970,
       "blockId": "block-15",
       "type": "quest",
       "title": "Un héritage tourmenté — jusqu'à la rune d'Harmonie",
@@ -23304,7 +23289,7 @@
     },
     {
       "id": "route-step-0939",
-      "order": 972,
+      "order": 971,
       "blockId": "block-15",
       "type": "long_running",
       "title": "Les totems de Maïmane",
@@ -23333,7 +23318,7 @@
     },
     {
       "id": "route-step-0940",
-      "order": 973,
+      "order": 972,
       "blockId": "block-15",
       "type": "dungeon",
       "title": "◆ Salons privés de Klime — TOTEM JOIE",
@@ -23345,7 +23330,7 @@
     },
     {
       "id": "route-step-0941",
-      "order": 974,
+      "order": 973,
       "blockId": "block-15",
       "type": "dungeon",
       "title": "◆ Temple de Koutoulou — TOTEM PEUR",
@@ -23357,7 +23342,7 @@
     },
     {
       "id": "route-step-0942",
-      "order": 975,
+      "order": 974,
       "blockId": "block-15",
       "type": "dungeon",
       "title": "◆ Brasserie du Roi Dazak — TOTEM COLÈRE",
@@ -23369,7 +23354,7 @@
     },
     {
       "id": "route-step-0943",
-      "order": 976,
+      "order": 975,
       "blockId": "block-15",
       "type": "dungeon",
       "title": "◆ Laboratoire de Nileza — TOTEM DÉGOÛT",
@@ -23381,7 +23366,7 @@
     },
     {
       "id": "route-step-0946",
-      "order": 977,
+      "order": 976,
       "blockId": "block-16",
       "type": "quest",
       "title": "S'armer contre le destin — avancer jusqu'au Vortex",
@@ -23410,7 +23395,7 @@
     },
     {
       "id": "route-step-0947",
-      "order": 978,
+      "order": 977,
       "blockId": "block-16",
       "type": "dungeon",
       "title": "Œil de Vortex — TOTEM TRISTESSE",
@@ -23426,7 +23411,7 @@
     },
     {
       "id": "route-step-0948",
-      "order": 979,
+      "order": 978,
       "blockId": "block-16",
       "type": "resume",
       "title": "S'armer contre le destin — reprendre jusqu'au Comte Harebourg",
@@ -23442,7 +23427,7 @@
     },
     {
       "id": "route-step-0950",
-      "order": 980,
+      "order": 979,
       "blockId": "block-16",
       "type": "dungeon",
       "title": "Comte Harebourg — SIX SUR SIX / TOTEM #2",
@@ -23455,7 +23440,7 @@
     },
     {
       "id": "route-step-0952",
-      "order": 981,
+      "order": 980,
       "blockId": "block-16",
       "type": "resume",
       "title": "Les totems de Maïmane",
@@ -23475,7 +23460,7 @@
     },
     {
       "id": "route-step-0954",
-      "order": 982,
+      "order": 981,
       "blockId": "block-16",
       "type": "resume",
       "title": "S'armer contre le destin",
@@ -23490,7 +23475,7 @@
     },
     {
       "id": "route-step-0955",
-      "order": 983,
+      "order": 982,
       "blockId": "block-16",
       "type": "quest",
       "title": "La fin... ou le commencement",
@@ -23514,7 +23499,7 @@
     },
     {
       "id": "route-step-0976",
-      "order": 984,
+      "order": 983,
       "blockId": "block-16",
       "type": "quest",
       "title": "Au détour d'un rêve perdu",
@@ -23537,7 +23522,7 @@
     },
     {
       "id": "route-step-0977",
-      "order": 985,
+      "order": 984,
       "blockId": "block-16",
       "type": "quest",
       "title": "Entretemps, une renaissance",
@@ -23561,7 +23546,7 @@
     },
     {
       "id": "route-step-0953",
-      "order": 986,
+      "order": 985,
       "blockId": "block-16",
       "type": "resume",
       "title": "Un héritage tourmenté",
@@ -23576,7 +23561,7 @@
     },
     {
       "id": "route-step-0958",
-      "order": 987,
+      "order": 986,
       "blockId": "block-17",
       "type": "preparation",
       "title": "Gobstination",
@@ -23633,7 +23618,7 @@
     },
     {
       "id": "route-step-0959",
-      "order": 988,
+      "order": 987,
       "blockId": "block-17",
       "type": "preparation",
       "title": "Qui nous protège — reliquat réellement nécessaire",
@@ -23771,7 +23756,7 @@
     },
     {
       "id": "route-step-0961",
-      "order": 989,
+      "order": 988,
       "blockId": "block-17",
       "type": "quest",
       "title": "Gobstination d'un Grobelin",
@@ -23794,7 +23779,7 @@
     },
     {
       "id": "route-step-0963",
-      "order": 990,
+      "order": 989,
       "blockId": "block-17",
       "type": "quest",
       "title": "Cultures et turpitudes",
@@ -23819,7 +23804,7 @@
     },
     {
       "id": "route-step-0965",
-      "order": 991,
+      "order": 990,
       "blockId": "block-17",
       "type": "major_step",
       "title": "Jiva puis Djaul — minimiser le farm de sigils",
@@ -23831,7 +23816,7 @@
     },
     {
       "id": "route-step-0966",
-      "order": 992,
+      "order": 991,
       "blockId": "block-17",
       "type": "long_running",
       "title": "Qui nous protège du Protecteur ? — sigils hors donjons",
@@ -23855,7 +23840,7 @@
     },
     {
       "id": "route-step-0967",
-      "order": 993,
+      "order": 992,
       "blockId": "block-17",
       "type": "dungeon",
       "title": "◆ Palais du Roi Nidas — SIGIL DE SUMENS",
@@ -23867,7 +23852,7 @@
     },
     {
       "id": "route-step-0968",
-      "order": 994,
+      "order": 993,
       "blockId": "block-17",
       "type": "dungeon",
       "title": "◆ Bataille de l'Aurore Pourpre — SIGIL DE RAVAL",
@@ -23880,7 +23865,7 @@
     },
     {
       "id": "route-step-0969",
-      "order": 995,
+      "order": 994,
       "blockId": "block-17",
       "type": "major_step",
       "title": "Préparer le sigil de Djaul — passage Brâkmar",
@@ -23893,7 +23878,7 @@
     },
     {
       "id": "route-step-0970",
-      "order": 996,
+      "order": 995,
       "blockId": "block-17",
       "type": "dungeon",
       "title": "◆ Tour de Solar — SIGIL DE DJAUL",
@@ -23906,7 +23891,7 @@
     },
     {
       "id": "route-step-0971",
-      "order": 997,
+      "order": 996,
       "blockId": "block-17",
       "type": "resume",
       "title": "Qui nous protège — reforger le Ménologium",
@@ -23922,7 +23907,7 @@
     },
     {
       "id": "route-step-0972",
-      "order": 998,
+      "order": 997,
       "blockId": "block-17",
       "type": "quest",
       "title": "Qui nous protège — avancer jusqu'à Elya Wood",
@@ -23939,7 +23924,7 @@
     },
     {
       "id": "route-step-0974",
-      "order": 999,
+      "order": 998,
       "blockId": "block-18",
       "type": "preparation",
       "title": "Avant La bête au bois dormant",
@@ -23967,7 +23952,7 @@
     },
     {
       "id": "route-step-0978",
-      "order": 1000,
+      "order": 999,
       "blockId": "block-18",
       "type": "quest",
       "title": "La bête au bois dormant",
@@ -23992,7 +23977,7 @@
     },
     {
       "id": "route-step-0988",
-      "order": 1001,
+      "order": 1000,
       "blockId": "block-19",
       "type": "milestone",
       "title": "◆ Akadémie des Gobs — GRUNOB",
@@ -24003,7 +23988,7 @@
     },
     {
       "id": "route-step-0989",
-      "order": 1002,
+      "order": 1001,
       "blockId": "block-19",
       "type": "milestone",
       "title": "Parler à Gobalden AVANT de sortir",
@@ -24015,7 +24000,7 @@
     },
     {
       "id": "route-step-0990",
-      "order": 1003,
+      "order": 1002,
       "blockId": "block-19",
       "type": "milestone",
       "title": "Gobdepin → obtenir le Dom de Pin",
@@ -24031,7 +24016,7 @@
     },
     {
       "id": "route-step-0992",
-      "order": 1004,
+      "order": 1003,
       "blockId": "block-20",
       "type": "hard_lock",
       "title": "Avant Flovoraison",
@@ -24042,7 +24027,7 @@
     },
     {
       "id": "route-step-0994",
-      "order": 1005,
+      "order": 1004,
       "blockId": "block-20",
       "type": "quest",
       "title": "Flovoraison — jusqu'à la Chambre des Maléfices",
@@ -24062,7 +24047,7 @@
     },
     {
       "id": "route-step-0995",
-      "order": 1006,
+      "order": 1005,
       "blockId": "block-20",
       "type": "dungeon",
       "title": "◆ Chambre des Maléfices — FLOVORAISON",
@@ -24075,7 +24060,7 @@
     },
     {
       "id": "route-step-0996",
-      "order": 1007,
+      "order": 1006,
       "blockId": "block-20",
       "type": "resume",
       "title": "Flovoraison — jusqu'au Dofus Sylvestre de quête",
@@ -24092,7 +24077,7 @@
     },
     {
       "id": "route-step-0997",
-      "order": 1008,
+      "order": 1007,
       "blockId": "block-20",
       "type": "resume",
       "title": "Qui nous protège du Protecteur ?",
@@ -24108,7 +24093,7 @@
     },
     {
       "id": "route-step-1172",
-      "order": 1009,
+      "order": 1008,
       "blockId": "block-20",
       "type": "resume",
       "title": "Parangon de puissance",
@@ -24125,7 +24110,7 @@
     },
     {
       "id": "route-step-0999",
-      "order": 1010,
+      "order": 1009,
       "blockId": "block-20",
       "type": "finish",
       "title": "Parler à Silvosse → Dofus Sylvestre",
