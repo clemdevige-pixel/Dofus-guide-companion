@@ -12,7 +12,7 @@ import type {
 } from '../src/route/types';
 import { validateRoute } from '../src/route/validation';
 
-const DEFAULT_RANGE = 'ROUTE!A5:V';
+const DEFAULT_RANGE = 'ROUTE!A5:W';
 const OUTPUT_PATH = resolve('data/route.json');
 
 const typeMap: Record<string, { type: StepType; displayType?: string }> = {
@@ -226,10 +226,10 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
     [1, 'TYPE'], [2, 'ÉTAPE'], [10, 'STEP_ID'], [11, 'GOAL_ID'], [12, 'GOAL_PHASE'],
     [13, 'POSITION'], [14, 'LANCEMENT'], [15, 'LANCEMENT_REQUIS'], [16, 'DESTINATION'],
     [17, 'GUIDE_ITEMS'], [18, 'MOMENT_ID'], [19, 'DISPLAY_ROLE'], [20, 'PARALLEL_ID'],
-    [21, 'PARALLEL_PHASE'],
+    [21, 'PARALLEL_PHASE'], [22, 'DOFUS_SERIES'],
   ];
   if (expectedHeaders.some(([index, label]) => cell(headers, index) !== label)) {
-    throw new Error('Colonnes ROUTE inattendues : les colonnes techniques jusqu’à PARALLEL_PHASE sont obligatoires.');
+    throw new Error('Colonnes ROUTE inattendues : les colonnes techniques jusqu’à DOFUS_SERIES sont obligatoires.');
   }
 
   const blocks: RouteBlock[] = [];
@@ -266,6 +266,7 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
     const goalPhase = parseLifecyclePhase(cell(formatted, 12), sheetRow, 'GOAL_PHASE');
     const parallelId = cell(formatted, 20);
     const parallelPhase = parseLifecyclePhase(cell(formatted, 21), sheetRow, 'PARALLEL_PHASE') as ParallelPhase | undefined;
+    const dofusSeries = cell(formatted, 22);
 
     if (goalPhase && !goalId) throw new Error(`Ligne Sheet ${sheetRow}: GOAL_PHASE défini sans GOAL_ID.`);
     if (goalId && !goalPhase && mapping.type !== 'hard_lock') throw new Error(`Ligne Sheet ${sheetRow}: GOAL_ID défini sans GOAL_PHASE.`);
@@ -299,6 +300,7 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
       blockId: currentBlock.id,
       type: mapping.type,
       ...(mapping.displayType ? { displayType: mapping.displayType } : {}),
+      ...(dofusSeries ? { dofusSeries } : {}),
       ...(displayRole ? { displayRole } : {}),
       title,
       ...(mapping.type !== 'preparation' && prerequisites ? { prerequisites } : {}),
