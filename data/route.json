@@ -236,7 +236,6 @@
       "title": "Premières armes",
       "displayRole": "objective",
       "action": "TERMINER",
-      "instruction": "TERMINE Premières armes.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/premieres-armes.html"
@@ -1528,7 +1527,6 @@
       "title": "Des chafers qui marchent — cimetière",
       "displayRole": "objective",
       "prerequisites": "Des chafers qui marchent active.",
-      "warning": "Profite de ce passage avant Kardorim ; le zaap cimetière a déjà été activé pendant la Forêt.",
       "action": "AVANCER / STOP",
       "instruction": "Va au cimetière en [4,1] et réalise l'objectif auprès de Percy Klop pour Des chafers qui marchent. GARDE la quête active jusqu'au rendu final à la milice.",
       "momentId": "moment-incarnam-retours2",
@@ -1570,7 +1568,7 @@
       "title": "Dans la gueule du Milimilou — Klasmor",
       "displayRole": "transition",
       "prerequisites": "Dans la gueule du Milimilou active ; Cryptologie active.",
-      "warning": "Ne lance pas un second donjon : prépare les deux objectifs avant Kardorim.",
+      "warning": "Cryptologie et Dans la gueule du Milimilou doivent être prêtes avant d'entrer chez Kardorim.",
       "action": "REPRENDRE / AVANCER",
       "instruction": "Toujours en [5,-1], poursuis le dialogue avec Klasmor et AVANCE Dans la gueule du Milimilou jusqu'au passage par la Crypte.",
       "source": {
@@ -1974,7 +1972,6 @@
       "type": "quest",
       "title": "Les principes d'Archie m'aident",
       "action": "TERMINER",
-      "instruction": "TERMINE Les principes d'Archie m'aident.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-principes-d-archie-m-aident.html"
@@ -4160,7 +4157,7 @@
       "displayRole": "objective",
       "prerequisites": "Le rebelle de la forêt + Tel est pris qui croyait prendre actifs.",
       "action": "AVANCER LES 2",
-      "instruction": "Profite de ce passage pour conserver Tel est pris au bon checkpoint ; ne la termine pas encore.",
+      "instruction": "Avance Le rebelle de la forêt et Tel est pris qui croyait prendre, puis garde Tel est pris active pour la suite.",
       "momentId": "moment-route-step-1157",
       "destination": {
         "x": 5,
@@ -5612,7 +5609,7 @@
       "order": 188,
       "blockId": "block-03",
       "type": "alignment",
-      "title": "Du repos mais pas trop — convergence Bworkette",
+      "title": "Du repos mais pas trop — jusqu'à Bworkette",
       "displayType": "ALIGN.",
       "displayRole": "objective",
       "prerequisites": "10 Bâtons de Boisaille + 1 Bakélélite préparés ; Les sbires du maître au checkpoint Bworkette.",
@@ -6041,7 +6038,6 @@
       "displayType": "ALIGN.",
       "displayRole": "objective",
       "action": "TERMINER",
-      "instruction": "TERMINE la quête.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/deacutegouts-temps.html"
@@ -7513,7 +7509,6 @@
       "displayRole": "objective",
       "prerequisites": "Carte de Cania assemblée.",
       "action": "LANCER / TERMINER",
-      "instruction": "En [-6,-3], parle à Mériana et LANCE Les bandits de Cania. TERMINE la quête selon DPLN.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-bandits-de-cania.html"
@@ -8610,7 +8605,6 @@
       "displayRole": "objective",
       "prerequisites": "Prévoir 1 Bière du Chabrulé.",
       "action": "LANCER / TERMINER",
-      "instruction": "En [-33,33], LANCE Le mort dort et TERMINE la quête selon DPLN.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-mort-dort.html"
@@ -8634,7 +8628,6 @@
       "displayRole": "objective",
       "prerequisites": "Prévoir 3 Bière Atolmond + 15 Trèfle à 5 feuilles + 3 Mâchoire de Chafer Draugr.",
       "action": "LANCER / TERMINER",
-      "instruction": "En [-26,36], LANCE Faire le mort et TERMINE la quête selon DPLN.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/faire-le-mort.html"
@@ -8658,7 +8651,6 @@
       "displayRole": "objective",
       "prerequisites": "5 000 kamas ou 2 × Œil de Cocholou ; drops de quête.",
       "action": "LANCER / TERMINER",
-      "instruction": "En [-26,-5], LANCE La bête intérieure et TERMINE la quête selon DPLN.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-bete-interieure.html"
@@ -9848,7 +9840,6 @@
       "title": "La maire de glace",
       "displayRole": "objective",
       "action": "LANCER / TERMINER",
-      "instruction": "En [-81,-37], LANCE La maire de glace et TERMINE la quête selon DPLN.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-maire-de-glace.html"
@@ -9918,7 +9909,6 @@
       "title": "Full Contact",
       "displayRole": "objective",
       "action": "LANCER / TERMINER",
-      "instruction": "En [-77,-42], LANCE Full Contact et TERMINE la quête selon DPLN.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/full-contact.html"
@@ -9989,7 +9979,6 @@
       "displayRole": "objective",
       "prerequisites": "Niveau recommandé 100 ; 1 combat en groupe possible.",
       "action": "LANCER / TERMINER",
-      "instruction": "En [-79,-42], LANCE Pauvre Kiki et TERMINE la quête selon DPLN.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/pauvre-kiki.html"
@@ -10628,7 +10617,6 @@
       "title": "Hôtel de glace",
       "displayRole": "objective",
       "action": "LANCER / TERMINER",
-      "instruction": "En [-61,-58], LANCE Hôtel de glace et TERMINE la quête selon DPLN.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/hocirctel-de-glace.html"
@@ -11139,7 +11127,7 @@
       "displayRole": "detail",
       "prerequisites": "L'ombre et la glace + Les joyeux de la couronne + Les chasseurs + Pêche en eaux gelées.",
       "action": "FAIRE",
-      "instruction": "Entre quand les quatre quêtes Frigost sont au Mansot, puis vaincs le Mansot Royal. Ne cherche pas à valider Viti ici : un second passage avec l'Idole de Viti Glacée sera fait après Chêne Mou.",
+      "instruction": "Entre quand les quatre quêtes Frigost sont au Mansot, puis vaincs le Mansot Royal. Ne valide pas Viti ici : l'Idole de Viti Glacée sera utilisée plus tard.",
       "momentId": "moment-mansot-pass",
       "parallelGroup": {
         "parallelId": "parallel-mansot",
@@ -11254,7 +11242,6 @@
       "title": "La pêche à Mel",
       "displayRole": "objective",
       "action": "LANCER / TERMINER",
-      "instruction": "En [-64,-55], LANCE La pêche à Mel et TERMINE-la selon DPLN.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-pecircche-agrave-mel.html"
@@ -11277,7 +11264,6 @@
       "title": "Mel odieuse",
       "displayRole": "objective",
       "action": "LANCER / TERMINER",
-      "instruction": "En [-64,-55], LANCE Mel odieuse et TERMINE-la selon DPLN.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/mel-odieuse.html"
@@ -11300,7 +11286,6 @@
       "title": "Mel au drame",
       "displayRole": "objective",
       "action": "LANCER / TERMINER",
-      "instruction": "En [-64,-55], LANCE Mel au drame et TERMINE-la selon DPLN.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/mel-au-drame.html"
@@ -11323,7 +11308,6 @@
       "title": "Il est frais mon pichon",
       "displayRole": "objective",
       "action": "LANCER / TERMINER",
-      "instruction": "En [-64,-55], LANCE Il est frais mon pichon et TERMINE-la selon DPLN.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/il-est-frais-mon-pichon.html"
@@ -12707,7 +12691,7 @@
       "prerequisites": "La voie du guerrier au checkpoint Founoroshi.",
       "warning": "Capture Founoroshi pour l'Ocre pendant ce passage.",
       "action": "FAIRE",
-      "instruction": "Vaincs et capture Founoroshi pour l'Ocre avec La voie du guerrier active. Ensuite retourne voir le Maître des clefs, valide Founoroshi et prends Chêne Mou. Ne tente pas de mutualiser Viti ici : son lancement dépend de la fin de Plongeon et dragon après Chêne Mou."
+      "instruction": "Vaincs et capture Founoroshi pour l'Ocre avec La voie du guerrier active. Ensuite retourne voir le Maître des clefs, valide Founoroshi et prends l'objectif Chêne Mou."
     },
     {
       "id": "route-step-0353",
@@ -12798,7 +12782,6 @@
       "displayRole": "objective",
       "prerequisites": "Plongeon et dragon terminé.",
       "action": "LANCER / TERMINER",
-      "instruction": "En [-6,-3], LANCE Extinction des feux et TERMINE la quête selon DPLN.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/extinction-des-feux.html"
@@ -12988,7 +12971,7 @@
       "title": "Le festival de la lanterne — avancer jusqu’au Founoroshi",
       "displayRole": "objective",
       "action": "AVANCER / STOP",
-      "instruction": "LANCE Le festival de la lanterne après La jetée des enfants perdus et AVANCE jusqu’à devoir vaincre Founoroshi, puis STOP devant la Fabrique. Ce passage sera mutualisé avec La bénédiction de Viti lors du second Founoroshi.",
+      "instruction": "LANCE Le festival de la lanterne après La jetée des enfants perdus et AVANCE jusqu’à devoir vaincre Founoroshi, puis STOP devant la Fabrique.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-festival-de-la-lanterne.html"
@@ -13025,7 +13008,7 @@
       "prerequisites": "La bénédiction de Viti + Le festival de la lanterne au checkpoint Founoroshi ; idole de Viti Roussie prête.",
       "warning": "⚠ AVANT DE SORTIR DU DONJON — active l'Idole de Viti Roussie avant le combat. Après le boss, parle à Founoroshi pour Le festival de la lanterne et récupère le Mortier enchanté avant de sortir.",
       "action": "FAIRE",
-      "instruction": "Vaincs Founoroshi avec l'Idole de Viti Roussie et Le festival de la lanterne actif. Ce second passage est distinct du passage La voie du guerrier effectué avant Chêne Mou.",
+      "instruction": "Vaincs Founoroshi avec l'Idole de Viti Roussie et Le festival de la lanterne actif.",
       "momentId": "moment-viti-2boss"
     },
     {
@@ -13037,7 +13020,7 @@
       "displayRole": "transition",
       "prerequisites": "Founoroshi vaincu pendant le second passage Viti + Festival ; Mortier enchanté récupéré avant la sortie.",
       "action": "TERMINER",
-      "instruction": "REPRENDS Le festival de la lanterne après le passage mutualisé Founoroshi, poursuis le choix de camp demandé puis TERMINE la quête.",
+      "instruction": "REPRENDS Le festival de la lanterne, poursuis le choix de camp demandé puis TERMINE la quête.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-festival-de-la-lanterne.html"
@@ -13685,7 +13668,7 @@
       "prerequisites": "La bénédiction de Thomahon active + Idole de Thomahon Marine ; Larmes d'Ouronigride déjà débloquées via Fais dodo, t'auras du gâteau.",
       "warning": "⚠ AVANT LE COMBAT — double-clique l'Idole de Thomahon Marine avant chaque tentative.",
       "action": "FAIRE",
-      "instruction": "Vaincs Ben le Ripate avec l'Idole de Thomahon Marine. Ce second passage est distinct du premier Ben effectué pour Fais dodo et l'accès aux Larmes d'Ouronigride.",
+      "instruction": "Vaincs Ben le Ripate avec l'Idole de Thomahon Marine.",
       "momentId": "moment-route-step-0488"
     },
     {
@@ -14126,7 +14109,7 @@
       "prerequisites": "Fais dodo, t'auras du gâteau terminée ; accès aux Larmes d'Ouronigride débloqué.",
       "warning": "Lavomatique se lance auprès de Lave Azza avant l'Hypogée de l'Obsidiantre.",
       "action": "LANCER / STOP",
-      "instruction": "En [-71,-83], parle à Lave Azza et LANCE Lavomatique. Garde la quête active pour le passage Hypogée mutualisé avec Dan Lavy et Thomahon.",
+      "instruction": "En [-71,-83], parle à Lave Azza et LANCE Lavomatique. Garde la quête active jusqu'au passage de l'Hypogée de l'Obsidiantre.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/lavomatique.html"
@@ -14469,7 +14452,6 @@
       "displayType": "QUÊTES PARALLÈLES",
       "displayRole": "transition",
       "prerequisites": "La quatrième dimension + Crache Test déjà actives.",
-      "warning": "Ouvre les deux missions locales dès l'arrivée dans l'avant-poste.",
       "action": "LANCER LES 2 / STOP",
       "instruction": "Les quatre quêtes Enutrosor sont maintenant actives ; profite des mêmes déplacements.",
       "momentId": "moment-route-step-1168",
@@ -16550,7 +16532,7 @@
       "title": "Au fion du trou",
       "prerequisites": "20 000 kamas.",
       "action": "LANCER / STOP",
-      "instruction": "LANCE Au fion du trou après le premier Grolloum d'alignement et garde-la active jusqu'au second Grolloum, prévu avec La machine à démonter le temps.",
+      "instruction": "LANCE Au fion du trou après le Grolloum d'alignement et garde-la active jusqu'au Grolloum de La machine à démonter le temps.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/au-fion-du-trou.html"
@@ -18255,7 +18237,7 @@
       "prerequisites": "Fée d'hiver au checkpoint Ilyzaelle.",
       "warning": "⚠ AVANT DE SORTIR DU DONJON — après Ilyzaelle, parle-lui pour obtenir la bénédiction nécessaire à Fée d'hiver.",
       "action": "FAIRE",
-      "instruction": "Vaincs Ilyzaelle pour Fée d'hiver. Ce premier passage est nécessaire avant l'alignement 100 et ne peut pas attendre Valonia.",
+      "instruction": "Vaincs Ilyzaelle pour Fée d'hiver.",
       "momentId": "moment-route-step-0640"
     },
     {
@@ -18383,7 +18365,7 @@
       "displayRole": "objective",
       "prerequisites": "Il faut mettre un terme aux maîtres terminée.",
       "action": "LANCER / STOP",
-      "instruction": "À la Tour de la Clepsydre en [-59,-88], parle à Dorléans et LANCE Un comte de faits divers. Garde-la active pour le passage Comte mutualisé juste après.",
+      "instruction": "À la Tour de la Clepsydre en [-59,-88], parle à Dorléans et LANCE Un comte de faits divers. Garde la quête active pour le Comte juste après.",
       "momentId": "moment-comte-ddg",
       "location": {
         "x": -59,
@@ -18404,7 +18386,7 @@
       "prerequisites": "Le givre des révélations + Un comte de faits divers actifs ; les quatre maîtres de Frigost III vaincus.",
       "warning": "⚠ AVANT DE SORTIR DU DONJON — parle au Comte, donne-lui la montre puis récupère-la, prélève le Liquide de la Clepsydre sur le socle et effectue les dialogues Jiva/Djaul requis par Le givre des révélations.",
       "action": "FAIRE",
-      "instruction": "Vaincs le Comte Harebourg avec Le givre des révélations et Un comte de faits divers actifs. C'est le premier passage Comte, dédié au Dofus des Glaces.",
+      "instruction": "Vaincs le Comte Harebourg avec Le givre des révélations et Un comte de faits divers actifs.",
       "momentId": "moment-comte-ddg"
     },
     {
@@ -22966,7 +22948,7 @@
       "prerequisites": "Une dernière volonté au checkpoint Ilyzaelle.",
       "warning": "⚠ AVANT DE SORTIR DU DONJON — parle à Ilyzaelle dans la salle de sortie pour faire avancer Une dernière volonté.",
       "action": "FAIRE",
-      "instruction": "Vaincs Ilyzaelle pour Une dernière volonté. Ce passage est distinct du passage Alignement 99 et de celui de L'avis de la Mort, ces quêtes n'étant pas disponibles simultanément.",
+      "instruction": "Vaincs Ilyzaelle pour Une dernière volonté.",
       "momentId": "moment-valonia-ilyzaelle"
     },
     {
@@ -23269,7 +23251,7 @@
       "displayRole": "objective",
       "prerequisites": "Un héritage au checkpoint rune.",
       "action": "LANCER / FIL ROUGE",
-      "instruction": "LANCE les Totems puis collecte les six émotions lors des passages dédiés. Garde la quête active : S'armer contre le destin rejoindra ce groupe au Vortex.",
+      "instruction": "LANCE Les totems de Maïmane puis collecte les six émotions lors des passages dédiés. Garde la quête active jusqu'au Vortex.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-totems-de-maimane.html"
@@ -23406,7 +23388,7 @@
       "prerequisites": "S'armer contre le destin + Les totems de Maïmane actifs ; Dofus des Glaces déjà obtenu.",
       "warning": "⚠ AVANT DE SORTIR DU DONJON — effectue les dialogues demandés par S'armer contre le destin. Le Totem de la surprise tombe automatiquement.",
       "action": "FAIRE",
-      "instruction": "Vaincs le Comte avec S'armer contre le destin + Les totems de Maïmane actifs. L'Éclat de destin brisé et le Totem de la surprise sont obtenus pendant ce second passage.",
+      "instruction": "Vaincs le Comte avec S'armer contre le destin + Les totems de Maïmane actifs. L'Éclat de destin brisé et le Totem de la surprise sont obtenus pendant ce combat.",
       "momentId": "moment-comte-convergence"
     },
     {
@@ -24072,7 +24054,6 @@
       "prerequisites": "La mère des Dragoeufs est restée active depuis le checkpoint Parangon pendant les gardiens de donjon niveau 200.",
       "warning": "Si le Parangon n'est pas tombé, garde La mère des Dragoeufs active et ne poursuis pas la branche Vulbis.",
       "action": "FIN DU SUIVI",
-      "instruction": "Clôture le suivi Parangon dans Companion. Aucun farm supplémentaire ni aucune suite Vulbis ne sont ajoutés ici.",
       "momentId": "moment-sylvestre-final",
       "longRunningGoal": {
         "goalId": "parangon-puissance",
