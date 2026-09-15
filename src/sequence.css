@@ -5,8 +5,8 @@
 .sequence-list {
   counter-reset: sequence-objective;
   display: grid;
-  gap: 9px;
-  margin: 12px 0 0;
+  gap: 7px;
+  margin: 10px 0 0;
   padding: 0;
   list-style: none;
 }
@@ -16,21 +16,27 @@
   display: grid;
   grid-template-columns: 24px minmax(0, 1fr);
   gap: 7px;
-  padding: 8px;
+  padding: 7px;
   border: 1px solid #34453a;
-  border-radius: 9px;
+  border-radius: 8px;
   background: #111913;
+  transition: border-color 120ms ease, background 120ms ease, opacity 120ms ease;
 }
 
 .sequence-item:not(.sequence-item--completed) {
   box-shadow: inset 2px 0 0 #45604d;
 }
 
+.sequence-item:not(.sequence-item--completed):hover {
+  border-color: #476451;
+  background: #152019;
+}
+
 .sequence-item--completed {
-  padding-block: 7px;
+  padding-block: 6px;
   border-color: #29362e;
   background: #101611;
-  opacity: 0.6;
+  opacity: 0.58;
 }
 
 .sequence-checkbox {
@@ -46,6 +52,16 @@
   font-size: 13px;
   font-weight: 900;
   cursor: pointer;
+  transition: border-color 120ms ease, background 120ms ease, transform 120ms ease;
+}
+
+.sequence-checkbox:hover {
+  border-color: #6a8f74;
+  background: #1d2d22;
+}
+
+.sequence-checkbox:active {
+  transform: scale(0.96);
 }
 
 .sequence-item--completed .sequence-checkbox {
@@ -112,14 +128,14 @@
 .sequence-item__detail {
   display: grid;
   gap: 5px;
-  margin-top: 7px;
+  margin-top: 6px;
   margin-left: -31px;
-  padding-top: 7px;
+  padding-top: 6px;
   border-top: 1px solid #243029;
 }
 
 .sequence-item__detail + .sequence-item__detail {
-  margin-top: 8px;
+  margin-top: 7px;
 }
 
 .sequence-item__detail .sequence-item__header strong {
@@ -144,7 +160,7 @@
   display: block;
   color: #aebcb1;
   font-size: 11px;
-  line-height: 1.4;
+  line-height: 1.38;
   white-space: pre-line;
 }
 
@@ -162,7 +178,7 @@
 
 .overlay--compact .sequence-list {
   gap: 5px;
-  margin-top: 9px;
+  margin-top: 8px;
 }
 
 .overlay--compact .sequence-item {
@@ -172,10 +188,6 @@
 
 .overlay--compact .sequence-item--completed {
   padding-block: 5px;
-}
-
-.overlay--compact .sequence-item__content > .sequence-item__header {
-  padding-left: 0;
 }
 
 .overlay--compact .sequence-item__content > .sequence-item__header::before {
@@ -204,6 +216,29 @@
   font-size: 10px;
 }
 
+@media (max-width: 430px) {
+  .sequence-list {
+    gap: 6px;
+  }
+
+  .sequence-item {
+    padding: 6px;
+  }
+}
+
+@media (max-width: 350px) {
+  .sequence-item__header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .sequence-item__tools {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
 @media (max-width: 330px) {
   .sequence-item {
     grid-template-columns: 22px minmax(0, 1fr);
@@ -224,13 +259,5 @@
 
   .sequence-item__detail {
     margin-left: -28px;
-  }
-
-  .sequence-item__header {
-    gap: 5px;
-  }
-
-  .sequence-item__tools {
-    gap: 3px;
   }
 }
