@@ -3,6 +3,7 @@ import { dirname, resolve } from 'node:path';
 import type {
   GuideItemAction,
   ParallelPhase,
+  PreparationItem,
   RouteBlock,
   RouteDocument,
   RouteStep,
@@ -17,19 +18,19 @@ const OUTPUT_PATH = resolve('data/route.json');
 const typeMap: Record<string, { type: StepType; displayType?: string }> = {
   'QUÊTE': { type: 'quest' },
   'QUÊTES PARALLÈLES': { type: 'quest', displayType: 'QUÊTES PARALLÈLES' },
-  'REPRISE': { type: 'resume' },
-  'DONJON': { type: 'dungeon' },
+  REPRISE: { type: 'resume' },
+  DONJON: { type: 'dungeon' },
   'PRÉPA': { type: 'preparation' },
   'RÈGLE': { type: 'rule' },
-  'JALON': { type: 'milestone' },
+  JALON: { type: 'milestone' },
   'FIL ROUGE': { type: 'long_running' },
   'VERROU DUR': { type: 'hard_lock' },
   'ALIGN.': { type: 'alignment', displayType: 'ALIGN.' },
-  'ORDRE': { type: 'order' },
+  ORDRE: { type: 'order' },
   'GROSSE ÉTAPE': { type: 'major_step' },
-  'FIN': { type: 'finish' },
-  'TOUR': { type: 'quest', displayType: 'TOUR' },
-  'TURQUOISE': { type: 'quest', displayType: 'TURQUOISE' },
+  FIN: { type: 'finish' },
+  TOUR: { type: 'quest', displayType: 'TOUR' },
+  TURQUOISE: { type: 'quest', displayType: 'TURQUOISE' },
   'OPTI ALIGNEMENT': { type: 'major_step', displayType: 'OPTI ALIGNEMENT' },
 };
 
@@ -166,13 +167,54 @@ function parseBlock(title: string): RouteBlock | undefined {
   return { id: `block-${match[1].padStart(2, '0')}`, order, title: match[2].trim() };
 }
 
-function parsePreparationItems(text: string): string[] | undefined {
+const professionPattern = /\b(m[ée]tier|alchimiste|b[ûu]cheron|mineur|p[êe]cheur|paysan|chasseur|bricoleur|bijoutier|cordonnier|tailleur|fa[çc]onneur|forgeron|sculpteur)\b/i;
+const classPattern = /\b(classes?|cra|ecaflip|eliotrope|eniripsa|enutrof|feca|forgelance|huppermage|iop|osamodas|ouginak|pandawa|roublard|sacrieur|sadida|sram|steamer|xelor|zobal)\b/i;
+const partyPattern = /\b(dalles?|joueurs?|personnes?|personnages?|groupe|alli[ée]s?|aide)\b/i;
+const quantityPattern = /^([\d\s]+)\s*(?:[×x]\s*)?(.+?)\s*$/i;
+
+const exactResourceNames = new Map<string, string>([
+  ['Capes Bontariennes', 'Cape Bontarienne'],
+  ['Cerises', 'Cerise'],
+  ['Viandes avariées', 'Viande Avariée'],
+  ['Enchanterelles', 'Enchanterelle'],
+  ['Pépites', 'Pépite'],
+]);
+
+function parsePreparationLine(rawLine: string): PreparationItem {
+  const text = rawLine.replace(/^•\s*/, '').trim();
+  const quantityMatch = text.match(quantityPattern);
+  const withoutQuantity = quantityMatch?.[2]?.trim() ?? text;
+
+  if (/\bkamas?\b/i.test(text)) return { kind: 'kamas', text };
+  if (partyPattern.test(withoutQuantity)) return { kind: 'party', text: withoutQuantity };
+  if (classPattern.test(withoutQuantity) && classPattern.exec(withoutQuantity)?.index === 0) {
+    return { kind: 'class', text: withoutQuantity };
+  }
+  if (/^m[ée]tier\b/i.test(withoutQuantity) || (professionPattern.test(withoutQuantity) && /\b(niveau|requis|minimum|pour)\b/i.test(withoutQuantity))) {
+    return { kind: 'profession', text: withoutQuantity };
+  }
+
+  if (!quantityMatch) return { kind: 'requirement', text };
+
+  const quantity = Number.parseInt(quantityMatch[1].replace(/\s/g, ''), 10);
+  if (!Number.isInteger(quantity) || quantity <= 0) return { kind: 'requirement', text };
+
+  const explicitName = exactResourceNames.get(withoutQuantity);
+  if (explicitName) return { kind: 'resource', quantity, name: explicitName };
+
+  if (/\b(succ[eè]s|niveau|minimum|alignement|inventaire|sort)\b/i.test(withoutQuantity) || /[+:]/.test(withoutQuantity)) {
+    return { kind: 'requirement', text };
+  }
+
+  return { kind: 'resource', quantity, name: withoutQuantity };
+}
+
+function parsePreparationItems(text: string): PreparationItem[] | undefined {
   const items = text
     .split('\n')
     .map((line) => line.trim())
     .filter((line) => line.startsWith('•'))
-    .map((line) => line.replace(/^•\s*/, '').trim())
-    .filter(Boolean);
+    .map(parsePreparationLine);
   return items.length > 0 ? items : undefined;
 }
 
