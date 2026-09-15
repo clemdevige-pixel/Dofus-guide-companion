@@ -1,205 +1,149 @@
 # AGENTS.md — Dofus Guide Companion
 
-Ce fichier est le contrat de travail des agents qui interviennent sur ce repo.
+Ce fichier est le contrat de travail des agents intervenant sur le repo.
 
 ## 1. Lire avant de coder
 
-Toujours lire, dans cet ordre :
+Toujours lire dans cet ordre :
 1. `AGENTS.md`
 2. `SPEC.md`
 3. `ARCHITECTURE.md`
 4. `docs/DATA_MODEL.md`
-5. `docs/ROUTE_OPTIMIZATION.md` pour tout chantier route
-6. `docs/ROUTE_OPTIMIZATION_WORKFLOW.md` pour toute passe d'audit/réécriture
+5. `docs/ROUTE_OPTIMIZATION.md` si la route est réellement rouverte
+6. `docs/ROUTE_OPTIMIZATION_WORKFLOW.md` pour une correction métier de route
 7. `HANDOFF.md`
 
-Ne pas coder depuis une supposition si la doc ou la donnée existante permet de trancher.
+`HANDOFF.md` est l’unique handoff opérationnel.
 
 ## 2. Principes non négociables
 
 - Architecture simple, locale et data-driven.
-- Le Google Sheet est la source éditoriale ; l'app consomme `data/route.json`.
+- Google Sheet `ROUTE` = source éditoriale.
+- `data/route.json` = artefact généré.
 - Aucune logique spécifique à une quête dans React.
-- Ne jamais parser du texte d'affichage pour déduire un comportement métier.
-- Une seule vérité de progression : `completedStepIds`.
-- `STEP_ID` stable et indépendant des lignes Sheet.
-- `MOMENT_ID` explicite pour les moments joueur devant former une seule carte.
-- `DISPLAY_ROLE` explicite quand une ligne d'un moment doit être `OBJECTIVE`, `TRANSITION` ou `DETAIL`.
-- `PARALLEL_ID` / `PARALLEL_PHASE` explicites pour les vraies salves de quêtes à garder actives ensemble.
-- Réutiliser l'existant avant de créer une couche.
-- Toute réécriture complexe se fait par paquet indivisible.
-- Après linéarisation locale, exécuter aussi des passes globales sur toute la route.
-- Une information utile ne doit apparaître qu'une fois dans le flux joueur.
-- Une information future ne doit jamais apparaître sur une carte antérieure ou intermédiaire sans rapport.
+- Ne jamais parser un texte d’affichage pour déduire une règle métier.
+- `completedStepIds` = unique vérité de progression.
+- `STEP_ID` = identité métier stable.
+- `MOMENT_ID` = frontière autoritaire d’une carte multi-step.
+- `DISPLAY_ROLE` = `OBJECTIVE`, `TRANSITION`, `DETAIL`.
+- `PARALLEL_ID / PARALLEL_PHASE` = vraies quêtes à garder actives ensemble.
+- `GOAL_ID / GOAL_PHASE` = lifecycle des fils rouges.
+- Réutiliser les données existantes avant d’ajouter une métadonnée.
+- Une information utile ne doit apparaître qu’une fois dans le flux joueur.
+- Une information interne de routing ne doit jamais apparaître côté joueur.
 
-## 3. Interdictions explicites
+## 3. Interdictions
 
 Interdit :
-
-```ts
-if (step.title === "L'éternelle moisson") { ... }
-```
-
-Interdit également :
-- numéro de ligne Sheet comme identité métier ;
+- `if (step.title === '...')` pour piloter une règle métier ;
+- numéro de ligne Sheet comme identité ;
 - progression dupliquée dans plusieurs stores ;
-- route mock parallèle ;
-- override manuel de goals/positions/moments ;
-- OCR, lecture mémoire, injection ou automatisation Dofus ;
-- importer GP0 sans filtrer le scope ;
-- considérer une même carte/donjon comme preuve suffisante de mutualisation ;
-- réutiliser un `STEP_ID` pour un autre événement métier ;
+- route mock / override parallèle ;
+- correction manuelle de `data/route.json` comme source éditoriale ;
 - utiliser `POSITION` comme destination ;
-- corriger `data/route.json` à la main ;
-- considérer une cellule technique vidée parce qu'elle a été omise d'un `updateCells` ;
-- créer un `VERROU DUR` uniquement parce qu'un niveau personnage est recommandé/minimum ;
-- regrouper automatiquement des lignes sans `MOMENT_ID` ;
-- laisser React décider checkbox/transition par nom de quête ou parsing d'instruction : utiliser `DISPLAY_ROLE` ;
-- définir `DISPLAY_ROLE` hors d'un `MOMENT_ID` ;
-- définir un `MOMENT_ID` sans `DISPLAY_ROLE` ;
-- commencer un `MOMENT_ID` par `TRANSITION` ou `DETAIL` : le premier membre doit être `OBJECTIVE` ;
-- conserver une carte autonome uniquement pour répéter « rendre », « reprendre », « terminer », « lancer » si cette transition peut être intégrée au moment adjacent ;
-- répéter dans la carte suivante la fin déjà explicitée dans la carte précédente ;
-- afficher toutes les micro-étapes techniques comme autant d'objectifs joueur ;
-- afficher un rappel de groupe parallèle sur une carte qui n'est pas elle-même un checkpoint de ce groupe ;
-- considérer qu'une ressource citée très loin en amont suffit si elle a pu être consommée depuis ; les quantités doivent être vérifiées jusqu'au premier usage ;
-- laisser une ressource pré-farmable uniquement dans le texte d'une quête si une `PRÉPA` locale peut la rendre visible avant consommation.
+- créer un `VERROU DUR` depuis un simple niveau recommandé ;
+- regrouper automatiquement sans `MOMENT_ID` ;
+- `DISPLAY_ROLE` sans `MOMENT_ID` ;
+- `MOMENT_ID` sans `DISPLAY_ROLE` ;
+- moment commençant par autre chose que `OBJECTIVE` ;
+- carte de plus de 5 `OBJECTIVE` ;
+- afficher toutes les micro-étapes techniques comme objectifs ;
+- afficher un groupe parallèle sur une carte sans rapport ;
+- dupliquer le détail DPLN dans les séquences sans valeur ajoutée ;
+- laisser des commentaires d’audit/routing dans `warning` ou les titres joueur.
 
-## 4. Stack V1
+## 4. Contrat UI
 
-- Tauri 2
-- React
-- TypeScript
-- Vite
-- CSS simple
-- persistance locale
+Une carte représente un moment joueur.
 
-## 5. État et sélecteurs
+### Cartes mutualisées
 
-La progression réelle repose sur `completedStepIds`.
-
-Doivent rester dérivés :
-- progression ;
-- première étape non validée ;
-- fils rouges actifs ;
-- prochain verrou dur ;
-- bloc courant ;
-- groupes/cartes visibles ;
-- groupes parallèles actifs et leur rappel contextuel.
-
-`getStepGroups()` suit une règle unique :
-- plusieurs lignes contiguës partageant le même `MOMENT_ID` = une carte ;
-- une ligne sans `MOMENT_ID` = une carte autonome.
-
-Dans un moment explicite, `DISPLAY_ROLE` est autoritaire :
 - `OBJECTIVE` = checkbox ;
-- `TRANSITION` = ligne intermédiaire sans checkbox ;
-- `DETAIL` = information attachée à l'objectif précédent sans checkbox.
+- `TRANSITION` / `DETAIL` = rattachés à l’objectif précédent ;
+- actions principales conservées sur les `OBJECTIVE` ;
+- hard lock conserve son message métier ;
+- transitions indispensables restent visibles ;
+- footer/navigation restent stables.
 
-Le premier membre d'un moment doit toujours être `OBJECTIVE`.
+### Prérequis
 
-Pour les groupes parallèles :
-- le lifecycle data reste `start → progress* → finish` ;
-- le groupe peut rester actif en donnée à travers plusieurs cartes ;
-- le rappel UI n'est visible que lorsque la carte courante est elle-même un checkpoint du groupe ;
-- une carte intermédiaire sans rapport ne doit jamais afficher le rappel du groupe.
+`prerequisites` reste disponible pour audit/validation mais n’est pas affiché sur les cartes.
 
-## 6. UI — contrat de lisibilité
+### GUIDE_ITEMS
 
-Priorités : lisibilité, faible encombrement, navigation immédiate, resize fiable.
+Donnée structurée utile. Ne pas l’afficher automatiquement dans les séquences uniquement pour recopier DPLN.
 
-Une carte représente un **moment joueur**, pas nécessairement une ligne Sheet.
+### Titres
 
-Rendu cible des cartes mutualisées :
-- **1 checkbox = 1 sous-objectif significatif** (quête réelle, donjon, combat, étape majeure) ;
-- **maximum 5 `OBJECTIVE` par carte** ; au-delà, scinder sur une frontière logique ;
-- **1 ligne de transition sans checkbox** quand il faut réellement rendre/prendre/avancer/parler/donner/récupérer quelque chose entre deux objectifs ;
-- une transition doit nommer l'action, le PNJ et la position quand la donnée existe ;
-- une transition sans `instruction` propre doit rester visible via un fallback compact construit uniquement depuis ses champs structurés `action + title` ;
-- les notes critiques restent visibles : Ocre/capture, STOP, objet requis, ordre obligatoire, condition de sortie ;
-- les libellés techniques répétitifs (`REPRENDRE / FAIRE`, `FAIRE & VALIDER`, etc.) ne doivent pas dominer le rendu ;
-- la carte suivante commence sur la nouvelle action, sans réexpliquer la fin de la précédente ;
-- la fenêtre ne change pas de taille selon la carte ; la zone centrale peut scroller, le footer reste stable ;
-- une carte validée et ses sous-objectifs validés doivent être visuellement barrés à partir de `completedStepIds` ;
-- la navigation directe par numéro de carte reste disponible dans le header.
+La donnée brute conserve le titre éditorial complet.
 
-Ne jamais reconstruire les cartes depuis des mots présents dans `title` ou `instruction`. Les regroupements et rôles internes doivent venir de la donnée structurée (`MOMENT_ID`, `DISPLAY_ROLE`, `GUIDE_ITEMS`, positions, types, destinations, etc.).
+Le runtime utilise `getPlayerFacingStepTitle()` pour masquer les suffixes éditoriaux inutiles et les métadonnées de passage de donjon.
 
-## 7. Export de route
+Les tests éditoriaux doivent auditer la donnée brute avant cette normalisation UI.
 
-Flux :
+### Marqueurs
+
+- Alignement = `type === 'alignment'` ;
+- Donjon = `type === 'dungeon'` ;
+- Dofus = `dofusSeries` ;
+- maximum 2 icônes visibles.
+
+Aucune détection par titre.
+
+## 5. Route
+
+La route actuelle est certifiée sur son périmètre métier. Ne pas relancer une optimisation globale sans défaut concret.
+
+Pour une correction :
+1. reproduire le défaut ;
+2. cartographier le paquet indivisible ;
+3. vérifier Ganymède + source factuelle ;
+4. modifier le Sheet ;
+5. préserver les identités/lifecycles non concernés ;
+6. ajouter/adapter un test si le défaut est généralisable ;
+7. exporter ;
+8. tester.
+
+Une différence avec Ganymède n’est pas automatiquement une incohérence.
+
+## 6. Export
+
+Plage actuelle : `ROUTE!A5:W`.
+
+Colonnes techniques jusqu’à `DOFUS_SERIES`.
+
+Flux officiel :
 
 ```text
-Google Sheet → scripts/export-route.ts → validation stricte → data/route.json
+Google Sheet ROUTE
+→ pnpm export:route
+→ pnpm test:route
+→ pnpm validate:route
+→ pnpm build
+→ commit / push
 ```
 
-Plage technique actuelle : `ROUTE!A5:V`.
+Check Tauri lorsque l’environnement le permet.
 
-L'export/validation doit échouer sur :
-- type/ID/block invalide ;
-- relations de goal incohérentes ;
-- lancement incomplet ;
-- position/destination invalide ;
-- `MOMENT_ID` vide, non contigu ou multi-blocs ;
-- `DISPLAY_ROLE` inconnu ou défini sans `MOMENT_ID` ;
-- `MOMENT_ID` défini sans `DISPLAY_ROLE` ;
-- moment commençant par autre chose que `OBJECTIVE` ;
-- carte contenant plus de 5 `OBJECTIVE` ;
-- lifecycle `PARALLEL_ID / PARALLEL_PHASE` invalide ;
-- `VERROU DUR` de niveau personnage ;
-- route sans une unique `FIN` finale.
+Sous PowerShell Windows, utiliser `pnpm.cmd` si `pnpm.ps1` est bloqué.
 
-## 8. Méthode de chantier route
+## 7. Qualité
 
-Pour chaque paquet :
-1. lire l'existant ;
-2. identifier la source de vérité ;
-3. cartographier le moment complet ;
-4. vérifier prérequis/coexistence ;
-5. décider `STEP_ID` et `MOMENT_ID` avant écriture ;
-6. classer chaque ligne utile en `OBJECTIVE`, `TRANSITION` ou `DETAIL` quand le moment est mutualisé ;
-7. distinguer objectifs joueur et transitions obligatoires ;
-8. supprimer les redondances intra-carte et inter-cartes ;
-9. écrire en une passe ;
-10. relire les colonnes techniques jusqu'à `PARALLEL_PHASE` ;
-11. nettoyer les résidus ;
-12. contrôler mécaniquement.
+Avant d’annoncer un chantier intégré :
+- tests verts ;
+- validation verte ;
+- build vert ;
+- aucune divergence connue Sheet / JSON ;
+- aucune régression visible sur les cartes concernées.
 
-### Audit ressources obligatoire
+Ne jamais annoncer “100% certifié” après quelques checks ciblés seulement.
 
-Pour toute passe ressources :
-1. vérifier les besoins réels de la quête avec DPLN/Ganymède si nécessaire ;
-2. distinguer ressource à apporter, objet obtenu naturellement pendant la quête, prérequis et aide externe ;
-3. vérifier les **quantités cumulées** jusqu'au premier usage : une ressource déjà consommée ne couvre pas un besoin plus tard ;
-4. placer les ressources pré-farmables dans une `PRÉPA` située avant la consommation et suffisamment proche pour être actionnable ;
-5. garder dans l'instruction uniquement les objets/actions obtenus pendant la quête ou les avertissements contextuels ;
-6. ne pas dupliquer une liste de ressources entre `PRÉPA` et description de quête.
+## 8. Documentation
 
-Après les paquets/blocs, exécuter les passes globales définies dans `docs/ROUTE_OPTIMIZATION_WORKFLOW.md`, notamment la passe finale **anti-redondance / confort joueur** sur toute la route.
+Mettre la doc à jour seulement lorsque le contrat produit/data/architecture change.
 
-## 9. Qualité
-
-Avant de considérer un chantier intégré :
-
-```bash
-pnpm export:route
-pnpm test:route
-pnpm validate:route
-pnpm build
-```
-
-Le check Tauri est aussi requis lorsque l'environnement le permet.
-
-Ne pas annoncer un export/validation vert si `data/route.json` n'a pas réellement été régénéré après les dernières modifications Sheet.
-
-## 10. Règle de documentation
-
-Mettre à jour la doc lorsque le contrat produit, data, validation, regroupement de cartes ou méthodologie change.
-
-Un handoff doit indiquer précisément :
-- ce qui est déjà intégré ;
-- ce qui reste à auditer ;
-- si le Sheet et `route.json` sont synchronisés ou non ;
-- état réel des tests/validation/build ;
-- état de la passe anti-redondance globale ;
-- état de la passe ressources et des corrections éditoriales en cours.
+Ne pas créer de handoff parallèle. Mettre à jour `HANDOFF.md` avec :
+- état réel des tests ;
+- état Sheet / JSON ;
+- ce qui est intégré ;
+- ce qui reste avant release.
