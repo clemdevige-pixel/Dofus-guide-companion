@@ -14816,9 +14816,8 @@
           "text": "Alchimiste 185+"
         },
         {
-          "kind": "resource",
-          "quantity": 1,
-          "name": "Pandawa pour Pense-bête"
+          "kind": "class",
+          "text": "Pandawa pour Pense-bête"
         }
       ]
     },
