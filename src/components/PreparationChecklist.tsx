@@ -4,6 +4,7 @@ import {
   preparationRequirementLabels,
 } from '../route/preparation';
 import type { PreparationItem } from '../route/types';
+import './PreparationChecklist.css';
 
 interface PreparationChecklistProps {
   stepId: string;
