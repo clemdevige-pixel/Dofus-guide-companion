@@ -47,11 +47,6 @@ function assertValidCoordinate(
 }
 
 function assertValidPreparationItem(item: PreparationItem, context: string) {
-  if (typeof item === 'string') {
-    if (!isNonEmptyString(item)) throw new Error(`${context}: entrée de préparation vide.`);
-    return;
-  }
-
   if (!item || typeof item !== 'object') {
     throw new Error(`${context}: entrée de préparation invalide.`);
   }
@@ -65,13 +60,6 @@ function assertValidPreparationItem(item: PreparationItem, context: string) {
     }
     if (item.note !== undefined && !isNonEmptyString(item.note)) {
       throw new Error(`${context}: note de ressource vide.`);
-    }
-    return;
-  }
-
-  if (item.kind === 'note') {
-    if (!isNonEmptyString(item.text)) {
-      throw new Error(`${context}: note de préparation vide.`);
     }
     return;
   }
