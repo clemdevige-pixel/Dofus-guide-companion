@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { writeText } from '@tauri-apps/plugin-clipboard-manager';
 import { openUrl } from '@tauri-apps/plugin-opener';
+import { PreparationChecklist } from './components/PreparationChecklist';
 import { loadProgress, saveProgress } from './progress/storage';
 import { loadBundledRoute } from './route/loader';
 import {
@@ -63,10 +64,6 @@ const guideActionLabels: Record<GuideItemAction, string> = {
   do: 'FAIRE',
 };
 
-function getResourceName(item: string): string {
-  return item.replace(/^\d+\s*[×x]\s*/i, '').trim();
-}
-
 function groupGuideItems(items: GuideItem[]) {
   const groups: Array<{ action: GuideItemAction; items: GuideItem[] }> = [];
 
@@ -121,6 +118,9 @@ export function App() {
   const [completedStepIds, setCompletedStepIds] = useState<Set<string>>(
     () => new Set(initialProgress.completedStepIds),
   );
+  const [checkedPreparationItemIds, setCheckedPreparationItemIds] = useState<Set<string>>(
+    () => new Set(initialProgress.checkedPreparationItemIds),
+  );
   const [compact, setCompact] = useState(initialProgress.compact);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [secondaryView, setSecondaryView] = useState<SecondaryView>(null);
@@ -162,10 +162,11 @@ export function App() {
 
     saveProgress({
       completedStepIds: [...completedStepIds],
+      checkedPreparationItemIds: [...checkedPreparationItemIds],
       compact,
       ...(savedStep ? { currentStepId: savedStep.id } : {}),
     });
-  }, [completedStepIds, compact, currentGroup]);
+  }, [completedStepIds, checkedPreparationItemIds, compact, currentGroup]);
 
   useEffect(() => {
     saveShortcutBindings(shortcutBindings);
@@ -317,6 +318,18 @@ export function App() {
     if (completesSequence && !containsHardLock && viewIndex < stepGroups.length - 1) {
       setViewIndex((index) => index + 1);
     }
+  }
+
+  function togglePreparationItem(itemId: string) {
+    setCheckedPreparationItemIds((previous) => {
+      const next = new Set(previous);
+      if (next.has(itemId)) {
+        next.delete(itemId);
+      } else {
+        next.add(itemId);
+      }
+      return next;
+    });
   }
 
   async function copyToClipboard(text: string) {
@@ -547,7 +560,7 @@ export function App() {
           )}
 
           {secondaryView === 'preparation' && (
-            <div className="context-panel__body">
+            <div className="context-panel__body preparation-dashboard">
               {blockPreparations.length === 0 ? (
                 <p>Aucune préparation structurée dans ce bloc.</p>
               ) : (
@@ -555,21 +568,13 @@ export function App() {
                   <div className="preparation-group" key={preparation.id}>
                     <strong>{preparation.title}</strong>
                     {preparation.preparationItems && preparation.preparationItems.length > 0 ? (
-                      <ul className="copy-list">
-                        {preparation.preparationItems.map((item) => (
-                          <li key={item}>
-                            <button
-                              className="copy-item-button"
-                              type="button"
-                              title={`Copier ${getResourceName(item)}`}
-                              onClick={() => void copyToClipboard(getResourceName(item))}
-                            >
-                              <span>{item}</span>
-                              <span aria-hidden="true">⧉</span>
-                            </button>
-                          </li>
-                        ))}
-                      </ul>
+                      <PreparationChecklist
+                        stepId={preparation.id}
+                        items={preparation.preparationItems}
+                        checkedItemIds={checkedPreparationItemIds}
+                        onToggleItem={togglePreparationItem}
+                        onCopyName={(name) => void copyToClipboard(name)}
+                      />
                     ) : preparation.instruction ? (
                       <p>{preparation.instruction}</p>
                     ) : null}
@@ -584,10 +589,18 @@ export function App() {
               {completedHistory.length === 0 ? (
                 <p>Aucune étape validée.</p>
               ) : (
-                <ol className="history-list">
-                  {completedHistory.slice(0, 30).map((step) => (
-                    <li key={step.id}>{step.title}</li>
-                  ))}
+                <ol className="history-list history-list--detailed">
+                  {completedHistory.slice(0, 50).map((step) => {
+                    const block = route.blocks.find((candidate) => candidate.id === step.blockId);
+                    return (
+                      <li key={step.id}>
+                        <span className="history-list__meta">
+                          B{block?.order ?? '?'} · {step.displayType ?? typeLabels[step.type]}
+                        </span>
+                        <strong>{step.title}</strong>
+                      </li>
+                    );
+                  })}
                 </ol>
               )}
             </div>
@@ -837,21 +850,13 @@ export function App() {
             {currentStep.instruction && <p className="instruction">{currentStep.instruction}</p>}
 
             {currentStep.type === 'preparation' && currentStep.preparationItems && (
-              <ul className="preparation-list copy-list">
-                {currentStep.preparationItems.map((item) => (
-                  <li key={item}>
-                    <button
-                      className="copy-item-button"
-                      type="button"
-                      title={`Copier ${getResourceName(item)}`}
-                      onClick={() => void copyToClipboard(getResourceName(item))}
-                    >
-                      <span>{item}</span>
-                      <span aria-hidden="true">⧉</span>
-                    </button>
-                  </li>
-                ))}
-              </ul>
+              <PreparationChecklist
+                stepId={currentStep.id}
+                items={currentStep.preparationItems}
+                checkedItemIds={checkedPreparationItemIds}
+                onToggleItem={togglePreparationItem}
+                onCopyName={(name) => void copyToClipboard(name)}
+              />
             )}
 
             {currentStep.longRunningGoal && currentStep.longRunningGoal.phase !== 'finish' && (
