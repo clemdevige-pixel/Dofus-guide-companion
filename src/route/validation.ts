@@ -1,6 +1,7 @@
 import type {
   GuideItemAction,
   ParallelPhase,
+  PreparationItem,
   RouteDocument,
   StepDisplayRole,
   StepType,
@@ -39,6 +40,39 @@ function assertValidCoordinate(
   if (!Number.isInteger(coordinate.x) || !Number.isInteger(coordinate.y)) {
     throw new Error(`${context}: ${label} invalide, x et y doivent être des entiers.`);
   }
+}
+
+function assertValidPreparationItem(item: PreparationItem, context: string) {
+  if (typeof item === 'string') {
+    if (!isNonEmptyString(item)) throw new Error(`${context}: entrée de préparation vide.`);
+    return;
+  }
+
+  if (!item || typeof item !== 'object') {
+    throw new Error(`${context}: entrée de préparation invalide.`);
+  }
+
+  if (item.kind === 'resource') {
+    if (!Number.isInteger(item.quantity) || item.quantity <= 0) {
+      throw new Error(`${context}: quantité de ressource invalide.`);
+    }
+    if (!isNonEmptyString(item.name)) {
+      throw new Error(`${context}: nom de ressource vide.`);
+    }
+    if (item.note !== undefined && !isNonEmptyString(item.note)) {
+      throw new Error(`${context}: note de ressource vide.`);
+    }
+    return;
+  }
+
+  if (item.kind === 'note') {
+    if (!isNonEmptyString(item.text)) {
+      throw new Error(`${context}: note de préparation vide.`);
+    }
+    return;
+  }
+
+  throw new Error(`${context}: kind de préparation inconnu.`);
 }
 
 function isCharacterLevelHardLockTitle(title: string): boolean {
@@ -188,8 +222,17 @@ export function validateRoute(route: RouteDocument): RouteDocument {
       }
     }
 
+    if (step.preparationItems !== undefined) {
+      if (!Array.isArray(step.preparationItems) || step.preparationItems.length === 0) {
+        throw new Error(`${step.id}: preparationItems doit contenir au moins une entrée.`);
+      }
+      step.preparationItems.forEach((item, itemIndex) => {
+        assertValidPreparationItem(item, `${step.id}: preparationItems[${itemIndex}]`);
+      });
+    }
+
     if (step.type === 'preparation') {
-      const hasItems = Array.isArray(step.preparationItems) && step.preparationItems.length > 0 && step.preparationItems.every(isNonEmptyString);
+      const hasItems = Array.isArray(step.preparationItems) && step.preparationItems.length > 0;
       if (!hasItems && !isNonEmptyString(step.instruction)) {
         throw new Error(`${step.id}: PRÉPA sans preparationItems ni instruction exploitable.`);
       }
