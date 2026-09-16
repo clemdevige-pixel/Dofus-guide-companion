@@ -1,6 +1,6 @@
 [package]
 name = "dofus-guide-companion"
-version = "0.1.0"
+version = "1.0.0"
 description = "Dofus Guide Companion"
 authors = ["clemdevige-pixel"]
 edition = "2021"
