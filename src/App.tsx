@@ -7,13 +7,9 @@ import { StepMarkers } from './components/StepMarkers';
 import { loadProgress, saveProgress } from './progress/storage';
 import { loadBundledRoute } from './route/loader';
 import {
-  getActiveLongRunningGoals,
   getActiveParallelGroups,
-  getBlockPreparationSteps,
-  getCompletedSteps,
   getFirstIncompleteStep,
   getHardLockForGoal,
-  getNextHardLock,
   getProgress,
   getSequenceObjectives,
   getStepGroupIndex,
@@ -34,14 +30,7 @@ import './progression.css';
 const route = loadBundledRoute();
 const shortcutActions = Object.keys(defaultShortcutBindings) as ShortcutAction[];
 
-type SecondaryView =
-  | 'progress'
-  | 'goals'
-  | 'lock'
-  | 'preparation'
-  | 'history'
-  | 'settings'
-  | null;
+type SecondaryView = 'progress' | 'settings' | null;
 
 const typeLabels: Record<StepType, string> = {
   quest: 'QUÊTE',
@@ -196,23 +185,17 @@ export function App() {
   }, []);
 
   const progress = getProgress(route, completedStepIds);
-  const activeGoals = getActiveLongRunningGoals(route, completedStepIds);
   const activeParallelGroups = getActiveParallelGroups(
     route,
     completedStepIds,
     currentGroup?.steps ?? [],
   );
-  const nextHardLock = getNextHardLock(route, completedStepIds);
-  const completedHistory = getCompletedSteps(route, completedStepIds);
   const isCurrentCompleted = currentGroup
     ? currentGroup.steps.every((step) => completedStepIds.has(step.id))
     : false;
   const currentBlock = currentGroup
     ? route.blocks.find((block) => block.id === currentGroup.blockId)
     : undefined;
-  const blockPreparations = currentGroup
-    ? getBlockPreparationSteps(route, currentGroup.blockId)
-    : [];
   const currentGoalLock = currentStep?.longRunningGoal
     ? getHardLockForGoal(route, currentStep.longRunningGoal.goalId)
     : undefined;
@@ -221,12 +204,19 @@ export function App() {
       const blockSteps = route.steps.filter((step) => step.blockId === block.id);
       const completed = blockSteps.filter((step) => completedStepIds.has(step.id)).length;
       const total = blockSteps.length;
+      const firstCardIndex = stepGroups.findIndex((group) => group.blockId === block.id);
+      const firstIncompleteCardIndex = stepGroups.findIndex(
+        (group) =>
+          group.blockId === block.id &&
+          group.steps.some((step) => !completedStepIds.has(step.id)),
+      );
       return {
         ...block,
         completed,
         total,
         percentage: total === 0 ? 0 : Math.round((completed / total) * 100),
-        firstCardIndex: stepGroups.findIndex((group) => group.blockId === block.id),
+        firstCardIndex,
+        targetCardIndex: firstIncompleteCardIndex >= 0 ? firstIncompleteCardIndex : firstCardIndex,
       };
     }),
     [completedStepIds, stepGroups],
@@ -259,13 +249,13 @@ export function App() {
     setCardJumpValue(String(targetCard));
   }
 
-  function jumpToBlock(firstCardIndex: number) {
-    if (firstCardIndex < 0) {
+  function jumpToBlock(targetCardIndex: number) {
+    if (targetCardIndex < 0) {
       return;
     }
     setDrawerOpen(false);
     setSecondaryView(null);
-    setViewIndex(firstCardIndex);
+    setViewIndex(targetCardIndex);
   }
 
   function toggleCurrentStep() {
@@ -472,10 +462,6 @@ export function App() {
       {drawerOpen && !compact && (
         <nav className="drawer" aria-label="Navigation secondaire">
           <button type="button" onClick={() => openSecondaryView('progress')}>Progression</button>
-          <button type="button" onClick={() => openSecondaryView('goals')}>Fils rouges</button>
-          <button type="button" onClick={() => openSecondaryView('lock')}>Prochain verrou</button>
-          <button type="button" onClick={() => openSecondaryView('preparation')}>Prépa du bloc</button>
-          <button type="button" onClick={() => openSecondaryView('history')}>Étapes validées</button>
           <button type="button" onClick={() => openSecondaryView('settings')}>Paramètres</button>
         </nav>
       )}
@@ -485,10 +471,6 @@ export function App() {
           <div className="context-panel__header">
             <p className="eyebrow">
               {secondaryView === 'progress' && 'Progression'}
-              {secondaryView === 'goals' && 'Fils rouges'}
-              {secondaryView === 'lock' && 'Prochain verrou'}
-              {secondaryView === 'preparation' && 'Prépa du bloc'}
-              {secondaryView === 'history' && 'Étapes validées'}
               {secondaryView === 'settings' && 'Paramètres'}
             </p>
             <button
@@ -515,7 +497,7 @@ export function App() {
                       className={`progression-block${isCurrent ? ' progression-block--current' : ''}`}
                       type="button"
                       key={block.id}
-                      onClick={() => jumpToBlock(block.firstCardIndex)}
+                      onClick={() => jumpToBlock(block.targetCardIndex)}
                     >
                       <div className="progression-block__header">
                         <span className="progression-block__title">
@@ -532,78 +514,6 @@ export function App() {
                   );
                 })}
               </div>
-            </div>
-          )}
-
-          {secondaryView === 'goals' && (
-            <div className="context-panel__body">
-              {activeGoals.length === 0 ? (
-                <p>Aucun fil rouge actif.</p>
-              ) : (
-                <ul>
-                  {activeGoals.map((goal) => <li key={goal.id}>{goal.title}</li>)}
-                </ul>
-              )}
-            </div>
-          )}
-
-          {secondaryView === 'lock' && (
-            <div className="context-panel__body">
-              {nextHardLock ? (
-                <>
-                  <strong>{nextHardLock.title}</strong>
-                  <p>{nextHardLock.hardLock?.message ?? nextHardLock.instruction}</p>
-                </>
-              ) : (
-                <p>Aucun verrou dur restant.</p>
-              )}
-            </div>
-          )}
-
-          {secondaryView === 'preparation' && (
-            <div className="context-panel__body preparation-dashboard">
-              {blockPreparations.length === 0 ? (
-                <p>Aucune préparation structurée dans ce bloc.</p>
-              ) : (
-                blockPreparations.map((preparation) => (
-                  <div className="preparation-group" key={preparation.id}>
-                    <strong>{preparation.title}</strong>
-                    {preparation.preparationItems && preparation.preparationItems.length > 0 ? (
-                      <PreparationChecklist
-                        stepId={preparation.id}
-                        items={preparation.preparationItems}
-                        checkedItemIds={checkedPreparationItemIds}
-                        onToggleItem={togglePreparationItem}
-                        onCopyName={(name) => void copyToClipboard(name)}
-                      />
-                    ) : preparation.instruction ? (
-                      <p>{preparation.instruction}</p>
-                    ) : null}
-                  </div>
-                ))
-              )}
-            </div>
-          )}
-
-          {secondaryView === 'history' && (
-            <div className="context-panel__body">
-              {completedHistory.length === 0 ? (
-                <p>Aucune étape validée.</p>
-              ) : (
-                <ol className="history-list history-list--detailed">
-                  {completedHistory.slice(0, 50).map((step) => {
-                    const block = route.blocks.find((candidate) => candidate.id === step.blockId);
-                    return (
-                      <li key={step.id}>
-                        <span className="history-list__meta">
-                          B{block?.order ?? '?'} · {step.displayType ?? typeLabels[step.type]}
-                        </span>
-                        <strong>{step.title}</strong>
-                      </li>
-                    );
-                  })}
-                </ol>
-              )}
             </div>
           )}
 
