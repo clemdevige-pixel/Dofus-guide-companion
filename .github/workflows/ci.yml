@@ -3,224 +3,16 @@ name: CI
 on:
   push:
     branches:
-      - agent/initial-scaffold
-
-permissions:
-  contents: write
+      - main
+      - 'agent/**'
+  pull_request:
 
 jobs:
-  migrate-save:
+  frontend:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: agent/initial-scaffold
-          fetch-depth: 0
-
-      - name: Implement route-aware progress migration
-        shell: bash
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-
-          Path('src/progress/storage.ts').write_text("""const STORAGE_KEY = 'dofus-guide-companion.progress.v1';
-
-export interface ProgressState {
-  completedStepIds: string[];
-  checkedPreparationItemIds: string[];
-  compact: boolean;
-  currentStepId?: string;
-  routeVersion?: string;
-}
-
-interface ProgressStorage {
-  getItem(key: string): string | null;
-  setItem(key: string, value: string): void;
-}
-
-const defaultState: ProgressState = {
-  completedStepIds: [],
-  checkedPreparationItemIds: [],
-  compact: false,
-};
-
-export function parseProgress(raw: string | null): ProgressState {
-  if (!raw) return defaultState;
-
-  try {
-    const parsed = JSON.parse(raw) as Partial<ProgressState>;
-    return {
-      completedStepIds: Array.isArray(parsed.completedStepIds)
-        ? parsed.completedStepIds.filter((id): id is string => typeof id === 'string')
-        : [],
-      checkedPreparationItemIds: Array.isArray(parsed.checkedPreparationItemIds)
-        ? parsed.checkedPreparationItemIds.filter((id): id is string => typeof id === 'string')
-        : [],
-      compact: typeof parsed.compact === 'boolean' ? parsed.compact : false,
-      ...(typeof parsed.currentStepId === 'string' && parsed.currentStepId
-        ? { currentStepId: parsed.currentStepId }
-        : {}),
-      ...(typeof parsed.routeVersion === 'string' && parsed.routeVersion
-        ? { routeVersion: parsed.routeVersion }
-        : {}),
-    };
-  } catch {
-    return defaultState;
-  }
-}
-
-export function loadProgress(storage: ProgressStorage = window.localStorage): ProgressState {
-  try {
-    return parseProgress(storage.getItem(STORAGE_KEY));
-  } catch {
-    return defaultState;
-  }
-}
-
-export function saveProgress(
-  state: ProgressState,
-  storage: ProgressStorage = window.localStorage,
-): void {
-  storage.setItem(STORAGE_KEY, JSON.stringify(state));
-}
-""", encoding='utf-8')
-
-          Path('src/progress/reconcile.ts').write_text("""import { getPreparationItemKey } from '../route/preparation';
-import { getSortedSteps } from '../route/selectors';
-import type { RouteDocument } from '../route/types';
-import type { ProgressState } from './storage';
-
-/** Reconciles persisted progress with the currently bundled route. */
-export function reconcileProgressWithRoute(
-  route: RouteDocument,
-  progress: ProgressState,
-): ProgressState {
-  const sortedSteps = getSortedSteps(route);
-  const stepIndexById = new Map(sortedSteps.map((step, index) => [step.id, index]));
-  const validStepIds = new Set(route.steps.map((step) => step.id));
-  const completedStepIds = new Set(
-    progress.completedStepIds.filter((stepId) => validStepIds.has(stepId)),
-  );
-  const routeChanged = progress.routeVersion !== route.routeVersion;
-
-  let currentStepId =
-    progress.currentStepId && stepIndexById.has(progress.currentStepId)
-      ? progress.currentStepId
-      : undefined;
-
-  let anchorIndex = currentStepId ? stepIndexById.get(currentStepId) ?? -1 : -1;
-  if (anchorIndex < 0) {
-    for (const stepId of completedStepIds) {
-      const index = stepIndexById.get(stepId);
-      if (index !== undefined && index > anchorIndex) anchorIndex = index;
-    }
-  }
-
-  if (routeChanged && anchorIndex >= 0) {
-    for (let index = 0; index < anchorIndex; index += 1) {
-      const step = sortedSteps[index];
-      if (step.type === 'preparation') completedStepIds.add(step.id);
-    }
-
-    if (!currentStepId) {
-      currentStepId = sortedSteps
-        .slice(anchorIndex + 1)
-        .find((step) => !completedStepIds.has(step.id))?.id;
-    }
-  }
-
-  const validPreparationItemIds = new Set<string>();
-  for (const step of route.steps) {
-    for (let itemIndex = 0; itemIndex < (step.preparationItems?.length ?? 0); itemIndex += 1) {
-      validPreparationItemIds.add(getPreparationItemKey(step.id, itemIndex));
-    }
-  }
-
-  return {
-    completedStepIds: [...completedStepIds],
-    checkedPreparationItemIds: routeChanged
-      ? []
-      : progress.checkedPreparationItemIds.filter((itemId) => validPreparationItemIds.has(itemId)),
-    compact: progress.compact,
-    ...(currentStepId ? { currentStepId } : {}),
-    routeVersion: route.routeVersion,
-  };
-}
-""", encoding='utf-8')
-
-          Path('src/progress/reconcile.test.ts').write_text("""import assert from 'node:assert/strict';
-import test from 'node:test';
-import type { RouteDocument } from '../route/types';
-import { reconcileProgressWithRoute } from './reconcile';
-import type { ProgressState } from './storage';
-
-const route: RouteDocument = {
-  schemaVersion: 1,
-  routeVersion: '2026-09-16',
-  title: 'Test route',
-  blocks: [{ id: 'block-01', order: 1, title: 'Block' }],
-  steps: [
-    { id: 'prep-before', order: 1, blockId: 'block-01', type: 'preparation', title: 'Prepare before', preparationItems: [{ kind: 'resource', quantity: 1, name: 'Resource A' }] },
-    { id: 'quest-1', order: 2, blockId: 'block-01', type: 'quest', title: 'Quest 1' },
-    { id: 'prep-middle', order: 3, blockId: 'block-01', type: 'preparation', title: 'Prepare middle', preparationItems: [{ kind: 'resource', quantity: 1, name: 'Resource B' }] },
-    { id: 'quest-2', order: 4, blockId: 'block-01', type: 'quest', title: 'Quest 2' },
-  ],
-};
-
-function makeProgress(overrides: Partial<ProgressState> = {}): ProgressState {
-  return { completedStepIds: [], checkedPreparationItemIds: [], compact: false, ...overrides };
-}
-
-test('route migration preserves métier progress and closes historical preparation cards', () => {
-  const migrated = reconcileProgressWithRoute(route, makeProgress({
-    completedStepIds: ['quest-1', 'removed-old-prep'],
-    checkedPreparationItemIds: ['removed-old-prep:0', 'prep-before:0'],
-    currentStepId: 'quest-2',
-  }));
-
-  assert.deepEqual(new Set(migrated.completedStepIds), new Set(['quest-1', 'prep-before', 'prep-middle']));
-  assert.equal(migrated.currentStepId, 'quest-2');
-  assert.deepEqual(migrated.checkedPreparationItemIds, []);
-  assert.equal(migrated.routeVersion, route.routeVersion);
-});
-
-test('same route version does not auto-complete an intentionally unchecked preparation', () => {
-  const reconciled = reconcileProgressWithRoute(route, makeProgress({
-    completedStepIds: ['quest-1'],
-    checkedPreparationItemIds: ['prep-before:0', 'stale:0'],
-    currentStepId: 'quest-2',
-    routeVersion: route.routeVersion,
-  }));
-
-  assert.deepEqual(reconciled.completedStepIds, ['quest-1']);
-  assert.deepEqual(reconciled.checkedPreparationItemIds, ['prep-before:0']);
-});
-
-test('removed saved cursor resumes after the furthest surviving completed step', () => {
-  const migrated = reconcileProgressWithRoute(route, makeProgress({
-    completedStepIds: ['quest-1'],
-    currentStepId: 'removed-old-prep',
-  }));
-
-  assert.deepEqual(new Set(migrated.completedStepIds), new Set(['quest-1', 'prep-before']));
-  assert.equal(migrated.currentStepId, 'prep-middle');
-});
-""", encoding='utf-8')
-
-          app_path = Path('src/App.tsx')
-          app = app_path.read_text(encoding='utf-8')
-          anchors = [
-            ("import { loadProgress, saveProgress } from './progress/storage';", "import { reconcileProgressWithRoute } from './progress/reconcile';\nimport { loadProgress, saveProgress } from './progress/storage';"),
-            ("  const initialProgress = useMemo(() => loadProgress(), []);", "  const initialProgress = useMemo(\n    () => reconcileProgressWithRoute(route, loadProgress()),\n    [],\n  );"),
-            ("    saveProgress({\n      completedStepIds: [...completedStepIds],", "    saveProgress({\n      routeVersion: route.routeVersion,\n      completedStepIds: [...completedStepIds],"),
-          ]
-          for old, new in anchors:
-            if old not in app:
-              raise SystemExit(f'App patch anchor missing: {old[:50]}')
-            app = app.replace(old, new, 1)
-          app_path.write_text(app, encoding='utf-8')
-          PY
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -235,72 +27,23 @@ test('removed saved cursor resumes after the furthest surviving completed step',
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
-      - name: Test route and progress
+      - name: Test route logic
         run: pnpm test:route
 
-      - name: Validate route
+      - name: Validate route data
         run: pnpm validate:route
 
       - name: Build frontend
         run: pnpm build
 
-      - name: Restore normal CI and commit
-        shell: bash
-        run: |
-          rm -f .github/workflows/save-migration.yml
-          cat > .github/workflows/ci.yml <<'EOF'
-          name: CI
+  tauri-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-          on:
-            push:
-              branches:
-                - main
-                - 'agent/**'
-            pull_request:
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
 
-          jobs:
-            frontend:
-              runs-on: ubuntu-latest
-              steps:
-                - name: Checkout
-                  uses: actions/checkout@v4
-
-                - name: Setup pnpm
-                  uses: pnpm/action-setup@v4
-                  with:
-                    version: 10
-
-                - name: Setup Node
-                  uses: actions/setup-node@v4
-                  with:
-                    node-version: 24
-
-                - name: Install dependencies
-                  run: pnpm install --no-frozen-lockfile
-
-                - name: Test route logic
-                  run: pnpm test:route
-
-                - name: Validate route data
-                  run: pnpm validate:route
-
-                - name: Build frontend
-                  run: pnpm build
-
-            tauri-windows:
-              runs-on: windows-latest
-              steps:
-                - name: Checkout
-                  uses: actions/checkout@v4
-
-                - name: Setup Rust
-                  uses: dtolnay/rust-toolchain@stable
-
-                - name: Check Tauri backend
-                  run: cargo check --manifest-path src-tauri/Cargo.toml
-          EOF
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/App.tsx src/progress/storage.ts src/progress/reconcile.ts src/progress/reconcile.test.ts .github/workflows/ci.yml .github/workflows/save-migration.yml
-          git commit -m "fix(progress): migrate saves across route revisions"
-          git push origin HEAD:agent/initial-scaffold
+      - name: Check Tauri backend
+        run: cargo check --manifest-path src-tauri/Cargo.toml
