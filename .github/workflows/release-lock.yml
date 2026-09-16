@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   sync-lock:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,9 +27,9 @@ jobs:
         run: cargo check --manifest-path src-tauri/Cargo.toml
 
       - name: Commit refreshed lockfile and cleanup
-        shell: bash
+        shell: pwsh
         run: |
-          rm .github/workflows/release-lock.yml
+          Remove-Item .github/workflows/release-lock.yml
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add src-tauri/Cargo.lock .github/workflows/release-lock.yml
