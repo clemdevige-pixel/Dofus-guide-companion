@@ -1,0 +1,448 @@
+.app-header--dense {
+  min-width: 0;
+  padding-bottom: 8px;
+}
+
+.app-header__context {
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.header-block-line {
+  display: flex;
+  min-width: 0;
+  align-items: baseline;
+  gap: 4px;
+  margin: 0 0 2px;
+  color: #93a396;
+  font-size: 11px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.header-block-line__index,
+.header-block-line__progress {
+  flex: 0 0 auto;
+}
+
+.header-block-line__title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.header-block-line__title strong {
+  color: #dce7de;
+  font-weight: 800;
+}
+
+.header-block-line__progress {
+  color: #b9e7c1;
+  font-weight: 800;
+}
+
+.app-header--dense .card-jump {
+  min-width: 0;
+  margin-top: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.context-panel--progress,
+.context-panel:not(.context-panel--progress) {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-height: 0;
+  max-height: calc(100vh - 106px);
+  overflow: hidden;
+}
+
+.context-panel--progress .context-panel__header,
+.context-panel:not(.context-panel--progress) .context-panel__header {
+  flex: 0 0 auto;
+}
+
+.context-panel--progress .context-panel__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.context-panel:not(.context-panel--progress) .context-panel__body {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 3px;
+  scrollbar-gutter: stable;
+}
+
+.progression-dashboard {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 8px;
+  height: 100%;
+  min-height: 0;
+}
+
+.progression-summary {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 9px;
+  border: 1px solid #334139;
+  border-radius: 8px;
+  background: #111913;
+}
+
+.progression-summary strong {
+  color: #b9e7c1;
+  font-size: 17px;
+}
+
+.progression-summary span {
+  color: #93a396;
+  font-size: 11px;
+  text-align: right;
+}
+
+.progression-blocks {
+  display: grid;
+  gap: 5px;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 4px;
+  scrollbar-gutter: stable;
+}
+
+.progression-block {
+  display: grid;
+  gap: 5px;
+  width: 100%;
+  padding: 7px 8px;
+  border: 1px solid #2f3d34;
+  border-radius: 8px;
+  background: #111913;
+  color: #dce7de;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 120ms ease, background 120ms ease;
+}
+
+.progression-block:hover,
+.progression-block:focus-visible {
+  border-color: #476451;
+  background: #152019;
+}
+
+.progression-block--current {
+  border-color: #578366;
+  background: #17241b;
+}
+
+.progression-block__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.progression-block__title {
+  display: flex;
+  min-width: 0;
+  gap: 7px;
+  align-items: flex-start;
+}
+
+.progression-block__title b {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  background: #1b2a20;
+  color: #b9e7c1;
+  font-size: 10px;
+}
+
+.progression-block__title span {
+  overflow: hidden;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+}
+
+.progression-block__header > strong {
+  flex: 0 0 auto;
+  color: #b9e7c1;
+  font-size: 11px;
+}
+
+.progression-block__bar {
+  height: 5px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #202b24;
+}
+
+.progression-block__bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: #578366;
+}
+
+.progression-block__meta {
+  color: #839187;
+  font-size: 10px;
+}
+
+.context-panel__body > ul {
+  display: grid;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.context-panel__body > ul > li {
+  padding: 8px 9px;
+  border: 1px solid #2f3d34;
+  border-radius: 8px;
+  background: #111913;
+  color: #dce7de;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.context-panel__body > strong + p {
+  margin: 5px 0 0;
+  padding: 8px 9px;
+  border: 1px solid #765038;
+  border-radius: 8px;
+  background: #241b15;
+  color: #ffd1aa;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.38;
+}
+
+.context-panel__body > strong {
+  color: #eef4ef;
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+.preparation-dashboard {
+  display: grid;
+  gap: 8px;
+}
+
+.preparation-group {
+  display: grid;
+  gap: 6px;
+}
+
+.preparation-group > strong {
+  color: #eef4ef;
+  font-size: 12px;
+}
+
+.preparation-checklist__resource {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 6px;
+  align-items: stretch;
+}
+
+.preparation-checklist__check,
+.preparation-checklist__copy {
+  border: 1px solid #2f3d34;
+  border-radius: 7px;
+  background: #111913;
+  color: #dce7de;
+  transition: border-color 120ms ease, background 120ms ease, opacity 120ms ease;
+}
+
+.preparation-checklist__check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.preparation-checklist__copy {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 7px;
+  align-items: center;
+  min-width: 0;
+  padding: 6px 8px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.preparation-checklist__resource:hover .preparation-checklist__check,
+.preparation-checklist__copy:hover,
+.preparation-checklist__check:focus-visible,
+.preparation-checklist__copy:focus-visible {
+  border-color: #476451;
+  background: #152019;
+}
+
+.preparation-checklist__resource--checked {
+  opacity: 0.62;
+}
+
+.preparation-checklist__resource--checked .preparation-checklist__check {
+  border-color: #578366;
+  background: #17241b;
+  color: #b9e7c1;
+}
+
+.preparation-checklist__resource--checked .preparation-checklist__name {
+  text-decoration: line-through;
+}
+
+.preparation-checklist__quantity {
+  color: #93a396;
+  font-size: 10px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.preparation-checklist__name {
+  min-width: 0;
+  overflow: hidden;
+  font-size: 12px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.preparation-checklist__copy-icon {
+  color: #839187;
+  font-size: 11px;
+}
+
+.preparation-checklist__resource-note {
+  grid-column: 2;
+  margin: -2px 2px 2px;
+  color: #839187;
+  font-size: 10px;
+  line-height: 1.3;
+}
+
+.history-list--detailed {
+  display: grid;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.history-list--detailed li {
+  display: grid;
+  gap: 3px;
+  padding: 7px 8px;
+  border: 1px solid #2f3d34;
+  border-radius: 8px;
+  background: #111913;
+}
+
+.history-list__meta {
+  color: #839187;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.history-list--detailed strong {
+  color: #dce7de;
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+@media (max-width: 430px) {
+  .app-header--dense {
+    gap: 7px;
+  }
+
+  .app-header--dense .icon-button {
+    flex: 0 0 auto;
+  }
+
+  .header-block-line {
+    font-size: 10px;
+  }
+
+  .app-header--dense .card-jump {
+    gap: 3px;
+    font-size: 11px;
+  }
+
+  .app-header--dense .card-jump input {
+    width: 40px;
+  }
+
+  .context-panel--progress,
+  .context-panel:not(.context-panel--progress) {
+    max-height: calc(100vh - 96px);
+  }
+
+  .preparation-checklist__copy {
+    gap: 5px;
+    padding-inline: 7px;
+  }
+}
+
+@media (max-width: 350px) {
+  .header-block-line__title {
+    display: none;
+  }
+
+  .header-block-line__progress::before {
+    content: 'Bloc ';
+    color: #93a396;
+    font-weight: 700;
+  }
+
+  .app-header--dense .card-jump > span:first-child {
+    display: none;
+  }
+
+  .preparation-checklist__resource {
+    grid-template-columns: 26px minmax(0, 1fr);
+    gap: 5px;
+  }
+
+  .preparation-checklist__name {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 330px) {
+  .progression-summary {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .progression-summary span {
+    text-align: left;
+  }
+
+  .progression-block__header {
+    gap: 6px;
+  }
+}
