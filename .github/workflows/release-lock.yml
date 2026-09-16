@@ -1,0 +1,37 @@
+name: Sync release lockfile
+
+on:
+  push:
+    branches:
+      - agent/initial-scaffold
+    paths:
+      - .github/workflows/release-lock.yml
+
+permissions:
+  contents: write
+
+jobs:
+  sync-lock:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: agent/initial-scaffold
+          fetch-depth: 0
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Refresh Cargo lockfile
+        run: cargo check --manifest-path src-tauri/Cargo.toml
+
+      - name: Commit refreshed lockfile and cleanup
+        shell: bash
+        run: |
+          rm .github/workflows/release-lock.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src-tauri/Cargo.lock .github/workflows/release-lock.yml
+          git commit -m "chore(release): sync Cargo lockfile for 1.0.0"
+          git push origin HEAD:agent/initial-scaffold
