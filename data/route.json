@@ -14429,7 +14429,7 @@
       "type": "quest",
       "displayRole": "objective",
       "title": "Les grandes galeries",
-      "prerequisites": "Dofus Cawotte équipé.",
+      "prerequisites": "Niveau recommandé : 150.",
       "action": "TERMINER",
       "source": {
         "label": "DPLN",
@@ -21412,7 +21412,6 @@
       "type": "resume",
       "displayRole": "transition",
       "title": "Mort et renouveau",
-      "prerequisites": "Dofus des Veilleurs.",
       "action": "TERMINER",
       "instruction": "Corruption vaincu : REPRENDS et TERMINE Mort et renouveau.",
       "source": {
@@ -23250,7 +23249,7 @@
       "type": "dungeon",
       "displayRole": "objective",
       "title": "◆ Laboratoire de Nileza — TOTEM DÉGOÛT",
-      "prerequisites": "Dofus des Glaces ; Dofus Tacheté ; Dofus des Veilleurs ; Dofus Abyssal.",
+      "prerequisites": "Les totems de Maïmane active ; choisir Nileza pour le Totem du dégoût.",
       "action": "FAIRE",
       "instruction": "Vaincs Nileza avec Les totems de Maïmane active et récupère le Totem du dégoût.",
       "momentId": "moment-totems-ouverture-donjons"
@@ -23872,7 +23871,7 @@
       "type": "milestone",
       "displayRole": "objective",
       "title": "◆ Akadémie des Gobs — GRUNOB",
-      "prerequisites": "Dofus des Glaces ; Dofus Tacheté ; Dofus des Veilleurs ; Dofus Abyssal.",
+      "prerequisites": "Six sur six + Le secret des Dofus : Prologue + L'héritage de l'île brisée terminés ; 6 Dofus Primordiaux en inventaire.",
       "action": "FAIRE",
       "momentId": "moment-route-step-0988"
     },
