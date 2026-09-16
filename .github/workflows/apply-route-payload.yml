@@ -5,7 +5,8 @@ on:
     branches:
       - agent/initial-scaffold
     paths:
-      - .route-payload.b64
+      - '.route-payload.part*'
+      - '.github/workflows/apply-route-payload.yml'
 
 permissions:
   contents: write
@@ -20,7 +21,26 @@ jobs:
           ref: agent/initial-scaffold
 
       - name: Decode generated route
-        run: base64 -d .route-payload.b64 | gzip -d > data/route.json
+        run: |
+          cat \
+            .route-payload.part01a \
+            .route-payload.part01b \
+            .route-payload.part01c \
+            .route-payload.part02 \
+            .route-payload.part03 \
+            .route-payload.part04 \
+            .route-payload.part05a \
+            .route-payload.part05b \
+            .route-payload.part05c \
+            .route-payload.part06 \
+            .route-payload.part07a \
+            .route-payload.part07b \
+            .route-payload.part07c \
+            .route-payload.part08a \
+            | base64 -d \
+            | gzip -d \
+            > data/route.json
+          echo '601d649d79e7694bd00e2df7379ce75c37f0025b9745838ca39b1eba9880da82  data/route.json' | sha256sum -c -
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -49,6 +69,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/route.json
-          git rm .route-payload.b64 .github/workflows/apply-route-payload.yml
+          git rm -f .route-payload.b64 .route-payload.part* .github/workflows/apply-route-payload.yml
           git commit -m "chore(route): sync optimized roadmap"
           git push origin HEAD:agent/initial-scaffold
