@@ -1,0 +1,78 @@
+name: Final audit route sync
+
+on:
+  push:
+    branches:
+      - agent/initial-scaffold
+    paths:
+      - .github/workflows/final-audit-sync.yml
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: agent/initial-scaffold
+          fetch-depth: 0
+
+      - name: Apply certified prerequisite fixes
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const path = 'data/route.json';
+          const route = JSON.parse(fs.readFileSync(path, 'utf8'));
+          const byId = new Map(route.steps.map((step) => [step.id, step]));
+
+          const requireStep = (id) => {
+            const step = byId.get(id);
+            if (!step) throw new Error(`Missing route step: ${id}`);
+            return step;
+          };
+
+          requireStep('route-step-0764').prerequisites = 'Niveau recommandé : 150.';
+          delete requireStep('route-step-0744').prerequisites;
+          requireStep('route-step-0943').prerequisites = 'Les totems de Maïmane active ; choisir Nileza pour le Totem du dégoût.';
+          requireStep('route-step-0988').prerequisites = "Six sur six + Le secret des Dofus : Prologue + L'héritage de l'île brisée terminés ; 6 Dofus Primordiaux en inventaire.";
+
+          fs.writeFileSync(path, `${JSON.stringify(route, null, 2)}\n`);
+          NODE
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Test route logic
+        run: pnpm test:route
+
+      - name: Validate route data
+        run: pnpm validate:route
+
+      - name: Build frontend
+        run: pnpm build
+
+      - name: Commit certified sync and cleanup
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/final-audit-sync.yml
+          git add data/route.json
+          git diff --cached --quiet && exit 0
+          git commit -m "fix(route): sync final certification prerequisites"
+          git push origin HEAD:agent/initial-scaffold
