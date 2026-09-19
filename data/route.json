@@ -5908,7 +5908,7 @@
       "prerequisites": "Les sbires du maître à l'étape Rakoopeur + Association de fureteurs au checkpoint + L'éternelle moisson active avec pierre d'âme adaptée.",
       "action": "FAIRE",
       "instruction": "Vaincs Rakoopeur une seule fois pour Les sbires du maître + Association de fureteurs, et capture-le pour l'Ocre.",
-      "momentId": "moment-route-step-0165",
+      "momentId": "moment-rakoopeur-shared",
       "guideItems": [
         {
           "action": "do",
@@ -5922,7 +5922,7 @@
       "order": 196,
       "blockId": "block-05",
       "type": "resume",
-      "displayRole": "transition",
+      "displayRole": "objective",
       "title": "Association de fureteurs",
       "prerequisites": "Rakoopeur vaincu dans le Refuge Sylvestre avec Association de fureteurs au checkpoint.",
       "action": "TERMINER",
@@ -5969,7 +5969,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-sbires-du-maitre.html"
       },
-      "momentId": "moment-route-step-0165",
+      "momentId": "moment-pat-craqueleur",
       "destination": {
         "x": 5,
         "y": 0
