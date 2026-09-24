@@ -154,3 +154,16 @@ test('contrat route — Frimar utilise le drop de Métal Éternel, jamais une ca
   assert.ok(machine?.instruction);
   assert.match(machine.instruction, /2 Métaux Éternels.*Frimar/i);
 });
+
+
+test('contrat route — une seule carte ENTRÉE par bloc et aucune ancienne PRÉPA autonome', () => {
+  const entries = route.steps.filter((step) => step.type === 'preparation');
+
+  assert.equal(entries.length, route.blocks.length);
+  for (const block of route.blocks) {
+    const blockEntries = entries.filter((step) => step.blockId === block.id);
+    assert.equal(blockEntries.length, 1, `${block.id}: une seule carte ENTRÉE est attendue.`);
+    assert.equal(blockEntries[0]?.displayType, 'ENTRÉE');
+    assert.match(blockEntries[0]?.id ?? '', /^block-entry-\d{2}$/);
+  }
+});

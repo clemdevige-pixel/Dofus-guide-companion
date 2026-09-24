@@ -21,6 +21,7 @@ const typeMap: Record<string, { type: StepType; displayType?: string }> = {
   REPRISE: { type: 'resume' },
   DONJON: { type: 'dungeon' },
   'PRÉPA': { type: 'preparation' },
+  ENTRÉE: { type: 'preparation', displayType: 'ENTRÉE' },
   'RÈGLE': { type: 'rule' },
   JALON: { type: 'milestone' },
   'FIL ROUGE': { type: 'long_running' },
