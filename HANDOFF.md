@@ -1,6 +1,6 @@
 # HANDOFF — Dofus Guide Companion / V1
 
-Date : 2026-09-16
+Date : 2026-09-25
 Branche : `agent/initial-scaffold`
 Version : **1.0.0**
 
@@ -10,17 +10,24 @@ V1 gelée et prête à distribuer.
 
 État validé :
 - route Astrub → Dofus Sylvestre certifiée sur son périmètre métier ;
-- **1002 étapes / 32 blocs** ;
+- **1000 étapes / 32 blocs** ;
 - **59 PRÉPA** reconstruites autour des consommations réelles ;
 - ordre relatif des **943 étapes métier historiques** conservé pendant la refonte blocs/prépas ;
-- tests route/progress : **51/51** ;
+- tests route/progress : **verts sur la CI du correctif Meno/Frimar** ;
 - validation route : verte ;
 - build frontend : vert ;
-- `cargo check` Tauri Windows : vert ;
+- `cargo check` Tauri Windows : vérification CI en cours sur le dernier correctif ;
 - recette manuelle validée : save/reload, navigation, progression, compact, DPLN, `/travel`, raccourcis, taille/position fenêtre, console ;
 - Sheet `ROUTE` et `data/route.json` synchronisés.
 
 Ne pas relancer une optimisation globale de route sans bug concret ou nouvelle exigence métier.
+
+Dernière correction métier intégrée :
+- Meno mutualisé en **un seul passage** pour `Une voix de crystal` + `Piège de crystal` / `Son nom est Personne` ;
+- anciennes étapes du premier passage Meno supprimées ;
+- ancienne mécanique « capturer les Frimar » supprimée partout ;
+- `La machine à démonter le temps` indique désormais explicitement de **drop 2 Métaux Éternels sur les Frimar** ;
+- Royalmouth conservé à **3 passages** après vérification des dépendances du Dofus Pourpre : aucune suppression appliquée.
 
 ## Sources de vérité
 
@@ -91,4 +98,4 @@ Bundles générés sous `src-tauri/target/release/bundle/`.
 
 Lire dans l’ordre : `AGENTS.md`, `SPEC.md`, `ARCHITECTURE.md`, `docs/DATA_MODEL.md`, puis ce `HANDOFF.md`.
 
-État de reprise : **V1 gelée, route figée, 51/51 tests verts, validation/build/Tauri verts, version 1.0.0 prête à distribuer.**
+État de reprise : **V1 maintenue ; correctif route Meno/Frimar intégré ; tests route, validation et build frontend verts ; `cargo check` Windows du dernier correctif encore en cours au moment de ce handoff.**
