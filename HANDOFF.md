@@ -10,7 +10,7 @@ V1 gelée et prête à distribuer.
 
 État validé :
 - route Astrub → Dofus Sylvestre certifiée sur son périmètre métier ;
-- **1000 étapes / 32 blocs** ;
+- **973 étapes / 32 blocs** ;
 - **59 PRÉPA** reconstruites autour des consommations réelles ;
 - ordre relatif des **943 étapes métier historiques** conservé pendant la refonte blocs/prépas ;
 - tests route/progress : **verts sur la CI du correctif Meno/Frimar** ;
@@ -21,6 +21,13 @@ V1 gelée et prête à distribuer.
 - Sheet `ROUTE` et `data/route.json` synchronisés.
 
 Ne pas relancer une optimisation globale de route sans bug concret ou nouvelle exigence métier.
+
+Dernière refonte UX route intégrée :
+- **32 cartes `ENTRÉE`**, exactement une par bloc ;
+- **0 carte `PRÉPA` autonome** ;
+- 35 préparations globales fusionnées dans les entrées de bloc ;
+- 24 préparations tardives déplacées directement sur leur étape de consommation ;
+- type éditorial `ENTRÉE` mappé sur le comportement structuré de préparation pour conserver les checklists sans ajouter de logique spécifique dans React ;
 
 Dernière correction métier intégrée :
 - Meno mutualisé en **un seul passage** pour `Une voix de crystal` + `Piège de crystal` / `Son nom est Personne` ;
@@ -98,4 +105,4 @@ Bundles générés sous `src-tauri/target/release/bundle/`.
 
 Lire dans l’ordre : `AGENTS.md`, `SPEC.md`, `ARCHITECTURE.md`, `docs/DATA_MODEL.md`, puis ce `HANDOFF.md`.
 
-État de reprise : **V1 maintenue ; correctif route Meno/Frimar intégré ; tests route, validation et build frontend verts ; `cargo check` Windows du dernier correctif encore en cours au moment de ce handoff.**
+État de reprise : **V1 maintenue ; refonte des cartes de préparation intégrée ; 973 étapes / 32 blocs ; tests route, validation et build frontend verts ; `cargo check` Windows du dernier commit fonctionnel encore en cours au moment de ce handoff.**
