@@ -111,12 +111,12 @@
     {
       "id": "block-22",
       "order": 22,
-      "title": "Dofus Ivoire I — Dragon blanc, Baleine & Enutrosor"
+      "title": "Dofus Ivoire I — Dragon blanc, Baleine, Enutrosor & ouverture Nordalie"
     },
     {
       "id": "block-23",
       "order": 23,
-      "title": "Nordalie & Quatre sur Six"
+      "title": "Quatre sur Six"
     },
     {
       "id": "block-24",
@@ -17635,7 +17635,7 @@
       "blockId": "block-22",
       "type": "preparation",
       "displayType": "ENTRÉE",
-      "title": "Entrée — Dofus Ivoire I — Dragon blanc, Baleine & Enutrosor",
+      "title": "Entrée — Dofus Ivoire I — Dragon blanc, Baleine, Enutrosor & ouverture Nordalie",
       "action": "PRÉPARER / COMMENCER",
       "instruction": "Prépare les éléments globaux de ce bloc avant de commencer. Les besoins propres à une quête plus tardive sont rappelés directement sur l’étape concernée.",
       "preparationItems": [
@@ -18256,12 +18256,67 @@
       "momentId": "moment-route-step-0828"
     },
     {
-      "id": "block-entry-23",
+      "id": "route-step-0830",
       "order": 780,
+      "blockId": "block-22",
+      "type": "quest",
+      "dofusSeries": "Dofus Ivoire",
+      "displayRole": "objective",
+      "title": "Nordalie — avancer jusqu’à Tal Kasha",
+      "prerequisites": "niveau recommandé 200.",
+      "action": "LANCER / AVANCER / STOP",
+      "instruction": "En [-9,-22], LANCE Nordalie et AVANCE jusqu’à devoir vaincre Tal Kasha puis STOP devant la Chambre.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/nordalie.html"
+      },
+      "momentId": "moment-nordalie-tal-kasha",
+      "location": {
+        "x": -9,
+        "y": -22
+      },
+      "destination": {
+        "x": -9,
+        "y": -22
+      }
+    },
+    {
+      "id": "route-step-0831",
+      "order": 781,
+      "blockId": "block-22",
+      "type": "dungeon",
+      "displayRole": "detail",
+      "title": "◆ Chambre de Tal Kasha — NORDALIE",
+      "prerequisites": "Nordalie au checkpoint Tal Kasha.",
+      "warning": "⚠ AVANT DE SORTIR DU DONJON — parle à Hem le Maudit dans la salle de sortie et épuise son dialogue sur le destin.",
+      "action": "FAIRE",
+      "instruction": "Vaincs Tal Kasha, puis poursuis Nordalie.",
+      "momentId": "moment-nordalie-tal-kasha"
+    },
+    {
+      "id": "route-step-0832",
+      "order": 782,
+      "blockId": "block-22",
+      "type": "resume",
+      "dofusSeries": "Dofus Ivoire",
+      "displayRole": "transition",
+      "title": "Nordalie — reprendre jusqu’aux quatre missions",
+      "prerequisites": "Tal Kasha vaincue.",
+      "action": "REPRENDRE / AVANCER",
+      "instruction": "Après Tal Kasha, REPRENDS Nordalie jusqu'à l'ouverture de ses quatre missions : Le guerrier noir, Le bonheur est dans le spray, Une voix de crystal et Le mort dans l'âme.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/nordalie.html"
+      },
+      "momentId": "moment-nordalie-tal-kasha"
+    },
+    {
+      "id": "block-entry-23",
+      "order": 783,
       "blockId": "block-23",
       "type": "preparation",
       "displayType": "ENTRÉE",
-      "title": "Entrée — Nordalie & Quatre sur Six",
+      "title": "Entrée — Quatre sur Six",
       "action": "PRÉPARER / COMMENCER",
       "instruction": "Prépare les éléments globaux de ce bloc avant de commencer. Les besoins propres à une quête plus tardive sont rappelés directement sur l’étape concernée.",
       "preparationItems": [
@@ -18308,61 +18363,6 @@
           "text": "Plus de 600 Force pour l'épreuve de Gobrikol"
         }
       ]
-    },
-    {
-      "id": "route-step-0830",
-      "order": 781,
-      "blockId": "block-23",
-      "type": "quest",
-      "dofusSeries": "Dofus Ivoire",
-      "displayRole": "objective",
-      "title": "Nordalie — avancer jusqu’à Tal Kasha",
-      "prerequisites": "niveau recommandé 200.",
-      "action": "LANCER / AVANCER / STOP",
-      "instruction": "En [-9,-22], LANCE Nordalie et AVANCE jusqu’à devoir vaincre Tal Kasha puis STOP devant la Chambre.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/nordalie.html"
-      },
-      "momentId": "moment-nordalie-tal-kasha",
-      "location": {
-        "x": -9,
-        "y": -22
-      },
-      "destination": {
-        "x": -9,
-        "y": -22
-      }
-    },
-    {
-      "id": "route-step-0831",
-      "order": 782,
-      "blockId": "block-23",
-      "type": "dungeon",
-      "displayRole": "detail",
-      "title": "◆ Chambre de Tal Kasha — NORDALIE",
-      "prerequisites": "Nordalie au checkpoint Tal Kasha.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — parle à Hem le Maudit dans la salle de sortie et épuise son dialogue sur le destin.",
-      "action": "FAIRE",
-      "instruction": "Vaincs Tal Kasha, puis poursuis Nordalie.",
-      "momentId": "moment-nordalie-tal-kasha"
-    },
-    {
-      "id": "route-step-0832",
-      "order": 783,
-      "blockId": "block-23",
-      "type": "resume",
-      "dofusSeries": "Dofus Ivoire",
-      "displayRole": "transition",
-      "title": "Nordalie — reprendre jusqu’aux quatre missions",
-      "prerequisites": "Tal Kasha vaincue.",
-      "action": "REPRENDRE / AVANCER",
-      "instruction": "Après Tal Kasha, REPRENDS Nordalie jusqu'à l'ouverture de ses quatre missions : Le guerrier noir, Le bonheur est dans le spray, Une voix de crystal et Le mort dans l'âme.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/nordalie.html"
-      },
-      "momentId": "moment-nordalie-tal-kasha"
     },
     {
       "id": "route-step-0896",
