@@ -169,16 +169,15 @@ test('contrat route — une seule carte ENTRÉE par bloc et aucune ancienne PRÉ
 });
 
 
-test('contrat route — Nordalie ouvre ses missions avant le bloc Quatre sur Six', () => {
+test('contrat route — Nordalie ouvre ses missions au début du bloc Ivoire II', () => {
   const nordalieIds = ['route-step-0830', 'route-step-0831', 'route-step-0832'] as const;
 
   for (const stepId of nordalieIds) {
     const step = route.steps.find((candidate) => candidate.id === stepId);
-    assert.equal(step?.blockId, 'block-22', `${stepId} doit rester dans le bloc Ivoire I.`);
+    assert.equal(step?.blockId, 'block-24', `${stepId} doit rester dans le bloc Ivoire II.`);
   }
 
-  const quatreSurSixEntry = route.steps.find((step) => step.id === 'block-entry-23');
-  assert.equal(quatreSurSixEntry?.title, 'Entrée — Quatre sur Six');
-  assert.ok(requireOrder('route-step-0832') < requireOrder('block-entry-23'));
   assert.ok(requireOrder('block-entry-23') < requireOrder('route-step-0896'));
+  assert.ok(requireOrder('block-entry-24') < requireOrder('route-step-0830'));
+  assert.ok(requireOrder('route-step-0832') < requireOrder('route-step-0833'));
 });

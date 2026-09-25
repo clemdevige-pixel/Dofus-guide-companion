@@ -111,7 +111,7 @@
     {
       "id": "block-22",
       "order": 22,
-      "title": "Dofus Ivoire I — Dragon blanc, Baleine, Enutrosor & ouverture Nordalie"
+      "title": "Dofus Ivoire I — Dragon blanc, Baleine & Enutrosor"
     },
     {
       "id": "block-23",
@@ -121,7 +121,7 @@
     {
       "id": "block-24",
       "order": 24,
-      "title": "Dofus Ivoire — missions Nordalie & obtention"
+      "title": "Dofus Ivoire II — Nordalie, missions & obtention"
     },
     {
       "id": "block-25",
@@ -17635,7 +17635,7 @@
       "blockId": "block-22",
       "type": "preparation",
       "displayType": "ENTRÉE",
-      "title": "Entrée — Dofus Ivoire I — Dragon blanc, Baleine, Enutrosor & ouverture Nordalie",
+      "title": "Entrée — Dofus Ivoire I — Dragon blanc, Baleine & Enutrosor",
       "action": "PRÉPARER / COMMENCER",
       "instruction": "Prépare les éléments globaux de ce bloc avant de commencer. Les besoins propres à une quête plus tardive sont rappelés directement sur l’étape concernée.",
       "preparationItems": [
@@ -18256,63 +18256,8 @@
       "momentId": "moment-route-step-0828"
     },
     {
-      "id": "route-step-0830",
-      "order": 780,
-      "blockId": "block-22",
-      "type": "quest",
-      "dofusSeries": "Dofus Ivoire",
-      "displayRole": "objective",
-      "title": "Nordalie — avancer jusqu’à Tal Kasha",
-      "prerequisites": "niveau recommandé 200.",
-      "action": "LANCER / AVANCER / STOP",
-      "instruction": "En [-9,-22], LANCE Nordalie et AVANCE jusqu’à devoir vaincre Tal Kasha puis STOP devant la Chambre.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/nordalie.html"
-      },
-      "momentId": "moment-nordalie-tal-kasha",
-      "location": {
-        "x": -9,
-        "y": -22
-      },
-      "destination": {
-        "x": -9,
-        "y": -22
-      }
-    },
-    {
-      "id": "route-step-0831",
-      "order": 781,
-      "blockId": "block-22",
-      "type": "dungeon",
-      "displayRole": "detail",
-      "title": "◆ Chambre de Tal Kasha — NORDALIE",
-      "prerequisites": "Nordalie au checkpoint Tal Kasha.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — parle à Hem le Maudit dans la salle de sortie et épuise son dialogue sur le destin.",
-      "action": "FAIRE",
-      "instruction": "Vaincs Tal Kasha, puis poursuis Nordalie.",
-      "momentId": "moment-nordalie-tal-kasha"
-    },
-    {
-      "id": "route-step-0832",
-      "order": 782,
-      "blockId": "block-22",
-      "type": "resume",
-      "dofusSeries": "Dofus Ivoire",
-      "displayRole": "transition",
-      "title": "Nordalie — reprendre jusqu’aux quatre missions",
-      "prerequisites": "Tal Kasha vaincue.",
-      "action": "REPRENDRE / AVANCER",
-      "instruction": "Après Tal Kasha, REPRENDS Nordalie jusqu'à l'ouverture de ses quatre missions : Le guerrier noir, Le bonheur est dans le spray, Une voix de crystal et Le mort dans l'âme.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/nordalie.html"
-      },
-      "momentId": "moment-nordalie-tal-kasha"
-    },
-    {
       "id": "block-entry-23",
-      "order": 783,
+      "order": 780,
       "blockId": "block-23",
       "type": "preparation",
       "displayType": "ENTRÉE",
@@ -18366,7 +18311,7 @@
     },
     {
       "id": "route-step-0896",
-      "order": 784,
+      "order": 781,
       "blockId": "block-23",
       "type": "resume",
       "displayRole": "objective",
@@ -18380,7 +18325,7 @@
     },
     {
       "id": "route-step-0897",
-      "order": 785,
+      "order": 782,
       "blockId": "block-23",
       "type": "quest",
       "displayRole": "objective",
@@ -18404,7 +18349,7 @@
     },
     {
       "id": "route-step-0898",
-      "order": 786,
+      "order": 783,
       "blockId": "block-23",
       "type": "dungeon",
       "displayRole": "detail",
@@ -18416,7 +18361,7 @@
     },
     {
       "id": "route-step-0899",
-      "order": 787,
+      "order": 784,
       "blockId": "block-23",
       "type": "resume",
       "displayRole": "transition",
@@ -18431,7 +18376,7 @@
     },
     {
       "id": "route-step-0900",
-      "order": 788,
+      "order": 785,
       "blockId": "block-23",
       "type": "quest",
       "displayRole": "objective",
@@ -18455,7 +18400,7 @@
     },
     {
       "id": "route-step-0901",
-      "order": 789,
+      "order": 786,
       "blockId": "block-23",
       "type": "dungeon",
       "displayRole": "detail",
@@ -18468,7 +18413,7 @@
     },
     {
       "id": "route-step-0902",
-      "order": 790,
+      "order": 787,
       "blockId": "block-23",
       "type": "resume",
       "displayRole": "transition",
@@ -18483,7 +18428,7 @@
     },
     {
       "id": "route-step-0903",
-      "order": 791,
+      "order": 788,
       "blockId": "block-23",
       "type": "quest",
       "displayRole": "objective",
@@ -18506,7 +18451,7 @@
     },
     {
       "id": "route-step-0904",
-      "order": 792,
+      "order": 789,
       "blockId": "block-23",
       "type": "dungeon",
       "displayRole": "detail",
@@ -18519,7 +18464,7 @@
     },
     {
       "id": "route-step-0905",
-      "order": 793,
+      "order": 790,
       "blockId": "block-23",
       "type": "resume",
       "displayRole": "transition",
@@ -18534,7 +18479,7 @@
     },
     {
       "id": "route-step-0906",
-      "order": 794,
+      "order": 791,
       "blockId": "block-23",
       "type": "quest",
       "displayRole": "objective",
@@ -18558,7 +18503,7 @@
     },
     {
       "id": "route-step-0907",
-      "order": 795,
+      "order": 792,
       "blockId": "block-23",
       "type": "dungeon",
       "displayRole": "detail",
@@ -18570,7 +18515,7 @@
     },
     {
       "id": "route-step-0908",
-      "order": 796,
+      "order": 793,
       "blockId": "block-23",
       "type": "resume",
       "displayRole": "transition",
@@ -18586,7 +18531,7 @@
     },
     {
       "id": "route-step-0909",
-      "order": 797,
+      "order": 794,
       "blockId": "block-23",
       "type": "quest",
       "displayRole": "objective",
@@ -18653,7 +18598,7 @@
     },
     {
       "id": "route-step-0910",
-      "order": 798,
+      "order": 795,
       "blockId": "block-23",
       "type": "resume",
       "displayRole": "objective",
@@ -18669,7 +18614,7 @@
     },
     {
       "id": "route-step-0911",
-      "order": 799,
+      "order": 796,
       "blockId": "block-23",
       "type": "resume",
       "displayRole": "objective",
@@ -18685,7 +18630,7 @@
     },
     {
       "id": "route-step-0912",
-      "order": 800,
+      "order": 797,
       "blockId": "block-23",
       "type": "resume",
       "displayRole": "objective",
@@ -18701,7 +18646,7 @@
     },
     {
       "id": "route-step-0913",
-      "order": 801,
+      "order": 798,
       "blockId": "block-23",
       "type": "resume",
       "displayRole": "transition",
@@ -18716,7 +18661,7 @@
     },
     {
       "id": "route-step-0914",
-      "order": 802,
+      "order": 799,
       "blockId": "block-23",
       "type": "quest",
       "displayRole": "objective",
@@ -18740,7 +18685,7 @@
     },
     {
       "id": "route-step-0915",
-      "order": 803,
+      "order": 800,
       "blockId": "block-23",
       "type": "dungeon",
       "displayRole": "detail",
@@ -18753,7 +18698,7 @@
     },
     {
       "id": "route-step-0916",
-      "order": 804,
+      "order": 801,
       "blockId": "block-23",
       "type": "resume",
       "displayRole": "transition",
@@ -18769,7 +18714,7 @@
     },
     {
       "id": "route-step-0917",
-      "order": 805,
+      "order": 802,
       "blockId": "block-23",
       "type": "quest",
       "displayRole": "objective",
@@ -18787,13 +18732,68 @@
     },
     {
       "id": "block-entry-24",
-      "order": 806,
+      "order": 803,
       "blockId": "block-24",
       "type": "preparation",
       "displayType": "ENTRÉE",
-      "title": "Entrée — Dofus Ivoire — missions Nordalie & obtention",
+      "title": "Entrée — Dofus Ivoire II — Nordalie, missions & obtention",
       "action": "COMMENCER",
       "instruction": "Commence le bloc. Les besoins spécifiques sont indiqués directement sur les étapes où ils deviennent utiles."
+    },
+    {
+      "id": "route-step-0830",
+      "order": 804,
+      "blockId": "block-24",
+      "type": "quest",
+      "dofusSeries": "Dofus Ivoire",
+      "displayRole": "objective",
+      "title": "Nordalie — avancer jusqu’à Tal Kasha",
+      "prerequisites": "niveau recommandé 200.",
+      "action": "LANCER / AVANCER / STOP",
+      "instruction": "En [-9,-22], LANCE Nordalie et AVANCE jusqu’à devoir vaincre Tal Kasha puis STOP devant la Chambre.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/nordalie.html"
+      },
+      "momentId": "moment-nordalie-tal-kasha",
+      "location": {
+        "x": -9,
+        "y": -22
+      },
+      "destination": {
+        "x": -9,
+        "y": -22
+      }
+    },
+    {
+      "id": "route-step-0831",
+      "order": 805,
+      "blockId": "block-24",
+      "type": "dungeon",
+      "displayRole": "detail",
+      "title": "◆ Chambre de Tal Kasha — NORDALIE",
+      "prerequisites": "Nordalie au checkpoint Tal Kasha.",
+      "warning": "⚠ AVANT DE SORTIR DU DONJON — parle à Hem le Maudit dans la salle de sortie et épuise son dialogue sur le destin.",
+      "action": "FAIRE",
+      "instruction": "Vaincs Tal Kasha, puis poursuis Nordalie.",
+      "momentId": "moment-nordalie-tal-kasha"
+    },
+    {
+      "id": "route-step-0832",
+      "order": 806,
+      "blockId": "block-24",
+      "type": "resume",
+      "dofusSeries": "Dofus Ivoire",
+      "displayRole": "transition",
+      "title": "Nordalie — reprendre jusqu’aux quatre missions",
+      "prerequisites": "Tal Kasha vaincue.",
+      "action": "REPRENDRE / AVANCER",
+      "instruction": "Après Tal Kasha, REPRENDS Nordalie jusqu'à l'ouverture de ses quatre missions : Le guerrier noir, Le bonheur est dans le spray, Une voix de crystal et Le mort dans l'âme.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/nordalie.html"
+      },
+      "momentId": "moment-nordalie-tal-kasha"
     },
     {
       "id": "route-step-0833",
