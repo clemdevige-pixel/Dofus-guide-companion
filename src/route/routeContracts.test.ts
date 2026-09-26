@@ -150,14 +150,20 @@ test('contrat route — Meno mutualise Ivoire + Abyssal en un seul passage', () 
   ]);
 });
 
-test('contrat route — Dazak mutualise Ébène + Martegel en un seul passage', () => {
-  const dazakDungeons = route.steps.filter(
-    (step) => step.type === 'dungeon' && step.title.includes('Brasserie du Roi Dazak'),
+test('contrat route — Dazak mutualise Ébène + Martegel sur leur passage commun', () => {
+  const dazakEbeneMartegel = route.steps.filter(
+    (step) =>
+      step.type === 'dungeon' &&
+      step.title.includes('Brasserie du Roi Dazak') &&
+      step.title.includes('ÉBÈNE + MARTEGEL'),
   );
 
-  assert.equal(dazakDungeons.length, 1, 'La Brasserie du Roi Dazak doit rester mutualisée en un seul passage.');
-  assert.equal(dazakDungeons[0]?.id, 'route-step-0874');
-  assert.match(dazakDungeons[0]?.title ?? '', /ÉBÈNE \+ MARTEGEL/);
+  assert.equal(
+    dazakEbeneMartegel.length,
+    1,
+    'La convergence Ébène + Martegel doit rester mutualisée en un seul passage Dazak.',
+  );
+  assert.equal(dazakEbeneMartegel[0]?.id, 'route-step-0874');
   assertOrderedSequence('contrat Dazak — Martegel attend la convergence Ébène', [
     'route-step-0853',
     'route-step-0873',
