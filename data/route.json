@@ -18897,7 +18897,8 @@
       "instruction": "Avant d'entrer, REPRENDS la chaîne Abyssal depuis Piège de crystal et avance-la jusqu'au checkpoint Meno, puis vaincs Meno une seule fois pour Ivoire + Abyssal.",
       "momentId": "moment-nordalie-missions",
       "source": {
-        "label": "GANYMÈDE GP0 2026 + DPLN"
+        "label": "GANYMÈDE GP0 2026 + DPLN",
+        "url": "https://ganymede-app.com/guides/2747"
       }
     },
     {
@@ -18912,7 +18913,8 @@
       "action": "REPRENDRE / TERMINER",
       "instruction": "Fais Deks, Docteur Hou et Jelus Vern pour Son nom est Personne et récupère les 7 partitions d'Une voix de crystal. Une fois les objectifs réunis, utilise le Pichon kloune pour retourner auprès de Meno SANS refaire le donjon : termine l'étape de Son nom est Personne et remets les 7 partitions pour obtenir le Crystal de Kallishindri, puis rends Son nom est Personne à Prosper.",
       "source": {
-        "label": "GANYMÈDE GP0 2026 + DPLN"
+        "label": "GANYMÈDE GP0 2026 + DPLN",
+        "url": "https://ganymede-app.com/guides/2747"
       },
       "momentId": "moment-nordalie-missions",
       "warning": "Fais les objectifs des deux quêtes avant le retour auprès de Meno ; le Pichon kloune permet d'y retourner sans refaire le donjon."
