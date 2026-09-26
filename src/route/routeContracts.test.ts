@@ -133,23 +133,20 @@ assertOrderedSequence('contrat route — accès Martegel précède De Brikke et 
 ]);
 
 
-test('contrat route — Meno est fait une première fois pour Piège puis une seconde fois pour Une voix', () => {
+test('contrat route — Meno mutualise Ivoire + Abyssal en un seul passage', () => {
   const menoDungeons = route.steps.filter(
     (step) => step.type === 'dungeon' && step.title.includes('Vaisseau du Capitaine Meno'),
   );
 
-  assert.equal(menoDungeons.length, 2, 'La chaîne impose deux passages Meno distincts.');
-  assert.deepEqual(
-    menoDungeons.map((step) => step.id),
-    ['route-step-1173', 'route-step-0837'],
-  );
-  assertOrderedSequence('contrat Meno — Piège → Son nom → Une voix', [
+  assert.equal(menoDungeons.length, 1, 'Le Vaisseau du Capitaine Meno doit rester mutualisé en un seul passage.');
+  assert.equal(menoDungeons[0]?.id, 'route-step-0837');
+  assert.match(menoDungeons[0]?.title ?? '', /IVOIRE \+ ABYSSAL/);
+  assertOrderedSequence('contrat Meno — Piège attend la convergence Ivoire', [
     'route-step-0671',
-    'route-step-1173',
-    'route-step-1174',
-    'route-step-1175',
     'route-step-0835',
+    'route-step-0836',
     'route-step-0837',
+    'route-step-0838',
   ]);
 });
 
