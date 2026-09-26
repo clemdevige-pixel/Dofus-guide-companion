@@ -126,7 +126,7 @@
     {
       "id": "block-25",
       "order": 25,
-      "title": "Cavaliers & Externam"
+      "title": "Martegel, Cavaliers & Externam"
     },
     {
       "id": "block-26",
@@ -146,7 +146,7 @@
     {
       "id": "block-29",
       "order": 29,
-      "title": "Pandamonium, Cauchemar & Aurore Pourpre"
+      "title": "Pandamonium, Valonia, Cauchemar & Aurore Pourpre"
     },
     {
       "id": "block-30",
@@ -19138,7 +19138,7 @@
       "blockId": "block-25",
       "type": "preparation",
       "displayType": "ENTRÉE",
-      "title": "Entrée — Cavaliers & Externam",
+      "title": "Entrée — Martegel, Cavaliers & Externam",
       "warning": "Prépare ces ressources avant d'ouvrir les branches Guerre et Servitude pour pouvoir les enchaîner sans détour d'achat.",
       "action": "PRÉPARER / COMMENCER",
       "instruction": "Prépare les éléments globaux de ce bloc avant de commencer. Les besoins propres à une quête plus tardive sont rappelés directement sur l’étape concernée.",
@@ -21018,7 +21018,7 @@
       "blockId": "block-29",
       "type": "preparation",
       "displayType": "ENTRÉE",
-      "title": "Entrée — Pandamonium, Cauchemar & Aurore Pourpre",
+      "title": "Entrée — Pandamonium, Valonia, Cauchemar & Aurore Pourpre",
       "action": "PRÉPARER / COMMENCER",
       "instruction": "Prépare les éléments globaux de ce bloc avant de commencer. Les besoins propres à une quête plus tardive sont rappelés directement sur l’étape concernée.",
       "preparationItems": [
