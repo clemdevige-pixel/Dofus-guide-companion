@@ -2,265 +2,186 @@
 
 ## 1. Principes
 
-L'architecture doit rester simple, locale et data-driven.
+Architecture locale, simple et data-driven.
 
-Le companion ne connaît pas les règles métier de chaque quête. Il sait uniquement interpréter une route structurée.
+Le Companion ne connaît pas les règles métier de chaque quête. Il interprète une route structurée.
+
+Interdits :
+- logique spécifique par nom de quête dans React ;
+- parsing de texte pour déduire un comportement métier ;
+- seconde vérité de progression ;
+- correction manuelle de `data/route.json` comme source éditoriale.
 
 ## 2. Flux de données
 
 ```text
-Google Sheet
+Google Sheet ROUTE
     ↓
 scripts/export-route.ts
     ↓
-validation de schéma
+validation stricte
     ↓
 data/route.json
     ↓
 route loader
     ↓
-route state
+selectors
     ↓
-UI overlay
+UI React / Tauri
 ```
 
-La progression utilisateur est séparée des données de route :
-
-```text
-route.json            user-progress.json / store local
-     ↓                         ↓
-     └──────── app state ──────┘
-```
-
-Une mise à jour de la route ne doit pas écraser la progression utilisateur tant que les identifiants d'étapes restent stables.
+Le Sheet est la source éditoriale. `data/route.json` est un artefact généré.
 
 ## 3. Stack
 
-### Desktop
+- Tauri 2
+- React
+- TypeScript
+- Vite
+- CSS simple
+- persistance locale
 
-Tauri.
+## 4. Progression
 
-Responsabilités :
+La route et la progression utilisateur sont séparées.
 
-- fenêtre native ;
-- always-on-top ;
-- position / dimensions ;
-- fenêtre redimensionnable librement ;
-- ouverture des liens externes ;
-- raccourcis clavier globaux ;
-- persistance locale si nécessaire ;
-- futur click-through V1.1.
+La vérité de progression est `completedStepIds`.
 
-Largeur compacte par défaut : **380 px**, sans empêcher le resize utilisateur.
-
-### Front
-
-React + TypeScript + Vite.
-
-Responsabilités :
-
-- rendu de l'étape courante ;
-- navigation ;
-- composants visuels par type ;
-- fils rouges ;
-- verrous ;
-- progression ;
+Sont persistés localement :
+- étapes validées ;
+- position de consultation / étape courante ;
+- mode compact ;
 - préférences UI ;
-- écran de réglages des raccourcis.
+- raccourcis globaux ;
+- taille et position de fenêtre.
 
-## 4. Modules cibles
+Les fils rouges, verrou suivant, progression et groupes parallèles restent dérivés depuis `route + completedStepIds`.
+
+## 5. Cartes UI
+
+Une ligne `RouteStep` n’équivaut pas nécessairement à une carte.
+
+Contrat :
+- `STEP_ID` = identité métier stable ;
+- `MOMENT_ID` = frontière d’une carte multi-step ;
+- `DISPLAY_ROLE` = rôle dans la carte (`OBJECTIVE`, `TRANSITION`, `DETAIL`).
+
+`getStepGroups()` :
+- même `MOMENT_ID` contigu → une carte ;
+- sans `MOMENT_ID` → carte autonome.
+
+`getSequenceObjectives()` :
+- `OBJECTIVE` crée une checkbox ;
+- `TRANSITION` / `DETAIL` se rattachent au dernier objectif ;
+- seules les actions des vrais `OBJECTIVE` restent exposées comme actions principales.
+
+Maximum 5 `OBJECTIVE` par carte.
+
+React ne décide jamais du regroupement depuis le titre, `STOP`, le type ou la proximité des lignes.
+
+## 6. Hiérarchie de contenu joueur
+
+Priorité :
+1. objectif / titre ;
+2. action structurante ;
+3. position utile ;
+4. warning réellement critique ;
+5. instruction/transition nécessaire ;
+6. lien DPLN pour le détail fin.
+
+`prerequisites` reste en donnée pour audit/validation mais n’est pas affiché dans les cartes.
+
+`warning` ne doit contenir que des informations joueur utiles, jamais des commentaires de routing.
+
+`GUIDE_ITEMS` reste structuré en donnée. Décision UX V1 : ne pas l’afficher automatiquement dans les séquences `MOMENT_ID` uniquement pour recopier DPLN.
+
+Le message métier d’un hard lock reste visible même dans une séquence.
+
+## 7. Titres joueur
+
+La route brute conserve le titre éditorial complet.
+
+Après validation, `loadBundledRoute()` applique `getPlayerFacingStepTitle()` :
+- suppression des suffixes éditoriaux de quête DPLN (`— avancer jusqu’à...`, `— reprise`, etc.) ;
+- suppression du préfixe legacy `◆` et de `— PASSAGE #N` sur les donjons ;
+- conservation des suffixes réellement significatifs sur les cartes composites.
+
+Cette transformation est présentationnelle. Les tests éditoriaux doivent auditer la donnée brute.
+
+## 8. Marqueurs visuels
+
+`StepMarkers` dérive uniquement de données structurées :
+- Alignement : `type === 'alignment'` ;
+- Dofus : `dofusSeries` ;
+- Donjon : `type === 'dungeon'`.
+
+Maximum 2 icônes visibles devant un titre.
+
+Aucune détection par titre.
+
+## 9. Lancements et déplacements
+
+- `location` = position de prise/lancement ;
+- `launchInstruction` = lancement sans coordonnée unique ;
+- `destination` = prochain lieu utile ;
+- `guideItems` = actions structurées courtes lorsque leur rendu est pertinent.
+
+`POSITION` ne doit jamais être détourné comme destination.
+
+## 10. Fils rouges / hard locks / groupes parallèles
+
+### Fils rouges
+
+`GOAL_ID / GOAL_PHASE` → lifecycle `start → progress* → finish`.
+
+### Hard locks
+
+Blocage réel de progression. Un simple niveau recommandé ne suffit pas.
+
+### Groupes parallèles
+
+`PARALLEL_ID / PARALLEL_PHASE` → lifecycle `start → progress* → finish`.
+
+Le rappel UI n’apparaît que sur les cartes qui appartiennent réellement au groupe.
+
+## 11. Export
+
+`scripts/export-route.ts` est le seul point de transformation Sheet → runtime.
+
+Plage actuelle : `ROUTE!A5:W`.
+
+La colonne `DOFUS_SERIES` alimente `RouteStep.dofusSeries`.
+
+Flux de synchronisation :
 
 ```text
-src/
-├─ app/
-│  ├─ App.tsx
-│  └─ providers/
-├─ route/
-│  ├─ schema.ts
-│  ├─ loader.ts
-│  ├─ selectors.ts
-│  └─ validation.ts
-├─ progress/
-│  ├─ progressStore.ts
-│  └─ progressSelectors.ts
-├─ overlay/
-│  ├─ OverlayShell.tsx
-│  └─ useWindowPreferences.ts
-├─ shortcuts/
-│  ├─ shortcutStore.ts
-│  └─ shortcutService.ts
-├─ settings/
-│  └─ SettingsPanel.tsx
-├─ features/
-│  ├─ current-step/
-│  ├─ long-running-goals/
-│  ├─ hard-lock/
-│  └─ preparation/
-└─ ui/
-   └─ composants génériques
-
-scripts/
-└─ export-route.ts
+pnpm export:route
+pnpm test:route
+pnpm validate:route
+pnpm build
 ```
 
-Cette arborescence est indicative : ne pas créer des dossiers vides ou des abstractions avant qu'elles soient nécessaires.
+Un état n’est « synchronisé » qu’après ce flux.
 
-## 5. État
+## 12. Validation
 
-État minimal :
+Le runtime doit échouer clairement sur les incohérences structurelles :
+- ID/type/bloc invalide ;
+- URL/coordonnées invalides ;
+- lancement incomplet ;
+- lifecycle goal/parallèle invalide ;
+- moment non contigu / multi-bloc / sans display role ;
+- premier membre non `OBJECTIVE` ;
+- plus de 5 objectifs par carte ;
+- hard lock de niveau personnage ;
+- `FIN` absente, multiple ou non terminale.
 
-- route chargée ;
-- `completedStepIds` ;
-- étape courante dérivée ;
-- préférences overlay ;
-- mapping des raccourcis globaux ;
-- version de la route.
+## 13. Anti-patterns
 
-L'étape courante doit autant que possible être **dérivée** de la première étape non validée plutôt que maintenue comme une deuxième vérité indépendante.
-
-Un pointeur manuel peut exister pour consulter les étapes précédentes/suivantes, mais il ne doit pas remplacer l'état réel de progression.
-
-## 6. Raccourcis globaux
-
-Les raccourcis font partie de la V1.
-
-Mapping par défaut :
-
-```text
-Ctrl+Alt+Right  → étape suivante
-Ctrl+Alt+Left   → étape précédente
-Ctrl+Alt+Enter  → valider / dévalider
-Ctrl+Alt+Space  → afficher / masquer overlay
-```
-
-Contraintes :
-
-- mapping configurable depuis les réglages ;
-- persistance locale ;
-- restauration des valeurs par défaut ;
-- enregistrement natif centralisé dans un service unique ;
-- changement de mapping atomique : désenregistrer l'ancien puis enregistrer le nouveau ;
-- conflit ou raccourci indisponible remonté explicitement à l'UI ;
-- aucune fonctionnalité ne doit dépendre directement de la combinaison par défaut.
-
-## 7. Fenêtre overlay
-
-La fenêtre native est la source de vérité pour sa géométrie.
-
-Principes :
-
-- always-on-top ;
-- largeur initiale compacte : 380 px ;
-- redimensionnable librement ;
-- dimensions et position restaurées au lancement ;
-- définir seulement un minimum raisonnable empêchant les contrôles essentiels de devenir inutilisables ;
-- l'UI React doit être responsive au container, pas construite autour d'une largeur fixe.
-
-Le click-through n'est pas implémenté en V1. L'architecture doit toutefois éviter de rendre son ajout V1.1 coûteux.
-
-## 8. Identifiants stables
-
-Chaque étape doit posséder un `id` stable indépendant de son numéro de ligne Google Sheet.
-
-**Interdit :** utiliser `row 523` comme identité métier.
-
-Les insertions dans le Sheet ne doivent pas invalider les sauvegardes locales.
-
-Format recommandé :
-
-```text
-block-08-tablette-totankama-fil-rouge
-block-08-tablette-totankama-lock
-```
-
-ou identifiant généré et ensuite conservé dans la source éditoriale.
-
-## 9. Sélecteurs dérivés
-
-Les comportements suivants doivent être calculés depuis les données :
-
-- première étape non validée ;
-- progression globale ;
-- progression du bloc ;
-- fils rouges actifs ;
-- prochain verrou dur ;
-- étape précédente / suivante ;
-- statut terminé d'un bloc.
-
-Aucun de ces éléments ne doit être dupliqué dans `route.json` s'il peut être dérivé sans ambiguïté.
-
-## 10. Validation de données
-
-Le chargement doit échouer clairement si :
-
-- `id` dupliqué ;
-- type inconnu ;
-- bloc inexistant ;
-- lien invalide ;
-- relation de fil rouge/verrou vers un id absent ;
-- version de schéma non supportée.
-
-Un export invalide ne doit jamais produire silencieusement une route partiellement cassée.
-
-Le script d'export doit valider avant d'écrire `data/route.json`.
-
-## 11. Persistance
-
-La sauvegarde locale doit être petite et atomique.
-
-Exemple :
-
-```json
-{
-  "schemaVersion": 1,
-  "routeVersion": "2026-09-03",
-  "completedStepIds": [],
-  "ui": {
-    "compact": true
-  },
-  "shortcuts": {
-    "next": "Ctrl+Alt+Right",
-    "previous": "Ctrl+Alt+Left",
-    "toggleCompleted": "Ctrl+Alt+Enter",
-    "toggleOverlay": "Ctrl+Alt+Space"
-  }
-}
-```
-
-La position et la taille native de fenêtre peuvent être gérées séparément si Tauri fournit un mécanisme plus adapté.
-
-## 12. Export Google Sheet
-
-Le script `scripts/export-route.ts` est le seul point de transformation éditorial → runtime.
-
-Responsabilités :
-
-1. lire les données source ;
-2. normaliser les valeurs ;
-3. produire les identifiants stables selon la stratégie validée ;
-4. construire les relations structurées nécessaires ;
-5. valider le résultat ;
-6. écrire `data/route.json` uniquement si la validation passe.
-
-L'application desktop ne lit pas le Google Sheet à chaque lancement.
-
-## 13. Mise à jour de route
-
-À terme :
-
-1. exporter une nouvelle version ;
-2. valider le schéma ;
-3. charger la route ;
-4. conserver les validations dont les `stepId` existent toujours ;
-5. signaler les étapes supprimées ou renommées si nécessaire.
-
-## 14. Anti-patterns interdits
-
-- `if (step.name === "L'éternelle moisson")` dans l'UI ;
-- stockage de la même progression dans plusieurs stores ;
-- parsing du texte affiché pour deviner le comportement ;
-- dépendre des numéros de ligne du Sheet ;
-- synchroniser le Sheet en temps réel à chaque navigation ;
-- ajouter une API/backend sans besoin V1 démontré ;
-- enregistrer les raccourcis globaux depuis plusieurs composants React ;
-- figer la mise en page sur 380 px sans supporter le resize.
+Ne pas :
+- reconnaître une quête par son titre pour décider d’un comportement ;
+- dupliquer une donnée dérivable dans un nouveau store ;
+- recréer un regroupement automatique sans `MOMENT_ID` ;
+- afficher des commentaires de construction au joueur ;
+- ajouter une métadonnée si un champ existant porte déjà la vérité ;
+- transformer une dette d’affichage en nouvelle logique métier.
