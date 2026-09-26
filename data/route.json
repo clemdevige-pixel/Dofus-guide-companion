@@ -17552,7 +17552,7 @@
       "order": 744,
       "blockId": "block-21",
       "type": "dungeon",
-      "displayRole": "detail",
+      "displayRole": "objective",
       "title": "◆ Vaisseau du Capitaine Meno — PIÈGE DE CRYSTAL",
       "prerequisites": "Piège de crystal au checkpoint Meno.",
       "warning": "⚠ AVANT DE SORTIR DU DONJON — après Meno, parle au Capitaine Meno. Ce dialogue termine Piège de crystal et débloque Son nom est Personne.",
