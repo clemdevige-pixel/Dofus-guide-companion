@@ -136,3 +136,20 @@ Lire dans l’ordre : `AGENTS.md`, `SPEC.md`, `ARCHITECTURE.md`, `docs/DATA_MODE
 - Nouveaux STEP_ID : `route-step-1173`, `route-step-1174`, `route-step-1175`.
 - Aucun autre prérequis inversé identifié dans les blocs 24 à 32 après vérification des portes d'entrée, dépendances croisées et chaînes finales Dom de Pin / Qui nous protège / Flovoraison.
 - Commit route : `0c780dcc80d54c27680c0e5946ef506f10a3d624`.
+
+
+## Update 2026-09-26 — correction régression Meno
+
+- Régression identifiée puis corrigée : le Vaisseau du Capitaine Meno doit rester mutualisé en un seul passage pour le Dofus Ivoire + Dofus Abyssal.
+- Source de vérité utilisée pour cette convergence : JSON Ganymède GP0 fourni dans la conversation.
+- Séquence GP0 confirmée :
+  - avancer le guide Ivoire jusqu'au checkpoint Meno ;
+  - reprendre le guide Abyssal de l'étape 55 à l'étape 122 ;
+  - faire Meno une seule fois ;
+  - parler au Capitaine Meno en salle de sortie d'abord pour `Une voix de crystal`, puis pour `Son nom est Personne`.
+- Les trois étapes ajoutées par erreur pour un premier Meno séparé (`route-step-1173`, `route-step-1174`, `route-step-1175`) ont été supprimées.
+- `route-step-0671` redevient un checkpoint Abyssal différé : ne pas faire Meno à ce stade.
+- `route-step-0837` redevient l'unique donjon Meno `IVOIRE + ABYSSAL`.
+- Le contrat de test protège désormais explicitement cette mutualisation à un seul passage.
+- Commit route : `62a00062e52d20a3ddb34c483a8399614cf22d10`.
+- Commit test : `7f3bbd7b5ae79b813cf8e99b65864de003086fe3`.
