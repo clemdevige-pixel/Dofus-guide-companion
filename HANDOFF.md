@@ -106,3 +106,20 @@ Bundles générés sous `src-tauri/target/release/bundle/`.
 Lire dans l’ordre : `AGENTS.md`, `SPEC.md`, `ARCHITECTURE.md`, `docs/DATA_MODEL.md`, puis ce `HANDOFF.md`.
 
 État de reprise : **V1 maintenue ; refonte des cartes de préparation intégrée ; 973 étapes / 32 blocs ; tests route, validation et build frontend verts ; `cargo check` Windows du dernier commit fonctionnel encore en cours au moment de ce handoff.**
+
+
+## Update 2026-09-26 — ordre Pandamonium / Cavaliers
+
+- Correction d'un verrou réel de prérequis : `Toute possession dépossède` ne peut pas être faite au bloc 25, car `Quand l'éveil n'est qu'un songe` n'est terminé qu'au bloc 29.
+- Paquet indivisible déplacé dans le bloc 29, immédiatement après la fin de `Quand l'éveil n'est qu'un songe` :
+  - `Toute possession dépossède`
+  - `Le chant du Pandamonium`
+  - `Le début de la fin`
+- Ce placement est volontairement avant `La danse de la dissonance`, qui dépend de `Le début de la fin`.
+- `Les sentiers de la guerre` reste au bloc 25 : ses prérequis amont (`Rêves translucides` et `Chachyène de vie`) sont déjà fermés à cet endroit.
+- `Les quatre volontés` reste immédiatement après `Les sentiers de la guerre`.
+- Ressources Pandamonium déplacées de l'entrée du bloc 25 vers l'entrée du bloc 29 ; total `Umeshushu` du bloc 29 porté à 7 pour couvrir les besoins cumulés.
+- `STEP_ID` conservés ; `moment-route-step-0714` attribué à `Les sentiers de la guerre` pour éviter un `MOMENT_ID` partagé entre deux blocs.
+- Source éditoriale `ROUTE` et `data/route.json` resynchronisés.
+- Commit de correction : `3f30ee0141ecc88a1cdd5795b2dc187dff81a40c`.
+- CI frontend du commit : `test:route`, `validate:route` et build au vert.
