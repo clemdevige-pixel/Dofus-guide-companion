@@ -150,6 +150,24 @@ test('contrat route — Meno mutualise Ivoire + Abyssal en un seul passage', () 
   ]);
 });
 
+test('contrat route — Dazak mutualise Ébène + Martegel en un seul passage', () => {
+  const dazakDungeons = route.steps.filter(
+    (step) => step.type === 'dungeon' && step.title.includes('Brasserie du Roi Dazak'),
+  );
+
+  assert.equal(dazakDungeons.length, 1, 'La Brasserie du Roi Dazak doit rester mutualisée en un seul passage.');
+  assert.equal(dazakDungeons[0]?.id, 'route-step-0874');
+  assert.match(dazakDungeons[0]?.title ?? '', /ÉBÈNE \+ MARTEGEL/);
+  assertOrderedSequence('contrat Dazak — Martegel attend la convergence Ébène', [
+    'route-step-0853',
+    'route-step-0873',
+    'route-step-0874',
+    'route-step-0875',
+    'route-step-0876',
+  ]);
+});
+
+
 test('contrat route — Frimar utilise le drop de Métal Éternel, jamais une capture', () => {
   const serialized = route.steps
     .map((step) => [step.title, step.instruction, step.warning, step.prerequisites].filter(Boolean).join(' '))
