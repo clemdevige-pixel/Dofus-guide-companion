@@ -133,14 +133,24 @@ assertOrderedSequence('contrat route — accès Martegel précède De Brikke et 
 ]);
 
 
-test('contrat route — Meno mutualisé Ivoire + Abyssal en un seul passage', () => {
+test('contrat route — Meno est fait une première fois pour Piège puis une seconde fois pour Une voix', () => {
   const menoDungeons = route.steps.filter(
     (step) => step.type === 'dungeon' && step.title.includes('Vaisseau du Capitaine Meno'),
   );
 
-  assert.equal(menoDungeons.length, 1, 'Le Vaisseau du Capitaine Meno ne doit apparaître qu’une seule fois.');
-  assert.equal(menoDungeons[0]?.id, 'route-step-0837');
-  assert.ok(requireOrder('route-step-0671') < requireOrder('route-step-0837'));
+  assert.equal(menoDungeons.length, 2, 'La chaîne impose deux passages Meno distincts.');
+  assert.deepEqual(
+    menoDungeons.map((step) => step.id),
+    ['route-step-1173', 'route-step-0837'],
+  );
+  assertOrderedSequence('contrat Meno — Piège → Son nom → Une voix', [
+    'route-step-0671',
+    'route-step-1173',
+    'route-step-1174',
+    'route-step-1175',
+    'route-step-0835',
+    'route-step-0837',
+  ]);
 });
 
 test('contrat route — Frimar utilise le drop de Métal Éternel, jamais une capture', () => {
