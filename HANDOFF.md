@@ -123,3 +123,16 @@ Lire dans l’ordre : `AGENTS.md`, `SPEC.md`, `ARCHITECTURE.md`, `docs/DATA_MODE
 - Source éditoriale `ROUTE` et `data/route.json` resynchronisés.
 - Commit de correction : `3f30ee0141ecc88a1cdd5795b2dc187dff81a40c`.
 - CI frontend du commit : `test:route`, `validate:route` et build au vert.
+
+
+## Update 2026-09-26 — audit prérequis blocs 24 à 32
+
+- Audit des prérequis imbriqués effectué sur les blocs 24 à 32, avec recoupement de la ROUTE, de Ganymède GP0 et des pages DPLN utiles.
+- Un second verrou critique a été trouvé dans le bloc 24 : la mutualisation Meno Ivoire + Abyssal en un seul passage était impossible.
+- Cause : `Une voix de crystal` exige `Son nom est Personne` lancée ou terminée avant le combat contre Meno, tandis que `Son nom est Personne` n'est disponible qu'après avoir terminé `Piège de crystal`, qui exige lui-même un premier Meno.
+- Correction : deux passages Meno explicites et linéaires :
+  1. `Piège de crystal` → Meno → terminer `Piège de crystal` → lancer/terminer `Son nom est Personne`.
+  2. Plus tard dans Nordalie : Nileza → Meno avec `Une voix de crystal` active → partitions → retour via Pichon → terminer `Une voix de crystal`.
+- Nouveaux STEP_ID : `route-step-1173`, `route-step-1174`, `route-step-1175`.
+- Aucun autre prérequis inversé identifié dans les blocs 24 à 32 après vérification des portes d'entrée, dépendances croisées et chaînes finales Dom de Pin / Qui nous protège / Flovoraison.
+- Commit route : `0c780dcc80d54c27680c0e5946ef506f10a3d624`.
