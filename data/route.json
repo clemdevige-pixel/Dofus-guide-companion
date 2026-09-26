@@ -18892,9 +18892,9 @@
       "displayRole": "detail",
       "title": "◆ Vaisseau du Capitaine Meno — IVOIRE + ABYSSAL",
       "prerequisites": "Une voix de crystal au checkpoint Meno ; chaîne Abyssal reprise depuis Piège de crystal jusqu'au checkpoint Meno (équivalent GP56 étapes 55→122).",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — parle au Capitaine Meno d'abord pour Une voix de crystal, puis pour Son nom est Personne. Ne quitte pas le vaisseau avant les deux dialogues.",
+      "warning": "⚠ AVANT DE SORTIR DU DONJON — Meno est le point de convergence Ivoire + Abyssal. Après le boss, parle au Capitaine Meno d'abord pour Une voix de crystal, puis pour Son nom est Personne. Ne quitte pas le vaisseau avant les deux dialogues.",
       "action": "REPRENDRE ABYSSAL / FAIRE",
-      "instruction": "Avant d'entrer, REPRENDS la chaîne Abyssal depuis Piège de crystal et avance-la jusqu'au checkpoint Meno, puis vaincs Meno une seule fois pour Ivoire + Abyssal.",
+      "instruction": "Avant d'entrer, vérifie que Une voix de crystal ET la chaîne Abyssal sont toutes les deux au checkpoint Meno. Vaincs Meno une seule fois pour les deux routes.",
       "momentId": "moment-nordalie-missions",
       "source": {
         "label": "GANYMÈDE GP0 2026 + DPLN",
@@ -18911,13 +18911,13 @@
       "title": "Une voix de crystal + Son nom est Personne — objectifs puis retour Pichon",
       "prerequisites": "Meno vaincu ; Une voix de crystal avancée auprès de Meno ; Son nom est Personne active.",
       "action": "REPRENDRE / TERMINER",
-      "instruction": "Fais Deks, Docteur Hou et Jelus Vern pour Son nom est Personne et récupère les 7 partitions d'Une voix de crystal. Une fois les objectifs réunis, utilise le Pichon kloune pour retourner auprès de Meno SANS refaire le donjon : termine l'étape de Son nom est Personne et remets les 7 partitions pour obtenir le Crystal de Kallishindri, puis rends Son nom est Personne à Prosper.",
+      "instruction": "Après le premier Meno, fais Deks, Docteur Hou et Jelus Vern pour Son nom est Personne ET récupère les 7 partitions d'Une voix de crystal. Quand les deux paquets d'objectifs sont prêts, retourne en [24,27] et parle au Pichon kloune UNE SEULE FOIS pour rejoindre Meno sans refaire le donjon : valide Son nom est Personne auprès de Meno et remets les 7 partitions pour obtenir le Crystal de Kallishindri, puis termine Son nom est Personne chez Prosper et Une voix de crystal chez Lachandi.",
       "source": {
         "label": "GANYMÈDE GP0 2026 + DPLN",
         "url": "https://ganymede-app.com/guides/2747"
       },
       "momentId": "moment-nordalie-missions",
-      "warning": "Fais les objectifs des deux quêtes avant le retour auprès de Meno ; le Pichon kloune permet d'y retourner sans refaire le donjon."
+      "warning": "⚠ RETOUR MENO — ne parle au Pichon kloune qu'après avoir terminé tous les objectifs extérieurs des deux quêtes : Deks + Docteur Hou + Jelus Vern pour Son nom est Personne ET les 7 partitions pour Une voix de crystal."
     },
     {
       "id": "route-step-0839",
@@ -20067,7 +20067,7 @@
       "displayRole": "objective",
       "title": "Le dragon noir — avancer jusqu'au Roi Dazak",
       "action": "LANCER / AVANCER / STOP",
-      "instruction": "En [-25,-52], LANCE Le dragon noir et AVANCE jusqu'à devoir rencontrer Dazak puis STOP devant la Brasserie.",
+      "instruction": "En [-25,-52], LANCE Le dragon noir et AVANCE jusqu'à devoir rencontrer Dazak puis STOP devant la Brasserie. N'entre que lorsque De Brikke et de Brokke est lui aussi au checkpoint Roi Dazak.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-dragon-noir.html"
@@ -20092,15 +20092,19 @@
       "blockId": "block-26",
       "type": "dungeon",
       "displayRole": "detail",
-      "title": "◆ Brasserie du Roi Dazak — LE DRAGON NOIR",
-      "prerequisites": "Le dragon noir + De Brikke et de Brokke au Roi Dazak.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après Dazak, parle-lui avant de quitter la zone.",
+      "title": "◆ Brasserie du Roi Dazak — ÉBÈNE + MARTEGEL",
+      "prerequisites": "Le dragon noir + De Brikke et de Brokke tous les deux au checkpoint Roi Dazak.",
+      "warning": "⚠ AVANT DE SORTIR DU DONJON — Dazak est le point de convergence Ébène + Martegel. Après le boss, fais les interactions de sortie requises pour les DEUX chaînes avant de quitter la Brasserie.",
       "action": "FAIRE",
-      "instruction": "Vaincs le Roi Dazak.",
+      "instruction": "Vaincs le Roi Dazak une seule fois pour Le dragon noir + De Brikke et de Brokke, puis termine les interactions de sortie des deux quêtes avant de quitter le donjon.",
       "momentId": "moment-ebene-dazak",
       "parallelGroup": {
         "parallelId": "parallel-dazak",
         "phase": "finish"
+      },
+      "source": {
+        "label": "GANYMÈDE GP0 2026 + DPLN",
+        "url": "https://ganymede-app.com/guides/2747"
       }
     },
     {
@@ -20130,12 +20134,13 @@
       "displayRole": "transition",
       "title": "De Brikke et de Brokke",
       "action": "TERMINER",
-      "instruction": "→ Après La bible des rancunes, termine De Brikke et de Brokke.",
+      "instruction": "Après avoir sécurisé les interactions des DEUX chaînes à la sortie de Dazak puis terminé La bible des rancunes, TERMINE De Brikke et de Brokke.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/de-brikke-et-de-brokke.html"
       },
-      "momentId": "moment-ebene-dazak"
+      "momentId": "moment-ebene-dazak",
+      "prerequisites": "Interactions de sortie Dazak effectuées pour Le dragon noir + De Brikke et de Brokke ; La bible des rancunes terminée."
     },
     {
       "id": "route-step-0877",
