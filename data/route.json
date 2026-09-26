@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "routeVersion": "2026-09-25",
+  "routeVersion": "2026-09-26",
   "title": "Astrub → Dofus Sylvestre",
   "blocks": [
     {
@@ -126,7 +126,7 @@
     {
       "id": "block-25",
       "order": 25,
-      "title": "Pandamonium, Cavaliers & Externam"
+      "title": "Cavaliers & Externam"
     },
     {
       "id": "block-26",
@@ -146,7 +146,7 @@
     {
       "id": "block-29",
       "order": 29,
-      "title": "Cauchemar & Aurore Pourpre"
+      "title": "Pandamonium, Cauchemar & Aurore Pourpre"
     },
     {
       "id": "block-30",
@@ -19061,35 +19061,11 @@
       "blockId": "block-25",
       "type": "preparation",
       "displayType": "ENTRÉE",
-      "title": "Entrée — Pandamonium, Cavaliers & Externam",
+      "title": "Entrée — Cavaliers & Externam",
       "warning": "Prépare ces ressources avant d'ouvrir les branches Guerre et Servitude pour pouvoir les enchaîner sans détour d'achat.",
       "action": "PRÉPARER / COMMENCER",
       "instruction": "Prépare les éléments globaux de ce bloc avant de commencer. Les besoins propres à une quête plus tardive sont rappelés directement sur l’étape concernée.",
       "preparationItems": [
-        {
-          "kind": "resource",
-          "quantity": 6,
-          "name": "Vodkawa"
-        },
-        {
-          "kind": "resource",
-          "quantity": 6,
-          "name": "Umeshushu"
-        },
-        {
-          "kind": "resource",
-          "quantity": 6,
-          "name": "Shaké à haute fermentation OU 6 Artefacts Pandawushu de chaque élément"
-        },
-        {
-          "kind": "resource",
-          "quantity": 1,
-          "name": "Clef du Ventre de la Baleine"
-        },
-        {
-          "kind": "kamas",
-          "text": "1 Saucisson de Porkania OU 2 000 kamas"
-        },
         {
           "kind": "resource",
           "quantity": 1,
@@ -19411,86 +19387,33 @@
       }
     },
     {
-      "id": "route-step-0711",
+      "id": "route-step-0714",
       "order": 828,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
-      "title": "Toute possession dépossède",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/toute-possession-depossede.html"
-      },
-      "momentId": "moment-route-step-0711",
-      "location": {
-        "x": 21,
-        "y": -33
-      }
-    },
-    {
-      "id": "route-step-0712",
-      "order": 829,
-      "blockId": "block-25",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Le chant du Pandamonium",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/le-chant-du-pandamonium.html"
-      },
-      "momentId": "moment-route-step-0711",
-      "location": {
-        "x": 39,
-        "y": -53
-      }
-    },
-    {
-      "id": "route-step-0713",
-      "order": 830,
-      "blockId": "block-25",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Le début de la fin",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/le-debut-de-la-fin.html"
-      },
-      "momentId": "moment-route-step-0711",
-      "location": {
-        "x": 21,
-        "y": -33
-      }
-    },
-    {
-      "id": "route-step-0714",
-      "order": 831,
-      "blockId": "block-25",
-      "type": "quest",
-      "displayRole": "objective",
       "title": "Les sentiers de la guerre",
-      "prerequisites": "ouvrir les trois zones draconiques.",
-      "action": "TERMINER",
+      "prerequisites": "Rêves translucides terminée ; Chachyène de vie terminée pour l'étape Kanigroula.",
+      "action": "LANCER / TERMINER",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-sentiers-de-la-guerre.html"
       },
-      "momentId": "moment-route-step-0711",
+      "momentId": "moment-route-step-0714",
       "location": {
         "x": -13,
         "y": -22
-      }
+      },
+      "instruction": "En [-13,-22], LANCE puis TERMINE Les sentiers de la guerre."
     },
     {
       "id": "route-step-0717",
-      "order": 832,
+      "order": 829,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
       "title": "Les quatre volontés",
-      "prerequisites": "Dofus Argenté sécurise les étapes bloquantes.",
+      "prerequisites": "Les sentiers de la guerre terminée.",
       "action": "LANCER / STOP",
       "instruction": "LANCE Les quatre volontés. Termine les quatre branches Cavaliers puis STOP avant L'avis de la Mort.",
       "source": {
@@ -19505,7 +19428,7 @@
     },
     {
       "id": "route-step-0718",
-      "order": 833,
+      "order": 830,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19529,7 +19452,7 @@
     },
     {
       "id": "route-step-0719",
-      "order": 834,
+      "order": 831,
       "blockId": "block-25",
       "type": "dungeon",
       "displayRole": "detail",
@@ -19542,7 +19465,7 @@
     },
     {
       "id": "route-step-0720",
-      "order": 835,
+      "order": 832,
       "blockId": "block-25",
       "type": "resume",
       "displayRole": "transition",
@@ -19557,7 +19480,7 @@
     },
     {
       "id": "route-step-0721",
-      "order": 836,
+      "order": 833,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19575,7 +19498,7 @@
     },
     {
       "id": "route-step-0722",
-      "order": 837,
+      "order": 834,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19594,7 +19517,7 @@
     },
     {
       "id": "route-step-0723",
-      "order": 838,
+      "order": 835,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19618,7 +19541,7 @@
     },
     {
       "id": "route-step-0724",
-      "order": 839,
+      "order": 836,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19641,7 +19564,7 @@
     },
     {
       "id": "route-step-0725",
-      "order": 840,
+      "order": 837,
       "blockId": "block-25",
       "type": "dungeon",
       "displayRole": "detail",
@@ -19653,7 +19576,7 @@
     },
     {
       "id": "route-step-0726",
-      "order": 841,
+      "order": 838,
       "blockId": "block-25",
       "type": "resume",
       "displayRole": "transition",
@@ -19669,7 +19592,7 @@
     },
     {
       "id": "route-step-0727",
-      "order": 842,
+      "order": 839,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19689,7 +19612,7 @@
     },
     {
       "id": "route-step-0728",
-      "order": 843,
+      "order": 840,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19707,7 +19630,7 @@
     },
     {
       "id": "route-step-0729",
-      "order": 844,
+      "order": 841,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19725,7 +19648,7 @@
     },
     {
       "id": "route-step-0730",
-      "order": 845,
+      "order": 842,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19749,7 +19672,7 @@
     },
     {
       "id": "route-step-0731",
-      "order": 846,
+      "order": 843,
       "blockId": "block-25",
       "type": "dungeon",
       "displayRole": "detail",
@@ -19762,7 +19685,7 @@
     },
     {
       "id": "route-step-0732",
-      "order": 847,
+      "order": 844,
       "blockId": "block-25",
       "type": "resume",
       "displayRole": "transition",
@@ -19778,7 +19701,7 @@
     },
     {
       "id": "route-step-0733",
-      "order": 848,
+      "order": 845,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19794,7 +19717,7 @@
     },
     {
       "id": "route-step-0734",
-      "order": 849,
+      "order": 846,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19811,7 +19734,7 @@
     },
     {
       "id": "route-step-0735",
-      "order": 850,
+      "order": 847,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19835,7 +19758,7 @@
     },
     {
       "id": "route-step-0736",
-      "order": 851,
+      "order": 848,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19859,7 +19782,7 @@
     },
     {
       "id": "route-step-0737",
-      "order": 852,
+      "order": 849,
       "blockId": "block-25",
       "type": "dungeon",
       "displayRole": "detail",
@@ -19872,7 +19795,7 @@
     },
     {
       "id": "route-step-0738",
-      "order": 853,
+      "order": 850,
       "blockId": "block-25",
       "type": "dungeon",
       "displayRole": "objective",
@@ -19885,7 +19808,7 @@
     },
     {
       "id": "route-step-1204",
-      "order": 854,
+      "order": 851,
       "blockId": "block-25",
       "type": "dungeon",
       "displayRole": "objective",
@@ -19898,7 +19821,7 @@
     },
     {
       "id": "route-step-0741",
-      "order": 855,
+      "order": 852,
       "blockId": "block-25",
       "type": "resume",
       "displayRole": "transition",
@@ -19914,7 +19837,7 @@
     },
     {
       "id": "route-step-0742",
-      "order": 856,
+      "order": 853,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19938,7 +19861,7 @@
     },
     {
       "id": "route-step-0743",
-      "order": 857,
+      "order": 854,
       "blockId": "block-25",
       "type": "dungeon",
       "displayRole": "detail",
@@ -19951,7 +19874,7 @@
     },
     {
       "id": "route-step-0744",
-      "order": 858,
+      "order": 855,
       "blockId": "block-25",
       "type": "resume",
       "displayRole": "transition",
@@ -19966,7 +19889,7 @@
     },
     {
       "id": "route-step-0745",
-      "order": 859,
+      "order": 856,
       "blockId": "block-25",
       "type": "resume",
       "displayRole": "objective",
@@ -19983,7 +19906,7 @@
     },
     {
       "id": "block-entry-26",
-      "order": 860,
+      "order": 857,
       "blockId": "block-26",
       "type": "preparation",
       "displayType": "ENTRÉE",
@@ -19993,7 +19916,7 @@
     },
     {
       "id": "route-step-0865",
-      "order": 861,
+      "order": 858,
       "blockId": "block-26",
       "type": "major_step",
       "dofusSeries": "Dofus Ébène",
@@ -20004,7 +19927,7 @@
     },
     {
       "id": "route-step-0866",
-      "order": 862,
+      "order": 859,
       "blockId": "block-26",
       "type": "quest",
       "dofusSeries": "Dofus Ébène",
@@ -20029,7 +19952,7 @@
     },
     {
       "id": "route-step-0867",
-      "order": 863,
+      "order": 860,
       "blockId": "block-26",
       "type": "dungeon",
       "displayRole": "detail",
@@ -20041,7 +19964,7 @@
     },
     {
       "id": "route-step-0868",
-      "order": 864,
+      "order": 861,
       "blockId": "block-26",
       "type": "resume",
       "dofusSeries": "Dofus Ébène",
@@ -20057,7 +19980,7 @@
     },
     {
       "id": "route-step-0869",
-      "order": 865,
+      "order": 862,
       "blockId": "block-26",
       "type": "quest",
       "dofusSeries": "Dofus Ébène",
@@ -20082,7 +20005,7 @@
     },
     {
       "id": "route-step-0870",
-      "order": 866,
+      "order": 863,
       "blockId": "block-26",
       "type": "dungeon",
       "displayRole": "detail",
@@ -20094,7 +20017,7 @@
     },
     {
       "id": "route-step-0871",
-      "order": 867,
+      "order": 864,
       "blockId": "block-26",
       "type": "resume",
       "dofusSeries": "Dofus Ébène",
@@ -20110,7 +20033,7 @@
     },
     {
       "id": "route-step-0872",
-      "order": 868,
+      "order": 865,
       "blockId": "block-26",
       "type": "quest",
       "dofusSeries": "Dofus Ébène",
@@ -20130,7 +20053,7 @@
     },
     {
       "id": "route-step-0873",
-      "order": 869,
+      "order": 866,
       "blockId": "block-26",
       "type": "quest",
       "dofusSeries": "Dofus Ébène",
@@ -20158,7 +20081,7 @@
     },
     {
       "id": "route-step-0874",
-      "order": 870,
+      "order": 867,
       "blockId": "block-26",
       "type": "dungeon",
       "displayRole": "detail",
@@ -20175,7 +20098,7 @@
     },
     {
       "id": "route-step-0875",
-      "order": 871,
+      "order": 868,
       "blockId": "block-26",
       "type": "quest",
       "displayRole": "objective",
@@ -20194,7 +20117,7 @@
     },
     {
       "id": "route-step-0876",
-      "order": 872,
+      "order": 869,
       "blockId": "block-26",
       "type": "resume",
       "displayRole": "transition",
@@ -20209,7 +20132,7 @@
     },
     {
       "id": "route-step-0877",
-      "order": 873,
+      "order": 870,
       "blockId": "block-26",
       "type": "resume",
       "dofusSeries": "Dofus Ébène",
@@ -20226,7 +20149,7 @@
     },
     {
       "id": "route-step-0878",
-      "order": 874,
+      "order": 871,
       "blockId": "block-26",
       "type": "dungeon",
       "displayRole": "detail",
@@ -20239,7 +20162,7 @@
     },
     {
       "id": "route-step-0879",
-      "order": 875,
+      "order": 872,
       "blockId": "block-26",
       "type": "resume",
       "dofusSeries": "Dofus Ébène",
@@ -20255,7 +20178,7 @@
     },
     {
       "id": "route-step-0880",
-      "order": 876,
+      "order": 873,
       "blockId": "block-26",
       "type": "quest",
       "dofusSeries": "Dofus Ébène",
@@ -20275,7 +20198,7 @@
     },
     {
       "id": "route-step-0881",
-      "order": 877,
+      "order": 874,
       "blockId": "block-26",
       "type": "quest",
       "dofusSeries": "Dofus Ébène",
@@ -20300,7 +20223,7 @@
     },
     {
       "id": "route-step-0882",
-      "order": 878,
+      "order": 875,
       "blockId": "block-26",
       "type": "dungeon",
       "displayRole": "detail",
@@ -20313,7 +20236,7 @@
     },
     {
       "id": "route-step-0883",
-      "order": 879,
+      "order": 876,
       "blockId": "block-26",
       "type": "resume",
       "dofusSeries": "Dofus Ébène",
@@ -20329,7 +20252,7 @@
     },
     {
       "id": "route-step-0884",
-      "order": 880,
+      "order": 877,
       "blockId": "block-26",
       "type": "quest",
       "dofusSeries": "Dofus Ébène",
@@ -20354,7 +20277,7 @@
     },
     {
       "id": "route-step-0885",
-      "order": 881,
+      "order": 878,
       "blockId": "block-26",
       "type": "dungeon",
       "displayRole": "objective",
@@ -20367,7 +20290,7 @@
     },
     {
       "id": "route-step-0886",
-      "order": 882,
+      "order": 879,
       "blockId": "block-26",
       "type": "resume",
       "dofusSeries": "Dofus Ébène",
@@ -20384,7 +20307,7 @@
     },
     {
       "id": "block-entry-27",
-      "order": 883,
+      "order": 880,
       "blockId": "block-27",
       "type": "preparation",
       "displayType": "ENTRÉE",
@@ -20433,7 +20356,7 @@
     },
     {
       "id": "route-step-0918",
-      "order": 884,
+      "order": 881,
       "blockId": "block-27",
       "type": "quest",
       "displayRole": "objective",
@@ -20458,7 +20381,7 @@
     },
     {
       "id": "route-step-0919",
-      "order": 885,
+      "order": 882,
       "blockId": "block-27",
       "type": "quest",
       "dofusSeries": "Dofus Argenté Scintillant",
@@ -20479,7 +20402,7 @@
     },
     {
       "id": "route-step-0920",
-      "order": 886,
+      "order": 883,
       "blockId": "block-27",
       "type": "resume",
       "displayRole": "transition",
@@ -20493,7 +20416,7 @@
     },
     {
       "id": "route-step-0921",
-      "order": 887,
+      "order": 884,
       "blockId": "block-27",
       "type": "quest",
       "displayRole": "objective",
@@ -20512,7 +20435,7 @@
     },
     {
       "id": "route-step-0923",
-      "order": 888,
+      "order": 885,
       "blockId": "block-27",
       "type": "quest",
       "displayRole": "objective",
@@ -20536,7 +20459,7 @@
     },
     {
       "id": "route-step-0924",
-      "order": 889,
+      "order": 886,
       "blockId": "block-27",
       "type": "dungeon",
       "displayRole": "objective",
@@ -20548,7 +20471,7 @@
     },
     {
       "id": "route-step-0925",
-      "order": 890,
+      "order": 887,
       "blockId": "block-27",
       "type": "resume",
       "displayRole": "transition",
@@ -20564,7 +20487,7 @@
     },
     {
       "id": "route-step-0926",
-      "order": 891,
+      "order": 888,
       "blockId": "block-27",
       "type": "dungeon",
       "displayRole": "objective",
@@ -20577,7 +20500,7 @@
     },
     {
       "id": "route-step-0927",
-      "order": 892,
+      "order": 889,
       "blockId": "block-27",
       "type": "resume",
       "displayRole": "transition",
@@ -20592,7 +20515,7 @@
     },
     {
       "id": "route-step-0928",
-      "order": 893,
+      "order": 890,
       "blockId": "block-27",
       "type": "quest",
       "displayRole": "objective",
@@ -20616,7 +20539,7 @@
     },
     {
       "id": "route-step-0929",
-      "order": 894,
+      "order": 891,
       "blockId": "block-27",
       "type": "quest",
       "displayRole": "transition",
@@ -20632,7 +20555,7 @@
     },
     {
       "id": "route-step-0930",
-      "order": 895,
+      "order": 892,
       "blockId": "block-27",
       "type": "dungeon",
       "displayRole": "objective",
@@ -20644,7 +20567,7 @@
     },
     {
       "id": "route-step-0931",
-      "order": 896,
+      "order": 893,
       "blockId": "block-27",
       "type": "resume",
       "displayRole": "objective",
@@ -20659,7 +20582,7 @@
     },
     {
       "id": "block-entry-28",
-      "order": 897,
+      "order": 894,
       "blockId": "block-28",
       "type": "preparation",
       "displayType": "ENTRÉE",
@@ -20795,7 +20718,7 @@
     },
     {
       "id": "route-step-0693",
-      "order": 898,
+      "order": 895,
       "blockId": "block-28",
       "type": "quest",
       "dofusSeries": "Dofus Tacheté",
@@ -20820,7 +20743,7 @@
     },
     {
       "id": "route-step-0694",
-      "order": 899,
+      "order": 896,
       "blockId": "block-28",
       "type": "quest",
       "displayRole": "objective",
@@ -20844,7 +20767,7 @@
     },
     {
       "id": "route-step-0695",
-      "order": 900,
+      "order": 897,
       "blockId": "block-28",
       "type": "quest",
       "displayRole": "objective",
@@ -20864,7 +20787,7 @@
     },
     {
       "id": "route-step-0696",
-      "order": 901,
+      "order": 898,
       "blockId": "block-28",
       "type": "resume",
       "dofusSeries": "Dofus Tacheté",
@@ -20880,7 +20803,7 @@
     },
     {
       "id": "route-step-0697",
-      "order": 902,
+      "order": 899,
       "blockId": "block-28",
       "type": "quest",
       "dofusSeries": "Dofus Tacheté",
@@ -20905,7 +20828,7 @@
     },
     {
       "id": "route-step-0698",
-      "order": 903,
+      "order": 900,
       "blockId": "block-28",
       "type": "dungeon",
       "displayRole": "detail",
@@ -20922,7 +20845,7 @@
     },
     {
       "id": "route-step-0699",
-      "order": 904,
+      "order": 901,
       "blockId": "block-28",
       "type": "resume",
       "dofusSeries": "Dofus Tacheté",
@@ -20939,7 +20862,7 @@
     },
     {
       "id": "route-step-0700",
-      "order": 905,
+      "order": 902,
       "blockId": "block-28",
       "type": "dungeon",
       "displayRole": "objective",
@@ -20956,7 +20879,7 @@
     },
     {
       "id": "route-step-0701",
-      "order": 906,
+      "order": 903,
       "blockId": "block-28",
       "type": "resume",
       "dofusSeries": "Dofus Tacheté",
@@ -20973,7 +20896,7 @@
     },
     {
       "id": "route-step-0702",
-      "order": 907,
+      "order": 904,
       "blockId": "block-28",
       "type": "resume",
       "dofusSeries": "Dofus Tacheté",
@@ -20989,7 +20912,7 @@
     },
     {
       "id": "route-step-0703",
-      "order": 908,
+      "order": 905,
       "blockId": "block-28",
       "type": "quest",
       "dofusSeries": "Dofus Tacheté",
@@ -21014,14 +20937,38 @@
     },
     {
       "id": "block-entry-29",
-      "order": 909,
+      "order": 906,
       "blockId": "block-29",
       "type": "preparation",
       "displayType": "ENTRÉE",
-      "title": "Entrée — Cauchemar & Aurore Pourpre",
+      "title": "Entrée — Pandamonium, Cauchemar & Aurore Pourpre",
       "action": "PRÉPARER / COMMENCER",
       "instruction": "Prépare les éléments globaux de ce bloc avant de commencer. Les besoins propres à une quête plus tardive sont rappelés directement sur l’étape concernée.",
       "preparationItems": [
+        {
+          "kind": "resource",
+          "quantity": 6,
+          "name": "Vodkawa"
+        },
+        {
+          "kind": "resource",
+          "quantity": 7,
+          "name": "Umeshushu"
+        },
+        {
+          "kind": "resource",
+          "quantity": 6,
+          "name": "Shaké à haute fermentation OU 6 Artefacts Pandawushu de chaque élément"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Clef du Ventre de la Baleine"
+        },
+        {
+          "kind": "kamas",
+          "text": "1 Saucisson de Porkania OU 2 000 kamas"
+        },
         {
           "kind": "kamas",
           "text": "Jusqu'à 120 000 kamas — Le poids de son regard, uniquement si tu ne réunis pas 12 classes"
@@ -21098,11 +21045,6 @@
         {
           "kind": "resource",
           "quantity": 1,
-          "name": "Umeshushu"
-        },
-        {
-          "kind": "resource",
-          "quantity": 1,
           "name": "Carré de Chocolat au Lait"
         },
         {
@@ -21127,7 +21069,7 @@
     },
     {
       "id": "route-step-0705",
-      "order": 910,
+      "order": 907,
       "blockId": "block-29",
       "type": "quest",
       "displayRole": "objective",
@@ -21147,7 +21089,7 @@
     },
     {
       "id": "route-step-0706",
-      "order": 911,
+      "order": 908,
       "blockId": "block-29",
       "type": "quest",
       "displayRole": "objective",
@@ -21166,7 +21108,7 @@
     },
     {
       "id": "route-step-0707",
-      "order": 912,
+      "order": 909,
       "blockId": "block-29",
       "type": "quest",
       "displayRole": "objective",
@@ -21185,7 +21127,7 @@
     },
     {
       "id": "route-step-0708",
-      "order": 913,
+      "order": 910,
       "blockId": "block-29",
       "type": "quest",
       "displayRole": "objective",
@@ -21204,7 +21146,7 @@
     },
     {
       "id": "route-step-0709",
-      "order": 914,
+      "order": 911,
       "blockId": "block-29",
       "type": "resume",
       "displayRole": "transition",
@@ -21216,6 +21158,66 @@
         "url": "https://www.dofuspourlesnoobs.com/quand-l-eveil-n-est-qu-un-songe.html"
       },
       "momentId": "moment-route-step-0705"
+    },
+    {
+      "id": "route-step-0711",
+      "order": 912,
+      "blockId": "block-29",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Toute possession dépossède",
+      "action": "LANCER / TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/toute-possession-depossede.html"
+      },
+      "momentId": "moment-route-step-0711",
+      "location": {
+        "x": 21,
+        "y": -33
+      },
+      "prerequisites": "Quand l'éveil n'est qu'un songe terminée.",
+      "instruction": "En [21,-33], LANCE puis TERMINE Toute possession dépossède."
+    },
+    {
+      "id": "route-step-0712",
+      "order": 913,
+      "blockId": "block-29",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Le chant du Pandamonium",
+      "action": "LANCER / TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/le-chant-du-pandamonium.html"
+      },
+      "momentId": "moment-route-step-0711",
+      "location": {
+        "x": 39,
+        "y": -53
+      },
+      "prerequisites": "Toute possession dépossède terminée.",
+      "instruction": "En [39,-53], LANCE puis TERMINE Le chant du Pandamonium."
+    },
+    {
+      "id": "route-step-0713",
+      "order": 914,
+      "blockId": "block-29",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Le début de la fin",
+      "action": "LANCER / TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/le-debut-de-la-fin.html"
+      },
+      "momentId": "moment-route-step-0711",
+      "location": {
+        "x": 21,
+        "y": -33
+      },
+      "prerequisites": "Le chant du Pandamonium terminé.",
+      "instruction": "En [21,-33], LANCE puis TERMINE Le début de la fin."
     },
     {
       "id": "route-step-0796",
