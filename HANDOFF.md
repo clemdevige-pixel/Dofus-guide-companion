@@ -153,3 +153,24 @@ Lire dans l’ordre : `AGENTS.md`, `SPEC.md`, `ARCHITECTURE.md`, `docs/DATA_MODE
 - Le contrat de test protège désormais explicitement cette mutualisation à un seul passage.
 - Commit route : `62a00062e52d20a3ddb34c483a8399614cf22d10`.
 - Commit test : `7f3bbd7b5ae79b813cf8e99b65864de003086fe3`.
+
+## Update 2026-09-27 — trous de route + wording Tougli généralisé
+
+- Audit Tougli recroisé avec les prérequis réels : le Dofus des Veilleurs n'est pas requis pour le Sylvestre et n'a pas été ajouté.
+- Ajout de `L'accusé de la réception` avant `Les monstres aboient, la diligence casse`, qui en dépend directement.
+- Ajout volontaire de `La dernière barbe avant la fin du monde` après `Frappez, ami, et entrez`, avant `De Brikke et de Brokke`.
+- Nouveaux STEP_ID stables :
+  - `route-step-accuse-reception`
+  - `route-step-derniere-barbe`
+- Le moment Martegel `moment-route-step-0849` reste à 5 OBJECTIVE maximum.
+- Wording généralisé sur toute la route : 405 instructions runtime reformulées vers un style plus naturel de type « avance X jusqu'à Y, fais Z, puis reprends X », sans modifier l'ordre métier, les STEP_ID, les MOMENT_ID, les groupes parallèles ni les goals.
+- Deux drapeaux techniques `LANCEMENT_REQUIS` déjà incohérents ont été remis à TRUE sur `Association de fureteurs` et `La complote des P.O.M.S.` afin de rétablir la compatibilité avec l'exporteur ; aucune logique runtime changée.
+- Source éditoriale `ROUTE` et `data/route.json` synchronisés : **975 étapes / 32 blocs**.
+- Tests de contrat ajoutés pour protéger :
+  - `L'accusé de la réception → Les monstres aboient, la diligence casse` ;
+  - `Frappez, ami, et entrez → La dernière barbe avant la fin du monde → De Brikke et de Brokke`.
+- Commit route : `9abc462fb6cb75b9d4190bc0ea6dd38b44951dcb`.
+- Commit tests : `25684d7dba65f1587b13b48c2cf8ce98f9315cf4`.
+- CI frontend du commit tests : `test:route`, `validate:route` et build **verts**.
+- `cargo check` Windows : encore en cours au moment de cette mise à jour.
+
