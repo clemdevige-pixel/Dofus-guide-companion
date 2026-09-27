@@ -16447,11 +16447,11 @@
       "order": 690,
       "blockId": "block-19",
       "type": "quest",
-      "displayRole": "transition",
+      "displayRole": "objective",
       "title": "La source de tous les maux",
-      "prerequisites": "250 Pousses de Plante Hygrade + 250 Graine de la Discorde.",
-      "action": "TERMINER",
-      "instruction": "Termine La source de tous les maux.",
+      "prerequisites": "Veilleur sous surveillance terminé.",
+      "action": "LANCER / TERMINER",
+      "instruction": "Après Veilleur sous surveillance, retourne en [2,1], lance La source de tous les maux auprès d’Entropix puis termine la quête.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-source-de-tous-les-maux.html"
