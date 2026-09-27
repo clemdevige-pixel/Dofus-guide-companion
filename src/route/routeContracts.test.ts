@@ -127,6 +127,21 @@ assertOrderedSequence('contrat route — Tour du Monde suit Ougah → Merkator �
   'route-step-audit-tour-joue-finish',
 ]);
 
+test('contrat route — La source de tous les maux reste un objectif visible après Veilleur', () => {
+  const ids = ['route-step-0681', 'route-step-0682', 'route-step-0683', 'route-step-0684', 'route-step-0685'] as const;
+  const steps = ids.map((id) => route.steps.find((step) => step.id === id));
+
+  for (const step of steps) {
+    assert.ok(step, `${step?.id ?? 'étape'} absente de la route`);
+    assert.equal(step?.momentId, 'moment-eliocalypse-reel-b');
+    assert.equal(step?.displayRole, 'objective');
+  }
+
+  const source = route.steps.find((step) => step.id === 'route-step-0685');
+  assert.equal(source?.prerequisites, 'Veilleur sous surveillance terminé.');
+  assert.equal(source?.action, 'LANCER / TERMINER');
+});
+
 assertOrderedSequence('contrat route — L\'accusé de la réception débloque la diligence', [
   'route-step-accuse-reception',
   'route-step-0531',
