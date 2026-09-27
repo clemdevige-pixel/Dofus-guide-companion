@@ -127,8 +127,14 @@ assertOrderedSequence('contrat route — Tour du Monde suit Ougah → Merkator �
   'route-step-audit-tour-joue-finish',
 ]);
 
-assertOrderedSequence('contrat route — accès Martegel précède De Brikke et de Brokke', [
+assertOrderedSequence('contrat route — L\'accusé de la réception débloque la diligence', [
+  'route-step-accuse-reception',
+  'route-step-0531',
+]);
+
+assertOrderedSequence('contrat route — ouverture Martegel inclut La dernière barbe avant De Brikke', [
   'route-step-0848',
+  'route-step-derniere-barbe',
   'route-step-0849',
 ]);
 
