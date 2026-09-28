@@ -172,6 +172,36 @@ test('contrat éditorial — une instruction ne répète pas seulement action, t
   }
 });
 
+test('contrat UX — les flow notes restent ciblées sur les moments complexes', () => {
+  const flowNotes = route.steps.filter((step) => step.flowNote);
+  assert.ok(flowNotes.length >= 50, `Au moins 50 flow notes sont attendues, reçu : ${flowNotes.length}.`);
+
+  for (const step of flowNotes) {
+    if (!step.momentId) continue;
+    const firstMomentStep = route.steps.find((candidate) => candidate.momentId === step.momentId);
+    assert.equal(
+      firstMomentStep?.id,
+      step.id,
+      `${step.id}: une flow note doit être portée par le premier step du moment.`,
+    );
+  }
+
+  const expected = new Map([
+    ['route-step-1100', /quêtes des PNJ/i],
+    ['route-step-0857', /Skeunk.*Fraktale/i],
+    ['route-step-0838', /un seul retour au Pichon/i],
+    ['route-step-0693', /Main dans la main.*branches/i],
+    ['route-step-0938', /Rune d’Harmonie.*totems de Maïmane/i],
+    ['route-step-0994', /Flovoraison.*Protecteur/i],
+  ]);
+
+  for (const [stepId, pattern] of expected) {
+    const step = route.steps.find((candidate) => candidate.id === stepId);
+    assert.ok(step?.flowNote, `${stepId}: flow note manquante.`);
+    assert.match(step.flowNote ?? '', pattern);
+  }
+});
+
 test('contrat route — La source de tous les maux reste un objectif visible après Veilleur', () => {
   const ids = ['route-step-0681', 'route-step-0682', 'route-step-0683', 'route-step-0684', 'route-step-0685'] as const;
   const steps = ids.map((id) => route.steps.find((step) => step.id === id));
