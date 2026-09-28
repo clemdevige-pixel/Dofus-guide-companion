@@ -93,6 +93,8 @@ Priorité :
 
 `warning` ne doit contenir que des informations joueur utiles, jamais des commentaires de routing.
 
+`flowNote` porte le contexte macro joueur d’une carte complexe : checkpoint, reprise prévue, branches à fermer ou convergence. Il est édité dans `FLOW_NOTE` et n’est jamais déduit depuis le titre ou l’instruction.
+
 `GUIDE_ITEMS` reste structuré en donnée. Décision UX V1 : ne pas l’afficher automatiquement dans les séquences `MOMENT_ID` uniquement pour recopier DPLN.
 
 Le message métier d’un hard lock reste visible même dans une séquence.
@@ -148,7 +150,7 @@ Le rappel UI n’apparaît que sur les cartes qui appartiennent réellement au g
 
 `scripts/export-route.ts` est le seul point de transformation Sheet → runtime.
 
-Plage actuelle : `ROUTE!A5:W`.
+Plage actuelle : `ROUTE!A5:X`.
 
 La colonne `DOFUS_SERIES` alimente `RouteStep.dofusSeries`.
 
