@@ -166,7 +166,6 @@ export function App() {
   const currentStep = currentGroup
     ? currentGroup.steps.find((step) => !completedStepIds.has(step.id)) ?? currentGroup.steps[0]
     : undefined;
-  const currentFlowNote = currentGroup?.steps.find((step) => step.flowNote)?.flowNote;
   const sequenceObjectives = useMemo(
     () => (currentGroup?.isSequence ? getSequenceObjectives(currentGroup.steps) : []),
     [currentGroup],
@@ -674,13 +673,6 @@ export function App() {
                 : `${sequenceObjectives.length} objectifs à enchaîner`}
             </p>
 
-            {currentFlowNote && (
-              <div className="flow-note">
-                <span aria-hidden="true">↪</span>
-                <p>{currentFlowNote}</p>
-              </div>
-            )}
-
             <ol className="sequence-list">
               {sequenceObjectives.map((objective) => {
                 const displayStep = getObjectiveDisplayStep(objective.steps);
@@ -825,7 +817,7 @@ export function App() {
                               <span className="sequence-item__note">{step.launchInstruction}</span>
                             )}
                             {step.instruction && (
-                              <span className={currentFlowNote ? 'sequence-item__note sequence-item__note--flow' : 'sequence-item__note'}>
+                              <span className="sequence-item__note">
                                 {step.instruction}
                               </span>
                             )}
@@ -871,13 +863,6 @@ export function App() {
               <p className={`action-label action-label--${getActionTone(currentStep.action)}`}>
                 {currentStep.action}
               </p>
-            )}
-
-            {currentFlowNote && (
-              <div className="flow-note">
-                <span aria-hidden="true">↪</span>
-                <p>{currentFlowNote}</p>
-              </div>
             )}
 
             {guideGroups.length > 0 && (
@@ -938,16 +923,7 @@ export function App() {
               </div>
             )}
 
-            {currentStep.instruction && (
-              currentFlowNote ? (
-                <div className="flow-note flow-note--detail">
-                  <span aria-hidden="true">•</span>
-                  <p>{currentStep.instruction}</p>
-                </div>
-              ) : (
-                <p className="instruction">{currentStep.instruction}</p>
-              )
-            )}
+            {currentStep.instruction && <p className="instruction">{currentStep.instruction}</p>}
 
             {currentStep.type === 'preparation' && currentStep.preparationItems && (
               <PreparationChecklist
