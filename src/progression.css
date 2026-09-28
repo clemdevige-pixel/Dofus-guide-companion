@@ -80,7 +80,7 @@
 
 .progression-dashboard {
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-rows: auto auto minmax(0, 1fr);
   gap: 8px;
   height: 100%;
   min-height: 0;
@@ -106,6 +106,118 @@
   color: #93a396;
   font-size: 11px;
   text-align: right;
+}
+
+.block-roadmap {
+  display: grid;
+  gap: 6px;
+  min-height: 0;
+  padding: 8px;
+  border: 1px solid #334139;
+  border-radius: 8px;
+  background: #111913;
+}
+
+.block-roadmap__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.block-roadmap__header strong {
+  min-width: 0;
+  overflow: hidden;
+  color: #eef4ef;
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.block-roadmap__header span {
+  flex: 0 0 auto;
+  color: #b9e7c1;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.block-roadmap__cards {
+  display: grid;
+  gap: 4px;
+  max-height: 190px;
+  overflow-y: auto;
+  padding-right: 3px;
+  scrollbar-gutter: stable;
+}
+
+.block-roadmap__card {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 6px;
+  align-items: center;
+  width: 100%;
+  padding: 5px 6px;
+  border: 1px solid #2b3830;
+  border-radius: 7px;
+  background: #0f1511;
+  color: #dce7de;
+  cursor: pointer;
+  text-align: left;
+}
+
+.block-roadmap__card:hover,
+.block-roadmap__card:focus-visible {
+  border-color: #476451;
+  background: #152019;
+}
+
+.block-roadmap__card--current {
+  border-color: #6a8f74;
+  background: #18251c;
+}
+
+.block-roadmap__card--completed {
+  opacity: 0.52;
+}
+
+.block-roadmap__status {
+  display: grid;
+  width: 22px;
+  height: 22px;
+  place-items: center;
+  border-radius: 999px;
+  background: #1a251d;
+  color: #9fb4a4;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.block-roadmap__card--current .block-roadmap__status {
+  background: #25462f;
+  color: #c8efcf;
+}
+
+.block-roadmap__content {
+  display: grid;
+  min-width: 0;
+  gap: 1px;
+}
+
+.block-roadmap__content small {
+  color: #839187;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.block-roadmap__content strong {
+  overflow: hidden;
+  color: #dce7de;
+  font-size: 10px;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .progression-blocks {
