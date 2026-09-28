@@ -355,7 +355,7 @@
       "displayRole": "objective",
       "title": "Le village dans les nuages",
       "action": "LANCER / STOP",
-      "instruction": "Parle à Lykhen Lesurviven.",
+      "instruction": "Parle à Lykhen Lesurviven. Garde Le village dans les nuages actif et prends les quêtes des PNJ rencontrés pendant la tournée Incarnam.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-village-dans-les-nuages.html"
@@ -368,8 +368,7 @@
       "destination": {
         "x": -2,
         "y": -3
-      },
-      "flowNote": "Garde Le village dans les nuages actif et prends les quêtes des PNJ rencontrés pendant la tournée Incarnam."
+      }
     },
     {
       "id": "route-step-1101",
@@ -2000,7 +1999,7 @@
       "title": "Donjon en mousse",
       "prerequisites": "Niveau > 19.",
       "action": "LANCER / STOP",
-      "instruction": "Parle à Emma Tompouce.",
+      "instruction": "Garde Donjon en mousse active jusqu’à sa reprise plus tard.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/donjon-en-mousse.html"
@@ -2012,8 +2011,7 @@
       "destination": {
         "x": 1,
         "y": -15
-      },
-      "flowNote": "Reprise prévue plus tard : garde Donjon en mousse active."
+      }
     },
     {
       "id": "route-step-0045",
@@ -2765,7 +2763,6 @@
       "dofusSeries": "Dofus Argenté",
       "title": "Déjeuner à la fourchette",
       "prerequisites": "Combat de rue actif.",
-      "warning": "Ne termine pas immédiatement : le parcours donjons bas niveau s'enchaîne avant le rendu.",
       "action": "LANCER / STOP",
       "source": {
         "label": "DPLN",
@@ -2779,7 +2776,7 @@
         "x": 5,
         "y": -22
       },
-      "flowNote": "Reprise prévue plus tard : garde Déjeuner à la fourchette active."
+      "instruction": "Lance Déjeuner à la fourchette et garde-la active jusqu’au rendu prévu après le parcours des donjons bas niveau."
     },
     {
       "id": "route-step-0042",
@@ -2968,9 +2965,8 @@
       "type": "quest",
       "dofusSeries": "Dofus Argenté",
       "title": "Qui sème le vent récolte l'Art'empeth",
-      "warning": "Ouvre cette branche à l'Atelier des Paysans avant de poursuivre vers Bûcherons.",
       "action": "LANCER / STOP",
-      "instruction": "Entre dans l’Atelier des Paysans, puis parle à Mawy et Emia Elliesol.",
+      "instruction": "Entre dans l’Atelier des Paysans, puis parle à Mawy et Emia Elliesol. Garde Qui sème le vent récolte l'Art'empeth active jusqu’à sa reprise.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/qui-seme-le-vent-recolte-l-artempeth.html"
@@ -2982,8 +2978,7 @@
       "destination": {
         "x": 7,
         "y": -24
-      },
-      "flowNote": "Reprise prévue plus tard : garde Qui sème le vent récolte l'Art'empeth active."
+      }
     },
     {
       "id": "route-step-1124",
@@ -2992,7 +2987,6 @@
       "type": "quest",
       "dofusSeries": "Dofus Argenté",
       "title": "Bûcherons en détresse",
-      "warning": "Ouvre cette branche maintenant ; son rendu n'arrive qu'au dernier retour en forêt.",
       "action": "LANCER / STOP",
       "source": {
         "label": "DPLN",
@@ -3006,7 +3000,7 @@
         "x": 0,
         "y": -25
       },
-      "flowNote": "Reprise prévue plus tard : garde Bûcherons en détresse active."
+      "instruction": "Lance Bûcherons en détresse et garde-la active jusqu’au dernier retour en forêt."
     },
     {
       "id": "route-step-1142",
@@ -3032,7 +3026,7 @@
       "dofusSeries": "Dofus Argenté",
       "title": "La coupe des vices",
       "action": "LANCER / STOP",
-      "instruction": "Parle à Jeffrey Baratourte.",
+      "instruction": "Parle à Jeffrey Baratourte et garde La coupe des vices active jusqu’à sa reprise.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-coupe-des-vices.html"
@@ -3044,8 +3038,7 @@
       "destination": {
         "x": 2,
         "y": -31
-      },
-      "flowNote": "Reprise prévue plus tard : garde La coupe des vices active."
+      }
     },
     {
       "id": "route-step-1125",
@@ -3067,7 +3060,7 @@
         "x": 1,
         "y": -29
       },
-      "flowNote": "Reprise prévue plus tard : garde Le génie se meut active."
+      "instruction": "Garde Le génie se meut active jusqu’à sa reprise plus tard."
     },
     {
       "id": "route-step-1143",
@@ -3162,12 +3155,11 @@
       "title": "Restauration rapide — TAINÉLA 3/3",
       "prerequisites": "Bouftou Royal vaincu ; Restauration rapide active.",
       "action": "AVANCER",
-      "instruction": "Parle à Mage Ax puis à Nibé Lulle, puis prépare le Vermifuge.",
+      "instruction": "Parle à Mage Ax puis à Nibé Lulle, prépare le Vermifuge et arrête-toi : ne rends pas Restauration rapide, elle sera terminée plus tard à la bibliothèque.",
       "destination": {
         "x": 3,
         "y": -21
-      },
-      "flowNote": "Avance Restauration rapide jusqu’à Mage Ax. Ne rends pas la quête : elle sera terminée plus tard à la bibliothèque."
+      }
     },
     {
       "id": "block-entry-03",
@@ -3520,7 +3512,7 @@
         "x": 5,
         "y": -17
       },
-      "flowNote": "Reprise prévue plus tard : garde Les as de la cambriole active."
+      "instruction": "Garde Les as de la cambriole active jusqu’à sa reprise plus tard."
     },
     {
       "id": "route-step-1152",
@@ -5127,13 +5119,12 @@
       "displayRole": "objective",
       "title": "Le maître des clefs — Chafer Rōnin",
       "action": "REPRENDRE / STOP",
-      "instruction": "Ne fais pas encore le donjon : lance d’abord Ned le dentiste.",
+      "instruction": "Reprends Le maître des clefs et prends l’objectif Chafer Rōnin. Ne fais pas encore le donjon : lance d’abord Ned le dentiste. Garde ensuite la chaîne active jusqu’au prochain donjon demandé.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-maitre-des-clefs.html"
       },
-      "momentId": "moment-route-step-0132",
-      "flowNote": "Reprends Le maître des clefs et prends l’objectif Chafer Rōnin. Garde ensuite la chaîne active jusqu’au prochain donjon demandé."
+      "momentId": "moment-route-step-0132"
     },
     {
       "id": "route-step-0133",
@@ -6063,7 +6054,7 @@
           "note": "STOP — Les Pitons seront faits plus tard avec La fureur du Holbaïd."
         }
       ],
-      "flowNote": "Reprends la chaîne Pat Akess au Craqueleur Légendaire, puis garde-la active jusqu’à sa prochaine validation."
+      "instruction": "Reprends la chaîne Pat Akess au Craqueleur Légendaire, puis garde-la active jusqu’à sa prochaine validation."
     },
     {
       "id": "route-step-0105",
@@ -6089,9 +6080,8 @@
       "type": "quest",
       "displayRole": "objective",
       "title": "Après lui, le déluge — jusqu'à la Grotte Hesque",
-      "warning": "Ne fais pas Hesque avant d'avoir aussi Donjon magistral actif.",
       "action": "LANCER / AVANCER / STOP",
-      "instruction": "Parle à Otomaï.",
+      "instruction": "Parle à Otomaï, avance Après lui, le déluge jusqu’à la Grotte Hesque puis garde-la active. Ne fais pas Hesque avant d’avoir aussi Donjon magistral actif.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/apres-lui-le-deluge.html"
@@ -6104,8 +6094,7 @@
       "destination": {
         "x": -55,
         "y": 15
-      },
-      "flowNote": "Reprise prévue plus tard : garde Après lui, le déluge active."
+      }
     },
     {
       "id": "route-step-0160",
@@ -6345,7 +6334,7 @@
         "x": -32,
         "y": -57
       },
-      "flowNote": "Reprise prévue plus tard : garde Le Tabi d'Amayiro active."
+      "instruction": "Garde Le Tabi d'Amayiro active jusqu’à sa reprise plus tard."
     },
     {
       "id": "route-step-0179",
@@ -7980,7 +7969,7 @@
       "title": "Munster lève le mystère — jusqu'au Domaine Ancestral",
       "prerequisites": "6 × Glande d'Arak-haï.",
       "action": "LANCER / AVANCER / STOP",
-      "instruction": "À PRÉVOIR ICI — Munster lève le mystère\n• 6 Glandes d'Arak-haï\nNote : À préparer juste avant Munster lève le mystère pour éviter un farm/détour au lancement de la quête.",
+      "instruction": "Garde Munster lève le mystère active jusqu’à sa reprise.\n\nÀ PRÉVOIR ICI — Munster lève le mystère\n• 6 Glandes d'Arak-haï\nNote : À préparer juste avant Munster lève le mystère pour éviter un farm/détour au lancement de la quête.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/munster-legraveve-le-mystegravere.html"
@@ -7996,8 +7985,7 @@
       "destination": {
         "x": -6,
         "y": -10
-      },
-      "flowNote": "Reprise prévue plus tard : garde Munster lève le mystère active."
+      }
     },
     {
       "id": "route-step-0288",
@@ -8016,7 +8004,7 @@
         "x": 24,
         "y": -35
       },
-      "flowNote": "Reprise prévue plus tard : garde Pas de fumée sans feu active."
+      "instruction": "Garde Pas de fumée sans feu active jusqu’à sa reprise plus tard."
     },
     {
       "id": "route-step-0290",
@@ -8119,7 +8107,7 @@
         "parallelId": "parallel-domaine-ancestral",
         "phase": "progress"
       },
-      "flowNote": "Reprends Un juge hystérique auprès de Chris de Naire et avance jusqu’au Domaine Ancestral. Les autres quêtes mutualisées doivent déjà y attendre."
+      "instruction": "Reprends Un juge hystérique auprès de Chris de Naire et avance jusqu’au Domaine Ancestral. Les autres quêtes mutualisées doivent déjà y attendre."
     },
     {
       "id": "route-step-0295",
@@ -8507,7 +8495,7 @@
         "x": -6,
         "y": -3
       },
-      "flowNote": "Reprise prévue plus tard : garde Plongeon et dragon active."
+      "instruction": "Garde Plongeon et dragon active jusqu’à sa reprise plus tard."
     },
     {
       "id": "route-step-0300",
@@ -8867,7 +8855,7 @@
         "x": -26,
         "y": -5
       },
-      "flowNote": "Avance Allumer le feu jusqu’au Meulou. Fais Draconanthropie dans cette séquence, puis poursuis Allumer le feu jusqu’à sa validation."
+      "instruction": "Avance Allumer le feu jusqu’au Meulou. Fais Draconanthropie dans cette séquence, puis poursuis Allumer le feu jusqu’à sa validation."
     },
     {
       "id": "route-step-0317",
@@ -9266,7 +9254,7 @@
           "note": "Kal Vissi."
         }
       ],
-      "flowNote": "Reprends Des donjons, encore des donjons au Maître Corbac. Fais Le livre des Taures pendant ce passage, puis poursuis la chaîne Tour du Monde."
+      "instruction": "Reprends Des donjons, encore des donjons au Maître Corbac. Fais Le livre des Taures pendant ce passage, puis poursuis la chaîne Tour du Monde."
     },
     {
       "id": "route-step-0343",
@@ -9453,7 +9441,7 @@
         "x": 22,
         "y": -29
       },
-      "flowNote": "Avance Sous le bois de sa colère jusqu’à Damadrya. Fais Le Saule du Promeneur puis Rester planté là, puis poursuis Sous le bois de sa colère."
+      "instruction": "Avance Sous le bois de sa colère jusqu’à Damadrya. Fais Le Saule du Promeneur puis Rester planté là, puis poursuis Sous le bois de sa colère."
     },
     {
       "id": "route-step-0268",
@@ -9764,7 +9752,7 @@
       "displayRole": "objective",
       "title": "Taures et détours — avancer jusqu'au Minotoror",
       "action": "LANCER / AVANCER / STOP",
-      "instruction": "Ne fais pas le Labyrinthe avant Royalmouth #1.",
+      "instruction": "Garde Taures et détours active jusqu’à sa reprise plus tard. Ne fais pas le Labyrinthe avant Royalmouth #1.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/taures-et-deacutetours.html"
@@ -9777,8 +9765,7 @@
       "destination": {
         "x": -6,
         "y": -3
-      },
-      "flowNote": "Reprise prévue plus tard : garde Taures et détours active."
+      }
     },
     {
       "id": "route-step-0349",
@@ -10140,7 +10127,7 @@
       "title": "Le trésor de Totankama — avancer jusqu'à Mériana",
       "prerequisites": "quête prise auprès du Minotot.",
       "action": "AVANCER / STOP",
-      "instruction": "Les trois ressources du rituel et la tablette seront préparées avant la carte de fin.",
+      "instruction": "Avance Le trésor de Totankama jusqu’à Mériana. Termine Il faut battre le lait quand il est chaud, Regrets d’éternailes et L’anneau de Tot, puis garde Le trésor de Totankama actif jusqu’à sa carte de fin. Les trois ressources du rituel et la tablette seront préparées avant la carte de fin.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-treacutesor-de-totankama.html"
@@ -10148,8 +10135,7 @@
       "location": {
         "x": -39,
         "y": -11
-      },
-      "flowNote": "Avance Le trésor de Totankama jusqu’à Mériana. Termine Il faut battre le lait quand il est chaud, Regrets d’éternailes et L’anneau de Tot, puis garde Le trésor de Totankama actif jusqu’à sa carte de fin."
+      }
     },
     {
       "id": "route-step-0381",
@@ -10159,7 +10145,7 @@
       "displayRole": "objective",
       "title": "Comment perdre ses plumes — avancer jusqu'à la Haute Truche",
       "action": "LANCER / AVANCER / STOP",
-      "instruction": "Lance la quête auprès de Mériana.",
+      "instruction": "Lance Comment perdre ses plumes auprès de Mériana, avance jusqu’à la Haute Truche puis garde la quête active jusqu’à sa reprise.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/comment-perdre-ses-plumes.html"
@@ -10168,8 +10154,7 @@
       "location": {
         "x": -6,
         "y": -3
-      },
-      "flowNote": "Reprise prévue plus tard : garde Comment perdre ses plumes active."
+      }
     },
     {
       "id": "route-step-0382",
@@ -10267,12 +10252,11 @@
       "title": "Comment perdre ses plumes — reprendre jusqu'au Tofu Royal",
       "prerequisites": "Œuf Surprenant + Œuf Végétal obtenus.",
       "action": "REPRENDRE / AVANCER / STOP",
-      "instruction": "Des donjons, encore des donjons arrive au même boss juste après.",
+      "instruction": "Reprends Comment perdre ses plumes jusqu’au Tofu Royal et garde-la active. Des donjons, encore des donjons arrive au même boss juste après.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/comment-perdre-ses-plumes.html"
-      },
-      "flowNote": "Reprise prévue plus tard : garde Comment perdre ses plumes active."
+      }
     },
     {
       "id": "route-step-0389",
@@ -10283,7 +10267,7 @@
       "title": "Des donjons, encore des donjons — jusqu'au Tofu Royal",
       "prerequisites": "Minotoror vaincu.",
       "action": "REPRENDRE / STOP",
-      "instruction": "Auprès de Kal Vissi, prends l’objectif Tofu Royal.",
+      "instruction": "Reprends Des donjons, encore des donjons auprès de Kal Vissi, prends l’objectif Tofu Royal et garde Comment perdre ses plumes au même boss.",
       "momentId": "moment-route-step-0389",
       "guideItems": [
         {
@@ -10300,8 +10284,7 @@
           "label": "Tofulailler Royal",
           "note": "Avec Comment perdre ses plumes actif."
         }
-      ],
-      "flowNote": "Reprends Des donjons, encore des donjons au Tofu Royal. Comment perdre ses plumes doit déjà être au même boss."
+      ]
     },
     {
       "id": "route-step-0390",
@@ -10779,7 +10762,7 @@
       "prerequisites": "Pêche en eaux gelées toujours active avec son compteur de 50 Mansots.",
       "warning": "Les ressources de quête se dropent à 100 % sur les monstres du Lac gelé, notamment Mamansots et Mansobèses. Fais ces combats avant de compléter le reliquat des 50 Mansots de Pêche.",
       "action": "LANCER / AVANCER / STOP",
-      "instruction": "Profite du farm Mansot pour faire les drops de L’ombre et la glace.",
+      "instruction": "Avance L’ombre et la glace jusqu’au Mansot Royal en gardant Pêche en eaux gelées active. Profite du même passage pour Les joyeux de la couronne et Les chasseurs, puis termine les trois quêtes après le boss.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/lombre-et-la-glace.html"
@@ -10796,8 +10779,7 @@
       "destination": {
         "x": -60,
         "y": -57
-      },
-      "flowNote": "Avance L’ombre et la glace jusqu’au Mansot Royal en gardant Pêche en eaux gelées active. Profite du même passage pour Les joyeux de la couronne et Les chasseurs, puis termine les trois quêtes après le boss."
+      }
     },
     {
       "id": "route-step-0424",
@@ -11104,9 +11086,8 @@
       "type": "quest",
       "title": "Frigost, une île pas comme les autres — LANCER",
       "prerequisites": "L'essentiel est dans le lac gelé terminé.",
-      "warning": "Garde la quête active pendant Frigost II : certaines des 11 cartes demandées nécessitent les accès avancés de l'île.",
       "action": "LANCER / STOP",
-      "instruction": "Parle à Lucette Brifian ; les visites demandées se feront naturellement pendant Frigost I/II.",
+      "instruction": "Parle à Lucette Brifian et garde Frigost, une île pas comme les autres active pendant Frigost II ; les 11 cartes demandées se feront naturellement avec les accès avancés de l’île.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/frigost-une-icircle-pas-comme-les-autres.html"
@@ -11118,8 +11099,7 @@
       "destination": {
         "x": -77,
         "y": -42
-      },
-      "flowNote": "Reprise prévue plus tard : garde Frigost, une île pas comme les autres active."
+      }
     },
     {
       "id": "route-step-audit-dev-durable-start",
@@ -11197,9 +11177,8 @@
       "type": "quest",
       "title": "Le mal a dit — avancer jusqu'au Royalmouth",
       "prerequisites": "vaccin temporaire des Monologues du vaccin expiré depuis 1 semaine.",
-      "warning": "Le mal a dit ne peut pas être lancé tant que le vaccin temporaire est actif. Les autres quêtes bloquantes requises sont déjà terminées.",
       "action": "LANCER / AVANCER / STOP",
-      "instruction": "Si le vaccin temporaire est encore actif, attends sa fin avant de lancer Le mal a dit.\n\nÀ PRÉVOIR ICI — Le mal a dit\n• 1 Huile de Mamansot\n• 5 Poil de Smilomouth\n• 5 Cuir du Sanglacier\n• 1 Gland de l'Ecumouth\n• 10 Eau Calme\n• 5 Frigrowka\n• 5 Friswein\nNote : Prépare ces ressources avant la séquence Il préfère la mort en mer → Le mal a dit.",
+      "instruction": "Si le vaccin temporaire est encore actif, attends sa fin avant de lancer Le mal a dit, puis garde la quête active jusqu’à sa reprise.\n\nÀ PRÉVOIR ICI — Le mal a dit\n• 1 Huile de Mamansot\n• 5 Poil de Smilomouth\n• 5 Cuir du Sanglacier\n• 1 Gland de l'Ecumouth\n• 10 Eau Calme\n• 5 Frigrowka\n• 5 Friswein\nNote : Prépare ces ressources avant la séquence Il préfère la mort en mer → Le mal a dit.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-mal-a-dit.html"
@@ -11207,8 +11186,7 @@
       "location": {
         "x": -80,
         "y": -45
-      },
-      "flowNote": "Reprise prévue plus tard : garde Le mal a dit active."
+      }
     },
     {
       "id": "route-step-0439",
@@ -11353,7 +11331,7 @@
         "x": -6,
         "y": -3
       },
-      "flowNote": "Avance L’épée du rocher jusqu’au Skeunk et récupère la Poudre scintillante avant de sortir, puis poursuis la quête jusqu’à Fraktale."
+      "instruction": "Avance L’épée du rocher jusqu’au Skeunk et récupère la Poudre scintillante avant de sortir, puis poursuis la quête jusqu’à Fraktale."
     },
     {
       "id": "route-step-0858",
@@ -11424,9 +11402,8 @@
       "displayRole": "objective",
       "title": "Ne tirez pas sur le messager — jusqu'au Muldobus",
       "prerequisites": "Ailes en bois améliorées ; Bâton Volé ; Pince à Linge ; Perruque du Kimbo ; 100 unité de Bois ; Marteau de Boisaille.",
-      "warning": "La quête se lance avant À plus dans l'muldobus, mais son accès Nimotopia la bloque ensuite. Ne cherche pas à la terminer avant d'avoir ouvert le Muldobus.",
       "action": "LANCER / AVANCER / STOP",
-      "instruction": "Lance la quête auprès de Chalcas ; le passage vers Nimotopia se fait via Kerubim.",
+      "instruction": "Lance Ne tirez pas sur le messager auprès de Chalcas ; le passage vers Nimotopia se fait via Kerubim. Avance jusqu’au Muldobus, fais À plus dans l’muldobus, puis garde Ne tirez pas sur le messager active jusqu’à sa carte de fin.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/ne-tirez-pas-sur-le-messager.html"
@@ -11443,8 +11420,7 @@
       "longRunningGoal": {
         "goalId": "nimotopia-messager",
         "phase": "start"
-      },
-      "flowNote": "Avance Ne tirez pas sur le messager jusqu’au Muldobus, fais À plus dans l’muldobus, puis garde Ne tirez pas sur le messager active jusqu’à sa carte de fin."
+      }
     },
     {
       "id": "route-step-0654",
@@ -11590,7 +11566,7 @@
         "x": -6,
         "y": -3
       },
-      "flowNote": "Avance Le forgeur de légende jusqu’à Crocabulia. Fais le passage demandé, puis poursuis Le forgeur de légende dans cette même séquence."
+      "instruction": "Avance Le forgeur de légende jusqu’à Crocabulia. Fais le passage demandé, puis poursuis Le forgeur de légende dans cette même séquence."
     },
     {
       "id": "route-step-0405",
@@ -11692,9 +11668,8 @@
       "displayRole": "objective",
       "title": "La voie du guerrier — jusqu'au Repaire de Skeunk",
       "action": "REPRENDRE / STOP",
-      "instruction": "Auprès du Maître des clefs, prends l’objectif Skeunk.",
-      "momentId": "moment-route-step-0408",
-      "flowNote": "Reprends La voie du guerrier au Repaire de Skeunk, puis garde la chaîne active pour les donjons suivants."
+      "instruction": "Auprès du Maître des clefs, reprends La voie du guerrier et prends l’objectif Skeunk, puis garde la chaîne active pour les donjons suivants.",
+      "momentId": "moment-route-step-0408"
     },
     {
       "id": "route-step-0409",
@@ -12032,7 +12007,6 @@
       "dofusSeries": "Dofus Turquoise",
       "displayRole": "objective",
       "title": "La méchante sorcière de l'Est — avancer jusqu'à Viti",
-      "warning": "La quête exige la bénédiction de Viti avant de pouvoir se terminer.",
       "action": "LANCER / AVANCER / STOP",
       "source": {
         "label": "DPLN",
@@ -12047,7 +12021,7 @@
         "x": -6,
         "y": -3
       },
-      "flowNote": "Avance La méchante sorcière de l’Est jusqu’au Disciple de Viti et fais La bénédiction de Viti. Garde La méchante sorcière de l’Est active : elle sera terminée après cette branche."
+      "instruction": "Avance La méchante sorcière de l’Est jusqu’au Disciple de Viti et fais La bénédiction de Viti. Garde La méchante sorcière de l’Est active : elle sera terminée après cette branche."
     },
     {
       "id": "route-step-0361",
@@ -12137,7 +12111,7 @@
       "displayRole": "objective",
       "title": "Le festival de la lanterne — avancer jusqu’au Founoroshi",
       "action": "AVANCER / STOP",
-      "instruction": "Lance Le festival de la lanterne après La jetée des enfants perdus.",
+      "instruction": "Lance Le festival de la lanterne après La jetée des enfants perdus, avance jusqu’au Founoroshi, fais La bénédiction de Viti puis poursuis Le festival jusqu’à sa validation.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-festival-de-la-lanterne.html"
@@ -12146,8 +12120,7 @@
       "location": {
         "x": 22,
         "y": -29
-      },
-      "flowNote": "Avance Le festival de la lanterne jusqu’au Founoroshi, fais La bénédiction de Viti, puis poursuis Le festival de la lanterne jusqu’à sa validation."
+      }
     },
     {
       "id": "route-step-0454",
@@ -12429,7 +12402,7 @@
         "url": "https://www.dofuspourlesnoobs.com/pas-de-fumee-sans-feu.html"
       },
       "momentId": "moment-route-step-0500",
-      "flowNote": "Reprends Pas de fumée sans feu et avance jusqu’à débloquer Arrête-la si tu peux. Termine cette branche avant de poursuivre Pas de fumée sans feu."
+      "instruction": "Reprends Pas de fumée sans feu et avance jusqu’à débloquer Arrête-la si tu peux. Termine cette branche avant de poursuivre Pas de fumée sans feu."
     },
     {
       "id": "route-step-0501",
@@ -12519,7 +12492,7 @@
         "x": -6,
         "y": -3
       },
-      "flowNote": "Avance Autel du Nord jusqu’au Disciple de Thomahon et fais La bénédiction de Thomahon. Garde Autel du Nord actif : il sera terminé après cette branche."
+      "instruction": "Avance Autel du Nord jusqu’au Disciple de Thomahon et fais La bénédiction de Thomahon. Garde Autel du Nord actif : il sera terminé après cette branche."
     },
     {
       "id": "route-step-0470",
@@ -13018,9 +12991,8 @@
       "displayRole": "objective",
       "title": "La voie du guerrier — jusqu'au Minotot",
       "action": "REPRENDRE / STOP",
-      "instruction": "Utilise la sauvegarde du Minotoror si elle est encore disponible.",
-      "momentId": "moment-voie-guerrier-minotot",
-      "flowNote": "Reprends La voie du guerrier au Minotot et garde-la active pour la suite de la chaîne."
+      "instruction": "Reprends La voie du guerrier au Minotot et garde-la active pour la suite de la chaîne. Utilise la sauvegarde du Minotoror si elle est encore disponible.",
+      "momentId": "moment-voie-guerrier-minotot"
     },
     {
       "id": "route-step-0460",
@@ -13197,9 +13169,8 @@
       "displayRole": "objective",
       "title": "Lavomatique — LANCER",
       "prerequisites": "Fais dodo, t'auras du gâteau terminée ; accès aux Larmes d'Ouronigride débloqué.",
-      "warning": "Lavomatique se lance auprès de Lave Azza avant l'Hypogée de l'Obsidiantre.",
       "action": "LANCER / STOP",
-      "instruction": "Parle à Lave Azza.",
+      "instruction": "Parle à Lave Azza avant l’Hypogée de l’Obsidiantre pour lancer Lavomatique, puis garde la quête active jusqu’à sa reprise.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/lavomatique.html"
@@ -13212,8 +13183,7 @@
       "destination": {
         "x": -71,
         "y": -83
-      },
-      "flowNote": "Reprise prévue plus tard : garde Lavomatique active."
+      }
     },
     {
       "id": "route-step-0519",
@@ -13397,7 +13367,7 @@
         "x": -6,
         "y": -3
       },
-      "flowNote": "Avance Il était une foi dans l’Ouest jusqu’au Disciple de Foluk et fais La bénédiction de Foluk. Garde Il était une foi dans l’Ouest active : elle sera terminée après cette branche."
+      "instruction": "Avance Il était une foi dans l’Ouest jusqu’au Disciple de Foluk et fais La bénédiction de Foluk. Garde Il était une foi dans l’Ouest active : elle sera terminée après cette branche."
     },
     {
       "id": "route-step-0525",
@@ -14554,9 +14524,8 @@
       "displayRole": "objective",
       "title": "Dépôt de ravitaillement — avancer jusqu'au verrou Chaud du S.L.I.P.",
       "prerequisites": "Village Enseveli libéré ; parler à Lulu Cotte entre 8h00 et 20h00.",
-      "warning": "Dépôt impose ensuite Chaud du S.L.I.P. : ne pas essayer de terminer Dépôt avant.",
       "action": "AVANCER / STOP",
-      "instruction": "Le verrou se déclenche quand Lulu Cotte t’envoie dans l’Hypogée.",
+      "instruction": "Avance Dépôt de ravitaillement jusqu’au verrou Chaud du S.L.I.P. ; il se déclenche quand Lulu Cotte t’envoie dans l’Hypogée. Termine Chaud du S.L.I.P. et le passage Obsidiantre avant de poursuivre Dépôt de ravitaillement.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/deacutepocirct-de-ravitaillement.html"
@@ -14565,8 +14534,7 @@
       "location": {
         "x": -80,
         "y": -73
-      },
-      "flowNote": "Avance Dépôt de ravitaillement jusqu’au verrou Chaud du S.L.I.P. Termine Chaud du S.L.I.P. et le passage Obsidiantre avant de poursuivre Dépôt de ravitaillement."
+      }
     },
     {
       "id": "route-step-0561",
@@ -14741,7 +14709,6 @@
       "type": "quest",
       "title": "Quand les esprits s'échauffent — jusqu'à Demeure des Esprits",
       "prerequisites": "12 Épices + 12 Viande Saignante + 12 Riz.",
-      "warning": "STOP devant Koumiho : attends que Requiem pour un Yokai soit lui aussi au même donjon.",
       "action": "LANCER / AVANCER / STOP",
       "source": {
         "label": "DPLN",
@@ -14759,7 +14726,7 @@
         "x": -6,
         "y": 18
       },
-      "flowNote": "Reprise prévue plus tard : garde Quand les esprits s'échauffent active."
+      "instruction": "Avance Quand les esprits s'échauffent jusqu’à Koumiho puis garde la quête active. Arrête-toi devant la Demeure des Esprits jusqu’à ce que Requiem pour un Yokai soit au même checkpoint."
     },
     {
       "id": "route-step-0509",
@@ -14787,7 +14754,7 @@
         "x": 36,
         "y": -44
       },
-      "flowNote": "Avance Requiem pour un Yokai jusqu’à la Demeure des Esprits. Fais Jusqu’à leur dernier soupir dans le même passage, puis poursuis Requiem pour un Yokai jusqu’à sa fin."
+      "instruction": "Avance Requiem pour un Yokai jusqu’à la Demeure des Esprits. Fais Jusqu’à leur dernier soupir dans le même passage, puis poursuis Requiem pour un Yokai jusqu’à sa fin."
     },
     {
       "id": "route-step-0510",
@@ -15668,7 +15635,7 @@
       "title": "Au fion du trou",
       "prerequisites": "20 000 kamas.",
       "action": "LANCER / STOP",
-      "instruction": "Lance Au fion du trou après le Grolloum d’alignement.",
+      "instruction": "Lance Au fion du trou après le Grolloum d’alignement puis garde la quête active jusqu’à sa reprise.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/au-fion-du-trou.html"
@@ -15684,8 +15651,7 @@
       "destination": {
         "x": -77,
         "y": -42
-      },
-      "flowNote": "Reprise prévue plus tard : garde Au fion du trou active."
+      }
     },
     {
       "id": "route-step-0600",
@@ -15936,7 +15902,6 @@
       "displayRole": "objective",
       "title": "Nos amies les bêtes",
       "prerequisites": "ressources Nimotopia préparées.",
-      "warning": "Ne termine pas Nos amies les bêtes avant d'avoir ouvert Shyriiwook et À armes égales.",
       "action": "LANCER / FIL ROUGE",
       "source": {
         "label": "DPLN",
@@ -15955,7 +15920,7 @@
         "goalId": "nimotopia-parallele",
         "phase": "start"
       },
-      "flowNote": "Lance Nos amies les bêtes puis ouvre Shyriiwook et À armes égales. Fais les trois quêtes pendant la même boucle Nimotopia."
+      "instruction": "Lance Nos amies les bêtes puis ouvre Shyriiwook et À armes égales. Fais les trois quêtes pendant la même boucle Nimotopia."
     },
     {
       "id": "route-step-1165",
@@ -16062,7 +16027,7 @@
         "goalId": "nimotopia-il-a-fui",
         "phase": "start"
       },
-      "flowNote": "Lance Il a fui, il a tout compris et garde-la active pendant la boucle Nimotopia. La valse des manuels s’insère ensuite avant sa fin."
+      "instruction": "Lance Il a fui, il a tout compris et garde-la active pendant la boucle Nimotopia. La valse des manuels s’insère ensuite avant sa fin."
     },
     {
       "id": "route-step-0658",
@@ -16352,7 +16317,7 @@
         "x": 2,
         "y": 1
       },
-      "flowNote": "Avant tout donjon niveau 200, avance La mère des Dragoeufs jusqu’à l’objectif « Obtenir un Parangon de puissance ». Une fois ce checkpoint atteint, le drop du Parangon est actif sur les gardiens de donjon niveau 200."
+      "instruction": "Avant tout donjon niveau 200, avance La mère des Dragoeufs jusqu’à l’objectif « Obtenir un Parangon de puissance ». Une fois ce checkpoint atteint, le drop du Parangon est actif sur les gardiens de donjon niveau 200."
     },
     {
       "id": "route-step-0679",
@@ -16423,9 +16388,8 @@
       "displayRole": "objective",
       "title": "La mère des Dragoeufs AU PARANGON",
       "prerequisites": "niveau recommandé 200.",
-      "warning": "Ne poursuis pas la branche Vulbis après le drop du Parangon.",
       "action": "LANCER / AVANCER / STOP",
-      "instruction": "En [1,6], lance La mère des Dragoeufs auprès de Doc Emiette Borgne et fais toute la partie préliminaire.",
+      "instruction": "En [1,6], lance La mère des Dragoeufs auprès de Doc Emiette Borgne et fais toute la partie préliminaire. Avant tout donjon niveau 200, avance jusqu’à l’objectif « Obtenir un Parangon de puissance » : le drop du Parangon devient alors actif sur les gardiens de donjon niveau 200. Ne poursuis pas la branche Vulbis après le drop.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-mere-des-dragoeufs.html"
@@ -16780,7 +16744,7 @@
       "displayRole": "objective",
       "title": "Au-delà du mur — avancer jusqu'à Nileza",
       "action": "LANCER / AVANCER / STOP",
-      "instruction": "Clique la machine du Laboratoire de Nileza avant le combat.",
+      "instruction": "Avance Au-delà du mur jusqu’à Nileza. Clique la machine du Laboratoire avant le combat, fais Chaud et Froid dans le même passage puis poursuis Au-delà du mur.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/au-delagrave-du-mur.html"
@@ -16793,8 +16757,7 @@
       "destination": {
         "x": -61,
         "y": -81
-      },
-      "flowNote": "Avance Au-delà du mur jusqu’à Nileza. Fais Chaud et Froid dans le même passage, puis poursuis Au-delà du mur."
+      }
     },
     {
       "id": "route-step-0621",
@@ -17266,7 +17229,7 @@
       "displayRole": "objective",
       "title": "Le givre des révélations — jusqu'au Comte Harebourg",
       "action": "LANCER / AVANCER / STOP",
-      "instruction": "La machine à démonter le temps doit être terminée avant l’obtention finale du Dofus des Glaces.",
+      "instruction": "Avance Le givre des révélations jusqu’au Comte Harebourg avec Un comte de faits divers actif. Garde la quête active : elle sera terminée après le passage Comte. La machine à démonter le temps doit être terminée avant l’obtention finale du Dofus des Glaces.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-givre-des-revelations.html"
@@ -17279,8 +17242,7 @@
       "destination": {
         "x": -59,
         "y": -74
-      },
-      "flowNote": "Avance Le givre des révélations jusqu’au Comte Harebourg avec Un comte de faits divers actif. Garde la quête active : elle sera terminée après le passage Comte."
+      }
     },
     {
       "id": "route-step-audit-un-comte-start",
@@ -18601,7 +18563,7 @@
         "x": -55,
         "y": 15
       },
-      "flowNote": "Avance Un remède draconien jusqu’au Glourséleste puis ouvre les quatre quêtes des dragons. Termine les quatre branches avant de terminer Un remède draconien."
+      "instruction": "Avance Un remède draconien jusqu’au Glourséleste puis ouvre les quatre quêtes des dragons. Termine les quatre branches avant de terminer Un remède draconien."
     },
     {
       "id": "route-step-0907",
@@ -18861,7 +18823,7 @@
         "x": -9,
         "y": -22
       },
-      "flowNote": "Après Tal Kasha, avance Nordalie jusqu’aux quatre missions puis termine Le bonheur est dans le spray, Une voix de crystal, Le mort dans l’âme et Le guerrier noir. Nordalie sera terminée ensuite."
+      "instruction": "Après Tal Kasha, avance Nordalie jusqu’aux quatre missions puis termine Le bonheur est dans le spray, Une voix de crystal, Le mort dans l’âme et Le guerrier noir. Nordalie sera terminée ensuite."
     },
     {
       "id": "route-step-0831",
@@ -18898,7 +18860,7 @@
       "title": "Le guerrier noir — EN PREMIER parmi les quatre missions",
       "prerequisites": "Faire cette mission avant les trois autres pour limiter les agressions.",
       "action": "LANCER / TERMINER",
-      "instruction": "Termine Le guerrier noir en premier parmi les quatre missions Nordalie.",
+      "instruction": "Termine Le guerrier noir en premier parmi les quatre missions Nordalie. Prépare ensuite les deux paquets avant le retour à Meno ; un seul retour au Pichon validera les deux.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-guerrier-noir.html"
@@ -18911,8 +18873,7 @@
       "destination": {
         "x": -76,
         "y": -80
-      },
-      "flowNote": "Prépare les deux paquets avant le retour à Meno : les objectifs de Son nom est Personne et les 7 partitions d’Une voix de crystal. Un seul retour au Pichon valide les deux."
+      }
     },
     {
       "id": "route-step-0834",
@@ -19553,7 +19514,7 @@
         "x": -13,
         "y": -22
       },
-      "flowNote": "Lance Les quatre volontés puis termine les quatre branches Cavaliers. La quête sera terminée plus tard, juste avant L’avis de la Mort."
+      "instruction": "Lance Les quatre volontés puis termine les quatre branches Cavaliers. La quête sera terminée plus tard, juste avant L’avis de la Mort."
     },
     {
       "id": "route-step-0718",
@@ -19905,7 +19866,7 @@
         "x": 0,
         "y": 0
       },
-      "flowNote": "Avance Un pouvoir mérydique jusqu’au Kimbo. Fais ensuite le Chêne Mou puis le Grand Ougah avec l’idole Mérydique avant de terminer la quête."
+      "instruction": "Avance Un pouvoir mérydique jusqu’au Kimbo. Fais ensuite le Chêne Mou puis le Grand Ougah avec l’idole Mérydique avant de terminer la quête."
     },
     {
       "id": "route-step-0737",
@@ -20489,7 +20450,6 @@
       "displayRole": "objective",
       "title": "Dans la gueule du dragon — avancer jusqu'après Rathrosk",
       "prerequisites": "Quatre sur six + Blanc ivoire + Noir d'ébène + 6 Primordiaux + À la croisée des mondes.",
-      "warning": "STOP juste après avoir vaincu Rathrosk : Le silence est d'Aure devient disponible.",
       "action": "LANCER / AVANCER / STOP",
       "source": {
         "label": "DPLN",
@@ -20504,7 +20464,7 @@
         "x": -6,
         "y": -3
       },
-      "flowNote": "Avance Dans la gueule du dragon jusqu’après Rathrosk puis lance Prise de conscience. Termine les deux branches qu’elle ouvre avant de poursuivre ces deux fils."
+      "instruction": "Avance Dans la gueule du dragon jusqu’après Rathrosk et arrête-toi : Le silence est d’Aure devient disponible. Lance ensuite Prise de conscience, termine les deux branches qu’elle ouvre puis poursuis ces deux fils."
     },
     {
       "id": "route-step-0919",
@@ -20569,7 +20529,7 @@
       "title": "L'avis de la Mort — jusqu'à Ilyzaelle",
       "prerequisites": "5 kamas ; 1 faux code xélor : 42 ; 4 personnages pour les dalles.",
       "action": "LANCER / AVANCER / STOP",
-      "instruction": "À PRÉVOIR ICI — Convergence Ilyzaelle\n• 10 Cristal liquide\n• 10 Cristal pliable\n• 10 Chanvre\n• 10 Sauge\n• 1 Élixir des Trépasseurs\n• 1 Ardonite\n• 120 kamas\n• 10 Bières aigrisantes OU 5 000 kamas — Marteau-Aigri\n• Sort Flamiche\n• Alignement 85→99 au verrou Ilyzaelle\n• Deux souffles, une inspiration terminé\nNote : Un clan hétéroclite impose une attente réelle de 2 minutes.",
+      "instruction": "Avance L’avis de la Mort jusqu’à Ilyzaelle, traite les objectifs de cette séquence puis poursuis L’avis de la Mort jusqu’à sa validation.\n\nÀ PRÉVOIR ICI — Convergence Ilyzaelle\n• 10 Cristal liquide\n• 10 Cristal pliable\n• 10 Chanvre\n• 10 Sauge\n• 1 Élixir des Trépasseurs\n• 1 Ardonite\n• 120 kamas\n• 10 Bières aigrisantes OU 5 000 kamas — Marteau-Aigri\n• Sort Flamiche\n• Alignement 85→99 au verrou Ilyzaelle\n• Deux souffles, une inspiration terminé\nNote : Un clan hétéroclite impose une attente réelle de 2 minutes.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/lavis-de-la-mort.html"
@@ -20582,8 +20542,7 @@
       "destination": {
         "x": 3,
         "y": 1
-      },
-      "flowNote": "Avance L’avis de la Mort jusqu’à Ilyzaelle, traite les objectifs de cette séquence, puis poursuis L’avis de la Mort jusqu’à sa validation."
+      }
     },
     {
       "id": "route-step-0924",
@@ -20854,7 +20813,7 @@
       "title": "Main dans la main — jusqu'à la chope de bière en métal",
       "prerequisites": "Domakuro + Dorigami en inventaire.",
       "action": "LANCER / AVANCER / STOP",
-      "instruction": "Obtiens la chope de bière en métal.",
+      "instruction": "Obtiens la chope de bière en métal et avance Main dans la main jusqu’à débloquer la Taverne interdite, puis garde la quête active jusqu’après les branches suivantes.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/main-dans-la-main.html"
@@ -20867,8 +20826,7 @@
       "destination": {
         "x": 23,
         "y": -32
-      },
-      "flowNote": "Avance Main dans la main jusqu’à débloquer la Taverne interdite, puis garde la quête active. Elle sera terminée après les branches suivantes."
+      }
     },
     {
       "id": "route-step-0694",
@@ -20952,7 +20910,7 @@
         "x": 2,
         "y": 0
       },
-      "flowNote": "Avance Deux souffles, une inspiration jusqu’au Roi Imagami. Fais Souvenir d’Imagiro puis En ce jardin qui nous unit, puis poursuis Deux souffles, une inspiration jusqu’à sa validation."
+      "instruction": "Avance Deux souffles, une inspiration jusqu’au Roi Imagami. Fais Souvenir d’Imagiro puis En ce jardin qui nous unit, puis poursuis Deux souffles, une inspiration jusqu’à sa validation."
     },
     {
       "id": "route-step-0698",
@@ -21212,7 +21170,7 @@
         "x": 21,
         "y": -33
       },
-      "flowNote": "Lance Quand l’éveil n’est qu’un songe puis traite les objectifs de cette séquence avant de terminer la quête."
+      "instruction": "Lance Quand l’éveil n’est qu’un songe, traite les objectifs de cette séquence puis termine la quête."
     },
     {
       "id": "route-step-0706",
@@ -21820,7 +21778,7 @@
         "x": 21,
         "y": -33
       },
-      "flowNote": "Avance Un héritage tourmenté jusqu’à la Rune d’Harmonie, lance Les totems de Maïmane, puis garde les deux quêtes actives jusqu’à leur convergence."
+      "instruction": "Avance Un héritage tourmenté jusqu’à la Rune d’Harmonie, lance Les totems de Maïmane puis garde les deux quêtes actives jusqu’à leur convergence."
     },
     {
       "id": "route-step-0939",
@@ -21924,7 +21882,7 @@
         "x": 38,
         "y": -21
       },
-      "flowNote": "Avance S’armer contre le destin jusqu’au Vortex avec Les totems de Maïmane actifs. Garde la quête active : elle sera reprise sur la carte suivante vers le Comte Harebourg."
+      "instruction": "Avance S’armer contre le destin jusqu’au Vortex avec Les totems de Maïmane actifs. Garde la quête active : elle sera reprise sur la carte suivante vers le Comte Harebourg."
     },
     {
       "id": "route-step-0947",
@@ -22345,7 +22303,7 @@
       "title": "Qui nous protège du Protecteur ? — sigils hors donjons",
       "warning": "Maïmane donne son sigil au lancement. Respecte Ulgrude AVANT Hécate et fais Jiva avant le changement d'alignement prévu.",
       "action": "LANCER / FIL ROUGE / AVANCER",
-      "instruction": "Récupère les sigils hors donjons accessibles : Jiva, Silvosse, Ulgrude, Silouate, Rosal, Hécate, Pouchecot et Brumaire. Fais Ulgrude avant Hécate, puis arrête-toi avant les trois sigils de donjon.",
+      "instruction": "Récupère les sigils hors donjons accessibles : Jiva, Silvosse, Ulgrude, Silouate, Rosal, Hécate, Pouchecot et Brumaire. Fais Ulgrude avant Hécate puis arrête-toi avant les trois sigils de donjon. Garde Qui nous protège du Protecteur ? active : Flovoraison s’insérera avant sa conclusion.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/qui-nous-protege-du-protecteur.html"
@@ -22358,8 +22316,7 @@
       "longRunningGoal": {
         "goalId": "qui-nous-protege",
         "phase": "start"
-      },
-      "flowNote": "Garde Qui nous protège du Protecteur ? active : Flovoraison s’insérera avant sa conclusion, puis la route terminera le Protecteur."
+      }
     },
     {
       "id": "route-step-0967",
@@ -22550,7 +22507,7 @@
         "x": 7,
         "y": 1
       },
-      "flowNote": "Flovoraison et Qui nous protège du Protecteur ? convergent ici : termine la séquence Flovoraison, puis termine Qui nous protège du Protecteur ?."
+      "instruction": "Flovoraison et Qui nous protège du Protecteur ? convergent ici : termine la séquence Flovoraison, puis termine Qui nous protège du Protecteur ?."
     },
     {
       "id": "route-step-0995",
