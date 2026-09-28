@@ -5306,7 +5306,7 @@
       "title": "Les sbires du maître + Scarabosse Doré",
       "warning": "Ne tente pas la capture Ocre du Scarabosse ici : le sort Capture d'Âme n'est pas encore obtenu. La capture sera faite après le Kwakwa.",
       "action": "LANCER / FAIRE",
-      "instruction": "Lance Les sbires du maître auprès de Pat Akess puis fais le Donjon des Scarafeuilles pour vaincre le Scarabosse Doré. Ne le capture pas ici : Capture d'Âme sera obtenu plus tard au Kwakwa.",
+      "instruction": "Lance Les sbires du maître auprès de Pat Akess puis fais le Donjon des Scarafeuilles pour vaincre le Scarabosse Doré.",
       "momentId": "moment-route-step-0139",
       "location": {
         "x": 5,
@@ -6003,7 +6003,7 @@
       "title": "Association de fureteurs",
       "prerequisites": "Rakoopeur vaincu dans le Refuge Sylvestre avec Association de fureteurs au checkpoint.",
       "action": "TERMINER",
-      "instruction": "Après le boss, reparle à Rakoopeur et termine Association de fureteurs. Continue immédiatement le dialogue pour débloquer La complote des P.O.M.S.",
+      "instruction": "Après le boss, reparle à Rakoopeur et termine Association de fureteurs.",
       "momentId": "moment-valonia-rakoopeur-close",
       "location": {
         "x": 40,
@@ -6019,7 +6019,7 @@
       "title": "La complote des P.O.M.S.",
       "prerequisites": "Association de fureteurs terminée ; niveau recommandé 50.",
       "action": "LANCER / TERMINER",
-      "instruction": "Après avoir terminé Association de fureteurs, continue le dialogue avec Rakoopeur pour lancer La complote des P.O.M.S., puis termine la quête.",
+      "instruction": "Continue le dialogue avec Rakoopeur pour lancer La complote des P.O.M.S., puis termine la quête.",
       "momentId": "moment-valonia-rakoopeur-close",
       "location": {
         "x": 40,
@@ -10717,9 +10717,9 @@
       "displayRole": "objective",
       "title": "Pêche en eaux gelées — farm Mansot",
       "prerequisites": "ressources de Pêche en eaux gelées préparées.",
-      "warning": "La quête demande 50 Graisses de Mansot, obtenues automatiquement sur les Mansots tués. Garde ce farm ouvert jusqu'à La marche de l'impératrice pour profiter des mêmes combats.",
+      "warning": "Les 50 Graisses de Mansot tombent automatiquement sur les Mansots tués ; ne les préachète pas.",
       "action": "LANCER / STOP",
-      "instruction": "Lance Pêche en eaux gelées et commence le farm des 50 Mansots, mais garde la quête active. Enchaîne ensuite La marche de l'impératrice : ses combats Mamansot compteront aussi pour ce farm.\n\nÀ PRÉVOIR ICI — Pêche en eaux gelées\n• 35 Bois de Tremble\n• 30 Laine de Boufmouth\n• 15 Laine de Boufmouth légendaire\n• 1 Laine du Royalmouth\n• 5 Défense du Sanglacier\n• 5 Dent de Smilomouth\nNote : Bricole Girl doit être terminée avant l'étape atelier. Les 50 Graisses de Mansot sont obtenues après lancement pendant le farm Mansot : ne les traite pas comme une ressource à préacheter.",
+      "instruction": "Lance Pêche en eaux gelées et garde-la active, puis enchaîne La marche de l'impératrice afin de mutualiser les combats.\n\nÀ PRÉVOIR ICI — Pêche en eaux gelées\n• 35 Bois de Tremble\n• 30 Laine de Boufmouth\n• 15 Laine de Boufmouth légendaire\n• 1 Laine du Royalmouth\n• 5 Défense du Sanglacier\n• 5 Dent de Smilomouth\nNote : Bricole Girl doit être terminée avant l'étape atelier.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/pecircche-en-eaux-geleacutees.html"
@@ -11854,7 +11854,7 @@
       "prerequisites": "La voie du guerrier au checkpoint Founoroshi.",
       "warning": "Capture Founoroshi pour l'Ocre pendant ce passage.",
       "action": "FAIRE",
-      "instruction": "Vaincs et capture Founoroshi pour l'Ocre avec La voie du guerrier active. Ensuite retourne voir le Maître des clefs, valide Founoroshi et prends l'objectif Chêne Mou."
+      "instruction": "Vaincs Founoroshi avec La voie du guerrier active. Ensuite retourne voir le Maître des clefs, valide Founoroshi et prends l'objectif Chêne Mou."
     },
     {
       "id": "route-step-0353",
@@ -11993,7 +11993,6 @@
       "displayRole": "objective",
       "title": "L'Ombre et la proie",
       "prerequisites": "On dirait le Sud au passage chez Joris.",
-      "warning": "Garde L'Ombre et la proie active pendant la progression de On dirait le Sud ; elle sera reprise plus tard.",
       "action": "LANCER",
       "instruction": "Lance L'Ombre et la proie à ce passage puis garde-la active jusqu'à sa reprise plus tard.",
       "source": {
@@ -12532,7 +12531,6 @@
       "displayRole": "objective",
       "title": "La bénédiction de Thomahon",
       "prerequisites": "Autel du Nord au Disciple de Thomahon.",
-      "warning": "Boss requis : Sphincter Cell + Ben le Ripate + Kimbo + Obsidiantre.",
       "action": "LANCER / FIL ROUGE",
       "instruction": "Lance La bénédiction de Thomahon. Ne termine pas Autel du Nord : la bénédiction restera ouverte jusqu'à l'Obsidiantre.\n\nÀ PRÉVOIR ICI — Turquoise — Idoles de Thomahon\n• 200 × Pépite\n• 10 × Aile de Dragodinde\n• 10 × Poil de Rat d'Égoutant\n• 10 × Fleur de Gloutoblop\n• 10 × Peau de Don Dorgan\n• 10 × Moustache du Mufafah\n• 10 × Oreille de Rhinoféroce\n• 10 × Duvet de Truchon\n• 10 × Tronc de Kokoko\n• 10 × Casque Cassé du Chafer\n• 5 × Magnésite\n• 5 × Kouartz\n• 5 × Kriptonite\n• 5 × Ébonite\n• 5 × Lait de Tortue\n• 3 × Rotule du Disciple Zoth\n• 3 × Aile Atrophiée de Tofu Dodu\n• 1 × Feuille de Blop Multicolore Royal\n• 1 × Chaussette trouée de Dramak\n• 1 × Carniflore\n• 1 × Plume du Kwakwa\nNote : Après avoir lancé La bénédiction de Thomahon, fabrique les 4 idoles en [6,3] avant Sphincter Cell, Ben le Ripate, Kimbo et Obsidiantre.",
       "source": {
@@ -13411,7 +13409,6 @@
       "displayRole": "objective",
       "title": "La bénédiction de Foluk",
       "prerequisites": "1 000 kamas.",
-      "warning": "Boss requis : Phossile → Kanigroula → Korriandre.",
       "action": "LANCER / FIL ROUGE",
       "instruction": "Lance La bénédiction de Foluk et garde-la active pendant la préparation du passage Kanigroula.\n\nÀ PRÉVOIR ICI — Turquoise — Idoles de Foluk\n• 400 × Pépite\n• 10 × Poils de Smilomouth\n• 10 × Carpelle de Brouture\n• 10 × Croupion de Truchmuche\n• 10 × Calumet Zoth\n• 5 × Substrat de Fascine\n• 5 × Kriptonite\n• 5 × Substrat de Fourré\n• 3 × Corne de Dragoss Calcaire\n• 3 × Corne de Rhinoféroce\n• 3 × Échasse de Molette\n• 3 × Morpion de Truchideur\n• 3 × Arête géante du Shamansot\n• 1 × Groin de Dragon Cochon\n• 1 × Laine du Royalmouth\n• 1 × Pixel de Fraktale\nNote : Après avoir lancé La bénédiction de Foluk, fabrique les 3 idoles en [6,3] avant Phossile, Kanigroula et Korriandre.",
       "source": {
@@ -14495,9 +14492,9 @@
       "displayRole": "detail",
       "title": "◆ Temple du Grand Ougah — ORDRE 4",
       "prerequisites": "Apprentissage : Assassin Suprême + Tour de force au checkpoint Grand Ougah ; capture Ocre ; 4 personnages minimum pour franchir la salle 4.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — parle à Dike Tarak pour Assassin Suprême. Capture le Grand Ougah pour l'Ocre pendant ce passage.",
+      "warning": "⚠ AVANT DE SORTIR DU DONJON — parle à Dike Tarak pour Assassin Suprême.",
       "action": "FAIRE",
-      "instruction": "Vaincs et capture le Grand Ougah avec Assassin Suprême + Tour de force actifs, puis parle à Dike Tarak avant de quitter le Temple.",
+      "instruction": "Vaincs et capture le Grand Ougah pour l'Ocre avec Assassin Suprême + Tour de force actifs.",
       "momentId": "moment-order4-assassin"
     },
     {
@@ -14991,9 +14988,9 @@
       "displayRole": "objective",
       "title": "Les derniers d'entre nous — avancer jusqu'au Korriandre",
       "prerequisites": "Niveau 160+ ; composants de l'Essence de Sylvesprit préparés OU 1 Essence du Korriandre disponible.",
-      "warning": "Après avoir parlé à Sylvie Barbe devant le donjon, fabrique 1 Essence de Sylvesprit avec un Alchimiste 180+ si tu n'utilises pas directement 1 Essence du Korriandre. Ne rentre pas sans l'une des deux.",
+      "warning": "Ne rentre pas au Korriandre sans l'essence requise pour l'interaction post-boss.",
       "action": "AVANCER / STOP",
-      "instruction": "Avance jusqu'à l'entrée du Korriandre. Parle à Sylvie Barbe, fabrique l'Essence de Sylvesprit si nécessaire, puis arrête-toi avant d'entrer. Garde l'essence sur toi pour l'interaction post-boss.\n\nÀ PRÉVOIR ICI — Korriandre / Les derniers d'entre nous\n• Option A : 1 Essence du Korriandre\n• Option B : composants pour 1 Essence de Sylvesprit :\n  • 20 Eau Calme\n  • 4 Volve de Fistulor\n  • 4 Lamelle de Dramanite\n  • 4 Lamelle de Mérulette\n  • 4 Volve de Fongeur\n  • 4 Écorce d'Abrazif\n  • Alchimiste 180+\nNote : Prépare l'une des deux options avant d'entrer au Korriandre. L'Essence de Sylvesprit devient craftable après le dialogue prévu devant le boss.",
+      "instruction": "Avance jusqu'à l'entrée du Korriandre, parle à Sylvie Barbe puis arrête-toi avant d'entrer.\n\nÀ PRÉVOIR ICI — Korriandre / Les derniers d'entre nous\n• Option A : 1 Essence du Korriandre\n• Option B : composants pour 1 Essence de Sylvesprit :\n  • 20 Eau Calme\n  • 4 Volve de Fistulor\n  • 4 Lamelle de Dramanite\n  • 4 Lamelle de Mérulette\n  • 4 Volve de Fongeur\n  • 4 Écorce d'Abrazif\n  • Alchimiste 180+\nNote : L'Essence de Sylvesprit devient craftable après le dialogue prévu devant le boss.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-derniers-d-entre-nous.html"
@@ -15379,7 +15376,7 @@
       "title": "Le pic qui glace — avancer jusqu'au Glourséleste",
       "prerequisites": "accès Mont Torrideau.",
       "action": "LANCER / GARDER ACTIF",
-      "instruction": "Lance Le pic qui glace et garde-la active : Mission solution récupère le miel en salle 3 puis tu continues directement jusqu'au Glourséleste sans sortir.",
+      "instruction": "Lance Le pic qui glace et garde-la active jusqu'au Glourséleste.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-pic-qui-glace.html"
@@ -15427,7 +15424,7 @@
       "title": "◆ Antichambre des Gloursons",
       "prerequisites": "Le pic qui glace actif + Miel Liquide Mordoré de Mission solution récupéré en salle 3.",
       "action": "FAIRE",
-      "instruction": "Après avoir récupéré le Miel Liquide Mordoré en salle 3, continue sans sortir et vaincs le Glourséleste.",
+      "instruction": "Vaincs le Glourséleste.",
       "momentId": "moment-route-step-0589",
       "parallelGroup": {
         "parallelId": "parallel-glours",
@@ -16426,7 +16423,7 @@
       "displayRole": "objective",
       "title": "La mère des Dragoeufs AU PARANGON",
       "prerequisites": "niveau recommandé 200.",
-      "warning": "Avance uniquement jusqu'à l'objectif « Obtenir un Parangon de puissance ». Le Parangon pourra ensuite tomber naturellement sur les gardiens de donjon niveau 200. Ne poursuis pas la branche Vulbis après le drop.",
+      "warning": "Ne poursuis pas la branche Vulbis après le drop du Parangon.",
       "action": "LANCER / AVANCER / STOP",
       "instruction": "En [1,6], lance La mère des Dragoeufs auprès de Doc Emiette Borgne et fais toute la partie préliminaire.",
       "source": {
@@ -17292,7 +17289,7 @@
       "type": "quest",
       "dofusSeries": "Dofus des Glaces",
       "displayRole": "objective",
-      "title": "Un comte de faits divers — LANCER",
+      "title": "Un comte de faits divers",
       "prerequisites": "Il faut mettre un terme aux maîtres terminée.",
       "action": "LANCER / STOP",
       "instruction": "À la Tour de la Clepsydre en [-59,-88], parle à Dorléans et lance Un comte de faits divers.",
@@ -17729,7 +17726,7 @@
       "blockId": "block-21",
       "type": "resume",
       "displayRole": "transition",
-      "title": "Le tour est joué — TERMINER",
+      "title": "Le tour est joué",
       "prerequisites": "Kralamoure Géant vaincu et L'éternelle moisson terminée.",
       "action": "TERMINER",
       "instruction": "Après le Kralamoure, parle à Lorie Culère en [16,27] pour mettre à jour Le tour est joué, puis à Emma Tompouce en [1,-15] pour terminer la quête et clôturer le Tour du Monde.",
@@ -18177,7 +18174,7 @@
       "title": "Un morceau de roi — avancer jusqu'au Nidas",
       "prerequisites": "niveau recommandé 200.",
       "action": "LANCER / AVANCER / STOP",
-      "instruction": "Lance puis arrête-toi devant le Palais du Roi Nidas.",
+      "instruction": "Avance Un morceau de roi et Coiffeur de génie jusqu'au Palais du Roi Nidas.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/un-morceau-de-roi.html"
@@ -18201,7 +18198,6 @@
       "title": "Coiffeur de génie — avancer jusqu'au Nidas",
       "prerequisites": "Niveau >179 ; 1 Corne de Kamasterisk + 1 Sourcil de Barbétoal + 1 Dent de Lévitrof + 1 Morceau de clef de Paspartou préparés.",
       "action": "LANCER / AVANCER / STOP",
-      "instruction": "Lance puis arrête-toi devant le Palais du Roi Nidas.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/coiffeur-de-genie.html"
@@ -18988,9 +18984,9 @@
       "displayRole": "detail",
       "title": "◆ Vaisseau du Capitaine Meno — IVOIRE + ABYSSAL",
       "prerequisites": "Une voix de crystal au checkpoint Meno ; chaîne Abyssal reprise depuis Piège de crystal jusqu'au checkpoint Meno (équivalent GP56 étapes 55→122).",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — Meno est le point de convergence Ivoire + Abyssal. Après le boss, parle au Capitaine Meno d'abord pour Une voix de crystal, puis pour Son nom est Personne. Ne quitte pas le vaisseau avant les deux dialogues.",
+      "warning": "⚠ AVANT DE SORTIR DU DONJON — après Meno, fais les deux dialogues de sortie : Une voix de crystal puis Piège de crystal → Son nom est Personne.",
       "action": "REPRENDRE ABYSSAL / FAIRE",
-      "instruction": "Avant d'entrer, vérifie que Une voix de crystal ET la chaîne Abyssal sont toutes les deux au checkpoint Meno. Vaincs Meno une seule fois pour les deux routes.",
+      "instruction": "Avant d'entrer, vérifie que Une voix de crystal et la chaîne Abyssal sont toutes les deux au checkpoint Meno. Vaincs Meno.",
       "momentId": "moment-nordalie-missions"
     },
     {
@@ -19001,7 +18997,6 @@
       "displayRole": "transition",
       "title": "Piège de crystal → Son nom est Personne",
       "prerequisites": "Capitaine Meno vaincu ; Piège de crystal au dialogue de fin.",
-      "warning": "Ne quitte pas le Vaisseau avant d’avoir terminé Piège de crystal et lancé Son nom est Personne.",
       "action": "TERMINER / LANCER",
       "instruction": "Après Meno, parle au Capitaine avant de sortir : termine Piège de crystal puis lance Son nom est Personne dans le même enchaînement.",
       "momentId": "moment-nordalie-missions",
@@ -19016,9 +19011,8 @@
       "displayRole": "detail",
       "title": "Une voix de crystal + Son nom est Personne — objectifs puis retour Pichon",
       "prerequisites": "Meno vaincu ; Une voix de crystal avancée auprès de Meno ; Son nom est Personne active.",
-      "warning": "⚠ RETOUR MENO — ne parle au Pichon kloune qu'après avoir terminé tous les objectifs extérieurs des deux quêtes : Deks + Docteur Hou + Jelus Vern pour Son nom est Personne ET les 7 partitions pour Une voix de crystal.",
       "action": "AVANCER / TERMINER",
-      "instruction": "Après le premier Meno, fais Deks, Docteur Hou et Jelus Vern pour Son nom est Personne ET récupère les 7 partitions d'Une voix de crystal. Quand les deux paquets d'objectifs sont prêts, retourne en [24,27] et parle au Pichon kloune UNE SEULE FOIS pour rejoindre Meno sans refaire le donjon : valide Son nom est Personne auprès de Meno et remets les 7 partitions pour obtenir le Crystal de Kallishindri, puis termine Son nom est Personne chez Prosper et Une voix de crystal chez Lachandi.",
+      "instruction": "Fais Deks, Docteur Hou et Jelus Vern, récupère les 7 partitions, puis retourne en [24,27] parler au Pichon kloune. Au retour Meno, valide Son nom est Personne et remets les 7 partitions pour obtenir le Crystal de Kallishindri ; termine ensuite Son nom est Personne chez Prosper.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/une-voix-de-crystal.html"
@@ -19034,7 +19028,6 @@
       "displayRole": "transition",
       "title": "Une voix de crystal — TERMINER",
       "prerequisites": "Crystal de Kallishindri obtenu.",
-      "warning": "Retourner à Lachandi.",
       "action": "TERMINER",
       "instruction": "Retourne voir Lachandi avec le Crystal de Kallishindri et termine Une voix de crystal.",
       "source": {
@@ -19161,7 +19154,7 @@
       "title": "Il est temps de mourir",
       "prerequisites": "Sylargh vaincu.",
       "action": "TERMINER",
-      "instruction": "Après Sylargh, ne sors pas : détruis le Nékoléreux instable dans la salle de sortie. Ressuscite, parle à Agonie devant le donjon, puis termine la suite Hyrkul selon DPLN jusqu’à récupérer le Dofus Ivoire.",
+      "instruction": "Une fois revenu auprès d'Agonie devant le donjon, poursuis la suite Hyrkul selon DPLN jusqu’à récupérer le Dofus Ivoire.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/il-est-temps-de-mourir.html"
@@ -20498,7 +20491,6 @@
       "prerequisites": "Quatre sur six + Blanc ivoire + Noir d'ébène + 6 Primordiaux + À la croisée des mondes.",
       "warning": "STOP juste après avoir vaincu Rathrosk : Le silence est d'Aure devient disponible.",
       "action": "LANCER / AVANCER / STOP",
-      "instruction": "Le silence est d’Aure s’ouvre après Rathrosk.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/dans-la-gueule-du-dragon.html"
@@ -22463,7 +22455,7 @@
       "prerequisites": "main élémentaire récupérée ; prévoir 1 Fluide glacial si encore demandé par DPLN.",
       "warning": "Pendant la quête, récupère 1 Enchanterelle sur les Malters si tu n'as plus le buff Au-delà des apparences.",
       "action": "LANCER / TERMINER",
-      "instruction": "En [21,-33], Lance puis termine La bête au bois dormant. Utilise le Substrat réservé et récupère l'Enchanterelle sur les Malters si nécessaire avant le retour au Sceau de Terrakourial.\n\nÀ PRÉVOIR ICI — Avant La bête au bois dormant\n• Entretemps, une renaissance terminé\n• Le serment de l'ambre terminé\n• 6 Primordiaux en inventaire\n• 1 Substrat de Sylve\nNote : Pendant La bête au bois dormant, récupère 1 Enchanterelle sur les Malters si tu n'as plus le buff Au-delà des apparences.",
+      "instruction": "En [21,-33], lance puis termine La bête au bois dormant avec le Substrat réservé.\n\nÀ PRÉVOIR ICI — Avant La bête au bois dormant\n• Entretemps, une renaissance terminé\n• Le serment de l'ambre terminé\n• 6 Primordiaux en inventaire\n• 1 Substrat de Sylve",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-bete-au-bois-dormant.html"
