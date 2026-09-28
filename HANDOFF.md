@@ -268,3 +268,15 @@ Lire dans l’ordre : `AGENTS.md`, `SPEC.md`, `ARCHITECTURE.md`, `docs/DATA_MODE
 - CI frontend du commit `49227a96310ce3596277f55fa399228e1bacb77c` : tests route, validation et build **verts**.
 - `cargo check` Windows encore en cours au dernier contrôle.
 
+
+
+## Update 2026-09-28 — retrait de FLOW_NOTE
+
+- Décision UX : `FLOW_NOTE` n'est plus une couche d'affichage séparée.
+- Les 62 flow notes ont été réintégrées dans les `instruction` des étapes concernées, avec purge des redondances `warning` / `instruction`.
+- Cas Parangon : la logique « avant tout donjon 200 → Obtenir un Parangon de puissance → drop actif » est désormais portée directement par `La mère des Dragoeufs`.
+- Runtime : `RouteStep.flowNote` supprimé.
+- UI : callout `flow-note` supprimé ; les descriptions utilisent le rendu normal d'`instruction`.
+- Export Sheet : `FLOW_NOTE` retiré ; plage ramenée à `ROUTE!A5:W`.
+- Validation / contrats : les contrats dédiés aux flow notes ont été migrés vers les descriptions intégrées.
+- Règle éditoriale courante : une information joueur ne doit exister qu'à un seul endroit ; `warning` = risque/contrainte, `instruction` = action + contexte utile.
