@@ -214,10 +214,11 @@ test('contrat route — le drop Parangon est activé avant le premier donjon 200
   ]);
 
   const parangon = route.steps.find((step) => step.id === 'route-step-1171');
+  const cardOwner = route.steps.find((step) => step.id === 'route-step-0678');
   assert.match(parangon?.action ?? '', /AVANCER/);
   assert.match(parangon?.action ?? '', /STOP/);
-  assert.match(parangon?.flowNote ?? '', /Obtenir un Parangon de puissance/i);
-  assert.match(parangon?.flowNote ?? '', /avant tout donjon niveau 200/i);
+  assert.match(cardOwner?.flowNote ?? '', /Obtenir un Parangon de puissance/i);
+  assert.match(cardOwner?.flowNote ?? '', /avant tout donjon niveau 200/i);
 });
 
 test('contrat UX — une reprise annoncée possède une vraie reprise ou fin ultérieure', () => {
