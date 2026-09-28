@@ -1,0 +1,47 @@
+.source-title-button {
+  display: inline;
+  max-width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.source-title-button:hover,
+.source-title-button:focus-visible {
+  color: #c1efca;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.source-title-button:focus-visible {
+  outline: 1px solid #6a8f74;
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+.source-title-button--main {
+  font-size: inherit;
+}
+
+.sequence-item--completed .source-title-button {
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+.sequence-item--completed .source-title-button:hover,
+.sequence-item--completed .source-title-button:focus-visible {
+  text-decoration: line-through underline;
+}
+
+/* A hard lock has one authoritative blocking message: the lock panel itself. */
+.current-step--hard_lock > .action-label,
+.current-step--hard_lock > .instruction {
+  display: none;
+}

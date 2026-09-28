@@ -1,0 +1,74 @@
+.preparation-checklist {
+  display: grid;
+  gap: 10px;
+}
+
+.preparation-checklist__section {
+  display: grid;
+  gap: 6px;
+}
+
+.preparation-checklist__heading {
+  margin: 0;
+  color: #93a396;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+}
+
+.preparation-checklist__list,
+.preparation-checklist__requirements {
+  display: grid;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.preparation-checklist__requirements {
+  gap: 6px;
+}
+
+.preparation-checklist__requirement {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+  padding: 7px 8px;
+  border: 1px solid #2f3d34;
+  border-radius: 7px;
+  background: #111913;
+  color: #cbd7cd;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.preparation-checklist__requirement-kind {
+  display: inline-flex;
+  align-items: center;
+  min-height: 18px;
+  padding: 0 5px;
+  border: 1px solid #415047;
+  border-radius: 5px;
+  color: #aebbb1;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.preparation-checklist__requirement-kind--kamas {
+  border-color: #665b37;
+  color: #e8d88c;
+}
+
+.preparation-checklist__requirement-kind--profession {
+  border-color: #4d5f70;
+  color: #b8d5ec;
+}
+
+.preparation-checklist__requirement-kind--party,
+.preparation-checklist__requirement-kind--class {
+  border-color: #625076;
+  color: #d7c0ec;
+}
