@@ -253,6 +253,41 @@ button:disabled {
   line-height: 1.42;
 }
 
+.flow-note {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  gap: 6px;
+  align-items: start;
+  margin-top: 8px;
+  padding: 7px 8px;
+  border-left: 2px solid #527b96;
+  border-radius: 6px;
+  background: #131d22;
+  color: #b9cbd5;
+}
+
+.flow-note > span {
+  color: #8cc4e8;
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1.35;
+}
+
+.flow-note p {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.38;
+}
+
+.overlay--compact .flow-note {
+  margin-top: 6px;
+  padding: 6px 7px;
+}
+
+.overlay--compact .flow-note p {
+  font-size: 10px;
+}
+
 .guide-items {
   display: grid;
   gap: 10px;
