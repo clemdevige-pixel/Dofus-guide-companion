@@ -321,6 +321,52 @@ test('contrat UX — « reprends » n’apparaît qu’au moment d’une vraie r
   }
 });
 
+test('contrat UX — pas de duplication textuelle brute dans une même carte', () => {
+  const normalize = (value: string) =>
+    value
+      .normalize('NFD')
+      .replace(/\p{Diacritic}/gu, '')
+      .replace(/[^a-zA-Z0-9]+/g, ' ')
+      .trim()
+      .toLowerCase();
+
+  const byMoment = new Map<string, typeof route.steps>();
+  for (const step of route.steps) {
+    if (!step.momentId) continue;
+    const members = byMoment.get(step.momentId) ?? [];
+    members.push(step);
+    byMoment.set(step.momentId, members);
+  }
+
+  for (const [momentId, steps] of byMoment) {
+    const seenInstructions = new Map<string, string>();
+    for (const step of steps) {
+      if (!step.instruction) continue;
+      const normalized = normalize(step.instruction);
+      const previousStepId = seenInstructions.get(normalized);
+      assert.equal(
+        previousStepId,
+        undefined,
+        `${momentId}: instruction dupliquée entre ${previousStepId ?? 'inconnu'} et ${step.id}.`,
+      );
+      seenInstructions.set(normalized, step.id);
+    }
+  }
+
+  for (const step of route.steps) {
+    if (!step.warning || !step.instruction) continue;
+    const warning = normalize(step.warning.replace(/^⚠[^—]*—\s*/u, ''));
+    const instruction = normalize(step.instruction);
+    if (warning.length < 40) continue;
+
+    assert.equal(
+      instruction.includes(warning) || warning.includes(instruction),
+      false,
+      `${step.id}: warning et instruction répètent la même information.`,
+    );
+  }
+});
+
 test('contrat UX — une poursuite dans la même carte ne redevient pas une reprise', () => {
   const sameCardContinuationIds = [
     'route-step-0298',
