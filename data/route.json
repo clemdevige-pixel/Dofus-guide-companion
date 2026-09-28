@@ -4497,7 +4497,7 @@
       "title": "Bûcherons en détresse",
       "prerequisites": "Quête active depuis le premier passage en [0,-25].",
       "warning": "Ferme cette branche au retour final en forêt, juste avant Le génie se meut.",
-      "action": "TERMINER",
+      "action": "REPRENDRE / TERMINER",
       "instruction": "Au dernier retour en [0,-25], Reprends et termine Bûcherons en détresse.",
       "source": {
         "label": "DPLN",
@@ -4935,7 +4935,7 @@
       "type": "resume",
       "displayRole": "objective",
       "title": "Le réceptacle des Dofus",
-      "action": "TERMINER",
+      "action": "REPRENDRE / TERMINER",
       "instruction": "Le réceptacle des Dofus est déjà actif depuis Astrub. Reprends la quête après Le réveil de Pandala et termine sa séquence prévue ici.",
       "source": {
         "label": "DPLN",
@@ -5137,7 +5137,7 @@
         "url": "https://www.dofuspourlesnoobs.com/le-maitre-des-clefs.html"
       },
       "momentId": "moment-route-step-0132",
-      "flowNote": "Reprise prévue plus tard : garde Le maître des clefs active."
+      "flowNote": "Reprends Le maître des clefs et prends l’objectif Chafer Rōnin. Garde ensuite la chaîne active jusqu’au prochain donjon demandé."
     },
     {
       "id": "route-step-0133",
@@ -5786,7 +5786,7 @@
       "displayRole": "transition",
       "title": "La raison du plus fort",
       "prerequisites": "Directeur Grunob vaincu + Carnet de Jykel récupéré.",
-      "action": "TERMINER",
+      "action": "REPRENDRE / TERMINER",
       "instruction": "Reprends La raison du plus fort, termine la Base des Justiciers et les étapes restantes, puis termine la quête avant de poursuivre.",
       "source": {
         "label": "DPLN",
@@ -6067,7 +6067,7 @@
           "note": "STOP — Les Pitons seront faits plus tard avec La fureur du Holbaïd."
         }
       ],
-      "flowNote": "Reprise prévue plus tard : garde Pat Akess active."
+      "flowNote": "Reprends la chaîne Pat Akess au Craqueleur Légendaire, puis garde-la active jusqu’à sa prochaine validation."
     },
     {
       "id": "route-step-0105",
@@ -8126,7 +8126,7 @@
         "parallelId": "parallel-domaine-ancestral",
         "phase": "progress"
       },
-      "flowNote": "Reprise prévue plus tard : garde Un juge hystérique active."
+      "flowNote": "Reprends Un juge hystérique auprès de Chris de Naire et avance jusqu’au Domaine Ancestral. Les autres quêtes mutualisées doivent déjà y attendre."
     },
     {
       "id": "route-step-0295",
@@ -8539,7 +8539,7 @@
       "displayRole": "transition",
       "title": "Plongeon et dragon — jusqu'au Chêne Mou",
       "prerequisites": "Dragon Cochon validé.",
-      "action": "AVANCER / STOP",
+      "action": "REPRENDRE / AVANCER / STOP",
       "instruction": "Après le Dragon Cochon, reprends Plongeon et dragon puis arrête-toi ici au checkpoint Chêne Mou.",
       "source": {
         "label": "DPLN",
@@ -8876,7 +8876,7 @@
         "x": -26,
         "y": -5
       },
-      "flowNote": "Avance Allumer le feu jusqu’au checkpoint indiqué, fais Draconanthropie, puis reprends Allumer le feu."
+      "flowNote": "Avance Allumer le feu jusqu’au Meulou. Fais Draconanthropie dans cette séquence, puis poursuis Allumer le feu jusqu’à sa validation."
     },
     {
       "id": "route-step-0317",
@@ -9275,7 +9275,7 @@
           "note": "Kal Vissi."
         }
       ],
-      "flowNote": "Avance Des donjons, encore des donjons jusqu’au checkpoint indiqué, fais Le livre des Taures, puis reprends Des donjons, encore des donjons."
+      "flowNote": "Reprends Des donjons, encore des donjons au Maître Corbac. Fais Le livre des Taures pendant ce passage, puis poursuis la chaîne Tour du Monde."
     },
     {
       "id": "route-step-0343",
@@ -9463,7 +9463,7 @@
         "x": 22,
         "y": -29
       },
-      "flowNote": "Avance Sous le bois de sa colère jusqu’au checkpoint indiqué, fais Le Saule du Promeneur puis Rester planté là, puis reprends Sous le bois de sa colère."
+      "flowNote": "Avance Sous le bois de sa colère jusqu’à Damadrya. Fais Le Saule du Promeneur puis Rester planté là, puis poursuis Sous le bois de sa colère."
     },
     {
       "id": "route-step-0268",
@@ -10159,7 +10159,7 @@
         "x": -39,
         "y": -11
       },
-      "flowNote": "Avance Le trésor de Totankama jusqu’à Mériana, ferme Il faut battre le lait quand il est chaud, Regrets d’éternailes et L’anneau de Tot, puis reviens terminer la quête."
+      "flowNote": "Avance Le trésor de Totankama jusqu’à Mériana. Termine Il faut battre le lait quand il est chaud, Regrets d’éternailes et L’anneau de Tot, puis garde Le trésor de Totankama actif jusqu’à sa carte de fin."
     },
     {
       "id": "route-step-0381",
@@ -10202,7 +10202,7 @@
       "displayRole": "transition",
       "title": "Comment perdre ses plumes — reprendre jusqu'au Rasboul Majeur",
       "prerequisites": "Janseb interrogé après la Haute Truche.",
-      "action": "AVANCER / STOP",
+      "action": "REPRENDRE / AVANCER / STOP",
       "instruction": "Reprends la quête, libère Alain, récupère l'Œuf Surprenant puis arrête-toi devant le Rasboul Majeur.",
       "source": {
         "label": "DPLN",
@@ -10276,7 +10276,7 @@
       "type": "resume",
       "title": "Comment perdre ses plumes — reprendre jusqu'au Tofu Royal",
       "prerequisites": "Œuf Surprenant + Œuf Végétal obtenus.",
-      "action": "AVANCER / STOP",
+      "action": "REPRENDRE / AVANCER / STOP",
       "instruction": "Reprends Comment perdre ses plumes et arrête-toi ici au Tofu Royal. Garde-la active : Des donjons, encore des donjons arrive au même boss juste après.",
       "source": {
         "label": "DPLN",
@@ -10311,7 +10311,7 @@
           "note": "Avec Comment perdre ses plumes actif."
         }
       ],
-      "flowNote": "Reprise prévue plus tard : garde Des donjons, encore des donjons active."
+      "flowNote": "Reprends Des donjons, encore des donjons au Tofu Royal. Comment perdre ses plumes doit déjà être au même boss."
     },
     {
       "id": "route-step-0390",
@@ -10807,7 +10807,7 @@
         "x": -60,
         "y": -57
       },
-      "flowNote": "Avance L'ombre et la glace jusqu’au checkpoint indiqué, fais Les joyeux de la couronne puis Les chasseurs, puis reprends L'ombre et la glace."
+      "flowNote": "Avance L’ombre et la glace jusqu’au Mansot Royal en gardant Pêche en eaux gelées active. Profite du même passage pour Les joyeux de la couronne et Les chasseurs, puis termine les trois quêtes après le boss."
     },
     {
       "id": "route-step-0424",
@@ -11339,7 +11339,7 @@
         "x": -6,
         "y": -3
       },
-      "flowNote": "Avance L’épée du rocher jusqu’au Skeunk, récupère la Poudre scintillante avant de sortir, puis reprends jusqu’à Fraktale et utilise le Détecteur portable après le boss."
+      "flowNote": "Avance L’épée du rocher jusqu’au Skeunk et récupère la Poudre scintillante avant de sortir. Garde la quête active : elle sera reprise ensuite jusqu’à Fraktale."
     },
     {
       "id": "route-step-0858",
@@ -11364,7 +11364,7 @@
       "title": "L'épée du rocher — jusqu'à Fraktale",
       "prerequisites": "Poudre scintillante récupérée ; terminer les étapes intermédiaires de fabrication et d'enquête.",
       "warning": "Passer physiquement par la map du portail Xélorium avant Fraktale pour actualiser la quête.",
-      "action": "AVANCER / STOP",
+      "action": "REPRENDRE / AVANCER / STOP",
       "instruction": "Reprends la quête, avance jusqu'à devoir obtenir le Temps fracassé et arrête-toi devant le Mégalithe de Fraktale.",
       "source": {
         "label": "DPLN",
@@ -11430,7 +11430,7 @@
         "goalId": "nimotopia-messager",
         "phase": "start"
       },
-      "flowNote": "Avance Ne tirez pas sur le messager jusqu’au Muldobus, fais À plus dans l’muldobus, puis reprends la quête."
+      "flowNote": "Avance Ne tirez pas sur le messager jusqu’au Muldobus, fais À plus dans l’muldobus, puis garde Ne tirez pas sur le messager active jusqu’à sa carte de fin."
     },
     {
       "id": "route-step-0654",
@@ -11464,7 +11464,7 @@
       "displayRole": "transition",
       "title": "Ne tirez pas sur le messager",
       "prerequisites": "combat avec un Eniripsa + plusieurs classes utiles ; 1 Serpète ; Cape de Jahash.",
-      "action": "TERMINER",
+      "action": "REPRENDRE / TERMINER",
       "instruction": "Reprends Ne tirez pas sur le messager : prends le Muldobus, poursuis le parcours Nimotopia jusqu'à Coqueline et termine la quête.",
       "source": {
         "label": "DPLN",
@@ -11577,7 +11577,7 @@
         "x": -6,
         "y": -3
       },
-      "flowNote": "Avance Le forgeur de légende jusqu’au checkpoint indiqué, fais Des donjons, encore des donjons, puis reprends Le forgeur de légende."
+      "flowNote": "Avance Le forgeur de légende jusqu’à Crocabulia. Fais le passage demandé, puis poursuis Le forgeur de légende dans cette même séquence."
     },
     {
       "id": "route-step-0405",
@@ -11681,7 +11681,7 @@
       "action": "REPRENDRE / STOP",
       "instruction": "Auprès du Maître des clefs, prends l'objectif Skeunk puis arrête-toi devant le Repaire.",
       "momentId": "moment-route-step-0408",
-      "flowNote": "Reprise prévue plus tard : garde La voie du guerrier active."
+      "flowNote": "Reprends La voie du guerrier au Repaire de Skeunk, puis garde la chaîne active pour les donjons suivants."
     },
     {
       "id": "route-step-0409",
@@ -11869,7 +11869,7 @@
       "displayRole": "transition",
       "title": "Plongeon et dragon",
       "prerequisites": "Dragon Cochon + Chêne Mou validés.",
-      "action": "TERMINER",
+      "action": "REPRENDRE / TERMINER",
       "instruction": "Reprends Plongeon et dragon après le Chêne Mou et termine la quête auprès de Mériana.",
       "source": {
         "label": "DPLN",
@@ -11885,7 +11885,7 @@
       "displayRole": "transition",
       "title": "L'art de la langue de bois",
       "prerequisites": "Chêne Mou vaincu et interrogé dans le donjon.",
-      "action": "TERMINER",
+      "action": "REPRENDRE / TERMINER",
       "instruction": "Reprends la quête après le Chêne Mou et termine-la avant de continuer.",
       "source": {
         "label": "DPLN",
@@ -12136,7 +12136,7 @@
         "x": 22,
         "y": -29
       },
-      "flowNote": "Avance Le festival de la lanterne jusqu’au checkpoint indiqué, fais La bénédiction de Viti, puis reprends Le festival de la lanterne."
+      "flowNote": "Avance Le festival de la lanterne jusqu’au Founoroshi, fais La bénédiction de Viti, puis poursuis Le festival de la lanterne jusqu’à sa validation."
     },
     {
       "id": "route-step-0454",
@@ -12177,7 +12177,7 @@
       "displayRole": "transition",
       "title": "Le festival de la lanterne",
       "prerequisites": "Founoroshi vaincu pendant le second passage Viti + Festival ; Mortier enchanté récupéré avant la sortie.",
-      "action": "TERMINER",
+      "action": "REPRENDRE / TERMINER",
       "instruction": "Reprends Le festival de la lanterne, poursuis le choix de camp demandé puis termine la quête.",
       "source": {
         "label": "DPLN",
@@ -12419,7 +12419,7 @@
         "url": "https://www.dofuspourlesnoobs.com/pas-de-fumee-sans-feu.html"
       },
       "momentId": "moment-route-step-0500",
-      "flowNote": "Avance Pas de fumée sans feu jusqu’au checkpoint indiqué, fais Arrête-la si tu peux, puis reprends Pas de fumée sans feu."
+      "flowNote": "Reprends Pas de fumée sans feu et avance jusqu’à débloquer Arrête-la si tu peux. Termine cette branche avant de poursuivre Pas de fumée sans feu."
     },
     {
       "id": "route-step-0501",
@@ -12939,7 +12939,7 @@
       "displayRole": "transition",
       "title": "Bandanarthrie",
       "prerequisites": "Sphincter Cell vaincu + Bandana Troué récupéré.",
-      "action": "TERMINER",
+      "action": "REPRENDRE / TERMINER",
       "instruction": "Reprends Bandanarthrie après le Sphincter et termine la quête.",
       "source": {
         "label": "DPLN",
@@ -13012,7 +13012,7 @@
       "action": "REPRENDRE / STOP",
       "instruction": "Reprends La voie du guerrier au checkpoint Minotot. Utilise la sauvegarde du Minotoror si elle est encore disponible puis arrête-toi devant la Salle du Minotot.",
       "momentId": "moment-voie-guerrier-minotot",
-      "flowNote": "Reprise prévue plus tard : garde La voie du guerrier active."
+      "flowNote": "Reprends La voie du guerrier au Minotot et garde-la active pour la suite de la chaîne."
     },
     {
       "id": "route-step-0460",
@@ -14483,7 +14483,7 @@
       "displayRole": "transition",
       "title": "Apprentissage : Assassin Suprême",
       "prerequisites": "Grand Ougah vaincu ; Dike Tarak rencontré après le boss.",
-      "action": "TERMINER",
+      "action": "REPRENDRE / TERMINER",
       "instruction": "Après le Grand Ougah, Reprends Apprentissage : Assassin Suprême et termine la quête auprès d'Ebru of El.",
       "momentId": "moment-order4-assassin"
     },
@@ -14544,7 +14544,7 @@
         "x": -80,
         "y": -73
       },
-      "flowNote": "Avance Dépôt de ravitaillement jusqu’au checkpoint indiqué, fais Chaud du S.L.I.P. puis Hypogée de l'Obsidiantre, puis reprends Dépôt de ravitaillement."
+      "flowNote": "Avance Dépôt de ravitaillement jusqu’au verrou Chaud du S.L.I.P. Termine Chaud du S.L.I.P. et le passage Obsidiantre avant de poursuivre Dépôt de ravitaillement."
     },
     {
       "id": "route-step-0561",
@@ -14586,7 +14586,7 @@
       "displayRole": "transition",
       "title": "Chaud du S.L.I.P. — reprendre jusqu'à l'Obsidiantre",
       "prerequisites": "Royalmouth vaincu pour Chaud ; ressources et objectifs intermédiaires de la quête à effectuer.",
-      "action": "AVANCER / STOP",
+      "action": "REPRENDRE / AVANCER / STOP",
       "instruction": "Reprends Chaud du S.L.I.P., fais les objectifs intermédiaires demandés puis arrête-toi devant l'Obsidiantre.",
       "source": {
         "label": "DPLN",
@@ -14614,7 +14614,7 @@
       "type": "resume",
       "displayRole": "transition",
       "title": "Chaud du S.L.I.P.",
-      "action": "TERMINER",
+      "action": "REPRENDRE / TERMINER",
       "instruction": "Reprends et termine Chaud du S.L.I.P. afin d'obtenir la Potion du S.L.I.P.",
       "source": {
         "label": "DPLN",
@@ -14629,7 +14629,7 @@
       "type": "resume",
       "displayRole": "transition",
       "title": "Dépôt de ravitaillement",
-      "action": "TERMINER",
+      "action": "REPRENDRE / TERMINER",
       "instruction": "Reprends Dépôt, montre la potion, libère les bûcherons demandés puis termine la quête.",
       "source": {
         "label": "DPLN",
@@ -14767,7 +14767,7 @@
         "x": 36,
         "y": -44
       },
-      "flowNote": "Avance Requiem pour un Yokai jusqu’au checkpoint indiqué, fais Jusqu'à leur dernier soupir, puis reprends Requiem pour un Yokai."
+      "flowNote": "Avance Requiem pour un Yokai jusqu’à la Demeure des Esprits. Fais Jusqu’à leur dernier soupir dans le même passage, puis poursuis Requiem pour un Yokai jusqu’à sa fin."
     },
     {
       "id": "route-step-0510",
@@ -14821,7 +14821,7 @@
       "displayRole": "transition",
       "title": "Requiem pour un Yokai — TERMINER / obtenir le Dorigami",
       "action": "TERMINER",
-      "instruction": "Termine Requiem pour un Yokai : le succès Le gardien de l'immaculé se ferme et tu obtiens le Dorigami. Garde-le en inventaire.",
+      "instruction": "Termine Requiem pour un Yokai : le succès Le gardien de l'immaculé se termine et tu obtiens le Dorigami. Garde-le en inventaire.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/requiem-pour-un-yokai.html"
@@ -15904,7 +15904,7 @@
         "goalId": "nimotopia-parallele",
         "phase": "start"
       },
-      "flowNote": "Avance Nos amies les bêtes jusqu’au checkpoint indiqué, fais Shyriiwook puis À armes égales, puis reprends Nos amies les bêtes."
+      "flowNote": "Lance Nos amies les bêtes puis ouvre Shyriiwook et À armes égales. Fais les trois quêtes pendant la même boucle Nimotopia."
     },
     {
       "id": "route-step-1165",
@@ -16012,7 +16012,7 @@
         "goalId": "nimotopia-il-a-fui",
         "phase": "start"
       },
-      "flowNote": "Avance Il a fui, il a tout compris jusqu’au checkpoint indiqué, fais La valse des manuels, puis reprends Il a fui, il a tout compris."
+      "flowNote": "Lance Il a fui, il a tout compris et garde-la active pendant la boucle Nimotopia. La valse des manuels s’insère ensuite avant sa fin."
     },
     {
       "id": "route-step-0658",
@@ -16096,7 +16096,7 @@
       "displayRole": "transition",
       "title": "Il a fui, il a tout compris",
       "warning": "Les positions/indices peuvent varier : suis DPLN pour les variantes.",
-      "action": "TERMINER",
+      "action": "REPRENDRE / TERMINER",
       "instruction": "Reprends Il a fui, il a tout compris et termine la quête selon DPLN. La valse des manuels reste active pour le passage Razof juste après.",
       "source": {
         "label": "DPLN",
@@ -16744,7 +16744,7 @@
         "x": -61,
         "y": -81
       },
-      "flowNote": "Avance Au-delà du mur jusqu’au checkpoint indiqué, fais Chaud et Froid, puis reprends Au-delà du mur."
+      "flowNote": "Avance Au-delà du mur jusqu’à Nileza. Fais Chaud et Froid dans le même passage, puis poursuis Au-delà du mur."
     },
     {
       "id": "route-step-0621",
@@ -17230,7 +17230,7 @@
         "x": -59,
         "y": -74
       },
-      "flowNote": "Avance Le givre des révélations jusqu’au checkpoint indiqué, fais Un comte de faits divers puis Le Dofus des Glaces, puis reprends Le givre des révélations."
+      "flowNote": "Avance Le givre des révélations jusqu’au Comte Harebourg avec Un comte de faits divers actif. Garde la quête active : elle sera terminée après le passage Comte."
     },
     {
       "id": "route-step-audit-un-comte-start",
@@ -17287,7 +17287,7 @@
       "dofusSeries": "Dofus des Glaces",
       "displayRole": "transition",
       "title": "Le givre des révélations",
-      "action": "TERMINER",
+      "action": "REPRENDRE / TERMINER",
       "instruction": "Reprends Le givre des révélations après le Comte et termine la quête.",
       "source": {
         "label": "DPLN",
@@ -18238,7 +18238,7 @@
       "displayRole": "transition",
       "title": "Casse en Enutrosor",
       "prerequisites": "Nidas vaincu + Coffret précieux combattu dans la salle de sortie.",
-      "action": "TERMINER",
+      "action": "REPRENDRE / TERMINER",
       "instruction": "Reprends Casse : Externam → Archonte → Thanatena → retour Ilyzaelle → Dardondakal, puis termine Casse en Enutrosor. Nordalie est alors débloquée.",
       "source": {
         "label": "DPLN",
@@ -18254,7 +18254,7 @@
       "displayRole": "transition",
       "title": "Un morceau de roi",
       "prerequisites": "personnage féminin si demandé par l'étape DPLN.",
-      "action": "TERMINER",
+      "action": "REPRENDRE / TERMINER",
       "instruction": "Roi Nidas vaincu : Reprends et termine Un morceau de roi auprès du PNJ prévu par la quête.",
       "source": {
         "label": "DPLN",
@@ -18270,7 +18270,7 @@
       "displayRole": "transition",
       "title": "Coiffeur de génie",
       "prerequisites": "Roi Nidas vaincu ; dialogue avec Nidas effectué pour Léonard.",
-      "action": "TERMINER",
+      "action": "REPRENDRE / TERMINER",
       "instruction": "Roi Nidas vaincu et dialogue effectué : Reprends et termine Coiffeur de génie.",
       "source": {
         "label": "DPLN",
@@ -18553,7 +18553,7 @@
         "x": -55,
         "y": 15
       },
-      "flowNote": "Avance Un remède draconien jusqu’au Glourséleste, puis ouvre les quatre quêtes des dragons. Termine les quatre branches avant de revenir fermer Un remède draconien."
+      "flowNote": "Avance Un remède draconien jusqu’au Glourséleste puis ouvre les quatre quêtes des dragons. Termine les quatre branches avant de terminer Un remède draconien."
     },
     {
       "id": "route-step-0907",
@@ -19026,7 +19026,7 @@
       "displayRole": "transition",
       "title": "Le mort dans l’âme",
       "prerequisites": "Katrepat vaincu.",
-      "action": "TERMINER",
+      "action": "REPRENDRE / TERMINER",
       "instruction": "Katrepat vaincu : Reprends et termine Le mort dans l'âme.",
       "source": {
         "label": "DPLN",
@@ -19412,7 +19412,7 @@
       "type": "resume",
       "displayRole": "transition",
       "title": "De Brikke et de Brokke — reprendre jusqu'aux Ninsoumis",
-      "action": "AVANCER / STOP",
+      "action": "REPRENDRE / AVANCER / STOP",
       "instruction": "Reprends De Brikke et de Brokke jusqu’à l’étape Les Ninsoumis, puis arrête-toi ici.",
       "source": {
         "label": "DPLN",
@@ -19497,7 +19497,7 @@
         "x": -13,
         "y": -22
       },
-      "flowNote": "Lance Les quatre volontés, ferme les quatre branches Cavaliers, puis reviens valider la quête."
+      "flowNote": "Lance Les quatre volontés puis termine les quatre branches Cavaliers. La quête sera terminée plus tard, juste avant L’avis de la Mort."
     },
     {
       "id": "route-step-0718",
@@ -19850,7 +19850,7 @@
         "x": 0,
         "y": 0
       },
-      "flowNote": "Avance Un pouvoir mérydique jusqu’au checkpoint indiqué, fais Clairière du Chêne Mou puis Temple du Grand Ougah, puis reprends Un pouvoir mérydique."
+      "flowNote": "Avance Un pouvoir mérydique jusqu’au Kimbo. Fais ensuite le Chêne Mou puis le Grand Ougah avec l’idole Mérydique avant de terminer la quête."
     },
     {
       "id": "route-step-0737",
@@ -19899,7 +19899,7 @@
       "displayRole": "transition",
       "title": "Un pouvoir mérydique",
       "prerequisites": "Dofus Pourpre équipé ; prévoir un allié pour le levier si tu es solo.",
-      "action": "TERMINER",
+      "action": "REPRENDRE / TERMINER",
       "instruction": "Kimbo + Chêne Mou + Grand Ougah validés : Reprends et termine Un pouvoir mérydique.",
       "source": {
         "label": "DPLN",
@@ -19951,7 +19951,7 @@
       "type": "resume",
       "displayRole": "transition",
       "title": "Mort et renouveau",
-      "action": "TERMINER",
+      "action": "REPRENDRE / TERMINER",
       "instruction": "Corruption vaincu : Reprends et termine Mort et renouveau.",
       "source": {
         "label": "DPLN",
@@ -19968,7 +19968,7 @@
       "title": "Les quatre volontés",
       "prerequisites": "les 4 Volontés obtenues.",
       "warning": "Termine cette quête avant L'avis de la Mort et Prise de conscience.",
-      "action": "TERMINER",
+      "action": "REPRENDRE / TERMINER",
       "instruction": "Les quatre branches Cavaliers sont fermées : Reprends et termine Les quatre volontés auprès de Maisial.",
       "source": {
         "label": "DPLN",
@@ -20212,7 +20212,7 @@
       "displayRole": "objective",
       "title": "Le dragon noir — REPRENDRE jusqu'à Klime",
       "prerequisites": "prévoir 1 Pano Pikmi.",
-      "action": "AVANCER / STOP",
+      "action": "REPRENDRE / AVANCER / STOP",
       "instruction": "Reprends Le dragon noir et avance jusqu'à Klime puis arrête-toi devant le donjon.",
       "source": {
         "label": "DPLN",
@@ -20451,7 +20451,7 @@
         "x": -6,
         "y": -3
       },
-      "flowNote": "Avance Dans la gueule du dragon jusqu’après Rathrosk, puis lance Prise de conscience : elle ouvre les deux branches suivantes. Ferme-les avant de reprendre les deux fils."
+      "flowNote": "Avance Dans la gueule du dragon jusqu’après Rathrosk puis lance Prise de conscience. Termine les deux branches qu’elle ouvre avant de poursuivre ces deux fils."
     },
     {
       "id": "route-step-0919",
@@ -20530,7 +20530,7 @@
         "x": 3,
         "y": 1
       },
-      "flowNote": "Avance L'avis de la Mort jusqu’au checkpoint indiqué, traite les objectifs de cette séquence, puis reprends L'avis de la Mort."
+      "flowNote": "Avance L’avis de la Mort jusqu’à Ilyzaelle, traite les objectifs de cette séquence, puis poursuis L’avis de la Mort jusqu’à sa validation."
     },
     {
       "id": "route-step-0924",
@@ -20815,7 +20815,7 @@
         "x": 23,
         "y": -32
       },
-      "flowNote": "Avance Main dans la main jusqu’à débloquer la Taverne interdite, fais les branches nécessaires, puis reprends Main dans la main. Reprise prévue après ces branches."
+      "flowNote": "Avance Main dans la main jusqu’à débloquer la Taverne interdite, puis garde la quête active. Elle sera terminée après les branches suivantes."
     },
     {
       "id": "route-step-0694",
@@ -20901,7 +20901,7 @@
         "x": 2,
         "y": 0
       },
-      "flowNote": "Avance Deux souffles, une inspiration jusqu’au checkpoint indiqué, fais Souvenir d'Imagiro puis En ce jardin qui nous unit, puis reprends Deux souffles, une inspiration."
+      "flowNote": "Avance Deux souffles, une inspiration jusqu’au Roi Imagami. Fais Souvenir d’Imagiro puis En ce jardin qui nous unit, puis poursuis Deux souffles, une inspiration jusqu’à sa validation."
     },
     {
       "id": "route-step-0698",
@@ -21161,7 +21161,7 @@
         "x": 21,
         "y": -33
       },
-      "flowNote": "Avance Quand l'éveil n'est qu'un songe jusqu’au checkpoint indiqué, traite les objectifs de cette séquence, puis reprends Quand l'éveil n'est qu'un songe."
+      "flowNote": "Lance Quand l’éveil n’est qu’un songe puis traite les objectifs de cette séquence avant de terminer la quête."
     },
     {
       "id": "route-step-0706",
@@ -21227,7 +21227,7 @@
       "type": "resume",
       "displayRole": "transition",
       "title": "Quand l'éveil n'est qu'un songe",
-      "action": "TERMINER",
+      "action": "REPRENDRE / TERMINER",
       "instruction": "Reprends Draconiros et termine Quand l'éveil n'est qu'un songe.",
       "source": {
         "label": "DPLN",
@@ -21349,7 +21349,7 @@
       "type": "resume",
       "displayRole": "transition",
       "title": "La sorcière exilée",
-      "action": "TERMINER",
+      "action": "REPRENDRE / TERMINER",
       "instruction": "Reprends et termine La sorcière exilée. Elle débloque maintenant La graine de la révolte et Pour que la flamme vacille.",
       "source": {
         "label": "DPLN",
@@ -21490,7 +21490,7 @@
       "displayRole": "transition",
       "title": "Une dernière volonté",
       "prerequisites": "Ilyzaelle vaincue ; dialogues post-donjon effectués.",
-      "action": "TERMINER",
+      "action": "REPRENDRE / TERMINER",
       "instruction": "Reprends et termine Une dernière volonté après les dialogues post-Ilyzaelle.",
       "source": {
         "label": "DPLN",
@@ -21874,7 +21874,7 @@
         "x": 38,
         "y": -21
       },
-      "flowNote": "Avance S’armer contre le destin jusqu’au Vortex avec Les totems de Maïmane actifs, fais le Vortex, puis reprends la quête vers le Comte Harebourg."
+      "flowNote": "Avance S’armer contre le destin jusqu’au Vortex avec Les totems de Maïmane actifs. Garde la quête active : elle sera reprise sur la carte suivante vers le Comte Harebourg."
     },
     {
       "id": "route-step-0947",
@@ -22309,7 +22309,7 @@
         "goalId": "qui-nous-protege",
         "phase": "start"
       },
-      "flowNote": "Garde Qui nous protège du Protecteur ? active : Flovoraison s’insérera avant sa conclusion, puis la route reviendra fermer le Protecteur."
+      "flowNote": "Garde Qui nous protège du Protecteur ? active : Flovoraison s’insérera avant sa conclusion, puis la route terminera le Protecteur."
     },
     {
       "id": "route-step-0967",
@@ -22501,7 +22501,7 @@
         "x": 7,
         "y": 1
       },
-      "flowNote": "Flovoraison et Qui nous protège du Protecteur ? convergent ici : termine la séquence Flovoraison, puis ferme le Protecteur."
+      "flowNote": "Flovoraison et Qui nous protège du Protecteur ? convergent ici : termine la séquence Flovoraison, puis termine Qui nous protège du Protecteur ?."
     },
     {
       "id": "route-step-0995",
