@@ -208,6 +208,50 @@ test('contrat route — Piège de crystal se termine explicitement au Meno avant
   assert.ok(!/REPRENDRE/i.test(followUp?.action ?? ''));
 });
 
+test('contrat route — les fins Frigost différées restent explicites', () => {
+  assertOrderedSequence('Dan Lavy', [
+    'route-step-0519',
+    'route-step-0520',
+    'route-step-dan-lavy-finish',
+  ]);
+  assertOrderedSequence('Là-haut sur la montagne', [
+    'route-step-0577',
+    'route-step-0582',
+    'route-step-lahaut-montagne-finish',
+  ]);
+  assertOrderedSequence('Le pic qui glace', [
+    'route-step-0589',
+    'route-step-0590',
+    'route-step-pic-qui-glace-finish',
+  ]);
+
+  for (const stepId of [
+    'route-step-dan-lavy-finish',
+    'route-step-lahaut-montagne-finish',
+    'route-step-pic-qui-glace-finish',
+  ]) {
+    const step = route.steps.find((candidate) => candidate.id === stepId);
+    assert.ok(step, `${stepId}: étape de fin absente.`);
+    assert.match(step?.action ?? '', /TERMINER/);
+    assert.equal(step?.displayRole, 'objective');
+  }
+});
+
+test('contrat route — Flovoraison se termine explicitement avant le Protecteur', () => {
+  assertOrderedSequence('Flovoraison → Protecteur', [
+    'route-step-0994',
+    'route-step-0996',
+    'route-step-flovoraison-finish',
+    'route-step-0997',
+  ]);
+
+  const flovoraison = route.steps.find((step) => step.id === 'route-step-flovoraison-finish');
+  const protecteur = route.steps.find((step) => step.id === 'route-step-0997');
+  assert.equal(flovoraison?.action, 'TERMINER');
+  assert.match(protecteur?.action ?? '', /REPRENDRE/);
+  assert.match(protecteur?.action ?? '', /TERMINER/);
+});
+
 test('contrat route — Pêche en eaux gelées est explicitement terminée après le Mansot Royal', () => {
   assertOrderedSequence('Pêche en eaux gelées', [
     'route-step-0417',
@@ -266,13 +310,13 @@ test('contrat UX — une reprise annoncée possède une vraie reprise ou fin ult
   }
 });
 
-test('contrat UX — une instruction Reprends sur une reprise réelle porte aussi l’action REPRENDRE', () => {
+test('contrat UX — « reprends » n’apparaît qu’au moment d’une vraie reprise', () => {
   for (const step of route.steps) {
-    if (step.type !== 'resume' || !step.instruction || !/\bReprends\b/i.test(step.instruction)) continue;
+    if (!step.instruction || !/\bReprends\b/i.test(step.instruction)) continue;
     assert.match(
       step.action ?? '',
       /REPRENDRE/i,
-      `${step.id}: instruction de reprise sans action REPRENDRE.`,
+      `${step.id}: instruction utilise « reprends » sans action REPRENDRE.`,
     );
   }
 });
