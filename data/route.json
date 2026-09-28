@@ -2191,12 +2191,13 @@
       "displayRole": "transition",
       "title": "Ça sent le gaz",
       "action": "LANCER / STOP",
-      "instruction": "Parle à ton chef de classe et choisis « Demander s'il a encore besoin de vous » pour lancer Ça sent le gaz, puis garde-la active. La position dépend de ta classe.",
+      "instruction": "Après le lancement, garde Ça sent le gaz active.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/ca-sent-le-gaz.html"
       },
-      "momentId": "moment-route-step-0048"
+      "momentId": "moment-route-step-0048",
+      "launchInstruction": "Parle à ton chef de classe et choisis « Demander s'il a encore besoin de vous ». La position dépend de ta classe."
     },
     {
       "id": "route-step-1131",
@@ -4706,7 +4707,7 @@
       "title": "Aventure miniature",
       "prerequisites": "Quête lancée dans la salle de sortie de Kankreblath ; Baguette Rikiki requise.",
       "action": "LANCER / TERMINER",
-      "instruction": "Dans la salle de sortie de Kankreblath, utilise la Croquette Magique pour lancer Aventure miniature, puis va en [3,-17] et termine la quête.",
+      "instruction": "Puis va en [3,-17] et termine Aventure miniature.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/aventure-miniature.html"
@@ -4715,7 +4716,8 @@
       "destination": {
         "x": 3,
         "y": -17
-      }
+      },
+      "launchInstruction": "Dans la salle de sortie de la Cache de Kankreblath, utilise la Croquette Magique obtenue après le boss pour lancer la quête."
     },
     {
       "id": "route-step-0091",
@@ -16120,7 +16122,7 @@
       "prerequisites": "Aucun prérequis de quête ; il faut uniquement obtenir 1 Manuel Scolaire sur les monstres de Nimotopia.",
       "warning": "Le Manuel a pu tomber naturellement pendant toute la boucle précédente. Ne farme que s'il n'est toujours pas obtenu.",
       "action": "OBTENIR / LANCER / AVANCER / STOP",
-      "instruction": "VÉRIFIE ton inventaire : si tu as déjà 1 Manuel Scolaire, ne farm rien. Sinon, combats les monstres de Nimotopia jusqu'à l'obtenir. Double-clique ensuite le Manuel pour lancer La valse des manuels, parle à Coqueline en [-63,29], puis avance jusqu'au Camp du Comte Razof et arrête-toi devant le donjon.",
+      "instruction": "VÉRIFIE d'abord ton inventaire : si tu n'as pas encore le Manuel, combats les monstres de Nimotopia jusqu'à l'obtenir. Parle ensuite à Coqueline en [-63,29], puis avance jusqu'au Camp du Comte Razof et arrête-toi devant le donjon.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-valse-des-manuels.html"
@@ -16133,7 +16135,8 @@
       "longRunningGoal": {
         "goalId": "nimotopia-valse",
         "phase": "start"
-      }
+      },
+      "launchInstruction": "Double-clique 1 Manuel Scolaire dans ton inventaire pour lancer La valse des manuels."
     },
     {
       "id": "route-step-0660",
@@ -18995,8 +18998,9 @@
       "title": "Piège de crystal → Son nom est Personne",
       "prerequisites": "Capitaine Meno vaincu ; Piège de crystal au dialogue de fin.",
       "action": "TERMINER / LANCER",
-      "instruction": "Après Meno, parle au Capitaine avant de sortir : termine Piège de crystal puis lance Son nom est Personne dans le même enchaînement.",
-      "momentId": "moment-nordalie-missions"
+      "instruction": "Termine d'abord Piège de crystal, puis enchaîne immédiatement sans quitter le Vaisseau.",
+      "momentId": "moment-nordalie-missions",
+      "launchInstruction": "Dans la salle de sortie du Vaisseau, lance Son nom est Personne auprès du Capitaine Meno."
     },
     {
       "id": "route-step-0838",
