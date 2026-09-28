@@ -16373,8 +16373,8 @@
       "title": "La mère des Dragoeufs AU PARANGON",
       "prerequisites": "niveau recommandé 200.",
       "warning": "Avance uniquement jusqu'à l'objectif « Obtenir un Parangon de puissance ». Le Parangon pourra ensuite tomber naturellement sur les gardiens de donjon niveau 200. Ne poursuis pas la branche Vulbis après le drop.",
-      "action": "LANCER / FIL ROUGE / STOP",
-      "instruction": "En [1,6], Lance La mère des Dragoeufs auprès de Doc Emiette Borgne. Fais l'enquête initiale et les combats jusqu'au moment où la quête demande d'OBTENIR UN PARANGON DE PUISSANCE, puis arrête-toi ici. Poursuis les autres objectifs avec cette étape active : chaque gardien de donjon niveau 200 devient une chance de drop.",
+      "action": "LANCER / AVANCER / STOP",
+      "instruction": "En [1,6], lance La mère des Dragoeufs auprès de Doc Emiette Borgne. Fais toute la partie préliminaire de la quête et arrête-toi exactement quand l’objectif devient « Obtenir un Parangon de puissance ». À partir de ce checkpoint, garde la quête active pendant les donjons niveau 200.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-mere-des-dragoeufs.html"
@@ -16391,7 +16391,8 @@
       "longRunningGoal": {
         "goalId": "parangon-puissance",
         "phase": "start"
-      }
+      },
+      "flowNote": "Avant tout donjon niveau 200, avance La mère des Dragoeufs jusqu’à l’objectif « Obtenir un Parangon de puissance ». Une fois ce checkpoint atteint, le drop du Parangon est actif sur les gardiens de donjon niveau 200."
     },
     {
       "id": "route-step-0680",
