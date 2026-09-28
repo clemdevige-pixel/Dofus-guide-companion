@@ -16316,8 +16316,7 @@
       "location": {
         "x": 2,
         "y": 1
-      },
-      "instruction": "Avant tout donjon niveau 200, avance La mère des Dragoeufs jusqu’à l’objectif « Obtenir un Parangon de puissance ». Une fois ce checkpoint atteint, le drop du Parangon est actif sur les gardiens de donjon niveau 200."
+      }
     },
     {
       "id": "route-step-0679",
