@@ -18979,7 +18979,8 @@
       "warning": "Ne quitte pas le Vaisseau avant d’avoir terminé Piège de crystal et lancé Son nom est Personne.",
       "action": "TERMINER / LANCER",
       "instruction": "Après Meno, parle au Capitaine avant de sortir : termine Piège de crystal puis lance Son nom est Personne dans le même enchaînement.",
-      "momentId": "moment-nordalie-missions"
+      "momentId": "moment-nordalie-missions",
+      "launchInstruction": "Dans la salle de sortie du Vaisseau, parle au Capitaine Meno après avoir terminé Piège de crystal pour lancer Son nom est Personne."
     },
     {
       "id": "route-step-0838",
