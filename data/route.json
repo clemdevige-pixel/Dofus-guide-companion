@@ -2725,7 +2725,7 @@
       "displayRole": "objective",
       "title": "L'histoire en mouvement",
       "prerequisites": "L'histoire en mouvement active.",
-      "action": "TERMINER",
+      "action": "REPRENDRE / TERMINER",
       "instruction": "Reprends et termine L'histoire en mouvement au fil du retour Astrub. Chacha Blues reste active pour le sous-parcours suivant.",
       "source": {
         "label": "DPLN",
@@ -16688,7 +16688,7 @@
       "title": "Moteur à explosion",
       "prerequisites": "Les derniers rescapés lancée ; niveau recommandé 200.",
       "warning": "Ne retourne pas à Karla pour la lancer : elle est déjà active.",
-      "action": "TERMINER",
+      "action": "REPRENDRE / TERMINER",
       "instruction": "Reprends et termine Moteur à explosion déjà active.",
       "source": {
         "label": "DPLN",
@@ -21427,7 +21427,7 @@
       "title": "La graine de la révolte",
       "prerequisites": "La graine de la révolte déjà lancée avec Pour que la flamme vacille.",
       "warning": "Termine cette branche en premier : elle fournit notamment la Liane de Soldalia et l'Épine d'Armuguet utiles à la Fleur de Cendrepierre.",
-      "action": "TERMINER",
+      "action": "REPRENDRE / TERMINER",
       "instruction": "Reprends et termine La graine de la révolte déjà active. Conserve les récompenses utiles au craft de Pour que la flamme vacille.",
       "source": {
         "label": "DPLN",
@@ -21448,7 +21448,7 @@
       "title": "Pour que la flamme vacille",
       "prerequisites": "Pour que la flamme vacille déjà active ; composants récupérés/conservés.",
       "warning": "Utilise en priorité le Casque obtenu via La sorcière exilée et la Liane/Épine obtenues via La graine de la révolte.",
-      "action": "TERMINER",
+      "action": "REPRENDRE / TERMINER",
       "instruction": "Reprends Pour que la flamme vacille, fabrique la Fleur de Cendrepierre avec les ressources déjà récupérées puis termine la quête afin d'obtenir l'accès à Cire Momore.",
       "source": {
         "label": "DPLN",
