@@ -132,6 +132,9 @@ export function validateRoute(route: RouteDocument): RouteDocument {
     }
     if (step.displayRole !== undefined && !step.momentId) throw new Error(`${step.id}: displayRole défini sans momentId.`);
     if (step.momentId !== undefined && step.displayRole === undefined) throw new Error(`${step.id}: momentId défini sans displayRole.`);
+    if (step.flowNote !== undefined && !isNonEmptyString(step.flowNote)) {
+      throw new Error(`${step.id}: flowNote vide.`);
+    }
 
     if (step.parallelGroup) {
       if (!isNonEmptyString(step.parallelGroup.parallelId)) {
@@ -170,6 +173,9 @@ export function validateRoute(route: RouteDocument): RouteDocument {
     if (step.momentId !== undefined) {
       if (!isNonEmptyString(step.momentId)) throw new Error(`${step.id}: momentId vide.`);
       const opensMoment = activeMomentId !== step.momentId;
+      if (step.flowNote && !opensMoment) {
+        throw new Error(`${step.id}: flowNote doit être porté par le premier OBJECTIVE du moment.`);
+      }
       if (opensMoment && step.displayRole !== 'objective') {
         throw new Error(`${step.id}: un momentId doit commencer par displayRole=objective.`);
       }
