@@ -74,6 +74,8 @@ export interface RouteStep {
   /** Information importante affichée avant l'action ; source = colonne « À SAVOIR » du Sheet. */
   warning?: string;
   action?: string;
+  /** Contexte macro joueur : pourquoi on s'arrête, ce qui doit être fait avant la reprise, ou comment plusieurs branches convergent. */
+  flowNote?: string;
   instruction?: string;
   source?: {
     label: string;
