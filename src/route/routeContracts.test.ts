@@ -321,6 +321,54 @@ test('contrat UX — « reprends » n’apparaît qu’au moment d’une vraie r
   }
 });
 
+test('contrat UX — une poursuite dans la même carte ne redevient pas une reprise', () => {
+  const sameCardContinuationIds = [
+    'route-step-0298',
+    'route-step-0301',
+    'route-step-0346',
+    'route-step-0383',
+    'route-step-0410',
+    'route-step-0563',
+    'route-step-0565',
+    'route-step-0566',
+    'route-step-0624',
+    'route-step-0655',
+    'route-step-0660',
+    'route-step-0696',
+    'route-step-0699',
+    'route-step-0709',
+    'route-step-0741',
+    'route-step-0832',
+    'route-step-0908',
+    'route-step-0925',
+    'route-step-0951',
+    'route-step-0969',
+    'route-step-0996',
+  ] as const;
+
+  for (const stepId of sameCardContinuationIds) {
+    const step = route.steps.find((candidate) => candidate.id === stepId);
+    assert.ok(step, `${stepId}: étape absente.`);
+    assert.doesNotMatch(
+      step?.action ?? '',
+      /REPRENDRE/i,
+      `${stepId}: une poursuite dans la même carte ne doit pas porter REPRENDRE.`,
+    );
+    assert.doesNotMatch(
+      step?.instruction ?? '',
+      /\bReprends?\b/i,
+      `${stepId}: le texte doit utiliser poursuis/avance/termine dans la même carte.`,
+    );
+  }
+
+  const talKasha = route.steps.find((step) => step.id === 'route-step-0831');
+  assert.equal(talKasha?.instruction, 'Vaincs Tal Kasha.');
+
+  const nordalie = route.steps.find((step) => step.id === 'route-step-0832');
+  assert.equal(nordalie?.action, 'AVANCER');
+  assert.equal(nordalie?.instruction, undefined);
+});
+
 test('contrat UX — les flow notes restent ciblées sur les moments complexes', () => {
   const flowNotes = route.steps.filter((step) => step.flowNote);
   assert.ok(flowNotes.length >= 50, `Au moins 50 flow notes sont attendues, reçu : ${flowNotes.length}.`);
