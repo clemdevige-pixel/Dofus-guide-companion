@@ -70,7 +70,6 @@ interface RouteStep {
   prerequisites?: string;
   warning?: string;
   action?: string;
-  flowNote?: string;
   instruction?: string;
 
   source?: {
@@ -170,16 +169,10 @@ Les besoins actionnables doivent passer par :
 - `warning` si critique ;
 - `instruction` / champs structurés si nécessaire.
 
-### `flowNote`
 
-Contexte macro joueur, affiché une seule fois sur la carte :
-- pourquoi une quête est laissée active ;
-- ce qui doit être fait avant sa reprise ;
-- comment plusieurs branches convergent.
+### Informations de flow intégrées
 
-Source Sheet : colonne `FLOW_NOTE`.
-
-Sur une carte `MOMENT_ID`, `flowNote` est porté uniquement par le premier `OBJECTIVE`. Il ne remplace ni `warning` ni le détail opérationnel de `instruction`.
+La logique macro joueur (quête laissée active, reprise différée, convergence, mutualisation) n’a plus de champ dédié. Elle est intégrée directement à `instruction`, au plus près de l’étape concernée. `warning` reste réservé aux risques, contraintes et interactions à ne pas manquer.
 
 ### `warning`
 
@@ -299,7 +292,7 @@ Colonnes structurantes actuellement utilisées :
 - `DOFUS_SERIES` ;
 - `FLOW_NOTE`.
 
-La plage d’export couvre désormais `ROUTE!A5:X`.
+La plage d’export couvre désormais `ROUTE!A5:W`.
 
 ## 13. Validation
 
