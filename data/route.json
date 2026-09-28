@@ -4484,7 +4484,7 @@
       "displayRole": "objective",
       "title": "Bûcherons en détresse",
       "prerequisites": "Quête active depuis le premier passage en [0,-25].",
-      "warning": "Ferme cette branche au retour final en forêt, juste avant Le génie se meut.",
+      "warning": "Termine cette branche au retour final en forêt, juste avant Le génie se meut.",
       "action": "REPRENDRE / TERMINER",
       "instruction": "Au dernier retour en [0,-25], Reprends et termine Bûcherons en détresse.",
       "source": {
@@ -4583,7 +4583,7 @@
       "displayRole": "objective",
       "title": "Qui sème le vent récolte l'Art'empeth",
       "prerequisites": "Quête active depuis le début du parcours Astrub.",
-      "warning": "Ferme cette longue branche juste avant Le repos est dans le champ.",
+      "warning": "Termine cette longue branche juste avant Le repos est dans le champ.",
       "action": "TERMINER",
       "instruction": "Fais le dernier objectif avant le retour final.",
       "source": {
@@ -19548,7 +19548,7 @@
       "displayRole": "detail",
       "title": "◆ Trône de Sang — GUERRE",
       "prerequisites": "Le jour le plus long au checkpoint Guerre.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après Guerre, reparle-lui avant de quitter le Trône de Sang. Le dialogue ferme Le jour le plus long et ouvre la suite Au-delà de la gloire.",
+      "warning": "⚠ AVANT DE SORTIR DU DONJON — après Guerre, reparle-lui avant de quitter le Trône de Sang. Le dialogue termine Le jour le plus long et ouvre la suite Au-delà de la gloire.",
       "action": "FAIRE",
       "instruction": "Vaincs Guerre au Trône de Sang.",
       "momentId": "moment-cavalier-guerre"
