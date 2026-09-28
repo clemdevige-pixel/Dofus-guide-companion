@@ -58,6 +58,7 @@ Afficher uniquement ce qui aide à jouer :
 - position/destination utile ;
 - warning critique ;
 - instruction/transition nécessaire ;
+- contexte macro de parcours (`FLOW_NOTE`) uniquement lorsqu’il explique un checkpoint, une reprise ou une convergence ;
 - lien DPLN.
 
 Les blocs génériques `PRÉREQUIS` ne sont pas affichés côté joueur.
