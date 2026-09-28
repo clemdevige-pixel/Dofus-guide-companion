@@ -23,8 +23,7 @@
   transition: border-color 120ms ease, background 120ms ease, opacity 120ms ease;
 }
 
-.sequence-item--expanded,
-.sequence-item:has(.sequence-expand-indicator) {
+.sequence-item--expandable {
   cursor: pointer;
 }
 
@@ -144,24 +143,6 @@
   flex: 0 0 auto;
   align-items: center;
   gap: 5px;
-}
-
-.sequence-expand-indicator {
-  display: grid;
-  width: 24px;
-  height: 24px;
-  place-items: center;
-  border: 1px solid #334139;
-  border-radius: 6px;
-  background: #172019;
-  color: #aebcb1;
-  font-size: 11px;
-}
-
-.sequence-item:hover .sequence-expand-indicator {
-  border-color: #578366;
-  background: #1d2d22;
-  color: #dce7de;
 }
 
 .sequence-item__action {
