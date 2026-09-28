@@ -239,3 +239,32 @@ Lire dans l’ordre : `AGENTS.md`, `SPEC.md`, `ARCHITECTURE.md`, `docs/DATA_MODE
 - `cargo check` Windows encore en cours au dernier contrôle.
 - Point restant volontairement non étendu : terminer complètement `La mère des Dragoeufs` après le Parangon demanderait d'ajouter `Perdu dans le temps` puis la suite Vulbis. La route conserve pour l'instant uniquement le checkpoint Parangon utile aux donjons 200.
 
+## Update 2026-09-28 — passe finale flow / reprises / fins explicites
+
+- Règle UX consolidée :
+  - `FLOW_NOTE` = logique macro de la carte ;
+  - l’`instruction` du même step ne garde que l’info micro réellement unique ;
+  - aucune duplication volontaire flow + instruction ;
+  - `reprends` n’est utilisé qu’au moment d’une vraie reprise ;
+  - `termine` est préféré à `ferme` dans le wording joueur.
+- 58 instructions portées par des flow notes ont été nettoyées ; 30 gardent uniquement un détail micro utile (PNJ, ressource, verrou, interaction critique).
+- Actions de reprise corrigées notamment sur `Recouvrement de dette à la Tabasse` et `L'heure des adieux`.
+- 4 fins de quêtes auparavant implicites sont maintenant des étapes visibles :
+  - `route-step-dan-lavy-finish` — À la recherche de Dan Lavy ;
+  - `route-step-lahaut-montagne-finish` — Là-haut sur la montagne ;
+  - `route-step-pic-qui-glace-finish` — Le pic qui glace ;
+  - `route-step-flovoraison-finish` — Flovoraison.
+- `Pêche en eaux gelées` reste protégée par `route-step-peche-eaux-gelees-finish`.
+- `La mère des Dragoeufs` est conservée : avant tout donjon 200, elle doit être avancée exactement jusqu'à l'objectif « Obtenir un Parangon de puissance » ; la quête reste ensuite active pour le drop. La suite Vulbis reste hors scope et est explicitement clôturée côté Companion par `FIN DU SUIVI`.
+- `Qui nous protège du Protecteur ?` est maintenant repris/terminé après une étape séparée de fin de Flovoraison.
+- Route runtime : **981 étapes / 32 blocs**.
+- Contrats ajoutés :
+  - aucun `flowNote` avec « ferme/fermer » ;
+  - « reprends » uniquement avec action `REPRENDRE` ;
+  - toute reprise annoncée possède une vraie reprise/fin ultérieure ;
+  - fins explicites Dan Lavy / Là-haut / Pic qui glace / Flovoraison ;
+  - Pêche en eaux gelées terminée après Mansot ;
+  - checkpoint Parangon avant Nileza, premier donjon 200 de la série.
+- CI frontend du commit `49227a96310ce3596277f55fa399228e1bacb77c` : tests route, validation et build **verts**.
+- `cargo check` Windows encore en cours au dernier contrôle.
+
