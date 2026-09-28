@@ -10926,8 +10926,33 @@
       "momentId": "moment-mansot-pass"
     },
     {
-      "id": "route-step-1207",
+      "id": "route-step-peche-eaux-gelees-finish",
       "order": 422,
+      "blockId": "block-11",
+      "type": "resume",
+      "displayRole": "objective",
+      "title": "Pêche en eaux gelées — TERMINER",
+      "prerequisites": "Mansot Royal vaincu ; Alliance de Damar récupérée ; Bricole Girl terminée.",
+      "warning": "Termine cette quête avant d’enchaîner La pêche à Mel.",
+      "action": "REPRENDRE / TERMINER",
+      "instruction": "Après le Mansot Royal, rapporte l’Alliance de Damar à Valy en [-75,-38], puis retourne voir Damar en [-67,-54] et termine Pêche en eaux gelées.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/pecircche-en-eaux-geleacutees.html"
+      },
+      "momentId": "moment-mansot-pass",
+      "location": {
+        "x": -75,
+        "y": -38
+      },
+      "destination": {
+        "x": -67,
+        "y": -54
+      }
+    },
+    {
+      "id": "route-step-1207",
+      "order": 423,
       "blockId": "block-11",
       "type": "quest",
       "displayRole": "objective",
@@ -10952,7 +10977,7 @@
     },
     {
       "id": "route-step-1208",
-      "order": 423,
+      "order": 424,
       "blockId": "block-11",
       "type": "dungeon",
       "displayRole": "detail",
@@ -10964,7 +10989,7 @@
     },
     {
       "id": "route-step-1209",
-      "order": 424,
+      "order": 425,
       "blockId": "block-11",
       "type": "resume",
       "displayRole": "transition",
@@ -10981,7 +11006,7 @@
     },
     {
       "id": "route-step-0430",
-      "order": 425,
+      "order": 426,
       "blockId": "block-11",
       "type": "quest",
       "displayRole": "objective",
@@ -11003,7 +11028,7 @@
     },
     {
       "id": "route-step-0431",
-      "order": 426,
+      "order": 427,
       "blockId": "block-11",
       "type": "quest",
       "displayRole": "objective",
@@ -11025,7 +11050,7 @@
     },
     {
       "id": "route-step-0432",
-      "order": 427,
+      "order": 428,
       "blockId": "block-11",
       "type": "quest",
       "displayRole": "objective",
@@ -11047,7 +11072,7 @@
     },
     {
       "id": "route-step-0433",
-      "order": 428,
+      "order": 429,
       "blockId": "block-11",
       "type": "quest",
       "displayRole": "objective",
@@ -11069,7 +11094,7 @@
     },
     {
       "id": "route-step-0434",
-      "order": 429,
+      "order": 430,
       "blockId": "block-11",
       "type": "resume",
       "displayRole": "transition",
@@ -11084,7 +11109,7 @@
     },
     {
       "id": "route-step-audit-frigost-ile-start",
-      "order": 430,
+      "order": 431,
       "blockId": "block-11",
       "type": "quest",
       "title": "Frigost, une île pas comme les autres — LANCER",
@@ -11108,7 +11133,7 @@
     },
     {
       "id": "route-step-audit-dev-durable-start",
-      "order": 431,
+      "order": 432,
       "blockId": "block-11",
       "type": "quest",
       "displayRole": "objective",
@@ -11128,7 +11153,7 @@
     },
     {
       "id": "route-step-0435",
-      "order": 432,
+      "order": 433,
       "blockId": "block-11",
       "type": "quest",
       "displayRole": "objective",
@@ -11152,7 +11177,7 @@
     },
     {
       "id": "route-step-0437",
-      "order": 433,
+      "order": 434,
       "blockId": "block-11",
       "type": "quest",
       "displayRole": "objective",
@@ -11177,7 +11202,7 @@
     },
     {
       "id": "route-step-0438",
-      "order": 434,
+      "order": 435,
       "blockId": "block-11",
       "type": "quest",
       "title": "Le mal a dit — avancer jusqu'au Royalmouth",
@@ -11197,7 +11222,7 @@
     },
     {
       "id": "route-step-0439",
-      "order": 435,
+      "order": 436,
       "blockId": "block-11",
       "type": "dungeon",
       "displayRole": "objective",
@@ -11210,7 +11235,7 @@
     },
     {
       "id": "route-step-0440",
-      "order": 436,
+      "order": 437,
       "blockId": "block-11",
       "type": "resume",
       "dofusSeries": "Dofus Pourpre",
@@ -11227,7 +11252,7 @@
     },
     {
       "id": "route-step-0441",
-      "order": 437,
+      "order": 438,
       "blockId": "block-11",
       "type": "resume",
       "displayRole": "transition",
@@ -11243,7 +11268,7 @@
     },
     {
       "id": "block-entry-12",
-      "order": 438,
+      "order": 439,
       "blockId": "block-12",
       "type": "preparation",
       "displayType": "ENTRÉE",
@@ -11317,7 +11342,7 @@
     },
     {
       "id": "route-step-0857",
-      "order": 439,
+      "order": 440,
       "blockId": "block-12",
       "type": "quest",
       "dofusSeries": "Dofus Ébène",
@@ -11343,7 +11368,7 @@
     },
     {
       "id": "route-step-0858",
-      "order": 440,
+      "order": 441,
       "blockId": "block-12",
       "type": "dungeon",
       "displayRole": "detail",
@@ -11356,7 +11381,7 @@
     },
     {
       "id": "route-step-0859",
-      "order": 441,
+      "order": 442,
       "blockId": "block-12",
       "type": "resume",
       "dofusSeries": "Dofus Ébène",
@@ -11374,7 +11399,7 @@
     },
     {
       "id": "route-step-0860",
-      "order": 442,
+      "order": 443,
       "blockId": "block-12",
       "type": "dungeon",
       "displayRole": "objective",
@@ -11387,7 +11412,7 @@
     },
     {
       "id": "route-step-0861",
-      "order": 443,
+      "order": 444,
       "blockId": "block-12",
       "type": "resume",
       "dofusSeries": "Dofus Ébène",
@@ -11404,7 +11429,7 @@
     },
     {
       "id": "route-step-1163",
-      "order": 444,
+      "order": 445,
       "blockId": "block-12",
       "type": "quest",
       "displayRole": "objective",
@@ -11434,7 +11459,7 @@
     },
     {
       "id": "route-step-0654",
-      "order": 445,
+      "order": 446,
       "blockId": "block-12",
       "type": "quest",
       "displayRole": "objective",
@@ -11458,7 +11483,7 @@
     },
     {
       "id": "route-step-0655",
-      "order": 446,
+      "order": 447,
       "blockId": "block-12",
       "type": "resume",
       "displayRole": "transition",
@@ -11482,7 +11507,7 @@
     },
     {
       "id": "route-step-0686",
-      "order": 447,
+      "order": 448,
       "blockId": "block-12",
       "type": "quest",
       "displayRole": "objective",
@@ -11500,7 +11525,7 @@
     },
     {
       "id": "route-step-0687",
-      "order": 448,
+      "order": 449,
       "blockId": "block-12",
       "type": "quest",
       "displayRole": "objective",
@@ -11518,7 +11543,7 @@
     },
     {
       "id": "route-step-0688",
-      "order": 449,
+      "order": 450,
       "blockId": "block-12",
       "type": "quest",
       "displayRole": "objective",
@@ -11536,7 +11561,7 @@
     },
     {
       "id": "route-step-0689",
-      "order": 450,
+      "order": 451,
       "blockId": "block-12",
       "type": "quest",
       "displayRole": "objective",
@@ -11555,7 +11580,7 @@
     },
     {
       "id": "route-step-0862",
-      "order": 451,
+      "order": 452,
       "blockId": "block-12",
       "type": "quest",
       "dofusSeries": "Dofus Ébène",
@@ -11581,7 +11606,7 @@
     },
     {
       "id": "route-step-0405",
-      "order": 452,
+      "order": 453,
       "blockId": "block-12",
       "type": "resume",
       "displayRole": "objective",
@@ -11608,7 +11633,7 @@
     },
     {
       "id": "route-step-0406",
-      "order": 453,
+      "order": 454,
       "blockId": "block-12",
       "type": "dungeon",
       "displayRole": "detail",
@@ -11621,7 +11646,7 @@
     },
     {
       "id": "route-step-0864",
-      "order": 454,
+      "order": 455,
       "blockId": "block-12",
       "type": "resume",
       "dofusSeries": "Dofus Ébène",
@@ -11638,7 +11663,7 @@
     },
     {
       "id": "route-step-0407",
-      "order": 455,
+      "order": 456,
       "blockId": "block-12",
       "type": "resume",
       "displayRole": "transition",
@@ -11672,7 +11697,7 @@
     },
     {
       "id": "route-step-0408",
-      "order": 456,
+      "order": 457,
       "blockId": "block-12",
       "type": "quest",
       "displayType": "TOUR",
@@ -11685,7 +11710,7 @@
     },
     {
       "id": "route-step-0409",
-      "order": 457,
+      "order": 458,
       "blockId": "block-12",
       "type": "dungeon",
       "displayRole": "detail",
@@ -11698,7 +11723,7 @@
     },
     {
       "id": "route-step-0410",
-      "order": 458,
+      "order": 459,
       "blockId": "block-12",
       "type": "resume",
       "displayRole": "transition",
@@ -11724,7 +11749,7 @@
     },
     {
       "id": "block-entry-13",
-      "order": 459,
+      "order": 460,
       "blockId": "block-13",
       "type": "preparation",
       "displayType": "ENTRÉE",
@@ -11734,7 +11759,7 @@
     },
     {
       "id": "route-step-0274",
-      "order": 460,
+      "order": 461,
       "blockId": "block-13",
       "type": "quest",
       "dofusSeries": "Domakuro",
@@ -11755,7 +11780,7 @@
     },
     {
       "id": "route-step-0265",
-      "order": 461,
+      "order": 462,
       "blockId": "block-13",
       "type": "resume",
       "displayRole": "transition",
@@ -11775,7 +11800,7 @@
     },
     {
       "id": "route-step-0275",
-      "order": 462,
+      "order": 463,
       "blockId": "block-13",
       "type": "dungeon",
       "displayRole": "detail",
@@ -11788,7 +11813,7 @@
     },
     {
       "id": "route-step-0276",
-      "order": 463,
+      "order": 464,
       "blockId": "block-13",
       "type": "resume",
       "dofusSeries": "Domakuro",
@@ -11804,7 +11829,7 @@
     },
     {
       "id": "route-step-0455",
-      "order": 464,
+      "order": 465,
       "blockId": "block-13",
       "type": "resume",
       "displayRole": "transition",
@@ -11834,7 +11859,7 @@
     },
     {
       "id": "route-step-1205",
-      "order": 465,
+      "order": 466,
       "blockId": "block-13",
       "type": "dungeon",
       "title": "◆ Fabrique de foux d'artifice — LA VOIE DU GUERRIER #1",
@@ -11845,7 +11870,7 @@
     },
     {
       "id": "route-step-0353",
-      "order": 466,
+      "order": 467,
       "blockId": "block-13",
       "type": "dungeon",
       "displayRole": "objective",
@@ -11862,7 +11887,7 @@
     },
     {
       "id": "route-step-0354",
-      "order": 467,
+      "order": 468,
       "blockId": "block-13",
       "type": "resume",
       "dofusSeries": "Dofus Turquoise",
@@ -11879,7 +11904,7 @@
     },
     {
       "id": "route-step-0355",
-      "order": 468,
+      "order": 469,
       "blockId": "block-13",
       "type": "resume",
       "displayRole": "transition",
@@ -11895,7 +11920,7 @@
     },
     {
       "id": "route-step-0457",
-      "order": 469,
+      "order": 470,
       "blockId": "block-13",
       "type": "resume",
       "displayRole": "transition",
@@ -11926,7 +11951,7 @@
     },
     {
       "id": "route-step-0356",
-      "order": 470,
+      "order": 471,
       "blockId": "block-13",
       "type": "quest",
       "dofusSeries": "Dofus Turquoise",
@@ -11950,7 +11975,7 @@
     },
     {
       "id": "route-step-0357",
-      "order": 471,
+      "order": 472,
       "blockId": "block-13",
       "type": "quest",
       "dofusSeries": "Dofus Turquoise",
@@ -11974,7 +11999,7 @@
     },
     {
       "id": "route-step-0358",
-      "order": 472,
+      "order": 473,
       "blockId": "block-13",
       "type": "quest",
       "displayRole": "objective",
@@ -11999,7 +12024,7 @@
     },
     {
       "id": "route-step-0359",
-      "order": 473,
+      "order": 474,
       "blockId": "block-13",
       "type": "resume",
       "dofusSeries": "Dofus Turquoise",
@@ -12014,7 +12039,7 @@
     },
     {
       "id": "route-step-0360",
-      "order": 474,
+      "order": 475,
       "blockId": "block-13",
       "type": "quest",
       "dofusSeries": "Dofus Turquoise",
@@ -12040,7 +12065,7 @@
     },
     {
       "id": "route-step-0361",
-      "order": 475,
+      "order": 476,
       "blockId": "block-13",
       "type": "quest",
       "displayType": "TURQUOISE",
@@ -12070,7 +12095,7 @@
     },
     {
       "id": "route-step-0277",
-      "order": 476,
+      "order": 477,
       "blockId": "block-13",
       "type": "quest",
       "dofusSeries": "Domakuro",
@@ -12090,7 +12115,7 @@
     },
     {
       "id": "route-step-0278",
-      "order": 477,
+      "order": 478,
       "blockId": "block-13",
       "type": "dungeon",
       "displayRole": "detail",
@@ -12103,7 +12128,7 @@
     },
     {
       "id": "route-step-0279",
-      "order": 478,
+      "order": 479,
       "blockId": "block-13",
       "type": "resume",
       "dofusSeries": "Domakuro",
@@ -12119,7 +12144,7 @@
     },
     {
       "id": "route-step-0280",
-      "order": 479,
+      "order": 480,
       "blockId": "block-13",
       "type": "quest",
       "dofusSeries": "Domakuro",
@@ -12140,7 +12165,7 @@
     },
     {
       "id": "route-step-0454",
-      "order": 480,
+      "order": 481,
       "blockId": "block-13",
       "type": "resume",
       "dofusSeries": "Dofus Turquoise",
@@ -12157,7 +12182,7 @@
     },
     {
       "id": "route-step-0456",
-      "order": 481,
+      "order": 482,
       "blockId": "block-13",
       "type": "dungeon",
       "displayRole": "detail",
@@ -12170,7 +12195,7 @@
     },
     {
       "id": "route-step-0282",
-      "order": 482,
+      "order": 483,
       "blockId": "block-13",
       "type": "resume",
       "dofusSeries": "Domakuro",
@@ -12187,7 +12212,7 @@
     },
     {
       "id": "route-step-0283",
-      "order": 483,
+      "order": 484,
       "blockId": "block-13",
       "type": "quest",
       "dofusSeries": "Domakuro",
@@ -12207,7 +12232,7 @@
     },
     {
       "id": "route-step-0284",
-      "order": 484,
+      "order": 485,
       "blockId": "block-13",
       "type": "dungeon",
       "displayRole": "detail",
@@ -12220,7 +12245,7 @@
     },
     {
       "id": "route-step-0285",
-      "order": 485,
+      "order": 486,
       "blockId": "block-13",
       "type": "resume",
       "dofusSeries": "Domakuro",
@@ -12235,7 +12260,7 @@
     },
     {
       "id": "route-step-0286",
-      "order": 486,
+      "order": 487,
       "blockId": "block-13",
       "type": "quest",
       "dofusSeries": "Domakuro",
@@ -12258,7 +12283,7 @@
     },
     {
       "id": "route-step-1206",
-      "order": 487,
+      "order": 488,
       "blockId": "block-13",
       "type": "dungeon",
       "title": "◆ Excavation du Mansot Royal — VITI #2",
@@ -12269,7 +12294,7 @@
     },
     {
       "id": "route-step-0464",
-      "order": 488,
+      "order": 489,
       "blockId": "block-13",
       "type": "quest",
       "displayType": "TOUR",
@@ -12281,7 +12306,7 @@
     },
     {
       "id": "route-step-0465",
-      "order": 489,
+      "order": 490,
       "blockId": "block-13",
       "type": "dungeon",
       "displayRole": "detail",
@@ -12294,7 +12319,7 @@
     },
     {
       "id": "route-step-0466",
-      "order": 490,
+      "order": 491,
       "blockId": "block-13",
       "type": "resume",
       "displayRole": "transition",
@@ -12328,7 +12353,7 @@
     },
     {
       "id": "route-step-0467",
-      "order": 491,
+      "order": 492,
       "blockId": "block-13",
       "type": "resume",
       "dofusSeries": "Dofus Turquoise",
@@ -12349,7 +12374,7 @@
     },
     {
       "id": "route-step-0468",
-      "order": 492,
+      "order": 493,
       "blockId": "block-13",
       "type": "resume",
       "dofusSeries": "Dofus Turquoise",
@@ -12365,7 +12390,7 @@
     },
     {
       "id": "block-entry-14",
-      "order": 493,
+      "order": 494,
       "blockId": "block-14",
       "type": "preparation",
       "displayType": "ENTRÉE",
@@ -12406,7 +12431,7 @@
     },
     {
       "id": "route-step-0500",
-      "order": 494,
+      "order": 495,
       "blockId": "block-14",
       "type": "resume",
       "displayRole": "objective",
@@ -12423,7 +12448,7 @@
     },
     {
       "id": "route-step-0501",
-      "order": 495,
+      "order": 496,
       "blockId": "block-14",
       "type": "quest",
       "displayRole": "objective",
@@ -12446,7 +12471,7 @@
     },
     {
       "id": "route-step-0502",
-      "order": 496,
+      "order": 497,
       "blockId": "block-14",
       "type": "dungeon",
       "displayRole": "detail",
@@ -12458,7 +12483,7 @@
     },
     {
       "id": "route-step-0503",
-      "order": 497,
+      "order": 498,
       "blockId": "block-14",
       "type": "resume",
       "displayRole": "transition",
@@ -12472,7 +12497,7 @@
     },
     {
       "id": "route-step-0504",
-      "order": 498,
+      "order": 499,
       "blockId": "block-14",
       "type": "resume",
       "displayRole": "transition",
@@ -12487,7 +12512,7 @@
     },
     {
       "id": "route-step-0469",
-      "order": 499,
+      "order": 500,
       "blockId": "block-14",
       "type": "quest",
       "displayType": "TURQUOISE",
@@ -12514,7 +12539,7 @@
     },
     {
       "id": "route-step-0470",
-      "order": 500,
+      "order": 501,
       "blockId": "block-14",
       "type": "quest",
       "displayType": "TURQUOISE",
@@ -12541,7 +12566,7 @@
     },
     {
       "id": "route-step-0471",
-      "order": 501,
+      "order": 502,
       "blockId": "block-14",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -12560,7 +12585,7 @@
     },
     {
       "id": "route-step-0472",
-      "order": 502,
+      "order": 503,
       "blockId": "block-14",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -12575,7 +12600,7 @@
     },
     {
       "id": "route-step-0473",
-      "order": 503,
+      "order": 504,
       "blockId": "block-14",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -12594,7 +12619,7 @@
     },
     {
       "id": "route-step-0474",
-      "order": 504,
+      "order": 505,
       "blockId": "block-14",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -12614,7 +12639,7 @@
     },
     {
       "id": "route-step-0475",
-      "order": 505,
+      "order": 506,
       "blockId": "block-14",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -12634,7 +12659,7 @@
     },
     {
       "id": "route-step-0476",
-      "order": 506,
+      "order": 507,
       "blockId": "block-14",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -12654,7 +12679,7 @@
     },
     {
       "id": "route-step-0477",
-      "order": 507,
+      "order": 508,
       "blockId": "block-14",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -12670,7 +12695,7 @@
     },
     {
       "id": "route-step-0478",
-      "order": 508,
+      "order": 509,
       "blockId": "block-14",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -12685,7 +12710,7 @@
     },
     {
       "id": "route-step-0479",
-      "order": 509,
+      "order": 510,
       "blockId": "block-14",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -12704,7 +12729,7 @@
     },
     {
       "id": "route-step-0480",
-      "order": 510,
+      "order": 511,
       "blockId": "block-14",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -12720,7 +12745,7 @@
     },
     {
       "id": "route-step-0481",
-      "order": 511,
+      "order": 512,
       "blockId": "block-14",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -12735,7 +12760,7 @@
     },
     {
       "id": "route-step-0482",
-      "order": 512,
+      "order": 513,
       "blockId": "block-14",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -12750,7 +12775,7 @@
     },
     {
       "id": "route-step-0483",
-      "order": 513,
+      "order": 514,
       "blockId": "block-14",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -12766,7 +12791,7 @@
     },
     {
       "id": "route-step-0484",
-      "order": 514,
+      "order": 515,
       "blockId": "block-14",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -12785,7 +12810,7 @@
     },
     {
       "id": "route-step-0485",
-      "order": 515,
+      "order": 516,
       "blockId": "block-14",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -12813,7 +12838,7 @@
     },
     {
       "id": "route-step-0486",
-      "order": 516,
+      "order": 517,
       "blockId": "block-14",
       "type": "order",
       "displayRole": "objective",
@@ -12832,7 +12857,7 @@
     },
     {
       "id": "route-step-0487",
-      "order": 517,
+      "order": 518,
       "blockId": "block-14",
       "type": "order",
       "displayRole": "objective",
@@ -12852,7 +12877,7 @@
     },
     {
       "id": "route-step-audit-grain-sel",
-      "order": 518,
+      "order": 519,
       "blockId": "block-14",
       "type": "quest",
       "displayRole": "objective",
@@ -12867,7 +12892,7 @@
     },
     {
       "id": "route-step-0488",
-      "order": 519,
+      "order": 520,
       "blockId": "block-14",
       "type": "dungeon",
       "displayRole": "objective",
@@ -12880,7 +12905,7 @@
     },
     {
       "id": "route-step-0489",
-      "order": 520,
+      "order": 521,
       "blockId": "block-14",
       "type": "quest",
       "displayRole": "objective",
@@ -12900,7 +12925,7 @@
     },
     {
       "id": "route-step-0490",
-      "order": 521,
+      "order": 522,
       "blockId": "block-14",
       "type": "quest",
       "displayType": "TOUR",
@@ -12916,7 +12941,7 @@
     },
     {
       "id": "route-step-0491",
-      "order": 522,
+      "order": 523,
       "blockId": "block-14",
       "type": "dungeon",
       "displayRole": "detail",
@@ -12933,7 +12958,7 @@
     },
     {
       "id": "route-step-0492",
-      "order": 523,
+      "order": 524,
       "blockId": "block-14",
       "type": "resume",
       "displayRole": "transition",
@@ -12949,7 +12974,7 @@
     },
     {
       "id": "route-step-0493",
-      "order": 524,
+      "order": 525,
       "blockId": "block-14",
       "type": "resume",
       "displayRole": "transition",
@@ -12983,7 +13008,7 @@
     },
     {
       "id": "route-step-1201",
-      "order": 525,
+      "order": 526,
       "blockId": "block-14",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13004,7 +13029,7 @@
     },
     {
       "id": "route-step-0459",
-      "order": 526,
+      "order": 527,
       "blockId": "block-14",
       "type": "resume",
       "displayRole": "objective",
@@ -13016,7 +13041,7 @@
     },
     {
       "id": "route-step-0460",
-      "order": 527,
+      "order": 528,
       "blockId": "block-14",
       "type": "dungeon",
       "displayRole": "detail",
@@ -13028,7 +13053,7 @@
     },
     {
       "id": "route-step-0494",
-      "order": 528,
+      "order": 529,
       "blockId": "block-14",
       "type": "quest",
       "displayType": "TOUR",
@@ -13041,7 +13066,7 @@
     },
     {
       "id": "route-step-0495",
-      "order": 529,
+      "order": 530,
       "blockId": "block-14",
       "type": "dungeon",
       "displayRole": "detail",
@@ -13054,7 +13079,7 @@
     },
     {
       "id": "route-step-0496",
-      "order": 530,
+      "order": 531,
       "blockId": "block-14",
       "type": "resume",
       "displayRole": "transition",
@@ -13070,7 +13095,7 @@
     },
     {
       "id": "route-step-0497",
-      "order": 531,
+      "order": 532,
       "blockId": "block-14",
       "type": "order",
       "title": "Apprentissage : Chasseur de Renégats",
@@ -13088,7 +13113,7 @@
     },
     {
       "id": "block-entry-15",
-      "order": 532,
+      "order": 533,
       "blockId": "block-15",
       "type": "preparation",
       "displayType": "ENTRÉE",
@@ -13183,7 +13208,7 @@
     },
     {
       "id": "route-step-1210",
-      "order": 533,
+      "order": 534,
       "blockId": "block-15",
       "type": "quest",
       "displayRole": "objective",
@@ -13209,7 +13234,7 @@
     },
     {
       "id": "route-step-0519",
-      "order": 534,
+      "order": 535,
       "blockId": "block-15",
       "type": "quest",
       "title": "À la recherche de Dan Lavy — avancer jusqu'à Gros Med",
@@ -13228,7 +13253,7 @@
     },
     {
       "id": "route-step-audit-mauvaise-graine",
-      "order": 535,
+      "order": 536,
       "blockId": "block-15",
       "type": "quest",
       "displayRole": "objective",
@@ -13243,7 +13268,7 @@
     },
     {
       "id": "route-step-audit-champ-pomy",
-      "order": 536,
+      "order": 537,
       "blockId": "block-15",
       "type": "quest",
       "displayRole": "objective",
@@ -13258,7 +13283,7 @@
     },
     {
       "id": "route-step-0520",
-      "order": 537,
+      "order": 538,
       "blockId": "block-15",
       "type": "dungeon",
       "displayRole": "objective",
@@ -13271,7 +13296,7 @@
     },
     {
       "id": "route-step-0521",
-      "order": 538,
+      "order": 539,
       "blockId": "block-15",
       "type": "resume",
       "displayRole": "transition",
@@ -13286,7 +13311,7 @@
     },
     {
       "id": "route-step-0554",
-      "order": 539,
+      "order": 540,
       "blockId": "block-15",
       "type": "quest",
       "displayRole": "objective",
@@ -13304,7 +13329,7 @@
     },
     {
       "id": "route-step-0555",
-      "order": 540,
+      "order": 541,
       "blockId": "block-15",
       "type": "resume",
       "displayRole": "transition",
@@ -13319,7 +13344,7 @@
     },
     {
       "id": "route-step-0522",
-      "order": 541,
+      "order": 542,
       "blockId": "block-15",
       "type": "resume",
       "dofusSeries": "Dofus Turquoise",
@@ -13340,7 +13365,7 @@
     },
     {
       "id": "route-step-0523",
-      "order": 542,
+      "order": 543,
       "blockId": "block-15",
       "type": "resume",
       "dofusSeries": "Dofus Turquoise",
@@ -13356,7 +13381,7 @@
     },
     {
       "id": "route-step-0524",
-      "order": 543,
+      "order": 544,
       "blockId": "block-15",
       "type": "quest",
       "displayType": "TURQUOISE",
@@ -13378,7 +13403,7 @@
     },
     {
       "id": "route-step-0525",
-      "order": 544,
+      "order": 545,
       "blockId": "block-15",
       "type": "quest",
       "displayType": "TURQUOISE",
@@ -13409,7 +13434,7 @@
     },
     {
       "id": "route-step-0527",
-      "order": 545,
+      "order": 546,
       "blockId": "block-15",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13429,7 +13454,7 @@
     },
     {
       "id": "route-step-0528",
-      "order": 546,
+      "order": 547,
       "blockId": "block-15",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13448,7 +13473,7 @@
     },
     {
       "id": "route-step-0529",
-      "order": 547,
+      "order": 548,
       "blockId": "block-15",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13468,7 +13493,7 @@
     },
     {
       "id": "route-step-0530",
-      "order": 548,
+      "order": 549,
       "blockId": "block-15",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13487,7 +13512,7 @@
     },
     {
       "id": "route-step-1168",
-      "order": 549,
+      "order": 550,
       "blockId": "block-15",
       "type": "quest",
       "displayType": "QUÊTES PARALLÈLES",
@@ -13533,7 +13558,7 @@
     },
     {
       "id": "route-step-1169",
-      "order": 550,
+      "order": 551,
       "blockId": "block-15",
       "type": "quest",
       "displayType": "QUÊTES PARALLÈLES",
@@ -13578,7 +13603,7 @@
     },
     {
       "id": "route-step-0755",
-      "order": 551,
+      "order": 552,
       "blockId": "block-15",
       "type": "major_step",
       "displayRole": "objective",
@@ -13620,7 +13645,7 @@
     },
     {
       "id": "route-step-0759",
-      "order": 552,
+      "order": 553,
       "blockId": "block-15",
       "type": "quest",
       "displayRole": "objective",
@@ -13638,7 +13663,7 @@
     },
     {
       "id": "route-step-0760",
-      "order": 553,
+      "order": 554,
       "blockId": "block-15",
       "type": "quest",
       "displayRole": "objective",
@@ -13656,7 +13681,7 @@
     },
     {
       "id": "route-step-0761",
-      "order": 554,
+      "order": 555,
       "blockId": "block-15",
       "type": "quest",
       "displayRole": "objective",
@@ -13675,7 +13700,7 @@
     },
     {
       "id": "route-step-0762",
-      "order": 555,
+      "order": 556,
       "blockId": "block-15",
       "type": "dungeon",
       "displayRole": "detail",
@@ -13688,7 +13713,7 @@
     },
     {
       "id": "route-step-0763",
-      "order": 556,
+      "order": 557,
       "blockId": "block-15",
       "type": "resume",
       "displayRole": "transition",
@@ -13704,7 +13729,7 @@
     },
     {
       "id": "route-step-0764",
-      "order": 557,
+      "order": 558,
       "blockId": "block-15",
       "type": "quest",
       "displayRole": "objective",
@@ -13724,7 +13749,7 @@
     },
     {
       "id": "route-step-0765",
-      "order": 558,
+      "order": 559,
       "blockId": "block-15",
       "type": "quest",
       "displayRole": "objective",
@@ -13739,7 +13764,7 @@
     },
     {
       "id": "route-step-0766",
-      "order": 559,
+      "order": 560,
       "blockId": "block-15",
       "type": "quest",
       "displayRole": "objective",
@@ -13757,7 +13782,7 @@
     },
     {
       "id": "route-step-accuse-reception",
-      "order": 560,
+      "order": 561,
       "blockId": "block-15",
       "type": "quest",
       "displayRole": "objective",
@@ -13781,7 +13806,7 @@
     },
     {
       "id": "route-step-0531",
-      "order": 561,
+      "order": 562,
       "blockId": "block-15",
       "type": "quest",
       "displayRole": "objective",
@@ -13799,7 +13824,7 @@
     },
     {
       "id": "route-step-0532",
-      "order": 562,
+      "order": 563,
       "blockId": "block-15",
       "type": "quest",
       "displayRole": "objective",
@@ -13823,7 +13848,7 @@
     },
     {
       "id": "route-step-0533",
-      "order": 563,
+      "order": 564,
       "blockId": "block-15",
       "type": "dungeon",
       "displayRole": "detail",
@@ -13840,7 +13865,7 @@
     },
     {
       "id": "route-step-0534",
-      "order": 564,
+      "order": 565,
       "blockId": "block-15",
       "type": "resume",
       "displayRole": "transition",
@@ -13855,7 +13880,7 @@
     },
     {
       "id": "route-step-0537",
-      "order": 565,
+      "order": 566,
       "blockId": "block-15",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -13874,7 +13899,7 @@
     },
     {
       "id": "block-entry-16",
-      "order": 566,
+      "order": 567,
       "blockId": "block-16",
       "type": "preparation",
       "displayType": "ENTRÉE",
@@ -14059,7 +14084,7 @@
     },
     {
       "id": "route-step-0506",
-      "order": 567,
+      "order": 568,
       "blockId": "block-16",
       "type": "quest",
       "dofusSeries": "Dorigami",
@@ -14084,7 +14109,7 @@
     },
     {
       "id": "route-step-0507",
-      "order": 568,
+      "order": 569,
       "blockId": "block-16",
       "type": "dungeon",
       "displayRole": "detail",
@@ -14097,7 +14122,7 @@
     },
     {
       "id": "route-step-0508",
-      "order": 569,
+      "order": 570,
       "blockId": "block-16",
       "type": "resume",
       "dofusSeries": "Dorigami",
@@ -14113,7 +14138,7 @@
     },
     {
       "id": "route-step-0538",
-      "order": 570,
+      "order": 571,
       "blockId": "block-16",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -14132,7 +14157,7 @@
     },
     {
       "id": "route-step-0539",
-      "order": 571,
+      "order": 572,
       "blockId": "block-16",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -14151,7 +14176,7 @@
     },
     {
       "id": "route-step-0540",
-      "order": 572,
+      "order": 573,
       "blockId": "block-16",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -14170,7 +14195,7 @@
     },
     {
       "id": "route-step-audit-gant-graine",
-      "order": 573,
+      "order": 574,
       "blockId": "block-16",
       "type": "quest",
       "displayRole": "objective",
@@ -14185,7 +14210,7 @@
     },
     {
       "id": "route-step-0556",
-      "order": 574,
+      "order": 575,
       "blockId": "block-16",
       "type": "quest",
       "displayRole": "objective",
@@ -14205,7 +14230,7 @@
     },
     {
       "id": "route-step-0557",
-      "order": 575,
+      "order": 576,
       "blockId": "block-16",
       "type": "dungeon",
       "displayRole": "detail",
@@ -14217,7 +14242,7 @@
     },
     {
       "id": "route-step-0558",
-      "order": 576,
+      "order": 577,
       "blockId": "block-16",
       "type": "resume",
       "displayRole": "transition",
@@ -14233,7 +14258,7 @@
     },
     {
       "id": "route-step-0541",
-      "order": 577,
+      "order": 578,
       "blockId": "block-16",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -14251,7 +14276,7 @@
     },
     {
       "id": "route-step-0542",
-      "order": 578,
+      "order": 579,
       "blockId": "block-16",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -14271,7 +14296,7 @@
     },
     {
       "id": "route-step-0543",
-      "order": 579,
+      "order": 580,
       "blockId": "block-16",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -14291,7 +14316,7 @@
     },
     {
       "id": "route-step-0544",
-      "order": 580,
+      "order": 581,
       "blockId": "block-16",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -14310,7 +14335,7 @@
     },
     {
       "id": "route-step-0545",
-      "order": 581,
+      "order": 582,
       "blockId": "block-16",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -14330,7 +14355,7 @@
     },
     {
       "id": "route-step-0546",
-      "order": 582,
+      "order": 583,
       "blockId": "block-16",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -14349,7 +14374,7 @@
     },
     {
       "id": "route-step-0547",
-      "order": 583,
+      "order": 584,
       "blockId": "block-16",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -14368,7 +14393,7 @@
     },
     {
       "id": "route-step-0548",
-      "order": 584,
+      "order": 585,
       "blockId": "block-16",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -14384,7 +14409,7 @@
     },
     {
       "id": "route-step-0549",
-      "order": 585,
+      "order": 586,
       "blockId": "block-16",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -14403,7 +14428,7 @@
     },
     {
       "id": "route-step-0550",
-      "order": 586,
+      "order": 587,
       "blockId": "block-16",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -14423,7 +14448,7 @@
     },
     {
       "id": "route-step-0551",
-      "order": 587,
+      "order": 588,
       "blockId": "block-16",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -14448,7 +14473,7 @@
     },
     {
       "id": "route-step-0552",
-      "order": 588,
+      "order": 589,
       "blockId": "block-16",
       "type": "order",
       "displayRole": "objective",
@@ -14464,7 +14489,7 @@
     },
     {
       "id": "route-step-audit-ougah-order4",
-      "order": 589,
+      "order": 590,
       "blockId": "block-16",
       "type": "dungeon",
       "displayRole": "detail",
@@ -14477,7 +14502,7 @@
     },
     {
       "id": "route-step-0740",
-      "order": 590,
+      "order": 591,
       "blockId": "block-16",
       "type": "resume",
       "displayRole": "transition",
@@ -14489,7 +14514,7 @@
     },
     {
       "id": "route-step-audit-tour-force-nage",
-      "order": 591,
+      "order": 592,
       "blockId": "block-16",
       "type": "resume",
       "displayRole": "transition",
@@ -14505,7 +14530,7 @@
     },
     {
       "id": "route-step-0559",
-      "order": 592,
+      "order": 593,
       "blockId": "block-16",
       "type": "quest",
       "title": "Les rescapés du Village Enseveli",
@@ -14526,7 +14551,7 @@
     },
     {
       "id": "route-step-0560",
-      "order": 593,
+      "order": 594,
       "blockId": "block-16",
       "type": "quest",
       "displayRole": "objective",
@@ -14548,7 +14573,7 @@
     },
     {
       "id": "route-step-0561",
-      "order": 594,
+      "order": 595,
       "blockId": "block-16",
       "type": "quest",
       "displayRole": "objective",
@@ -14568,7 +14593,7 @@
     },
     {
       "id": "route-step-0562",
-      "order": 595,
+      "order": 596,
       "blockId": "block-16",
       "type": "dungeon",
       "displayRole": "detail",
@@ -14580,7 +14605,7 @@
     },
     {
       "id": "route-step-0563",
-      "order": 596,
+      "order": 597,
       "blockId": "block-16",
       "type": "resume",
       "displayRole": "transition",
@@ -14596,7 +14621,7 @@
     },
     {
       "id": "route-step-0564",
-      "order": 597,
+      "order": 598,
       "blockId": "block-16",
       "type": "dungeon",
       "displayRole": "objective",
@@ -14609,7 +14634,7 @@
     },
     {
       "id": "route-step-0565",
-      "order": 598,
+      "order": 599,
       "blockId": "block-16",
       "type": "resume",
       "displayRole": "transition",
@@ -14624,7 +14649,7 @@
     },
     {
       "id": "route-step-0566",
-      "order": 599,
+      "order": 600,
       "blockId": "block-16",
       "type": "resume",
       "displayRole": "transition",
@@ -14639,7 +14664,7 @@
     },
     {
       "id": "route-step-0568",
-      "order": 600,
+      "order": 601,
       "blockId": "block-16",
       "type": "quest",
       "displayRole": "objective",
@@ -14658,7 +14683,7 @@
     },
     {
       "id": "route-step-0569",
-      "order": 601,
+      "order": 602,
       "blockId": "block-16",
       "type": "quest",
       "displayRole": "objective",
@@ -14682,7 +14707,7 @@
     },
     {
       "id": "block-entry-17",
-      "order": 602,
+      "order": 603,
       "blockId": "block-17",
       "type": "preparation",
       "displayType": "ENTRÉE",
@@ -14714,7 +14739,7 @@
     },
     {
       "id": "route-step-0505",
-      "order": 603,
+      "order": 604,
       "blockId": "block-17",
       "type": "quest",
       "title": "Quand les esprits s'échauffent — jusqu'à Demeure des Esprits",
@@ -14742,7 +14767,7 @@
     },
     {
       "id": "route-step-0509",
-      "order": 604,
+      "order": 605,
       "blockId": "block-17",
       "type": "quest",
       "dofusSeries": "Dorigami",
@@ -14771,7 +14796,7 @@
     },
     {
       "id": "route-step-0510",
-      "order": 605,
+      "order": 606,
       "blockId": "block-17",
       "type": "dungeon",
       "displayRole": "detail",
@@ -14788,7 +14813,7 @@
     },
     {
       "id": "route-step-0511",
-      "order": 606,
+      "order": 607,
       "blockId": "block-17",
       "type": "quest",
       "dofusSeries": "Dorigami",
@@ -14814,7 +14839,7 @@
     },
     {
       "id": "route-step-0512",
-      "order": 607,
+      "order": 608,
       "blockId": "block-17",
       "type": "resume",
       "dofusSeries": "Dorigami",
@@ -14830,7 +14855,7 @@
     },
     {
       "id": "route-step-0513",
-      "order": 608,
+      "order": 609,
       "blockId": "block-17",
       "type": "resume",
       "displayRole": "transition",
@@ -14845,7 +14870,7 @@
     },
     {
       "id": "route-step-0515",
-      "order": 609,
+      "order": 610,
       "blockId": "block-17",
       "type": "quest",
       "title": "Le serment de l'ambre",
@@ -14862,7 +14887,7 @@
     },
     {
       "id": "route-step-audit-gang-toxines",
-      "order": 610,
+      "order": 611,
       "blockId": "block-17",
       "type": "quest",
       "displayRole": "objective",
@@ -14873,7 +14898,7 @@
     },
     {
       "id": "route-step-audit-sombres-desseins",
-      "order": 611,
+      "order": 612,
       "blockId": "block-17",
       "type": "quest",
       "displayRole": "objective",
@@ -14884,7 +14909,7 @@
     },
     {
       "id": "route-step-audit-jour-assassins",
-      "order": 612,
+      "order": 613,
       "blockId": "block-17",
       "type": "quest",
       "displayRole": "objective",
@@ -14895,7 +14920,7 @@
     },
     {
       "id": "route-step-audit-piege-referme",
-      "order": 613,
+      "order": 614,
       "blockId": "block-17",
       "type": "quest",
       "displayRole": "objective",
@@ -14906,7 +14931,7 @@
     },
     {
       "id": "route-step-0517",
-      "order": 614,
+      "order": 615,
       "blockId": "block-17",
       "type": "quest",
       "title": "Si loin, si proches",
@@ -14923,7 +14948,7 @@
     },
     {
       "id": "route-step-audit-graines-discorde",
-      "order": 615,
+      "order": 616,
       "blockId": "block-17",
       "type": "quest",
       "displayRole": "objective",
@@ -14938,7 +14963,7 @@
     },
     {
       "id": "route-step-0571",
-      "order": 616,
+      "order": 617,
       "blockId": "block-17",
       "type": "quest",
       "displayRole": "objective",
@@ -14962,7 +14987,7 @@
     },
     {
       "id": "route-step-0572",
-      "order": 617,
+      "order": 618,
       "blockId": "block-17",
       "type": "quest",
       "displayRole": "objective",
@@ -14987,7 +15012,7 @@
     },
     {
       "id": "route-step-0573",
-      "order": 618,
+      "order": 619,
       "blockId": "block-17",
       "type": "dungeon",
       "displayRole": "detail",
@@ -15004,7 +15029,7 @@
     },
     {
       "id": "route-step-0574",
-      "order": 619,
+      "order": 620,
       "blockId": "block-17",
       "type": "resume",
       "displayRole": "transition",
@@ -15020,7 +15045,7 @@
     },
     {
       "id": "route-step-0575",
-      "order": 620,
+      "order": 621,
       "blockId": "block-17",
       "type": "resume",
       "displayRole": "transition",
@@ -15035,7 +15060,7 @@
     },
     {
       "id": "route-step-0576",
-      "order": 621,
+      "order": 622,
       "blockId": "block-17",
       "type": "resume",
       "displayRole": "transition",
@@ -15050,7 +15075,7 @@
     },
     {
       "id": "route-step-0577",
-      "order": 622,
+      "order": 623,
       "blockId": "block-17",
       "type": "quest",
       "title": "Là-haut sur la montagne — avancer jusqu'au Kolosso",
@@ -15067,7 +15092,7 @@
     },
     {
       "id": "route-step-0578",
-      "order": 623,
+      "order": 624,
       "blockId": "block-17",
       "type": "resume",
       "dofusSeries": "Dofus Turquoise",
@@ -15088,7 +15113,7 @@
     },
     {
       "id": "route-step-0579",
-      "order": 624,
+      "order": 625,
       "blockId": "block-17",
       "type": "resume",
       "dofusSeries": "Dofus Turquoise",
@@ -15104,7 +15129,7 @@
     },
     {
       "id": "route-step-0580",
-      "order": 625,
+      "order": 626,
       "blockId": "block-17",
       "type": "quest",
       "dofusSeries": "Dofus Turquoise",
@@ -15122,7 +15147,7 @@
     },
     {
       "id": "block-entry-18",
-      "order": 626,
+      "order": 627,
       "blockId": "block-18",
       "type": "preparation",
       "displayType": "ENTRÉE",
@@ -15179,7 +15204,7 @@
     },
     {
       "id": "route-step-0461",
-      "order": 627,
+      "order": 628,
       "blockId": "block-18",
       "type": "resume",
       "displayRole": "objective",
@@ -15190,7 +15215,7 @@
     },
     {
       "id": "route-step-0462",
-      "order": 628,
+      "order": 629,
       "blockId": "block-18",
       "type": "dungeon",
       "displayRole": "detail",
@@ -15202,7 +15227,7 @@
     },
     {
       "id": "route-step-0463",
-      "order": 629,
+      "order": 630,
       "blockId": "block-18",
       "type": "resume",
       "displayRole": "transition",
@@ -15217,7 +15242,7 @@
     },
     {
       "id": "route-step-audit-champ-heros",
-      "order": 630,
+      "order": 631,
       "blockId": "block-18",
       "type": "quest",
       "displayRole": "objective",
@@ -15232,7 +15257,7 @@
     },
     {
       "id": "route-step-0581",
-      "order": 631,
+      "order": 632,
       "blockId": "block-18",
       "type": "quest",
       "displayRole": "objective",
@@ -15252,7 +15277,7 @@
     },
     {
       "id": "route-step-0582",
-      "order": 632,
+      "order": 633,
       "blockId": "block-18",
       "type": "dungeon",
       "displayRole": "detail",
@@ -15263,7 +15288,7 @@
     },
     {
       "id": "route-step-0583",
-      "order": 633,
+      "order": 634,
       "blockId": "block-18",
       "type": "resume",
       "displayRole": "transition",
@@ -15279,7 +15304,7 @@
     },
     {
       "id": "route-step-0584",
-      "order": 634,
+      "order": 635,
       "blockId": "block-18",
       "type": "quest",
       "displayRole": "objective",
@@ -15298,7 +15323,7 @@
     },
     {
       "id": "route-step-0585",
-      "order": 635,
+      "order": 636,
       "blockId": "block-18",
       "type": "resume",
       "displayRole": "transition",
@@ -15318,7 +15343,7 @@
     },
     {
       "id": "route-step-audit-champ-borde",
-      "order": 636,
+      "order": 637,
       "blockId": "block-18",
       "type": "quest",
       "displayRole": "objective",
@@ -15333,7 +15358,7 @@
     },
     {
       "id": "route-step-0589",
-      "order": 637,
+      "order": 638,
       "blockId": "block-18",
       "type": "quest",
       "displayRole": "objective",
@@ -15357,7 +15382,7 @@
     },
     {
       "id": "route-step-0586",
-      "order": 638,
+      "order": 639,
       "blockId": "block-18",
       "type": "resume",
       "displayRole": "transition",
@@ -15381,7 +15406,7 @@
     },
     {
       "id": "route-step-0590",
-      "order": 639,
+      "order": 640,
       "blockId": "block-18",
       "type": "dungeon",
       "displayRole": "detail",
@@ -15397,7 +15422,7 @@
     },
     {
       "id": "route-step-0587",
-      "order": 640,
+      "order": 641,
       "blockId": "block-18",
       "type": "resume",
       "displayRole": "transition",
@@ -15416,7 +15441,7 @@
     },
     {
       "id": "route-step-0588",
-      "order": 641,
+      "order": 642,
       "blockId": "block-18",
       "type": "quest",
       "displayRole": "objective",
@@ -15435,7 +15460,7 @@
     },
     {
       "id": "route-step-audit-dev-durable-finish",
-      "order": 642,
+      "order": 643,
       "blockId": "block-18",
       "type": "resume",
       "displayRole": "objective",
@@ -15450,7 +15475,7 @@
     },
     {
       "id": "route-step-0644",
-      "order": 643,
+      "order": 644,
       "blockId": "block-18",
       "type": "quest",
       "title": "Donjons et trouffions",
@@ -15469,7 +15494,7 @@
     },
     {
       "id": "route-step-audit-frigost-ile-finish",
-      "order": 644,
+      "order": 645,
       "blockId": "block-18",
       "type": "resume",
       "title": "Frigost, une île pas comme les autres",
@@ -15483,7 +15508,7 @@
     },
     {
       "id": "route-step-0593",
-      "order": 645,
+      "order": 646,
       "blockId": "block-18",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -15504,7 +15529,7 @@
     },
     {
       "id": "route-step-0594",
-      "order": 646,
+      "order": 647,
       "blockId": "block-18",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -15523,7 +15548,7 @@
     },
     {
       "id": "route-step-0595",
-      "order": 647,
+      "order": 648,
       "blockId": "block-18",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -15542,7 +15567,7 @@
     },
     {
       "id": "route-step-0596",
-      "order": 648,
+      "order": 649,
       "blockId": "block-18",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -15561,7 +15586,7 @@
     },
     {
       "id": "route-step-0597",
-      "order": 649,
+      "order": 650,
       "blockId": "block-18",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -15582,7 +15607,7 @@
     },
     {
       "id": "route-step-0598",
-      "order": 650,
+      "order": 651,
       "blockId": "block-18",
       "type": "dungeon",
       "displayRole": "detail",
@@ -15595,7 +15620,7 @@
     },
     {
       "id": "route-step-0599",
-      "order": 651,
+      "order": 652,
       "blockId": "block-18",
       "type": "resume",
       "displayRole": "transition",
@@ -15610,7 +15635,7 @@
     },
     {
       "id": "route-step-0645",
-      "order": 652,
+      "order": 653,
       "blockId": "block-18",
       "type": "quest",
       "title": "Au fion du trou",
@@ -15637,7 +15662,7 @@
     },
     {
       "id": "route-step-0600",
-      "order": 653,
+      "order": 654,
       "blockId": "block-18",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -15656,7 +15681,7 @@
     },
     {
       "id": "route-step-0601",
-      "order": 654,
+      "order": 655,
       "blockId": "block-18",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -15676,7 +15701,7 @@
     },
     {
       "id": "route-step-0602",
-      "order": 655,
+      "order": 656,
       "blockId": "block-18",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -15697,7 +15722,7 @@
     },
     {
       "id": "route-step-0603",
-      "order": 656,
+      "order": 657,
       "blockId": "block-18",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -15717,7 +15742,7 @@
     },
     {
       "id": "route-step-0604",
-      "order": 657,
+      "order": 658,
       "blockId": "block-18",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -15736,7 +15761,7 @@
     },
     {
       "id": "route-step-0606",
-      "order": 658,
+      "order": 659,
       "blockId": "block-18",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -15756,7 +15781,7 @@
     },
     {
       "id": "route-step-0607",
-      "order": 659,
+      "order": 660,
       "blockId": "block-18",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -15780,7 +15805,7 @@
     },
     {
       "id": "block-entry-19",
-      "order": 660,
+      "order": 661,
       "blockId": "block-19",
       "type": "preparation",
       "displayType": "ENTRÉE",
@@ -15856,7 +15881,7 @@
     },
     {
       "id": "route-step-0656",
-      "order": 661,
+      "order": 662,
       "blockId": "block-19",
       "type": "quest",
       "title": "Frais de porc inclus",
@@ -15878,7 +15903,7 @@
     },
     {
       "id": "route-step-1164",
-      "order": 662,
+      "order": 663,
       "blockId": "block-19",
       "type": "quest",
       "displayRole": "objective",
@@ -15908,7 +15933,7 @@
     },
     {
       "id": "route-step-1165",
-      "order": 663,
+      "order": 664,
       "blockId": "block-19",
       "type": "quest",
       "displayRole": "objective",
@@ -15936,7 +15961,7 @@
     },
     {
       "id": "route-step-1166",
-      "order": 664,
+      "order": 665,
       "blockId": "block-19",
       "type": "quest",
       "displayRole": "objective",
@@ -15964,7 +15989,7 @@
     },
     {
       "id": "route-step-0657",
-      "order": 665,
+      "order": 666,
       "blockId": "block-19",
       "type": "resume",
       "displayRole": "transition",
@@ -15988,7 +16013,7 @@
     },
     {
       "id": "route-step-1167",
-      "order": 666,
+      "order": 667,
       "blockId": "block-19",
       "type": "quest",
       "displayRole": "objective",
@@ -16016,7 +16041,7 @@
     },
     {
       "id": "route-step-0658",
-      "order": 667,
+      "order": 668,
       "blockId": "block-19",
       "type": "resume",
       "displayRole": "transition",
@@ -16040,7 +16065,7 @@
     },
     {
       "id": "route-step-0659",
-      "order": 668,
+      "order": 669,
       "blockId": "block-19",
       "type": "resume",
       "displayRole": "transition",
@@ -16064,7 +16089,7 @@
     },
     {
       "id": "route-step-0661",
-      "order": 669,
+      "order": 670,
       "blockId": "block-19",
       "type": "quest",
       "displayRole": "objective",
@@ -16090,7 +16115,7 @@
     },
     {
       "id": "route-step-0660",
-      "order": 670,
+      "order": 671,
       "blockId": "block-19",
       "type": "resume",
       "displayRole": "transition",
@@ -16114,7 +16139,7 @@
     },
     {
       "id": "route-step-0662",
-      "order": 671,
+      "order": 672,
       "blockId": "block-19",
       "type": "dungeon",
       "displayRole": "objective",
@@ -16127,7 +16152,7 @@
     },
     {
       "id": "route-step-0663",
-      "order": 672,
+      "order": 673,
       "blockId": "block-19",
       "type": "resume",
       "displayRole": "transition",
@@ -16147,7 +16172,7 @@
     },
     {
       "id": "route-step-0789",
-      "order": 673,
+      "order": 674,
       "blockId": "block-19",
       "type": "quest",
       "displayRole": "objective",
@@ -16166,7 +16191,7 @@
     },
     {
       "id": "route-step-0790",
-      "order": 674,
+      "order": 675,
       "blockId": "block-19",
       "type": "quest",
       "displayRole": "objective",
@@ -16185,7 +16210,7 @@
     },
     {
       "id": "route-step-0791",
-      "order": 675,
+      "order": 676,
       "blockId": "block-19",
       "type": "dungeon",
       "displayRole": "detail",
@@ -16198,7 +16223,7 @@
     },
     {
       "id": "route-step-0792",
-      "order": 676,
+      "order": 677,
       "blockId": "block-19",
       "type": "resume",
       "displayRole": "transition",
@@ -16212,7 +16237,7 @@
     },
     {
       "id": "route-step-0793",
-      "order": 677,
+      "order": 678,
       "blockId": "block-19",
       "type": "quest",
       "displayRole": "objective",
@@ -16231,7 +16256,7 @@
     },
     {
       "id": "route-step-0794",
-      "order": 678,
+      "order": 679,
       "blockId": "block-19",
       "type": "quest",
       "displayRole": "objective",
@@ -16250,7 +16275,7 @@
     },
     {
       "id": "route-step-0676",
-      "order": 679,
+      "order": 680,
       "blockId": "block-19",
       "type": "quest",
       "title": "Barnabé dans l'espace",
@@ -16268,7 +16293,7 @@
     },
     {
       "id": "route-step-0677",
-      "order": 680,
+      "order": 681,
       "blockId": "block-19",
       "type": "quest",
       "title": "Chaque chose en son temps",
@@ -16286,7 +16311,7 @@
     },
     {
       "id": "route-step-0678",
-      "order": 681,
+      "order": 682,
       "blockId": "block-19",
       "type": "quest",
       "displayRole": "objective",
@@ -16305,7 +16330,7 @@
     },
     {
       "id": "route-step-0679",
-      "order": 682,
+      "order": 683,
       "blockId": "block-19",
       "type": "quest",
       "displayRole": "objective",
@@ -16323,7 +16348,7 @@
     },
     {
       "id": "route-step-1170",
-      "order": 683,
+      "order": 684,
       "blockId": "block-19",
       "type": "quest",
       "displayRole": "objective",
@@ -16366,7 +16391,7 @@
     },
     {
       "id": "route-step-1171",
-      "order": 684,
+      "order": 685,
       "blockId": "block-19",
       "type": "long_running",
       "displayRole": "objective",
@@ -16396,7 +16421,7 @@
     },
     {
       "id": "route-step-0680",
-      "order": 685,
+      "order": 686,
       "blockId": "block-19",
       "type": "quest",
       "displayRole": "objective",
@@ -16414,7 +16439,7 @@
     },
     {
       "id": "route-step-0681",
-      "order": 686,
+      "order": 687,
       "blockId": "block-19",
       "type": "quest",
       "displayRole": "objective",
@@ -16433,7 +16458,7 @@
     },
     {
       "id": "route-step-0682",
-      "order": 687,
+      "order": 688,
       "blockId": "block-19",
       "type": "quest",
       "displayRole": "objective",
@@ -16451,7 +16476,7 @@
     },
     {
       "id": "route-step-0683",
-      "order": 688,
+      "order": 689,
       "blockId": "block-19",
       "type": "quest",
       "displayRole": "objective",
@@ -16469,7 +16494,7 @@
     },
     {
       "id": "route-step-0684",
-      "order": 689,
+      "order": 690,
       "blockId": "block-19",
       "type": "quest",
       "displayRole": "objective",
@@ -16487,7 +16512,7 @@
     },
     {
       "id": "route-step-0685",
-      "order": 690,
+      "order": 691,
       "blockId": "block-19",
       "type": "quest",
       "displayRole": "objective",
@@ -16507,7 +16532,7 @@
     },
     {
       "id": "block-entry-20",
-      "order": 691,
+      "order": 692,
       "blockId": "block-20",
       "type": "preparation",
       "displayType": "ENTRÉE",
@@ -16524,7 +16549,7 @@
     },
     {
       "id": "route-step-0611",
-      "order": 692,
+      "order": 693,
       "blockId": "block-20",
       "type": "quest",
       "displayRole": "objective",
@@ -16548,7 +16573,7 @@
     },
     {
       "id": "route-step-0612",
-      "order": 693,
+      "order": 694,
       "blockId": "block-20",
       "type": "quest",
       "displayRole": "objective",
@@ -16567,7 +16592,7 @@
     },
     {
       "id": "route-step-0613",
-      "order": 694,
+      "order": 695,
       "blockId": "block-20",
       "type": "quest",
       "displayRole": "objective",
@@ -16587,7 +16612,7 @@
     },
     {
       "id": "route-step-0614",
-      "order": 695,
+      "order": 696,
       "blockId": "block-20",
       "type": "quest",
       "displayRole": "objective",
@@ -16607,7 +16632,7 @@
     },
     {
       "id": "route-step-0615",
-      "order": 696,
+      "order": 697,
       "blockId": "block-20",
       "type": "quest",
       "displayRole": "objective",
@@ -16656,7 +16681,7 @@
     },
     {
       "id": "route-step-0616",
-      "order": 697,
+      "order": 698,
       "blockId": "block-20",
       "type": "resume",
       "displayRole": "transition",
@@ -16673,7 +16698,7 @@
     },
     {
       "id": "route-step-0617",
-      "order": 698,
+      "order": 699,
       "blockId": "block-20",
       "type": "quest",
       "displayRole": "objective",
@@ -16692,7 +16717,7 @@
     },
     {
       "id": "route-step-0618",
-      "order": 699,
+      "order": 700,
       "blockId": "block-20",
       "type": "quest",
       "displayRole": "objective",
@@ -16710,7 +16735,7 @@
     },
     {
       "id": "route-step-0619",
-      "order": 700,
+      "order": 701,
       "blockId": "block-20",
       "type": "resume",
       "displayRole": "transition",
@@ -16724,7 +16749,7 @@
     },
     {
       "id": "route-step-0620",
-      "order": 701,
+      "order": 702,
       "blockId": "block-20",
       "type": "quest",
       "displayRole": "objective",
@@ -16748,7 +16773,7 @@
     },
     {
       "id": "route-step-0621",
-      "order": 702,
+      "order": 703,
       "blockId": "block-20",
       "type": "quest",
       "displayRole": "objective",
@@ -16764,7 +16789,7 @@
     },
     {
       "id": "route-step-0622",
-      "order": 703,
+      "order": 704,
       "blockId": "block-20",
       "type": "dungeon",
       "displayRole": "detail",
@@ -16775,7 +16800,7 @@
     },
     {
       "id": "route-step-0623",
-      "order": 704,
+      "order": 705,
       "blockId": "block-20",
       "type": "resume",
       "displayRole": "transition",
@@ -16790,7 +16815,7 @@
     },
     {
       "id": "route-step-0624",
-      "order": 705,
+      "order": 706,
       "blockId": "block-20",
       "type": "resume",
       "displayRole": "transition",
@@ -16810,7 +16835,7 @@
     },
     {
       "id": "route-step-0625",
-      "order": 706,
+      "order": 707,
       "blockId": "block-20",
       "type": "quest",
       "displayRole": "objective",
@@ -16834,7 +16859,7 @@
     },
     {
       "id": "route-step-0626",
-      "order": 707,
+      "order": 708,
       "blockId": "block-20",
       "type": "dungeon",
       "displayRole": "detail",
@@ -16847,7 +16872,7 @@
     },
     {
       "id": "route-step-0627",
-      "order": 708,
+      "order": 709,
       "blockId": "block-20",
       "type": "resume",
       "displayRole": "transition",
@@ -16862,7 +16887,7 @@
     },
     {
       "id": "route-step-0628",
-      "order": 709,
+      "order": 710,
       "blockId": "block-20",
       "type": "quest",
       "displayRole": "objective",
@@ -16886,7 +16911,7 @@
     },
     {
       "id": "route-step-0629",
-      "order": 710,
+      "order": 711,
       "blockId": "block-20",
       "type": "dungeon",
       "displayRole": "detail",
@@ -16898,7 +16923,7 @@
     },
     {
       "id": "route-step-0630",
-      "order": 711,
+      "order": 712,
       "blockId": "block-20",
       "type": "resume",
       "displayRole": "transition",
@@ -16913,7 +16938,7 @@
     },
     {
       "id": "route-step-0631",
-      "order": 712,
+      "order": 713,
       "blockId": "block-20",
       "type": "quest",
       "displayRole": "objective",
@@ -16941,7 +16966,7 @@
     },
     {
       "id": "route-step-0632",
-      "order": 713,
+      "order": 714,
       "blockId": "block-20",
       "type": "dungeon",
       "displayRole": "detail",
@@ -16957,7 +16982,7 @@
     },
     {
       "id": "route-step-0633",
-      "order": 714,
+      "order": 715,
       "blockId": "block-20",
       "type": "resume",
       "displayRole": "transition",
@@ -16973,7 +16998,7 @@
     },
     {
       "id": "route-step-0634",
-      "order": 715,
+      "order": 716,
       "blockId": "block-20",
       "type": "resume",
       "displayRole": "objective",
@@ -16992,7 +17017,7 @@
     },
     {
       "id": "route-step-0636",
-      "order": 716,
+      "order": 717,
       "blockId": "block-20",
       "type": "quest",
       "displayRole": "objective",
@@ -17011,7 +17036,7 @@
     },
     {
       "id": "route-step-0637",
-      "order": 717,
+      "order": 718,
       "blockId": "block-20",
       "type": "resume",
       "displayRole": "transition",
@@ -17026,7 +17051,7 @@
     },
     {
       "id": "route-step-0638",
-      "order": 718,
+      "order": 719,
       "blockId": "block-20",
       "type": "resume",
       "displayRole": "transition",
@@ -17041,7 +17066,7 @@
     },
     {
       "id": "route-step-0639",
-      "order": 719,
+      "order": 720,
       "blockId": "block-20",
       "type": "resume",
       "displayRole": "transition",
@@ -17057,7 +17082,7 @@
     },
     {
       "id": "route-step-0640",
-      "order": 720,
+      "order": 721,
       "blockId": "block-20",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -17077,7 +17102,7 @@
     },
     {
       "id": "route-step-0641",
-      "order": 721,
+      "order": 722,
       "blockId": "block-20",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -17102,7 +17127,7 @@
     },
     {
       "id": "route-step-audit-ilyzaelle-align99",
-      "order": 722,
+      "order": 723,
       "blockId": "block-20",
       "type": "dungeon",
       "displayRole": "detail",
@@ -17115,7 +17140,7 @@
     },
     {
       "id": "route-step-0806",
-      "order": 723,
+      "order": 724,
       "blockId": "block-20",
       "type": "resume",
       "displayRole": "transition",
@@ -17131,7 +17156,7 @@
     },
     {
       "id": "route-step-0643",
-      "order": 724,
+      "order": 725,
       "blockId": "block-20",
       "type": "quest",
       "dofusSeries": "Dofus des Glaces",
@@ -17161,7 +17186,7 @@
     },
     {
       "id": "route-step-0646",
-      "order": 725,
+      "order": 726,
       "blockId": "block-20",
       "type": "dungeon",
       "displayRole": "detail",
@@ -17177,7 +17202,7 @@
     },
     {
       "id": "route-step-0647",
-      "order": 726,
+      "order": 727,
       "blockId": "block-20",
       "type": "resume",
       "dofusSeries": "Dofus des Glaces",
@@ -17193,7 +17218,7 @@
     },
     {
       "id": "route-step-0648",
-      "order": 727,
+      "order": 728,
       "blockId": "block-20",
       "type": "resume",
       "displayRole": "transition",
@@ -17209,7 +17234,7 @@
     },
     {
       "id": "route-step-0949",
-      "order": 728,
+      "order": 729,
       "blockId": "block-20",
       "type": "quest",
       "dofusSeries": "Dofus des Glaces",
@@ -17234,7 +17259,7 @@
     },
     {
       "id": "route-step-audit-un-comte-start",
-      "order": 729,
+      "order": 730,
       "blockId": "block-20",
       "type": "quest",
       "dofusSeries": "Dofus des Glaces",
@@ -17255,7 +17280,7 @@
     },
     {
       "id": "route-step-audit-comte-ddg",
-      "order": 730,
+      "order": 731,
       "blockId": "block-20",
       "type": "dungeon",
       "displayRole": "detail",
@@ -17268,7 +17293,7 @@
     },
     {
       "id": "route-step-audit-un-comte-finish",
-      "order": 731,
+      "order": 732,
       "blockId": "block-20",
       "type": "resume",
       "dofusSeries": "Dofus des Glaces",
@@ -17281,7 +17306,7 @@
     },
     {
       "id": "route-step-0951",
-      "order": 732,
+      "order": 733,
       "blockId": "block-20",
       "type": "resume",
       "dofusSeries": "Dofus des Glaces",
@@ -17297,7 +17322,7 @@
     },
     {
       "id": "route-step-audit-dofus-glaces",
-      "order": 733,
+      "order": 734,
       "blockId": "block-20",
       "type": "quest",
       "dofusSeries": "Dofus des Glaces",
@@ -17318,7 +17343,7 @@
     },
     {
       "id": "block-entry-21",
-      "order": 734,
+      "order": 735,
       "blockId": "block-21",
       "type": "preparation",
       "displayType": "ENTRÉE",
@@ -17328,7 +17353,7 @@
     },
     {
       "id": "route-step-0650",
-      "order": 735,
+      "order": 736,
       "blockId": "block-21",
       "type": "quest",
       "title": "La garde meurt mais ne se rend pas",
@@ -17346,7 +17371,7 @@
     },
     {
       "id": "route-step-0807",
-      "order": 736,
+      "order": 737,
       "blockId": "block-21",
       "type": "alignment",
       "displayType": "ALIGN.",
@@ -17367,7 +17392,7 @@
     },
     {
       "id": "route-step-0808",
-      "order": 737,
+      "order": 738,
       "blockId": "block-21",
       "type": "order",
       "displayRole": "objective",
@@ -17387,7 +17412,7 @@
     },
     {
       "id": "route-step-0809",
-      "order": 738,
+      "order": 739,
       "blockId": "block-21",
       "type": "dungeon",
       "displayRole": "detail",
@@ -17400,7 +17425,7 @@
     },
     {
       "id": "route-step-0810",
-      "order": 739,
+      "order": 740,
       "blockId": "block-21",
       "type": "resume",
       "displayRole": "transition",
@@ -17416,7 +17441,7 @@
     },
     {
       "id": "route-step-audit-tour-nage-joue",
-      "order": 740,
+      "order": 741,
       "blockId": "block-21",
       "type": "resume",
       "displayRole": "transition",
@@ -17432,7 +17457,7 @@
     },
     {
       "id": "route-step-0668",
-      "order": 741,
+      "order": 742,
       "blockId": "block-21",
       "type": "quest",
       "displayRole": "objective",
@@ -17475,7 +17500,7 @@
     },
     {
       "id": "route-step-0669",
-      "order": 742,
+      "order": 743,
       "blockId": "block-21",
       "type": "quest",
       "displayRole": "objective",
@@ -17516,7 +17541,7 @@
     },
     {
       "id": "route-step-0670",
-      "order": 743,
+      "order": 744,
       "blockId": "block-21",
       "type": "quest",
       "displayRole": "objective",
@@ -17559,7 +17584,7 @@
     },
     {
       "id": "route-step-0671",
-      "order": 744,
+      "order": 745,
       "blockId": "block-21",
       "type": "quest",
       "displayRole": "objective",
@@ -17602,7 +17627,7 @@
     },
     {
       "id": "route-step-0887",
-      "order": 745,
+      "order": 746,
       "blockId": "block-21",
       "type": "hard_lock",
       "title": "L'éternelle moisson",
@@ -17618,7 +17643,7 @@
     },
     {
       "id": "route-step-0888",
-      "order": 746,
+      "order": 747,
       "blockId": "block-21",
       "type": "resume",
       "dofusSeries": "Dofus Ocre",
@@ -17635,7 +17660,7 @@
     },
     {
       "id": "route-step-0889",
-      "order": 747,
+      "order": 748,
       "blockId": "block-21",
       "type": "dungeon",
       "displayRole": "detail",
@@ -17652,7 +17677,7 @@
     },
     {
       "id": "route-step-0890",
-      "order": 748,
+      "order": 749,
       "blockId": "block-21",
       "type": "resume",
       "dofusSeries": "Dofus Ocre",
@@ -17672,7 +17697,7 @@
     },
     {
       "id": "route-step-audit-tour-joue-finish",
-      "order": 749,
+      "order": 750,
       "blockId": "block-21",
       "type": "resume",
       "displayRole": "transition",
@@ -17684,7 +17709,7 @@
     },
     {
       "id": "block-entry-22",
-      "order": 750,
+      "order": 751,
       "blockId": "block-22",
       "type": "preparation",
       "displayType": "ENTRÉE",
@@ -17759,7 +17784,7 @@
     },
     {
       "id": "route-step-0816",
-      "order": 751,
+      "order": 752,
       "blockId": "block-22",
       "type": "quest",
       "dofusSeries": "Dofus Ivoire",
@@ -17784,7 +17809,7 @@
     },
     {
       "id": "route-step-0817",
-      "order": 752,
+      "order": 753,
       "blockId": "block-22",
       "type": "dungeon",
       "displayRole": "detail",
@@ -17797,7 +17822,7 @@
     },
     {
       "id": "route-step-0818",
-      "order": 753,
+      "order": 754,
       "blockId": "block-22",
       "type": "resume",
       "dofusSeries": "Dofus Ivoire",
@@ -17813,7 +17838,7 @@
     },
     {
       "id": "route-step-0819",
-      "order": 754,
+      "order": 755,
       "blockId": "block-22",
       "type": "quest",
       "dofusSeries": "Dofus Ivoire",
@@ -17837,7 +17862,7 @@
     },
     {
       "id": "route-step-0820",
-      "order": 755,
+      "order": 756,
       "blockId": "block-22",
       "type": "dungeon",
       "displayRole": "detail",
@@ -17850,7 +17875,7 @@
     },
     {
       "id": "route-step-0821",
-      "order": 756,
+      "order": 757,
       "blockId": "block-22",
       "type": "resume",
       "dofusSeries": "Dofus Ivoire",
@@ -17866,7 +17891,7 @@
     },
     {
       "id": "route-step-0767",
-      "order": 757,
+      "order": 758,
       "blockId": "block-22",
       "type": "quest",
       "displayRole": "objective",
@@ -17884,7 +17909,7 @@
     },
     {
       "id": "route-step-0768",
-      "order": 758,
+      "order": 759,
       "blockId": "block-22",
       "type": "quest",
       "displayRole": "objective",
@@ -17902,7 +17927,7 @@
     },
     {
       "id": "route-step-0769",
-      "order": 759,
+      "order": 760,
       "blockId": "block-22",
       "type": "quest",
       "displayRole": "objective",
@@ -17920,7 +17945,7 @@
     },
     {
       "id": "route-step-0770",
-      "order": 760,
+      "order": 761,
       "blockId": "block-22",
       "type": "quest",
       "displayRole": "objective",
@@ -17938,7 +17963,7 @@
     },
     {
       "id": "route-step-0771",
-      "order": 761,
+      "order": 762,
       "blockId": "block-22",
       "type": "quest",
       "displayRole": "objective",
@@ -17956,7 +17981,7 @@
     },
     {
       "id": "route-step-0772",
-      "order": 762,
+      "order": 763,
       "blockId": "block-22",
       "type": "quest",
       "displayRole": "objective",
@@ -17976,7 +18001,7 @@
     },
     {
       "id": "route-step-0773",
-      "order": 763,
+      "order": 764,
       "blockId": "block-22",
       "type": "quest",
       "displayRole": "objective",
@@ -17995,7 +18020,7 @@
     },
     {
       "id": "route-step-0774",
-      "order": 764,
+      "order": 765,
       "blockId": "block-22",
       "type": "dungeon",
       "displayRole": "detail",
@@ -18008,7 +18033,7 @@
     },
     {
       "id": "route-step-0775",
-      "order": 765,
+      "order": 766,
       "blockId": "block-22",
       "type": "resume",
       "displayRole": "transition",
@@ -18023,7 +18048,7 @@
     },
     {
       "id": "route-step-0776",
-      "order": 766,
+      "order": 767,
       "blockId": "block-22",
       "type": "quest",
       "displayRole": "objective",
@@ -18041,7 +18066,7 @@
     },
     {
       "id": "route-step-0777",
-      "order": 767,
+      "order": 768,
       "blockId": "block-22",
       "type": "quest",
       "displayRole": "objective",
@@ -18060,7 +18085,7 @@
     },
     {
       "id": "route-step-0778",
-      "order": 768,
+      "order": 769,
       "blockId": "block-22",
       "type": "quest",
       "displayRole": "objective",
@@ -18079,7 +18104,7 @@
     },
     {
       "id": "route-step-0779",
-      "order": 769,
+      "order": 770,
       "blockId": "block-22",
       "type": "quest",
       "displayRole": "objective",
@@ -18098,7 +18123,7 @@
     },
     {
       "id": "route-step-0780",
-      "order": 770,
+      "order": 771,
       "blockId": "block-22",
       "type": "quest",
       "displayRole": "objective",
@@ -18117,7 +18142,7 @@
     },
     {
       "id": "route-step-0781",
-      "order": 771,
+      "order": 772,
       "blockId": "block-22",
       "type": "quest",
       "displayRole": "objective",
@@ -18141,7 +18166,7 @@
     },
     {
       "id": "route-step-0782",
-      "order": 772,
+      "order": 773,
       "blockId": "block-22",
       "type": "quest",
       "displayRole": "objective",
@@ -18165,7 +18190,7 @@
     },
     {
       "id": "route-step-0822",
-      "order": 773,
+      "order": 774,
       "blockId": "block-22",
       "type": "quest",
       "dofusSeries": "Dofus Ivoire",
@@ -18185,7 +18210,7 @@
     },
     {
       "id": "route-step-0823",
-      "order": 774,
+      "order": 775,
       "blockId": "block-22",
       "type": "quest",
       "dofusSeries": "Dofus Ivoire",
@@ -18214,7 +18239,7 @@
     },
     {
       "id": "route-step-0824",
-      "order": 775,
+      "order": 776,
       "blockId": "block-22",
       "type": "dungeon",
       "displayRole": "detail",
@@ -18231,7 +18256,7 @@
     },
     {
       "id": "route-step-0825",
-      "order": 776,
+      "order": 777,
       "blockId": "block-22",
       "type": "resume",
       "dofusSeries": "Dofus Ivoire",
@@ -18248,7 +18273,7 @@
     },
     {
       "id": "route-step-0826",
-      "order": 777,
+      "order": 778,
       "blockId": "block-22",
       "type": "resume",
       "displayRole": "transition",
@@ -18264,7 +18289,7 @@
     },
     {
       "id": "route-step-0827",
-      "order": 778,
+      "order": 779,
       "blockId": "block-22",
       "type": "resume",
       "displayRole": "transition",
@@ -18280,7 +18305,7 @@
     },
     {
       "id": "route-step-0828",
-      "order": 779,
+      "order": 780,
       "blockId": "block-22",
       "type": "quest",
       "displayRole": "objective",
@@ -18299,7 +18324,7 @@
     },
     {
       "id": "route-step-0829",
-      "order": 780,
+      "order": 781,
       "blockId": "block-22",
       "type": "milestone",
       "displayRole": "transition",
@@ -18310,7 +18335,7 @@
     },
     {
       "id": "block-entry-23",
-      "order": 781,
+      "order": 782,
       "blockId": "block-23",
       "type": "preparation",
       "displayType": "ENTRÉE",
@@ -18364,7 +18389,7 @@
     },
     {
       "id": "route-step-0896",
-      "order": 782,
+      "order": 783,
       "blockId": "block-23",
       "type": "resume",
       "displayRole": "objective",
@@ -18378,7 +18403,7 @@
     },
     {
       "id": "route-step-0897",
-      "order": 783,
+      "order": 784,
       "blockId": "block-23",
       "type": "quest",
       "displayRole": "objective",
@@ -18402,7 +18427,7 @@
     },
     {
       "id": "route-step-0898",
-      "order": 784,
+      "order": 785,
       "blockId": "block-23",
       "type": "dungeon",
       "displayRole": "detail",
@@ -18414,7 +18439,7 @@
     },
     {
       "id": "route-step-0899",
-      "order": 785,
+      "order": 786,
       "blockId": "block-23",
       "type": "resume",
       "displayRole": "transition",
@@ -18429,7 +18454,7 @@
     },
     {
       "id": "route-step-0900",
-      "order": 786,
+      "order": 787,
       "blockId": "block-23",
       "type": "quest",
       "displayRole": "objective",
@@ -18453,7 +18478,7 @@
     },
     {
       "id": "route-step-0901",
-      "order": 787,
+      "order": 788,
       "blockId": "block-23",
       "type": "dungeon",
       "displayRole": "detail",
@@ -18466,7 +18491,7 @@
     },
     {
       "id": "route-step-0902",
-      "order": 788,
+      "order": 789,
       "blockId": "block-23",
       "type": "resume",
       "displayRole": "transition",
@@ -18481,7 +18506,7 @@
     },
     {
       "id": "route-step-0903",
-      "order": 789,
+      "order": 790,
       "blockId": "block-23",
       "type": "quest",
       "displayRole": "objective",
@@ -18504,7 +18529,7 @@
     },
     {
       "id": "route-step-0904",
-      "order": 790,
+      "order": 791,
       "blockId": "block-23",
       "type": "dungeon",
       "displayRole": "detail",
@@ -18517,7 +18542,7 @@
     },
     {
       "id": "route-step-0905",
-      "order": 791,
+      "order": 792,
       "blockId": "block-23",
       "type": "resume",
       "displayRole": "transition",
@@ -18532,7 +18557,7 @@
     },
     {
       "id": "route-step-0906",
-      "order": 792,
+      "order": 793,
       "blockId": "block-23",
       "type": "quest",
       "displayRole": "objective",
@@ -18557,7 +18582,7 @@
     },
     {
       "id": "route-step-0907",
-      "order": 793,
+      "order": 794,
       "blockId": "block-23",
       "type": "dungeon",
       "displayRole": "detail",
@@ -18569,7 +18594,7 @@
     },
     {
       "id": "route-step-0908",
-      "order": 794,
+      "order": 795,
       "blockId": "block-23",
       "type": "resume",
       "displayRole": "transition",
@@ -18585,7 +18610,7 @@
     },
     {
       "id": "route-step-0909",
-      "order": 795,
+      "order": 796,
       "blockId": "block-23",
       "type": "quest",
       "displayRole": "objective",
@@ -18652,7 +18677,7 @@
     },
     {
       "id": "route-step-0910",
-      "order": 796,
+      "order": 797,
       "blockId": "block-23",
       "type": "resume",
       "displayRole": "objective",
@@ -18668,7 +18693,7 @@
     },
     {
       "id": "route-step-0911",
-      "order": 797,
+      "order": 798,
       "blockId": "block-23",
       "type": "resume",
       "displayRole": "objective",
@@ -18684,7 +18709,7 @@
     },
     {
       "id": "route-step-0912",
-      "order": 798,
+      "order": 799,
       "blockId": "block-23",
       "type": "resume",
       "displayRole": "objective",
@@ -18700,7 +18725,7 @@
     },
     {
       "id": "route-step-0913",
-      "order": 799,
+      "order": 800,
       "blockId": "block-23",
       "type": "resume",
       "displayRole": "transition",
@@ -18715,7 +18740,7 @@
     },
     {
       "id": "route-step-0914",
-      "order": 800,
+      "order": 801,
       "blockId": "block-23",
       "type": "quest",
       "displayRole": "objective",
@@ -18739,7 +18764,7 @@
     },
     {
       "id": "route-step-0915",
-      "order": 801,
+      "order": 802,
       "blockId": "block-23",
       "type": "dungeon",
       "displayRole": "detail",
@@ -18752,7 +18777,7 @@
     },
     {
       "id": "route-step-0916",
-      "order": 802,
+      "order": 803,
       "blockId": "block-23",
       "type": "resume",
       "displayRole": "transition",
@@ -18768,7 +18793,7 @@
     },
     {
       "id": "route-step-0917",
-      "order": 803,
+      "order": 804,
       "blockId": "block-23",
       "type": "quest",
       "displayRole": "objective",
@@ -18786,7 +18811,7 @@
     },
     {
       "id": "block-entry-24",
-      "order": 804,
+      "order": 805,
       "blockId": "block-24",
       "type": "preparation",
       "displayType": "ENTRÉE",
@@ -18796,7 +18821,7 @@
     },
     {
       "id": "route-step-0830",
-      "order": 805,
+      "order": 806,
       "blockId": "block-24",
       "type": "quest",
       "dofusSeries": "Dofus Ivoire",
@@ -18818,7 +18843,7 @@
     },
     {
       "id": "route-step-0831",
-      "order": 806,
+      "order": 807,
       "blockId": "block-24",
       "type": "dungeon",
       "displayRole": "detail",
@@ -18831,7 +18856,7 @@
     },
     {
       "id": "route-step-0832",
-      "order": 807,
+      "order": 808,
       "blockId": "block-24",
       "type": "resume",
       "dofusSeries": "Dofus Ivoire",
@@ -18844,7 +18869,7 @@
     },
     {
       "id": "route-step-0833",
-      "order": 808,
+      "order": 809,
       "blockId": "block-24",
       "type": "quest",
       "dofusSeries": "Dofus Ivoire",
@@ -18870,7 +18895,7 @@
     },
     {
       "id": "route-step-0834",
-      "order": 809,
+      "order": 810,
       "blockId": "block-24",
       "type": "quest",
       "dofusSeries": "Dofus Ivoire",
@@ -18895,7 +18920,7 @@
     },
     {
       "id": "route-step-0835",
-      "order": 810,
+      "order": 811,
       "blockId": "block-24",
       "type": "quest",
       "dofusSeries": "Dofus Ivoire",
@@ -18920,7 +18945,7 @@
     },
     {
       "id": "route-step-0836",
-      "order": 811,
+      "order": 812,
       "blockId": "block-24",
       "type": "dungeon",
       "displayRole": "detail",
@@ -18932,7 +18957,7 @@
     },
     {
       "id": "route-step-0837",
-      "order": 812,
+      "order": 813,
       "blockId": "block-24",
       "type": "dungeon",
       "displayRole": "detail",
@@ -18945,7 +18970,7 @@
     },
     {
       "id": "route-step-0838",
-      "order": 813,
+      "order": 814,
       "blockId": "block-24",
       "type": "resume",
       "dofusSeries": "Dofus Ivoire",
@@ -18963,7 +18988,7 @@
     },
     {
       "id": "route-step-0839",
-      "order": 814,
+      "order": 815,
       "blockId": "block-24",
       "type": "resume",
       "dofusSeries": "Dofus Ivoire",
@@ -18981,7 +19006,7 @@
     },
     {
       "id": "route-step-0840",
-      "order": 815,
+      "order": 816,
       "blockId": "block-24",
       "type": "quest",
       "dofusSeries": "Dofus Ivoire",
@@ -19006,7 +19031,7 @@
     },
     {
       "id": "route-step-0841",
-      "order": 816,
+      "order": 817,
       "blockId": "block-24",
       "type": "dungeon",
       "displayRole": "detail",
@@ -19019,7 +19044,7 @@
     },
     {
       "id": "route-step-0842",
-      "order": 817,
+      "order": 818,
       "blockId": "block-24",
       "type": "resume",
       "dofusSeries": "Dofus Ivoire",
@@ -19036,7 +19061,7 @@
     },
     {
       "id": "route-step-0843",
-      "order": 818,
+      "order": 819,
       "blockId": "block-24",
       "type": "resume",
       "dofusSeries": "Dofus Ivoire",
@@ -19051,7 +19076,7 @@
     },
     {
       "id": "route-step-0844",
-      "order": 819,
+      "order": 820,
       "blockId": "block-24",
       "type": "quest",
       "dofusSeries": "Dofus Ivoire",
@@ -19076,7 +19101,7 @@
     },
     {
       "id": "route-step-0845",
-      "order": 820,
+      "order": 821,
       "blockId": "block-24",
       "type": "dungeon",
       "displayRole": "detail",
@@ -19089,7 +19114,7 @@
     },
     {
       "id": "route-step-0846",
-      "order": 821,
+      "order": 822,
       "blockId": "block-24",
       "type": "resume",
       "dofusSeries": "Dofus Ivoire",
@@ -19106,7 +19131,7 @@
     },
     {
       "id": "block-entry-25",
-      "order": 822,
+      "order": 823,
       "blockId": "block-25",
       "type": "preparation",
       "displayType": "ENTRÉE",
@@ -19321,7 +19346,7 @@
     },
     {
       "id": "route-step-0848",
-      "order": 823,
+      "order": 824,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19345,7 +19370,7 @@
     },
     {
       "id": "route-step-derniere-barbe",
-      "order": 824,
+      "order": 825,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19369,7 +19394,7 @@
     },
     {
       "id": "route-step-0849",
-      "order": 825,
+      "order": 826,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19388,7 +19413,7 @@
     },
     {
       "id": "route-step-0850",
-      "order": 826,
+      "order": 827,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19407,7 +19432,7 @@
     },
     {
       "id": "route-step-0851",
-      "order": 827,
+      "order": 828,
       "blockId": "block-25",
       "type": "resume",
       "displayRole": "transition",
@@ -19422,7 +19447,7 @@
     },
     {
       "id": "route-step-0852",
-      "order": 828,
+      "order": 829,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19441,7 +19466,7 @@
     },
     {
       "id": "route-step-0853",
-      "order": 829,
+      "order": 830,
       "blockId": "block-25",
       "type": "resume",
       "displayRole": "transition",
@@ -19461,7 +19486,7 @@
     },
     {
       "id": "route-step-0714",
-      "order": 830,
+      "order": 831,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19480,7 +19505,7 @@
     },
     {
       "id": "route-step-0717",
-      "order": 831,
+      "order": 832,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19501,7 +19526,7 @@
     },
     {
       "id": "route-step-0718",
-      "order": 832,
+      "order": 833,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19525,7 +19550,7 @@
     },
     {
       "id": "route-step-0719",
-      "order": 833,
+      "order": 834,
       "blockId": "block-25",
       "type": "dungeon",
       "displayRole": "detail",
@@ -19538,7 +19563,7 @@
     },
     {
       "id": "route-step-0720",
-      "order": 834,
+      "order": 835,
       "blockId": "block-25",
       "type": "resume",
       "displayRole": "transition",
@@ -19553,7 +19578,7 @@
     },
     {
       "id": "route-step-0721",
-      "order": 835,
+      "order": 836,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19571,7 +19596,7 @@
     },
     {
       "id": "route-step-0722",
-      "order": 836,
+      "order": 837,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19590,7 +19615,7 @@
     },
     {
       "id": "route-step-0723",
-      "order": 837,
+      "order": 838,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19613,7 +19638,7 @@
     },
     {
       "id": "route-step-0724",
-      "order": 838,
+      "order": 839,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19636,7 +19661,7 @@
     },
     {
       "id": "route-step-0725",
-      "order": 839,
+      "order": 840,
       "blockId": "block-25",
       "type": "dungeon",
       "displayRole": "detail",
@@ -19648,7 +19673,7 @@
     },
     {
       "id": "route-step-0726",
-      "order": 840,
+      "order": 841,
       "blockId": "block-25",
       "type": "resume",
       "displayRole": "transition",
@@ -19664,7 +19689,7 @@
     },
     {
       "id": "route-step-0727",
-      "order": 841,
+      "order": 842,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19684,7 +19709,7 @@
     },
     {
       "id": "route-step-0728",
-      "order": 842,
+      "order": 843,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19702,7 +19727,7 @@
     },
     {
       "id": "route-step-0729",
-      "order": 843,
+      "order": 844,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19720,7 +19745,7 @@
     },
     {
       "id": "route-step-0730",
-      "order": 844,
+      "order": 845,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19744,7 +19769,7 @@
     },
     {
       "id": "route-step-0731",
-      "order": 845,
+      "order": 846,
       "blockId": "block-25",
       "type": "dungeon",
       "displayRole": "detail",
@@ -19757,7 +19782,7 @@
     },
     {
       "id": "route-step-0732",
-      "order": 846,
+      "order": 847,
       "blockId": "block-25",
       "type": "resume",
       "displayRole": "transition",
@@ -19772,7 +19797,7 @@
     },
     {
       "id": "route-step-0733",
-      "order": 847,
+      "order": 848,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19788,7 +19813,7 @@
     },
     {
       "id": "route-step-0734",
-      "order": 848,
+      "order": 849,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19805,7 +19830,7 @@
     },
     {
       "id": "route-step-0735",
-      "order": 849,
+      "order": 850,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19829,7 +19854,7 @@
     },
     {
       "id": "route-step-0736",
-      "order": 850,
+      "order": 851,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19854,7 +19879,7 @@
     },
     {
       "id": "route-step-0737",
-      "order": 851,
+      "order": 852,
       "blockId": "block-25",
       "type": "dungeon",
       "displayRole": "detail",
@@ -19867,7 +19892,7 @@
     },
     {
       "id": "route-step-0738",
-      "order": 852,
+      "order": 853,
       "blockId": "block-25",
       "type": "dungeon",
       "displayRole": "objective",
@@ -19880,7 +19905,7 @@
     },
     {
       "id": "route-step-1204",
-      "order": 853,
+      "order": 854,
       "blockId": "block-25",
       "type": "dungeon",
       "displayRole": "objective",
@@ -19893,7 +19918,7 @@
     },
     {
       "id": "route-step-0741",
-      "order": 854,
+      "order": 855,
       "blockId": "block-25",
       "type": "resume",
       "displayRole": "transition",
@@ -19909,7 +19934,7 @@
     },
     {
       "id": "route-step-0742",
-      "order": 855,
+      "order": 856,
       "blockId": "block-25",
       "type": "quest",
       "displayRole": "objective",
@@ -19933,7 +19958,7 @@
     },
     {
       "id": "route-step-0743",
-      "order": 856,
+      "order": 857,
       "blockId": "block-25",
       "type": "dungeon",
       "displayRole": "detail",
@@ -19946,7 +19971,7 @@
     },
     {
       "id": "route-step-0744",
-      "order": 857,
+      "order": 858,
       "blockId": "block-25",
       "type": "resume",
       "displayRole": "transition",
@@ -19961,7 +19986,7 @@
     },
     {
       "id": "route-step-0745",
-      "order": 858,
+      "order": 859,
       "blockId": "block-25",
       "type": "resume",
       "displayRole": "objective",
@@ -19978,7 +20003,7 @@
     },
     {
       "id": "block-entry-26",
-      "order": 859,
+      "order": 860,
       "blockId": "block-26",
       "type": "preparation",
       "displayType": "ENTRÉE",
@@ -19988,7 +20013,7 @@
     },
     {
       "id": "route-step-0865",
-      "order": 860,
+      "order": 861,
       "blockId": "block-26",
       "type": "major_step",
       "dofusSeries": "Dofus Ébène",
@@ -19999,7 +20024,7 @@
     },
     {
       "id": "route-step-0866",
-      "order": 861,
+      "order": 862,
       "blockId": "block-26",
       "type": "quest",
       "dofusSeries": "Dofus Ébène",
@@ -20024,7 +20049,7 @@
     },
     {
       "id": "route-step-0867",
-      "order": 862,
+      "order": 863,
       "blockId": "block-26",
       "type": "dungeon",
       "displayRole": "detail",
@@ -20036,7 +20061,7 @@
     },
     {
       "id": "route-step-0868",
-      "order": 863,
+      "order": 864,
       "blockId": "block-26",
       "type": "resume",
       "dofusSeries": "Dofus Ébène",
@@ -20052,7 +20077,7 @@
     },
     {
       "id": "route-step-0869",
-      "order": 864,
+      "order": 865,
       "blockId": "block-26",
       "type": "quest",
       "dofusSeries": "Dofus Ébène",
@@ -20077,7 +20102,7 @@
     },
     {
       "id": "route-step-0870",
-      "order": 865,
+      "order": 866,
       "blockId": "block-26",
       "type": "dungeon",
       "displayRole": "detail",
@@ -20089,7 +20114,7 @@
     },
     {
       "id": "route-step-0871",
-      "order": 866,
+      "order": 867,
       "blockId": "block-26",
       "type": "resume",
       "dofusSeries": "Dofus Ébène",
@@ -20105,7 +20130,7 @@
     },
     {
       "id": "route-step-0872",
-      "order": 867,
+      "order": 868,
       "blockId": "block-26",
       "type": "quest",
       "dofusSeries": "Dofus Ébène",
@@ -20125,7 +20150,7 @@
     },
     {
       "id": "route-step-0873",
-      "order": 868,
+      "order": 869,
       "blockId": "block-26",
       "type": "quest",
       "dofusSeries": "Dofus Ébène",
@@ -20153,7 +20178,7 @@
     },
     {
       "id": "route-step-0874",
-      "order": 869,
+      "order": 870,
       "blockId": "block-26",
       "type": "dungeon",
       "displayRole": "detail",
@@ -20170,7 +20195,7 @@
     },
     {
       "id": "route-step-0875",
-      "order": 870,
+      "order": 871,
       "blockId": "block-26",
       "type": "quest",
       "displayRole": "objective",
@@ -20189,7 +20214,7 @@
     },
     {
       "id": "route-step-0876",
-      "order": 871,
+      "order": 872,
       "blockId": "block-26",
       "type": "resume",
       "displayRole": "transition",
@@ -20205,7 +20230,7 @@
     },
     {
       "id": "route-step-0877",
-      "order": 872,
+      "order": 873,
       "blockId": "block-26",
       "type": "resume",
       "dofusSeries": "Dofus Ébène",
@@ -20222,7 +20247,7 @@
     },
     {
       "id": "route-step-0878",
-      "order": 873,
+      "order": 874,
       "blockId": "block-26",
       "type": "dungeon",
       "displayRole": "detail",
@@ -20235,7 +20260,7 @@
     },
     {
       "id": "route-step-0879",
-      "order": 874,
+      "order": 875,
       "blockId": "block-26",
       "type": "resume",
       "dofusSeries": "Dofus Ébène",
@@ -20251,7 +20276,7 @@
     },
     {
       "id": "route-step-0880",
-      "order": 875,
+      "order": 876,
       "blockId": "block-26",
       "type": "quest",
       "dofusSeries": "Dofus Ébène",
@@ -20271,7 +20296,7 @@
     },
     {
       "id": "route-step-0881",
-      "order": 876,
+      "order": 877,
       "blockId": "block-26",
       "type": "quest",
       "dofusSeries": "Dofus Ébène",
@@ -20296,7 +20321,7 @@
     },
     {
       "id": "route-step-0882",
-      "order": 877,
+      "order": 878,
       "blockId": "block-26",
       "type": "dungeon",
       "displayRole": "detail",
@@ -20309,7 +20334,7 @@
     },
     {
       "id": "route-step-0883",
-      "order": 878,
+      "order": 879,
       "blockId": "block-26",
       "type": "resume",
       "dofusSeries": "Dofus Ébène",
@@ -20325,7 +20350,7 @@
     },
     {
       "id": "route-step-0884",
-      "order": 879,
+      "order": 880,
       "blockId": "block-26",
       "type": "quest",
       "dofusSeries": "Dofus Ébène",
@@ -20350,7 +20375,7 @@
     },
     {
       "id": "route-step-0885",
-      "order": 880,
+      "order": 881,
       "blockId": "block-26",
       "type": "dungeon",
       "displayRole": "objective",
@@ -20363,7 +20388,7 @@
     },
     {
       "id": "route-step-0886",
-      "order": 881,
+      "order": 882,
       "blockId": "block-26",
       "type": "resume",
       "dofusSeries": "Dofus Ébène",
@@ -20380,7 +20405,7 @@
     },
     {
       "id": "block-entry-27",
-      "order": 882,
+      "order": 883,
       "blockId": "block-27",
       "type": "preparation",
       "displayType": "ENTRÉE",
@@ -20429,7 +20454,7 @@
     },
     {
       "id": "route-step-0918",
-      "order": 883,
+      "order": 884,
       "blockId": "block-27",
       "type": "quest",
       "displayRole": "objective",
@@ -20455,7 +20480,7 @@
     },
     {
       "id": "route-step-0919",
-      "order": 884,
+      "order": 885,
       "blockId": "block-27",
       "type": "quest",
       "dofusSeries": "Dofus Argenté Scintillant",
@@ -20476,7 +20501,7 @@
     },
     {
       "id": "route-step-0920",
-      "order": 885,
+      "order": 886,
       "blockId": "block-27",
       "type": "resume",
       "displayRole": "transition",
@@ -20490,7 +20515,7 @@
     },
     {
       "id": "route-step-0921",
-      "order": 886,
+      "order": 887,
       "blockId": "block-27",
       "type": "quest",
       "displayRole": "objective",
@@ -20509,7 +20534,7 @@
     },
     {
       "id": "route-step-0923",
-      "order": 887,
+      "order": 888,
       "blockId": "block-27",
       "type": "quest",
       "displayRole": "objective",
@@ -20534,7 +20559,7 @@
     },
     {
       "id": "route-step-0924",
-      "order": 888,
+      "order": 889,
       "blockId": "block-27",
       "type": "dungeon",
       "displayRole": "objective",
@@ -20546,7 +20571,7 @@
     },
     {
       "id": "route-step-0925",
-      "order": 889,
+      "order": 890,
       "blockId": "block-27",
       "type": "resume",
       "displayRole": "transition",
@@ -20562,7 +20587,7 @@
     },
     {
       "id": "route-step-0926",
-      "order": 890,
+      "order": 891,
       "blockId": "block-27",
       "type": "dungeon",
       "displayRole": "objective",
@@ -20575,7 +20600,7 @@
     },
     {
       "id": "route-step-0927",
-      "order": 891,
+      "order": 892,
       "blockId": "block-27",
       "type": "resume",
       "displayRole": "transition",
@@ -20590,7 +20615,7 @@
     },
     {
       "id": "route-step-0928",
-      "order": 892,
+      "order": 893,
       "blockId": "block-27",
       "type": "quest",
       "displayRole": "objective",
@@ -20614,7 +20639,7 @@
     },
     {
       "id": "route-step-0929",
-      "order": 893,
+      "order": 894,
       "blockId": "block-27",
       "type": "quest",
       "displayRole": "transition",
@@ -20630,7 +20655,7 @@
     },
     {
       "id": "route-step-0930",
-      "order": 894,
+      "order": 895,
       "blockId": "block-27",
       "type": "dungeon",
       "displayRole": "objective",
@@ -20642,7 +20667,7 @@
     },
     {
       "id": "route-step-0931",
-      "order": 895,
+      "order": 896,
       "blockId": "block-27",
       "type": "resume",
       "displayRole": "objective",
@@ -20657,7 +20682,7 @@
     },
     {
       "id": "block-entry-28",
-      "order": 896,
+      "order": 897,
       "blockId": "block-28",
       "type": "preparation",
       "displayType": "ENTRÉE",
@@ -20793,7 +20818,7 @@
     },
     {
       "id": "route-step-0693",
-      "order": 897,
+      "order": 898,
       "blockId": "block-28",
       "type": "quest",
       "dofusSeries": "Dofus Tacheté",
@@ -20819,7 +20844,7 @@
     },
     {
       "id": "route-step-0694",
-      "order": 898,
+      "order": 899,
       "blockId": "block-28",
       "type": "quest",
       "displayRole": "objective",
@@ -20843,7 +20868,7 @@
     },
     {
       "id": "route-step-0695",
-      "order": 899,
+      "order": 900,
       "blockId": "block-28",
       "type": "quest",
       "displayRole": "objective",
@@ -20863,7 +20888,7 @@
     },
     {
       "id": "route-step-0696",
-      "order": 900,
+      "order": 901,
       "blockId": "block-28",
       "type": "resume",
       "dofusSeries": "Dofus Tacheté",
@@ -20879,7 +20904,7 @@
     },
     {
       "id": "route-step-0697",
-      "order": 901,
+      "order": 902,
       "blockId": "block-28",
       "type": "quest",
       "dofusSeries": "Dofus Tacheté",
@@ -20905,7 +20930,7 @@
     },
     {
       "id": "route-step-0698",
-      "order": 902,
+      "order": 903,
       "blockId": "block-28",
       "type": "dungeon",
       "displayRole": "detail",
@@ -20922,7 +20947,7 @@
     },
     {
       "id": "route-step-0699",
-      "order": 903,
+      "order": 904,
       "blockId": "block-28",
       "type": "resume",
       "dofusSeries": "Dofus Tacheté",
@@ -20939,7 +20964,7 @@
     },
     {
       "id": "route-step-0700",
-      "order": 904,
+      "order": 905,
       "blockId": "block-28",
       "type": "dungeon",
       "displayRole": "objective",
@@ -20956,7 +20981,7 @@
     },
     {
       "id": "route-step-0701",
-      "order": 905,
+      "order": 906,
       "blockId": "block-28",
       "type": "resume",
       "dofusSeries": "Dofus Tacheté",
@@ -20973,7 +20998,7 @@
     },
     {
       "id": "route-step-0702",
-      "order": 906,
+      "order": 907,
       "blockId": "block-28",
       "type": "resume",
       "dofusSeries": "Dofus Tacheté",
@@ -20988,7 +21013,7 @@
     },
     {
       "id": "route-step-0703",
-      "order": 907,
+      "order": 908,
       "blockId": "block-28",
       "type": "quest",
       "dofusSeries": "Dofus Tacheté",
@@ -21013,7 +21038,7 @@
     },
     {
       "id": "block-entry-29",
-      "order": 908,
+      "order": 909,
       "blockId": "block-29",
       "type": "preparation",
       "displayType": "ENTRÉE",
@@ -21145,7 +21170,7 @@
     },
     {
       "id": "route-step-0705",
-      "order": 909,
+      "order": 910,
       "blockId": "block-29",
       "type": "quest",
       "displayRole": "objective",
@@ -21165,7 +21190,7 @@
     },
     {
       "id": "route-step-0706",
-      "order": 910,
+      "order": 911,
       "blockId": "block-29",
       "type": "quest",
       "displayRole": "objective",
@@ -21184,7 +21209,7 @@
     },
     {
       "id": "route-step-0707",
-      "order": 911,
+      "order": 912,
       "blockId": "block-29",
       "type": "quest",
       "displayRole": "objective",
@@ -21203,7 +21228,7 @@
     },
     {
       "id": "route-step-0708",
-      "order": 912,
+      "order": 913,
       "blockId": "block-29",
       "type": "quest",
       "displayRole": "objective",
@@ -21222,7 +21247,7 @@
     },
     {
       "id": "route-step-0709",
-      "order": 913,
+      "order": 914,
       "blockId": "block-29",
       "type": "resume",
       "displayRole": "transition",
@@ -21237,7 +21262,7 @@
     },
     {
       "id": "route-step-0711",
-      "order": 914,
+      "order": 915,
       "blockId": "block-29",
       "type": "quest",
       "displayRole": "objective",
@@ -21256,7 +21281,7 @@
     },
     {
       "id": "route-step-0712",
-      "order": 915,
+      "order": 916,
       "blockId": "block-29",
       "type": "quest",
       "displayRole": "objective",
@@ -21275,7 +21300,7 @@
     },
     {
       "id": "route-step-0713",
-      "order": 916,
+      "order": 917,
       "blockId": "block-29",
       "type": "quest",
       "displayRole": "objective",
@@ -21294,7 +21319,7 @@
     },
     {
       "id": "route-step-0796",
-      "order": 917,
+      "order": 918,
       "blockId": "block-29",
       "type": "quest",
       "displayRole": "objective",
@@ -21313,7 +21338,7 @@
     },
     {
       "id": "route-step-0797",
-      "order": 918,
+      "order": 919,
       "blockId": "block-29",
       "type": "quest",
       "displayRole": "objective",
@@ -21332,7 +21357,7 @@
     },
     {
       "id": "route-step-0798",
-      "order": 919,
+      "order": 920,
       "blockId": "block-29",
       "type": "dungeon",
       "displayRole": "detail",
@@ -21344,7 +21369,7 @@
     },
     {
       "id": "route-step-0799",
-      "order": 920,
+      "order": 921,
       "blockId": "block-29",
       "type": "resume",
       "displayRole": "transition",
@@ -21359,7 +21384,7 @@
     },
     {
       "id": "route-step-0800",
-      "order": 921,
+      "order": 922,
       "blockId": "block-29",
       "type": "quest",
       "displayRole": "objective",
@@ -21395,7 +21420,7 @@
     },
     {
       "id": "route-step-0801",
-      "order": 922,
+      "order": 923,
       "blockId": "block-29",
       "type": "resume",
       "displayRole": "transition",
@@ -21416,7 +21441,7 @@
     },
     {
       "id": "route-step-1001",
-      "order": 923,
+      "order": 924,
       "blockId": "block-29",
       "type": "resume",
       "displayRole": "transition",
@@ -21433,7 +21458,7 @@
     },
     {
       "id": "route-step-0802",
-      "order": 924,
+      "order": 925,
       "blockId": "block-29",
       "type": "quest",
       "displayRole": "objective",
@@ -21451,7 +21476,7 @@
     },
     {
       "id": "route-step-0803",
-      "order": 925,
+      "order": 926,
       "blockId": "block-29",
       "type": "quest",
       "displayRole": "objective",
@@ -21471,7 +21496,7 @@
     },
     {
       "id": "route-step-0804",
-      "order": 926,
+      "order": 927,
       "blockId": "block-29",
       "type": "dungeon",
       "displayRole": "detail",
@@ -21484,7 +21509,7 @@
     },
     {
       "id": "route-step-0805",
-      "order": 927,
+      "order": 928,
       "blockId": "block-29",
       "type": "resume",
       "displayRole": "transition",
@@ -21500,7 +21525,7 @@
     },
     {
       "id": "route-step-0982",
-      "order": 928,
+      "order": 929,
       "blockId": "block-29",
       "type": "quest",
       "displayRole": "objective",
@@ -21519,7 +21544,7 @@
     },
     {
       "id": "route-step-0983",
-      "order": 929,
+      "order": 930,
       "blockId": "block-29",
       "type": "dungeon",
       "displayRole": "detail",
@@ -21531,7 +21556,7 @@
     },
     {
       "id": "route-step-0984",
-      "order": 930,
+      "order": 931,
       "blockId": "block-29",
       "type": "resume",
       "displayRole": "transition",
@@ -21546,7 +21571,7 @@
     },
     {
       "id": "route-step-0932",
-      "order": 931,
+      "order": 932,
       "blockId": "block-29",
       "type": "quest",
       "displayRole": "objective",
@@ -21565,7 +21590,7 @@
     },
     {
       "id": "route-step-0933",
-      "order": 932,
+      "order": 933,
       "blockId": "block-29",
       "type": "quest",
       "displayRole": "objective",
@@ -21589,7 +21614,7 @@
     },
     {
       "id": "route-step-0934",
-      "order": 933,
+      "order": 934,
       "blockId": "block-29",
       "type": "dungeon",
       "displayRole": "detail",
@@ -21602,7 +21627,7 @@
     },
     {
       "id": "route-step-0935",
-      "order": 934,
+      "order": 935,
       "blockId": "block-29",
       "type": "resume",
       "displayRole": "objective",
@@ -21617,7 +21642,7 @@
     },
     {
       "id": "route-step-0936",
-      "order": 935,
+      "order": 936,
       "blockId": "block-29",
       "type": "quest",
       "displayRole": "objective",
@@ -21635,7 +21660,7 @@
     },
     {
       "id": "block-entry-30",
-      "order": 936,
+      "order": 937,
       "blockId": "block-30",
       "type": "preparation",
       "displayType": "ENTRÉE",
@@ -21749,7 +21774,7 @@
     },
     {
       "id": "route-step-0938",
-      "order": 937,
+      "order": 938,
       "blockId": "block-30",
       "type": "quest",
       "displayRole": "objective",
@@ -21773,7 +21798,7 @@
     },
     {
       "id": "route-step-0939",
-      "order": 938,
+      "order": 939,
       "blockId": "block-30",
       "type": "long_running",
       "displayRole": "objective",
@@ -21801,7 +21826,7 @@
     },
     {
       "id": "route-step-0940",
-      "order": 939,
+      "order": 940,
       "blockId": "block-30",
       "type": "dungeon",
       "displayRole": "objective",
@@ -21813,7 +21838,7 @@
     },
     {
       "id": "route-step-0941",
-      "order": 940,
+      "order": 941,
       "blockId": "block-30",
       "type": "dungeon",
       "displayRole": "objective",
@@ -21825,7 +21850,7 @@
     },
     {
       "id": "route-step-0942",
-      "order": 941,
+      "order": 942,
       "blockId": "block-30",
       "type": "dungeon",
       "displayRole": "objective",
@@ -21837,7 +21862,7 @@
     },
     {
       "id": "route-step-0943",
-      "order": 942,
+      "order": 943,
       "blockId": "block-30",
       "type": "dungeon",
       "displayRole": "objective",
@@ -21849,7 +21874,7 @@
     },
     {
       "id": "route-step-0946",
-      "order": 943,
+      "order": 944,
       "blockId": "block-30",
       "type": "quest",
       "displayRole": "objective",
@@ -21878,7 +21903,7 @@
     },
     {
       "id": "route-step-0947",
-      "order": 944,
+      "order": 945,
       "blockId": "block-30",
       "type": "dungeon",
       "displayRole": "detail",
@@ -21894,7 +21919,7 @@
     },
     {
       "id": "route-step-0948",
-      "order": 945,
+      "order": 946,
       "blockId": "block-30",
       "type": "resume",
       "displayRole": "objective",
@@ -21910,7 +21935,7 @@
     },
     {
       "id": "route-step-0950",
-      "order": 946,
+      "order": 947,
       "blockId": "block-30",
       "type": "dungeon",
       "displayRole": "objective",
@@ -21923,7 +21948,7 @@
     },
     {
       "id": "route-step-0952",
-      "order": 947,
+      "order": 948,
       "blockId": "block-30",
       "type": "resume",
       "displayRole": "objective",
@@ -21943,7 +21968,7 @@
     },
     {
       "id": "route-step-0954",
-      "order": 948,
+      "order": 949,
       "blockId": "block-30",
       "type": "resume",
       "displayRole": "transition",
@@ -21958,7 +21983,7 @@
     },
     {
       "id": "route-step-0955",
-      "order": 949,
+      "order": 950,
       "blockId": "block-30",
       "type": "quest",
       "displayRole": "objective",
@@ -21981,7 +22006,7 @@
     },
     {
       "id": "route-step-0976",
-      "order": 950,
+      "order": 951,
       "blockId": "block-30",
       "type": "quest",
       "displayRole": "objective",
@@ -22003,7 +22028,7 @@
     },
     {
       "id": "route-step-0977",
-      "order": 951,
+      "order": 952,
       "blockId": "block-30",
       "type": "quest",
       "displayRole": "objective",
@@ -22026,7 +22051,7 @@
     },
     {
       "id": "route-step-0953",
-      "order": 952,
+      "order": 953,
       "blockId": "block-30",
       "type": "resume",
       "displayRole": "transition",
@@ -22041,7 +22066,7 @@
     },
     {
       "id": "block-entry-31",
-      "order": 953,
+      "order": 954,
       "blockId": "block-31",
       "type": "preparation",
       "displayType": "ENTRÉE",
@@ -22228,7 +22253,7 @@
     },
     {
       "id": "route-step-0961",
-      "order": 954,
+      "order": 955,
       "blockId": "block-31",
       "type": "quest",
       "displayRole": "objective",
@@ -22251,7 +22276,7 @@
     },
     {
       "id": "route-step-0963",
-      "order": 955,
+      "order": 956,
       "blockId": "block-31",
       "type": "quest",
       "displayRole": "objective",
@@ -22276,7 +22301,7 @@
     },
     {
       "id": "route-step-0965",
-      "order": 956,
+      "order": 957,
       "blockId": "block-31",
       "type": "major_step",
       "displayType": "OPTI ALIGNEMENT",
@@ -22288,7 +22313,7 @@
     },
     {
       "id": "route-step-0966",
-      "order": 957,
+      "order": 958,
       "blockId": "block-31",
       "type": "long_running",
       "displayRole": "objective",
@@ -22313,7 +22338,7 @@
     },
     {
       "id": "route-step-0967",
-      "order": 958,
+      "order": 959,
       "blockId": "block-31",
       "type": "dungeon",
       "displayRole": "objective",
@@ -22325,7 +22350,7 @@
     },
     {
       "id": "route-step-0968",
-      "order": 959,
+      "order": 960,
       "blockId": "block-31",
       "type": "dungeon",
       "displayRole": "objective",
@@ -22338,7 +22363,7 @@
     },
     {
       "id": "route-step-0969",
-      "order": 960,
+      "order": 961,
       "blockId": "block-31",
       "type": "major_step",
       "displayType": "OPTI ALIGNEMENT",
@@ -22351,7 +22376,7 @@
     },
     {
       "id": "route-step-0970",
-      "order": 961,
+      "order": 962,
       "blockId": "block-31",
       "type": "dungeon",
       "displayRole": "objective",
@@ -22364,7 +22389,7 @@
     },
     {
       "id": "route-step-0971",
-      "order": 962,
+      "order": 963,
       "blockId": "block-31",
       "type": "resume",
       "displayRole": "objective",
@@ -22380,7 +22405,7 @@
     },
     {
       "id": "route-step-0972",
-      "order": 963,
+      "order": 964,
       "blockId": "block-31",
       "type": "quest",
       "displayRole": "transition",
@@ -22397,7 +22422,7 @@
     },
     {
       "id": "route-step-0978",
-      "order": 964,
+      "order": 965,
       "blockId": "block-31",
       "type": "quest",
       "displayRole": "objective",
@@ -22422,7 +22447,7 @@
     },
     {
       "id": "route-step-0988",
-      "order": 965,
+      "order": 966,
       "blockId": "block-31",
       "type": "milestone",
       "displayRole": "objective",
@@ -22433,7 +22458,7 @@
     },
     {
       "id": "route-step-0989",
-      "order": 966,
+      "order": 967,
       "blockId": "block-31",
       "type": "milestone",
       "displayRole": "transition",
@@ -22445,7 +22470,7 @@
     },
     {
       "id": "route-step-0990",
-      "order": 967,
+      "order": 968,
       "blockId": "block-31",
       "type": "milestone",
       "dofusSeries": "Dom de Pin",
@@ -22462,7 +22487,7 @@
     },
     {
       "id": "route-step-0992",
-      "order": 968,
+      "order": 969,
       "blockId": "block-31",
       "type": "hard_lock",
       "title": "Avant Flovoraison",
@@ -22473,7 +22498,7 @@
     },
     {
       "id": "block-entry-32",
-      "order": 969,
+      "order": 970,
       "blockId": "block-32",
       "type": "preparation",
       "displayType": "ENTRÉE",
@@ -22483,7 +22508,7 @@
     },
     {
       "id": "route-step-0994",
-      "order": 970,
+      "order": 971,
       "blockId": "block-32",
       "type": "quest",
       "dofusSeries": "Dofus Sylvestre",
@@ -22505,7 +22530,7 @@
     },
     {
       "id": "route-step-0995",
-      "order": 971,
+      "order": 972,
       "blockId": "block-32",
       "type": "dungeon",
       "displayRole": "detail",
@@ -22518,7 +22543,7 @@
     },
     {
       "id": "route-step-0996",
-      "order": 972,
+      "order": 973,
       "blockId": "block-32",
       "type": "resume",
       "dofusSeries": "Dofus Sylvestre",
@@ -22536,7 +22561,7 @@
     },
     {
       "id": "route-step-0997",
-      "order": 973,
+      "order": 974,
       "blockId": "block-32",
       "type": "resume",
       "displayRole": "objective",
@@ -22552,7 +22577,7 @@
     },
     {
       "id": "route-step-1172",
-      "order": 974,
+      "order": 975,
       "blockId": "block-32",
       "type": "resume",
       "displayRole": "detail",
@@ -22568,7 +22593,7 @@
     },
     {
       "id": "route-step-0999",
-      "order": 975,
+      "order": 976,
       "blockId": "block-32",
       "type": "finish",
       "dofusSeries": "Dofus Sylvestre",
