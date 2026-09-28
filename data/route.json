@@ -2196,8 +2196,7 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/ca-sent-le-gaz.html"
       },
-      "momentId": "moment-route-step-0048",
-      "launchInstruction": "Parle à ton chef de classe et choisis « Demander s'il a encore besoin de vous ». La position dépend de ta classe."
+      "momentId": "moment-route-step-0048"
     },
     {
       "id": "route-step-1131",
@@ -4716,8 +4715,7 @@
       "destination": {
         "x": 3,
         "y": -17
-      },
-      "launchInstruction": "Dans la salle de sortie de la Cache de Kankreblath, utilise la Croquette Magique obtenue après le boss pour lancer la quête."
+      }
     },
     {
       "id": "route-step-0091",
@@ -16132,7 +16130,6 @@
         "x": -63,
         "y": 29
       },
-      "launchInstruction": "Obtiens 1 Manuel Scolaire sur les monstres de Nimotopia, puis double-clique le Manuel Scolaire dans ton inventaire pour lancer la quête.",
       "longRunningGoal": {
         "goalId": "nimotopia-valse",
         "phase": "start"
@@ -18999,8 +18996,7 @@
       "prerequisites": "Capitaine Meno vaincu ; Piège de crystal au dialogue de fin.",
       "action": "TERMINER / LANCER",
       "instruction": "Après Meno, parle au Capitaine avant de sortir : termine Piège de crystal puis lance Son nom est Personne dans le même enchaînement.",
-      "momentId": "moment-nordalie-missions",
-      "launchInstruction": "Dans la salle de sortie du Vaisseau, parle au Capitaine Meno après avoir terminé Piège de crystal pour lancer Son nom est Personne."
+      "momentId": "moment-nordalie-missions"
     },
     {
       "id": "route-step-0838",
