@@ -220,6 +220,47 @@ test('contrat route — le drop Parangon est activé avant le premier donjon 200
   assert.match(parangon?.flowNote ?? '', /avant tout donjon niveau 200/i);
 });
 
+test('contrat UX — une reprise annoncée possède une vraie reprise ou fin ultérieure', () => {
+  const baseTitle = (title: string) =>
+    title
+      .replace(/^◆\s*/, '')
+      .replace(/\s+→.*$/, '')
+      .replace(/\s+—.*$/, '')
+      .trim()
+      .toLocaleLowerCase('fr-FR');
+
+  for (const step of route.steps) {
+    if (!step.flowNote || !/Reprise prévue plus tard/i.test(step.flowNote)) continue;
+
+    const hasLaterLifecycleStep = route.steps.some((candidate) => {
+      if (candidate.order <= step.order) return false;
+      const sameSource = Boolean(
+        step.source?.url &&
+        candidate.source?.url &&
+        step.source.url === candidate.source.url,
+      );
+      const sameTitle = baseTitle(step.title) === baseTitle(candidate.title);
+      return (sameSource || sameTitle) && /REPRENDRE|TERMINER/i.test(candidate.action ?? '');
+    });
+
+    assert.ok(
+      hasLaterLifecycleStep,
+      `${step.id}: reprise annoncée sans vraie reprise/fin ultérieure.`,
+    );
+  }
+});
+
+test('contrat UX — une instruction Reprends sur une reprise réelle porte aussi l’action REPRENDRE', () => {
+  for (const step of route.steps) {
+    if (step.type !== 'resume' || !step.instruction || !/\bReprends\b/i.test(step.instruction)) continue;
+    assert.match(
+      step.action ?? '',
+      /REPRENDRE/i,
+      `${step.id}: instruction de reprise sans action REPRENDRE.`,
+    );
+  }
+});
+
 test('contrat UX — les flow notes restent ciblées sur les moments complexes', () => {
   const flowNotes = route.steps.filter((step) => step.flowNote);
   assert.ok(flowNotes.length >= 50, `Au moins 50 flow notes sont attendues, reçu : ${flowNotes.length}.`);
