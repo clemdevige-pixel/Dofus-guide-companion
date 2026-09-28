@@ -825,7 +825,9 @@ export function App() {
                               <span className="sequence-item__note">{step.launchInstruction}</span>
                             )}
                             {step.instruction && (
-                              <span className="sequence-item__note">{step.instruction}</span>
+                              <span className={currentFlowNote ? 'sequence-item__note sequence-item__note--flow' : 'sequence-item__note'}>
+                                {step.instruction}
+                              </span>
                             )}
                           </div>
                         );
@@ -936,7 +938,16 @@ export function App() {
               </div>
             )}
 
-            {currentStep.instruction && <p className="instruction">{currentStep.instruction}</p>}
+            {currentStep.instruction && (
+              currentFlowNote ? (
+                <div className="flow-note flow-note--detail">
+                  <span aria-hidden="true">•</span>
+                  <p>{currentStep.instruction}</p>
+                </div>
+              ) : (
+                <p className="instruction">{currentStep.instruction}</p>
+              )
+            )}
 
             {currentStep.type === 'preparation' && currentStep.preparationItems && (
               <PreparationChecklist
