@@ -359,6 +359,11 @@ test('contrat UX — une poursuite dans la même carte ne redevient pas une repr
       /\bReprends?\b/i,
       `${stepId}: le texte doit utiliser poursuis/avance/termine dans la même carte.`,
     );
+    assert.doesNotMatch(
+      step?.title ?? '',
+      /\breprendre\b/i,
+      `${stepId}: le titre ne doit pas annoncer une reprise dans la même carte.`,
+    );
   }
 
   const talKasha = route.steps.find((step) => step.id === 'route-step-0831');
