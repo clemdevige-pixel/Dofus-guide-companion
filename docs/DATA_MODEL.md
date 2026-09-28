@@ -290,7 +290,6 @@ Colonnes structurantes actuellement utilisées :
 - `PARALLEL_ID` ;
 - `PARALLEL_PHASE` ;
 - `DOFUS_SERIES` ;
-- `FLOW_NOTE`.
 
 La plage d’export couvre désormais `ROUTE!A5:W`.
 
