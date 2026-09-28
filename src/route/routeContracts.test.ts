@@ -172,24 +172,21 @@ test('contrat éditorial — une instruction ne répète pas seulement action, t
   }
 });
 
-test('contrat UX — reprends n\'apparaît dans un flow qu\'au moment d\'une vraie reprise', () => {
-  for (const step of route.steps) {
-    if (!step.flowNote || !/\breprends\b/i.test(step.flowNote)) continue;
-    assert.match(
-      step.action ?? '',
-      /REPRENDRE/i,
-      `${step.id}: flowNote utilise « reprends » sans action REPRENDRE.`,
-    );
-  }
-});
-
 test('contrat UX — le wording joueur utilise termine plutôt que ferme', () => {
   for (const step of route.steps) {
-    if (!step.flowNote) continue;
-    assert.ok(
-      !/\bferme(?:r)?\b/i.test(step.flowNote),
-      `${step.id}: flowNote contient encore « ferme/fermer ».`,
-    );
+    const texts = [
+      step.warning,
+      step.instruction,
+      step.launchInstruction,
+      step.hardLock?.message,
+    ].filter((value): value is string => Boolean(value));
+
+    for (const value of texts) {
+      assert.ok(
+        !/\bferme(?:r)?\b/i.test(value),
+        `${step.id}: le wording joueur contient encore « ferme/fermer ».`,
+      );
+    }
   }
 });
 
@@ -273,11 +270,10 @@ test('contrat route — le drop Parangon est activé avant le premier donjon 200
   ]);
 
   const parangon = route.steps.find((step) => step.id === 'route-step-1171');
-  const cardOwner = route.steps.find((step) => step.id === 'route-step-0678');
   assert.match(parangon?.action ?? '', /AVANCER/);
   assert.match(parangon?.action ?? '', /STOP/);
-  assert.match(cardOwner?.flowNote ?? '', /Obtenir un Parangon de puissance/i);
-  assert.match(cardOwner?.flowNote ?? '', /avant tout donjon niveau 200/i);
+  assert.match(parangon?.instruction ?? '', /Obtenir un Parangon de puissance/i);
+  assert.match(parangon?.instruction ?? '', /avant tout donjon niveau 200/i);
 });
 
 test('contrat UX — une reprise annoncée possède une vraie reprise ou fin ultérieure', () => {
@@ -290,7 +286,10 @@ test('contrat UX — une reprise annoncée possède une vraie reprise ou fin ult
       .toLocaleLowerCase('fr-FR');
 
   for (const step of route.steps) {
-    if (!step.flowNote || !/Reprise prévue plus tard/i.test(step.flowNote)) continue;
+    if (
+      !step.instruction ||
+      !/(Reprise prévue plus tard|garde .+ active jusqu[’']à sa reprise|garde .+ active jusqu[’']à sa prochaine validation)/i.test(step.instruction)
+    ) continue;
 
     const hasLaterLifecycleStep = route.steps.some((candidate) => {
       if (candidate.order <= step.order) return false;
@@ -443,17 +442,12 @@ test('contrat UX — une poursuite dans la même carte ne redevient pas une repr
   assert.equal(nordalie?.instruction, undefined);
 });
 
-test('contrat UX — les flow notes restent ciblées sur les moments complexes', () => {
-  const flowNotes = route.steps.filter((step) => step.flowNote);
-  assert.ok(flowNotes.length >= 50, `Au moins 50 flow notes sont attendues, reçu : ${flowNotes.length}.`);
-
-  for (const step of flowNotes) {
-    if (!step.momentId) continue;
-    const firstMomentStep = route.steps.find((candidate) => candidate.momentId === step.momentId);
+test('contrat UX — les informations de flow sont intégrées aux descriptions', () => {
+  for (const step of route.steps) {
     assert.equal(
-      firstMomentStep?.id,
-      step.id,
-      `${step.id}: une flow note doit être portée par le premier step du moment.`,
+      Object.prototype.hasOwnProperty.call(step, 'flowNote'),
+      false,
+      `${step.id}: flowNote ne doit plus exister dans le modèle runtime.`,
     );
   }
 
@@ -464,12 +458,13 @@ test('contrat UX — les flow notes restent ciblées sur les moments complexes',
     ['route-step-0693', /Main dans la main.*branches/i],
     ['route-step-0938', /Rune d’Harmonie.*totems de Maïmane/i],
     ['route-step-0994', /Flovoraison.*Protecteur/i],
+    ['route-step-1171', /Parangon de puissance.*donjon niveau 200/i],
   ]);
 
   for (const [stepId, pattern] of expected) {
     const step = route.steps.find((candidate) => candidate.id === stepId);
-    assert.ok(step?.flowNote, `${stepId}: flow note manquante.`);
-    assert.match(step.flowNote ?? '', pattern);
+    assert.ok(step?.instruction, `${stepId}: description intégrée manquante.`);
+    assert.match(step.instruction ?? '', pattern);
   }
 });
 
