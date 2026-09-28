@@ -458,7 +458,7 @@ test('contrat UX — les informations de flow sont intégrées aux descriptions'
     ['route-step-0693', /Main dans la main.*branches/i],
     ['route-step-0938', /Rune d’Harmonie.*totems de Maïmane/i],
     ['route-step-0994', /Flovoraison.*Protecteur/i],
-    ['route-step-1171', /Parangon de puissance.*donjon niveau 200/i],
+    ['route-step-1171', /donjon niveau 200.*Parangon de puissance/i],
   ]);
 
   for (const [stepId, pattern] of expected) {
