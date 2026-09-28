@@ -213,3 +213,29 @@ Lire dans l’ordre : `AGENTS.md`, `SPEC.md`, `ARCHITECTURE.md`, `docs/DATA_MODE
 - CI frontend du commit `14ebf3728beedb53cb7d5fa1aa5e9e52ebce2569` : `test:route`, `validate:route` et build **verts**.
 - `cargo check` Windows était encore en cours au dernier contrôle.
 
+## Update 2026-09-28 — audit lifecycle / wording des reprises
+
+- Passe globale sur les FLOW_NOTE + reprises :
+  - `reprends` réservé aux vraies étapes de reprise ;
+  - dans une même carte : `poursuis` / `termine` ;
+  - `ferme/fermer` remplacé par `termine/terminer` côté joueur ;
+  - toute instruction de type reprise sur un step `resume` porte désormais aussi `REPRENDRE` dans ACTION.
+- Les instructions présentes sous une FLOW_NOTE utilisent maintenant le même langage visuel de callout pour éviter le mélange de styles.
+- Trou de route corrigé : `Pêche en eaux gelées` possède désormais une étape explicite `REPRENDRE / TERMINER` après le Mansot Royal et avant `La pêche à Mel`.
+- Trou de route corrigé : `Piège de crystal` est désormais explicitement terminé après Meno, puis `Son nom est Personne` est lancé dans la salle de sortie avant de poursuivre les objectifs Abyssal/Ivoire.
+- `La mère des Dragoeufs` :
+  - avant tout donjon niveau 200, la quête doit être avancée jusqu'à l'objectif exact `Obtenir un Parangon de puissance` ;
+  - le drop du Parangon est alors actif sur les gardiens de donjon 200 ;
+  - cette condition est protégée par test avant le premier passage Nileza 200 de la route.
+- Tests ajoutés :
+  - un FLOW_NOTE contenant `reprends` exige ACTION `REPRENDRE` ;
+  - aucun FLOW_NOTE ne peut utiliser `ferme/fermer` ;
+  - toute reprise annoncée doit avoir une vraie reprise ou fin ultérieure ;
+  - lifecycle explicite de Pêche en eaux gelées ;
+  - lifecycle explicite Piège de crystal → Son nom est Personne ;
+  - checkpoint Parangon avant les donjons 200.
+- État runtime : 977 steps / 349 cards.
+- CI frontend du commit `517637e336c137c6061e870043f57fa9dfb3cacf` : tests route, validate route et build verts.
+- `cargo check` Windows encore en cours au dernier contrôle.
+- Point restant volontairement non étendu : terminer complètement `La mère des Dragoeufs` après le Parangon demanderait d'ajouter `Perdu dans le temps` puis la suite Vulbis. La route conserve pour l'instant uniquement le checkpoint Parangon utile aux donjons 200.
+
