@@ -138,6 +138,7 @@ export function App() {
   const [compact, setCompact] = useState(initialProgress.compact);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [secondaryView, setSecondaryView] = useState<SecondaryView>(null);
+  const [selectedProgressBlockId, setSelectedProgressBlockId] = useState<string | null>(null);
   const [expandedSequenceObjectiveId, setExpandedSequenceObjectiveId] = useState<string | null>(null);
   const [shortcutBindings, setShortcutBindings] = useState<ShortcutBindings>(initialShortcuts);
   const [viewIndex, setViewIndex] = useState(() => {
@@ -272,14 +273,19 @@ export function App() {
   const currentBlockProgress = currentBlock
     ? blockProgress.find((block) => block.id === currentBlock.id)
     : undefined;
-  const currentBlockCards = useMemo(
+  const selectedProgressBlock =
+    route.blocks.find((block) => block.id === selectedProgressBlockId) ?? currentBlock;
+  const selectedProgressBlockProgress = selectedProgressBlock
+    ? blockProgress.find((block) => block.id === selectedProgressBlock.id)
+    : undefined;
+  const selectedProgressBlockCards = useMemo(
     () =>
-      currentBlock
+      selectedProgressBlock
         ? stepGroups
             .map((group, index) => ({ group, index }))
-            .filter(({ group }) => group.blockId === currentBlock.id)
+            .filter(({ group }) => group.blockId === selectedProgressBlock.id)
         : [],
-    [currentBlock, stepGroups],
+    [selectedProgressBlock, stepGroups],
   );
 
   function goPrevious() {
@@ -306,7 +312,7 @@ export function App() {
     setCardJumpValue(String(targetCard));
   }
 
-  function jumpToBlock(targetCardIndex: number) {
+  function jumpToCardIndex(targetCardIndex: number) {
     if (targetCardIndex < 0) {
       return;
     }
@@ -440,6 +446,9 @@ export function App() {
 
   function openSecondaryView(view: Exclude<SecondaryView, null>) {
     setDrawerOpen(false);
+    if (view === 'progress') {
+      setSelectedProgressBlockId(currentBlock?.id ?? null);
+    }
     setSecondaryView(view);
   }
 
@@ -546,14 +555,14 @@ export function App() {
                 <strong>{progress.percentage}%</strong>
                 <span>{progress.completed} / {progress.total} étapes · {stepGroups.length} cartes</span>
               </div>
-              {currentBlock && currentBlockCards.length > 0 && (
-                <section className="block-roadmap" aria-label={`Étapes du bloc ${currentBlock.order}`}>
+              {selectedProgressBlock && selectedProgressBlockCards.length > 0 && (
+                <section className="block-roadmap" aria-label={`Étapes du bloc ${selectedProgressBlock.order}`}>
                   <div className="block-roadmap__header">
-                    <strong>Bloc actuel · {currentBlock.title}</strong>
-                    <span>{currentBlockProgress?.percentage ?? 0}%</span>
+                    <strong>Bloc {selectedProgressBlock.order} · {selectedProgressBlock.title}</strong>
+                    <span>{selectedProgressBlockProgress?.percentage ?? 0}%</span>
                   </div>
                   <div className="block-roadmap__cards">
-                    {currentBlockCards.map(({ group, index }) => {
+                    {selectedProgressBlockCards.map(({ group, index }) => {
                       const completed = group.steps.every((step) => completedStepIds.has(step.id));
                       const isCurrent = index === viewIndex;
                       const representative =
@@ -563,7 +572,7 @@ export function App() {
                           className={`block-roadmap__card${completed ? ' block-roadmap__card--completed' : ''}${isCurrent ? ' block-roadmap__card--current' : ''}`}
                           type="button"
                           key={group.id}
-                          onClick={() => jumpToBlock(index)}
+                          onClick={() => jumpToCardIndex(index)}
                         >
                           <span className="block-roadmap__status" aria-hidden="true">
                             {completed ? '✓' : isCurrent ? '→' : '○'}
@@ -581,12 +590,13 @@ export function App() {
               <div className="progression-blocks">
                 {blockProgress.map((block) => {
                   const isCurrent = block.id === currentBlock?.id;
+                  const isSelected = block.id === selectedProgressBlock?.id;
                   return (
                     <button
-                      className={`progression-block${isCurrent ? ' progression-block--current' : ''}`}
+                      className={`progression-block${isCurrent ? ' progression-block--current' : ''}${isSelected ? ' progression-block--selected' : ''}`}
                       type="button"
                       key={block.id}
-                      onClick={() => jumpToBlock(block.targetCardIndex)}
+                      onClick={() => setSelectedProgressBlockId(block.id)}
                     >
                       <div className="progression-block__header">
                         <span className="progression-block__title">
@@ -679,6 +689,7 @@ export function App() {
                   completed ? 'sequence-item--completed' : '',
                   active ? 'sequence-item--active' : '',
                   future ? 'sequence-item--future' : '',
+                  expandable ? 'sequence-item--expandable' : '',
                   expanded ? 'sequence-item--expanded' : '',
                 ].filter(Boolean).join(' ');
 
@@ -740,11 +751,6 @@ export function App() {
                             >
                               [{summaryCoordinate.x},{summaryCoordinate.y}] · ⧉
                             </button>
-                          )}
-                          {expandable && (
-                            <span className="sequence-expand-indicator" aria-hidden="true">
-                              {expanded ? '▾' : '▸'}
-                            </span>
                           )}
                         </div>
                       </div>
