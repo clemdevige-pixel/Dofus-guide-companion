@@ -368,7 +368,8 @@
       "destination": {
         "x": -2,
         "y": -3
-      }
+      },
+      "flowNote": "Garde Le village dans les nuages actif et prends les quêtes des PNJ rencontrés pendant la tournée Incarnam."
     },
     {
       "id": "route-step-1101",
@@ -2011,7 +2012,8 @@
       "destination": {
         "x": 1,
         "y": -15
-      }
+      },
+      "flowNote": "Reprise prévue plus tard : garde Donjon en mousse active."
     },
     {
       "id": "route-step-0045",
@@ -2777,7 +2779,8 @@
       "destination": {
         "x": 5,
         "y": -22
-      }
+      },
+      "flowNote": "Reprise prévue plus tard : garde Déjeuner à la fourchette active."
     },
     {
       "id": "route-step-0042",
@@ -2980,7 +2983,8 @@
       "destination": {
         "x": 7,
         "y": -24
-      }
+      },
+      "flowNote": "Reprise prévue plus tard : garde Qui sème le vent récolte l'Art'empeth active."
     },
     {
       "id": "route-step-1124",
@@ -3003,7 +3007,8 @@
       "destination": {
         "x": 0,
         "y": -25
-      }
+      },
+      "flowNote": "Reprise prévue plus tard : garde Bûcherons en détresse active."
     },
     {
       "id": "route-step-1142",
@@ -3041,7 +3046,8 @@
       "destination": {
         "x": 2,
         "y": -31
-      }
+      },
+      "flowNote": "Reprise prévue plus tard : garde La coupe des vices active."
     },
     {
       "id": "route-step-1125",
@@ -3063,7 +3069,8 @@
       "destination": {
         "x": 1,
         "y": -29
-      }
+      },
+      "flowNote": "Reprise prévue plus tard : garde Le génie se meut active."
     },
     {
       "id": "route-step-1143",
@@ -3162,7 +3169,8 @@
       "destination": {
         "x": 3,
         "y": -21
-      }
+      },
+      "flowNote": "Avance Restauration rapide jusqu’à Mage Ax. Ne rends pas la quête : elle sera terminée plus tard à la bibliothèque."
     },
     {
       "id": "block-entry-03",
@@ -3515,7 +3523,8 @@
       "location": {
         "x": 5,
         "y": -17
-      }
+      },
+      "flowNote": "Reprise prévue plus tard : garde Les as de la cambriole active."
     },
     {
       "id": "route-step-1152",
@@ -5127,7 +5136,8 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-maitre-des-clefs.html"
       },
-      "momentId": "moment-route-step-0132"
+      "momentId": "moment-route-step-0132",
+      "flowNote": "Reprise prévue plus tard : garde Le maître des clefs active."
     },
     {
       "id": "route-step-0133",
@@ -6056,7 +6066,8 @@
           },
           "note": "STOP — Les Pitons seront faits plus tard avec La fureur du Holbaïd."
         }
-      ]
+      ],
+      "flowNote": "Reprise prévue plus tard : garde Pat Akess active."
     },
     {
       "id": "route-step-0105",
@@ -6097,7 +6108,8 @@
       "destination": {
         "x": -55,
         "y": 15
-      }
+      },
+      "flowNote": "Reprise prévue plus tard : garde Après lui, le déluge active."
     },
     {
       "id": "route-step-0160",
@@ -6337,7 +6349,8 @@
       "location": {
         "x": -32,
         "y": -57
-      }
+      },
+      "flowNote": "Reprise prévue plus tard : garde Le Tabi d'Amayiro active."
     },
     {
       "id": "route-step-0179",
@@ -7988,7 +8001,8 @@
       "destination": {
         "x": -6,
         "y": -10
-      }
+      },
+      "flowNote": "Reprise prévue plus tard : garde Munster lève le mystère active."
     },
     {
       "id": "route-step-0288",
@@ -8007,7 +8021,8 @@
       "location": {
         "x": 24,
         "y": -35
-      }
+      },
+      "flowNote": "Reprise prévue plus tard : garde Pas de fumée sans feu active."
     },
     {
       "id": "route-step-0290",
@@ -8110,7 +8125,8 @@
       "parallelGroup": {
         "parallelId": "parallel-domaine-ancestral",
         "phase": "progress"
-      }
+      },
+      "flowNote": "Reprise prévue plus tard : garde Un juge hystérique active."
     },
     {
       "id": "route-step-0295",
@@ -8498,7 +8514,8 @@
       "location": {
         "x": -6,
         "y": -3
-      }
+      },
+      "flowNote": "Reprise prévue plus tard : garde Plongeon et dragon active."
     },
     {
       "id": "route-step-0300",
@@ -8858,7 +8875,8 @@
       "destination": {
         "x": -26,
         "y": -5
-      }
+      },
+      "flowNote": "Avance Allumer le feu jusqu’au checkpoint indiqué, fais Draconanthropie, puis reprends Allumer le feu."
     },
     {
       "id": "route-step-0317",
@@ -9256,7 +9274,8 @@
           },
           "note": "Kal Vissi."
         }
-      ]
+      ],
+      "flowNote": "Avance Des donjons, encore des donjons jusqu’au checkpoint indiqué, fais Le livre des Taures, puis reprends Des donjons, encore des donjons."
     },
     {
       "id": "route-step-0343",
@@ -9443,7 +9462,8 @@
       "destination": {
         "x": 22,
         "y": -29
-      }
+      },
+      "flowNote": "Avance Sous le bois de sa colère jusqu’au checkpoint indiqué, fais Le Saule du Promeneur puis Rester planté là, puis reprends Sous le bois de sa colère."
     },
     {
       "id": "route-step-0268",
@@ -9767,7 +9787,8 @@
       "destination": {
         "x": -6,
         "y": -3
-      }
+      },
+      "flowNote": "Reprise prévue plus tard : garde Taures et détours active."
     },
     {
       "id": "route-step-0349",
@@ -10137,7 +10158,8 @@
       "location": {
         "x": -39,
         "y": -11
-      }
+      },
+      "flowNote": "Avance Le trésor de Totankama jusqu’à Mériana, ferme Il faut battre le lait quand il est chaud, Regrets d’éternailes et L’anneau de Tot, puis reviens terminer la quête."
     },
     {
       "id": "route-step-0381",
@@ -10156,7 +10178,8 @@
       "location": {
         "x": -6,
         "y": -3
-      }
+      },
+      "flowNote": "Reprise prévue plus tard : garde Comment perdre ses plumes active."
     },
     {
       "id": "route-step-0382",
@@ -10258,7 +10281,8 @@
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/comment-perdre-ses-plumes.html"
-      }
+      },
+      "flowNote": "Reprise prévue plus tard : garde Comment perdre ses plumes active."
     },
     {
       "id": "route-step-0389",
@@ -10286,7 +10310,8 @@
           "label": "Tofulailler Royal",
           "note": "Avec Comment perdre ses plumes actif."
         }
-      ]
+      ],
+      "flowNote": "Reprise prévue plus tard : garde Des donjons, encore des donjons active."
     },
     {
       "id": "route-step-0390",
@@ -10781,7 +10806,8 @@
       "destination": {
         "x": -60,
         "y": -57
-      }
+      },
+      "flowNote": "Avance L'ombre et la glace jusqu’au checkpoint indiqué, fais Les joyeux de la couronne puis Les chasseurs, puis reprends L'ombre et la glace."
     },
     {
       "id": "route-step-0424",
@@ -11077,7 +11103,8 @@
       "destination": {
         "x": -77,
         "y": -42
-      }
+      },
+      "flowNote": "Reprise prévue plus tard : garde Frigost, une île pas comme les autres active."
     },
     {
       "id": "route-step-audit-dev-durable-start",
@@ -11165,7 +11192,8 @@
       "location": {
         "x": -80,
         "y": -45
-      }
+      },
+      "flowNote": "Reprise prévue plus tard : garde Le mal a dit active."
     },
     {
       "id": "route-step-0439",
@@ -11310,7 +11338,8 @@
       "destination": {
         "x": -6,
         "y": -3
-      }
+      },
+      "flowNote": "Avance L’épée du rocher jusqu’au Skeunk, récupère la Poudre scintillante avant de sortir, puis reprends jusqu’à Fraktale et utilise le Détecteur portable après le boss."
     },
     {
       "id": "route-step-0858",
@@ -11400,7 +11429,8 @@
       "longRunningGoal": {
         "goalId": "nimotopia-messager",
         "phase": "start"
-      }
+      },
+      "flowNote": "Avance Ne tirez pas sur le messager jusqu’au Muldobus, fais À plus dans l’muldobus, puis reprends la quête."
     },
     {
       "id": "route-step-0654",
@@ -11546,7 +11576,8 @@
       "destination": {
         "x": -6,
         "y": -3
-      }
+      },
+      "flowNote": "Avance Le forgeur de légende jusqu’au checkpoint indiqué, fais Des donjons, encore des donjons, puis reprends Le forgeur de légende."
     },
     {
       "id": "route-step-0405",
@@ -11649,7 +11680,8 @@
       "title": "La voie du guerrier — jusqu'au Repaire de Skeunk",
       "action": "REPRENDRE / STOP",
       "instruction": "Auprès du Maître des clefs, prends l'objectif Skeunk puis arrête-toi devant le Repaire.",
-      "momentId": "moment-route-step-0408"
+      "momentId": "moment-route-step-0408",
+      "flowNote": "Reprise prévue plus tard : garde La voie du guerrier active."
     },
     {
       "id": "route-step-0409",
@@ -12003,7 +12035,8 @@
       "destination": {
         "x": -6,
         "y": -3
-      }
+      },
+      "flowNote": "Avance La méchante sorcière de l’Est jusqu’au Disciple de Viti, fais La bénédiction de Viti, puis reviens terminer la quête."
     },
     {
       "id": "route-step-0361",
@@ -12102,7 +12135,8 @@
       "location": {
         "x": 22,
         "y": -29
-      }
+      },
+      "flowNote": "Avance Le festival de la lanterne jusqu’au checkpoint indiqué, fais La bénédiction de Viti, puis reprends Le festival de la lanterne."
     },
     {
       "id": "route-step-0454",
@@ -12384,7 +12418,8 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/pas-de-fumee-sans-feu.html"
       },
-      "momentId": "moment-route-step-0500"
+      "momentId": "moment-route-step-0500",
+      "flowNote": "Avance Pas de fumée sans feu jusqu’au checkpoint indiqué, fais Arrête-la si tu peux, puis reprends Pas de fumée sans feu."
     },
     {
       "id": "route-step-0501",
@@ -12474,7 +12509,8 @@
       "destination": {
         "x": -6,
         "y": -3
-      }
+      },
+      "flowNote": "Avance Autel du Nord jusqu’au Disciple de Thomahon, fais La bénédiction de Thomahon, puis reviens terminer Autel du Nord."
     },
     {
       "id": "route-step-0470",
@@ -12975,7 +13011,8 @@
       "title": "La voie du guerrier — jusqu'au Minotot",
       "action": "REPRENDRE / STOP",
       "instruction": "Reprends La voie du guerrier au checkpoint Minotot. Utilise la sauvegarde du Minotoror si elle est encore disponible puis arrête-toi devant la Salle du Minotot.",
-      "momentId": "moment-voie-guerrier-minotot"
+      "momentId": "moment-voie-guerrier-minotot",
+      "flowNote": "Reprise prévue plus tard : garde La voie du guerrier active."
     },
     {
       "id": "route-step-0460",
@@ -13167,7 +13204,8 @@
       "destination": {
         "x": -71,
         "y": -83
-      }
+      },
+      "flowNote": "Reprise prévue plus tard : garde Lavomatique active."
     },
     {
       "id": "route-step-0519",
@@ -13335,7 +13373,8 @@
       "location": {
         "x": -6,
         "y": -3
-      }
+      },
+      "flowNote": "Avance Il était une foi dans l’Ouest jusqu’au Disciple de Foluk, fais La bénédiction de Foluk, puis reviens terminer la quête."
     },
     {
       "id": "route-step-0525",
@@ -14504,7 +14543,8 @@
       "location": {
         "x": -80,
         "y": -73
-      }
+      },
+      "flowNote": "Avance Dépôt de ravitaillement jusqu’au checkpoint indiqué, fais Chaud du S.L.I.P. puis Hypogée de l'Obsidiantre, puis reprends Dépôt de ravitaillement."
     },
     {
       "id": "route-step-0561",
@@ -14697,7 +14737,8 @@
       "destination": {
         "x": -6,
         "y": 18
-      }
+      },
+      "flowNote": "Reprise prévue plus tard : garde Quand les esprits s'échauffent active."
     },
     {
       "id": "route-step-0509",
@@ -14725,7 +14766,8 @@
       "destination": {
         "x": 36,
         "y": -44
-      }
+      },
+      "flowNote": "Avance Requiem pour un Yokai jusqu’au checkpoint indiqué, fais Jusqu'à leur dernier soupir, puis reprends Requiem pour un Yokai."
     },
     {
       "id": "route-step-0510",
@@ -15590,7 +15632,8 @@
       "destination": {
         "x": -77,
         "y": -42
-      }
+      },
+      "flowNote": "Reprise prévue plus tard : garde Au fion du trou active."
     },
     {
       "id": "route-step-0600",
@@ -15860,7 +15903,8 @@
       "longRunningGoal": {
         "goalId": "nimotopia-parallele",
         "phase": "start"
-      }
+      },
+      "flowNote": "Avance Nos amies les bêtes jusqu’au checkpoint indiqué, fais Shyriiwook puis À armes égales, puis reprends Nos amies les bêtes."
     },
     {
       "id": "route-step-1165",
@@ -15967,7 +16011,8 @@
       "longRunningGoal": {
         "goalId": "nimotopia-il-a-fui",
         "phase": "start"
-      }
+      },
+      "flowNote": "Avance Il a fui, il a tout compris jusqu’au checkpoint indiqué, fais La valse des manuels, puis reprends Il a fui, il a tout compris."
     },
     {
       "id": "route-step-0658",
@@ -16697,7 +16742,8 @@
       "destination": {
         "x": -61,
         "y": -81
-      }
+      },
+      "flowNote": "Avance Au-delà du mur jusqu’au checkpoint indiqué, fais Chaud et Froid, puis reprends Au-delà du mur."
     },
     {
       "id": "route-step-0621",
@@ -17182,7 +17228,8 @@
       "destination": {
         "x": -59,
         "y": -74
-      }
+      },
+      "flowNote": "Avance Le givre des révélations jusqu’au checkpoint indiqué, fais Un comte de faits divers puis Le Dofus des Glaces, puis reprends Le givre des révélations."
     },
     {
       "id": "route-step-audit-un-comte-start",
@@ -18504,7 +18551,8 @@
       "destination": {
         "x": -55,
         "y": 15
-      }
+      },
+      "flowNote": "Avance Un remède draconien jusqu’au Glourséleste, puis ouvre les quatre quêtes des dragons. Termine les quatre branches avant de revenir fermer Un remède draconien."
     },
     {
       "id": "route-step-0907",
@@ -18764,7 +18812,8 @@
       "destination": {
         "x": -9,
         "y": -22
-      }
+      },
+      "flowNote": "Après Tal Kasha, avance Nordalie jusqu’aux quatre missions, termine Le bonheur est dans le spray, Une voix de crystal, Le mort dans l’âme et Le guerrier noir, puis reviens terminer Nordalie."
     },
     {
       "id": "route-step-0831",
@@ -18815,7 +18864,8 @@
       "destination": {
         "x": -76,
         "y": -80
-      }
+      },
+      "flowNote": "Prépare les deux paquets avant le retour à Meno : les objectifs de Son nom est Personne et les 7 partitions d’Une voix de crystal. Un seul retour au Pichon valide les deux."
     },
     {
       "id": "route-step-0834",
@@ -19445,7 +19495,8 @@
       "location": {
         "x": -13,
         "y": -22
-      }
+      },
+      "flowNote": "Lance Les quatre volontés, ferme les quatre branches Cavaliers, puis reviens valider la quête."
     },
     {
       "id": "route-step-0718",
@@ -19797,7 +19848,8 @@
       "destination": {
         "x": 0,
         "y": 0
-      }
+      },
+      "flowNote": "Avance Un pouvoir mérydique jusqu’au checkpoint indiqué, fais Clairière du Chêne Mou puis Temple du Grand Ougah, puis reprends Un pouvoir mérydique."
     },
     {
       "id": "route-step-0737",
@@ -20397,7 +20449,8 @@
       "destination": {
         "x": -6,
         "y": -3
-      }
+      },
+      "flowNote": "Avance Dans la gueule du dragon jusqu’après Rathrosk, puis lance Prise de conscience : elle ouvre les deux branches suivantes. Ferme-les avant de reprendre les deux fils."
     },
     {
       "id": "route-step-0919",
@@ -20475,7 +20528,8 @@
       "destination": {
         "x": 3,
         "y": 1
-      }
+      },
+      "flowNote": "Avance L'avis de la Mort jusqu’au checkpoint indiqué, traite les objectifs de cette séquence, puis reprends L'avis de la Mort."
     },
     {
       "id": "route-step-0924",
@@ -20759,7 +20813,8 @@
       "destination": {
         "x": 23,
         "y": -32
-      }
+      },
+      "flowNote": "Avance Main dans la main jusqu’à débloquer la Taverne interdite, fais les branches nécessaires, puis reprends Main dans la main. Reprise prévue après ces branches."
     },
     {
       "id": "route-step-0694",
@@ -20844,7 +20899,8 @@
       "destination": {
         "x": 2,
         "y": 0
-      }
+      },
+      "flowNote": "Avance Deux souffles, une inspiration jusqu’au checkpoint indiqué, fais Souvenir d'Imagiro puis En ce jardin qui nous unit, puis reprends Deux souffles, une inspiration."
     },
     {
       "id": "route-step-0698",
@@ -21103,7 +21159,8 @@
       "location": {
         "x": 21,
         "y": -33
-      }
+      },
+      "flowNote": "Avance Quand l'éveil n'est qu'un songe jusqu’au checkpoint indiqué, traite les objectifs de cette séquence, puis reprends Quand l'éveil n'est qu'un songe."
     },
     {
       "id": "route-step-0706",
@@ -21710,7 +21767,8 @@
       "destination": {
         "x": 21,
         "y": -33
-      }
+      },
+      "flowNote": "Avance Un héritage tourmenté jusqu’à la Rune d’Harmonie, lance Les totems de Maïmane, puis garde les deux quêtes actives jusqu’à leur convergence."
     },
     {
       "id": "route-step-0939",
@@ -21814,7 +21872,8 @@
       "destination": {
         "x": 38,
         "y": -21
-      }
+      },
+      "flowNote": "Avance S’armer contre le destin jusqu’au Vortex avec Les totems de Maïmane actifs, fais le Vortex, puis reprends la quête vers le Comte Harebourg."
     },
     {
       "id": "route-step-0947",
@@ -22248,7 +22307,8 @@
       "longRunningGoal": {
         "goalId": "qui-nous-protege",
         "phase": "start"
-      }
+      },
+      "flowNote": "Garde Qui nous protège du Protecteur ? active : Flovoraison s’insérera avant sa conclusion, puis la route reviendra fermer le Protecteur."
     },
     {
       "id": "route-step-0967",
@@ -22439,7 +22499,8 @@
       "location": {
         "x": 7,
         "y": 1
-      }
+      },
+      "flowNote": "Flovoraison et Qui nous protège du Protecteur ? convergent ici : termine la séquence Flovoraison, puis ferme le Protecteur."
     },
     {
       "id": "route-step-0995",
