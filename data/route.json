@@ -11974,7 +11974,6 @@
       "displayRole": "transition",
       "title": "On dirait le Sud — TERMINER",
       "action": "TERMINER",
-      "instruction": "Reprends On dirait le Sud et termine la quête.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/on-dirait-le-sud.html"
@@ -17141,7 +17140,6 @@
       "title": "La machine à démonter le temps",
       "prerequisites": "prévoir 1 Force de Crocoburio.",
       "action": "TERMINER",
-      "instruction": "Reprends La machine à démonter le temps et termine la quête.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-machine-agrave-deacutemonter-le-temps.html"
@@ -21103,7 +21101,6 @@
       "title": "Quand l'éveil n'est qu'un songe",
       "prerequisites": "Dofus Tacheté.",
       "action": "LANCER",
-      "instruction": "Lance Quand l'éveil n'est qu'un songe.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/quand-leveil-nest-quun-songe.html"
