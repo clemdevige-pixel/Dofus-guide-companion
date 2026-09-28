@@ -172,6 +172,54 @@ test('contrat éditorial — une instruction ne répète pas seulement action, t
   }
 });
 
+test('contrat UX — reprends n\'apparaît dans un flow qu\'au moment d\'une vraie reprise', () => {
+  for (const step of route.steps) {
+    if (!step.flowNote || !/\breprends\b/i.test(step.flowNote)) continue;
+    assert.match(
+      step.action ?? '',
+      /REPRENDRE/i,
+      `${step.id}: flowNote utilise « reprends » sans action REPRENDRE.`,
+    );
+  }
+});
+
+test('contrat UX — le wording joueur utilise termine plutôt que ferme', () => {
+  for (const step of route.steps) {
+    if (!step.flowNote) continue;
+    assert.ok(
+      !/\bferme(?:r)?\b/i.test(step.flowNote),
+      `${step.id}: flowNote contient encore « ferme/fermer ».`,
+    );
+  }
+});
+
+test('contrat route — Pêche en eaux gelées est explicitement terminée après le Mansot Royal', () => {
+  assertOrderedSequence('Pêche en eaux gelées', [
+    'route-step-0417',
+    'route-step-0426',
+    'route-step-peche-eaux-gelees-finish',
+    'route-step-0430',
+  ]);
+
+  const finish = route.steps.find((step) => step.id === 'route-step-peche-eaux-gelees-finish');
+  assert.equal(finish?.displayRole, 'objective');
+  assert.match(finish?.action ?? '', /REPRENDRE/);
+  assert.match(finish?.action ?? '', /TERMINER/);
+});
+
+test('contrat route — le drop Parangon est activé avant le premier donjon 200 de la série', () => {
+  assertOrderedSequence('Parangon avant donjons 200', [
+    'route-step-1171',
+    'route-step-0622',
+  ]);
+
+  const parangon = route.steps.find((step) => step.id === 'route-step-1171');
+  assert.match(parangon?.action ?? '', /AVANCER/);
+  assert.match(parangon?.action ?? '', /STOP/);
+  assert.match(parangon?.flowNote ?? '', /Obtenir un Parangon de puissance/i);
+  assert.match(parangon?.flowNote ?? '', /avant tout donjon niveau 200/i);
+});
+
 test('contrat UX — les flow notes restent ciblées sur les moments complexes', () => {
   const flowNotes = route.steps.filter((step) => step.flowNote);
   assert.ok(flowNotes.length >= 50, `Au moins 50 flow notes sont attendues, reçu : ${flowNotes.length}.`);
