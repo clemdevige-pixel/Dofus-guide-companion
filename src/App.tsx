@@ -87,6 +87,15 @@ function getParallelGroupLabel(steps: RouteStep[]): string {
   return [...new Set(steps.map((step) => step.title))].join(' + ');
 }
 
+function getActionTone(action?: string): 'danger' | 'success' | 'start' | 'progress' | 'neutral' {
+  const normalizedAction = action?.toUpperCase() ?? '';
+  if (normalizedAction.includes('STOP')) return 'danger';
+  if (normalizedAction.includes('TERMINER')) return 'success';
+  if (normalizedAction.includes('LANCER')) return 'start';
+  if (normalizedAction.includes('AVANCER') || normalizedAction.includes('REPRENDRE')) return 'progress';
+  return 'neutral';
+}
+
 const dungeonExitWarningPrefix = '⚠ AVANT DE SORTIR DU DONJON —';
 
 function getWarningLabel(warning: string): string {
@@ -114,6 +123,7 @@ export function App() {
   const [compact, setCompact] = useState(initialProgress.compact);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [secondaryView, setSecondaryView] = useState<SecondaryView>(null);
+  const [expandedSequenceObjectiveId, setExpandedSequenceObjectiveId] = useState<string | null>(null);
   const [shortcutBindings, setShortcutBindings] = useState<ShortcutBindings>(initialShortcuts);
   const [viewIndex, setViewIndex] = useState(() => {
     if (initialProgress.currentStepId) {
@@ -144,6 +154,23 @@ export function App() {
     () => (currentGroup?.isSequence ? getSequenceObjectives(currentGroup.steps) : []),
     [currentGroup],
   );
+  const activeSequenceObjectiveId = useMemo(
+    () =>
+      sequenceObjectives.find(
+        (objective) => !objective.steps.every((step) => completedStepIds.has(step.id)),
+      )?.id ?? null,
+    [sequenceObjectives, completedStepIds],
+  );
+
+  useEffect(() => {
+    if (!currentGroup?.isSequence) {
+      setExpandedSequenceObjectiveId(null);
+      return;
+    }
+    setExpandedSequenceObjectiveId(
+      activeSequenceObjectiveId ?? sequenceObjectives.at(-1)?.id ?? null,
+    );
+  }, [currentGroup?.id, currentGroup?.isSequence, activeSequenceObjectiveId, sequenceObjectives]);
 
   useEffect(() => {
     const savedStep = currentGroup
@@ -224,6 +251,15 @@ export function App() {
   const currentBlockProgress = currentBlock
     ? blockProgress.find((block) => block.id === currentBlock.id)
     : undefined;
+  const currentBlockCards = useMemo(
+    () =>
+      currentBlock
+        ? stepGroups
+            .map((group, index) => ({ group, index }))
+            .filter(({ group }) => group.blockId === currentBlock.id)
+        : [],
+    [currentBlock, stepGroups],
+  );
 
   function goPrevious() {
     setSecondaryView(null);
@@ -489,6 +525,38 @@ export function App() {
                 <strong>{progress.percentage}%</strong>
                 <span>{progress.completed} / {progress.total} étapes · {stepGroups.length} cartes</span>
               </div>
+              {currentBlock && currentBlockCards.length > 0 && (
+                <section className="block-roadmap" aria-label={`Étapes du bloc ${currentBlock.order}`}>
+                  <div className="block-roadmap__header">
+                    <strong>Bloc actuel · {currentBlock.title}</strong>
+                    <span>{currentBlockProgress?.percentage ?? 0}%</span>
+                  </div>
+                  <div className="block-roadmap__cards">
+                    {currentBlockCards.map(({ group, index }) => {
+                      const completed = group.steps.every((step) => completedStepIds.has(step.id));
+                      const isCurrent = index === viewIndex;
+                      const representative =
+                        group.steps.find((step) => step.displayRole === 'objective') ?? group.steps[0];
+                      return (
+                        <button
+                          className={`block-roadmap__card${completed ? ' block-roadmap__card--completed' : ''}${isCurrent ? ' block-roadmap__card--current' : ''}`}
+                          type="button"
+                          key={group.id}
+                          onClick={() => jumpToBlock(index)}
+                        >
+                          <span className="block-roadmap__status" aria-hidden="true">
+                            {completed ? '✓' : isCurrent ? '→' : '○'}
+                          </span>
+                          <span className="block-roadmap__content">
+                            <small>Carte {index + 1}</small>
+                            <strong>{representative.title}</strong>
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </section>
+              )}
               <div className="progression-blocks">
                 {blockProgress.map((block) => {
                   const isCurrent = block.id === currentBlock?.id;
@@ -579,13 +647,20 @@ export function App() {
               {sequenceObjectives.map((objective) => {
                 const displayStep = getObjectiveDisplayStep(objective.steps);
                 const completed = objective.steps.every((step) => completedStepIds.has(step.id));
+                const active = objective.id === activeSequenceObjectiveId;
+                const expanded = objective.id === expandedSequenceObjectiveId;
+                const future = !completed && !active;
                 const stepIds = objective.steps.map((step) => step.id);
+                const itemClasses = [
+                  'sequence-item',
+                  completed ? 'sequence-item--completed' : '',
+                  active ? 'sequence-item--active' : '',
+                  future ? 'sequence-item--future' : '',
+                  expanded ? 'sequence-item--expanded' : '',
+                ].filter(Boolean).join(' ');
 
                 return (
-                  <li
-                    className={completed ? 'sequence-item sequence-item--completed' : 'sequence-item'}
-                    key={objective.id}
-                  >
+                  <li className={itemClasses} key={objective.id}>
                     <button
                       className="sequence-checkbox"
                       type="button"
@@ -593,7 +668,7 @@ export function App() {
                       aria-pressed={completed}
                       onClick={() => toggleSequenceObjective(stepIds)}
                     >
-                      {completed ? '✓' : ''}
+                      {completed ? '✓' : active ? '→' : ''}
                     </button>
                     <div className="sequence-item__content">
                       <div className="sequence-item__header">
@@ -614,9 +689,22 @@ export function App() {
                             )}
                           </span>
                         </strong>
+                        <button
+                          className="sequence-expand-button"
+                          type="button"
+                          aria-label={expanded ? `Réduire ${displayStep.title}` : `Afficher le détail de ${displayStep.title}`}
+                          aria-expanded={expanded}
+                          onClick={() =>
+                            setExpandedSequenceObjectiveId((current) =>
+                              current === objective.id ? null : objective.id,
+                            )
+                          }
+                        >
+                          {expanded ? '▾' : '▸'}
+                        </button>
                       </div>
 
-                      {objective.steps.map((step) => {
+                      {expanded && objective.steps.map((step) => {
                         const coordinate = getSequenceCoordinate(step);
                         const hasDistinctSource = Boolean(
                           step.source && step.source.url !== displayStep.source?.url,
@@ -631,7 +719,11 @@ export function App() {
                             )}
                             <div className="sequence-item__header">
                               <div>
-                                {step.action && <span className="sequence-item__action">{step.action}</span>}
+                                {step.action && (
+                                  <span className={`sequence-item__action sequence-item__action--${getActionTone(step.action)}`}>
+                                    {step.action}
+                                  </span>
+                                )}
                                 {step !== displayStep && (step.type === 'dungeon' || hasDistinctSource) && (
                                   <strong>
                                     <span className="title-with-markers">
@@ -709,7 +801,11 @@ export function App() {
               </div>
             )}
 
-            {currentStep.action && <p className="action-label">{currentStep.action}</p>}
+            {currentStep.action && (
+              <p className={`action-label action-label--${getActionTone(currentStep.action)}`}>
+                {currentStep.action}
+              </p>
+            )}
 
             {guideGroups.length > 0 && (
               <div className="guide-items">
