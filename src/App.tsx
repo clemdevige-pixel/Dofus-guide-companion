@@ -83,6 +83,21 @@ function getObjectiveDisplayStep(steps: RouteStep[]): RouteStep {
   return steps[0];
 }
 
+function hasExpandableObjectiveDetails(steps: RouteStep[]): boolean {
+  const displayStep = getObjectiveDisplayStep(steps);
+
+  return steps.some((step) => {
+    const hasDistinctSource = Boolean(step.source && step.source.url !== displayStep.source?.url);
+    const hasDistinctStep = step !== displayStep;
+    return Boolean(
+      step.warning ||
+      step.instruction ||
+      (step.launchInstruction && !step.location) ||
+      (hasDistinctStep && (step.type === 'dungeon' || hasDistinctSource || step.title !== displayStep.title)),
+    );
+  });
+}
+
 function getParallelGroupLabel(steps: RouteStep[]): string {
   return [...new Set(steps.map((step) => step.title))].join(' + ');
 }
@@ -167,8 +182,14 @@ export function App() {
       setExpandedSequenceObjectiveId(null);
       return;
     }
+
+    const activeObjective = sequenceObjectives.find(
+      (objective) => objective.id === activeSequenceObjectiveId,
+    );
     setExpandedSequenceObjectiveId(
-      activeSequenceObjectiveId ?? sequenceObjectives.at(-1)?.id ?? null,
+      activeObjective && hasExpandableObjectiveDetails(activeObjective.steps)
+        ? activeObjective.id
+        : null,
     );
   }, [currentGroup?.id, currentGroup?.isSequence, activeSequenceObjectiveId, sequenceObjectives]);
 
@@ -648,9 +669,11 @@ export function App() {
                 const displayStep = getObjectiveDisplayStep(objective.steps);
                 const completed = objective.steps.every((step) => completedStepIds.has(step.id));
                 const active = objective.id === activeSequenceObjectiveId;
-                const expanded = objective.id === expandedSequenceObjectiveId;
+                const expandable = hasExpandableObjectiveDetails(objective.steps);
+                const expanded = expandable && objective.id === expandedSequenceObjectiveId;
                 const future = !completed && !active;
                 const stepIds = objective.steps.map((step) => step.id);
+                const summaryCoordinate = !expandable ? getSequenceCoordinate(displayStep) : undefined;
                 const itemClasses = [
                   'sequence-item',
                   completed ? 'sequence-item--completed' : '',
@@ -660,13 +683,25 @@ export function App() {
                 ].filter(Boolean).join(' ');
 
                 return (
-                  <li className={itemClasses} key={objective.id}>
+                  <li
+                    className={itemClasses}
+                    key={objective.id}
+                    onClick={() => {
+                      if (!expandable) return;
+                      setExpandedSequenceObjectiveId((current) =>
+                        current === objective.id ? null : objective.id,
+                      );
+                    }}
+                  >
                     <button
                       className="sequence-checkbox"
                       type="button"
                       aria-label={completed ? `Décocher ${displayStep.title}` : `Cocher ${displayStep.title}`}
                       aria-pressed={completed}
-                      onClick={() => toggleSequenceObjective(stepIds)}
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        toggleSequenceObjective(stepIds);
+                      }}
                     >
                       {completed ? '✓' : active ? '→' : ''}
                     </button>
@@ -680,7 +715,10 @@ export function App() {
                                 className="source-title-button"
                                 type="button"
                                 title={`Ouvrir ${displayStep.source.label}`}
-                                onClick={() => void openExternalSource(displayStep.source!.url)}
+                                onClick={(event) => {
+                                  event.stopPropagation();
+                                  void openExternalSource(displayStep.source!.url);
+                                }}
                               >
                                 {displayStep.title}
                               </button>
@@ -689,19 +727,26 @@ export function App() {
                             )}
                           </span>
                         </strong>
-                        <button
-                          className="sequence-expand-button"
-                          type="button"
-                          aria-label={expanded ? `Réduire ${displayStep.title}` : `Afficher le détail de ${displayStep.title}`}
-                          aria-expanded={expanded}
-                          onClick={() =>
-                            setExpandedSequenceObjectiveId((current) =>
-                              current === objective.id ? null : objective.id,
-                            )
-                          }
-                        >
-                          {expanded ? '▾' : '▸'}
-                        </button>
+                        <div className="sequence-item__summary-tools">
+                          {summaryCoordinate && (
+                            <button
+                              className="guide-location-button"
+                              type="button"
+                              title={`Copier /travel ${summaryCoordinate.x} ${summaryCoordinate.y}`}
+                              onClick={(event) => {
+                                event.stopPropagation();
+                                void copyToClipboard(`/travel ${summaryCoordinate.x} ${summaryCoordinate.y}`);
+                              }}
+                            >
+                              [{summaryCoordinate.x},{summaryCoordinate.y}] · ⧉
+                            </button>
+                          )}
+                          {expandable && (
+                            <span className="sequence-expand-indicator" aria-hidden="true">
+                              {expanded ? '▾' : '▸'}
+                            </span>
+                          )}
+                        </div>
                       </div>
 
                       {expanded && objective.steps.map((step) => {
@@ -733,7 +778,10 @@ export function App() {
                                           className="source-title-button"
                                           type="button"
                                           title={`Ouvrir ${step.source.label}`}
-                                          onClick={() => void openExternalSource(step.source!.url)}
+                                          onClick={(event) => {
+                                    event.stopPropagation();
+                                    void openExternalSource(step.source!.url);
+                                  }}
                                         >
                                           {step.title}
                                         </button>
@@ -750,7 +798,10 @@ export function App() {
                                     className="guide-location-button"
                                     type="button"
                                     title={`Copier /travel ${coordinate.x} ${coordinate.y}`}
-                                    onClick={() => void copyToClipboard(`/travel ${coordinate.x} ${coordinate.y}`)}
+                                    onClick={(event) => {
+                                      event.stopPropagation();
+                                      void copyToClipboard(`/travel ${coordinate.x} ${coordinate.y}`);
+                                    }}
                                   >
                                     [{coordinate.x},{coordinate.y}] · ⧉
                                   </button>
