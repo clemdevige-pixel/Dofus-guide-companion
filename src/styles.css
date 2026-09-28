@@ -226,6 +226,26 @@ button:disabled {
   letter-spacing: 0.05em;
 }
 
+.action-label--danger {
+  color: #ff9a7a;
+}
+
+.action-label--success {
+  color: #8fd6a0;
+}
+
+.action-label--start {
+  color: #f0c678;
+}
+
+.action-label--progress {
+  color: #8cc4e8;
+}
+
+.action-label--neutral {
+  color: #b8c8bb;
+}
+
 .instruction {
   margin-top: 6px;
   color: #d4ded6;
@@ -283,10 +303,10 @@ button:disabled {
 .guide-location-button {
   flex: 0 0 auto;
   padding: 3px 6px;
-  border: 1px solid transparent;
+  border: 1px solid #29445a;
   border-radius: 6px;
-  background: #1b2a20;
-  color: #b9e7c1;
+  background: #14202a;
+  color: #9ed4f2;
   font-size: 11px;
   font-weight: 800;
   cursor: pointer;
@@ -294,8 +314,8 @@ button:disabled {
 }
 
 .guide-location-button:hover {
-  border-color: #476451;
-  background: #23382a;
+  border-color: #47779a;
+  background: #192c3a;
 }
 
 .guide-items__note {
@@ -577,7 +597,9 @@ button:disabled {
   gap: 10px;
   margin-top: 9px;
   padding: 8px 9px;
-  color: #b9e7c1;
+  border-color: #29445a;
+  background: #14202a;
+  color: #9ed4f2;
   font-size: 12px;
   font-weight: 800;
 }
