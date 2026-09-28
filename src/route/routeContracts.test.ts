@@ -189,7 +189,7 @@ test('contrat UX — les flow notes restent ciblées sur les moments complexes',
   const expected = new Map([
     ['route-step-1100', /quêtes des PNJ/i],
     ['route-step-0857', /Skeunk.*Fraktale/i],
-    ['route-step-0838', /un seul retour au Pichon/i],
+    ['route-step-0833', /un seul retour au Pichon/i],
     ['route-step-0693', /Main dans la main.*branches/i],
     ['route-step-0938', /Rune d’Harmonie.*totems de Maïmane/i],
     ['route-step-0994', /Flovoraison.*Protecteur/i],
