@@ -12323,7 +12323,6 @@
       "title": "La méchante sorcière de l'Est — TERMINER",
       "prerequisites": "Bénédiction de Viti obtenue.",
       "action": "TERMINER",
-      "instruction": "Reprends La méchante sorcière de l'Est et termine-la.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-meacutechante-sorciegravere-de-lest.html"
@@ -14607,7 +14606,6 @@
       "title": "Malédiction ! — TERMINER",
       "prerequisites": "1 Gland d'Ecumouth préparé.",
       "action": "TERMINER",
-      "instruction": "Termine Malédiction ! maintenant.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/maleacutediction.html"
@@ -19419,7 +19417,6 @@
       "title": "Les sentiers de la guerre",
       "prerequisites": "Rêves translucides terminée ; Chachyène de vie terminée pour l'étape Kanigroula.",
       "action": "LANCER / TERMINER",
-      "instruction": "En [-13,-22], Lance puis termine Les sentiers de la guerre.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-sentiers-de-la-guerre.html"
@@ -19548,7 +19545,6 @@
       "title": "Le navire aux esclaves",
       "prerequisites": "Les quatre volontés lancée ; niveau recommandé 200.",
       "action": "LANCER / TERMINER",
-      "instruction": "[2,-1] : prendre puis terminer Le navire aux esclaves.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-navire-aux-esclaves.html"
@@ -19716,7 +19712,6 @@
       "title": "Avis de tempête",
       "prerequisites": "Misère vaincue.",
       "action": "TERMINER",
-      "instruction": "Terminer Avis de tempête.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/avis-de-tempete.html"
@@ -20928,7 +20923,6 @@
       "displayRole": "transition",
       "title": "Main dans la main",
       "action": "TERMINER",
-      "instruction": "Terminer Main dans la main.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/main-dans-la-main.html"
@@ -21192,7 +21186,6 @@
       "title": "Toute possession dépossède",
       "prerequisites": "Quand l'éveil n'est qu'un songe terminée.",
       "action": "LANCER / TERMINER",
-      "instruction": "En [21,-33], Lance puis termine Toute possession dépossède.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/toute-possession-depossede.html"
@@ -21212,7 +21205,6 @@
       "title": "Le chant du Pandamonium",
       "prerequisites": "Toute possession dépossède terminée.",
       "action": "LANCER / TERMINER",
-      "instruction": "En [39,-53], Lance puis termine Le chant du Pandamonium.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-chant-du-pandamonium.html"
@@ -21232,7 +21224,6 @@
       "title": "Le début de la fin",
       "prerequisites": "Le chant du Pandamonium terminé.",
       "action": "LANCER / TERMINER",
-      "instruction": "En [21,-33], Lance puis termine Le début de la fin.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-debut-de-la-fin.html"
@@ -21914,7 +21905,6 @@
       "title": "La fin... ou le commencement",
       "prerequisites": "6 Dofus Primordiaux en inventaire ; 1 kama.",
       "action": "LANCER / TERMINER",
-      "instruction": "En [38,-21], Lance puis termine La fin... ou le commencement.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-fin-ou-le-commencement.html"
@@ -21937,7 +21927,6 @@
       "displayRole": "objective",
       "title": "Au détour d'un rêve perdu",
       "action": "LANCER / TERMINER",
-      "instruction": "En [21,-33], Lance puis termine Au détour d'un rêve perdu.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/au-detour-d-un-reve-perdu.html"
@@ -21961,7 +21950,6 @@
       "title": "Entretemps, une renaissance",
       "prerequisites": "6 Primordiaux en inventaire ; niveau >189.",
       "action": "LANCER / TERMINER",
-      "instruction": "En [21,-33], Lance puis termine Entretemps, une renaissance.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/entretemps-une-renaissance.html"
