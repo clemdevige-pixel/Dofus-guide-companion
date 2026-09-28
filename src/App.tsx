@@ -166,6 +166,7 @@ export function App() {
   const currentStep = currentGroup
     ? currentGroup.steps.find((step) => !completedStepIds.has(step.id)) ?? currentGroup.steps[0]
     : undefined;
+  const currentFlowNote = currentGroup?.steps.find((step) => step.flowNote)?.flowNote;
   const sequenceObjectives = useMemo(
     () => (currentGroup?.isSequence ? getSequenceObjectives(currentGroup.steps) : []),
     [currentGroup],
@@ -673,6 +674,13 @@ export function App() {
                 : `${sequenceObjectives.length} objectifs à enchaîner`}
             </p>
 
+            {currentFlowNote && (
+              <div className="flow-note">
+                <span aria-hidden="true">↪</span>
+                <p>{currentFlowNote}</p>
+              </div>
+            )}
+
             <ol className="sequence-list">
               {sequenceObjectives.map((objective) => {
                 const displayStep = getObjectiveDisplayStep(objective.steps);
@@ -861,6 +869,13 @@ export function App() {
               <p className={`action-label action-label--${getActionTone(currentStep.action)}`}>
                 {currentStep.action}
               </p>
+            )}
+
+            {currentFlowNote && (
+              <div className="flow-note">
+                <span aria-hidden="true">↪</span>
+                <p>{currentFlowNote}</p>
+              </div>
             )}
 
             {guideGroups.length > 0 && (
