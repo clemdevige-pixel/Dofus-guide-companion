@@ -8176,7 +8176,7 @@
       "displayRole": "transition",
       "title": "Un juge hystérique — Dragon Cochon",
       "prerequisites": "Abraknyde Ancestral vaincu.",
-      "action": "REPRENDRE",
+      "action": "AVANCER / STOP",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/un-juge-hysterique.html"
@@ -9338,7 +9338,7 @@
       "displayRole": "transition",
       "title": "Des donjons, encore des donjons — Royalmouth",
       "prerequisites": "Maître Corbac vaincu.",
-      "action": "REPRENDRE / STOP",
+      "action": "AVANCER / STOP",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/des-donjons-encore-des-donjons.html"
@@ -11717,7 +11717,7 @@
       "displayRole": "transition",
       "title": "La voie du guerrier — Tanukouï San",
       "prerequisites": "Skeunk vaincu.",
-      "action": "REPRENDRE / STOP",
+      "action": "AVANCER / STOP",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/la-voie-du-guerrier.html"
@@ -16849,7 +16849,7 @@
       "displayRole": "transition",
       "title": "Chaud et Froid — poursuivre vers Sylargh / Klime / Missiz",
       "prerequisites": "Nileza vaincu et interrogé au sujet de la potion de longévité.",
-      "action": "REPRENDRE / AVANCER",
+      "action": "AVANCER",
       "instruction": "Après Nileza, poursuis Chaud et Froid au Sylargh, au Klime puis à Missiz Frizz, dans cet ordre.",
       "source": {
         "label": "DPLN",
@@ -22403,7 +22403,7 @@
       "displayRole": "transition",
       "title": "Préparer le sigil de Djaul — passage Brâkmar",
       "prerequisites": "Bûcheron 200 ; Mineur 200 ; 1 joueur avec Navigation ; sigils principaux déjà sécurisés.",
-      "action": "REPRENDRE / AVANCER",
+      "action": "AVANCER",
       "instruction": "Passe Brâkmarien si ce n'est pas déjà fait, farm les Âmes de Possédé requises pour Djaul puis avance jusqu'à devoir rejoindre Djaul auprès de Solar.",
       "momentId": "moment-sigils-donjons"
     },
