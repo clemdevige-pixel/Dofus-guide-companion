@@ -211,14 +211,6 @@
   white-space: pre-line;
 }
 
-.sequence-item__note--flow {
-  margin-top: 5px;
-  padding: 6px 7px;
-  border-left: 2px solid #527b96;
-  border-radius: 6px;
-  background: #131d22;
-  color: #b9cbd5;
-}
 
 .sequence-item:not(.sequence-item--expanded) .sequence-item__detail {
   display: none;
