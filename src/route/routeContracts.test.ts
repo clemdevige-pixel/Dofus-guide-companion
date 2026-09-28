@@ -367,6 +367,29 @@ test('contrat UX — pas de duplication textuelle brute dans une même carte', (
   }
 });
 
+test('contrat UX — lancement et instruction ne répètent pas la même consigne', () => {
+  const normalize = (value: string) =>
+    value
+      .normalize('NFD')
+      .replace(/\p{Diacritic}/gu, '')
+      .replace(/[^a-zA-Z0-9]+/g, ' ')
+      .trim()
+      .toLowerCase();
+
+  for (const step of route.steps) {
+    if (!step.launchInstruction || !step.instruction) continue;
+    const launch = normalize(step.launchInstruction);
+    const instruction = normalize(step.instruction);
+    if (launch.length < 40) continue;
+
+    assert.equal(
+      instruction.includes(launch) || launch.includes(instruction),
+      false,
+      `${step.id}: launchInstruction et instruction se dupliquent.`,
+    );
+  }
+});
+
 test('contrat UX — une poursuite dans la même carte ne redevient pas une reprise', () => {
   const sameCardContinuationIds = [
     'route-step-0298',
