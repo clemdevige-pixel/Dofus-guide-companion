@@ -12,7 +12,7 @@ import type {
 } from '../src/route/types';
 import { validateRoute } from '../src/route/validation';
 
-const DEFAULT_RANGE = 'ROUTE!A5:W';
+const DEFAULT_RANGE = 'ROUTE!A5:X';
 const OUTPUT_PATH = resolve('data/route.json');
 
 const typeMap: Record<string, { type: StepType; displayType?: string }> = {
@@ -224,10 +224,10 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
 
   const headers = formattedRows[0] ?? [];
   const expectedHeaders: Array<[number, string]> = [
-    [1, 'TYPE'], [2, 'ÉTAPE'], [6, 'NOTE / OPTI'], [10, 'STEP_ID'], [11, 'GOAL_ID'], [12, 'GOAL_PHASE'],
+    [1, 'TYPE'], [2, 'ÉTAPE'], [10, 'STEP_ID'], [11, 'GOAL_ID'], [12, 'GOAL_PHASE'],
     [13, 'POSITION'], [14, 'LANCEMENT'], [15, 'LANCEMENT_REQUIS'], [16, 'DESTINATION'],
     [17, 'GUIDE_ITEMS'], [18, 'MOMENT_ID'], [19, 'DISPLAY_ROLE'], [20, 'PARALLEL_ID'],
-    [21, 'PARALLEL_PHASE'], [22, 'DOFUS_SERIES'],
+    [21, 'PARALLEL_PHASE'], [22, 'DOFUS_SERIES'], [23, 'FLOW_NOTE'],
   ];
   if (expectedHeaders.some(([index, label]) => cell(headers, index) !== label)) {
     throw new Error('Colonnes ROUTE inattendues : les colonnes techniques jusqu’à DOFUS_SERIES sont obligatoires.');
@@ -279,7 +279,7 @@ function buildRoute(formattedRows: SheetRow[], formulaRows: SheetRow[]): RouteDo
     const hyperlink = parseHyperlinkFormula(cell(formula, 2));
     const prerequisites = cell(formatted, 3);
     const warning = cell(formatted, 4);
-    const flowNote = cell(formatted, 6);
+    const flowNote = cell(formatted, 23);
     const preparationText = prerequisites;
     const instruction = cell(formatted, 9);
     const location = parseCoordinate(cell(formatted, 13), sheetRow, 'POSITION');
