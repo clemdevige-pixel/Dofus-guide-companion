@@ -174,3 +174,26 @@ Lire dans l’ordre : `AGENTS.md`, `SPEC.md`, `ARCHITECTURE.md`, `docs/DATA_MODE
 - CI frontend du commit tests : `test:route`, `validate:route` et build **verts**.
 - `cargo check` Windows : encore en cours au moment de cette mise à jour.
 
+## Update 2026-09-28 — UX Tougli adaptée au Companion
+
+- Refonte des cartes séquence sans modifier le modèle métier :
+  - premier objectif incomplet = objectif actif visuellement dominant ;
+  - objectifs terminés fortement atténués ;
+  - objectifs futurs atténués ;
+  - détail d'un objectif repliable/dépliable via chevron ;
+  - l'objectif actif s'ouvre automatiquement ;
+  - aucune duplication d'objectif ni de progression.
+- Code couleur sémantique basé uniquement sur les données structurées existantes :
+  - STOP = rouge ;
+  - TERMINER = vert ;
+  - LANCER = or ;
+  - AVANCER / REPRENDRE = bleu ;
+  - coordonnées /travel = bleu.
+- Vue Progression enrichie d'une mini-roadmap du bloc courant :
+  - cartes du bloc listées dans l'ordre ;
+  - état terminé / courant / à venir ;
+  - numéro réel de carte ;
+  - clic direct vers la carte.
+- Aucun parsing de titre/instruction ajouté ; aucune donnée métier supplémentaire.
+- Fichiers UI concernés : `src/App.tsx`, `src/sequence.css`, `src/styles.css`, `src/progression.css`.
+
