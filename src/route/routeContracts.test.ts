@@ -193,6 +193,21 @@ test('contrat UX — le wording joueur utilise termine plutôt que ferme', () =>
   }
 });
 
+test('contrat route — Piège de crystal se termine explicitement au Meno avant Son nom est Personne', () => {
+  assertOrderedSequence('Piège de crystal', [
+    'route-step-0671',
+    'route-step-0837',
+    'route-step-piege-crystal-finish',
+    'route-step-0838',
+  ]);
+
+  const finish = route.steps.find((step) => step.id === 'route-step-piege-crystal-finish');
+  const followUp = route.steps.find((step) => step.id === 'route-step-0838');
+  assert.match(finish?.action ?? '', /TERMINER/);
+  assert.match(finish?.action ?? '', /LANCER/);
+  assert.ok(!/REPRENDRE/i.test(followUp?.action ?? ''));
+});
+
 test('contrat route — Pêche en eaux gelées est explicitement terminée après le Mansot Royal', () => {
   assertOrderedSequence('Pêche en eaux gelées', [
     'route-step-0417',
