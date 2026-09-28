@@ -127,6 +127,51 @@ assertOrderedSequence('contrat route — Tour du Monde suit Ougah → Merkator �
   'route-step-audit-tour-joue-finish',
 ]);
 
+test('contrat éditorial — une instruction ne répète pas seulement action, titre et position', () => {
+  const normalize = (value: string) =>
+    value
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/\p{Diacritic}/gu, '')
+      .replace(/[’']/g, "'")
+      .replace(/[.,;:!?()[\]]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+  const baseTitle = (title: string) => title.replace(/\s+—.*$/, '').trim();
+
+  for (const step of route.steps) {
+    if (!step.instruction) continue;
+
+    const title = baseTitle(step.title);
+    const coordinate = step.destination ?? step.location;
+    const patterns = [
+      `Lance ${title}`,
+      `Termine ${title}`,
+      `Terminer ${title}`,
+      `Reprends ${title} et termine-la`,
+      `Reprends ${title} et termine la quête`,
+      `Reprends et termine ${title}`,
+      ...(coordinate
+        ? [
+            `En [${coordinate.x},${coordinate.y}], lance puis termine ${title}`,
+            `En [${coordinate.x},${coordinate.y}], lance ${title} et termine la quête`,
+            `[${coordinate.x},${coordinate.y}] : prendre puis terminer ${title}`,
+            `En [${coordinate.x},${coordinate.y}], termine ${title}`,
+            `À [${coordinate.x},${coordinate.y}], termine ${title}`,
+          ]
+        : []),
+      `Termine ${title} maintenant`,
+      `Terminer ${title} maintenant`,
+    ].map(normalize);
+
+    assert.ok(
+      !patterns.includes(normalize(step.instruction)),
+      `instruction redondante sur ${step.id} : ${step.instruction}`,
+    );
+  }
+});
+
 test('contrat route — La source de tous les maux reste un objectif visible après Veilleur', () => {
   const ids = ['route-step-0681', 'route-step-0682', 'route-step-0683', 'route-step-0684', 'route-step-0685'] as const;
   const steps = ids.map((id) => route.steps.find((step) => step.id === id));
