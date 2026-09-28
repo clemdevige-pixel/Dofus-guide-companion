@@ -251,8 +251,16 @@
 }
 
 .progression-block--current {
-  border-color: #578366;
+  border-color: #3f5a48;
+}
+
+.progression-block--selected {
+  border-color: #6a8f74;
   background: #17241b;
+}
+
+.progression-block--current.progression-block--selected {
+  border-color: #8fb99a;
 }
 
 .progression-block__header {
