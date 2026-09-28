@@ -30,6 +30,7 @@ Toujours lire dans cet ordre :
 - `GOAL_ID / GOAL_PHASE` = lifecycle des fils rouges.
 - Réutiliser les données existantes avant d’ajouter une métadonnée.
 - Une information utile ne doit apparaître qu’une fois dans le flux joueur.
+- `FLOW_NOTE` = contexte macro joueur uniquement (checkpoint, reprise, convergence), jamais commentaire interne d’audit.
 - Une information interne de routing ne doit jamais apparaître côté joueur.
 
 ## 3. Interdictions
@@ -108,9 +109,9 @@ Une différence avec Ganymède n’est pas automatiquement une incohérence.
 
 ## 6. Export
 
-Plage actuelle : `ROUTE!A5:W`.
+Plage actuelle : `ROUTE!A5:X`.
 
-Colonnes techniques jusqu’à `DOFUS_SERIES`.
+Colonnes techniques jusqu’à `FLOW_NOTE`.
 
 Flux officiel :
 
