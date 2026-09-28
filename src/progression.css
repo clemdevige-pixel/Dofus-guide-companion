@@ -80,7 +80,7 @@
 
 .progression-dashboard {
   display: grid;
-  grid-template-rows: auto auto minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
   gap: 8px;
   height: 100%;
   min-height: 0;
@@ -228,6 +228,24 @@
   overscroll-behavior: contain;
   padding-right: 4px;
   scrollbar-gutter: stable;
+}
+
+.progression-block-group {
+  display: grid;
+  gap: 4px;
+}
+
+.progression-block-group--expanded {
+  padding-bottom: 4px;
+}
+
+.block-roadmap__cards--inline {
+  max-height: none;
+  margin: 0 0 2px 27px;
+  padding: 4px 0 2px 8px;
+  border-left: 2px solid #2f4937;
+  overflow: visible;
+  scrollbar-gutter: auto;
 }
 
 .progression-block {
