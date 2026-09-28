@@ -197,3 +197,19 @@ Lire dans l’ordre : `AGENTS.md`, `SPEC.md`, `ARCHITECTURE.md`, `docs/DATA_MODE
 - Aucun parsing de titre/instruction ajouté ; aucune donnée métier supplémentaire.
 - Fichiers UI concernés : `src/App.tsx`, `src/sequence.css`, `src/styles.css`, `src/progression.css`.
 
+## Update 2026-09-28 — flow UX global inspiré Tougli
+
+- Méthode validée puis déployée sur toute la route : pas de texte macro sur les cartes évidentes ; contexte ajouté uniquement pour checkpoint, reprise, branches imbriquées, convergence ou mutualisation.
+- Nouvelle métadonnée player-facing structurée : `FLOW_NOTE` (colonne X du Sheet, `RouteStep.flowNote` au runtime).
+- `NOTE / OPTI` reste une colonne éditoriale interne et n'est pas exposée au joueur.
+- Export Sheet étendu à `ROUTE!A5:X`.
+- **61 flow notes** ajoutées sur les moments réellement complexes, réparties du bloc 1 au bloc 32.
+- Wording macro calé sur les patterns Tougli : « avance X jusqu'à Y », « fais les branches », « puis reprends X », « reprise prévue plus tard ».
+- Les détails opérationnels déjà plus précis dans notre route (coordonnées, STOP, sortie de donjon, objets/interactions critiques) restent dans `instruction` / `warning`.
+- Exemples couverts explicitement : Incarnam, Restauration rapide/Mage Ax, L'épée du rocher, Meno Ivoire+Abyssal, Main dans la main, Nordalie, Un remède draconien, Cavaliers, Prise de conscience, Totems, Protecteur/Flovoraison.
+- UI : la flow note est affichée une seule fois au niveau carte, avant les objectifs, sous forme de callout compact.
+- Validation : une flow note d'un `MOMENT_ID` doit être portée par le premier `OBJECTIVE`.
+- Test de contrat : au moins 50 flow notes + checkpoints sensibles protégés.
+- CI frontend du commit `14ebf3728beedb53cb7d5fa1aa5e9e52ebce2569` : `test:route`, `validate:route` et build **verts**.
+- `cargo check` Windows était encore en cours au dernier contrôle.
+
