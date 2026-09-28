@@ -273,20 +273,6 @@ export function App() {
   const currentBlockProgress = currentBlock
     ? blockProgress.find((block) => block.id === currentBlock.id)
     : undefined;
-  const selectedProgressBlock =
-    route.blocks.find((block) => block.id === selectedProgressBlockId) ?? currentBlock;
-  const selectedProgressBlockProgress = selectedProgressBlock
-    ? blockProgress.find((block) => block.id === selectedProgressBlock.id)
-    : undefined;
-  const selectedProgressBlockCards = useMemo(
-    () =>
-      selectedProgressBlock
-        ? stepGroups
-            .map((group, index) => ({ group, index }))
-            .filter(({ group }) => group.blockId === selectedProgressBlock.id)
-        : [],
-    [selectedProgressBlock, stepGroups],
-  );
 
   function goPrevious() {
     setSecondaryView(null);
@@ -447,7 +433,7 @@ export function App() {
   function openSecondaryView(view: Exclude<SecondaryView, null>) {
     setDrawerOpen(false);
     if (view === 'progress') {
-      setSelectedProgressBlockId(currentBlock?.id ?? null);
+      setSelectedProgressBlockId(null);
     }
     setSecondaryView(view);
   }
@@ -555,64 +541,76 @@ export function App() {
                 <strong>{progress.percentage}%</strong>
                 <span>{progress.completed} / {progress.total} étapes · {stepGroups.length} cartes</span>
               </div>
-              {selectedProgressBlock && selectedProgressBlockCards.length > 0 && (
-                <section className="block-roadmap" aria-label={`Étapes du bloc ${selectedProgressBlock.order}`}>
-                  <div className="block-roadmap__header">
-                    <strong>Bloc {selectedProgressBlock.order} · {selectedProgressBlock.title}</strong>
-                    <span>{selectedProgressBlockProgress?.percentage ?? 0}%</span>
-                  </div>
-                  <div className="block-roadmap__cards">
-                    {selectedProgressBlockCards.map(({ group, index }) => {
-                      const completed = group.steps.every((step) => completedStepIds.has(step.id));
-                      const isCurrent = index === viewIndex;
-                      const representative =
-                        group.steps.find((step) => step.displayRole === 'objective') ?? group.steps[0];
-                      return (
-                        <button
-                          className={`block-roadmap__card${completed ? ' block-roadmap__card--completed' : ''}${isCurrent ? ' block-roadmap__card--current' : ''}`}
-                          type="button"
-                          key={group.id}
-                          onClick={() => jumpToCardIndex(index)}
-                        >
-                          <span className="block-roadmap__status" aria-hidden="true">
-                            {completed ? '✓' : isCurrent ? '→' : '○'}
-                          </span>
-                          <span className="block-roadmap__content">
-                            <small>Carte {index + 1}</small>
-                            <strong>{representative.title}</strong>
-                          </span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </section>
-              )}
               <div className="progression-blocks">
                 {blockProgress.map((block) => {
                   const isCurrent = block.id === currentBlock?.id;
-                  const isSelected = block.id === selectedProgressBlock?.id;
+                  const isExpanded = block.id === selectedProgressBlockId;
+                  const blockCards = isExpanded
+                    ? stepGroups
+                        .map((group, index) => ({ group, index }))
+                        .filter(({ group }) => group.blockId === block.id)
+                    : [];
+
                   return (
-                    <button
-                      className={`progression-block${isCurrent ? ' progression-block--current' : ''}${isSelected ? ' progression-block--selected' : ''}`}
-                      type="button"
+                    <div
+                      className={`progression-block-group${isExpanded ? ' progression-block-group--expanded' : ''}`}
                       key={block.id}
-                      onClick={() => setSelectedProgressBlockId(block.id)}
                     >
-                      <div className="progression-block__header">
-                        <span className="progression-block__title">
-                          <b>{block.order}</b>
-                          <span>{block.title}</span>
+                      <button
+                        className={`progression-block${isCurrent ? ' progression-block--current' : ''}${isExpanded ? ' progression-block--selected' : ''}`}
+                        type="button"
+                        aria-expanded={isExpanded}
+                        onClick={() =>
+                          setSelectedProgressBlockId((current) =>
+                            current === block.id ? null : block.id,
+                          )
+                        }
+                      >
+                        <div className="progression-block__header">
+                          <span className="progression-block__title">
+                            <b>{block.order}</b>
+                            <span>{block.title}</span>
+                          </span>
+                          <strong>{block.percentage}%</strong>
+                        </div>
+                        <div className="progression-block__bar" aria-hidden="true">
+                          <span style={{ width: `${block.percentage}%` }} />
+                        </div>
+                        <span className="progression-block__meta">
+                          {block.completed} / {block.total} étapes
                         </span>
-                        <strong>{block.percentage}%</strong>
-                      </div>
-                      <div className="progression-block__bar" aria-hidden="true">
-                        <span style={{ width: `${block.percentage}%` }} />
-                      </div>
-                      <span className="progression-block__meta">{block.completed} / {block.total} étapes</span>
-                    </button>
+                      </button>
+
+                      {isExpanded && blockCards.length > 0 && (
+                        <div className="block-roadmap__cards block-roadmap__cards--inline">
+                          {blockCards.map(({ group, index }) => {
+                            const completed = group.steps.every((step) => completedStepIds.has(step.id));
+                            const isCurrentCard = index === viewIndex;
+                            const representative =
+                              group.steps.find((step) => step.displayRole === 'objective') ?? group.steps[0];
+                            return (
+                              <button
+                                className={`block-roadmap__card${completed ? ' block-roadmap__card--completed' : ''}${isCurrentCard ? ' block-roadmap__card--current' : ''}`}
+                                type="button"
+                                key={group.id}
+                                onClick={() => jumpToCardIndex(index)}
+                              >
+                                <span className="block-roadmap__status" aria-hidden="true">
+                                  {completed ? '✓' : isCurrentCard ? '→' : '○'}
+                                </span>
+                                <span className="block-roadmap__content">
+                                  <small>Carte {index + 1}</small>
+                                  <strong>{representative.title}</strong>
+                                </span>
+                              </button>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
                   );
                 })}
-              </div>
+              </div>              </div>
             </div>
           )}
 
@@ -646,6 +644,7 @@ export function App() {
         </section>
       )}
 
+      {secondaryView !== 'progress' && (
       <section
         className={`current-step current-step--${containsHardLock ? 'hard_lock' : isSequence ? 'sequence' : currentStep.type}${isCurrentCompleted ? ' current-step--completed' : ''}`}
         aria-labelledby="current-step-title"
@@ -950,7 +949,9 @@ export function App() {
           </>
         )}
       </section>
+      )}
 
+      {secondaryView !== 'progress' && (
       <footer className="navigation-bar">
         <button type="button" aria-label="Carte précédente" onClick={goPrevious} disabled={viewIndex === 0}>
           ←
@@ -967,6 +968,7 @@ export function App() {
           →
         </button>
       </footer>
+      )}
     </main>
   );
 }
