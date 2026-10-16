@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "routeVersion": "2026-09-28",
+  "routeVersion": "2026-10-16",
   "title": "Astrub → Dofus Sylvestre",
   "blocks": [
     {
@@ -131,22 +131,22 @@
     {
       "id": "block-26",
       "order": 26,
-      "title": "Dofus Ébène — Crocoburio, Dragon noir & obtention"
+      "title": "Prise de conscience, Tacheté, Pandamonium & ouverture des Totems"
     },
     {
       "id": "block-27",
       "order": 27,
-      "title": "Six sur Six I — Rathrosk & Prise de conscience"
+      "title": "Dofus Ébène — cinq Totems mutualisés"
     },
     {
       "id": "block-28",
       "order": 28,
-      "title": "Dofus Tacheté — Un rêve en clair-obscur"
+      "title": "Six sur Six I — Rathrosk et Le silence est d'Aure"
     },
     {
       "id": "block-29",
       "order": 29,
-      "title": "Pandamonium, Valonia, Cauchemar & Aurore Pourpre"
+      "title": "Valonia — quêtes après Ébène"
     },
     {
       "id": "block-30",
@@ -13248,8 +13248,23 @@
       "momentId": "moment-route-step-0520"
     },
     {
-      "id": "route-step-dan-lavy-finish",
+      "id": "route-step-0521",
       "order": 539,
+      "blockId": "block-15",
+      "type": "resume",
+      "displayRole": "transition",
+      "title": "Lavomatique",
+      "action": "TERMINER",
+      "instruction": "Parle à Lave Azza après l'Obsidiantre et termine Lavomatique. Ne continue pas en considérant la quête validée implicitement.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/lavomatique.html"
+      },
+      "momentId": "moment-route-step-0520"
+    },
+    {
+      "id": "route-step-dan-lavy-finish",
+      "order": 540,
       "blockId": "block-15",
       "type": "resume",
       "displayRole": "objective",
@@ -13260,21 +13275,6 @@
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/a-la-recherche-de-dan-lavy.html"
-      },
-      "momentId": "moment-route-step-0520"
-    },
-    {
-      "id": "route-step-0521",
-      "order": 540,
-      "blockId": "block-15",
-      "type": "resume",
-      "displayRole": "transition",
-      "title": "Lavomatique",
-      "action": "TERMINER",
-      "instruction": "Parle à Lave Azza après l'Obsidiantre et termine Lavomatique. Ne continue pas en considérant la quête validée implicitement.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/lavomatique.html"
       },
       "momentId": "moment-route-step-0520"
     },
@@ -15249,24 +15249,8 @@
       "momentId": "moment-route-step-0581"
     },
     {
-      "id": "route-step-lahaut-montagne-finish",
-      "order": 635,
-      "blockId": "block-18",
-      "type": "resume",
-      "displayRole": "objective",
-      "title": "Là-haut sur la montagne",
-      "prerequisites": "Kolosso vaincu avec la quête active.",
-      "action": "TERMINER",
-      "instruction": "À la sortie du Kolosso, vérifie que Là-haut sur la montagne est terminée et que l’accès au Mont Torrideau est débloqué.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/lagrave-haut-sur-la-montagne.html"
-      },
-      "momentId": "moment-route-step-0581"
-    },
-    {
       "id": "route-step-0583",
-      "order": 636,
+      "order": 635,
       "blockId": "block-18",
       "type": "resume",
       "displayRole": "transition",
@@ -15277,6 +15261,22 @@
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/un-ami-qui-ne-vous-veut-pas-que-du-bien.html"
+      },
+      "momentId": "moment-route-step-0581"
+    },
+    {
+      "id": "route-step-lahaut-montagne-finish",
+      "order": 636,
+      "blockId": "block-18",
+      "type": "resume",
+      "displayRole": "objective",
+      "title": "Là-haut sur la montagne",
+      "prerequisites": "Kolosso vaincu avec la quête active.",
+      "action": "TERMINER",
+      "instruction": "À la sortie du Kolosso, vérifie que Là-haut sur la montagne est terminée et que l’accès au Mont Torrideau est débloqué.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/lagrave-haut-sur-la-montagne.html"
       },
       "momentId": "moment-route-step-0581"
     },
@@ -15399,24 +15399,8 @@
       }
     },
     {
-      "id": "route-step-pic-qui-glace-finish",
-      "order": 643,
-      "blockId": "block-18",
-      "type": "resume",
-      "displayRole": "objective",
-      "title": "Le pic qui glace",
-      "prerequisites": "Glourséleste vaincu ; Miel Liquide Mordoré récupéré.",
-      "action": "TERMINER",
-      "instruction": "À la sortie auprès de Willy La Bille, vérifie que Le pic qui glace est terminée et que l’accès à Frigost III est débloqué.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/le-pic-qui-glace.html"
-      },
-      "momentId": "moment-route-step-0589"
-    },
-    {
       "id": "route-step-0587",
-      "order": 644,
+      "order": 643,
       "blockId": "block-18",
       "type": "resume",
       "displayRole": "transition",
@@ -15432,6 +15416,22 @@
         "goalId": "mission-solution",
         "phase": "finish"
       }
+    },
+    {
+      "id": "route-step-pic-qui-glace-finish",
+      "order": 644,
+      "blockId": "block-18",
+      "type": "resume",
+      "displayRole": "objective",
+      "title": "Le pic qui glace",
+      "prerequisites": "Glourséleste vaincu ; Miel Liquide Mordoré récupéré.",
+      "action": "TERMINER",
+      "instruction": "À la sortie auprès de Willy La Bille, vérifie que Le pic qui glace est terminée et que l’accès à Frigost III est débloqué.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/le-pic-qui-glace.html"
+      },
+      "momentId": "moment-route-step-0589"
     },
     {
       "id": "route-step-0588",
@@ -19996,685 +19996,10 @@
       "blockId": "block-26",
       "type": "preparation",
       "displayType": "ENTRÉE",
-      "title": "Entrée — Dofus Ébène — Crocoburio, Dragon noir & obtention",
+      "title": "Entrée — Prise de conscience, Tacheté, Pandamonium & Totems",
       "action": "COMMENCER",
-      "instruction": "Commence le bloc. Les besoins spécifiques sont indiqués directement sur les étapes où ils deviennent utiles."
-    },
-    {
-      "id": "route-step-0865",
-      "order": 865,
-      "blockId": "block-26",
-      "type": "major_step",
-      "dofusSeries": "Dofus Ébène",
-      "title": "Jusqu'au bout du rêve",
-      "prerequisites": "12 apparitions Crocobur ; 6 dernières en Rêve III+ jusqu'au palier V.",
-      "warning": "Pendant cette session : conserve au moins 600 Reflets oniriques au total pour S'armer contre le destin et récupère 1 Rêve d'harmonie en Rêve III+ pour Le poids de son regard.",
-      "action": "TERMINER"
-    },
-    {
-      "id": "route-step-0866",
-      "order": 866,
-      "blockId": "block-26",
-      "type": "quest",
-      "dofusSeries": "Dofus Ébène",
-      "displayRole": "objective",
-      "title": "À la recherche de Crocoburio — avancer jusqu'à Bethel",
-      "prerequisites": "sort Nécronyx disponible.",
-      "action": "LANCER / AVANCER / STOP",
-      "instruction": "En [-6,-3], Lance À la recherche de Crocoburio et avance jusqu'à la Tour de Bethel puis arrête-toi devant le donjon.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/a-la-recherche-de-crocoburio.html"
-      },
-      "momentId": "moment-route-step-0866",
-      "location": {
-        "x": -6,
-        "y": -3
-      },
-      "destination": {
-        "x": -6,
-        "y": -3
-      }
-    },
-    {
-      "id": "route-step-0867",
-      "order": 867,
-      "blockId": "block-26",
-      "type": "dungeon",
-      "displayRole": "detail",
-      "title": "◆ Tour de Bethel — À LA RECHERCHE DE CROCOBURIO",
-      "prerequisites": "À la recherche de Crocoburio au checkpoint Bethel ; Nécronyx disponible.",
-      "action": "FAIRE",
-      "instruction": "Vaincs Bethel Akarna avec Nécronyx disponible. La Coquille d’âme corrompue est obtenue automatiquement ; retourne ensuite voir Sramsara pour poursuivre À la recherche de Crocoburio.",
-      "momentId": "moment-route-step-0866"
-    },
-    {
-      "id": "route-step-0868",
-      "order": 868,
-      "blockId": "block-26",
-      "type": "resume",
-      "dofusSeries": "Dofus Ébène",
-      "displayRole": "transition",
-      "title": "À la recherche de Crocoburio",
-      "prerequisites": "2 Fragments de carte d'Atcham ; 2 Fragments de carte de Dremoan ; environ 24 à 26 000 kamas.",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/a-la-recherche-de-crocoburio.html"
-      },
-      "momentId": "moment-route-step-0866"
-    },
-    {
-      "id": "route-step-0869",
-      "order": 869,
-      "blockId": "block-26",
-      "type": "quest",
-      "dofusSeries": "Dofus Ébène",
-      "displayRole": "objective",
-      "title": "Le creuset de Mériana — avancer jusqu'à Koutoulou",
-      "prerequisites": "ressources préparées.",
-      "action": "LANCER / AVANCER / STOP",
-      "instruction": "En [-6,-3], Lance Le creuset de Mériana et avance jusqu'au Temple de Koutoulou puis arrête-toi devant le donjon.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/le-creuset-de-meriana.html"
-      },
-      "momentId": "moment-route-step-0869",
-      "location": {
-        "x": -6,
-        "y": -3
-      },
-      "destination": {
-        "x": -6,
-        "y": -3
-      }
-    },
-    {
-      "id": "route-step-0870",
-      "order": 870,
-      "blockId": "block-26",
-      "type": "dungeon",
-      "displayRole": "detail",
-      "title": "◆ Temple de Koutoulou — LE CREUSET DE MÉRIANA",
-      "prerequisites": "Le creuset de Mériana au checkpoint Koutoulou.",
-      "action": "FAIRE",
-      "instruction": "Vaincs la Larve de Koutoulou. L’Huile immiscible et indicible est obtenue automatiquement ; aucune interaction post-boss supplémentaire n’est nécessaire pour Le creuset de Mériana.",
-      "momentId": "moment-route-step-0869"
-    },
-    {
-      "id": "route-step-0871",
-      "order": 871,
-      "blockId": "block-26",
-      "type": "resume",
-      "dofusSeries": "Dofus Ébène",
-      "displayRole": "transition",
-      "title": "Le creuset de Mériana",
-      "prerequisites": "1 x Échantillon de sang infecté ; 1 x Slip du Roi de Bonta ; 1 x Fluide Glacial.",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/le-creuset-de-meriana.html"
-      },
-      "momentId": "moment-route-step-0869"
-    },
-    {
-      "id": "route-step-0872",
-      "order": 872,
-      "blockId": "block-26",
-      "type": "quest",
-      "dofusSeries": "Dofus Ébène",
-      "displayRole": "objective",
-      "title": "Une douloureuse séparation",
-      "prerequisites": "1 Corde d'escalade.",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/une-douloureuse-separation.html"
-      },
-      "momentId": "moment-ebene-dazak",
-      "location": {
-        "x": -6,
-        "y": -3
-      }
-    },
-    {
-      "id": "route-step-0873",
-      "order": 873,
-      "blockId": "block-26",
-      "type": "quest",
-      "dofusSeries": "Dofus Ébène",
-      "displayRole": "objective",
-      "title": "Le dragon noir — avancer jusqu'au Roi Dazak",
-      "action": "LANCER / AVANCER / STOP",
-      "instruction": "En [-25,-52], Lance Le dragon noir et avance jusqu'à devoir rencontrer Dazak puis arrête-toi devant la Brasserie. N'entre que lorsque De Brikke et de Brokke est lui aussi au checkpoint Roi Dazak.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/le-dragon-noir.html"
-      },
-      "momentId": "moment-ebene-dazak",
-      "parallelGroup": {
-        "parallelId": "parallel-dazak",
-        "phase": "progress"
-      },
-      "location": {
-        "x": -25,
-        "y": -52
-      },
-      "destination": {
-        "x": -25,
-        "y": -52
-      }
-    },
-    {
-      "id": "route-step-0874",
-      "order": 874,
-      "blockId": "block-26",
-      "type": "dungeon",
-      "displayRole": "detail",
-      "title": "◆ Brasserie du Roi Dazak — ÉBÈNE + MARTEGEL",
-      "prerequisites": "Le dragon noir + De Brikke et de Brokke tous les deux au checkpoint Roi Dazak.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — Dazak est le point de convergence Ébène + Martegel. Après le boss, fais les interactions de sortie requises pour les DEUX chaînes avant de quitter la Brasserie.",
-      "action": "FAIRE",
-      "instruction": "Vaincs le Roi Dazak une seule fois pour Le dragon noir + De Brikke et de Brokke, puis termine les interactions de sortie des deux quêtes avant de quitter le donjon.",
-      "momentId": "moment-ebene-dazak",
-      "parallelGroup": {
-        "parallelId": "parallel-dazak",
-        "phase": "finish"
-      }
-    },
-    {
-      "id": "route-step-0875",
-      "order": 875,
-      "blockId": "block-26",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "La bible des rancunes",
-      "prerequisites": "accès la zone Orée enchantée via l'expédition Valkyr.",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/la-bible-des-rancunes.html"
-      },
-      "momentId": "moment-ebene-dazak",
-      "location": {
-        "x": -62,
-        "y": -70
-      }
-    },
-    {
-      "id": "route-step-0876",
-      "order": 876,
-      "blockId": "block-26",
-      "type": "resume",
-      "displayRole": "transition",
-      "title": "De Brikke et de Brokke",
-      "prerequisites": "Interactions de sortie Dazak effectuées pour Le dragon noir + De Brikke et de Brokke ; La bible des rancunes terminée.",
-      "action": "TERMINER",
-      "instruction": "Après avoir sécurisé les interactions des DEUX chaînes à la sortie de Dazak puis terminé La bible des rancunes, termine De Brikke et de Brokke.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/de-brikke-et-de-brokke.html"
-      },
-      "momentId": "moment-ebene-dazak"
-    },
-    {
-      "id": "route-step-0877",
-      "order": 877,
-      "blockId": "block-26",
-      "type": "resume",
-      "dofusSeries": "Dofus Ébène",
-      "displayRole": "objective",
-      "title": "Le dragon noir — REPRENDRE jusqu'à Klime",
-      "prerequisites": "prévoir 1 Pano Pikmi.",
-      "action": "REPRENDRE / AVANCER / STOP",
-      "instruction": "Reprends Le dragon noir et avance jusqu'à Klime puis arrête-toi devant le donjon.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/le-dragon-noir.html"
-      },
-      "momentId": "moment-route-step-0877"
-    },
-    {
-      "id": "route-step-0878",
-      "order": 878,
-      "blockId": "block-26",
-      "type": "dungeon",
-      "displayRole": "detail",
-      "title": "◆ Salons privés de Klime — LE DRAGON NOIR",
-      "prerequisites": "Le dragon noir au checkpoint Klime.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — reparle à Klime pour faire fabriquer le Sac en peau de crocodaille.",
-      "action": "FAIRE",
-      "instruction": "Vaincs Klime.",
-      "momentId": "moment-route-step-0877"
-    },
-    {
-      "id": "route-step-0879",
-      "order": 879,
-      "blockId": "block-26",
-      "type": "resume",
-      "dofusSeries": "Dofus Ébène",
-      "displayRole": "transition",
-      "title": "Le dragon noir",
-      "prerequisites": "Dazak + Klime validés ; Sac en peau de crocodaille obtenu.",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/le-dragon-noir.html"
-      },
-      "momentId": "moment-route-step-0877"
-    },
-    {
-      "id": "route-step-0880",
-      "order": 880,
-      "blockId": "block-26",
-      "type": "quest",
-      "dofusSeries": "Dofus Ébène",
-      "displayRole": "objective",
-      "title": "La vengeance du dernier empereur",
-      "prerequisites": "20 500 kamas ; 2 combats solo.",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/la-vengeance-du-dernier-empereur.html"
-      },
-      "momentId": "moment-ebene-crocabulia",
-      "location": {
-        "x": -82,
-        "y": 6
-      }
-    },
-    {
-      "id": "route-step-0881",
-      "order": 881,
-      "blockId": "block-26",
-      "type": "quest",
-      "dofusSeries": "Dofus Ébène",
-      "displayRole": "objective",
-      "title": "L'œuf de Crocabulia — avancer jusqu'à la Reine des Voleurs",
-      "prerequisites": "accès Srambad.",
-      "action": "LANCER / AVANCER / STOP",
-      "instruction": "En [-6,-3], Lance L'œuf de Crocabulia et avance jusqu'à devoir récupérer le Coffret verrouillé puis arrête-toi devant la Reine des Voleurs.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/l-oeuf-de-crocabulia.html"
-      },
-      "momentId": "moment-ebene-crocabulia",
-      "location": {
-        "x": -6,
-        "y": -3
-      },
-      "destination": {
-        "x": -6,
-        "y": -3
-      }
-    },
-    {
-      "id": "route-step-0882",
-      "order": 882,
-      "blockId": "block-26",
-      "type": "dungeon",
-      "displayRole": "detail",
-      "title": "◆ Trône de la Cour Sombre — REINE DES VOLEURS",
-      "prerequisites": "L'œuf de Crocabulia au checkpoint Reine des Voleurs.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — monte les escaliers et parle à la Reine des Voleurs dans la salle de sortie après le combat.",
-      "action": "FAIRE",
-      "instruction": "Vaincs la Reine des Voleurs.",
-      "momentId": "moment-ebene-crocabulia"
-    },
-    {
-      "id": "route-step-0883",
-      "order": 883,
-      "blockId": "block-26",
-      "type": "resume",
-      "dofusSeries": "Dofus Ébène",
-      "displayRole": "transition",
-      "title": "L'œuf de Crocabulia",
-      "prerequisites": "idoles : Hulhu, Nyoro, Nekineko, Ougah, Aroumb, Muta.",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/l-oeuf-de-crocabulia.html"
-      },
-      "momentId": "moment-ebene-crocabulia"
-    },
-    {
-      "id": "route-step-0884",
-      "order": 884,
-      "blockId": "block-26",
-      "type": "quest",
-      "dofusSeries": "Dofus Ébène",
-      "displayRole": "transition",
-      "title": "Un nouvel héritier — avancer jusqu'à Solar",
-      "prerequisites": "20 Âmes de Calciné à récupérer hors donjon ; Nécronyx disponible.",
-      "action": "LANCER / AVANCER / STOP",
-      "instruction": "En [-6,-3], Lance Un nouvel héritier, récupère/utilise les 20 Âmes de Calciné puis arrête-toi devant la Tour de Solar.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/un-nouvel-heritier.html"
-      },
-      "momentId": "moment-ebene-crocabulia",
-      "location": {
-        "x": -6,
-        "y": -3
-      },
-      "destination": {
-        "x": -6,
-        "y": -3
-      }
-    },
-    {
-      "id": "route-step-0885",
-      "order": 885,
-      "blockId": "block-26",
-      "type": "dungeon",
-      "displayRole": "objective",
-      "title": "◆ Tour de Solar — UN NOUVEL HÉRITIER",
-      "prerequisites": "Un nouvel héritier au checkpoint Solar ; Nécronyx disponible.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après Solar, monte les escaliers, clique sur la sphère puis parle au Dieu Sram avant de quitter la Tour.",
-      "action": "FAIRE",
-      "instruction": "Vaincs Solar.",
-      "momentId": "moment-route-step-0884"
-    },
-    {
-      "id": "route-step-0886",
-      "order": 886,
-      "blockId": "block-26",
-      "type": "resume",
-      "dofusSeries": "Dofus Ébène",
-      "displayRole": "transition",
-      "title": "Un nouvel héritier",
-      "prerequisites": "niveau 190+.",
-      "action": "TERMINER",
-      "instruction": "Libère puis réincarne Crocoburio et termine auprès de Grougalorasalar pour obtenir le Dofus Ébène.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/un-nouvel-heritier.html"
-      },
-      "momentId": "moment-route-step-0884"
-    },
-    {
-      "id": "block-entry-27",
-      "order": 887,
-      "blockId": "block-27",
-      "type": "preparation",
-      "displayType": "ENTRÉE",
-      "title": "Entrée — Six sur Six I — Rathrosk & Prise de conscience",
-      "action": "PRÉPARER / COMMENCER",
-      "instruction": "Prépare les éléments globaux de ce bloc avant de commencer. Les besoins propres à une quête plus tardive sont rappelés directement sur l’étape concernée.",
-      "preparationItems": [
-        {
-          "kind": "requirement",
-          "text": "6 Dofus Primordiaux en inventaire"
-        },
-        {
-          "kind": "profession",
-          "text": "Métier de récolte 200"
-        },
-        {
-          "kind": "resource",
-          "quantity": 600,
-          "name": "Reflets oniriques — déjà réservés pendant Jusqu'au bout du rêve"
-        },
-        {
-          "kind": "resource",
-          "quantity": 1,
-          "name": "Framboise OU 10 Carrés de Chocolat au Lait"
-        },
-        {
-          "kind": "resource",
-          "quantity": 1,
-          "name": "Carré de Chocolat Noir"
-        },
-        {
-          "kind": "resource",
-          "quantity": 1,
-          "name": "Oignon"
-        },
-        {
-          "kind": "resource",
-          "quantity": 1,
-          "name": "Baguette Rikiki"
-        },
-        {
-          "kind": "kamas",
-          "text": "1 kama"
-        }
-      ]
-    },
-    {
-      "id": "route-step-0918",
-      "order": 888,
-      "blockId": "block-27",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Dans la gueule du dragon — avancer jusqu'après Rathrosk",
-      "prerequisites": "Quatre sur six + Blanc ivoire + Noir d'ébène + 6 Primordiaux + À la croisée des mondes.",
-      "action": "LANCER / AVANCER / STOP",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/dans-la-gueule-du-dragon.html"
-      },
-      "momentId": "moment-quatre-sur-six-cloture",
-      "location": {
-        "x": -6,
-        "y": -3
-      },
-      "destination": {
-        "x": -6,
-        "y": -3
-      },
-      "instruction": "Avance Dans la gueule du dragon jusqu’après Rathrosk et arrête-toi : Le silence est d’Aure devient disponible. Lance ensuite Prise de conscience, termine les deux branches qu’elle ouvre puis poursuis ces deux fils."
-    },
-    {
-      "id": "route-step-0919",
-      "order": 889,
-      "blockId": "block-27",
-      "type": "quest",
-      "dofusSeries": "Dofus Argenté Scintillant",
-      "displayRole": "objective",
-      "title": "Le silence est d'Aure",
-      "prerequisites": "10 Plume de Cycloïde + 10 Aile de Brabuzar + 10 Pince de Krabouilleur + 10 Bave de Champodonte + 10 Écume de Mer + 10 Salikrone + 10 Quisnoa.",
-      "action": "TERMINER",
-      "instruction": "À PRÉVOIR ICI — Le pays des Vermeils\n• 3 000 points de succès minimum\n• 1 métier niveau 200 (requis par Raisons de retraite)\n• 200 000 kamas disponibles (non consommés)\n• Pour Après les phorreurs : satisfaire au moins un test de caractéristiques/succès (>600 Agi/Chance/Force/Intel, ou >700 Vita, ou succès L'éleveur c'est moi, ou Ma petite entreprise) ; attention aux builds full sagesse\n• 1 Clef Galerie du Phossile\n• 1 Clef Palais du Roi Nidas\n• 2 Clefs Fabrique de Malléfisk (Malladie + Malle des profondeurs ; trousseau inutilisable en dimension)\n• 1 kama — Malladie\n• 1 Moyenne pierre d'âme — Koffrologie\n• 1 Corne de Kamasterisk — Coiffeur de génie\n• 1 Sourcil de Barbétoal — Coiffeur de génie\n• 1 Dent de Lévitrof — Coiffeur de génie\n• 1 Morceau de clef de Paspartou — Coiffeur de génie\nNote : Le pays des Vermeils sera requis par Le silence est d'Aure. Conserve les Orichor utiles pendant la progression.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/le-silence-est-d-aure.html"
-      },
-      "momentId": "moment-quatre-sur-six-cloture",
-      "location": {
-        "x": -5,
-        "y": -9
-      }
-    },
-    {
-      "id": "route-step-0920",
-      "order": 890,
-      "blockId": "block-27",
-      "type": "resume",
-      "displayRole": "transition",
-      "title": "Dans la gueule du dragon — TERMINER",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/dans-la-gueule-du-dragon.html"
-      },
-      "momentId": "moment-quatre-sur-six-cloture"
-    },
-    {
-      "id": "route-step-0921",
-      "order": 891,
-      "blockId": "block-27",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Prise de conscience",
-      "action": "LANCER / STOP",
-      "instruction": "Lance Prise de conscience auprès de Maisial en [-10,-31], puis arrête-toi ici.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/prise-de-conscience.html"
-      },
-      "momentId": "moment-quatre-sur-six-cloture",
-      "location": {
-        "x": -10,
-        "y": -31
-      }
-    },
-    {
-      "id": "route-step-0923",
-      "order": 892,
-      "blockId": "block-27",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "L'avis de la Mort — jusqu'à Ilyzaelle",
-      "prerequisites": "5 kamas ; 1 faux code xélor : 42 ; 4 personnages pour les dalles.",
-      "action": "LANCER / AVANCER / STOP",
-      "instruction": "Avance L’avis de la Mort jusqu’à Ilyzaelle, traite les objectifs de cette séquence puis poursuis L’avis de la Mort jusqu’à sa validation.\n\nÀ PRÉVOIR ICI — Convergence Ilyzaelle\n• 10 Cristal liquide\n• 10 Cristal pliable\n• 10 Chanvre\n• 10 Sauge\n• 1 Élixir des Trépasseurs\n• 1 Ardonite\n• 120 kamas\n• 10 Bières aigrisantes OU 5 000 kamas — Marteau-Aigri\n• Sort Flamiche\n• Alignement 85→99 au verrou Ilyzaelle\n• Deux souffles, une inspiration terminé\nNote : Un clan hétéroclite impose une attente réelle de 2 minutes.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/lavis-de-la-mort.html"
-      },
-      "momentId": "moment-prise-conscience-ouverture",
-      "location": {
-        "x": 3,
-        "y": 1
-      },
-      "destination": {
-        "x": 3,
-        "y": 1
-      }
-    },
-    {
-      "id": "route-step-0924",
-      "order": 893,
-      "blockId": "block-27",
-      "type": "dungeon",
-      "displayRole": "objective",
-      "title": "◆ Belvédère d'Ilyzaelle — L'AVIS DE LA MORT",
-      "prerequisites": "L'avis de la Mort au checkpoint Ilyzaelle.",
-      "action": "FAIRE",
-      "instruction": "Vaincs Ilyzaelle pour L'avis de la Mort ; le Feu dévoreur est obtenu automatiquement.",
-      "momentId": "moment-prise-conscience-ouverture"
-    },
-    {
-      "id": "route-step-0925",
-      "order": 894,
-      "blockId": "block-27",
-      "type": "resume",
-      "displayRole": "transition",
-      "title": "L'avis de la Mort — jusqu'au Bouftou Royal",
-      "prerequisites": "artefact temporel en poche.",
-      "action": "AVANCER / STOP",
-      "instruction": "Arrête-toi devant la Cour du Bouftou Royal.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/lavis-de-la-mort.html"
-      },
-      "momentId": "moment-prise-conscience-ouverture"
-    },
-    {
-      "id": "route-step-0926",
-      "order": 895,
-      "blockId": "block-27",
-      "type": "dungeon",
-      "displayRole": "objective",
-      "title": "◆ Cour du Bouftou Royal — L'AVIS DE LA MORT",
-      "prerequisites": "L'avis de la Mort au checkpoint Bouftou Royal.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — dans la dernière salle après le Bouftou Royal, clique sur le sac de laine entouré de chachas noirs. C'est le passage requis par L'avis de la Mort.",
-      "action": "FAIRE",
-      "instruction": "Vaincs le Bouftou Royal.",
-      "momentId": "moment-prise-conscience-ouverture"
-    },
-    {
-      "id": "route-step-0927",
-      "order": 896,
-      "blockId": "block-27",
-      "type": "resume",
-      "displayRole": "transition",
-      "title": "L'avis de la Mort",
-      "prerequisites": "Ilyzaelle + Bouftou Royal validés ; Rathrosk consulté avant Thanatena.",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/l-avis-de-la-mort.html"
-      },
-      "momentId": "moment-prise-conscience-ouverture"
-    },
-    {
-      "id": "route-step-0928",
-      "order": 897,
-      "blockId": "block-27",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "La guerre de Cania n'aura pas lieu",
-      "prerequisites": "Prise de conscience lancée ; Paysan 100 ; ressources de gâteau préparées.",
-      "action": "LANCER / TERMINER",
-      "instruction": "En [3,1], Lance La guerre de Cania n'aura pas lieu et termine-la avec les ressources préparées.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/la-guerre-de-cania-n-aura-pas-lieu.html"
-      },
-      "momentId": "moment-prise-conscience-ouverture",
-      "location": {
-        "x": 3,
-        "y": 1
-      },
-      "destination": {
-        "x": 3,
-        "y": 1
-      }
-    },
-    {
-      "id": "route-step-0929",
-      "order": 898,
-      "blockId": "block-27",
-      "type": "quest",
-      "displayRole": "transition",
-      "title": "Prise de conscience — jusqu'à la Tempête de l'Eliocalypse",
-      "prerequisites": "La source de tous les maux.",
-      "action": "AVANCER / STOP",
-      "instruction": "Avance Prise de conscience jusqu'à la Tempête de l'Eliocalypse puis arrête-toi devant le combat des quatre Cavaliers.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/prise-de-conscience.html"
-      },
-      "momentId": "moment-prise-conscience-ouverture"
-    },
-    {
-      "id": "route-step-0930",
-      "order": 899,
-      "blockId": "block-27",
-      "type": "dungeon",
-      "displayRole": "objective",
-      "title": "◆ Tempête de l'Eliocalypse — PRISE DE CONSCIENCE",
-      "prerequisites": "Prise de conscience au checkpoint boss.",
-      "action": "FAIRE",
-      "instruction": "Vaincs les quatre Cavaliers réunis dans la Tempête de l'Eliocalypse pour Prise de conscience.",
-      "momentId": "moment-prise-conscience-ouverture"
-    },
-    {
-      "id": "route-step-0931",
-      "order": 900,
-      "blockId": "block-27",
-      "type": "resume",
-      "displayRole": "objective",
-      "title": "Prise de conscience",
-      "action": "TERMINER",
-      "instruction": "À la sortie de la Tempête, parle à Martalo et indique que tu dois profiter de ce répit pour continuer ton voyage. Rejoins ensuite le Centre du Monde et clique sur le globe au centre de la carte pour poursuivre puis terminer Prise de conscience.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/prise-de-conscience.html"
-      },
-      "momentId": "moment-prise-conscience-finish"
-    },
-    {
-      "id": "block-entry-28",
-      "order": 901,
-      "blockId": "block-28",
-      "type": "preparation",
-      "displayType": "ENTRÉE",
-      "title": "Entrée — Dofus Tacheté — Un rêve en clair-obscur",
-      "action": "PRÉPARER / COMMENCER",
-      "instruction": "Prépare les éléments globaux de ce bloc avant de commencer. Les besoins propres à une quête plus tardive sont rappelés directement sur l’étape concernée.",
+      "instruction": "Commence le bloc. Les besoins spécifiques sont indiqués directement sur les étapes où ils deviennent utiles.",
+      "warning": "Vérifie l'accès aux Songes et le Rêve d'harmonie avant Le poids de son regard. Les 6 Dofus primordiaux ne sont pas exigés pour lancer les Totems.",
       "preparationItems": [
         {
           "kind": "requirement",
@@ -20799,236 +20124,7 @@
         {
           "kind": "requirement",
           "text": "Bricoleur 30+"
-        }
-      ]
-    },
-    {
-      "id": "route-step-0693",
-      "order": 902,
-      "blockId": "block-28",
-      "type": "quest",
-      "dofusSeries": "Dofus Tacheté",
-      "displayRole": "objective",
-      "title": "Main dans la main — jusqu'à la chope de bière en métal",
-      "prerequisites": "Domakuro + Dorigami en inventaire.",
-      "action": "LANCER / AVANCER / STOP",
-      "instruction": "Obtiens la chope de bière en métal et avance Main dans la main jusqu’à débloquer la Taverne interdite, puis garde la quête active jusqu’après les branches suivantes.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/main-dans-la-main.html"
-      },
-      "momentId": "moment-tachete-reunification-a",
-      "location": {
-        "x": 21,
-        "y": -33
-      },
-      "destination": {
-        "x": 23,
-        "y": -32
-      }
-    },
-    {
-      "id": "route-step-0694",
-      "order": 903,
-      "blockId": "block-28",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "De l'encre spectaculaire",
-      "prerequisites": "Main dans la main avancé jusqu'à la chope de bière en métal ; Bricoleur 30+ ; ressources préparées.",
-      "action": "LANCER / TERMINER",
-      "instruction": "Pandawayang [19,-21] : prendre puis terminer De l'encre spectaculaire.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/de-l-encre-spectaculaire.html"
-      },
-      "momentId": "moment-tachete-reunification-a",
-      "location": {
-        "x": 19,
-        "y": -21
-      },
-      "destination": {
-        "x": 19,
-        "y": -21
-      }
-    },
-    {
-      "id": "route-step-0695",
-      "order": 904,
-      "blockId": "block-28",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "L'épopée du moine pèlerin",
-      "prerequisites": "prévoir 1 Dream Fragment ou équivalent demandé par DPLN.",
-      "action": "LANCER / TERMINER",
-      "instruction": "Taverne interdite [23,-32] : prendre puis terminer L'épopée du moine pèlerin.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/l-epopee-du-moine-pelerin.html"
-      },
-      "momentId": "moment-tachete-reunification-a",
-      "location": {
-        "x": 23,
-        "y": -32
-      }
-    },
-    {
-      "id": "route-step-0696",
-      "order": 905,
-      "blockId": "block-28",
-      "type": "resume",
-      "dofusSeries": "Dofus Tacheté",
-      "displayRole": "transition",
-      "title": "Main dans la main — jusqu'à Deux souffles, une inspiration",
-      "action": "AVANCER / STOP",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/main-dans-la-main.html"
-      },
-      "momentId": "moment-tachete-reunification-a"
-    },
-    {
-      "id": "route-step-0697",
-      "order": 906,
-      "blockId": "block-28",
-      "type": "quest",
-      "dofusSeries": "Dofus Tacheté",
-      "displayRole": "objective",
-      "title": "Deux souffles, une inspiration — jusqu'au Roi Imagami",
-      "prerequisites": "Main dans la main au verrou des deux souffles ; Domakuro + Dorigami en inventaire.",
-      "action": "LANCER / AVANCER / STOP",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/deux-souffles-une-inspiration.html"
-      },
-      "momentId": "moment-tachete-reunification-b",
-      "location": {
-        "x": 23,
-        "y": -32
-      },
-      "destination": {
-        "x": 2,
-        "y": 0
-      },
-      "instruction": "Avance Deux souffles, une inspiration jusqu’au Roi Imagami. Fais Souvenir d’Imagiro puis En ce jardin qui nous unit, puis poursuis Deux souffles, une inspiration jusqu’à sa validation."
-    },
-    {
-      "id": "route-step-0698",
-      "order": 907,
-      "blockId": "block-28",
-      "type": "dungeon",
-      "displayRole": "detail",
-      "title": "◆ Mémoire d'Orukam — ROI IMAGAMI",
-      "prerequisites": "Deux souffles, une inspiration au checkpoint Mémoire d'Orukam.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après le Roi Imagami, reparle à Imetsu, Imushi, Imiyama, Imorok, Imafugo et Imagami, puis parle à Imihasu en dernier pour obtenir l'Origami du Wukin.",
-      "action": "FAIRE",
-      "instruction": "Dans la première salle, parle aux cinq Yokianzhi puis à Imagami en dernier avant le combat. Vaincs le Roi Imagami.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/memoire-d-orukam.html"
-      },
-      "momentId": "moment-tachete-reunification-b"
-    },
-    {
-      "id": "route-step-0699",
-      "order": 908,
-      "blockId": "block-28",
-      "type": "resume",
-      "dofusSeries": "Dofus Tacheté",
-      "displayRole": "transition",
-      "title": "Deux souffles, une inspiration — jusqu'à la Reine Amirukam",
-      "prerequisites": "Roi Imagami vaincu ; dialogues de sortie effectués.",
-      "action": "AVANCER / STOP",
-      "instruction": "Poursuis jusqu’au Souvenir d’Imagiro, puis arrête-toi.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/deux-souffles-une-inspiration.html"
-      },
-      "momentId": "moment-tachete-reunification-b"
-    },
-    {
-      "id": "route-step-0700",
-      "order": 909,
-      "blockId": "block-28",
-      "type": "dungeon",
-      "displayRole": "objective",
-      "title": "◆ Souvenir d'Imagiro — REINE AMIRUKAM",
-      "prerequisites": "Deux souffles, une inspiration au checkpoint Souvenir d'Imagiro.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après la Reine Amirukam, reparle à Tsunam, Shinlam, Mabram, Rokoram, Fugokam et Amirukam, puis parle à Sulianam en dernier pour obtenir la Silhouette du Wukang.",
-      "action": "FAIRE",
-      "instruction": "Dans la première salle, parle aux cinq Yokianzhi puis à Amirukam en dernier avant le combat. Vaincs la Reine Amirukam.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/souvenir-d-imagiro.html"
-      },
-      "momentId": "moment-tachete-reunification-b"
-    },
-    {
-      "id": "route-step-0701",
-      "order": 910,
-      "blockId": "block-28",
-      "type": "resume",
-      "dofusSeries": "Dofus Tacheté",
-      "displayRole": "transition",
-      "title": "Deux souffles, une inspiration",
-      "prerequisites": "Roi Imagami + Reine Amirukam validés ; formes Wukin/Wukang récupérées.",
-      "action": "TERMINER",
-      "instruction": "Terminer Deux souffles, une inspiration avec les deux formes obtenues.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/deux-souffles-une-inspiration.html"
-      },
-      "momentId": "moment-tachete-reunification-b"
-    },
-    {
-      "id": "route-step-0702",
-      "order": 911,
-      "blockId": "block-28",
-      "type": "resume",
-      "dofusSeries": "Dofus Tacheté",
-      "displayRole": "transition",
-      "title": "Main dans la main",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/main-dans-la-main.html"
-      },
-      "momentId": "moment-tachete-reunification-b"
-    },
-    {
-      "id": "route-step-0703",
-      "order": 912,
-      "blockId": "block-28",
-      "type": "quest",
-      "dofusSeries": "Dofus Tacheté",
-      "displayRole": "objective",
-      "title": "En ce jardin qui nous unit — Dofus Tacheté",
-      "prerequisites": "Domakuro + Dorigami en inventaire.",
-      "action": "LANCER / TERMINER",
-      "instruction": "☐ En ce jardin qui nous unit — [23,-32] : prendre, terminer, récupérer le Dofus Tacheté et le garder en inventaire.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/en-ce-jardin-qui-nous-unit.html"
-      },
-      "momentId": "moment-tachete-reunification-b",
-      "location": {
-        "x": 23,
-        "y": -32
-      },
-      "destination": {
-        "x": 23,
-        "y": -32
-      }
-    },
-    {
-      "id": "block-entry-29",
-      "order": 913,
-      "blockId": "block-29",
-      "type": "preparation",
-      "displayType": "ENTRÉE",
-      "title": "Entrée — Pandamonium, Valonia, Cauchemar & Aurore Pourpre",
-      "action": "PRÉPARER / COMMENCER",
-      "instruction": "Prépare les éléments globaux de ce bloc avant de commencer. Les besoins propres à une quête plus tardive sont rappelés directement sur l’étape concernée.",
-      "preparationItems": [
+        },
         {
           "kind": "resource",
           "quantity": 6,
@@ -21148,511 +20244,7 @@
         {
           "kind": "requirement",
           "text": "Sculpteur 180+"
-        }
-      ]
-    },
-    {
-      "id": "route-step-0705",
-      "order": 914,
-      "blockId": "block-29",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Quand l'éveil n'est qu'un songe",
-      "prerequisites": "Dofus Tacheté.",
-      "action": "LANCER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/quand-leveil-nest-quun-songe.html"
-      },
-      "momentId": "moment-route-step-0705",
-      "location": {
-        "x": 21,
-        "y": -33
-      },
-      "instruction": "Lance Quand l’éveil n’est qu’un songe, traite les objectifs de cette séquence puis termine la quête."
-    },
-    {
-      "id": "route-step-0706",
-      "order": 915,
-      "blockId": "block-29",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Par ce serment s'écrit le monde",
-      "prerequisites": "Quand l'éveil n'est qu'un songe lancée ; ressources Après la pluie préparées.",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/par-ce-serment-s-ecrit-le-monde.html"
-      },
-      "momentId": "moment-route-step-0705",
-      "location": {
-        "x": 23,
-        "y": -32
-      }
-    },
-    {
-      "id": "route-step-0707",
-      "order": 916,
-      "blockId": "block-29",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Le dernier rempart",
-      "prerequisites": "Quand l'éveil n'est qu'un songe lancée ; ressources Après la pluie préparées.",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/le-dernier-rempart.html"
-      },
-      "momentId": "moment-route-step-0705",
-      "location": {
-        "x": 22,
-        "y": -29
-      }
-    },
-    {
-      "id": "route-step-0708",
-      "order": 917,
-      "blockId": "block-29",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Une bien étrange prophétie",
-      "prerequisites": "Quand l'éveil n'est qu'un songe lancée ; Dofus Tacheté en inventaire ; ressources Après la pluie préparées.",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/une-bien-etrange-prophetie.html"
-      },
-      "momentId": "moment-route-step-0705",
-      "location": {
-        "x": 20,
-        "y": -27
-      }
-    },
-    {
-      "id": "route-step-0709",
-      "order": 918,
-      "blockId": "block-29",
-      "type": "resume",
-      "displayRole": "transition",
-      "title": "Quand l'éveil n'est qu'un songe",
-      "action": "TERMINER",
-      "instruction": "Retourne voir Draconiros et termine Quand l’éveil n’est qu’un songe.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/quand-l-eveil-n-est-qu-un-songe.html"
-      },
-      "momentId": "moment-route-step-0705"
-    },
-    {
-      "id": "route-step-0711",
-      "order": 919,
-      "blockId": "block-29",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Toute possession dépossède",
-      "prerequisites": "Quand l'éveil n'est qu'un songe terminée.",
-      "action": "LANCER / TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/toute-possession-depossede.html"
-      },
-      "momentId": "moment-route-step-0711",
-      "location": {
-        "x": 21,
-        "y": -33
-      }
-    },
-    {
-      "id": "route-step-0712",
-      "order": 920,
-      "blockId": "block-29",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Le chant du Pandamonium",
-      "prerequisites": "Toute possession dépossède terminée.",
-      "action": "LANCER / TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/le-chant-du-pandamonium.html"
-      },
-      "momentId": "moment-route-step-0711",
-      "location": {
-        "x": 39,
-        "y": -53
-      }
-    },
-    {
-      "id": "route-step-0713",
-      "order": 921,
-      "blockId": "block-29",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Le début de la fin",
-      "prerequisites": "Le chant du Pandamonium terminé.",
-      "action": "LANCER / TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/le-debut-de-la-fin.html"
-      },
-      "momentId": "moment-route-step-0711",
-      "location": {
-        "x": 21,
-        "y": -33
-      }
-    },
-    {
-      "id": "route-step-0796",
-      "order": 922,
-      "blockId": "block-29",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Les risques du métier",
-      "prerequisites": "accès Ephedrya.",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/les-risques-du-metier.html"
-      },
-      "momentId": "moment-valonia-sorciere-boss",
-      "location": {
-        "x": 22,
-        "y": -80
-      }
-    },
-    {
-      "id": "route-step-0797",
-      "order": 923,
-      "blockId": "block-29",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "La sorcière exilée — avancer jusqu'à la Chambre des Maléfices",
-      "action": "AVANCER / STOP",
-      "instruction": "Avance La sorcière exilée jusqu'à devoir entrer dans la Chambre des Maléfices puis arrête-toi ici.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/la-sorciere-exilee.html"
-      },
-      "momentId": "moment-valonia-sorciere-boss",
-      "location": {
-        "x": 36,
-        "y": -77
-      }
-    },
-    {
-      "id": "route-step-0798",
-      "order": 924,
-      "blockId": "block-29",
-      "type": "dungeon",
-      "displayRole": "detail",
-      "title": "◆ Chambre des Maléfices — LA SORCIÈRE EXILÉE",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après Belladone, parle-lui pour choisir de sauver les enfants et obtenir le signe magique nécessaire à la suite de La sorcière exilée.",
-      "action": "FAIRE",
-      "instruction": "Vaincs Belladone.",
-      "momentId": "moment-valonia-sorciere-boss"
-    },
-    {
-      "id": "route-step-0799",
-      "order": 925,
-      "blockId": "block-29",
-      "type": "resume",
-      "displayRole": "transition",
-      "title": "La sorcière exilée",
-      "action": "REPRENDRE / TERMINER",
-      "instruction": "Reprends et termine La sorcière exilée. Elle débloque maintenant La graine de la révolte et Pour que la flamme vacille.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/la-sorciere-exilee.html"
-      },
-      "momentId": "moment-valonia-sorciere-boss"
-    },
-    {
-      "id": "route-step-0800",
-      "order": 926,
-      "blockId": "block-29",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "La graine de la révolte + Pour que la flamme vacille",
-      "prerequisites": "Dofus Ébène équipé",
-      "action": "LANCER LES 2 / STOP",
-      "instruction": "Termine d'abord La graine de la révolte ; garde Pour que la flamme vacille active.",
-      "momentId": "moment-valonia-flamme",
-      "location": {
-        "x": 33,
-        "y": -84
-      },
-      "guideItems": [
-        {
-          "action": "take",
-          "label": "Pour que la flamme vacille",
-          "location": {
-            "x": 33,
-            "y": -84
-          },
-          "note": "Parle à Nascherite."
         },
-        {
-          "action": "take",
-          "label": "La graine de la révolte",
-          "location": {
-            "x": 33,
-            "y": -84
-          },
-          "note": "Parle à Nascherite."
-        }
-      ]
-    },
-    {
-      "id": "route-step-0801",
-      "order": 927,
-      "blockId": "block-29",
-      "type": "resume",
-      "displayRole": "transition",
-      "title": "La graine de la révolte",
-      "prerequisites": "La graine de la révolte déjà lancée avec Pour que la flamme vacille.",
-      "warning": "Termine cette branche en premier : elle fournit notamment la Liane de Soldalia et l'Épine d'Armuguet utiles à la Fleur de Cendrepierre.",
-      "action": "REPRENDRE / TERMINER",
-      "instruction": "Reprends et termine La graine de la révolte déjà active. Conserve les récompenses utiles au craft de Pour que la flamme vacille.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/la-graine-de-la-revolte.html"
-      },
-      "momentId": "moment-valonia-flamme",
-      "location": {
-        "x": 33,
-        "y": -84
-      }
-    },
-    {
-      "id": "route-step-1001",
-      "order": 928,
-      "blockId": "block-29",
-      "type": "resume",
-      "displayRole": "transition",
-      "title": "Pour que la flamme vacille",
-      "prerequisites": "Pour que la flamme vacille déjà active ; composants récupérés/conservés.",
-      "warning": "Utilise en priorité le Casque obtenu via La sorcière exilée et la Liane/Épine obtenues via La graine de la révolte.",
-      "action": "REPRENDRE / TERMINER",
-      "instruction": "Reprends Pour que la flamme vacille, fabrique la Fleur de Cendrepierre avec les ressources déjà récupérées puis termine la quête afin d'obtenir l'accès à Cire Momore.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/pour-que-la-flamme-vacille.html"
-      },
-      "momentId": "moment-valonia-flamme"
-    },
-    {
-      "id": "route-step-0802",
-      "order": 929,
-      "blockId": "block-29",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Par l'héritage qui vous lie",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/par-l-heritage-qui-vous-lie.html"
-      },
-      "momentId": "moment-valonia-ilyzaelle",
-      "location": {
-        "x": 33,
-        "y": -84
-      }
-    },
-    {
-      "id": "route-step-0803",
-      "order": 930,
-      "blockId": "block-29",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Une dernière volonté — avancer jusqu'à Ilyzaelle",
-      "prerequisites": "Par l'héritage qui vous lie + Deux souffles, une inspiration ; 10 Cristal liquide + 10 Cristal pliable.",
-      "action": "AVANCER / STOP",
-      "instruction": "Avance Une dernière volonté jusqu'à Ilyzaelle puis arrête-toi ici.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/une-derniere-volonte.html"
-      },
-      "momentId": "moment-valonia-ilyzaelle",
-      "location": {
-        "x": 33,
-        "y": -84
-      }
-    },
-    {
-      "id": "route-step-0804",
-      "order": 931,
-      "blockId": "block-29",
-      "type": "dungeon",
-      "displayRole": "detail",
-      "title": "Belvédère d'Ilyzaelle — UNE DERNIÈRE VOLONTÉ #3",
-      "prerequisites": "Une dernière volonté au checkpoint Ilyzaelle.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — parle à Ilyzaelle dans la salle de sortie pour faire avancer Une dernière volonté.",
-      "action": "FAIRE",
-      "instruction": "Vaincs Ilyzaelle pour Une dernière volonté.",
-      "momentId": "moment-valonia-ilyzaelle"
-    },
-    {
-      "id": "route-step-0805",
-      "order": 932,
-      "blockId": "block-29",
-      "type": "resume",
-      "displayRole": "transition",
-      "title": "Une dernière volonté",
-      "prerequisites": "Ilyzaelle vaincue ; dialogues post-donjon effectués.",
-      "action": "REPRENDRE / TERMINER",
-      "instruction": "Reprends et termine Une dernière volonté après les dialogues post-Ilyzaelle.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/une-derniere-volonte.html"
-      },
-      "momentId": "moment-valonia-ilyzaelle"
-    },
-    {
-      "id": "route-step-0982",
-      "order": 933,
-      "blockId": "block-29",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "L'heure des adieux — avancer jusqu'à Cire Momore",
-      "action": "AVANCER / STOP",
-      "instruction": "Avance L'heure des adieux jusqu'à devoir vaincre Cire Momore puis arrête-toi devant la caverne.\n\nÀ PRÉVOIR ICI — Bouquet final / Cire Momore\n• 7 Belladone\n• 7 Cendrepierre\n• 1 Mousse de Caméliache\n• 1 Fleur des protecteurs\n• 1 Poing de Coquelicogne\nNote : Le Casque de Statulipe, la Liane de Soldalia et l'Épine d'Armuguet sont obtenus pendant La sorcière exilée puis La graine de la révolte avant le craft de la Fleur de Cendrepierre : ne les préachète pas.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/l-heure-des-adieux.html"
-      },
-      "momentId": "moment-route-step-0982",
-      "location": {
-        "x": 31,
-        "y": -63
-      }
-    },
-    {
-      "id": "route-step-0983",
-      "order": 934,
-      "blockId": "block-29",
-      "type": "dungeon",
-      "displayRole": "detail",
-      "title": "◆ Caverne de Cire Momore — L'HEURE DES ADIEUX",
-      "prerequisites": "L'heure des adieux au checkpoint boss.",
-      "action": "FAIRE",
-      "instruction": "Vaincs Cire Momore pour récupérer la Lance Gnugnir.",
-      "momentId": "moment-route-step-0982"
-    },
-    {
-      "id": "route-step-0984",
-      "order": 935,
-      "blockId": "block-29",
-      "type": "resume",
-      "displayRole": "transition",
-      "title": "L'heure des adieux",
-      "prerequisites": "Cire Momore vaincu.",
-      "action": "REPRENDRE / TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/l-heure-des-adieux.html"
-      },
-      "momentId": "moment-route-step-0982",
-      "instruction": "Reprends L'heure des adieux auprès de Karon devant la caverne, puis termine la quête."
-    },
-    {
-      "id": "route-step-0932",
-      "order": 936,
-      "blockId": "block-29",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Le poids de son regard",
-      "prerequisites": "accès Pandamonium ; 1 Rêve d'harmonie déjà sécurisé pendant Jusqu'au bout du rêve ; réunir 12 classes sur le pentacle OU prévoir jusqu'à 120 000 kamas.",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/le-poids-de-son-regard.html"
-      },
-      "momentId": "moment-reminiscence",
-      "location": {
-        "x": 41,
-        "y": -56
-      }
-    },
-    {
-      "id": "route-step-0933",
-      "order": 937,
-      "blockId": "block-29",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "La danse de la dissonance — avancer jusqu'à Bataille de l'Aurore Pourpre",
-      "prerequisites": "Rituel de Kabahal accessible.",
-      "action": "LANCER / AVANCER / STOP",
-      "instruction": "En [21,-33], Lance La danse de la dissonance et avance jusqu'à devoir vaincre la Mère des Ravageurs puis arrête-toi devant Bataille de l'Aurore Pourpre.",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/la-danse-de-la-dissonance.html"
-      },
-      "momentId": "moment-reminiscence",
-      "location": {
-        "x": 21,
-        "y": -33
-      },
-      "destination": {
-        "x": 21,
-        "y": -33
-      }
-    },
-    {
-      "id": "route-step-0934",
-      "order": 938,
-      "blockId": "block-29",
-      "type": "dungeon",
-      "displayRole": "detail",
-      "title": "◆ Bataille de l'Aurore Pourpre — LA DANSE DE LA DISSONANCE",
-      "prerequisites": "La danse de la dissonance au checkpoint boss.",
-      "warning": "⚠ AVANT DE SORTIR DU DONJON — après l’Éternel Conflit, parle au Cauchemar des Ravageurs. Cette interaction est obligatoire pour La danse de la dissonance.",
-      "action": "FAIRE",
-      "instruction": "Vaincs l’Éternel Conflit avec La danse de la dissonance active.",
-      "momentId": "moment-reminiscence"
-    },
-    {
-      "id": "route-step-0935",
-      "order": 939,
-      "blockId": "block-29",
-      "type": "resume",
-      "displayRole": "objective",
-      "title": "La danse de la dissonance",
-      "prerequisites": "Bataille de l'Aurore Pourpre validée.",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/la-danse-de-la-dissonance.html"
-      },
-      "momentId": "moment-reminiscence-aurore"
-    },
-    {
-      "id": "route-step-0936",
-      "order": 940,
-      "blockId": "block-29",
-      "type": "quest",
-      "displayRole": "objective",
-      "title": "Descendre aux cendres",
-      "action": "TERMINER",
-      "source": {
-        "label": "DPLN",
-        "url": "https://www.dofuspourlesnoobs.com/descendre-aux-cendres.html"
-      },
-      "momentId": "moment-reminiscence-aurore",
-      "location": {
-        "x": 43,
-        "y": -57
-      }
-    },
-    {
-      "id": "block-entry-30",
-      "order": 941,
-      "blockId": "block-30",
-      "type": "preparation",
-      "displayType": "ENTRÉE",
-      "title": "Entrée — Six sur Six II — Totems & conclusion",
-      "warning": "Prise de conscience + Mort et renouveau + Descendre aux cendres terminés. Le Totem de l'équilibre est obtenu naturellement via Les totems de Maïmane : ne le préachète pas. Prévoir un équipement permettant 800 Force minimum et 0 Sagesse pour l'étape qui le demande.",
-      "action": "PRÉPARER / COMMENCER",
-      "instruction": "Prépare les éléments globaux de ce bloc avant de commencer. Les besoins propres à une quête plus tardive sont rappelés directement sur l’étape concernée.",
-      "preparationItems": [
         {
           "kind": "resource",
           "quantity": 200,
@@ -21753,13 +20345,673 @@
         {
           "kind": "requirement",
           "text": "0 Sagesse au moment du test concerné"
+        },
+        {
+          "kind": "resource",
+          "quantity": 600,
+          "name": "Reflets oniriques — disponibles avant le checkpoint du Feu primordial"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Framboise OU 10 Carrés de Chocolat au Lait"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Carré de Chocolat Noir"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Oignon"
+        },
+        {
+          "kind": "resource",
+          "quantity": 1,
+          "name": "Baguette Rikiki"
+        },
+        {
+          "kind": "kamas",
+          "text": "1 kama"
         }
       ]
     },
     {
+      "id": "route-step-0865",
+      "order": 865,
+      "blockId": "block-26",
+      "type": "major_step",
+      "dofusSeries": "Dofus Ébène",
+      "title": "Jusqu'au bout du rêve",
+      "prerequisites": "12 apparitions Crocobur ; conserver le Rêve d'harmonie pour Le poids de son regard.",
+      "warning": "Pendant cette session : conserve au moins 600 Reflets oniriques au total pour S'armer contre le destin et récupère 1 Rêve d'harmonie en Rêve III+ pour Le poids de son regard.",
+      "action": "TERMINER",
+      "instruction": "Effectue les apparitions Crocobur prévues et conserve le Rêve d'harmonie pour Le poids de son regard. Cette étape précède désormais l'ouverture des Totems."
+    },
+    {
+      "id": "route-step-0921",
+      "order": 866,
+      "blockId": "block-26",
+      "type": "quest",
+      "title": "Prise de conscience",
+      "action": "LANCER / STOP",
+      "instruction": "Lance Prise de conscience auprès de Maisial en [-10,-31], puis arrête-toi ici.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/prise-de-conscience.html"
+      },
+      "location": {
+        "x": -10,
+        "y": -31
+      }
+    },
+    {
+      "id": "route-step-0923",
+      "order": 867,
+      "blockId": "block-26",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "L'avis de la Mort — jusqu'à Ilyzaelle",
+      "prerequisites": "5 kamas ; 1 faux code xélor : 42 ; 4 personnages pour les dalles.",
+      "action": "LANCER / AVANCER / STOP",
+      "instruction": "Avance L’avis de la Mort jusqu’à Ilyzaelle, traite les objectifs de cette séquence puis poursuis L’avis de la Mort jusqu’à sa validation.\n\nÀ PRÉVOIR ICI — Convergence Ilyzaelle\n• 10 Cristal liquide\n• 10 Cristal pliable\n• 10 Chanvre\n• 10 Sauge\n• 1 Élixir des Trépasseurs\n• 1 Ardonite\n• 120 kamas\n• 10 Bières aigrisantes OU 5 000 kamas — Marteau-Aigri\n• Sort Flamiche\n• Alignement 85→99 au verrou Ilyzaelle\n• Deux souffles, une inspiration terminé\nNote : Un clan hétéroclite impose une attente réelle de 2 minutes.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/lavis-de-la-mort.html"
+      },
+      "momentId": "moment-prise-conscience-ouverture",
+      "location": {
+        "x": 3,
+        "y": 1
+      },
+      "destination": {
+        "x": 3,
+        "y": 1
+      }
+    },
+    {
+      "id": "route-step-0924",
+      "order": 868,
+      "blockId": "block-26",
+      "type": "dungeon",
+      "displayRole": "objective",
+      "title": "◆ Belvédère d'Ilyzaelle — L'AVIS DE LA MORT",
+      "prerequisites": "L'avis de la Mort au checkpoint Ilyzaelle.",
+      "action": "FAIRE",
+      "instruction": "Vaincs Ilyzaelle pour L'avis de la Mort ; le Feu dévoreur est obtenu automatiquement.",
+      "momentId": "moment-prise-conscience-ouverture"
+    },
+    {
+      "id": "route-step-0925",
+      "order": 869,
+      "blockId": "block-26",
+      "type": "resume",
+      "displayRole": "transition",
+      "title": "L'avis de la Mort — jusqu'au Bouftou Royal",
+      "prerequisites": "artefact temporel en poche.",
+      "action": "AVANCER / STOP",
+      "instruction": "Arrête-toi devant la Cour du Bouftou Royal.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/lavis-de-la-mort.html"
+      },
+      "momentId": "moment-prise-conscience-ouverture"
+    },
+    {
+      "id": "route-step-0926",
+      "order": 870,
+      "blockId": "block-26",
+      "type": "dungeon",
+      "displayRole": "objective",
+      "title": "◆ Cour du Bouftou Royal — L'AVIS DE LA MORT",
+      "prerequisites": "L'avis de la Mort au checkpoint Bouftou Royal.",
+      "warning": "⚠ AVANT DE SORTIR DU DONJON — dans la dernière salle après le Bouftou Royal, clique sur le sac de laine entouré de chachas noirs. C'est le passage requis par L'avis de la Mort.",
+      "action": "FAIRE",
+      "instruction": "Vaincs le Bouftou Royal.",
+      "momentId": "moment-prise-conscience-ouverture"
+    },
+    {
+      "id": "route-step-0927",
+      "order": 871,
+      "blockId": "block-26",
+      "type": "resume",
+      "displayRole": "transition",
+      "title": "L'avis de la Mort",
+      "prerequisites": "Ilyzaelle + Bouftou Royal validés ; Rathrosk consulté avant Thanatena.",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/l-avis-de-la-mort.html"
+      },
+      "momentId": "moment-prise-conscience-ouverture"
+    },
+    {
+      "id": "route-step-0928",
+      "order": 872,
+      "blockId": "block-26",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "La guerre de Cania n'aura pas lieu",
+      "prerequisites": "Prise de conscience lancée ; Paysan 100 ; ressources de gâteau préparées.",
+      "action": "LANCER / TERMINER",
+      "instruction": "En [3,1], Lance La guerre de Cania n'aura pas lieu et termine-la avec les ressources préparées.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/la-guerre-de-cania-n-aura-pas-lieu.html"
+      },
+      "momentId": "moment-prise-conscience-ouverture",
+      "location": {
+        "x": 3,
+        "y": 1
+      },
+      "destination": {
+        "x": 3,
+        "y": 1
+      }
+    },
+    {
+      "id": "route-step-0929",
+      "order": 873,
+      "blockId": "block-26",
+      "type": "quest",
+      "displayRole": "transition",
+      "title": "Prise de conscience — jusqu'à la Tempête de l'Eliocalypse",
+      "prerequisites": "La source de tous les maux.",
+      "action": "AVANCER / STOP",
+      "instruction": "Avance Prise de conscience jusqu'à la Tempête de l'Eliocalypse puis arrête-toi devant le combat des quatre Cavaliers.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/prise-de-conscience.html"
+      },
+      "momentId": "moment-prise-conscience-ouverture"
+    },
+    {
+      "id": "route-step-0930",
+      "order": 874,
+      "blockId": "block-26",
+      "type": "dungeon",
+      "displayRole": "objective",
+      "title": "◆ Tempête de l'Eliocalypse — PRISE DE CONSCIENCE",
+      "prerequisites": "Prise de conscience au checkpoint boss.",
+      "action": "FAIRE",
+      "instruction": "Vaincs les quatre Cavaliers réunis dans la Tempête de l'Eliocalypse pour Prise de conscience.",
+      "momentId": "moment-prise-conscience-ouverture"
+    },
+    {
+      "id": "route-step-0931",
+      "order": 875,
+      "blockId": "block-26",
+      "type": "resume",
+      "displayRole": "objective",
+      "title": "Prise de conscience",
+      "action": "TERMINER",
+      "instruction": "À la sortie de la Tempête, parle à Martalo et indique que tu dois profiter de ce répit pour continuer ton voyage. Rejoins ensuite le Centre du Monde et clique sur le globe au centre de la carte pour poursuivre puis terminer Prise de conscience.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/prise-de-conscience.html"
+      },
+      "momentId": "moment-prise-conscience-finish"
+    },
+    {
+      "id": "route-step-0693",
+      "order": 876,
+      "blockId": "block-26",
+      "type": "quest",
+      "dofusSeries": "Dofus Tacheté",
+      "displayRole": "objective",
+      "title": "Main dans la main — jusqu'à la chope de bière en métal",
+      "prerequisites": "Domakuro + Dorigami en inventaire.",
+      "action": "LANCER / AVANCER / STOP",
+      "instruction": "Obtiens la chope de bière en métal et avance Main dans la main jusqu’à débloquer la Taverne interdite, puis garde la quête active jusqu’après les branches suivantes.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/main-dans-la-main.html"
+      },
+      "momentId": "moment-tachete-reunification-a",
+      "location": {
+        "x": 21,
+        "y": -33
+      },
+      "destination": {
+        "x": 23,
+        "y": -32
+      }
+    },
+    {
+      "id": "route-step-0694",
+      "order": 877,
+      "blockId": "block-26",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "De l'encre spectaculaire",
+      "prerequisites": "Main dans la main avancé jusqu'à la chope de bière en métal ; Bricoleur 30+ ; ressources préparées.",
+      "action": "LANCER / TERMINER",
+      "instruction": "Pandawayang [19,-21] : prendre puis terminer De l'encre spectaculaire.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/de-l-encre-spectaculaire.html"
+      },
+      "momentId": "moment-tachete-reunification-a",
+      "location": {
+        "x": 19,
+        "y": -21
+      },
+      "destination": {
+        "x": 19,
+        "y": -21
+      }
+    },
+    {
+      "id": "route-step-0695",
+      "order": 878,
+      "blockId": "block-26",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "L'épopée du moine pèlerin",
+      "prerequisites": "prévoir 1 Dream Fragment ou équivalent demandé par DPLN.",
+      "action": "LANCER / TERMINER",
+      "instruction": "Taverne interdite [23,-32] : prendre puis terminer L'épopée du moine pèlerin.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/l-epopee-du-moine-pelerin.html"
+      },
+      "momentId": "moment-tachete-reunification-a",
+      "location": {
+        "x": 23,
+        "y": -32
+      }
+    },
+    {
+      "id": "route-step-0696",
+      "order": 879,
+      "blockId": "block-26",
+      "type": "resume",
+      "dofusSeries": "Dofus Tacheté",
+      "displayRole": "transition",
+      "title": "Main dans la main — jusqu'à Deux souffles, une inspiration",
+      "action": "AVANCER / STOP",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/main-dans-la-main.html"
+      },
+      "momentId": "moment-tachete-reunification-a"
+    },
+    {
+      "id": "route-step-0697",
+      "order": 880,
+      "blockId": "block-26",
+      "type": "quest",
+      "dofusSeries": "Dofus Tacheté",
+      "displayRole": "objective",
+      "title": "Deux souffles, une inspiration — jusqu'au Roi Imagami",
+      "prerequisites": "Main dans la main au verrou des deux souffles ; Domakuro + Dorigami en inventaire.",
+      "action": "LANCER / AVANCER / STOP",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/deux-souffles-une-inspiration.html"
+      },
+      "momentId": "moment-tachete-reunification-b",
+      "location": {
+        "x": 23,
+        "y": -32
+      },
+      "destination": {
+        "x": 2,
+        "y": 0
+      },
+      "instruction": "Avance Deux souffles, une inspiration jusqu’au Roi Imagami. Fais Souvenir d’Imagiro puis En ce jardin qui nous unit, puis poursuis Deux souffles, une inspiration jusqu’à sa validation."
+    },
+    {
+      "id": "route-step-0698",
+      "order": 881,
+      "blockId": "block-26",
+      "type": "dungeon",
+      "displayRole": "detail",
+      "title": "◆ Mémoire d'Orukam — ROI IMAGAMI",
+      "prerequisites": "Deux souffles, une inspiration au checkpoint Mémoire d'Orukam.",
+      "warning": "⚠ AVANT DE SORTIR DU DONJON — après le Roi Imagami, reparle à Imetsu, Imushi, Imiyama, Imorok, Imafugo et Imagami, puis parle à Imihasu en dernier pour obtenir l'Origami du Wukin.",
+      "action": "FAIRE",
+      "instruction": "Dans la première salle, parle aux cinq Yokianzhi puis à Imagami en dernier avant le combat. Vaincs le Roi Imagami.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/memoire-d-orukam.html"
+      },
+      "momentId": "moment-tachete-reunification-b"
+    },
+    {
+      "id": "route-step-0699",
+      "order": 882,
+      "blockId": "block-26",
+      "type": "resume",
+      "dofusSeries": "Dofus Tacheté",
+      "displayRole": "transition",
+      "title": "Deux souffles, une inspiration — jusqu'à la Reine Amirukam",
+      "prerequisites": "Roi Imagami vaincu ; dialogues de sortie effectués.",
+      "action": "AVANCER / STOP",
+      "instruction": "Poursuis jusqu’au Souvenir d’Imagiro, puis arrête-toi.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/deux-souffles-une-inspiration.html"
+      },
+      "momentId": "moment-tachete-reunification-b"
+    },
+    {
+      "id": "route-step-0700",
+      "order": 883,
+      "blockId": "block-26",
+      "type": "dungeon",
+      "displayRole": "objective",
+      "title": "◆ Souvenir d'Imagiro — REINE AMIRUKAM",
+      "prerequisites": "Deux souffles, une inspiration au checkpoint Souvenir d'Imagiro.",
+      "warning": "⚠ AVANT DE SORTIR DU DONJON — après la Reine Amirukam, reparle à Tsunam, Shinlam, Mabram, Rokoram, Fugokam et Amirukam, puis parle à Sulianam en dernier pour obtenir la Silhouette du Wukang.",
+      "action": "FAIRE",
+      "instruction": "Dans la première salle, parle aux cinq Yokianzhi puis à Amirukam en dernier avant le combat. Vaincs la Reine Amirukam.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/souvenir-d-imagiro.html"
+      },
+      "momentId": "moment-tachete-reunification-b"
+    },
+    {
+      "id": "route-step-0701",
+      "order": 884,
+      "blockId": "block-26",
+      "type": "resume",
+      "dofusSeries": "Dofus Tacheté",
+      "displayRole": "transition",
+      "title": "Deux souffles, une inspiration",
+      "prerequisites": "Roi Imagami + Reine Amirukam validés ; formes Wukin/Wukang récupérées.",
+      "action": "TERMINER",
+      "instruction": "Terminer Deux souffles, une inspiration avec les deux formes obtenues.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/deux-souffles-une-inspiration.html"
+      },
+      "momentId": "moment-tachete-reunification-b"
+    },
+    {
+      "id": "route-step-0702",
+      "order": 885,
+      "blockId": "block-26",
+      "type": "resume",
+      "dofusSeries": "Dofus Tacheté",
+      "displayRole": "transition",
+      "title": "Main dans la main",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/main-dans-la-main.html"
+      },
+      "momentId": "moment-tachete-reunification-b"
+    },
+    {
+      "id": "route-step-0703",
+      "order": 886,
+      "blockId": "block-26",
+      "type": "quest",
+      "dofusSeries": "Dofus Tacheté",
+      "displayRole": "objective",
+      "title": "En ce jardin qui nous unit — Dofus Tacheté",
+      "prerequisites": "Domakuro + Dorigami en inventaire.",
+      "action": "LANCER / TERMINER",
+      "instruction": "☐ En ce jardin qui nous unit — [23,-32] : prendre, terminer, récupérer le Dofus Tacheté et le garder en inventaire.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/en-ce-jardin-qui-nous-unit.html"
+      },
+      "momentId": "moment-tachete-reunification-b",
+      "location": {
+        "x": 23,
+        "y": -32
+      },
+      "destination": {
+        "x": 23,
+        "y": -32
+      }
+    },
+    {
+      "id": "route-step-0705",
+      "order": 887,
+      "blockId": "block-26",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Quand l'éveil n'est qu'un songe",
+      "prerequisites": "Dofus Tacheté.",
+      "action": "LANCER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/quand-leveil-nest-quun-songe.html"
+      },
+      "momentId": "moment-route-step-0705",
+      "location": {
+        "x": 21,
+        "y": -33
+      },
+      "instruction": "Lance Quand l’éveil n’est qu’un songe, traite les objectifs de cette séquence puis termine la quête."
+    },
+    {
+      "id": "route-step-0706",
+      "order": 888,
+      "blockId": "block-26",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Par ce serment s'écrit le monde",
+      "prerequisites": "Quand l'éveil n'est qu'un songe lancée ; ressources Après la pluie préparées.",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/par-ce-serment-s-ecrit-le-monde.html"
+      },
+      "momentId": "moment-route-step-0705",
+      "location": {
+        "x": 23,
+        "y": -32
+      }
+    },
+    {
+      "id": "route-step-0707",
+      "order": 889,
+      "blockId": "block-26",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Le dernier rempart",
+      "prerequisites": "Quand l'éveil n'est qu'un songe lancée ; ressources Après la pluie préparées.",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/le-dernier-rempart.html"
+      },
+      "momentId": "moment-route-step-0705",
+      "location": {
+        "x": 22,
+        "y": -29
+      }
+    },
+    {
+      "id": "route-step-0708",
+      "order": 890,
+      "blockId": "block-26",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Une bien étrange prophétie",
+      "prerequisites": "Quand l'éveil n'est qu'un songe lancée ; Dofus Tacheté en inventaire ; ressources Après la pluie préparées.",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/une-bien-etrange-prophetie.html"
+      },
+      "momentId": "moment-route-step-0705",
+      "location": {
+        "x": 20,
+        "y": -27
+      }
+    },
+    {
+      "id": "route-step-0709",
+      "order": 891,
+      "blockId": "block-26",
+      "type": "resume",
+      "displayRole": "transition",
+      "title": "Quand l'éveil n'est qu'un songe",
+      "action": "TERMINER",
+      "instruction": "Retourne voir Draconiros et termine Quand l’éveil n’est qu’un songe.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/quand-l-eveil-n-est-qu-un-songe.html"
+      },
+      "momentId": "moment-route-step-0705"
+    },
+    {
+      "id": "route-step-0711",
+      "order": 892,
+      "blockId": "block-26",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Toute possession dépossède",
+      "prerequisites": "Quand l'éveil n'est qu'un songe terminée.",
+      "action": "LANCER / TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/toute-possession-depossede.html"
+      },
+      "momentId": "moment-route-step-0711",
+      "location": {
+        "x": 21,
+        "y": -33
+      }
+    },
+    {
+      "id": "route-step-0712",
+      "order": 893,
+      "blockId": "block-26",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Le chant du Pandamonium",
+      "prerequisites": "Toute possession dépossède terminée.",
+      "action": "LANCER / TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/le-chant-du-pandamonium.html"
+      },
+      "momentId": "moment-route-step-0711",
+      "location": {
+        "x": 39,
+        "y": -53
+      }
+    },
+    {
+      "id": "route-step-0713",
+      "order": 894,
+      "blockId": "block-26",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Le début de la fin",
+      "prerequisites": "Le chant du Pandamonium terminé.",
+      "action": "LANCER / TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/le-debut-de-la-fin.html"
+      },
+      "momentId": "moment-route-step-0711",
+      "location": {
+        "x": 21,
+        "y": -33
+      }
+    },
+    {
+      "id": "route-step-0932",
+      "order": 895,
+      "blockId": "block-26",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Le poids de son regard",
+      "prerequisites": "accès Pandamonium ; 1 Rêve d'harmonie déjà sécurisé pendant Jusqu'au bout du rêve ; réunir 12 classes sur le pentacle OU prévoir jusqu'à 120 000 kamas.",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/le-poids-de-son-regard.html"
+      },
+      "momentId": "moment-reminiscence",
+      "location": {
+        "x": 41,
+        "y": -56
+      }
+    },
+    {
+      "id": "route-step-0933",
+      "order": 896,
+      "blockId": "block-26",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "La danse de la dissonance — avancer jusqu'à Bataille de l'Aurore Pourpre",
+      "prerequisites": "Rituel de Kabahal accessible.",
+      "action": "LANCER / AVANCER / STOP",
+      "instruction": "En [21,-33], Lance La danse de la dissonance et avance jusqu'à devoir vaincre la Mère des Ravageurs puis arrête-toi devant Bataille de l'Aurore Pourpre.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/la-danse-de-la-dissonance.html"
+      },
+      "momentId": "moment-reminiscence",
+      "location": {
+        "x": 21,
+        "y": -33
+      },
+      "destination": {
+        "x": 21,
+        "y": -33
+      }
+    },
+    {
+      "id": "route-step-0934",
+      "order": 897,
+      "blockId": "block-26",
+      "type": "dungeon",
+      "displayRole": "detail",
+      "title": "◆ Bataille de l'Aurore Pourpre — LA DANSE DE LA DISSONANCE",
+      "prerequisites": "La danse de la dissonance au checkpoint boss.",
+      "warning": "⚠ AVANT DE SORTIR DU DONJON — après l’Éternel Conflit, parle au Cauchemar des Ravageurs. Cette interaction est obligatoire pour La danse de la dissonance.",
+      "action": "FAIRE",
+      "instruction": "Vaincs l’Éternel Conflit avec La danse de la dissonance active.",
+      "momentId": "moment-reminiscence"
+    },
+    {
+      "id": "route-step-0935",
+      "order": 898,
+      "blockId": "block-26",
+      "type": "resume",
+      "displayRole": "objective",
+      "title": "La danse de la dissonance",
+      "prerequisites": "Bataille de l'Aurore Pourpre validée.",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/la-danse-de-la-dissonance.html"
+      },
+      "momentId": "moment-reminiscence-aurore"
+    },
+    {
+      "id": "route-step-0936",
+      "order": 899,
+      "blockId": "block-26",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Descendre aux cendres",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/descendre-aux-cendres.html"
+      },
+      "momentId": "moment-reminiscence-aurore",
+      "location": {
+        "x": 43,
+        "y": -57
+      }
+    },
+    {
       "id": "route-step-0938",
-      "order": 942,
-      "blockId": "block-30",
+      "order": 900,
+      "blockId": "block-26",
       "type": "quest",
       "displayRole": "objective",
       "title": "Un héritage tourmenté — jusqu'à la rune d'Harmonie",
@@ -21781,8 +21033,8 @@
     },
     {
       "id": "route-step-0939",
-      "order": 943,
-      "blockId": "block-30",
+      "order": 901,
+      "blockId": "block-26",
       "type": "long_running",
       "displayRole": "objective",
       "title": "Les totems de Maïmane",
@@ -21808,52 +21060,823 @@
       }
     },
     {
-      "id": "route-step-0940",
-      "order": 944,
-      "blockId": "block-30",
-      "type": "dungeon",
-      "displayRole": "objective",
-      "title": "◆ Salons privés de Klime — TOTEM JOIE",
-      "prerequisites": "Les totems de Maïmane active ; choisir Klime pour la Joie.",
-      "action": "FAIRE",
-      "instruction": "Vaincs Klime avec Les totems de Maïmane active et récupère le Totem de la joie.",
-      "momentId": "moment-totems-ouverture-donjons"
+      "id": "block-entry-27",
+      "order": 902,
+      "blockId": "block-27",
+      "type": "preparation",
+      "displayType": "ENTRÉE",
+      "title": "Entrée — Dofus Ébène, cinq Totems mutualisés",
+      "action": "PRÉPARER / COMMENCER",
+      "instruction": "Prépare les éléments globaux de ce bloc avant de commencer. Les besoins propres à une quête plus tardive sont rappelés directement sur l’étape concernée.",
+      "preparationItems": [
+        {
+          "kind": "requirement",
+          "text": "Les totems de Maïmane active avant Bethel"
+        },
+        {
+          "kind": "requirement",
+          "text": "Nécronyx disponible pour Bethel et Solar"
+        },
+        {
+          "kind": "requirement",
+          "text": "Conserver les préparations spécifiques aux étapes Ébène."
+        }
+      ],
+      "warning": "Garder la quête des Totems active dans tous les combats mutualisés."
     },
     {
-      "id": "route-step-0941",
-      "order": 945,
-      "blockId": "block-30",
-      "type": "dungeon",
+      "id": "route-step-0866",
+      "order": 903,
+      "blockId": "block-27",
+      "type": "quest",
+      "dofusSeries": "Dofus Ébène",
       "displayRole": "objective",
-      "title": "◆ Temple de Koutoulou — TOTEM PEUR",
-      "prerequisites": "Les totems de Maïmane active ; choisir Koutoulou pour la Peur.",
-      "action": "FAIRE",
-      "instruction": "Vaincs la Larve de Koutoulou avec Les totems de Maïmane active et récupère le Totem de la peur.",
-      "momentId": "moment-totems-ouverture-donjons"
+      "title": "À la recherche de Crocoburio — avancer jusqu'à Bethel",
+      "prerequisites": "sort Nécronyx disponible.",
+      "action": "LANCER / AVANCER / STOP",
+      "instruction": "En [-6,-3], Lance À la recherche de Crocoburio et avance jusqu'à la Tour de Bethel puis arrête-toi devant le donjon.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/a-la-recherche-de-crocoburio.html"
+      },
+      "momentId": "moment-route-step-0866",
+      "location": {
+        "x": -6,
+        "y": -3
+      },
+      "destination": {
+        "x": -6,
+        "y": -3
+      }
     },
     {
-      "id": "route-step-0942",
-      "order": 946,
-      "blockId": "block-30",
+      "id": "route-step-0867",
+      "order": 904,
+      "blockId": "block-27",
       "type": "dungeon",
-      "displayRole": "objective",
-      "title": "◆ Brasserie du Roi Dazak — TOTEM COLÈRE",
-      "prerequisites": "Les totems de Maïmane active ; choisir Dazak pour la Colère.",
+      "displayRole": "detail",
+      "title": "◆ Tour de Bethel — ÉBÈNE + TOTEM DÉGOÛT",
+      "prerequisites": "À la recherche de Crocoburio + Les totems de Maïmane actifs.",
       "action": "FAIRE",
-      "instruction": "Vaincs le Roi Dazak avec Les totems de Maïmane active et récupère le Totem de la colère.",
-      "momentId": "moment-totems-ouverture-donjons"
+      "instruction": "Vaincs Bethel avec Nécronyx disponible et Les totems de Maïmane active. La Coquille d'âme corrompue est obtenue automatiquement.",
+      "momentId": "moment-route-step-0866"
     },
     {
       "id": "route-step-0943",
-      "order": 947,
-      "blockId": "block-30",
+      "order": 905,
+      "blockId": "block-27",
       "type": "dungeon",
       "displayRole": "objective",
-      "title": "◆ Laboratoire de Nileza — TOTEM DÉGOÛT",
-      "prerequisites": "Les totems de Maïmane active ; choisir Nileza pour le Totem du dégoût.",
+      "title": "Totem du dégoût — Bethel",
+      "prerequisites": "Les totems de Maïmane active ; Bethel vaincu.",
       "action": "FAIRE",
-      "instruction": "Vaincs Nileza avec Les totems de Maïmane active et récupère le Totem du dégoût.",
-      "momentId": "moment-totems-ouverture-donjons"
+      "instruction": "Récupère le Totem du dégoût lors de ce passage à Bethel.",
+      "momentId": "moment-route-step-0866"
+    },
+    {
+      "id": "route-step-0868",
+      "order": 906,
+      "blockId": "block-27",
+      "type": "resume",
+      "dofusSeries": "Dofus Ébène",
+      "displayRole": "transition",
+      "title": "À la recherche de Crocoburio",
+      "prerequisites": "2 Fragments de carte d'Atcham ; 2 Fragments de carte de Dremoan ; environ 24 à 26 000 kamas.",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/a-la-recherche-de-crocoburio.html"
+      },
+      "momentId": "moment-route-step-0866"
+    },
+    {
+      "id": "route-step-0869",
+      "order": 907,
+      "blockId": "block-27",
+      "type": "quest",
+      "dofusSeries": "Dofus Ébène",
+      "displayRole": "objective",
+      "title": "Le creuset de Mériana — avancer jusqu'à Koutoulou",
+      "prerequisites": "ressources préparées.",
+      "action": "LANCER / AVANCER / STOP",
+      "instruction": "En [-6,-3], Lance Le creuset de Mériana et avance jusqu'au Temple de Koutoulou puis arrête-toi devant le donjon.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/le-creuset-de-meriana.html"
+      },
+      "momentId": "moment-route-step-0869",
+      "location": {
+        "x": -6,
+        "y": -3
+      },
+      "destination": {
+        "x": -6,
+        "y": -3
+      }
+    },
+    {
+      "id": "route-step-0870",
+      "order": 908,
+      "blockId": "block-27",
+      "type": "dungeon",
+      "displayRole": "detail",
+      "title": "◆ Temple de Koutoulou — ÉBÈNE + TOTEM PEUR",
+      "prerequisites": "Le creuset de Mériana + Les totems de Maïmane actifs.",
+      "action": "FAIRE",
+      "instruction": "Vaincs la Larve de Koutoulou avec Le creuset de Mériana et Les totems de Maïmane actifs.",
+      "momentId": "moment-route-step-0869"
+    },
+    {
+      "id": "route-step-0941",
+      "order": 909,
+      "blockId": "block-27",
+      "type": "dungeon",
+      "displayRole": "objective",
+      "title": "Totem de la peur — Koutoulou",
+      "prerequisites": "Les totems de Maïmane active ; Larve de Koutoulou vaincue.",
+      "action": "FAIRE",
+      "instruction": "Récupère le Totem de la peur lors de ce passage à Koutoulou.",
+      "momentId": "moment-route-step-0869"
+    },
+    {
+      "id": "route-step-0871",
+      "order": 910,
+      "blockId": "block-27",
+      "type": "resume",
+      "dofusSeries": "Dofus Ébène",
+      "displayRole": "transition",
+      "title": "Le creuset de Mériana",
+      "prerequisites": "1 x Échantillon de sang infecté ; 1 x Slip du Roi de Bonta ; 1 x Fluide Glacial.",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/le-creuset-de-meriana.html"
+      },
+      "momentId": "moment-route-step-0869"
+    },
+    {
+      "id": "route-step-0872",
+      "order": 911,
+      "blockId": "block-27",
+      "type": "quest",
+      "dofusSeries": "Dofus Ébène",
+      "displayRole": "objective",
+      "title": "Une douloureuse séparation",
+      "prerequisites": "1 Corde d'escalade.",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/une-douloureuse-separation.html"
+      },
+      "momentId": "moment-ebene-dazak",
+      "location": {
+        "x": -6,
+        "y": -3
+      }
+    },
+    {
+      "id": "route-step-0873",
+      "order": 912,
+      "blockId": "block-27",
+      "type": "quest",
+      "dofusSeries": "Dofus Ébène",
+      "displayRole": "objective",
+      "title": "Le dragon noir — avancer jusqu'au Roi Dazak",
+      "action": "LANCER / AVANCER / STOP",
+      "instruction": "En [-25,-52], Lance Le dragon noir et avance jusqu'à devoir rencontrer Dazak puis arrête-toi devant la Brasserie. N'entre que lorsque De Brikke et de Brokke est lui aussi au checkpoint Roi Dazak.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/le-dragon-noir.html"
+      },
+      "momentId": "moment-ebene-dazak",
+      "parallelGroup": {
+        "parallelId": "parallel-dazak",
+        "phase": "progress"
+      },
+      "location": {
+        "x": -25,
+        "y": -52
+      },
+      "destination": {
+        "x": -25,
+        "y": -52
+      }
+    },
+    {
+      "id": "route-step-0874",
+      "order": 913,
+      "blockId": "block-27",
+      "type": "dungeon",
+      "displayRole": "detail",
+      "title": "◆ Brasserie du Roi Dazak — ÉBÈNE + MARTEGEL + TOTEM COLÈRE",
+      "prerequisites": "Le dragon noir + De Brikke et de Brokke + Les totems de Maïmane au checkpoint.",
+      "warning": "⚠ AVANT DE SORTIR DU DONJON — Dazak est le point de convergence Ébène + Martegel. Après le boss, fais les interactions de sortie requises pour les DEUX chaînes avant de quitter la Brasserie.",
+      "action": "FAIRE",
+      "instruction": "Vaincs Dazak une fois pour les trois chaînes actives ; effectue toutes les interactions de sortie avant de partir.",
+      "momentId": "moment-ebene-dazak",
+      "parallelGroup": {
+        "parallelId": "parallel-dazak",
+        "phase": "finish"
+      }
+    },
+    {
+      "id": "route-step-0942",
+      "order": 914,
+      "blockId": "block-27",
+      "type": "dungeon",
+      "displayRole": "objective",
+      "title": "Totem de la colère — Dazak",
+      "prerequisites": "Les totems de Maïmane active ; Dazak vaincu.",
+      "action": "FAIRE",
+      "instruction": "Récupère le Totem de la colère lors de ce passage à Dazak.",
+      "momentId": "moment-ebene-dazak"
+    },
+    {
+      "id": "route-step-0875",
+      "order": 915,
+      "blockId": "block-27",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "La bible des rancunes",
+      "prerequisites": "accès la zone Orée enchantée via l'expédition Valkyr.",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/la-bible-des-rancunes.html"
+      },
+      "momentId": "moment-ebene-dazak",
+      "location": {
+        "x": -62,
+        "y": -70
+      }
+    },
+    {
+      "id": "route-step-0876",
+      "order": 916,
+      "blockId": "block-27",
+      "type": "resume",
+      "displayRole": "transition",
+      "title": "De Brikke et de Brokke",
+      "prerequisites": "Interactions de sortie Dazak effectuées pour Le dragon noir + De Brikke et de Brokke ; La bible des rancunes terminée.",
+      "action": "TERMINER",
+      "instruction": "Après avoir sécurisé les interactions des DEUX chaînes à la sortie de Dazak puis terminé La bible des rancunes, termine De Brikke et de Brokke.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/de-brikke-et-de-brokke.html"
+      },
+      "momentId": "moment-ebene-dazak"
+    },
+    {
+      "id": "route-step-0877",
+      "order": 917,
+      "blockId": "block-27",
+      "type": "resume",
+      "dofusSeries": "Dofus Ébène",
+      "displayRole": "objective",
+      "title": "Le dragon noir — REPRENDRE jusqu'à Klime",
+      "prerequisites": "prévoir 1 Pano Pikmi.",
+      "action": "REPRENDRE / AVANCER / STOP",
+      "instruction": "Reprends Le dragon noir et avance jusqu'à Klime puis arrête-toi devant le donjon.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/le-dragon-noir.html"
+      },
+      "momentId": "moment-route-step-0877"
+    },
+    {
+      "id": "route-step-0878",
+      "order": 918,
+      "blockId": "block-27",
+      "type": "dungeon",
+      "displayRole": "detail",
+      "title": "◆ Salons privés de Klime — ÉBÈNE + TOTEM JOIE",
+      "prerequisites": "Le dragon noir + Les totems de Maïmane actifs.",
+      "warning": "⚠ AVANT DE SORTIR DU DONJON — reparle à Klime pour faire fabriquer le Sac en peau de crocodaille.",
+      "action": "FAIRE",
+      "instruction": "Vaincs Klime pour Le dragon noir avec Les totems de Maïmane active.",
+      "momentId": "moment-route-step-0877"
+    },
+    {
+      "id": "route-step-0940",
+      "order": 919,
+      "blockId": "block-27",
+      "type": "dungeon",
+      "displayRole": "objective",
+      "title": "Totem de la joie — Klime",
+      "prerequisites": "Les totems de Maïmane active ; Klime vaincu.",
+      "action": "FAIRE",
+      "instruction": "Récupère le Totem de la joie lors de ce passage à Klime.",
+      "momentId": "moment-route-step-0877"
+    },
+    {
+      "id": "route-step-0879",
+      "order": 920,
+      "blockId": "block-27",
+      "type": "resume",
+      "dofusSeries": "Dofus Ébène",
+      "displayRole": "transition",
+      "title": "Le dragon noir",
+      "prerequisites": "Dazak + Klime validés ; Sac en peau de crocodaille obtenu.",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/le-dragon-noir.html"
+      },
+      "momentId": "moment-route-step-0877"
+    },
+    {
+      "id": "route-step-0880",
+      "order": 921,
+      "blockId": "block-27",
+      "type": "quest",
+      "dofusSeries": "Dofus Ébène",
+      "displayRole": "objective",
+      "title": "La vengeance du dernier empereur",
+      "prerequisites": "20 500 kamas ; 2 combats solo.",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/la-vengeance-du-dernier-empereur.html"
+      },
+      "momentId": "moment-ebene-crocabulia",
+      "location": {
+        "x": -82,
+        "y": 6
+      }
+    },
+    {
+      "id": "route-step-0881",
+      "order": 922,
+      "blockId": "block-27",
+      "type": "quest",
+      "dofusSeries": "Dofus Ébène",
+      "displayRole": "objective",
+      "title": "L'œuf de Crocabulia — avancer jusqu'à la Reine des Voleurs",
+      "prerequisites": "accès Srambad.",
+      "action": "LANCER / AVANCER / STOP",
+      "instruction": "En [-6,-3], Lance L'œuf de Crocabulia et avance jusqu'à devoir récupérer le Coffret verrouillé puis arrête-toi devant la Reine des Voleurs.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/l-oeuf-de-crocabulia.html"
+      },
+      "momentId": "moment-ebene-crocabulia",
+      "location": {
+        "x": -6,
+        "y": -3
+      },
+      "destination": {
+        "x": -6,
+        "y": -3
+      }
+    },
+    {
+      "id": "route-step-0882",
+      "order": 923,
+      "blockId": "block-27",
+      "type": "dungeon",
+      "displayRole": "detail",
+      "title": "◆ Trône de la Cour Sombre — ÉBÈNE + TOTEM SURPRISE",
+      "prerequisites": "L'œuf de Crocabulia + Les totems de Maïmane actifs.",
+      "warning": "⚠ AVANT DE SORTIR DU DONJON — monte les escaliers et parle à la Reine des Voleurs dans la salle de sortie après le combat.",
+      "action": "FAIRE",
+      "instruction": "Vaincs la Reine des Voleurs avec L'œuf de Crocabulia et Les totems de Maïmane actifs ; récupère automatiquement le Totem de la surprise.",
+      "momentId": "moment-ebene-crocabulia"
+    },
+    {
+      "id": "route-step-0883",
+      "order": 924,
+      "blockId": "block-27",
+      "type": "resume",
+      "dofusSeries": "Dofus Ébène",
+      "displayRole": "transition",
+      "title": "L'œuf de Crocabulia",
+      "prerequisites": "idoles : Hulhu, Nyoro, Nekineko, Ougah, Aroumb, Muta.",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/l-oeuf-de-crocabulia.html"
+      },
+      "momentId": "moment-ebene-crocabulia"
+    },
+    {
+      "id": "route-step-0884",
+      "order": 925,
+      "blockId": "block-27",
+      "type": "quest",
+      "dofusSeries": "Dofus Ébène",
+      "displayRole": "transition",
+      "title": "Un nouvel héritier — avancer jusqu'à Solar",
+      "prerequisites": "20 Âmes de Calciné à récupérer hors donjon ; Nécronyx disponible.",
+      "action": "LANCER / AVANCER / STOP",
+      "instruction": "En [-6,-3], Lance Un nouvel héritier, récupère/utilise les 20 Âmes de Calciné puis arrête-toi devant la Tour de Solar.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/un-nouvel-heritier.html"
+      },
+      "momentId": "moment-ebene-crocabulia",
+      "location": {
+        "x": -6,
+        "y": -3
+      },
+      "destination": {
+        "x": -6,
+        "y": -3
+      }
+    },
+    {
+      "id": "route-step-0885",
+      "order": 926,
+      "blockId": "block-27",
+      "type": "dungeon",
+      "displayRole": "objective",
+      "title": "◆ Tour de Solar — UN NOUVEL HÉRITIER",
+      "prerequisites": "Un nouvel héritier au checkpoint Solar ; Nécronyx disponible.",
+      "warning": "⚠ AVANT DE SORTIR DU DONJON — après Solar, monte les escaliers, clique sur la sphère puis parle au Dieu Sram avant de quitter la Tour.",
+      "action": "FAIRE",
+      "instruction": "Vaincs Solar.",
+      "momentId": "moment-route-step-0884"
+    },
+    {
+      "id": "route-step-0886",
+      "order": 927,
+      "blockId": "block-27",
+      "type": "resume",
+      "dofusSeries": "Dofus Ébène",
+      "displayRole": "transition",
+      "title": "Un nouvel héritier",
+      "prerequisites": "niveau 190+.",
+      "action": "TERMINER",
+      "instruction": "Libère puis réincarne Crocoburio et termine auprès de Grougalorasalar pour obtenir le Dofus Ébène.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/un-nouvel-heritier.html"
+      },
+      "momentId": "moment-route-step-0884"
+    },
+    {
+      "id": "block-entry-28",
+      "order": 928,
+      "blockId": "block-28",
+      "type": "preparation",
+      "displayType": "ENTRÉE",
+      "title": "Entrée — Six sur Six I — Rathrosk",
+      "action": "PRÉPARER / COMMENCER",
+      "instruction": "Prépare les éléments globaux de ce bloc avant de commencer. Les besoins propres à une quête plus tardive sont rappelés directement sur l’étape concernée.",
+      "preparationItems": [
+        {
+          "kind": "requirement",
+          "text": "6 Dofus Primordiaux en inventaire"
+        },
+        {
+          "kind": "requirement",
+          "text": "Quatre sur six et À la croisée des mondes terminées."
+        }
+      ],
+      "warning": "La branche Prise de conscience a déjà été effectuée avant l'Ébène."
+    },
+    {
+      "id": "route-step-0918",
+      "order": 929,
+      "blockId": "block-28",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Dans la gueule du dragon — avancer jusqu'après Rathrosk",
+      "prerequisites": "Quatre sur six + Blanc ivoire + Noir d'ébène + 6 Primordiaux + À la croisée des mondes.",
+      "action": "LANCER / AVANCER / STOP",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/dans-la-gueule-du-dragon.html"
+      },
+      "momentId": "moment-quatre-sur-six-cloture",
+      "location": {
+        "x": -6,
+        "y": -3
+      },
+      "destination": {
+        "x": -6,
+        "y": -3
+      },
+      "instruction": "Avance Dans la gueule du dragon jusqu'après Rathrosk, puis traite Le silence est d'Aure. Prise de conscience est déjà terminée dans le bloc 26."
+    },
+    {
+      "id": "route-step-0919",
+      "order": 930,
+      "blockId": "block-28",
+      "type": "quest",
+      "dofusSeries": "Dofus Argenté Scintillant",
+      "displayRole": "objective",
+      "title": "Le silence est d'Aure",
+      "prerequisites": "10 Plume de Cycloïde + 10 Aile de Brabuzar + 10 Pince de Krabouilleur + 10 Bave de Champodonte + 10 Écume de Mer + 10 Salikrone + 10 Quisnoa.",
+      "action": "TERMINER",
+      "instruction": "À PRÉVOIR ICI — Le pays des Vermeils\n• 3 000 points de succès minimum\n• 1 métier niveau 200 (requis par Raisons de retraite)\n• 200 000 kamas disponibles (non consommés)\n• Pour Après les phorreurs : satisfaire au moins un test de caractéristiques/succès (>600 Agi/Chance/Force/Intel, ou >700 Vita, ou succès L'éleveur c'est moi, ou Ma petite entreprise) ; attention aux builds full sagesse\n• 1 Clef Galerie du Phossile\n• 1 Clef Palais du Roi Nidas\n• 2 Clefs Fabrique de Malléfisk (Malladie + Malle des profondeurs ; trousseau inutilisable en dimension)\n• 1 kama — Malladie\n• 1 Moyenne pierre d'âme — Koffrologie\n• 1 Corne de Kamasterisk — Coiffeur de génie\n• 1 Sourcil de Barbétoal — Coiffeur de génie\n• 1 Dent de Lévitrof — Coiffeur de génie\n• 1 Morceau de clef de Paspartou — Coiffeur de génie\nNote : Le pays des Vermeils sera requis par Le silence est d'Aure. Conserve les Orichor utiles pendant la progression.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/le-silence-est-d-aure.html"
+      },
+      "momentId": "moment-quatre-sur-six-cloture",
+      "location": {
+        "x": -5,
+        "y": -9
+      }
+    },
+    {
+      "id": "route-step-0920",
+      "order": 931,
+      "blockId": "block-28",
+      "type": "resume",
+      "displayRole": "transition",
+      "title": "Dans la gueule du dragon — TERMINER",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/dans-la-gueule-du-dragon.html"
+      },
+      "momentId": "moment-quatre-sur-six-cloture"
+    },
+    {
+      "id": "block-entry-29",
+      "order": 932,
+      "blockId": "block-29",
+      "type": "preparation",
+      "displayType": "ENTRÉE",
+      "title": "Entrée — Valonia — quêtes après Ébène",
+      "action": "PRÉPARER / COMMENCER",
+      "instruction": "Prépare les éléments globaux de ce bloc avant de commencer. Les besoins propres à une quête plus tardive sont rappelés directement sur l’étape concernée.",
+      "warning": "Conserver l'Ébène équipé lorsque les quêtes Valonia le demandent."
+    },
+    {
+      "id": "route-step-0796",
+      "order": 933,
+      "blockId": "block-29",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Les risques du métier",
+      "prerequisites": "accès Ephedrya.",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/les-risques-du-metier.html"
+      },
+      "momentId": "moment-valonia-sorciere-boss",
+      "location": {
+        "x": 22,
+        "y": -80
+      }
+    },
+    {
+      "id": "route-step-0797",
+      "order": 934,
+      "blockId": "block-29",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "La sorcière exilée — avancer jusqu'à la Chambre des Maléfices",
+      "action": "AVANCER / STOP",
+      "instruction": "Avance La sorcière exilée jusqu'à devoir entrer dans la Chambre des Maléfices puis arrête-toi ici.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/la-sorciere-exilee.html"
+      },
+      "momentId": "moment-valonia-sorciere-boss",
+      "location": {
+        "x": 36,
+        "y": -77
+      }
+    },
+    {
+      "id": "route-step-0798",
+      "order": 935,
+      "blockId": "block-29",
+      "type": "dungeon",
+      "displayRole": "detail",
+      "title": "◆ Chambre des Maléfices — LA SORCIÈRE EXILÉE",
+      "warning": "⚠ AVANT DE SORTIR DU DONJON — après Belladone, parle-lui pour choisir de sauver les enfants et obtenir le signe magique nécessaire à la suite de La sorcière exilée.",
+      "action": "FAIRE",
+      "instruction": "Vaincs Belladone.",
+      "momentId": "moment-valonia-sorciere-boss"
+    },
+    {
+      "id": "route-step-0799",
+      "order": 936,
+      "blockId": "block-29",
+      "type": "resume",
+      "displayRole": "transition",
+      "title": "La sorcière exilée",
+      "action": "REPRENDRE / TERMINER",
+      "instruction": "Reprends et termine La sorcière exilée. Elle débloque maintenant La graine de la révolte et Pour que la flamme vacille.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/la-sorciere-exilee.html"
+      },
+      "momentId": "moment-valonia-sorciere-boss"
+    },
+    {
+      "id": "route-step-0800",
+      "order": 937,
+      "blockId": "block-29",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "La graine de la révolte + Pour que la flamme vacille",
+      "prerequisites": "Dofus Ébène équipé",
+      "action": "LANCER LES 2 / STOP",
+      "instruction": "Termine d'abord La graine de la révolte ; garde Pour que la flamme vacille active.",
+      "momentId": "moment-valonia-flamme",
+      "location": {
+        "x": 33,
+        "y": -84
+      },
+      "guideItems": [
+        {
+          "action": "take",
+          "label": "Pour que la flamme vacille",
+          "location": {
+            "x": 33,
+            "y": -84
+          },
+          "note": "Parle à Nascherite."
+        },
+        {
+          "action": "take",
+          "label": "La graine de la révolte",
+          "location": {
+            "x": 33,
+            "y": -84
+          },
+          "note": "Parle à Nascherite."
+        }
+      ]
+    },
+    {
+      "id": "route-step-0801",
+      "order": 938,
+      "blockId": "block-29",
+      "type": "resume",
+      "displayRole": "transition",
+      "title": "La graine de la révolte",
+      "prerequisites": "La graine de la révolte déjà lancée avec Pour que la flamme vacille.",
+      "warning": "Termine cette branche en premier : elle fournit notamment la Liane de Soldalia et l'Épine d'Armuguet utiles à la Fleur de Cendrepierre.",
+      "action": "REPRENDRE / TERMINER",
+      "instruction": "Reprends et termine La graine de la révolte déjà active. Conserve les récompenses utiles au craft de Pour que la flamme vacille.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/la-graine-de-la-revolte.html"
+      },
+      "momentId": "moment-valonia-flamme",
+      "location": {
+        "x": 33,
+        "y": -84
+      }
+    },
+    {
+      "id": "route-step-1001",
+      "order": 939,
+      "blockId": "block-29",
+      "type": "resume",
+      "displayRole": "transition",
+      "title": "Pour que la flamme vacille",
+      "prerequisites": "Pour que la flamme vacille déjà active ; composants récupérés/conservés.",
+      "warning": "Utilise en priorité le Casque obtenu via La sorcière exilée et la Liane/Épine obtenues via La graine de la révolte.",
+      "action": "REPRENDRE / TERMINER",
+      "instruction": "Reprends Pour que la flamme vacille, fabrique la Fleur de Cendrepierre avec les ressources déjà récupérées puis termine la quête afin d'obtenir l'accès à Cire Momore.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/pour-que-la-flamme-vacille.html"
+      },
+      "momentId": "moment-valonia-flamme"
+    },
+    {
+      "id": "route-step-0802",
+      "order": 940,
+      "blockId": "block-29",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Par l'héritage qui vous lie",
+      "action": "TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/par-l-heritage-qui-vous-lie.html"
+      },
+      "momentId": "moment-valonia-ilyzaelle",
+      "location": {
+        "x": 33,
+        "y": -84
+      }
+    },
+    {
+      "id": "route-step-0803",
+      "order": 941,
+      "blockId": "block-29",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "Une dernière volonté — avancer jusqu'à Ilyzaelle",
+      "prerequisites": "Par l'héritage qui vous lie + Deux souffles, une inspiration ; 10 Cristal liquide + 10 Cristal pliable.",
+      "action": "AVANCER / STOP",
+      "instruction": "Avance Une dernière volonté jusqu'à Ilyzaelle puis arrête-toi ici.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/une-derniere-volonte.html"
+      },
+      "momentId": "moment-valonia-ilyzaelle",
+      "location": {
+        "x": 33,
+        "y": -84
+      }
+    },
+    {
+      "id": "route-step-0804",
+      "order": 942,
+      "blockId": "block-29",
+      "type": "dungeon",
+      "displayRole": "detail",
+      "title": "Belvédère d'Ilyzaelle — UNE DERNIÈRE VOLONTÉ #3",
+      "prerequisites": "Une dernière volonté au checkpoint Ilyzaelle.",
+      "warning": "⚠ AVANT DE SORTIR DU DONJON — parle à Ilyzaelle dans la salle de sortie pour faire avancer Une dernière volonté.",
+      "action": "FAIRE",
+      "instruction": "Vaincs Ilyzaelle pour Une dernière volonté.",
+      "momentId": "moment-valonia-ilyzaelle"
+    },
+    {
+      "id": "route-step-0805",
+      "order": 943,
+      "blockId": "block-29",
+      "type": "resume",
+      "displayRole": "transition",
+      "title": "Une dernière volonté",
+      "prerequisites": "Ilyzaelle vaincue ; dialogues post-donjon effectués.",
+      "action": "REPRENDRE / TERMINER",
+      "instruction": "Reprends et termine Une dernière volonté après les dialogues post-Ilyzaelle.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/une-derniere-volonte.html"
+      },
+      "momentId": "moment-valonia-ilyzaelle"
+    },
+    {
+      "id": "route-step-0982",
+      "order": 944,
+      "blockId": "block-29",
+      "type": "quest",
+      "displayRole": "objective",
+      "title": "L'heure des adieux — avancer jusqu'à Cire Momore",
+      "action": "AVANCER / STOP",
+      "instruction": "Avance L'heure des adieux jusqu'à devoir vaincre Cire Momore puis arrête-toi devant la caverne.\n\nÀ PRÉVOIR ICI — Bouquet final / Cire Momore\n• 7 Belladone\n• 7 Cendrepierre\n• 1 Mousse de Caméliache\n• 1 Fleur des protecteurs\n• 1 Poing de Coquelicogne\nNote : Le Casque de Statulipe, la Liane de Soldalia et l'Épine d'Armuguet sont obtenus pendant La sorcière exilée puis La graine de la révolte avant le craft de la Fleur de Cendrepierre : ne les préachète pas.",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/l-heure-des-adieux.html"
+      },
+      "momentId": "moment-route-step-0982",
+      "location": {
+        "x": 31,
+        "y": -63
+      }
+    },
+    {
+      "id": "route-step-0983",
+      "order": 945,
+      "blockId": "block-29",
+      "type": "dungeon",
+      "displayRole": "detail",
+      "title": "◆ Caverne de Cire Momore — L'HEURE DES ADIEUX",
+      "prerequisites": "L'heure des adieux au checkpoint boss.",
+      "action": "FAIRE",
+      "instruction": "Vaincs Cire Momore pour récupérer la Lance Gnugnir.",
+      "momentId": "moment-route-step-0982"
+    },
+    {
+      "id": "route-step-0984",
+      "order": 946,
+      "blockId": "block-29",
+      "type": "resume",
+      "displayRole": "transition",
+      "title": "L'heure des adieux",
+      "prerequisites": "Cire Momore vaincu.",
+      "action": "REPRENDRE / TERMINER",
+      "source": {
+        "label": "DPLN",
+        "url": "https://www.dofuspourlesnoobs.com/l-heure-des-adieux.html"
+      },
+      "momentId": "moment-route-step-0982",
+      "instruction": "Reprends L'heure des adieux auprès de Karon devant la caverne, puis termine la quête."
+    },
+    {
+      "id": "block-entry-30",
+      "order": 947,
+      "blockId": "block-30",
+      "type": "preparation",
+      "displayType": "ENTRÉE",
+      "title": "Entrée — Six sur Six II — Vortex et conclusion",
+      "warning": "Les cinq premiers Totems ont été obtenus pendant l'Ébène. Le sixième est récupéré au Vortex.",
+      "action": "PRÉPARER / COMMENCER",
+      "instruction": "Prépare les éléments globaux de ce bloc avant de commencer. Les besoins propres à une quête plus tardive sont rappelés directement sur l’étape concernée.",
+      "preparationItems": [
+        {
+          "kind": "requirement",
+          "text": "Six Dofus Primordiaux disponibles"
+        },
+        {
+          "kind": "profession",
+          "text": "Métier de récolte 200 pour S'armer contre le destin"
+        }
+      ]
     },
     {
       "id": "route-step-0946",
@@ -21921,11 +21944,11 @@
       "blockId": "block-30",
       "type": "dungeon",
       "displayRole": "objective",
-      "title": "Comte Harebourg — SIX SUR SIX / TOTEM #2",
-      "prerequisites": "S'armer contre le destin + Les totems de Maïmane actifs ; Dofus des Glaces déjà obtenu.",
+      "title": "Comte Harebourg — SIX SUR SIX",
+      "prerequisites": "S'armer contre le destin active ; Dofus des Glaces déjà obtenu.",
       "warning": "⚠ AVANT DE SORTIR DU DONJON — effectue les dialogues demandés par S'armer contre le destin. Le Totem de la surprise tombe automatiquement.",
       "action": "FAIRE",
-      "instruction": "Vaincs le Comte avec S'armer contre le destin + Les totems de Maïmane actifs. L'Éclat de destin brisé et le Totem de la surprise sont obtenus pendant ce combat.",
+      "instruction": "Vaincs le Comte pour S'armer contre le destin. L'Éclat de destin brisé est obtenu pendant le combat ; le Totem de la surprise a déjà été récupéré sur la Reine des Voleurs.",
       "momentId": "moment-comte-convergence"
     },
     {
@@ -21935,9 +21958,9 @@
       "type": "resume",
       "displayRole": "objective",
       "title": "Les totems de Maïmane",
-      "prerequisites": "Joie Klime + Peur Koutoulou + Colère Dazak + Dégoût Nileza + Tristesse Vortex + Surprise Comte.",
+      "prerequisites": "Joie Klime + Peur Koutoulou + Colère Dazak + Dégoût Bethel + Surprise Reine des Voleurs + Tristesse Vortex.",
       "action": "TERMINER",
-      "instruction": "Rends les 6 Totems à Maïmane.",
+      "instruction": "Rends les six Totems à Maïmane et obtiens le Totem de l'équilibre.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-totems-de-maimane.html"
@@ -22540,8 +22563,24 @@
       "momentId": "moment-sylvestre-final"
     },
     {
-      "id": "route-step-flovoraison-finish",
+      "id": "route-step-0997",
       "order": 978,
+      "blockId": "block-32",
+      "type": "resume",
+      "displayRole": "objective",
+      "title": "Qui nous protège du Protecteur ?",
+      "prerequisites": "Flovoraison terminée ; Dofus Verdoyant donné au fantôme de Simple.",
+      "action": "REPRENDRE / TERMINER",
+      "instruction": "Reparle à Silvosse et termine Qui nous protège du Protecteur ? ; cela valide L'arbre qui cache la forêt.",
+      "momentId": "moment-sylvestre-final",
+      "longRunningGoal": {
+        "goalId": "qui-nous-protege",
+        "phase": "finish"
+      }
+    },
+    {
+      "id": "route-step-flovoraison-finish",
+      "order": 979,
       "blockId": "block-32",
       "type": "resume",
       "dofusSeries": "Dofus Sylvestre",
@@ -22555,22 +22594,6 @@
         "url": "https://www.dofuspourlesnoobs.com/flovoraison.html"
       },
       "momentId": "moment-sylvestre-final"
-    },
-    {
-      "id": "route-step-0997",
-      "order": 979,
-      "blockId": "block-32",
-      "type": "resume",
-      "displayRole": "objective",
-      "title": "Qui nous protège du Protecteur ?",
-      "prerequisites": "Flovoraison terminée ; Dofus Verdoyant donné au fantôme de Simple.",
-      "action": "REPRENDRE / TERMINER",
-      "instruction": "Reparle à Silvosse et termine Qui nous protège du Protecteur ? ; cela valide L'arbre qui cache la forêt.",
-      "momentId": "moment-sylvestre-final",
-      "longRunningGoal": {
-        "goalId": "qui-nous-protege",
-        "phase": "finish"
-      }
     },
     {
       "id": "route-step-1172",
