@@ -21948,7 +21948,7 @@
       "prerequisites": "S'armer contre le destin active ; Dofus des Glaces déjà obtenu.",
       "warning": "⚠ AVANT DE SORTIR DU DONJON — effectue les dialogues demandés par S'armer contre le destin. Le Totem de la surprise tombe automatiquement.",
       "action": "FAIRE",
-      "instruction": "Vaincs le Comte pour S'armer contre le destin. L'Éclat de destin brisé est obtenu pendant le combat ; le Totem de la surprise a déjà été récupéré sur la Reine des Voleurs.",
+      "instruction": "Vaincs le Comte pour S'armer contre le destin. L'Éclat de destin brisé est obtenu pendant le combat.",
       "momentId": "moment-comte-convergence"
     },
     {
