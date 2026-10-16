@@ -36,6 +36,52 @@ function normalizeObjectiveTitle(title: string): string {
   return title.trim().replace(/\s+/g, ' ').toLocaleLowerCase('fr-FR');
 }
 
+test('contrat route — les Totems sont ouverts avant les donjons Ébène', () => {
+  const sequence = [
+    'route-step-0745', // Les quatre volontés
+    'route-step-0921', // Prise de conscience
+    'route-step-0931', // Prise de conscience terminée
+    'route-step-0703', // Dofus Tacheté
+    'route-step-0713', // Le début de la fin
+    'route-step-0936', // Descendre aux cendres
+    'route-step-0938', // Un héritage tourmenté
+    'route-step-0939', // Les totems de Maïmane lancés
+    'route-step-0867', // Bethel
+    'route-step-0886', // Ébène obtenu
+    'route-step-0918', // Rathrosk uniquement après Ébène
+    'route-step-0947', // Vortex et dernier Totem
+    'route-step-0952', // Rendre les six Totems
+    'route-step-0977', // Entretemps, une renaissance
+    'route-step-0978', // La bête au bois dormant
+  ];
+  for (let index = 1; index < sequence.length; index += 1) {
+    assert.ok(requireOrder(sequence[index - 1]) < requireOrder(sequence[index]));
+  }
+});
+
+test('contrat route — les quatre étapes Totems utilisent les combats Ébène existants', () => {
+  const mutualisations = [
+    ['route-step-0867', 'route-step-0943', 'dégoût'],
+    ['route-step-0870', 'route-step-0941', 'peur'],
+    ['route-step-0874', 'route-step-0942', 'colère'],
+    ['route-step-0878', 'route-step-0940', 'joie'],
+  ] as const;
+
+  for (const [bossId, totemId, emotion] of mutualisations) {
+    const boss = route.steps.find((step) => step.id === bossId);
+    const totem = route.steps.find((step) => step.id === totemId);
+    assert.ok(boss && totem, `Mutualisation absente : ${bossId} / ${totemId}`);
+    assert.equal(totem.order, boss.order + 1, `Totem de ${emotion} séparé du boss`);
+    assert.equal(totem.momentId, boss.momentId);
+    assert.equal(totem.displayRole, 'objective');
+  }
+
+  const reine = route.steps.find((step) => step.id === 'route-step-0882');
+  const comte = route.steps.find((step) => step.id === 'route-step-0950');
+  assert.match(reine?.instruction ?? '', /Totem de la surprise/);
+  assert.doesNotMatch(comte?.instruction ?? '', /Totem de la surprise/);
+});
+
 test('contrat route — un moment ne contient pas deux fois le même objectif éditorial brut', () => {
   const objectiveTitlesByMoment = new Map<string, Map<string, string>>();
 
