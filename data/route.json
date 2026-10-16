@@ -131,27 +131,27 @@
     {
       "id": "block-26",
       "order": 26,
-      "title": "Prise de conscience, Tacheté, Pandamonium & ouverture des Totems"
+      "title": "Prise de conscience, Tacheté & Totems"
     },
     {
       "id": "block-27",
       "order": 27,
-      "title": "Dofus Ébène — cinq Totems mutualisés"
+      "title": "Dofus Ébène — Obtention & Totems"
     },
     {
       "id": "block-28",
       "order": 28,
-      "title": "Six sur Six I — Rathrosk et Le silence est d'Aure"
+      "title": "Six sur Six — Rathrosk"
     },
     {
       "id": "block-29",
       "order": 29,
-      "title": "Valonia — quêtes après Ébène"
+      "title": "Valonia — Quêtes & conclusion"
     },
     {
       "id": "block-30",
       "order": 30,
-      "title": "Six sur Six II — Totems & conclusion"
+      "title": "Six sur Six — Conclusion"
     },
     {
       "id": "block-31",
@@ -19996,7 +19996,7 @@
       "blockId": "block-26",
       "type": "preparation",
       "displayType": "ENTRÉE",
-      "title": "Entrée — Prise de conscience, Tacheté, Pandamonium & Totems",
+      "title": "Entrée — Prise de conscience, Tacheté & Totems",
       "action": "COMMENCER",
       "instruction": "Commence le bloc. Les besoins spécifiques sont indiqués directement sur les étapes où ils deviennent utiles.",
       "warning": "Vérifie l'accès aux Songes et le Rêve d'harmonie avant Le poids de son regard. Les 6 Dofus primordiaux ne sont pas exigés pour lancer les Totems.",
@@ -21065,7 +21065,7 @@
       "blockId": "block-27",
       "type": "preparation",
       "displayType": "ENTRÉE",
-      "title": "Entrée — Dofus Ébène, cinq Totems mutualisés",
+      "title": "Entrée — Dofus Ébène — Obtention & Totems",
       "action": "PRÉPARER / COMMENCER",
       "instruction": "Prépare les éléments globaux de ce bloc avant de commencer. Les besoins propres à une quête plus tardive sont rappelés directement sur l’étape concernée.",
       "preparationItems": [
@@ -21519,7 +21519,7 @@
       "blockId": "block-28",
       "type": "preparation",
       "displayType": "ENTRÉE",
-      "title": "Entrée — Six sur Six I — Rathrosk",
+      "title": "Entrée — Six sur Six — Rathrosk",
       "action": "PRÉPARER / COMMENCER",
       "instruction": "Prépare les éléments globaux de ce bloc avant de commencer. Les besoins propres à une quête plus tardive sont rappelés directement sur l’étape concernée.",
       "preparationItems": [
@@ -21599,7 +21599,7 @@
       "blockId": "block-29",
       "type": "preparation",
       "displayType": "ENTRÉE",
-      "title": "Entrée — Valonia — quêtes après Ébène",
+      "title": "Entrée — Valonia — Quêtes & conclusion",
       "action": "PRÉPARER / COMMENCER",
       "instruction": "Prépare les éléments globaux de ce bloc avant de commencer. Les besoins propres à une quête plus tardive sont rappelés directement sur l’étape concernée.",
       "warning": "Conserver l'Ébène équipé lorsque les quêtes Valonia le demandent."
@@ -21863,7 +21863,7 @@
       "blockId": "block-30",
       "type": "preparation",
       "displayType": "ENTRÉE",
-      "title": "Entrée — Six sur Six II — Vortex et conclusion",
+      "title": "Entrée — Six sur Six — Conclusion",
       "warning": "Les cinq premiers Totems ont été obtenus pendant l'Ébène. Le sixième est récupéré au Vortex.",
       "action": "PRÉPARER / COMMENCER",
       "instruction": "Prépare les éléments globaux de ce bloc avant de commencer. Les besoins propres à une quête plus tardive sont rappelés directement sur l’étape concernée.",
