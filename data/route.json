@@ -22563,24 +22563,8 @@
       "momentId": "moment-sylvestre-final"
     },
     {
-      "id": "route-step-0997",
-      "order": 978,
-      "blockId": "block-32",
-      "type": "resume",
-      "displayRole": "objective",
-      "title": "Qui nous protège du Protecteur ?",
-      "prerequisites": "Flovoraison terminée ; Dofus Verdoyant donné au fantôme de Simple.",
-      "action": "REPRENDRE / TERMINER",
-      "instruction": "Reparle à Silvosse et termine Qui nous protège du Protecteur ? ; cela valide L'arbre qui cache la forêt.",
-      "momentId": "moment-sylvestre-final",
-      "longRunningGoal": {
-        "goalId": "qui-nous-protege",
-        "phase": "finish"
-      }
-    },
-    {
       "id": "route-step-flovoraison-finish",
-      "order": 979,
+      "order": 978,
       "blockId": "block-32",
       "type": "resume",
       "dofusSeries": "Dofus Sylvestre",
@@ -22594,6 +22578,22 @@
         "url": "https://www.dofuspourlesnoobs.com/flovoraison.html"
       },
       "momentId": "moment-sylvestre-final"
+    },
+    {
+      "id": "route-step-0997",
+      "order": 979,
+      "blockId": "block-32",
+      "type": "resume",
+      "displayRole": "objective",
+      "title": "Qui nous protège du Protecteur ?",
+      "prerequisites": "Flovoraison terminée ; Dofus Verdoyant donné au fantôme de Simple.",
+      "action": "REPRENDRE / TERMINER",
+      "instruction": "Reparle à Silvosse et termine Qui nous protège du Protecteur ? ; cela valide L'arbre qui cache la forêt.",
+      "momentId": "moment-sylvestre-final",
+      "longRunningGoal": {
+        "goalId": "qui-nous-protege",
+        "phase": "finish"
+      }
     },
     {
       "id": "route-step-1172",
