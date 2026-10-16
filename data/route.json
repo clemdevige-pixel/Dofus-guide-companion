@@ -21566,9 +21566,9 @@
       "dofusSeries": "Dofus Argenté Scintillant",
       "displayRole": "objective",
       "title": "Le silence est d'Aure",
-      "prerequisites": "10 Plume de Cycloïde + 10 Aile de Brabuzar + 10 Pince de Krabouilleur + 10 Bave de Champodonte + 10 Écume de Mer + 10 Salikrone + 10 Quisnoa.",
+      "prerequisites": "Dans la gueule du dragon avancée après Rathrosk ; succès D'incarnam à Astrub et Le pays des Vermeils (bloc 22) validés ; Dofus Argenté en inventaire ; Masque mortuaire pour Externam.",
       "action": "TERMINER",
-      "instruction": "À PRÉVOIR ICI — Le pays des Vermeils\n• 3 000 points de succès minimum\n• 1 métier niveau 200 (requis par Raisons de retraite)\n• 200 000 kamas disponibles (non consommés)\n• Pour Après les phorreurs : satisfaire au moins un test de caractéristiques/succès (>600 Agi/Chance/Force/Intel, ou >700 Vita, ou succès L'éleveur c'est moi, ou Ma petite entreprise) ; attention aux builds full sagesse\n• 1 Clef Galerie du Phossile\n• 1 Clef Palais du Roi Nidas\n• 2 Clefs Fabrique de Malléfisk (Malladie + Malle des profondeurs ; trousseau inutilisable en dimension)\n• 1 kama — Malladie\n• 1 Moyenne pierre d'âme — Koffrologie\n• 1 Corne de Kamasterisk — Coiffeur de génie\n• 1 Sourcil de Barbétoal — Coiffeur de génie\n• 1 Dent de Lévitrof — Coiffeur de génie\n• 1 Morceau de clef de Paspartou — Coiffeur de génie\nNote : Le pays des Vermeils sera requis par Le silence est d'Aure. Conserve les Orichor utiles pendant la progression.",
+      "instruction": "Lance la quête auprès de Rathrosk en [-5,-9]. Enquête sur Aure : consulte les livres à Incarnam [2,-3] et au château d'Amakna [4,-6], puis passe par le temple Enutrof, Mériana et Barda Yaga. Retrouve les chasseurs d'étoiles et passe en Externam avec le Masque mortuaire. Fais le combat de la grande truche (groupe possible), puis défends Aure en [2,-13] (combat solo avec alliés). Le pays des Vermeils est déjà validé au bloc 22 : va convaincre le dieu Enutrof en Enutrosor [-5,-5], ramène Aure à Rathrosk [-5,-9] et termine la quête pour obtenir le Dofus Argenté Scintillant.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/le-silence-est-d-aure.html"
