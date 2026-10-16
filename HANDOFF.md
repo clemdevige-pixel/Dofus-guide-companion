@@ -280,3 +280,17 @@ Lire dans l’ordre : `AGENTS.md`, `SPEC.md`, `ARCHITECTURE.md`, `docs/DATA_MODE
 - Export Sheet : `FLOW_NOTE` retiré ; plage ramenée à `ROUTE!A5:W`.
 - Validation / contrats : les contrats dédiés aux flow notes ont été migrés vers les descriptions intégrées.
 - Règle éditoriale courante : une information joueur ne doit exister qu'à un seul endroit ; `warning` = risque/contrainte, `instruction` = action + contexte utile.
+
+## Update 2026-10-16 — anticipation des Totems avant l'Ébène
+
+- Source éditoriale `ROUTE` et `data/route.json` réordonnés sur la branche `agent/initial-scaffold`. **981 étapes / 32 blocs** : tous les `STEP_ID` existants conservés et ordre Sheet/JSON vérifié à l'identique.
+- Bloc 25 inchangé sur la clôture des Quatre Volontés. Nouveau bloc 26 : `Jusqu'au bout du rêve` (Rêve d'harmonie), `Prise de conscience`, Dofus Tacheté, Pandamonium jusqu'à `Le début de la fin`, Cauchemar jusqu'à `Descendre aux cendres`, puis ouverture d'`Un héritage tourmenté` et des `Totems de Maïmane`.
+- Bloc 27 : Dofus Ébène avec cinq Totems sur les passages déjà nécessaires : Bethel/Dégoût (`0943`), Koutoulou/Peur (`0941`), Dazak/Colère (`0942`, conserve la mutualisation Martegel), Klime/Joie (`0940`) et Reine des Voleurs/Surprise (même étape `0882`). Les quatre étapes de Totem conservent leurs IDs mais sont rattachées aux moments des donjons Ébène.
+- Bloc 28 : `Dans la gueule du dragon` et `Le silence est d'Aure`, désormais après l'Ébène. La branche `Prise de conscience` n'est plus dupliquée ici.
+- Bloc 29 : Valonia et quêtes nécessitant l'Ébène ; bloc 30 : `S'armer contre le destin`, Vortex/Tristesse, Comte Harebourg sans Totem Surprise, remise des six Totems et conclusions.
+- `La bête au bois dormant` reste en bloc 31 après `Entretemps, une renaissance` et `Le serment de l'ambre`.
+- Correction d'ordre indépendante imposée par le test existant : `Flovoraison — TERMINER` passe avant la reprise de `Qui nous protège du Protecteur ?`.
+- Tests anti-régression ajoutés sur l'ouverture des Totems avant l'Ébène et les mutualisations réelles.
+- **Source et JSON contrôlés** : 981 identifiants dans le même ordre, aucune divergence observée sur titres, actions, instructions, prérequis, blocs, moments, rôles ou séries Dofus. Liens DPLN restaurés sur les lignes déplacées.
+- CI frontend vérifiée sur le commit `8f2f3922dece9448eab9e1845379126bb607c259` : `test:route`, `validate:route` et `build` verts ; `cargo check` Windows encore en cours au dernier contrôle.
+- **À vérifier en recette manuelle** : lisibilité de la préparation longue du bloc 26, récupération effective des Totems pendant chacun des cinq combats mutualisés, et reprise des sauvegardes antérieures à ce changement d'ordre.
