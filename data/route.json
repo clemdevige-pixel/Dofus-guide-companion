@@ -22305,20 +22305,8 @@
       }
     },
     {
-      "id": "route-step-0965",
-      "order": 961,
-      "blockId": "block-31",
-      "type": "major_step",
-      "displayType": "OPTI ALIGNEMENT",
-      "title": "Jiva puis Djaul — minimiser le farm de sigils",
-      "prerequisites": "Toutes les quêtes d'alignement/ordre nécessaires doivent être terminées avant de changer.",
-      "warning": "Si Bontarien : farm Jiva à 25 Brûlâmes ; ensuite passer Brâkmarien et farm Djaul à 25 Possédés au lieu des seuils opposés plus élevés.",
-      "action": "APPLIQUER",
-      "instruction": "Fais Jiva en Bonta, puis change Brâkmar et fais Djaul."
-    },
-    {
       "id": "route-step-0966",
-      "order": 962,
+      "order": 961,
       "blockId": "block-31",
       "type": "long_running",
       "displayRole": "objective",
@@ -22342,7 +22330,7 @@
     },
     {
       "id": "route-step-0967",
-      "order": 963,
+      "order": 962,
       "blockId": "block-31",
       "type": "dungeon",
       "displayRole": "objective",
@@ -22354,7 +22342,7 @@
     },
     {
       "id": "route-step-0968",
-      "order": 964,
+      "order": 963,
       "blockId": "block-31",
       "type": "dungeon",
       "displayRole": "objective",
@@ -22367,7 +22355,7 @@
     },
     {
       "id": "route-step-0969",
-      "order": 965,
+      "order": 964,
       "blockId": "block-31",
       "type": "major_step",
       "displayType": "OPTI ALIGNEMENT",
@@ -22380,7 +22368,7 @@
     },
     {
       "id": "route-step-0970",
-      "order": 966,
+      "order": 965,
       "blockId": "block-31",
       "type": "dungeon",
       "displayRole": "objective",
@@ -22393,7 +22381,7 @@
     },
     {
       "id": "route-step-0971",
-      "order": 967,
+      "order": 966,
       "blockId": "block-31",
       "type": "resume",
       "displayRole": "objective",
@@ -22409,7 +22397,7 @@
     },
     {
       "id": "route-step-0972",
-      "order": 968,
+      "order": 967,
       "blockId": "block-31",
       "type": "quest",
       "displayRole": "transition",
@@ -22426,7 +22414,7 @@
     },
     {
       "id": "route-step-0978",
-      "order": 969,
+      "order": 968,
       "blockId": "block-31",
       "type": "quest",
       "displayRole": "objective",
@@ -22451,7 +22439,7 @@
     },
     {
       "id": "route-step-0988",
-      "order": 970,
+      "order": 969,
       "blockId": "block-31",
       "type": "milestone",
       "displayRole": "objective",
@@ -22462,7 +22450,7 @@
     },
     {
       "id": "route-step-0989",
-      "order": 971,
+      "order": 970,
       "blockId": "block-31",
       "type": "milestone",
       "displayRole": "transition",
@@ -22474,7 +22462,7 @@
     },
     {
       "id": "route-step-0990",
-      "order": 972,
+      "order": 971,
       "blockId": "block-31",
       "type": "milestone",
       "dofusSeries": "Dom de Pin",
@@ -22491,7 +22479,7 @@
     },
     {
       "id": "route-step-0992",
-      "order": 973,
+      "order": 972,
       "blockId": "block-31",
       "type": "hard_lock",
       "title": "Avant Flovoraison",
@@ -22502,7 +22490,7 @@
     },
     {
       "id": "block-entry-32",
-      "order": 974,
+      "order": 973,
       "blockId": "block-32",
       "type": "preparation",
       "displayType": "ENTRÉE",
@@ -22512,7 +22500,7 @@
     },
     {
       "id": "route-step-0994",
-      "order": 975,
+      "order": 974,
       "blockId": "block-32",
       "type": "quest",
       "dofusSeries": "Dofus Sylvestre",
@@ -22533,7 +22521,7 @@
     },
     {
       "id": "route-step-0995",
-      "order": 976,
+      "order": 975,
       "blockId": "block-32",
       "type": "dungeon",
       "displayRole": "detail",
@@ -22546,7 +22534,7 @@
     },
     {
       "id": "route-step-0996",
-      "order": 977,
+      "order": 976,
       "blockId": "block-32",
       "type": "resume",
       "dofusSeries": "Dofus Sylvestre",
@@ -22564,7 +22552,7 @@
     },
     {
       "id": "route-step-flovoraison-finish",
-      "order": 978,
+      "order": 977,
       "blockId": "block-32",
       "type": "resume",
       "dofusSeries": "Dofus Sylvestre",
@@ -22581,7 +22569,7 @@
     },
     {
       "id": "route-step-0997",
-      "order": 979,
+      "order": 978,
       "blockId": "block-32",
       "type": "resume",
       "displayRole": "objective",
@@ -22597,7 +22585,7 @@
     },
     {
       "id": "route-step-1172",
-      "order": 980,
+      "order": 979,
       "blockId": "block-32",
       "type": "resume",
       "displayRole": "detail",
@@ -22613,7 +22601,7 @@
     },
     {
       "id": "route-step-0999",
-      "order": 981,
+      "order": 980,
       "blockId": "block-32",
       "type": "finish",
       "dofusSeries": "Dofus Sylvestre",
