@@ -5,7 +5,7 @@ import { loadProgress, reconcileProgressWithRoute, type ProgressState } from './
 const KEY = 'dofus-guide-companion.profiles.v2';
 const LEGACY_KEY = 'dofus-guide-companion.progress.v1';
 
-export interface CharacterProfile { id: string; name: string; progress: ProgressState }
+export interface CharacterProfile { id: string; name: string; classId?: number; progress: ProgressState }
 export interface ProfilesState { version: 2; activeProfileId: string; profiles: CharacterProfile[] }
 export interface ProfileStorage {
   getItem(key: string): string | null;
@@ -41,6 +41,7 @@ export function loadProfiles(storage: ProfileStorage = window.localStorage, rout
             seen.add(entry.id);
             profiles.push({
               id: entry.id, name: entry.name.trim(),
+              ...(typeof entry.classId === 'number' && Number.isInteger(entry.classId) ? { classId: entry.classId } : {}),
               progress: reconcileProgressWithRoute({
                 completedStepIds: progress.completedStepIds as string[],
                 checkedPreparationItemIds: progress.checkedPreparationItemIds as string[],
