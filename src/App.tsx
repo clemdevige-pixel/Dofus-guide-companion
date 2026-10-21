@@ -4,7 +4,7 @@ import { writeText } from '@tauri-apps/plugin-clipboard-manager';
 import { openUrl } from '@tauri-apps/plugin-opener';
 import { PreparationChecklist } from './components/PreparationChecklist';
 import { StepMarkers } from './components/StepMarkers';
-import { loadProgress, saveProgress } from './progress/storage';
+import { loadProgress, reconcileProgressWithRoute, saveProgress } from './progress/storage';
 import { loadBundledRoute } from './route/loader';
 import {
   getActiveParallelGroups,
@@ -158,6 +158,8 @@ export function App() {
 
   const [cardJumpValue, setCardJumpValue] = useState(() => String(viewIndex + 1));
   const [lastValidation, setLastValidation] = useState<{ completedIds: string[]; cardIndex: number } | null>(null);
+  const [saveError, setSaveError] = useState<string | null>(null);
+  const [backupMessage, setBackupMessage] = useState<string | null>(null);
 
   useEffect(() => {
     setCardJumpValue(String(viewIndex + 1));
@@ -200,12 +202,18 @@ export function App() {
       ? currentGroup.steps.find((step) => !completedStepIds.has(step.id)) ?? currentGroup.steps[0]
       : undefined;
 
-    saveProgress({
-      completedStepIds: [...completedStepIds],
-      checkedPreparationItemIds: [...checkedPreparationItemIds],
-      compact,
-      ...(savedStep ? { currentStepId: savedStep.id } : {}),
-    });
+    try {
+      saveProgress({
+        completedStepIds: [...completedStepIds],
+        checkedPreparationItemIds: [...checkedPreparationItemIds],
+        compact,
+        ...(savedStep ? { currentStepId: savedStep.id } : {}),
+      });
+      setSaveError(null);
+    } catch (error) {
+      console.error('Sauvegarde de progression impossible.', error);
+      setSaveError('Sauvegarde locale impossible. Exporte ta progression depuis Paramètres.');
+    }
   }, [completedStepIds, checkedPreparationItemIds, compact, currentGroup]);
 
   useEffect(() => {
@@ -369,6 +377,62 @@ export function App() {
     setViewIndex(lastValidation.cardIndex);
     setSecondaryView(null);
     setLastValidation(null);
+  }
+
+  function exportProgressBackup() {
+    const snapshot = {
+      completedStepIds: [...completedStepIds],
+      checkedPreparationItemIds: [...checkedPreparationItemIds],
+      compact,
+      currentStepId: currentGroup?.steps.find(step => !completedStepIds.has(step.id))?.id
+        ?? currentGroup?.steps[0]?.id,
+      routeVersion: route.routeVersion,
+    };
+    const blob = new Blob([JSON.stringify(snapshot, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'dofus-companion-progression.json';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+    setBackupMessage('Sauvegarde exportée.');
+  }
+
+  async function importProgressBackup(file: File) {
+    try {
+      if (file.size > 2_000_000) throw new Error('Fichier trop volumineux.');
+      const data: unknown = JSON.parse(await file.text());
+      if (!data || typeof data !== 'object') throw new Error('Fichier invalide.');
+      const backup = data as Record<string, unknown>;
+      if (!Array.isArray(backup.completedStepIds)
+        || !backup.completedStepIds.every(id => typeof id === 'string')
+        || !Array.isArray(backup.checkedPreparationItemIds)
+        || !backup.checkedPreparationItemIds.every(id => typeof id === 'string')
+        || typeof backup.compact !== 'boolean') {
+        throw new Error('Format de sauvegarde non reconnu.');
+      }
+      const recovered = reconcileProgressWithRoute({
+        completedStepIds: backup.completedStepIds as string[],
+        checkedPreparationItemIds: backup.checkedPreparationItemIds as string[],
+        compact: backup.compact,
+        ...(typeof backup.currentStepId === 'string' ? { currentStepId: backup.currentStepId } : {}),
+        ...(typeof backup.routeVersion === 'string' ? { routeVersion: backup.routeVersion } : {}),
+      }, route);
+      setLastValidation(null);
+      setCompletedStepIds(new Set(recovered.completedStepIds));
+      setCheckedPreparationItemIds(new Set(recovered.checkedPreparationItemIds));
+      setCompact(recovered.compact);
+      if (recovered.currentStepId) {
+        const index = getStepGroupIndex(route, recovered.currentStepId);
+        if (index >= 0) setViewIndex(index);
+      }
+      setBackupMessage('Progression restaurée. Vérifie les cartes avant de continuer.');
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Fichier invalide.';
+      setBackupMessage('Import impossible : ' + message);
+    }
   }
 
   function togglePreparationItem(itemId: string) {
@@ -628,6 +692,21 @@ export function App() {
           {secondaryView === 'settings' && (
             <>
               <p className="settings-help">Raccourcis globaux Tauri, persistés localement.</p>
+              <div className="progress-backup">
+                <strong>SAUVEGARDE DE PROGRESSION</strong>
+                <p>Conserve une copie locale de tes coches et préparations avant une mise à jour.</p>
+                <button type="button" onClick={exportProgressBackup}>Exporter ma progression</button>
+                <label className="progress-backup__import">
+                  Importer une sauvegarde JSON
+                  <input type="file" accept=".json,application/json" onChange={(event) => {
+                    const file = event.target.files?.[0];
+                    if (file) void importProgressBackup(file);
+                    event.currentTarget.value = '';
+                  }} />
+                </label>
+                {backupMessage && <p role="status">{backupMessage}</p>}
+                {saveError && <p className="settings-error" role="alert">{saveError}</p>}
+              </div>
               <div className="shortcut-list">
                 {shortcutActions.map((action) => (
                   <label className="shortcut-field" key={action}>
