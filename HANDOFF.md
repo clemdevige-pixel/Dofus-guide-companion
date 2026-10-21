@@ -314,3 +314,13 @@ Lire dans l’ordre : `AGENTS.md`, `SPEC.md`, `ARCHITECTURE.md`, `docs/DATA_MODE
 - Les 13 images PNG transparentes `2x` sont dans `public/dofus/`, extraites des assets DOFUS via `scripts/import_dofus_art.py` et `.github/workflows/import-dofus-art.yml` (release source épinglée `v6.0_3.7.12.12`). Vérification : 13 fichiers PNG retrouvés et workflow d'import vert, commit `4c3f024`.
 - Tests route, validation et build frontend verts avant l'import des PNG (CI `39598742117`).
 - À vérifier dans Tauri Windows : affichage des 13 images / leur alpha, déclenchement uniquement à l'obtention, annulation, séquences, fenêtre étroite et réouverture avec progression déjà cochée.
+
+## 2026-10-21 — Profils multi-personnages (V1 locale)
+
+- Stockage `src/progress/profiles.ts` sous `dofus-guide-companion.profiles.v2`, migration **non destructive** de l'ancienne clé `dofus-guide-companion.progress.v1`, conservée telle quelle.
+- Un profil possède son `completedStepIds` (vérité de progression), ses coches de préparation, son curseur et son mode compact. Les raccourcis et la géométrie de fenêtre restent globaux.
+- UI `src/App.tsx` : accès par le nom du personnage dans l'en-tête ou menu « Personnages » ; création à zéro, sélection, renommage, duplication, suppression avec confirmation, reset ciblé avec confirmation. Conserve toujours au moins un profil.
+- Import/export JSON dans Paramètres concerne le personnage actif ; la sauvegarde v1 reste compatible.
+- Aucune modification de `data/route.json`, des `STEP_ID` ni de la progression métier.
+- Tests `src/progress/profiles.test.ts` : migration, isolation, duplication, reset, suppression, renommage, sauvegarde corrompue ; frontend CI verte sur `5f38c6622`.
+- Recette Windows restante : importer l'existant ; créer A et B ; valider des étapes sur A ; passer B ; rouvrir l'app ; vérifier A/B indépendants ; exporter/importer dans B ; dupliquer A ; supprimer et reset un profil avec confirmation ; vérifier vue compacte et raccourcis globaux.
