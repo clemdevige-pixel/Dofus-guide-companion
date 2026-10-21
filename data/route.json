@@ -1167,7 +1167,7 @@
       "blockId": "block-01",
       "type": "resume",
       "dofusSeries": "Dofus Argenté",
-      "displayRole": "transition",
+      "displayRole": "objective",
       "title": "Termine Des vestiges de légende, puis lance Vu du ciel",
       "prerequisites": "Toutes les stèles demandées validées.",
       "warning": "Enchaîne immédiatement la suite exploration.",
