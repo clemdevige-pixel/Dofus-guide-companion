@@ -584,3 +584,8 @@
     gap: 6px;
   }
 }
+
+/* Polish A — clearer current block and readable long card names. */
+.progression-block--current { outline: 1px solid #649772; outline-offset: -1px; }
+.block-roadmap__card--current { box-shadow: inset 3px 0 0 #8fc69a; }
+.block-roadmap__content strong { white-space: normal; overflow-wrap: anywhere; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
