@@ -754,7 +754,6 @@ export function App() {
             <p className="eyebrow">
               {secondaryView === 'progress' && 'Progression'}
               {secondaryView === 'settings' && 'Paramètres'}
-              {secondaryView === 'profiles' && 'Personnages'}
             </p>
             <button
               className="icon-button"
