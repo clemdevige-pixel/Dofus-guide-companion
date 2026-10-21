@@ -738,3 +738,45 @@ button:disabled {
 .character-danger { display: grid; gap: 7px; padding: 10px; border: 1px solid #755449; border-radius: 8px; }
 .character-danger p { margin: 0; font-size: 12px; color: #cab5ad; }
 .character-danger button { padding: 8px; border: 1px solid #946458; border-radius: 6px; background: #51342d; }
+
+
+/* Dedicated character page: never share height with guide cards or footer. */
+.profiles-page { display:flex; flex-direction:column; flex:1; min-height:0; min-width:0; overflow:hidden; }
+.profiles-page__header { display:flex; justify-content:space-between; align-items:center; gap:8px; flex:none; padding:4px 0 12px; }
+.profiles-page__header > div {display:grid; gap:2px; min-width:0}
+.profiles-page__header strong {font-size:16px}
+.profiles-page__header span {font-size:11px;color:#a4b8a7}
+.profiles-page__header button {font-size:12px;padding:7px 10px;border:1px solid #62846a;border-radius:7px;background:#243e2c;white-space:nowrap}
+.profiles-page__scroll {flex:1; min-height:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;display:grid;align-content:start;gap:10px;padding:2px 4px 12px 0}
+.profile-card,.profile-create {min-width:0;border:1px solid #405e49;border-radius:10px;background:#19271d;overflow:hidden}
+.profile-card__summary {border:0;background:transparent;width:100%;display:flex;align-items:center;gap:8px;text-align:left;padding:10px 8px;cursor:pointer;min-width:0}
+.profile-card__icon {width:34px;height:34px;object-fit:contain;flex:none}
+.profile-card__icon--empty {display:grid;place-items:center;border-radius:50%;background:#2c4933;font-size:22px}
+.profile-card__identity {flex:1;min-width:0;display:grid;gap:3px}
+.profile-card__identity strong {overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px}
+.profile-card__identity small {font-size:10px;color:#98b49f}
+.profile-card__summary b {font-size:13px;color:#c9edce}
+.profile-card__progress,.profile-dofus-bar {height:5px;background:#324138;overflow:hidden}
+.profile-card__progress > span,.profile-dofus-bar > span {display:block;height:100%;background:#77ba84;border-radius:0 4px 4px 0}
+.profile-card__detail {padding:10px 9px;display:grid;gap:12px;border-top:1px solid #36503d;min-width:0}
+.profile-edit {display:flex;min-width:0;gap:4px}
+.profile-edit input {flex:1;min-width:0;padding:7px;border:1px solid #62846a;border-radius:5px;background:#101a13;color:#fff}
+.profile-edit button,.profile-card__actions button,.profile-reset,.profile-create button {border:1px solid #53755d;background:#25412d;border-radius:6px;padding:7px;color:#e8f3ea;cursor:pointer}
+.profile-class-select,.profile-create label {display:grid;gap:5px;font-size:11px;color:#bdd1c1}
+.profile-class-select select,.profile-create select {width:100%;min-width:0;max-width:100%;background:#101a13;color:#eef4ef;border:1px solid #55725c;border-radius:6px;padding:7px}
+.profile-dofus-title {font-size:12px;font-weight:800;color:#d6ead9}
+.profile-dofus-list {display:grid;gap:10px}
+.profile-dofus-row {display:flex;align-items:center;gap:8px;min-width:0}
+.profile-dofus-row img {width:27px;height:27px;object-fit:contain;flex:none}
+.profile-dofus-row>div {flex:1;min-width:0}
+.profile-dofus-meta {display:flex;justify-content:space-between;gap:8px;margin-bottom:5px;font-size:11px}
+.profile-dofus-meta span {min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.profile-dofus-meta b {flex:none}
+.profile-dofus-bar {height:4px;border-radius:4px}
+.profile-card__actions,.profile-create__actions {display:flex;flex-wrap:wrap;gap:5px}
+.profile-card__actions button,.profile-create button {flex:1;min-width:80px;font-size:11px}
+.profile-reset {background:#492c2c;border-color:#855e5e;font-size:11px}
+.profile-create {display:grid;gap:10px;padding:11px}
+.profile-create strong {font-size:13px}
+.profile-create>input {width:100%;min-width:0;border:1px solid #55725c;border-radius:6px;background:#101a13;color:white;padding:8px}
+@media (max-width:280px) {.profiles-page__header strong{font-size:14px}.profile-card__icon{width:26px;height:26px}.profile-card__summary{gap:5px;padding:8px 5px}.profile-card__identity strong{font-size:11px}}
