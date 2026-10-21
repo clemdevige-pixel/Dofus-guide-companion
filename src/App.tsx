@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { writeText } from '@tauri-apps/plugin-clipboard-manager';
 import { openUrl } from '@tauri-apps/plugin-opener';
 import { PreparationChecklist } from './components/PreparationChecklist';
 import { StepMarkers } from './components/StepMarkers';
-import { loadProgress, parseProgressBackup, saveProgress } from './progress/storage';
+import { parseProgressBackup, type ProgressState } from './progress/storage';
+import { loadProfiles, saveProfiles, updateProfileProgress, emptyProgress, createProfile, renameProfile, deleteProfile, resetProfile, type ProfilesState } from './progress/profiles';
 import { loadBundledRoute } from './route/loader';
 import { getNewDofusReward, type DofusReward } from './route/dofusRewards';
 import {
@@ -31,7 +32,7 @@ import './progression.css';
 const route = loadBundledRoute();
 const shortcutActions = Object.keys(defaultShortcutBindings) as ShortcutAction[];
 
-type SecondaryView = 'progress' | 'settings' | null;
+type SecondaryView = 'progress' | 'settings' | 'profiles' | null;
 
 const typeLabels: Record<StepType, string> = {
   quest: 'QUÊTE',
@@ -127,7 +128,13 @@ function getWarningContent(warning: string): string {
 }
 
 export function App() {
-  const initialProgress = useMemo(() => loadProgress(), []);
+  const initialProfiles = useMemo(() => loadProfiles(), []);
+  const initialProgress = initialProfiles.profiles.find(p => p.id === initialProfiles.activeProfileId)!.progress;
+  const profilesRef = useRef<ProfilesState>(initialProfiles);
+  const skipNextSave = useRef(false);
+  const [profiles, setProfiles] = useState<ProfilesState>(initialProfiles);
+  const [profileName, setProfileName] = useState('');
+  const [profileMessage, setProfileMessage] = useState<string | null>(null);
   const initialShortcuts = useMemo(() => loadShortcutBindings(), []);
   const stepGroups = useMemo(() => getStepGroups(route), []);
   const [completedStepIds, setCompletedStepIds] = useState<Set<string>>(
@@ -201,20 +208,17 @@ export function App() {
   }, [currentGroup?.id, currentGroup?.isSequence, activeSequenceObjectiveId, sequenceObjectives]);
 
   useEffect(() => {
-    const savedStep = currentGroup
-      ? currentGroup.steps.find((step) => !completedStepIds.has(step.id)) ?? currentGroup.steps[0]
-      : undefined;
-
+    if (skipNextSave.current) { skipNextSave.current = false; return; }
     try {
-      saveProgress({
-        completedStepIds: [...completedStepIds],
-        checkedPreparationItemIds: [...checkedPreparationItemIds],
-        compact,
-        ...(savedStep ? { currentStepId: savedStep.id } : {}),
-      });
+      const step = currentGroup?.steps.find(x => !completedStepIds.has(x.id)) ?? currentGroup?.steps[0];
+      const snapshot: ProgressState = { completedStepIds: [...completedStepIds],
+        checkedPreparationItemIds: [...checkedPreparationItemIds], compact,
+        ...(step ? { currentStepId: step.id } : {}), routeVersion: route.routeVersion };
+      const updated = updateProfileProgress(profilesRef.current, profilesRef.current.activeProfileId, snapshot);
+      saveProfiles(updated); profilesRef.current = updated;
       setSaveError(null);
     } catch (error) {
-      console.error('Sauvegarde de progression impossible.', error);
+      console.error('Sauvegarde de profil impossible.', error);
       setSaveError('Sauvegarde locale impossible. Exporte ta progression depuis Paramètres.');
     }
   }, [completedStepIds, checkedPreparationItemIds, compact, currentGroup]);
@@ -319,6 +323,70 @@ export function App() {
     setViewIndex(targetCardIndex);
   }
 
+  function snapshot(): ProgressState {
+    const step = currentGroup?.steps.find(x => !completedStepIds.has(x.id)) ?? currentGroup?.steps[0];
+    return { completedStepIds: [...completedStepIds], checkedPreparationItemIds: [...checkedPreparationItemIds],
+      compact, ...(step ? { currentStepId: step.id } : {}), routeVersion: route.routeVersion };
+  }
+  function commitProfiles(next: ProfilesState) {
+    saveProfiles(next); profilesRef.current = next; setProfiles(next); setProfileMessage(null);
+  }
+  function activateProfile(next: ProfilesState) {
+    try {
+      const current = profilesRef.current;
+      const updated = updateProfileProgress(current, current.activeProfileId, snapshot());
+      const merged: ProfilesState = { ...next, profiles: next.profiles.map(p =>
+        p.id === current.activeProfileId ? updated.profiles.find(q => q.id === p.id) ?? p : p) };
+      const target = merged.profiles.find(p => p.id === merged.activeProfileId);
+      if (!target) throw new Error('Profil introuvable.');
+      saveProfiles(merged); profilesRef.current = merged; setProfiles(merged);
+      skipNextSave.current = true;
+      setCompletedStepIds(new Set(target.progress.completedStepIds));
+      setCheckedPreparationItemIds(new Set(target.progress.checkedPreparationItemIds));
+      setCompact(target.progress.compact);
+      const index = target.progress.currentStepId ? getStepGroupIndex(route, target.progress.currentStepId) : -1;
+      const first = getFirstIncompleteStep(route, new Set(target.progress.completedStepIds));
+      setViewIndex(index >= 0 ? index : first ? Math.max(0, getStepGroupIndex(route, first.id)) : 0);
+      setLastValidation(null); setReward(null); setBackupMessage(null);
+      setSecondaryView('profiles'); setProfileMessage(null);
+    } catch (error) { setProfileMessage(error instanceof Error ? error.message : 'Action impossible.'); }
+  }
+  function addCharacter(duplicate: boolean) {
+    try {
+      const base = updateProfileProgress(profilesRef.current, profilesRef.current.activeProfileId, snapshot());
+      const next = createProfile(base, profileName, duplicate ? snapshot() : emptyProgress(route));
+      activateProfile(next); setProfileName('');
+    } catch (error) { setProfileMessage(error instanceof Error ? error.message : 'Nom invalide.'); }
+  }
+  function renameCharacter(id: string) {
+    const p = profilesRef.current.profiles.find(p => p.id === id);
+    const name = window.prompt('Nouveau nom du personnage', p?.name ?? '');
+    if (name === null) return;
+    try { commitProfiles(renameProfile(profilesRef.current, id, name)); }
+    catch (error) { setProfileMessage(error instanceof Error ? error.message : 'Nom invalide.'); }
+  }
+  function removeCharacter(id: string) {
+    const p = profilesRef.current.profiles.find(p => p.id === id);
+    if (!window.confirm(`Supprimer définitivement « ${p?.name ?? ''} » et sa progression ?`)) return;
+    try {
+      const state = profilesRef.current; const next = deleteProfile(state, id);
+      if (next.activeProfileId !== state.activeProfileId) activateProfile(next);
+      else commitProfiles(next);
+    } catch (error) { setProfileMessage(error instanceof Error ? error.message : 'Suppression impossible.'); }
+  }
+  function restartCharacter() {
+    const active = profilesRef.current.profiles.find(p => p.id === profilesRef.current.activeProfileId)!;
+    if (!window.confirm(`Réinitialiser TOUTE la progression de « ${active.name} » ? Action irréversible. Exporte une sauvegarde au besoin.`)) return;
+    try {
+      const next = resetProfile(profilesRef.current, active.id, route);
+      saveProfiles(next); profilesRef.current = next; setProfiles(next);
+      skipNextSave.current = true;
+      setCompletedStepIds(new Set()); setCheckedPreparationItemIds(new Set());
+      setViewIndex(0); setLastValidation(null); setReward(null);
+      setProfileMessage('Progression réinitialisée.');
+    } catch (error) { setProfileMessage(error instanceof Error ? error.message : 'Réinitialisation impossible.'); }
+  }
+
   function toggleCurrentStep() {
     if (!currentGroup || !currentStep) {
       return;
@@ -414,6 +482,8 @@ export function App() {
     try {
       if (file.size > 2_000_000) throw new Error('Fichier trop volumineux.');
       const recovered = parseProgressBackup(await file.text(), route);
+      const updated = updateProfileProgress(profilesRef.current, profilesRef.current.activeProfileId, recovered);
+      saveProfiles(updated); profilesRef.current = updated; setProfiles(updated); skipNextSave.current = true;
       setLastValidation(null);
       setReward(null);
       setCompletedStepIds(new Set(recovered.completedStepIds));
@@ -521,6 +591,9 @@ export function App() {
             ☰
           </button>
           <div className="app-header__context">
+            <button className="profile-switch" type="button" onClick={() => openSecondaryView('profiles')}>
+              ♙ {profiles.profiles.find(p => p.id === profiles.activeProfileId)?.name ?? 'Personnage'} ▾
+            </button>
             {currentBlock && (
               <p className="header-block-line">
                 <span className="header-block-line__index">Bloc {currentBlock.order}/{route.blocks.length}</span>
@@ -583,6 +656,7 @@ export function App() {
 
       {drawerOpen && !compact && (
         <nav className="drawer" aria-label="Navigation secondaire">
+          <button type="button" onClick={() => openSecondaryView('profiles')}>Personnages</button>
           <button type="button" onClick={() => openSecondaryView('progress')}>Progression</button>
           <button type="button" onClick={() => openSecondaryView('settings')}>Paramètres</button>
         </nav>
@@ -594,6 +668,7 @@ export function App() {
             <p className="eyebrow">
               {secondaryView === 'progress' && 'Progression'}
               {secondaryView === 'settings' && 'Paramètres'}
+              {secondaryView === 'profiles' && 'Personnages'}
             </p>
             <button
               className="icon-button"
@@ -604,6 +679,39 @@ export function App() {
               ×
             </button>
           </div>
+
+          {secondaryView === 'profiles' && (
+            <div className="context-panel__body profiles-panel">
+              <p className="settings-help">Chaque personnage a sa propre progression et ses préparations.</p>
+              {profiles.profiles.map(profile => (
+                <div className="character-row" key={profile.id}>
+                  <button type="button" className={profile.id === profiles.activeProfileId ? 'character-active' : ''}
+                    onClick={() => profile.id !== profiles.activeProfileId && activateProfile({ ...profilesRef.current, activeProfileId: profile.id })}>
+                    <strong>{profile.id === profiles.activeProfileId ? '● ' : '○ '}{profile.name}</strong>
+                    <span>{getProgress(route, new Set(profile.id === profiles.activeProfileId ? [...completedStepIds] : profile.progress.completedStepIds)).percentage}%</span>
+                  </button>
+                  <button type="button" onClick={() => renameCharacter(profile.id)} aria-label={`Renommer ${profile.name}`}>✎</button>
+                  <button type="button" onClick={() => removeCharacter(profile.id)} disabled={profiles.profiles.length === 1}
+                    aria-label={`Supprimer ${profile.name}`}>×</button>
+                </div>
+              ))}
+              <label className="character-create">Nouveau personnage
+                <input type="text" maxLength={50} value={profileName} placeholder="Nom du personnage"
+                  onChange={event => setProfileName(event.target.value)}/>
+              </label>
+              <div className="character-actions">
+                <button type="button" disabled={!profileName.trim()} onClick={() => addCharacter(false)}>Créer à zéro</button>
+                <button type="button" disabled={!profileName.trim()} onClick={() => addCharacter(true)}>Dupliquer l'actuel</button>
+              </div>
+              <div className="character-danger">
+                <strong>Recommencer ce personnage</strong>
+                <p>Efface les coches et la carte courante de ce personnage uniquement.</p>
+                <button type="button" onClick={restartCharacter}>Réinitialiser la progression…</button>
+              </div>
+              {profileMessage && <p role="status">{profileMessage}</p>}
+              {saveError && <p className="settings-error" role="alert">{saveError}</p>}
+            </div>
+          )}
 
           {secondaryView === 'progress' && (
             <div className="context-panel__body progression-dashboard">
