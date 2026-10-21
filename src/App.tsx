@@ -157,6 +157,7 @@ export function App() {
   });
 
   const [cardJumpValue, setCardJumpValue] = useState(() => String(viewIndex + 1));
+  const [lastValidation, setLastValidation] = useState<{ completedIds: string[]; cardIndex: number } | null>(null);
 
   useEffect(() => {
     setCardJumpValue(String(viewIndex + 1));
@@ -313,6 +314,7 @@ export function App() {
     }
 
     const shouldComplete = !isCurrentCompleted;
+    setLastValidation({ completedIds: [...completedStepIds], cardIndex: viewIndex });
     setCompletedStepIds((previous) => {
       const next = new Set(previous);
       for (const step of currentGroup.steps) {
@@ -341,6 +343,7 @@ export function App() {
     );
     const wasCompleted = stepIds.every((stepId) => completedStepIds.has(stepId));
     const nextCompletedStepIds = new Set(completedStepIds);
+    setLastValidation({ completedIds: [...completedStepIds], cardIndex: viewIndex });
 
     for (const stepId of stepIds) {
       if (wasCompleted) {
@@ -358,6 +361,14 @@ export function App() {
     if (completesSequence && !containsHardLock && viewIndex < stepGroups.length - 1) {
       setViewIndex((index) => index + 1);
     }
+  }
+
+  function undoLastValidation() {
+    if (!lastValidation) return;
+    setCompletedStepIds(new Set(lastValidation.completedIds));
+    setViewIndex(lastValidation.cardIndex);
+    setSecondaryView(null);
+    setLastValidation(null);
   }
 
   function togglePreparationItem(itemId: string) {
@@ -696,6 +707,15 @@ export function App() {
                   <li
                     className={itemClasses}
                     key={objective.id}
+                    tabIndex={expandable ? 0 : undefined}
+                    role={expandable ? 'group' : undefined}
+                    aria-label={expandable ? `Détails de ${displayStep.title} — Entrée pour ouvrir ou fermer` : undefined}
+                    onKeyDown={(event) => {
+                      if (!expandable || (event.key !== 'Enter' && event.key !== ' ')) return;
+                      if (event.target !== event.currentTarget) return;
+                      event.preventDefault();
+                      setExpandedSequenceObjectiveId((value) => value === objective.id ? null : objective.id);
+                    }}
                     onClick={() => {
                       if (!expandable) return;
                       setExpandedSequenceObjectiveId((current) =>
@@ -955,6 +975,9 @@ export function App() {
 
       {secondaryView !== 'progress' && (
       <footer className="navigation-bar">
+        {lastValidation && (
+          <button className="undo-validation-button" type="button" onClick={undoLastValidation} title="Annuler la dernière validation">↶ Annuler</button>
+        )}
         <button type="button" aria-label="Carte précédente" onClick={goPrevious} disabled={viewIndex === 0}>
           ←
         </button>
