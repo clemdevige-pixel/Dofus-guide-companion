@@ -644,7 +644,7 @@
       "type": "major_step",
       "dofusSeries": "Dofus Argenté",
       "displayRole": "objective",
-      "title": "Transport peu commun",
+      "title": "Un peu de pigment",
       "prerequisites": "Transport peu commun actif ; Espoirs et tragédies actif.",
       "warning": "Active le zaap de la zone pendant ce déplacement.",
       "action": "AVANCER + LANCER / STOP",
