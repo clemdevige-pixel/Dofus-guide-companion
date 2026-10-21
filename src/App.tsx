@@ -1030,6 +1030,7 @@ export function App() {
                 const future = !completed && !active;
                 const stepIds = objective.steps.map((step) => step.id);
                 const questActions = getSequenceQuestActions(objective.steps);
+                const showQuestActions = questActions.length > 1 || objective.steps.some((step) => step.displayRole === 'transition' && step.guideItems?.some((item) => item.action === 'take' || item.action === 'finish'));
                 const summaryCoordinate = !expandable ? getSequenceCoordinate(displayStep) : undefined;
                 const itemClasses = [
                   'sequence-item',
@@ -1111,7 +1112,7 @@ export function App() {
                         </div>
                       </div>
 
-                      {questActions.length > 0 && (
+                      {showQuestActions && (
                         <div className="sequence-item__quest-actions" aria-label="Actions de quête">
                           {questActions.map((item) => (
                             <div className="sequence-item__quest-action" key={`${item.action}:${item.label}`}>
