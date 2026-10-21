@@ -696,3 +696,6 @@ button:disabled {
 .navigation-bar .complete-button { transition: background 120ms ease, border-color 120ms ease; }
 .navigation-bar .complete-button:focus-visible { outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) { .current-step { scroll-behavior: auto; } }
+
+.undo-validation-button { flex: 0 0 auto; padding-inline: 8px !important; color: #e9c997; border-color: #73583e !important; }
+@media (max-width: 380px) { .undo-validation-button { font-size: 10px; padding-inline: 5px !important; } }
