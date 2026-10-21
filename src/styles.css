@@ -780,3 +780,11 @@ button:disabled {
 .profile-create strong {font-size:13px}
 .profile-create>input {width:100%;min-width:0;border:1px solid #55725c;border-radius:6px;background:#101a13;color:white;padding:8px}
 @media (max-width:280px) {.profiles-page__header strong{font-size:14px}.profile-card__icon{width:26px;height:26px}.profile-card__summary{gap:5px;padding:8px 5px}.profile-card__identity strong{font-size:11px}}
+
+
+/* Profile management actions must remain discoverable even with a long Dofus list. */
+.profile-card__actions {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+.profile-card__actions button {min-width:0;padding:8px 3px;white-space:normal;overflow-wrap:anywhere}
+.profile-card__actions button:last-child {color:#f0c0ba;border-color:#8d5b58;background:#472d2c}
+.profile-card__detail>.profile-reset {width:100%}
+@media (max-width:270px) {.profile-card__actions {grid-template-columns:repeat(2,minmax(0,1fr))}}
