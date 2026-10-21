@@ -445,7 +445,8 @@
           },
           "note": "Clique l'avis de recherche des métiers."
         }
-      ]
+      ],
+      "instruction": "À Berb Nhin en [0,-3], avance Le village dans les nuages et lance Produits naturels. Sur la même carte, utilise l'avis de recherche des métiers pour lancer Mort au rat ! Garde Produits naturels active : son rendu est prévu plus tard."
     },
     {
       "id": "route-step-0015",
@@ -767,7 +768,8 @@
             "y": -4
           }
         }
-      ]
+      ],
+      "instruction": "Aux Champs, avance Espoirs et tragédies avec Lykhen, valide la stèle de Des vestiges de légende et vaincs les 4 espèces de Champs de bataille. Récupère 2 Œufs Chimériques et les Poudres de Perlinpainpain pour La galette secrète ; récolte 18 Blés et fabrique 1 Pain d'Incarnam en [-1,-4]. Ne rends pas encore ces quêtes."
     },
     {
       "id": "route-step-0023",
@@ -870,7 +872,8 @@
           "label": "Coups d'épée dans l'eau",
           "note": "Vaincs 2 Petit Gloot, 2 Plikplok et 1 Grand Splatch."
         }
-      ]
+      ],
+      "instruction": "Au lac, valide la stèle de Des vestiges de légende et parle à Aléha pour Espoirs et tragédies. Récolte 13 Orties et 8 Goujons, fabrique une Potion de Mini Soin en [-2,-2] et un Goujon en Tranche en [0,-1]. Pour Coups d'épée dans l'eau, vaincs 2 Petit Gloot, 2 Plikplok et 1 Grand Splatch. Les rendus viennent ensuite."
     },
     {
       "id": "route-step-0014",
@@ -972,7 +975,8 @@
             "y": -3
           }
         }
-      ]
+      ],
+      "instruction": "En [0,-3], termine Le métier des aventuriers puis lance La hache et la pioche auprès du même interlocuteur. Garde cette dernière active jusqu'à la fin de la boucle récolte et ateliers."
     },
     {
       "id": "route-step-0024",
@@ -1072,7 +1076,8 @@
           "label": "Décime-moi des bouftous",
           "note": "Vaincs les 4 espèces demandées et récupère aussi 2 Laine Céleste + 4 Bave de Bouftou."
         }
-      ]
+      ],
+      "instruction": "Dans les pâturages et la mine, valide la stèle de Des vestiges de légende en [1,-5], récupère 3 Poudres d'Aminite et passe voir Marylork en [3,-5] pour Un peu de pigment. Récolte 10 Fers et fabrique 1 Ferrite en [2,-4]. Avance Décime-moi des bouftous en combattant les 4 espèces demandées ; conserve aussi 2 Laines Célestes et 4 Baves de Bouftou. Termine les quêtes aux retours indiqués plus loin."
     },
     {
       "id": "route-step-0027",
@@ -1267,7 +1272,8 @@
             "y": 0
           }
         }
-      ]
+      ],
+      "instruction": "En forêt, utilise le télescope de Matu Vuh en [-1,-6] pour Vu du ciel, puis combats 2 Ronronchon, 2 Tigrimas et 2 Chakrobat pour Chasse aux chapardams. Coupe 10 Frênes et fabrique 1 Planche Agglomérée en [2,-2]. Pour Espoirs et tragédies, parle à Anta Brok en [1,-2] puis à Oskar Khas en [2,-1]. Active le zaap du cimetière en [3,0] ; ne rends pas encore ces quêtes."
     },
     {
       "id": "route-step-0013",
@@ -1599,7 +1605,8 @@
             "y": -3
           }
         }
-      ]
+      ],
+      "instruction": "En [0,-3], termine Boune un jour, boune toujours, puis lance Préparation au combat auprès du même interlocuteur. Ne la termine pas ici : les fabrications restantes sont prévues avant le départ d'Incarnam."
     },
     {
       "id": "route-step-1114",
@@ -2059,7 +2066,8 @@
             "y": -19
           }
         }
-      ]
+      ],
+      "instruction": "À la Tour du Conseil en [4,-19], lance On marche sur des œufs et Ça tombe à l'eau. Garde les deux quêtes actives : leurs rendus sont prévus plus loin dans la boucle d'Astrub."
     },
     {
       "id": "route-step-1129",
@@ -2333,7 +2341,8 @@
           },
           "note": "Continue avec Kaulysse."
         }
-      ]
+      ],
+      "instruction": "En [7,-19], termine Ça tombe à l'eau auprès de Kaulysse, puis lance Six pieds sous terre au même endroit. Garde Six pieds sous terre active jusqu'au passage chez Kerubim."
     },
     {
       "id": "route-step-1134",
@@ -2556,7 +2565,8 @@
           },
           "note": "Parle à Aisling."
         }
-      ]
+      ],
+      "instruction": "Reviens à la Tour en [4,-19] pour avancer Ça sent le gaz, puis termine-la en [7,-19]. Au même endroit, lance Balade en forêt auprès de la Recrue et L'histoire en mouvement auprès d'Aisling. Garde ces deux quêtes actives pour la suite."
     },
     {
       "id": "route-step-0053",
@@ -2632,7 +2642,7 @@
       "title": "Six pieds sous terre",
       "prerequisites": "Objectifs mine réalisés.",
       "action": "TERMINER / LANCER",
-      "instruction": "N'ouvre pas Balade en Ecaflipus.",
+      "instruction": "En [3,-17], termine Six pieds sous terre auprès de Kerubim, puis relance son dialogue pour lancer Tel est pris qui croyait prendre. Ne lance pas Balade en Ecaflipus.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/six-pieds-sous-terre.html"
@@ -3452,7 +3462,8 @@
           },
           "note": "Ouvre la grille, bats la Créature d'Otomaï puis termine les dialogues."
         }
-      ]
+      ],
+      "instruction": "Dans la mine, avance Attention à la Bête ! sur le circuit [10,-19] → [10,-20] → [9,-20] → [8,-19] → [9,-19]. Reviens en [10,-19], ouvre la grille, vaincs la Créature d'Otomaï puis termine les dialogues pour clôturer la quête."
     },
     {
       "id": "route-step-1151",
@@ -3601,7 +3612,8 @@
           },
           "note": "Remets la Poudre Révélatrice à Prim."
         }
-      ]
+      ],
+      "instruction": "En [3,-21], remets les ressources à Cirle Drawde et récupère la Poudre Révélatrice ; retourne en [7,-19] auprès de Prim pour terminer Mieux vaut ne pas se fier à la première impression."
     },
     {
       "id": "route-step-0071",
@@ -4046,7 +4058,8 @@
           },
           "note": "Place l'urne au pied de la tombe puis parle à Rathrosk."
         }
-      ]
+      ],
+      "instruction": "En [2,-11], place l'Urne bénie au pied de la tombe, puis parle à Rathrosk pour terminer Légende d'automne."
     },
     {
       "id": "route-step-0076",
@@ -4076,7 +4089,8 @@
           },
           "note": "Termine les dialogues après le combat du caveau."
         }
-      ]
+      ],
+      "instruction": "Après le combat du caveau en [1,-11], termine les dialogues pour clôturer L'invasion des profanateurs de sépulture."
     },
     {
       "id": "route-step-0067",
@@ -4659,7 +4673,8 @@
             "y": -14
           }
         }
-      ]
+      ],
+      "instruction": "Pour Le repos est dans le champ, poursuis les objectifs en [-1,-11] et [-3,-9], puis retourne en [2,-14] pour terminer la quête."
     },
     {
       "id": "route-step-0083",
@@ -4773,7 +4788,8 @@
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/donjon-rikiki.html"
       },
-      "momentId": "moment-route-step-0089"
+      "momentId": "moment-route-step-0089",
+      "instruction": "Après la Cache de Kankreblath, termine Donjon rikiki et vérifie sa validation dans le journal avant de poursuivre."
     },
     {
       "id": "block-entry-04",
