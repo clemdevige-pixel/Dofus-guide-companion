@@ -140,6 +140,7 @@ export function App() {
   const [editingProfileId, setEditingProfileId] = useState<string | null>(null);
   const [editingName, setEditingName] = useState('');
   const [profileMessage, setProfileMessage] = useState<string | null>(null);
+  const [profileConfirmation, setProfileConfirmation] = useState<{ kind: 'delete' | 'reset'; id: string } | null>(null);
   const initialShortcuts = useMemo(() => loadShortcutBindings(), []);
   const stepGroups = useMemo(() => getStepGroups(route), []);
   const [completedStepIds, setCompletedStepIds] = useState<Set<string>>(
@@ -375,24 +376,36 @@ export function App() {
       p.id === id ? { ...p, classId } : p) });
   }
   function removeCharacter(id: string) {
-    const p = profilesRef.current.profiles.find(p => p.id === id);
-    if (!window.confirm(`Supprimer définitivement « ${p?.name ?? ''} » et sa progression ?`)) return;
-    try {
-      const state = profilesRef.current; const next = deleteProfile(state, id);
-      if (next.activeProfileId !== state.activeProfileId) activateProfile(next);
-      else commitProfiles(next);
-    } catch (error) { setProfileMessage(error instanceof Error ? error.message : 'Suppression impossible.'); }
+    if (profilesRef.current.profiles.length <= 1) return;
+    setProfileConfirmation({ kind: 'delete', id });
   }
   function restartCharacter() {
-    const active = profilesRef.current.profiles.find(p => p.id === profilesRef.current.activeProfileId)!;
-    if (!window.confirm(`Réinitialiser TOUTE la progression de « ${active.name} » ? Action irréversible. Exporte une sauvegarde au besoin.`)) return;
+    setProfileConfirmation({ kind: 'reset', id: profilesRef.current.activeProfileId });
+  }
+  function confirmProfileAction() {
+    if (!profileConfirmation) return;
+    const { kind, id } = profileConfirmation;
     try {
-      const next = resetProfile(profilesRef.current, active.id, route);
-      saveProfiles(next); profilesRef.current = next; setProfiles(next);
-            setCompletedStepIds(new Set()); setCheckedPreparationItemIds(new Set());
-      setViewIndex(0); setLastValidation(null); setReward(null);
-      setProfileMessage('Progression réinitialisée.');
-    } catch (error) { setProfileMessage(error instanceof Error ? error.message : 'Réinitialisation impossible.'); }
+      if (kind === 'delete') {
+        const state = profilesRef.current;
+        const next = deleteProfile(state, id);
+        if (next.activeProfileId !== state.activeProfileId) activateProfile(next);
+        else commitProfiles(next);
+        setExpandedProfileId(prev => prev === id ? null : prev);
+      } else {
+        const state = profilesRef.current;
+        if (id !== state.activeProfileId) throw new Error('Profil actif modifié.');
+        const next = resetProfile(state, id, route);
+        saveProfiles(next); profilesRef.current = next; setProfiles(next);
+        setCompletedStepIds(new Set()); setCheckedPreparationItemIds(new Set());
+        setViewIndex(0); setLastValidation(null); setReward(null);
+        setProfileMessage('Progression réinitialisée.');
+      }
+      setProfileConfirmation(null);
+    } catch (error) {
+      setProfileMessage(error instanceof Error ? error.message : 'Action impossible.');
+      setProfileConfirmation(null);
+    }
   }
 
   function toggleCurrentStep() {
@@ -664,6 +677,27 @@ export function App() {
             </form>
             {profileMessage && <p role="status">{profileMessage}</p>}
           </div>
+          {profileConfirmation && (() => {
+            const profile = profiles.profiles.find(p => p.id === profileConfirmation.id);
+            return <div className="profile-confirm-backdrop">
+              <section className="profile-confirm" role="alertdialog" aria-modal="true"
+                aria-labelledby="profile-confirm-title" aria-describedby="profile-confirm-description">
+                <strong id="profile-confirm-title">{profileConfirmation.kind === 'delete' ? 'Supprimer le personnage ?' : 'Recommencer le guide ?'}</strong>
+                <p id="profile-confirm-description">
+                  {profileConfirmation.kind === 'delete'
+                    ? <>Supprimer définitivement <b>{profile?.name}</b> et toute sa progression ?</>
+                    : <>Effacer la progression de <b>{profile?.name}</b> ? Les autres profils seront conservés.</>}
+                </p>
+                <p className="profile-confirm__warning">Cette action est irréversible. Exporte une sauvegarde avant si nécessaire.</p>
+                <div className="profile-confirm__actions">
+                  <button type="button" onClick={() => setProfileConfirmation(null)}>Annuler</button>
+                  <button type="button" className="profile-confirm__danger" onClick={confirmProfileAction}>
+                    {profileConfirmation.kind === 'delete' ? 'Supprimer' : 'Réinitialiser'}
+                  </button>
+                </div>
+              </section>
+            </div>;
+          })()}
         </section>
       )}
       {secondaryView !== 'profiles' && (<>
