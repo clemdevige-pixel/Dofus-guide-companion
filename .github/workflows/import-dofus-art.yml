@@ -1,0 +1,33 @@
+name: Import Dofus art
+on:
+  push:
+    branches: [agent/initial-scaffold]
+    paths:
+      - 'scripts/import_dofus_art.py'
+      - '.github/workflows/import-dofus-art.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/initial-scaffold
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Download item art and identify icons
+        run: python scripts/import_dofus_art.py
+      - name: Commit verified PNG assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/dofus/*.png
+          if ! git diff --cached --quiet; then
+            git commit -m "assets(dofus): add local transparent 2x Dofus icons"
+            git push origin HEAD:agent/initial-scaffold
+          fi
