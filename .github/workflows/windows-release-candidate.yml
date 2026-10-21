@@ -1,0 +1,44 @@
+name: Windows release candidate
+on:
+  push:
+    branches: [agent/initial-scaffold]
+    paths:
+      - '.github/workflows/windows-release-candidate.yml'
+      - 'src-tauri/icons/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  installer:
+    runs-on: windows-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri -> target
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+      - name: Test route and saved progress
+        run: pnpm test:route
+      - name: Validate route
+        run: pnpm validate:route
+      - name: Build Windows installers
+        run: pnpm tauri build
+      - name: Upload Windows installer(s)
+        uses: actions/upload-artifact@v4
+        with:
+          name: dofus-guide-companion-windows-rc
+          path: |
+            src-tauri/target/release/bundle/nsis/*.exe
+            src-tauri/target/release/bundle/msi/*.msi
+          if-no-files-found: error
+          retention-days: 14

@@ -1,0 +1,172 @@
+/* Compact mode keeps every actionable datum while stripping framing and dead space. */
+.overlay--compact {
+  padding: 8px;
+}
+
+.overlay--compact .compact-header {
+  min-height: 24px;
+  margin-bottom: 5px;
+  font-size: 11px;
+}
+
+.overlay--compact .compact-header .icon-button {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+}
+
+/* The card index already gives enough context in compact mode. */
+.overlay--compact .block-banner {
+  display: none;
+}
+
+.overlay--compact .current-step {
+  padding: 9px;
+  border-radius: 9px;
+}
+
+.overlay--compact .step-title-row {
+  gap: 6px;
+}
+
+.overlay--compact .step-title-row h1 {
+  font-size: 16px;
+  line-height: 1.15;
+}
+
+.overlay--compact .source-link-button {
+  font-size: 11px;
+}
+
+.overlay--compact .action-label {
+  margin-top: 8px;
+  font-size: 11px;
+}
+
+.overlay--compact .instruction {
+  margin-top: 5px;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+/* Prerequisites and warnings stay visible, but no longer consume a full boxed panel. */
+.overlay--compact .step-context {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 3px 6px;
+  margin-top: 6px;
+  padding: 5px 0;
+  border-width: 0 0 1px;
+  border-radius: 0;
+  background: transparent;
+  font-size: 10px;
+  line-height: 1.3;
+}
+
+.overlay--compact .step-context strong {
+  flex: 0 0 auto;
+  font-size: 9px;
+  letter-spacing: 0.04em;
+}
+
+.overlay--compact .step-context span {
+  min-width: 0;
+}
+
+.overlay--compact .step-context--launch {
+  border-color: #334139;
+}
+
+.overlay--compact .step-context--goal {
+  border-color: #454064;
+}
+
+.overlay--compact .step-context--lock {
+  border-color: #765038;
+}
+
+.overlay--compact .guide-items {
+  gap: 7px;
+  margin-top: 8px;
+}
+
+.overlay--compact .guide-items__group {
+  gap: 4px;
+}
+
+.overlay--compact .guide-items__heading {
+  font-size: 10px;
+}
+
+.overlay--compact .guide-items__list {
+  gap: 3px;
+}
+
+.overlay--compact .guide-items__list li {
+  padding: 5px 6px;
+  border-radius: 6px;
+}
+
+.overlay--compact .guide-items__row {
+  gap: 6px;
+}
+
+.overlay--compact .guide-items__row strong {
+  font-size: 11px;
+}
+
+.overlay--compact .guide-items__note {
+  font-size: 10px;
+}
+
+.overlay--compact .guide-location-button {
+  padding: 2px 5px;
+  font-size: 10px;
+}
+
+.overlay--compact .travel-button {
+  margin-top: 7px;
+  padding: 6px 7px;
+  font-size: 10px;
+}
+
+.overlay--compact .preparation-list {
+  max-height: 145px;
+  margin-top: 7px;
+  overflow-y: auto;
+  font-size: 11px;
+}
+
+.overlay--compact .copy-item-button {
+  padding: 5px 6px;
+  font-size: 11px;
+}
+
+/* Sequence cards already identify themselves in the compact header. */
+.overlay--compact .current-step--sequence > .step-title-row {
+  display: none;
+}
+
+.overlay--compact .current-step--sequence > .action-label {
+  margin-top: 0;
+}
+
+.overlay--compact .sequence-list {
+  margin-top: 7px;
+}
+
+.overlay--compact .sequence-item__detail .step-context {
+  padding: 4px 0;
+}
+
+.overlay--compact .navigation-bar {
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.overlay--compact .navigation-bar button {
+  min-height: 34px;
+  padding-inline: 10px;
+  border-radius: 8px;
+}
