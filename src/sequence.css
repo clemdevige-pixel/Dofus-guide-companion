@@ -309,3 +309,9 @@
     margin-left: -28px;
   }
 }
+
+/* Polish A — prioritize active content, keep completed objectives compact. */
+.sequence-item--active { box-shadow: inset 3px 0 0 #8fc69a; }
+.sequence-item--completed { opacity: .62; }
+.sequence-item--future { opacity: .82; }
+.sequence-item__header strong { overflow-wrap: anywhere; }
