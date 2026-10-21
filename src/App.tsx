@@ -136,6 +136,10 @@ export function App() {
   const [profiles, setProfiles] = useState<ProfilesState>(initialProfiles);
   const [profileName, setProfileName] = useState('');
   const [newClassId, setNewClassId] = useState<number | undefined>(undefined);
+  const [createProfileOpen, setCreateProfileOpen] = useState(false);
+  const [duplicateNewProfile, setDuplicateNewProfile] = useState(false);
+  const [profileMenuId, setProfileMenuId] = useState<string | null>(null);
+  const [expandedDofusProfileId, setExpandedDofusProfileId] = useState<string | null>(null);
   const [expandedProfileId, setExpandedProfileId] = useState<string | null>(null);
   const [editingProfileId, setEditingProfileId] = useState<string | null>(null);
   const [editingName, setEditingName] = useState('');
@@ -360,6 +364,7 @@ export function App() {
       const base = updateProfileProgress(profilesRef.current, profilesRef.current.activeProfileId, snapshot());
       const next = createProfile(base, profileName, duplicate ? snapshot() : emptyProgress(route));
       activateProfile(next); setProfileName('');
+      setCreateProfileOpen(false); setDuplicateNewProfile(false);
       if (newClassId !== undefined) changeCharacterClass(next.activeProfileId, newClassId);
       setNewClassId(undefined);
     } catch (error) { setProfileMessage(error instanceof Error ? error.message : 'Nom invalide.'); }
@@ -606,6 +611,10 @@ export function App() {
             <div><strong>Personnages</strong><span>{profiles.profiles.length} profil(s) localement</span></div>
             <button type="button" onClick={() => setSecondaryView(null)} aria-label="Retour au guide">← Guide</button>
           </div>
+          <button className="profile-add-trigger" type="button" onClick={() => {
+            setProfileName(''); setNewClassId(undefined); setDuplicateNewProfile(false);
+            setProfileMessage(null); setCreateProfileOpen(true);
+          }}>+ Ajouter un personnage</button>
           <div className="profiles-page__scroll">
             {profiles.profiles.map(profile => {
               const ids = new Set(profile.id === profiles.activeProfileId ? [...completedStepIds] : profile.progress.completedStepIds);
@@ -626,13 +635,17 @@ export function App() {
                 </button>
                 <div className="profile-card__progress"><span style={{ width: `${summary.percentage}%` }}/></div>
                 {expanded && <div className="profile-card__detail">
-                  <div className="profile-card__actions">
-                    {profile.id !== profiles.activeProfileId && <button type="button" onClick={() => activateProfile({...profilesRef.current,activeProfileId:profile.id})}>Utiliser</button>}
-                    <button type="button" onClick={() => {setEditingName(profile.name);setEditingProfileId(profile.id)}}>Renommer</button>
-                    <button type="button" disabled={profiles.profiles.length === 1} onClick={() => removeCharacter(profile.id)}>Supprimer</button>
+                  <div className="profile-card__toolbar">
+                    {profile.id !== profiles.activeProfileId && <button type="button" onClick={() => activateProfile({...profilesRef.current,activeProfileId:profile.id})}>Utiliser ce personnage</button>}
+                    <button type="button" aria-expanded={profileMenuId === profile.id}
+                      onClick={() => setProfileMenuId(profileMenuId === profile.id ? null : profile.id)}>⋯ Gérer</button>
                   </div>
-                  {profile.id === profiles.activeProfileId && <button className="profile-reset" type="button" onClick={restartCharacter}>Réinitialiser ce profil…</button>}
-
+                  {profileMenuId === profile.id && <div className="profile-card__menu">
+                    <button type="button" onClick={() => {setEditingName(profile.name);setEditingProfileId(profile.id);setProfileMenuId(null)}}>Renommer</button>
+                    {profile.id === profiles.activeProfileId && <button type="button" onClick={() => {setProfileMenuId(null);restartCharacter()}}>Réinitialiser la progression</button>}
+                    <button type="button" disabled={profiles.profiles.length === 1}
+                      onClick={() => {setProfileMenuId(null);removeCharacter(profile.id)}}>Supprimer le personnage</button>
+                  </div>}
                   {editingProfileId === profile.id && <form className="profile-edit" onSubmit={event => {event.preventDefault();renameCharacter(profile.id)}}>
                     <input aria-label="Nom du personnage" autoFocus value={editingName} maxLength={50} onChange={event => setEditingName(event.target.value)}/>
                     <button type="submit">OK</button><button type="button" onClick={() => setEditingProfileId(null)}>×</button>
@@ -643,8 +656,25 @@ export function App() {
                       {dofusClasses.map(c => <option value={c.id} key={c.id}>{c.name}</option>)}
                     </select>
                   </label>
-                  <div className="profile-dofus-title">Progression par Dofus</div>
-                  <div className="profile-dofus-list">
+                  <div className="profile-collection-heading">
+                    <strong>Collection de Dofus</strong>
+                    <small>{Object.values(dofusRewards).filter(reward => ids.has(reward.stepId)).length}/{Object.keys(dofusRewards).length} obtenus</small>
+                  </div>
+                  <div className="profile-trophy-grid" aria-label="Dofus obtenus">
+                    {Object.values(dofusRewards).map(reward => {
+                      const obtained = ids.has(reward.stepId);
+                      return <div className={`profile-trophy${obtained ? ' profile-trophy--obtained' : ''}`}
+                        title={`${reward.name} : ${obtained ? 'obtenu' : 'non obtenu'}`} key={reward.stepId}>
+                        <img src={reward.image} alt={reward.name} />
+                      </div>;
+                    })}
+                  </div>
+                  <button className="profile-dofus-toggle" type="button"
+                    aria-expanded={expandedDofusProfileId === profile.id}
+                    onClick={() => setExpandedDofusProfileId(expandedDofusProfileId === profile.id ? null : profile.id)}>
+                    Progression détaillée par Dofus <span aria-hidden="true">{expandedDofusProfileId === profile.id ? '⌃' : '⌄'}</span>
+                  </button>
+                  {expandedDofusProfileId === profile.id && <div className="profile-dofus-list">
                     {Object.values(dofusRewards).map(reward => {
                       const steps = route.steps.filter(step => step.dofusSeries === reward.name);
                       const total = steps.length || 1;
@@ -656,27 +686,39 @@ export function App() {
                           <div className="profile-dofus-bar"><span style={{width: `${pct}%`}}/></div></div>
                       </div>;
                     })}
-                  </div>
+                  </div>}
                 </div>}
               </div>;
             })}
-            <form className="profile-create" onSubmit={event => { event.preventDefault(); addCharacter(false); }}>
-              <strong>Ajouter un personnage</strong>
-              <input value={profileName} maxLength={50} placeholder="Nom du personnage" aria-label="Nom du nouveau personnage"
-                onChange={event => setProfileName(event.target.value)} />
-              <label>Classe
-                <select value={newClassId ?? ''} onChange={event=>setNewClassId(event.target.value ? Number(event.target.value) : undefined)}>
-                  <option value="">Non définie</option>
-                  {dofusClasses.map(c => <option value={c.id} key={c.id}>{c.name}</option>)}
-                </select>
-              </label>
-              <div className="profile-create__actions">
-                <button type="submit" disabled={!profileName.trim()}>Créer à zéro</button>
-                <button type="button" disabled={!profileName.trim()} onClick={() => addCharacter(true)}>Dupliquer l'actuel</button>
-              </div>
-            </form>
             {profileMessage && <p role="status">{profileMessage}</p>}
           </div>
+          {createProfileOpen && (
+            <div className="profile-confirm-backdrop">
+              <form className="profile-create-dialog" role="dialog" aria-modal="true"
+                aria-labelledby="profile-create-title" onSubmit={event => { event.preventDefault(); addCharacter(duplicateNewProfile); }}>
+                <strong id="profile-create-title">Ajouter un personnage</strong>
+                <label>Nom du personnage
+                  <input autoFocus maxLength={50} required value={profileName} placeholder="Nom du personnage"
+                    onChange={event => setProfileName(event.target.value)} />
+                </label>
+                <label>Classe
+                  <select value={newClassId ?? ''} onChange={event => setNewClassId(event.target.value ? Number(event.target.value) : undefined)}>
+                    <option value="">Non définie</option>
+                    {dofusClasses.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+                  </select>
+                </label>
+                <label className="profile-create-dialog__duplicate">
+                  <input type="checkbox" checked={duplicateNewProfile} onChange={event => setDuplicateNewProfile(event.target.checked)} />
+                  Dupliquer la progression du personnage actif
+                </label>
+                {profileMessage && <p role="alert">{profileMessage}</p>}
+                <div className="profile-create-dialog__actions">
+                  <button type="button" onClick={() => setCreateProfileOpen(false)}>Annuler</button>
+                  <button type="submit" disabled={!profileName.trim()}>Valider</button>
+                </div>
+              </form>
+            </div>
+          )}
           {profileConfirmation && (() => {
             const profile = profiles.profiles.find(p => p.id === profileConfirmation.id);
             return <div className="profile-confirm-backdrop">
