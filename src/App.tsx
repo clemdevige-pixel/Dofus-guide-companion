@@ -177,7 +177,6 @@ export function App() {
   const [cardJumpValue, setCardJumpValue] = useState(() => String(viewIndex + 1));
   const [reward, setReward] = useState<DofusReward | null>(null);
   const [rewardImageFailed, setRewardImageFailed] = useState(false);
-  const [lastValidation, setLastValidation] = useState<{ completedIds: string[]; cardIndex: number } | null>(null);
   const [saveError, setSaveError] = useState<string | null>(null);
   const [backupMessage, setBackupMessage] = useState<string | null>(null);
 
@@ -355,7 +354,7 @@ export function App() {
       const index = target.progress.currentStepId ? getStepGroupIndex(route, target.progress.currentStepId) : -1;
       const first = getFirstIncompleteStep(route, new Set(target.progress.completedStepIds));
       setViewIndex(index >= 0 ? index : first ? Math.max(0, getStepGroupIndex(route, first.id)) : 0);
-      setLastValidation(null); setReward(null); setBackupMessage(null);
+      setReward(null); setBackupMessage(null);
       setSecondaryView('profiles'); setProfileMessage(null);
     } catch (error) { setProfileMessage(error instanceof Error ? error.message : 'Action impossible.'); }
   }
@@ -403,7 +402,7 @@ export function App() {
         const next = resetProfile(state, id, route);
         saveProfiles(next); profilesRef.current = next; setProfiles(next);
         setCompletedStepIds(new Set()); setCheckedPreparationItemIds(new Set());
-        setViewIndex(0); setLastValidation(null); setReward(null);
+        setViewIndex(0); setReward(null);
         setProfileMessage('Progression réinitialisée.');
       }
       setProfileConfirmation(null);
@@ -421,7 +420,6 @@ export function App() {
     const shouldComplete = !isCurrentCompleted;
     const earnedReward = shouldComplete ? getNewDofusReward(currentGroup.steps.map(step => step.id), completedStepIds) : undefined;
     if (earnedReward) { setRewardImageFailed(false); setReward(earnedReward); }
-    setLastValidation({ completedIds: [...completedStepIds], cardIndex: viewIndex });
     setCompletedStepIds((previous) => {
       const next = new Set(previous);
       for (const step of currentGroup.steps) {
@@ -454,7 +452,6 @@ export function App() {
       const earnedReward = getNewDofusReward(stepIds, completedStepIds);
       if (earnedReward) { setRewardImageFailed(false); setReward(earnedReward); }
     }
-    setLastValidation({ completedIds: [...completedStepIds], cardIndex: viewIndex });
 
     for (const stepId of stepIds) {
       if (wasCompleted) {
@@ -472,15 +469,6 @@ export function App() {
     if (completesSequence && !containsHardLock && viewIndex < stepGroups.length - 1) {
       setViewIndex((index) => index + 1);
     }
-  }
-
-  function undoLastValidation() {
-    if (!lastValidation) return;
-    setCompletedStepIds(new Set(lastValidation.completedIds));
-    setViewIndex(lastValidation.cardIndex);
-    setSecondaryView(null);
-    setLastValidation(null);
-    setReward(null);
   }
 
   function exportProgressBackup() {
@@ -509,7 +497,7 @@ export function App() {
       if (file.size > 2_000_000) throw new Error('Fichier trop volumineux.');
       const recovered = parseProgressBackup(await file.text(), route);
       const updated = updateProfileProgress(profilesRef.current, profilesRef.current.activeProfileId, recovered);
-      saveProfiles(updated); profilesRef.current = updated; setProfiles(updated);       setLastValidation(null);
+      saveProfiles(updated); profilesRef.current = updated; setProfiles(updated);       
       setReward(null);
       setCompletedStepIds(new Set(recovered.completedStepIds));
       setCheckedPreparationItemIds(new Set(recovered.checkedPreparationItemIds));
@@ -1208,9 +1196,7 @@ export function App() {
 
       {secondaryView !== 'progress' && (
       <footer className="navigation-bar">
-        {lastValidation && (
-          <button className="undo-validation-button" type="button" onClick={undoLastValidation} title="Annuler la dernière validation">↶ Annuler</button>
-        )}
+
         <button type="button" aria-label="Carte précédente" onClick={goPrevious} disabled={viewIndex === 0}>
           ←
         </button>
