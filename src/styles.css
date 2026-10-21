@@ -828,3 +828,12 @@ button:disabled {
 .profile-trophy--obtained img {filter:none;opacity:1}
 .profile-dofus-toggle {display:flex;justify-content:space-between;align-items:center;gap:6px;width:100%;padding:8px 4px;border:0;border-top:1px solid #385440;background:none;color:#d8eadb;text-align:left;font-weight:700;font-size:11px}
 .profile-dofus-list {min-width:0}
+
+
+/* Reveal the original colorful PNG from bottom to top according to route progress. */
+.profile-trophy {position:relative;overflow:hidden}
+.profile-trophy__muted {position:absolute;inset:3px;width:calc(100% - 6px)!important;height:calc(100% - 6px)!important;filter:grayscale(1)!important;opacity:.3!important}
+.profile-trophy__reveal {position:absolute;bottom:3px;left:3px;right:3px;overflow:hidden;display:block;pointer-events:none}
+.profile-trophy__reveal img {position:absolute;bottom:0;left:0;width:100%;height:auto;aspect-ratio:1;object-fit:contain;filter:none!important;opacity:1!important}
+.profile-trophy--obtained {border-color:#d3aa58;box-shadow:inset 0 0 0 1px #ad873a}
+.profile-trophy__check {position:absolute;right:0;bottom:0;display:grid;place-items:center;width:14px;height:14px;border-radius:5px 0 5px 0;background:#d4ad60;color:#132218;font-size:10px;font-weight:900}
