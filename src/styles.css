@@ -799,3 +799,32 @@ button:disabled {
 .profile-confirm__actions {display:flex;gap:8px;min-width:0}
 .profile-confirm__actions button {flex:1;min-width:0;min-height:35px;padding:8px 4px;border:1px solid #65836c;border-radius:7px;background:#284331;font-size:12px}
 .profile-confirm__actions .profile-confirm__danger {border-color:#9a6861;background:#633a35;color:#fff3ef}
+
+
+/* Profile dashboard: quick add and compact Dofus collection. */
+.profile-add-trigger {flex:none; width:100%; margin:0 0 10px; padding:10px; border:1px solid #6b9875; border-radius:8px; background:#294934; color:#e4f5e7; font-size:12px; font-weight:800; cursor:pointer}
+.profile-create-dialog {width:min(100%,350px);max-height:100%; overflow-y:auto;display:grid;gap:12px;min-width:0;padding:16px;border:1px solid #60886a;border-radius:12px;background:#1b2b20;box-shadow:0 12px 35px #000a}
+.profile-create-dialog strong {font-size:15px}
+.profile-create-dialog label {display:grid;gap:6px;font-size:12px;color:#c9e0cf}
+.profile-create-dialog input:not([type="checkbox"]),.profile-create-dialog select {width:100%;min-width:0;padding:9px;border:1px solid #617e69;border-radius:7px;background:#101c14;color:#f2f7f3}
+.profile-create-dialog .profile-create-dialog__duplicate {display:flex;align-items:center;gap:7px;line-height:1.3;font-size:11px}
+.profile-create-dialog__duplicate input {flex:none;accent-color:#77b783}
+.profile-create-dialog__actions {display:flex;gap:7px}
+.profile-create-dialog__actions button {flex:1;min-width:0;padding:9px 5px;border:1px solid #668670;border-radius:7px;background:#253c2c}
+.profile-create-dialog__actions button[type=submit] {background:#376847;font-weight:800}
+.profile-create-dialog__actions button:disabled {opacity:.45}
+.profile-card__toolbar {display:flex;gap:6px;flex-wrap:wrap}
+.profile-card__toolbar button {flex:1;min-width:0;padding:8px 6px;border:1px solid #56765e;border-radius:6px;background:#294531;font-size:11px}
+.profile-card__menu {display:grid;gap:5px;padding:8px;border:1px solid #435f4b;border-radius:7px;background:#132019}
+.profile-card__menu button {padding:8px;text-align:left;border:1px solid #415c49;border-radius:5px;background:#263e2c;font-size:11px}
+.profile-card__menu button:last-child {color:#f4c4bf;border-color:#795250;background:#442929}
+.profile-collection-heading {display:flex;align-items:center;justify-content:space-between;gap:7px;min-width:0}
+.profile-collection-heading strong {font-size:12px}
+.profile-collection-heading small {font-size:10px;color:#b2c9b6;white-space:nowrap}
+.profile-trophy-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(32px,1fr));gap:6px;min-width:0}
+.profile-trophy {aspect-ratio:1;display:grid;place-items:center;padding:3px;border:1px solid #344d3c;border-radius:7px;background:#1c2e22}
+.profile-trophy img {width:100%;height:100%;min-width:0;object-fit:contain;filter:grayscale(1);opacity:.28}
+.profile-trophy--obtained {border-color:#718f67;background:#2a3e2c}
+.profile-trophy--obtained img {filter:none;opacity:1}
+.profile-dofus-toggle {display:flex;justify-content:space-between;align-items:center;gap:6px;width:100%;padding:8px 4px;border:0;border-top:1px solid #385440;background:none;color:#d8eadb;text-align:left;font-weight:700;font-size:11px}
+.profile-dofus-list {min-width:0}
