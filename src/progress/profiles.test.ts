@@ -55,3 +55,15 @@ test('corrupted v2 never discards legacy progress', () => {
   storage.setItem('dofus-guide-companion.profiles.v2', '{oops');
   assert.deepEqual(loadProfiles(storage, route).profiles[0].progress.completedStepIds, ['s1']);
 });
+
+test('class icon choice persists across reload without disturbing progress', () => {
+  const storage = new Storage();
+  const state = loadProfiles(storage, route);
+  const customized = { ...state, profiles: state.profiles.map(p => ({
+    ...p, classId: 17, progress: { ...p.progress, completedStepIds: ['s1'] },
+  })) };
+  saveProfiles(customized, storage);
+  const restored = loadProfiles(storage, route);
+  assert.equal(restored.profiles[0].classId, 17);
+  assert.deepEqual(restored.profiles[0].progress.completedStepIds, ['s1']);
+});
