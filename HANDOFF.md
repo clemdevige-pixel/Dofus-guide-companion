@@ -349,3 +349,15 @@ Lire dans l’ordre : `AGENTS.md`, `SPEC.md`, `ARCHITECTURE.md`, `docs/DATA_MODE
 - Déclenchement : GitHub > Actions > Windows release candidate > Run workflow > branche `agent/initial-scaffold`. Récupérer l'artefact à la fin du job.
 - La compilation `cargo check` n'est pas une preuve d'installation ; faire une recette sur machine Windows réelle avant publication : installation / lancement, redimensionnement, overlay always-on-top, touches globales, sauvegarde multi-profils, redémarrage, sauvegarde import/export, suppression et reset confirmés, célébrations Dofus, installation puis désinstallation.
 - Version encore `1.0.0` et aucune release GitHub publiée. Ne pas qualifier la version de « distribuable validée » avant un vrai installateur exécuté et testé.
+
+
+## Update 2026-10-21 — vérification finale V1 (Incarnam / Astrub figés)
+
+- Décision produit : ne pas réaligner mécaniquement l'ordre sur Tougli ; Incarnam et Astrub sont acceptés avec leurs quêtes et mutualisations existantes. Les divergences d'ordre Tougli documentées dans `docs/TOUGLI_INCARNAM_ASTRUB_AUDIT.md` sont connues, non bloquantes pour la V1 ; il ne s'agit **pas** d'une certification d'équivalence exacte.
+- Dernier état contrôlé : **980 étapes / 32 blocs**, version applicative `1.0.0` ; `agent/initial-scaffold`.
+- Comparaison intégrale des **980** `STEP_ID` du runtime avec les lignes du Sheet `ROUTE` : **0 écart de titre et 0 écart de `DISPLAY_ROLE`**, 0 identifiant runtime absent de la feuille. Les autres colonnes n'ont pas été comparées intégralement dans ce contrôle.
+- Les quatre objectifs géographiques Incarnam (Champs, Lac, Pâturages + mine, Forêt) sont des **TRANSITION** rattachées aux moments existants, sans checkbox supplémentaire. Leurs consignes de quêtes, combats, ressources et crafts restent présentes.
+- Rendu stable des séquences restauré après les tentatives de simplification globale ; bouton d'annulation du footer retiré. Aucun changement React/CSS pendant cette passe de finalisation.
+- Dernier commit antérieur à cette documentation : `176bf7db7058e5a845df747487bd1e09a8e5661e` ; GitHub Actions : **CI verte** (frontend et Tauri Windows : succès), exécutions `39656318536` et `39656306927`.
+- Recette manuelle **à revalider sur le build exact final** : fenêtre étroite/redimensionnement, accordéons, liens DPLN, profils et progression enregistrée après redémarrage, export/import, navigation, progression Incarnam/Astrub et suite du parcours. Les tests CI ne prouvent pas seuls ces comportements visuels et locaux.
+- Après cette mise à jour documentaire : vérifier la CI du nouveau commit, puis construire le bundle Windows pour distribution. Aucun nouveau changement métier n'est demandé avant ce contrôle manuel.
