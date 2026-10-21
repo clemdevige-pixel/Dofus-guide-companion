@@ -1051,7 +1051,7 @@ export function App() {
                   </li>
                 );
               })}
-            </ol>       </ol>
+            </ol>
           </>
         ) : (
           <>
