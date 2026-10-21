@@ -401,7 +401,7 @@
       "type": "quest",
       "dofusSeries": "Dofus Argenté",
       "displayRole": "transition",
-      "title": "Avance Le village dans les nuages, puis lance Produits naturels et Mort au rat !",
+      "title": "Le village dans les nuages",
       "prerequisites": "Le village dans les nuages + Transport peu commun actifs.",
       "action": "LANCER LES 2 / STOP",
       "source": {
@@ -476,7 +476,7 @@
       "type": "major_step",
       "dofusSeries": "Dofus Argenté",
       "displayRole": "objective",
-      "title": "Avance Le village dans les nuages, puis lance La galette secrète",
+      "title": "Le village dans les nuages",
       "prerequisites": "Le village dans les nuages actif",
       "warning": "Lis la recette de la galette immédiatement : les Œufs Chimériques ne comptent que si La galette secrète est active.",
       "action": "AVANCER + LANCER / STOP",
@@ -508,7 +508,8 @@
           },
           "note": "Parle à Anta Brok puis lis la recette."
         }
-      ]
+      ],
+      "instruction": "Avance Le village dans les nuages, puis lance La galette secrète."
     },
     {
       "id": "route-step-1104",
@@ -543,7 +544,7 @@
       "type": "resume",
       "dofusSeries": "Dofus Argenté",
       "displayRole": "objective",
-      "title": "Termine Mise à l'épreuve, puis lance Champs de bataille",
+      "title": "Mise à l'épreuve",
       "warning": "Enchaîne immédiatement sur Champs de bataille avant de quitter la milice.",
       "action": "TERMINER + LANCER / STOP",
       "source": {
@@ -577,7 +578,8 @@
             "y": -4
           }
         }
-      ]
+      ],
+      "instruction": "Termine Mise à l'épreuve, puis lance Champs de bataille."
     },
     {
       "id": "route-step-0012",
@@ -586,7 +588,7 @@
       "type": "resume",
       "dofusSeries": "Dofus Argenté",
       "displayRole": "objective",
-      "title": "Termine Le village dans les nuages, puis lance Espoirs et tragédies",
+      "title": "Le village dans les nuages",
       "prerequisites": "Le village dans les nuages au dernier tour de PNJ.",
       "warning": "Lis le livre demandé par Fécaline avant de quitter la bibliothèque.",
       "action": "TERMINER + LANCER / STOP",
@@ -631,7 +633,8 @@
           },
           "note": "Lis ensuite le livre demandé."
         }
-      ]
+      ],
+      "instruction": "Termine Le village dans les nuages, puis lance Espoirs et tragédies."
     },
     {
       "id": "route-step-1105",
@@ -640,7 +643,7 @@
       "type": "major_step",
       "dofusSeries": "Dofus Argenté",
       "displayRole": "objective",
-      "title": "Avance Transport peu commun, puis lance Un peu de pigment",
+      "title": "Transport peu commun",
       "prerequisites": "Transport peu commun actif ; Espoirs et tragédies actif.",
       "warning": "Active le zaap de la zone pendant ce déplacement.",
       "action": "AVANCER + LANCER / STOP",
@@ -671,7 +674,8 @@
             "y": -5
           }
         }
-      ]
+      ],
+      "instruction": "Avance Transport peu commun, puis lance Un peu de pigment."
     },
     {
       "id": "route-step-0018",
@@ -680,7 +684,7 @@
       "type": "resume",
       "dofusSeries": "Dofus Argenté",
       "displayRole": "objective",
-      "title": "Termine Transport peu commun, puis lance Des vestiges de légende",
+      "title": "Transport peu commun",
       "prerequisites": "Objectif Xélora validé.",
       "warning": "Des vestiges de légende doit être active avant le nettoyage des zones.",
       "action": "TERMINER + LANCER / STOP",
@@ -714,7 +718,8 @@
             "y": -3
           }
         }
-      ]
+      ],
+      "instruction": "Termine Transport peu commun, puis lance Des vestiges de légende."
     },
     {
       "id": "route-step-1106",
@@ -778,7 +783,7 @@
       "type": "resume",
       "dofusSeries": "Dofus Argenté",
       "displayRole": "objective",
-      "title": "Termine Champs de bataille, puis lance Coups d'épée dans l'eau",
+      "title": "Champs de bataille",
       "warning": "Enchaîne la quête milice suivante avant de partir au Lac.",
       "action": "TERMINER + LANCER / STOP",
       "source": {
@@ -811,7 +816,8 @@
             "y": -4
           }
         }
-      ]
+      ],
+      "instruction": "Termine Champs de bataille, puis lance Coups d'épée dans l'eau."
     },
     {
       "id": "route-step-1107",
@@ -882,7 +888,7 @@
       "type": "resume",
       "dofusSeries": "Dofus Argenté",
       "displayRole": "objective",
-      "title": "Termine Produits naturels, puis lance Le métier des aventuriers",
+      "title": "Produits naturels",
       "prerequisites": "Potion de Mini Soin + Goujon en Tranche fabriqués.",
       "warning": "Lance la chasse avant de repartir : la viande tombe pendant les combats suivants.",
       "action": "TERMINER + LANCER / STOP",
@@ -916,7 +922,8 @@
             "y": -3
           }
         }
-      ]
+      ],
+      "instruction": "Termine Produits naturels, puis lance Le métier des aventuriers."
     },
     {
       "id": "route-step-1108",
@@ -941,7 +948,7 @@
       "type": "resume",
       "dofusSeries": "Dofus Argenté",
       "displayRole": "transition",
-      "title": "Termine Le métier des aventuriers, puis lance La hache et la pioche",
+      "title": "Le métier des aventuriers",
       "prerequisites": "Bouillon de Chair fabriqué.",
       "warning": "La hache et la pioche fournit la Ferrite et la Planche à conserver pour Préparation au combat.",
       "action": "TERMINER + LANCER / STOP",
@@ -985,7 +992,7 @@
       "type": "resume",
       "dofusSeries": "Dofus Argenté",
       "displayRole": "objective",
-      "title": "Termine Coups d'épée dans l'eau, puis lance Décime-moi des bouftous",
+      "title": "Coups d'épée dans l'eau",
       "prerequisites": "Monstres du Lac vaincus.",
       "warning": "Prends Décime avant le passage pâturages/mine.",
       "action": "TERMINER + LANCER / STOP",
@@ -1019,7 +1026,8 @@
             "y": -4
           }
         }
-      ]
+      ],
+      "instruction": "Termine Coups d'épée dans l'eau, puis lance Décime-moi des bouftous."
     },
     {
       "id": "route-step-1109",
@@ -1107,7 +1115,7 @@
       "type": "resume",
       "dofusSeries": "Dofus Argenté",
       "displayRole": "objective",
-      "title": "Termine Décime-moi des bouftous, puis lance Chasse aux chapardams",
+      "title": "Décime-moi des bouftous",
       "prerequisites": "Les 4 espèces de Bouftous vaincues.",
       "warning": "Ouvre Chasse avant le passage Forêt.",
       "action": "TERMINER + LANCER / STOP",
@@ -1141,7 +1149,8 @@
             "y": -4
           }
         }
-      ]
+      ],
+      "instruction": "Termine Décime-moi des bouftous, puis lance Chasse aux chapardams."
     },
     {
       "id": "route-step-1110",
@@ -1168,7 +1177,7 @@
       "type": "resume",
       "dofusSeries": "Dofus Argenté",
       "displayRole": "objective",
-      "title": "Termine Des vestiges de légende, puis lance Vu du ciel",
+      "title": "Des vestiges de légende",
       "prerequisites": "Toutes les stèles demandées validées.",
       "warning": "Enchaîne immédiatement la suite exploration.",
       "action": "TERMINER + LANCER / STOP",
@@ -1202,7 +1211,8 @@
             "y": -3
           }
         }
-      ]
+      ],
+      "instruction": "Termine Des vestiges de légende, puis lance Vu du ciel."
     },
     {
       "id": "route-step-1111",
@@ -1282,7 +1292,7 @@
       "type": "resume",
       "dofusSeries": "Dofus Argenté",
       "displayRole": "objective",
-      "title": "Termine Espoirs et tragédies, puis lance Dans la gueule du Milimilou",
+      "title": "Espoirs et tragédies",
       "prerequisites": "La galette secrète active.",
       "warning": "À la bibliothèque, échange aussi 5 Orties contre le Pot de Confiture Maison auprès de Pipelette : garde-le pour Milimilou.",
       "action": "TERMINER + LANCER / STOP",
@@ -1326,7 +1336,8 @@
             "y": -3
           }
         }
-      ]
+      ],
+      "instruction": "Termine Espoirs et tragédies, puis lance Dans la gueule du Milimilou."
     },
     {
       "id": "route-step-0028",
@@ -1335,7 +1346,7 @@
       "type": "resume",
       "dofusSeries": "Dofus Argenté",
       "displayRole": "objective",
-      "title": "Termine Chasse aux chapardams, puis lance Leçon d'humilité",
+      "title": "Chasse aux chapardams",
       "prerequisites": "Chapardams de la Forêt vaincus.",
       "warning": "Ouvre Leçon avant de repartir vers Kruella.",
       "action": "TERMINER + LANCER / STOP",
@@ -1369,7 +1380,8 @@
             "y": -4
           }
         }
-      ]
+      ],
+      "instruction": "Termine Chasse aux chapardams, puis lance Leçon d'humilité."
     },
     {
       "id": "route-step-0017",
@@ -1378,7 +1390,7 @@
       "type": "resume",
       "dofusSeries": "Dofus Argenté",
       "displayRole": "objective",
-      "title": "Termine La hache et la pioche, puis lance Boune un jour, boune toujours",
+      "title": "La hache et la pioche",
       "prerequisites": "Ferrite + Planche Agglomérée fabriquées.",
       "warning": "Ne consomme pas la Ferrite ni la Planche : Préparation au combat les demandera.",
       "action": "TERMINER + LANCER / STOP",
@@ -1412,7 +1424,8 @@
             "y": -3
           }
         }
-      ]
+      ],
+      "instruction": "Termine La hache et la pioche, puis lance Boune un jour, boune toujours."
     },
     {
       "id": "route-step-1112",
@@ -1502,7 +1515,7 @@
       "type": "resume",
       "dofusSeries": "Dofus Argenté",
       "displayRole": "objective",
-      "title": "Termine Leçon d'humilité, puis lance Des chafers qui marchent",
+      "title": "Leçon d'humilité",
       "prerequisites": "Leçon d'humilité active.",
       "warning": "Kruella se trouve en [1,0] ; rends ensuite directement à la milice.",
       "action": "TERMINER + LANCER / STOP",
@@ -1545,7 +1558,8 @@
             "y": -4
           }
         }
-      ]
+      ],
+      "instruction": "Termine Leçon d'humilité, puis lance Des chafers qui marchent."
     },
     {
       "id": "route-step-1113",
@@ -1572,7 +1586,7 @@
       "type": "resume",
       "dofusSeries": "Dofus Argenté",
       "displayRole": "transition",
-      "title": "Termine Boune un jour, boune toujours, puis lance Préparation au combat",
+      "title": "Boune un jour, boune toujours",
       "prerequisites": "Ferrite + Planche conservées.",
       "action": "TERMINER + LANCER / STOP",
       "source": {
@@ -1751,7 +1765,7 @@
       "type": "resume",
       "dofusSeries": "Dofus Argenté",
       "displayRole": "objective",
-      "title": "Termine Dans la gueule du Milimilou, puis lance Destination Astrub",
+      "title": "Dans la gueule du Milimilou",
       "prerequisites": "Hargnok rencontré après la crypte.",
       "action": "TERMINER + LANCER / STOP",
       "source": {
@@ -1784,7 +1798,8 @@
             "y": -3
           }
         }
-      ]
+      ],
+      "instruction": "Termine Dans la gueule du Milimilou, puis lance Destination Astrub."
     },
     {
       "id": "route-step-1117",
@@ -2211,10 +2226,10 @@
       "blockId": "block-02",
       "type": "major_step",
       "dofusSeries": "Dofus Argenté",
-      "title": "Avance Ça sent le gaz, puis lance Crise sanitaire",
+      "title": "Ça sent le gaz",
       "prerequisites": "Ça sent le gaz active.",
       "action": "AVANCER / LANCER",
-      "instruction": "Garde les deux quêtes actives.",
+      "instruction": "Avance Ça sent le gaz, puis lance Crise sanitaire. Garde les deux quêtes actives.",
       "location": {
         "x": 4,
         "y": -19
@@ -2312,7 +2327,7 @@
       "type": "resume",
       "dofusSeries": "Dofus Argenté",
       "displayRole": "objective",
-      "title": "Termine Ça tombe à l'eau, puis lance Six pieds sous terre",
+      "title": "Ça tombe à l'eau",
       "action": "TERMINER / LANCER",
       "momentId": "moment-route-step-0054",
       "location": {
@@ -2517,7 +2532,7 @@
       "type": "resume",
       "dofusSeries": "Dofus Argenté",
       "displayRole": "transition",
-      "title": "Termine Ça sent le gaz, puis lance Balade en forêt et L'histoire en mouvement",
+      "title": "Ça sent le gaz",
       "prerequisites": "Rathrosk suiveur obtenu.",
       "action": "TERMINER / LANCER LES 2",
       "momentId": "moment-route-step-1136",
@@ -3751,14 +3766,15 @@
       "type": "resume",
       "dofusSeries": "Dofus Argenté",
       "displayRole": "objective",
-      "title": "Termine Chacha blues, puis lance les deux quêtes du cimetière",
+      "title": "Chacha blues",
       "prerequisites": "Chacha Blues active depuis son lancement auprès de Soki.",
       "action": "TERMINER",
       "momentId": "moment-route-step-1121",
       "location": {
         "x": 7,
         "y": -20
-      }
+      },
+      "instruction": "Termine Chacha blues, puis lance les deux quêtes du cimetière."
     },
     {
       "id": "route-step-1121",
