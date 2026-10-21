@@ -341,3 +341,11 @@ Lire dans l’ordre : `AGENTS.md`, `SPEC.md`, `ARCHITECTURE.md`, `docs/DATA_MODE
 - Fiche de profil : actions sous `⋯ Gérer`, collection de 13 Dofus en grille (couleur si étape d'obtention cochée, sinon grisé) ; barres de progression par série désormais repliées par défaut.
 - Aucun changement de la route ni du schéma de sauvegarde. CI frontend verte sur `c7f7d39af`; vérification Tauri Windows encore en cours au moment de la note.
 - Recette : fenêtre étroite, création et duplication depuis modal, classe conservée, grille obtenus/non obtenus, ouverture des barres et actions du menu.
+
+## 2026-10-21 — Pré-release et packaging Windows
+
+- Dernière CI validée avant chantier : `716deb461`, frontend + Tauri Windows en succès.
+- Ajout du workflow manuel `.github/workflows/windows-release-candidate.yml` : tests route + validation puis `pnpm tauri build` sur Windows ; téléchargeables sous l'artefact `dofus-guide-companion-windows-rc` (NSIS exe et/ou MSI), conservation 14 jours.
+- Déclenchement : GitHub > Actions > Windows release candidate > Run workflow > branche `agent/initial-scaffold`. Récupérer l'artefact à la fin du job.
+- La compilation `cargo check` n'est pas une preuve d'installation ; faire une recette sur machine Windows réelle avant publication : installation / lancement, redimensionnement, overlay always-on-top, touches globales, sauvegarde multi-profils, redémarrage, sauvegarde import/export, suppression et reset confirmés, célébrations Dofus, installation puis désinstallation.
+- Version encore `1.0.0` et aucune release GitHub publiée. Ne pas qualifier la version de « distribuable validée » avant un vrai installateur exécuté et testé.
