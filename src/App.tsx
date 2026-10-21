@@ -131,7 +131,6 @@ export function App() {
   const initialProfiles = useMemo(() => loadProfiles(), []);
   const initialProgress = initialProfiles.profiles.find(p => p.id === initialProfiles.activeProfileId)!.progress;
   const profilesRef = useRef<ProfilesState>(initialProfiles);
-  const skipNextSave = useRef(false);
   const [profiles, setProfiles] = useState<ProfilesState>(initialProfiles);
   const [profileName, setProfileName] = useState('');
   const [profileMessage, setProfileMessage] = useState<string | null>(null);
@@ -208,7 +207,6 @@ export function App() {
   }, [currentGroup?.id, currentGroup?.isSequence, activeSequenceObjectiveId, sequenceObjectives]);
 
   useEffect(() => {
-    if (skipNextSave.current) { skipNextSave.current = false; return; }
     try {
       const step = currentGroup?.steps.find(x => !completedStepIds.has(x.id)) ?? currentGroup?.steps[0];
       const snapshot: ProgressState = { completedStepIds: [...completedStepIds],
@@ -221,7 +219,7 @@ export function App() {
       console.error('Sauvegarde de profil impossible.', error);
       setSaveError('Sauvegarde locale impossible. Exporte ta progression depuis Paramètres.');
     }
-  }, [completedStepIds, checkedPreparationItemIds, compact, currentGroup]);
+  }, [completedStepIds, checkedPreparationItemIds, compact, currentGroup, profiles.activeProfileId]);
 
   useEffect(() => {
     saveShortcutBindings(shortcutBindings);
@@ -340,8 +338,7 @@ export function App() {
       const target = merged.profiles.find(p => p.id === merged.activeProfileId);
       if (!target) throw new Error('Profil introuvable.');
       saveProfiles(merged); profilesRef.current = merged; setProfiles(merged);
-      skipNextSave.current = true;
-      setCompletedStepIds(new Set(target.progress.completedStepIds));
+            setCompletedStepIds(new Set(target.progress.completedStepIds));
       setCheckedPreparationItemIds(new Set(target.progress.checkedPreparationItemIds));
       setCompact(target.progress.compact);
       const index = target.progress.currentStepId ? getStepGroupIndex(route, target.progress.currentStepId) : -1;
@@ -380,8 +377,7 @@ export function App() {
     try {
       const next = resetProfile(profilesRef.current, active.id, route);
       saveProfiles(next); profilesRef.current = next; setProfiles(next);
-      skipNextSave.current = true;
-      setCompletedStepIds(new Set()); setCheckedPreparationItemIds(new Set());
+            setCompletedStepIds(new Set()); setCheckedPreparationItemIds(new Set());
       setViewIndex(0); setLastValidation(null); setReward(null);
       setProfileMessage('Progression réinitialisée.');
     } catch (error) { setProfileMessage(error instanceof Error ? error.message : 'Réinitialisation impossible.'); }
@@ -483,8 +479,7 @@ export function App() {
       if (file.size > 2_000_000) throw new Error('Fichier trop volumineux.');
       const recovered = parseProgressBackup(await file.text(), route);
       const updated = updateProfileProgress(profilesRef.current, profilesRef.current.activeProfileId, recovered);
-      saveProfiles(updated); profilesRef.current = updated; setProfiles(updated); skipNextSave.current = true;
-      setLastValidation(null);
+      saveProfiles(updated); profilesRef.current = updated; setProfiles(updated);       setLastValidation(null);
       setReward(null);
       setCompletedStepIds(new Set(recovered.completedStepIds));
       setCheckedPreparationItemIds(new Set(recovered.checkedPreparationItemIds));
