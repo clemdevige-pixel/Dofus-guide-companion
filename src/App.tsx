@@ -1010,17 +1010,22 @@ export function App() {
                 const completed = objective.steps.every((step) => completedStepIds.has(step.id));
                 const active = objective.id === activeSequenceObjectiveId;
                 const stepIds = objective.steps.map((step) => step.id);
+                const expandable = hasExpandableObjectiveDetails(objective.steps);
+                const expanded = expandable && objective.id === expandedSequenceObjectiveId;
                 return (
                   <li
                     className={['sequence-item', completed ? 'sequence-item--completed' : '', active ? 'sequence-item--active' : ''].filter(Boolean).join(' ')}
                     key={objective.id}
+                    onClick={() => {
+                      if (expandable) setExpandedSequenceObjectiveId((current) => current === objective.id ? null : objective.id);
+                    }}
                   >
                     <button
                       className="sequence-checkbox"
                       type="button"
                       aria-label={completed ? `Décocher ${displayStep.title}` : `Cocher ${displayStep.title}`}
                       aria-pressed={completed}
-                      onClick={() => toggleSequenceObjective(stepIds)}
+                      onClick={(event) => { event.stopPropagation(); toggleSequenceObjective(stepIds); }}
                     >
                       {completed ? '✓' : active ? '→' : ''}
                     </button>
@@ -1034,7 +1039,7 @@ export function App() {
                                 className="source-title-button"
                                 type="button"
                                 title={`Ouvrir ${step.source.label} : ${step.title}`}
-                                onClick={() => void openExternalSource(step.source!.url)}
+                                onClick={(event) => { event.stopPropagation(); void openExternalSource(step.source!.url); }}
                               >
                                 {step.title}
                               </button>
@@ -1043,8 +1048,15 @@ export function App() {
                             )}
                           </span>
                           {(step.warning || step.instruction || step.launchInstruction) && (
-                            <span className="sequence-simple-row__hint" title={[step.warning, step.launchInstruction, step.instruction].filter(Boolean).join('\n')} aria-label="Information complémentaire">ⓘ</span>
+                            <span className="sequence-simple-row__hint" aria-hidden="true">{expanded ? '−' : '＋'}</span>
                           )}
+                        </div>
+                      ))}
+                      {expanded && objective.steps.map((step) => (
+                        <div className="sequence-simple-row__details" key={`detail:${step.id}`}>
+                          {step.warning && <span className="sequence-item__note">{step.warning}</span>}
+                          {step.launchInstruction && !step.location && <span className="sequence-item__note">{step.launchInstruction}</span>}
+                          {step.instruction && <span className="sequence-item__note">{step.instruction}</span>}
                         </div>
                       ))}
                     </div>
