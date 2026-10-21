@@ -102,6 +102,22 @@ function hasExpandableObjectiveDetails(steps: RouteStep[]): boolean {
   });
 }
 
+/** Show only quest handoffs in the collapsed sequence, not the full DPLN walkthrough. */
+function getSequenceQuestActions(steps: RouteStep[]): GuideItem[] {
+  const seen = new Set<string>();
+  const result: GuideItem[] = [];
+  for (const step of steps) {
+    for (const item of step.guideItems ?? []) {
+      if (item.action !== 'take' && item.action !== 'finish') continue;
+      const key = `${item.action}:${item.label}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      result.push(item);
+    }
+  }
+  return result;
+}
+
 function getParallelGroupLabel(steps: RouteStep[]): string {
   return [...new Set(steps.map((step) => step.title))].join(' + ');
 }
@@ -1013,6 +1029,7 @@ export function App() {
                 const expanded = expandable && objective.id === expandedSequenceObjectiveId;
                 const future = !completed && !active;
                 const stepIds = objective.steps.map((step) => step.id);
+                const questActions = getSequenceQuestActions(objective.steps);
                 const summaryCoordinate = !expandable ? getSequenceCoordinate(displayStep) : undefined;
                 const itemClasses = [
                   'sequence-item',
@@ -1093,6 +1110,32 @@ export function App() {
                           )}
                         </div>
                       </div>
+
+                      {questActions.length > 0 && (
+                        <div className="sequence-item__quest-actions" aria-label="Actions de quête">
+                          {questActions.map((item) => (
+                            <div className="sequence-item__quest-action" key={`${item.action}:${item.label}`}>
+                              <span className={`sequence-item__action sequence-item__action--${item.action === 'take' ? 'start' : 'success'}`}>
+                                {item.action === 'take' ? 'LANCER' : 'TERMINER'}
+                              </span>
+                              <span>{item.label}</span>
+                              {item.location && (
+                                <button
+                                  className="guide-location-button"
+                                  type="button"
+                                  title={`Copier /travel ${item.location.x} ${item.location.y}`}
+                                  onClick={(event) => {
+                                    event.stopPropagation();
+                                    void copyToClipboard(`/travel ${item.location!.x} ${item.location!.y}`);
+                                  }}
+                                >
+                                  [${item.location.x},${item.location.y}] · ⧉
+                                </button>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      )}
 
                       {expanded && objective.steps.map((step) => {
                         const coordinate = getSequenceCoordinate(step);
