@@ -6,6 +6,7 @@ import { PreparationChecklist } from './components/PreparationChecklist';
 import { StepMarkers } from './components/StepMarkers';
 import { loadProgress, parseProgressBackup, saveProgress } from './progress/storage';
 import { loadBundledRoute } from './route/loader';
+import { getNewDofusReward, type DofusReward } from './route/dofusRewards';
 import {
   getActiveParallelGroups,
   getFirstIncompleteStep,
@@ -157,6 +158,8 @@ export function App() {
   });
 
   const [cardJumpValue, setCardJumpValue] = useState(() => String(viewIndex + 1));
+  const [reward, setReward] = useState<DofusReward | null>(null);
+  const [rewardImageFailed, setRewardImageFailed] = useState(false);
   const [lastValidation, setLastValidation] = useState<{ completedIds: string[]; cardIndex: number } | null>(null);
   const [saveError, setSaveError] = useState<string | null>(null);
   const [backupMessage, setBackupMessage] = useState<string | null>(null);
@@ -322,6 +325,8 @@ export function App() {
     }
 
     const shouldComplete = !isCurrentCompleted;
+    const earnedReward = shouldComplete ? getNewDofusReward(currentGroup.steps.map(step => step.id), completedStepIds) : undefined;
+    if (earnedReward) { setRewardImageFailed(false); setReward(earnedReward); }
     setLastValidation({ completedIds: [...completedStepIds], cardIndex: viewIndex });
     setCompletedStepIds((previous) => {
       const next = new Set(previous);
@@ -351,6 +356,10 @@ export function App() {
     );
     const wasCompleted = stepIds.every((stepId) => completedStepIds.has(stepId));
     const nextCompletedStepIds = new Set(completedStepIds);
+    if (!wasCompleted) {
+      const earnedReward = getNewDofusReward(stepIds, completedStepIds);
+      if (earnedReward) { setRewardImageFailed(false); setReward(earnedReward); }
+    }
     setLastValidation({ completedIds: [...completedStepIds], cardIndex: viewIndex });
 
     for (const stepId of stepIds) {
@@ -377,6 +386,7 @@ export function App() {
     setViewIndex(lastValidation.cardIndex);
     setSecondaryView(null);
     setLastValidation(null);
+    setReward(null);
   }
 
   function exportProgressBackup() {
@@ -405,6 +415,7 @@ export function App() {
       if (file.size > 2_000_000) throw new Error('Fichier trop volumineux.');
       const recovered = parseProgressBackup(await file.text(), route);
       setLastValidation(null);
+      setReward(null);
       setCompletedStepIds(new Set(recovered.completedStepIds));
       setCheckedPreparationItemIds(new Set(recovered.checkedPreparationItemIds));
       setCompact(recovered.compact);
@@ -1034,6 +1045,24 @@ export function App() {
           </>
         )}
       </section>
+      )}
+
+      {reward && (
+        <section className={`dofus-reward dofus-reward--${reward.tier}`} role="dialog" aria-modal="true" aria-label={`Dofus obtenu : ${reward.name}`}>
+          <div className="dofus-reward__panel">
+            <p className="dofus-reward__eyebrow">DOFUS OBTENU</p>
+            <div className="dofus-reward__image">
+              {!rewardImageFailed ? (
+                <img src={reward.image} alt={reward.name} onError={() => setRewardImageFailed(true)} />
+              ) : (
+                <span className="dofus-reward__placeholder" aria-hidden="true">✦</span>
+              )}
+            </div>
+            <h2>Félicitations !</h2>
+            <p className="dofus-reward__name">Tu as obtenu le {reward.name}.</p>
+            <button type="button" onClick={() => setReward(null)}>Continuer →</button>
+          </div>
+        </section>
       )}
 
       {secondaryView !== 'progress' && (
