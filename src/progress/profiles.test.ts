@@ -44,7 +44,7 @@ test('separate progress, duplication, rename, deletion, and reset', () => {
   state = deleteProfile(state, 'copy');
   assert.equal(state.profiles.length, 2);
   saveProfiles(state, storage);
-  assert.equal(loadProfiles(storage, route).activeProfileId, 'alt');
+  assert.equal(loadProfiles(storage, route).activeProfileId, firstId);
   assert.throws(() => createProfile(state, ' ', emptyProgress(route)), /Nom/);
   assert.throws(() => deleteProfile({ ...state, profiles: [state.profiles[0]], activeProfileId: firstId }, firstId), /au moins un/);
 });
