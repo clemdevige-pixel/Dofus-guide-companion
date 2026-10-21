@@ -315,3 +315,38 @@
 .sequence-item--completed { opacity: .62; }
 .sequence-item--future { opacity: .82; }
 .sequence-item__header strong { overflow-wrap: anywhere; }
+
+/* Structured quest handoffs stay readable without opening an objective. */
+.sequence-item__quest-actions {
+  display: grid;
+  gap: 5px;
+  margin-top: 6px;
+  min-width: 0;
+}
+.sequence-item__quest-action {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  color: #dce9de;
+  font-size: 11px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+.sequence-item__quest-action > .sequence-item__action {
+  flex: 0 0 65px;
+}
+.sequence-item__quest-action > .guide-location-button {
+  margin-left: auto;
+}
+.sequence-item--completed .sequence-item__quest-actions {
+  display: none;
+}
+.overlay--compact .sequence-item__quest-action {
+  font-size: 10px;
+}
+@media (max-width: 350px) {
+  .sequence-item__quest-action > .sequence-item__action {
+    flex-basis: 55px;
+  }
+}
