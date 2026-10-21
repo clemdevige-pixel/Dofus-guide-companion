@@ -721,3 +721,20 @@ button:disabled {
 .dofus-reward__name { margin: 0; color: #cce5ce; line-height: 1.4; }
 .dofus-reward__panel > button { width: 100%; min-height: 40px; border-radius: 8px; border: 1px solid #62846a; background: #294d31; color: #f1f7f1; font-weight: 800; cursor: pointer; }
 .dofus-reward__panel > button:hover { background: #32613d; }
+
+
+/* Local character profiles */
+.profile-switch { display: block; max-width: 100%; margin: 0 0 3px; padding: 2px 5px; border: 1px solid #41634a; border-radius: 5px; background: #22392a; color: #d3edd6; font-size: 11px; font-weight: 800; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; cursor: pointer; }
+.profiles-panel { display: flex; flex-direction: column; gap: 12px; overflow-y: auto; }
+.character-row { display: flex; gap: 5px; align-items: stretch; }
+.character-row button { min-width: 28px; border: 1px solid #415448; border-radius: 6px; background: #1a2a20; cursor: pointer; }
+.character-row button:first-child { flex: 1; min-width: 0; display: flex; justify-content: space-between; gap: 5px; padding: 9px; }
+.character-row button:first-child strong { overflow: hidden; text-overflow: ellipsis; }
+.character-row .character-active { border-color: #96b89b; background: #294833; }
+.character-create { display: grid; gap: 6px; color: #c5d9ca; font-size: 12px; }
+.character-create input { width: 100%; padding: 8px; border: 1px solid #516757; border-radius: 6px; background: #152119; color: #fff; }
+.character-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+.character-actions button { flex: 1; min-width: 105px; padding: 8px; border: 1px solid #61816b; border-radius: 6px; background: #294832; }
+.character-danger { display: grid; gap: 7px; padding: 10px; border: 1px solid #755449; border-radius: 8px; }
+.character-danger p { margin: 0; font-size: 12px; color: #cab5ad; }
+.character-danger button { padding: 8px; border: 1px solid #946458; border-radius: 6px; background: #51342d; }
