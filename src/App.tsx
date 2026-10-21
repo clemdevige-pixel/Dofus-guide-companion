@@ -663,9 +663,18 @@ export function App() {
                   <div className="profile-trophy-grid" aria-label="Dofus obtenus">
                     {Object.values(dofusRewards).map(reward => {
                       const obtained = ids.has(reward.stepId);
+                      const related = route.steps.filter(step => step.dofusSeries === reward.name);
+                      const completed = related.filter(step => ids.has(step.id)).length;
+                      const percent = obtained ? 100 : related.length ? Math.round(completed / related.length * 100) : 0;
                       return <div className={`profile-trophy${obtained ? ' profile-trophy--obtained' : ''}`}
-                        title={`${reward.name} : ${obtained ? 'obtenu' : 'non obtenu'}`} key={reward.stepId}>
-                        <img src={reward.image} alt={reward.name} />
+                        title={`${reward.name} · ${percent}% · ${obtained ? 'Obtenu' : 'Non obtenu'}`}
+                        aria-label={`${reward.name}, progression ${percent}%, ${obtained ? 'obtenu' : 'non obtenu'}`}
+                        key={reward.stepId}>
+                        <img className="profile-trophy__muted" src={reward.image} alt="" aria-hidden="true" />
+                        <span className="profile-trophy__reveal" style={{height: `${percent}%`}} aria-hidden="true">
+                          <img src={reward.image} alt="" />
+                        </span>
+                        {obtained && <span className="profile-trophy__check" aria-hidden="true">✓</span>}
                       </div>;
                     })}
                   </div>
