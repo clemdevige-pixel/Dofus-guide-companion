@@ -112,6 +112,30 @@ export function reconcileProgressWithRoute(
   };
 }
 
+
+/** Import explicitly requested by the player. Reject malformed backups rather than wiping progress. */
+export function parseProgressBackup(raw: string, route: RouteDocument): ProgressState {
+  const value: unknown = JSON.parse(raw);
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    throw new Error('Fichier invalide.');
+  }
+  const backup = value as Record<string, unknown>;
+  if (!Array.isArray(backup.completedStepIds)
+    || !backup.completedStepIds.every(id => typeof id === 'string')
+    || !Array.isArray(backup.checkedPreparationItemIds)
+    || !backup.checkedPreparationItemIds.every(id => typeof id === 'string')
+    || typeof backup.compact !== 'boolean') {
+    throw new Error('Format de sauvegarde non reconnu.');
+  }
+  return reconcileProgressWithRoute({
+    completedStepIds: backup.completedStepIds as string[],
+    checkedPreparationItemIds: backup.checkedPreparationItemIds as string[],
+    compact: backup.compact,
+    ...(typeof backup.currentStepId === 'string' ? { currentStepId: backup.currentStepId } : {}),
+    ...(typeof backup.routeVersion === 'string' ? { routeVersion: backup.routeVersion } : {}),
+  }, route);
+}
+
 export function loadProgress(
   storage: ProgressStorage = window.localStorage,
   route: RouteDocument = loadBundledRoute(),
