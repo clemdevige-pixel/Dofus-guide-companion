@@ -788,3 +788,14 @@ button:disabled {
 .profile-card__actions button:last-child {color:#f0c0ba;border-color:#8d5b58;background:#472d2c}
 .profile-card__detail>.profile-reset {width:100%}
 @media (max-width:270px) {.profile-card__actions {grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+
+/* Confirmation dialogs live inside the resizable Tauri viewport. */
+.profile-confirm-backdrop {position:absolute;inset:0;z-index:80;display:grid;place-items:center;background:#07100ddc;padding:12px;min-width:0}
+.profile-confirm {box-sizing:border-box;width:100%;max-width:360px;min-width:0;max-height:100%;overflow-y:auto;display:grid;gap:11px;padding:16px;border:1px solid #8f655b;border-radius:12px;background:#1d2920;box-shadow:0 14px 35px #0009;overflow-wrap:anywhere}
+.profile-confirm > strong {font-size:15px;color:#f8eee9}
+.profile-confirm p {margin:0;font-size:12px;line-height:1.5;color:#e0e8e0}
+.profile-confirm__warning {color:#e5b7a6!important}
+.profile-confirm__actions {display:flex;gap:8px;min-width:0}
+.profile-confirm__actions button {flex:1;min-width:0;min-height:35px;padding:8px 4px;border:1px solid #65836c;border-radius:7px;background:#284331;font-size:12px}
+.profile-confirm__actions .profile-confirm__danger {border-color:#9a6861;background:#633a35;color:#fff3ef}
