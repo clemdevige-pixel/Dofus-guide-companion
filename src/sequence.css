@@ -397,3 +397,17 @@
 .sequence-list--simple .sequence-item__content > .sequence-item__header::before { display: none; }
 .sequence-list--simple .sequence-item--completed .sequence-simple-row__title { text-decoration: line-through; }
 .overlay--compact .sequence-simple-row__title { font-size: 11px; }
+
+.sequence-list--simple .sequence-item { cursor: pointer; }
+.sequence-simple-row__details {
+  display: grid;
+  gap: 4px;
+  padding: 4px 0 5px;
+  min-width: 0;
+  border-top: 1px solid #293a30;
+}
+.sequence-simple-row__details:empty { display: none; }
+.sequence-simple-row__details .sequence-item__note {
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+}
