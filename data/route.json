@@ -3751,7 +3751,7 @@
       "type": "resume",
       "dofusSeries": "Dofus Argenté",
       "displayRole": "objective",
-      "title": "Chacha blues",
+      "title": "Termine Chacha blues, puis lance les deux quêtes du cimetière",
       "prerequisites": "Chacha Blues active depuis son lancement auprès de Soki.",
       "action": "TERMINER",
       "momentId": "moment-route-step-1121",
@@ -3801,7 +3801,8 @@
           },
           "note": "Donne les ingrédients à Nistracolamus et récupère l'eau bénite."
         }
-      ]
+      ],
+      "instruction": "En [2,-14], parle à Nistracolamus pour lancer Le repos est dans le champ ; donne les ingrédients demandés et récupère l'eau bénite. Garde la quête active pendant le parcours du cimetière."
     },
     {
       "id": "route-step-1122",
@@ -3836,7 +3837,8 @@
           },
           "note": "Parle à Becky Gorr."
         }
-      ]
+      ],
+      "instruction": "En [-1,-13], parle à Becky Gorr pour lancer L'invasion des profanateurs de sépulture. Ne la termine pas ici : le caveau et le rendu sont prévus plus loin."
     },
     {
       "id": "route-step-1123",
@@ -3844,7 +3846,7 @@
       "blockId": "block-03",
       "type": "major_step",
       "displayRole": "objective",
-      "title": "Cimetière d'Astrub — 3 quêtes",
+      "title": "Avance les trois quêtes du cimetière d'Astrub",
       "prerequisites": "Légende d'automne + Le repos est dans le champ + L'invasion des profanateurs actives.",
       "warning": "Ne rends pas Le repos est dans le champ à la fin de cette boucle ; la quête reprend plus tard.",
       "action": "FAIRE LE PARCOURS",
