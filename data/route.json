@@ -2006,7 +2006,7 @@
       "title": "Donjon en mousse",
       "prerequisites": "Niveau > 19.",
       "action": "LANCER / STOP",
-      "instruction": "Garde Donjon en mousse active jusqu’à sa reprise plus tard.",
+      "instruction": "En [1,-15], lance Donjon en mousse puis garde cette quête active : elle sera terminée après le Château Ensablé.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/donjon-en-mousse.html"
@@ -3070,7 +3070,7 @@
         "x": 1,
         "y": -29
       },
-      "instruction": "Garde Le génie se meut active jusqu’à sa reprise plus tard."
+      "instruction": "En [1,-29], lance Le génie se meut. Ne la rends pas ici : la route la reprend après Tainéla et la termine lors du retour en forêt."
     },
     {
       "id": "route-step-1143",
@@ -3523,7 +3523,7 @@
         "x": 5,
         "y": -17
       },
-      "instruction": "Garde Les as de la cambriole active jusqu’à sa reprise plus tard."
+      "instruction": "En [5,-17], lance Les as de la cambriole et avance ses objectifs jusqu'au passage de Kankreblath. Garde-la active jusqu'au rendu prévu après ce donjon."
     },
     {
       "id": "route-step-1152",
@@ -4692,7 +4692,8 @@
       "location": {
         "x": 1,
         "y": -15
-      }
+      },
+      "instruction": "En [1,-15], lance Donjon rikiki avant d'entrer dans la Cache de Kankreblath. La quête sera terminée après le donjon."
     },
     {
       "id": "route-step-0089",
