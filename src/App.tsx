@@ -102,22 +102,6 @@ function hasExpandableObjectiveDetails(steps: RouteStep[]): boolean {
   });
 }
 
-/** Show only quest handoffs in the collapsed sequence, not the full DPLN walkthrough. */
-function getSequenceQuestActions(steps: RouteStep[]): GuideItem[] {
-  const seen = new Set<string>();
-  const result: GuideItem[] = [];
-  for (const step of steps) {
-    for (const item of step.guideItems ?? []) {
-      if (item.action !== 'take' && item.action !== 'finish') continue;
-      const key = `${item.action}:${item.label}`;
-      if (seen.has(key)) continue;
-      seen.add(key);
-      result.push(item);
-    }
-  }
-  return result;
-}
-
 function getParallelGroupLabel(steps: RouteStep[]): string {
   return [...new Set(steps.map((step) => step.title))].join(' + ');
 }
@@ -1020,199 +1004,54 @@ export function App() {
                 : `${sequenceObjectives.length} objectifs à enchaîner`}
             </p>
 
-            <ol className="sequence-list">
+            <ol className="sequence-list sequence-list--simple">
               {sequenceObjectives.map((objective) => {
                 const displayStep = getObjectiveDisplayStep(objective.steps);
                 const completed = objective.steps.every((step) => completedStepIds.has(step.id));
                 const active = objective.id === activeSequenceObjectiveId;
-                const expandable = hasExpandableObjectiveDetails(objective.steps);
-                const expanded = expandable && objective.id === expandedSequenceObjectiveId;
-                const future = !completed && !active;
                 const stepIds = objective.steps.map((step) => step.id);
-                const questActions = getSequenceQuestActions(objective.steps);
-                const showQuestActions = questActions.length > 1 || objective.steps.some((step) => step.displayRole === 'transition' && step.guideItems?.some((item) => item.action === 'take' || item.action === 'finish'));
-                const summaryCoordinate = !expandable ? getSequenceCoordinate(displayStep) : undefined;
-                const itemClasses = [
-                  'sequence-item',
-                  completed ? 'sequence-item--completed' : '',
-                  active ? 'sequence-item--active' : '',
-                  future ? 'sequence-item--future' : '',
-                  expandable ? 'sequence-item--expandable' : '',
-                  expanded ? 'sequence-item--expanded' : '',
-                ].filter(Boolean).join(' ');
-
                 return (
                   <li
-                    className={itemClasses}
+                    className={['sequence-item', completed ? 'sequence-item--completed' : '', active ? 'sequence-item--active' : ''].filter(Boolean).join(' ')}
                     key={objective.id}
-                    tabIndex={expandable ? 0 : undefined}
-                    role={expandable ? 'group' : undefined}
-                    aria-label={expandable ? `Détails de ${displayStep.title} — Entrée pour ouvrir ou fermer` : undefined}
-                    onKeyDown={(event) => {
-                      if (!expandable || (event.key !== 'Enter' && event.key !== ' ')) return;
-                      if (event.target !== event.currentTarget) return;
-                      event.preventDefault();
-                      setExpandedSequenceObjectiveId((value) => value === objective.id ? null : objective.id);
-                    }}
-                    onClick={() => {
-                      if (!expandable) return;
-                      setExpandedSequenceObjectiveId((current) =>
-                        current === objective.id ? null : objective.id,
-                      );
-                    }}
                   >
                     <button
                       className="sequence-checkbox"
                       type="button"
                       aria-label={completed ? `Décocher ${displayStep.title}` : `Cocher ${displayStep.title}`}
                       aria-pressed={completed}
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        toggleSequenceObjective(stepIds);
-                      }}
+                      onClick={() => toggleSequenceObjective(stepIds)}
                     >
                       {completed ? '✓' : active ? '→' : ''}
                     </button>
                     <div className="sequence-item__content">
-                      <div className="sequence-item__header">
-                        <strong>
-                          <span className="title-with-markers">
-                            <StepMarkers step={displayStep} />
-                            {displayStep.source ? (
+                      {objective.steps.map((step) => (
+                        <div className="sequence-simple-row" key={step.id}>
+                          <span className="sequence-simple-row__title" title={step.title}>
+                            <StepMarkers step={step} />
+                            {step.source ? (
                               <button
                                 className="source-title-button"
                                 type="button"
-                                title={`Ouvrir ${displayStep.source.label}`}
-                                onClick={(event) => {
-                                  event.stopPropagation();
-                                  void openExternalSource(displayStep.source!.url);
-                                }}
+                                title={`Ouvrir ${step.source.label} : ${step.title}`}
+                                onClick={() => void openExternalSource(step.source!.url)}
                               >
-                                {displayStep.title}
+                                {step.title}
                               </button>
                             ) : (
-                              displayStep.title
+                              step.title
                             )}
                           </span>
-                        </strong>
-                        <div className="sequence-item__summary-tools">
-                          {summaryCoordinate && (
-                            <button
-                              className="guide-location-button"
-                              type="button"
-                              title={`Copier /travel ${summaryCoordinate.x} ${summaryCoordinate.y}`}
-                              onClick={(event) => {
-                                event.stopPropagation();
-                                void copyToClipboard(`/travel ${summaryCoordinate.x} ${summaryCoordinate.y}`);
-                              }}
-                            >
-                              [{summaryCoordinate.x},{summaryCoordinate.y}] · ⧉
-                            </button>
+                          {(step.warning || step.instruction || step.launchInstruction) && (
+                            <span className="sequence-simple-row__hint" title={[step.warning, step.launchInstruction, step.instruction].filter(Boolean).join('\n')} aria-label="Information complémentaire">ⓘ</span>
                           )}
                         </div>
-                      </div>
-
-                      {showQuestActions && (
-                        <div className="sequence-item__quest-actions" aria-label="Actions de quête">
-                          {questActions.map((item) => (
-                            <div className="sequence-item__quest-action" key={`${item.action}:${item.label}`}>
-                              <span className={`sequence-item__action sequence-item__action--${item.action === 'take' ? 'start' : 'success'}`}>
-                                {item.action === 'take' ? 'LANCER' : 'TERMINER'}
-                              </span>
-                              <span>{item.label}</span>
-                              {item.location && (
-                                <button
-                                  className="guide-location-button"
-                                  type="button"
-                                  title={`Copier /travel ${item.location.x} ${item.location.y}`}
-                                  onClick={(event) => {
-                                    event.stopPropagation();
-                                    void copyToClipboard(`/travel ${item.location!.x} ${item.location!.y}`);
-                                  }}
-                                >
-                                  [${item.location.x},${item.location.y}] · ⧉
-                                </button>
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      )}
-
-                      {expanded && objective.steps.map((step) => {
-                        const coordinate = getSequenceCoordinate(step);
-                        const hasDistinctSource = Boolean(
-                          step.source && step.source.url !== displayStep.source?.url,
-                        );
-                        return (
-                          <div className="sequence-item__detail" key={step.id}>
-                            {step.warning && (
-                              <div className="step-context step-context--lock">
-                                <strong>{getWarningLabel(step.warning)}</strong>
-                                <span>{getWarningContent(step.warning)}</span>
-                              </div>
-                            )}
-                            <div className="sequence-item__header">
-                              <div>
-                                {step.action && (
-                                  <span className={`sequence-item__action sequence-item__action--${getActionTone(step.action)}`}>
-                                    {step.action}
-                                  </span>
-                                )}
-                                {step !== displayStep && (step.type === 'dungeon' || hasDistinctSource) && (
-                                  <strong>
-                                    <span className="title-with-markers">
-                                      <StepMarkers step={step} />
-                                      {step.source ? (
-                                        <button
-                                          className="source-title-button"
-                                          type="button"
-                                          title={`Ouvrir ${step.source.label}`}
-                                          onClick={(event) => {
-                                    event.stopPropagation();
-                                    void openExternalSource(step.source!.url);
-                                  }}
-                                        >
-                                          {step.title}
-                                        </button>
-                                      ) : (
-                                        step.title
-                                      )}
-                                    </span>
-                                  </strong>
-                                )}
-                              </div>
-                              <div className="sequence-item__tools">
-                                {coordinate && (
-                                  <button
-                                    className="guide-location-button"
-                                    type="button"
-                                    title={`Copier /travel ${coordinate.x} ${coordinate.y}`}
-                                    onClick={(event) => {
-                                      event.stopPropagation();
-                                      void copyToClipboard(`/travel ${coordinate.x} ${coordinate.y}`);
-                                    }}
-                                  >
-                                    [{coordinate.x},{coordinate.y}] · ⧉
-                                  </button>
-                                )}
-                              </div>
-                            </div>
-                            {step.launchInstruction && !step.location && (
-                              <span className="sequence-item__note">{step.launchInstruction}</span>
-                            )}
-                            {step.instruction && (
-                              <span className="sequence-item__note">
-                                {step.instruction}
-                              </span>
-                            )}
-                          </div>
-                        );
-                      })}
+                      ))}
                     </div>
                   </li>
                 );
               })}
-            </ol>
+            </ol>       </ol>
           </>
         ) : (
           <>
