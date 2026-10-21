@@ -1,5 +1,9 @@
 name: Windows release candidate
 on:
+  push:
+    branches: [agent/initial-scaffold]
+    paths:
+      - '.github/workflows/windows-release-candidate.yml'
   workflow_dispatch:
 permissions:
   contents: read
