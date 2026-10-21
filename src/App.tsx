@@ -613,6 +613,13 @@ export function App() {
                 </button>
                 <div className="profile-card__progress"><span style={{ width: `${summary.percentage}%` }}/></div>
                 {expanded && <div className="profile-card__detail">
+                  <div className="profile-card__actions">
+                    {profile.id !== profiles.activeProfileId && <button type="button" onClick={() => activateProfile({...profilesRef.current,activeProfileId:profile.id})}>Utiliser</button>}
+                    <button type="button" onClick={() => {setEditingName(profile.name);setEditingProfileId(profile.id)}}>Renommer</button>
+                    <button type="button" disabled={profiles.profiles.length === 1} onClick={() => removeCharacter(profile.id)}>Supprimer</button>
+                  </div>
+                  {profile.id === profiles.activeProfileId && <button className="profile-reset" type="button" onClick={restartCharacter}>Réinitialiser ce profil…</button>}
+
                   {editingProfileId === profile.id && <form className="profile-edit" onSubmit={event => {event.preventDefault();renameCharacter(profile.id)}}>
                     <input aria-label="Nom du personnage" autoFocus value={editingName} maxLength={50} onChange={event => setEditingName(event.target.value)}/>
                     <button type="submit">OK</button><button type="button" onClick={() => setEditingProfileId(null)}>×</button>
@@ -637,12 +644,6 @@ export function App() {
                       </div>;
                     })}
                   </div>
-                  <div className="profile-card__actions">
-                    {profile.id !== profiles.activeProfileId && <button type="button" onClick={() => activateProfile({...profilesRef.current,activeProfileId:profile.id})}>Utiliser</button>}
-                    <button type="button" onClick={() => {setEditingName(profile.name);setEditingProfileId(profile.id)}}>Renommer</button>
-                    <button type="button" disabled={profiles.profiles.length === 1} onClick={() => removeCharacter(profile.id)}>Supprimer</button>
-                  </div>
-                  {profile.id === profiles.activeProfileId && <button className="profile-reset" type="button" onClick={restartCharacter}>Réinitialiser ce profil…</button>}
                 </div>}
               </div>;
             })}
