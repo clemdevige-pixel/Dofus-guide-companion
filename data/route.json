@@ -344,7 +344,8 @@
       "location": {
         "x": 1,
         "y": 1
-      }
+      },
+      "instruction": "Termine Réponses à tout avant de quitter le tutoriel d'Incarnam."
     },
     {
       "id": "route-step-1100",
@@ -1722,7 +1723,8 @@
       "destination": {
         "x": 5,
         "y": -1
-      }
+      },
+      "instruction": "Après la Crypte de Kardorim, termine Cryptologie avant de poursuivre."
     },
     {
       "id": "route-step-1115",
@@ -2046,7 +2048,8 @@
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/les-principes-d-archie-m-aident.html"
-      }
+      },
+      "instruction": "Termine Les principes d'Archie m'aident avant de passer aux quêtes de la Tour du Conseil."
     },
     {
       "id": "route-step-1128",
@@ -2296,7 +2299,7 @@
       "blockId": "block-02",
       "type": "major_step",
       "dofusSeries": "Dofus Argenté",
-      "title": "Avance Bière qui roule et Les deux font l'impair",
+      "title": "Bière qui roule et Les deux font l'impair",
       "prerequisites": "Bière + Les deux actives.",
       "action": "AVANCER",
       "guideItems": [
@@ -2318,7 +2321,8 @@
           },
           "note": "Parle à la Milicienne de Brâkmar."
         }
-      ]
+      ],
+      "instruction": "Avance Bière qui roule et Les deux font l'impair."
     },
     {
       "id": "route-step-0054",
@@ -2450,7 +2454,7 @@
       "type": "major_step",
       "dofusSeries": "Dofus Argenté",
       "displayRole": "objective",
-      "title": "Avance Six pieds sous terre et Crise sanitaire",
+      "title": "Six pieds sous terre et Crise sanitaire",
       "prerequisites": "Six pieds + Crise actives.",
       "action": "AVANCER LES 2",
       "instruction": "Garde Six pieds sous terre et Crise sanitaire actives après le passage.",
@@ -3110,11 +3114,11 @@
       "type": "major_step",
       "dofusSeries": "Dofus Argenté",
       "displayRole": "objective",
-      "title": "Avance Revenons à nos bouftons et Le génie se meut",
+      "title": "Revenons à nos bouftons et Le génie se meut",
       "prerequisites": "Revenons à nos bouftons + Le génie se meut actifs.",
       "warning": "Fais progresser les deux quêtes sur le même arrêt avant le Bouftou Royal.",
       "action": "AVANCER LES 2",
-      "instruction": "Entre ensuite dans la Cour du Bouftou Royal avec La coupe des vices toujours active.",
+      "instruction": "Avance Revenons à nos bouftons et Le génie se meut. Entre ensuite dans la Cour du Bouftou Royal avec La coupe des vices toujours active.",
       "momentId": "moment-route-step-1144",
       "destination": {
         "x": 2,
@@ -3229,11 +3233,11 @@
       "order": 100,
       "blockId": "block-03",
       "type": "major_step",
-      "title": "Avance Bûcherons en détresse et Tel est pris qui croyait prendre",
+      "title": "Bûcherons en détresse et Tel est pris qui croyait prendre",
       "prerequisites": "Bûcherons en détresse + Tel est pris qui croyait prendre actifs.",
       "warning": "Enchaîne ces objectifs avant de reprendre Le génie se meut.",
       "action": "AVANCER LES 2",
-      "instruction": "Ne termine pas Bûcherons en détresse ici. Garde Tel est pris qui croyait prendre et Le génie se meut actifs pour les étapes suivantes.",
+      "instruction": "Avance Bûcherons en détresse et Tel est pris qui croyait prendre. Ne termine pas Bûcherons en détresse ici. Garde Tel est pris qui croyait prendre et Le génie se meut actifs pour les étapes suivantes.",
       "destination": {
         "x": 3,
         "y": -21
@@ -3757,7 +3761,8 @@
       "location": {
         "x": 3,
         "y": -14
-      }
+      },
+      "instruction": "Termine La petite mission dans la prairie lors de ton passage dans les prairies d'Astrub."
     },
     {
       "id": "route-step-0072",
@@ -4326,7 +4331,7 @@
       "blockId": "block-03",
       "type": "major_step",
       "displayRole": "objective",
-      "title": "Avance Le rebelle de la forêt et Tel est pris qui croyait prendre",
+      "title": "Le rebelle de la forêt et Tel est pris qui croyait prendre",
       "prerequisites": "Le rebelle de la forêt + Tel est pris qui croyait prendre actifs.",
       "action": "AVANCER LES 2",
       "instruction": "Avance Le rebelle de la forêt et Tel est pris qui croyait prendre, puis garde Tel est pris active pour la suite.",
@@ -4409,11 +4414,11 @@
       "blockId": "block-03",
       "type": "major_step",
       "dofusSeries": "Dofus Argenté",
-      "title": "Avance Qui sème le vent récolte l'Art'empeth et Le repos est dans le champ",
+      "title": "Qui sème le vent récolte l'Art'empeth et Le repos est dans le champ",
       "prerequisites": "Qui sème le vent récolte l'Art'empeth + Le repos est dans le champ actifs.",
       "warning": "Alterne ces deux objectifs avant le dernier circuit forêt.",
       "action": "AVANCER LES 2",
-      "instruction": "Garde les deux quêtes actives jusqu'à leurs rendus finaux à Astrub.",
+      "instruction": "Avance Qui sème le vent récolte l'Art'empeth et Le repos est dans le champ. Garde les deux quêtes actives jusqu'à leurs rendus finaux à Astrub.",
       "destination": {
         "x": 0,
         "y": -19
