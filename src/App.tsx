@@ -4,7 +4,7 @@ import { writeText } from '@tauri-apps/plugin-clipboard-manager';
 import { openUrl } from '@tauri-apps/plugin-opener';
 import { PreparationChecklist } from './components/PreparationChecklist';
 import { StepMarkers } from './components/StepMarkers';
-import { loadProgress, reconcileProgressWithRoute, saveProgress } from './progress/storage';
+import { loadProgress, parseProgressBackup, saveProgress } from './progress/storage';
 import { loadBundledRoute } from './route/loader';
 import {
   getActiveParallelGroups,
@@ -403,23 +403,7 @@ export function App() {
   async function importProgressBackup(file: File) {
     try {
       if (file.size > 2_000_000) throw new Error('Fichier trop volumineux.');
-      const data: unknown = JSON.parse(await file.text());
-      if (!data || typeof data !== 'object') throw new Error('Fichier invalide.');
-      const backup = data as Record<string, unknown>;
-      if (!Array.isArray(backup.completedStepIds)
-        || !backup.completedStepIds.every(id => typeof id === 'string')
-        || !Array.isArray(backup.checkedPreparationItemIds)
-        || !backup.checkedPreparationItemIds.every(id => typeof id === 'string')
-        || typeof backup.compact !== 'boolean') {
-        throw new Error('Format de sauvegarde non reconnu.');
-      }
-      const recovered = reconcileProgressWithRoute({
-        completedStepIds: backup.completedStepIds as string[],
-        checkedPreparationItemIds: backup.checkedPreparationItemIds as string[],
-        compact: backup.compact,
-        ...(typeof backup.currentStepId === 'string' ? { currentStepId: backup.currentStepId } : {}),
-        ...(typeof backup.routeVersion === 'string' ? { routeVersion: backup.routeVersion } : {}),
-      }, route);
+      const recovered = parseProgressBackup(await file.text(), route);
       setLastValidation(null);
       setCompletedStepIds(new Set(recovered.completedStepIds));
       setCheckedPreparationItemIds(new Set(recovered.checkedPreparationItemIds));
