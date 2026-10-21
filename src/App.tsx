@@ -5,6 +5,8 @@ import { openUrl } from '@tauri-apps/plugin-opener';
 import { PreparationChecklist } from './components/PreparationChecklist';
 import { StepMarkers } from './components/StepMarkers';
 import { parseProgressBackup, type ProgressState } from './progress/storage';
+import { dofusClasses, getClassIcon } from './progress/classes';
+import { dofusRewards } from './route/dofusRewards';
 import { loadProfiles, saveProfiles, updateProfileProgress, emptyProgress, createProfile, renameProfile, deleteProfile, resetProfile, type ProfilesState } from './progress/profiles';
 import { loadBundledRoute } from './route/loader';
 import { getNewDofusReward, type DofusReward } from './route/dofusRewards';
@@ -133,6 +135,10 @@ export function App() {
   const profilesRef = useRef<ProfilesState>(initialProfiles);
   const [profiles, setProfiles] = useState<ProfilesState>(initialProfiles);
   const [profileName, setProfileName] = useState('');
+  const [newClassId, setNewClassId] = useState<number | undefined>(undefined);
+  const [expandedProfileId, setExpandedProfileId] = useState<string | null>(null);
+  const [editingProfileId, setEditingProfileId] = useState<string | null>(null);
+  const [editingName, setEditingName] = useState('');
   const [profileMessage, setProfileMessage] = useState<string | null>(null);
   const initialShortcuts = useMemo(() => loadShortcutBindings(), []);
   const stepGroups = useMemo(() => getStepGroups(route), []);
@@ -353,14 +359,20 @@ export function App() {
       const base = updateProfileProgress(profilesRef.current, profilesRef.current.activeProfileId, snapshot());
       const next = createProfile(base, profileName, duplicate ? snapshot() : emptyProgress(route));
       activateProfile(next); setProfileName('');
+      if (newClassId !== undefined) changeCharacterClass(next.activeProfileId, newClassId);
+      setNewClassId(undefined);
     } catch (error) { setProfileMessage(error instanceof Error ? error.message : 'Nom invalide.'); }
   }
   function renameCharacter(id: string) {
-    const p = profilesRef.current.profiles.find(p => p.id === id);
-    const name = window.prompt('Nouveau nom du personnage', p?.name ?? '');
-    if (name === null) return;
-    try { commitProfiles(renameProfile(profilesRef.current, id, name)); }
-    catch (error) { setProfileMessage(error instanceof Error ? error.message : 'Nom invalide.'); }
+    try {
+      commitProfiles(renameProfile(profilesRef.current, id, editingName));
+      setEditingProfileId(null);
+    } catch (error) { setProfileMessage(error instanceof Error ? error.message : 'Nom invalide.'); }
+  }
+  function changeCharacterClass(id: string, classId: number | undefined) {
+    const state = profilesRef.current;
+    commitProfiles({ ...state, profiles: state.profiles.map(p =>
+      p.id === id ? { ...p, classId } : p) });
   }
   function removeCharacter(id: string) {
     const p = profilesRef.current.profiles.find(p => p.id === id);
@@ -575,6 +587,85 @@ export function App() {
 
   return (
     <main className={`overlay ${compact ? 'overlay--compact' : ''}`}>
+      {secondaryView === 'profiles' && (
+        <section className="profiles-page" aria-label="Gestion des personnages">
+          <div className="profiles-page__header">
+            <div><strong>Personnages</strong><span>{profiles.profiles.length} profil(s) localement</span></div>
+            <button type="button" onClick={() => setSecondaryView(null)} aria-label="Retour au guide">← Guide</button>
+          </div>
+          <div className="profiles-page__scroll">
+            {profiles.profiles.map(profile => {
+              const ids = new Set(profile.id === profiles.activeProfileId ? [...completedStepIds] : profile.progress.completedStepIds);
+              const summary = getProgress(route, ids);
+              const expanded = expandedProfileId === profile.id;
+              return <div className="profile-card" key={profile.id}>
+                <button type="button" className="profile-card__summary"
+                  aria-expanded={expanded}
+                  onClick={() => setExpandedProfileId(expanded ? null : profile.id)}>
+                  {getClassIcon(profile.classId)
+                    ? <img className="profile-card__icon" src={getClassIcon(profile.classId)!} alt="" />
+                    : <span className="profile-card__icon profile-card__icon--empty">♙</span>}
+                  <span className="profile-card__identity">
+                    <strong>{profile.name}</strong>
+                    <small>{profile.id === profiles.activeProfileId ? 'ACTIF · ' : ''}{summary.completed}/{summary.total} étapes</small>
+                  </span>
+                  <b>{summary.percentage}%</b><span aria-hidden="true">{expanded ? '⌃' : '⌄'}</span>
+                </button>
+                <div className="profile-card__progress"><span style={{ width: `${summary.percentage}%` }}/></div>
+                {expanded && <div className="profile-card__detail">
+                  {editingProfileId === profile.id && <form className="profile-edit" onSubmit={event => {event.preventDefault();renameCharacter(profile.id)}}>
+                    <input aria-label="Nom du personnage" autoFocus value={editingName} maxLength={50} onChange={event => setEditingName(event.target.value)}/>
+                    <button type="submit">OK</button><button type="button" onClick={() => setEditingProfileId(null)}>×</button>
+                  </form>}
+                  <label className="profile-class-select">Classe
+                    <select value={profile.classId ?? ''} onChange={event => changeCharacterClass(profile.id, event.target.value ? Number(event.target.value) : undefined)}>
+                      <option value="">Non définie</option>
+                      {dofusClasses.map(c => <option value={c.id} key={c.id}>{c.name}</option>)}
+                    </select>
+                  </label>
+                  <div className="profile-dofus-title">Progression par Dofus</div>
+                  <div className="profile-dofus-list">
+                    {Object.values(dofusRewards).map(reward => {
+                      const steps = route.steps.filter(step => step.dofusSeries === reward.name);
+                      const total = steps.length || 1;
+                      const completed = steps.length ? steps.filter(step => ids.has(step.id)).length : Number(ids.has(reward.stepId));
+                      const pct = ids.has(reward.stepId) ? 100 : Math.round(completed / total * 100);
+                      return <div className="profile-dofus-row" key={reward.stepId}>
+                        <img src={reward.image} alt="" />
+                        <div><div className="profile-dofus-meta"><span>{reward.name}</span><b>{pct}%</b></div>
+                          <div className="profile-dofus-bar"><span style={{width: `${pct}%`}}/></div></div>
+                      </div>;
+                    })}
+                  </div>
+                  <div className="profile-card__actions">
+                    {profile.id !== profiles.activeProfileId && <button type="button" onClick={() => activateProfile({...profilesRef.current,activeProfileId:profile.id})}>Utiliser</button>}
+                    <button type="button" onClick={() => {setEditingName(profile.name);setEditingProfileId(profile.id)}}>Renommer</button>
+                    <button type="button" disabled={profiles.profiles.length === 1} onClick={() => removeCharacter(profile.id)}>Supprimer</button>
+                  </div>
+                  {profile.id === profiles.activeProfileId && <button className="profile-reset" type="button" onClick={restartCharacter}>Réinitialiser ce profil…</button>}
+                </div>}
+              </div>;
+            })}
+            <form className="profile-create" onSubmit={event => { event.preventDefault(); addCharacter(false); }}>
+              <strong>Ajouter un personnage</strong>
+              <input value={profileName} maxLength={50} placeholder="Nom du personnage" aria-label="Nom du nouveau personnage"
+                onChange={event => setProfileName(event.target.value)} />
+              <label>Classe
+                <select value={newClassId ?? ''} onChange={event=>setNewClassId(event.target.value ? Number(event.target.value) : undefined)}>
+                  <option value="">Non définie</option>
+                  {dofusClasses.map(c => <option value={c.id} key={c.id}>{c.name}</option>)}
+                </select>
+              </label>
+              <div className="profile-create__actions">
+                <button type="submit" disabled={!profileName.trim()}>Créer à zéro</button>
+                <button type="button" disabled={!profileName.trim()} onClick={() => addCharacter(true)}>Dupliquer l'actuel</button>
+              </div>
+            </form>
+            {profileMessage && <p role="status">{profileMessage}</p>}
+          </div>
+        </section>
+      )}
+      {secondaryView !== 'profiles' && (<>
       {!compact && (
         <header className="app-header app-header--dense">
           <button
@@ -674,39 +765,6 @@ export function App() {
               ×
             </button>
           </div>
-
-          {secondaryView === 'profiles' && (
-            <div className="context-panel__body profiles-panel">
-              <p className="settings-help">Chaque personnage a sa propre progression et ses préparations.</p>
-              {profiles.profiles.map(profile => (
-                <div className="character-row" key={profile.id}>
-                  <button type="button" className={profile.id === profiles.activeProfileId ? 'character-active' : ''}
-                    onClick={() => profile.id !== profiles.activeProfileId && activateProfile({ ...profilesRef.current, activeProfileId: profile.id })}>
-                    <strong>{profile.id === profiles.activeProfileId ? '● ' : '○ '}{profile.name}</strong>
-                    <span>{getProgress(route, new Set(profile.id === profiles.activeProfileId ? [...completedStepIds] : profile.progress.completedStepIds)).percentage}%</span>
-                  </button>
-                  <button type="button" onClick={() => renameCharacter(profile.id)} aria-label={`Renommer ${profile.name}`}>✎</button>
-                  <button type="button" onClick={() => removeCharacter(profile.id)} disabled={profiles.profiles.length === 1}
-                    aria-label={`Supprimer ${profile.name}`}>×</button>
-                </div>
-              ))}
-              <label className="character-create">Nouveau personnage
-                <input type="text" maxLength={50} value={profileName} placeholder="Nom du personnage"
-                  onChange={event => setProfileName(event.target.value)}/>
-              </label>
-              <div className="character-actions">
-                <button type="button" disabled={!profileName.trim()} onClick={() => addCharacter(false)}>Créer à zéro</button>
-                <button type="button" disabled={!profileName.trim()} onClick={() => addCharacter(true)}>Dupliquer l'actuel</button>
-              </div>
-              <div className="character-danger">
-                <strong>Recommencer ce personnage</strong>
-                <p>Efface les coches et la carte courante de ce personnage uniquement.</p>
-                <button type="button" onClick={restartCharacter}>Réinitialiser la progression…</button>
-              </div>
-              {profileMessage && <p role="status">{profileMessage}</p>}
-              {saveError && <p className="settings-error" role="alert">{saveError}</p>}
-            </div>
-          )}
 
           {secondaryView === 'progress' && (
             <div className="context-panel__body progression-dashboard">
@@ -1189,6 +1247,7 @@ export function App() {
         </button>
       </footer>
       )}
+      </>)}
     </main>
   );
 }
