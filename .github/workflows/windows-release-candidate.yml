@@ -4,6 +4,7 @@ on:
     branches: [agent/initial-scaffold]
     paths:
       - '.github/workflows/windows-release-candidate.yml'
+      - 'src-tauri/icons/**'
   workflow_dispatch:
 permissions:
   contents: read
