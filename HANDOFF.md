@@ -324,3 +324,13 @@ Lire dans l’ordre : `AGENTS.md`, `SPEC.md`, `ARCHITECTURE.md`, `docs/DATA_MODE
 - Aucune modification de `data/route.json`, des `STEP_ID` ni de la progression métier.
 - Tests `src/progress/profiles.test.ts` : migration, isolation, duplication, reset, suppression, renommage, sauvegarde corrompue ; frontend CI verte sur `5f38c6622`.
 - Recette Windows restante : importer l'existant ; créer A et B ; valider des étapes sur A ; passer B ; rouvrir l'app ; vérifier A/B indépendants ; exporter/importer dans B ; dupliquer A ; supprimer et reset un profil avec confirmation ; vérifier vue compacte et raccourcis globaux.
+
+## 2026-10-21 — Profils : page dédiée, classes, progression Dofus
+
+- Feedback Windows : ancien panneau de profils superposé au guide et `window.prompt` natif inadaptés à la petite fenêtre.
+- Nouvelle vraie page `Personnages` à défilement vertical indépendant, avec retour au guide ; aucune carte/navigateur/footer de guide rendu sur cette page.
+- Chaque fiche de personnage a une barre de progression globale, un accordéon affichant les 13 séries Dofus (pourcentage dérivé des `dofusSeries` balisées dans la route, 100 % à l'acquisition), actions de sélection/renommage/suppression, et choix de classe.
+- Classe facultative parmi 19, persistée sous `classId` dans `profiles.v2`, compatible avec profils anciens. Portraits PNG récupérés dans `public/classes/` via workflow `import-dofus-classes.yml`; source `bilalsaaoud/dofus-stuff-builder`.
+- Renommage désormais en formulaire intégré, plus de `window.prompt`.
+- Tests frontend / validation route / build verts sur commit `0cb693a0c`; `cargo check` Windows à attendre. Nouveau test pour persistance des classes ajouté.
+- Contrôles manuels : réduire fenêtre au minimum, vérifier scrolling et boutons, ouvrir plusieurs profils, déplier séries, renommer sans boîte native, changer classe, vérifier visuel et conservation après redémarrage ; pour un Dofus non couvert par `dofusSeries`, le pourcentage peut refléter uniquement l'acquisition.
