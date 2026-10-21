@@ -334,3 +334,10 @@ Lire dans l’ordre : `AGENTS.md`, `SPEC.md`, `ARCHITECTURE.md`, `docs/DATA_MODE
 - Renommage désormais en formulaire intégré, plus de `window.prompt`.
 - Tests frontend / validation route / build verts sur commit `0cb693a0c`; `cargo check` Windows à attendre. Nouveau test pour persistance des classes ajouté.
 - Contrôles manuels : réduire fenêtre au minimum, vérifier scrolling et boutons, ouvrir plusieurs profils, déplier séries, renommer sans boîte native, changer classe, vérifier visuel et conservation après redémarrage ; pour un Dofus non couvert par `dofusSeries`, le pourcentage peut refléter uniquement l'acquisition.
+
+## 2026-10-21 — Page profils : ajout en haut et collection compacte
+
+- Bouton `+ Ajouter un personnage` fixe en haut de la vue, ouverture d'un formulaire intégré et dimensionné à la fenêtre (nom, classe, option facultative dupliquer, Annuler/Valider). Formulaire permanent du bas supprimé.
+- Fiche de profil : actions sous `⋯ Gérer`, collection de 13 Dofus en grille (couleur si étape d'obtention cochée, sinon grisé) ; barres de progression par série désormais repliées par défaut.
+- Aucun changement de la route ni du schéma de sauvegarde. CI frontend verte sur `c7f7d39af`; vérification Tauri Windows encore en cours au moment de la note.
+- Recette : fenêtre étroite, création et duplication depuis modal, classe conservée, grille obtenus/non obtenus, ouverture des barres et actions du menu.
