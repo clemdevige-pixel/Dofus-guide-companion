@@ -3,6 +3,7 @@ import test from 'node:test';
 import type { RouteDocument } from '../route/types';
 import {
   loadProgress,
+  parseProgressBackup,
   reconcileProgressWithRoute,
   saveProgress,
   type ProgressState,
@@ -138,4 +139,28 @@ test('invalid persisted data falls back safely', () => {
     compact: false,
     routeVersion: route.routeVersion,
   });
+});
+
+test('backup import preserves valid checks and drops unknown IDs', () => {
+  const restored = parseProgressBackup(JSON.stringify({
+    completedStepIds: ['quest-1', 'deleted-id'],
+    checkedPreparationItemIds: ['prep-before:0', 'missing:0'],
+    compact: true,
+    currentStepId: 'quest-2',
+    routeVersion: route.routeVersion,
+  }), route);
+  assert.deepEqual(restored.completedStepIds, ['quest-1']);
+  assert.deepEqual(restored.checkedPreparationItemIds, ['prep-before:0']);
+  assert.equal(restored.currentStepId, 'quest-2');
+  assert.equal(restored.compact, true);
+});
+
+test('backup import rejects malformed progress instead of silently resetting it', () => {
+  assert.throws(() => parseProgressBackup('not json', route));
+  assert.throws(() => parseProgressBackup('{}', route), /Format de sauvegarde/);
+  assert.throws(() => parseProgressBackup(JSON.stringify({
+    completedStepIds: ['quest-1', 42],
+    checkedPreparationItemIds: [],
+    compact: false,
+  }), route), /Format de sauvegarde/);
 });
