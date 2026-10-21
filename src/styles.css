@@ -707,3 +707,17 @@ button:disabled {
 .progress-backup > button, .progress-backup__import { display: block; padding: 8px; border: 1px solid #45604d; border-radius: 7px; background: #17251b; cursor: pointer; color: #e4f0e6; font-weight: 700; font-size: 12px; }
 .progress-backup__import { display: grid; gap: 7px; }
 .progress-backup__import input { width: 100%; min-width: 0; font-size: 11px; }
+
+
+/* Dofus acquisition: presentation overlay; no new route or save entries. */
+.dofus-reward { position: absolute; z-index: 25; inset: 0; display: grid; place-items: center; padding: 12px; background: rgba(6, 12, 9, .88); }
+.dofus-reward__panel { width: min(100%, 360px); display: grid; gap: 12px; justify-items: center; padding: 22px 16px; border: 1px solid #b18b45; border-radius: 14px; background: radial-gradient(ellipse at 50% 34%, #343021 0%, #172018 62%, #101712 100%); text-align: center; box-shadow: 0 15px 50px #0009; }
+.dofus-reward--standard .dofus-reward__panel { border-color: #60866a; background: radial-gradient(ellipse at 50% 34%, #203d2a, #101712 76%); }
+.dofus-reward__eyebrow { margin: 0; color: #e4c58c; font-size: 11px; font-weight: 900; letter-spacing: .12em; }
+.dofus-reward__image { width: 138px; height: 138px; display: grid; place-items: center; border-radius: 50%; background: radial-gradient(circle, #b38b503b, transparent 68%); }
+.dofus-reward__image img { width: 100%; height: 100%; object-fit: contain; }
+.dofus-reward__placeholder { font-size: 72px; color: #dcb96e; }
+.dofus-reward h2 { margin: 0; font-size: 25px; color: #f3e7cf; }
+.dofus-reward__name { margin: 0; color: #cce5ce; line-height: 1.4; }
+.dofus-reward__panel > button { width: 100%; min-height: 40px; border-radius: 8px; border: 1px solid #62846a; background: #294d31; color: #f1f7f1; font-weight: 800; cursor: pointer; }
+.dofus-reward__panel > button:hover { background: #32613d; }
