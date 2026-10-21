@@ -304,3 +304,13 @@ Lire dans l’ordre : `AGENTS.md`, `SPEC.md`, `ARCHITECTURE.md`, `docs/DATA_MODE
 - Aucun changement de `ROUTE`, `data/route.json` ou des identifiants.
 - CI frontend du commit `76e2e729df6974dc097271ccb687f5a1b411702e` : tests route, validation et build verts.
 - **Recette Windows restant à faire :** vérifier que le WebView Tauri télécharge bien le backup Blob, réimporte le fichier, affiche les erreurs de quota, conserve l'état après fermeture/relaunch, et que resize/déplacement multi-écrans/raccourcis restent fiables ; `cargo check` ne remplace pas la recette runtime.
+
+## 2026-10-21 — Cartes visuelles d'obtention des Dofus
+
+- 13 acquisitions vérifiées dans `data/route.json` ; aucune carte de célébration Abyssal (aucune obtention).
+- `src/route/dofusRewards.ts` associe chaque acquisition réelle à son `STEP_ID`, nom, image et niveau d'affichage ; `src/route/dofusRewards.test.ts` vérifie que tous les identifiants existent.
+- `src/App.tsx` affiche une célébration après une validation effective, y compris à l'intérieur d'un `MOMENT_ID`, avec bouton Continuer ; pas de nouveau `STEP_ID` et aucune modification de l'état persisté. Annuler restaure les coches et ferme la célébration.
+- `src/styles.css` : overlay thématisé, adaptable à la fenêtre, avec visuel PNG et secours si asset absent.
+- Les 13 images PNG transparentes `2x` sont dans `public/dofus/`, extraites des assets DOFUS via `scripts/import_dofus_art.py` et `.github/workflows/import-dofus-art.yml` (release source épinglée `v6.0_3.7.12.12`). Vérification : 13 fichiers PNG retrouvés et workflow d'import vert, commit `4c3f024`.
+- Tests route, validation et build frontend verts avant l'import des PNG (CI `39598742117`).
+- À vérifier dans Tauri Windows : affichage des 13 images / leur alpha, déclenchement uniquement à l'obtention, annulation, séquences, fenêtre étroite et réouverture avec progression déjà cochée.
