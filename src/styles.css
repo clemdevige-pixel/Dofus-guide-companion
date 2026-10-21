@@ -699,3 +699,11 @@ button:disabled {
 
 .undo-validation-button { flex: 0 0 auto; padding-inline: 8px !important; color: #e9c997; border-color: #73583e !important; }
 @media (max-width: 380px) { .undo-validation-button { font-size: 10px; padding-inline: 5px !important; } }
+
+/* Polish C — backup and restore controls stay usable in a narrow overlay. */
+.progress-backup { display: grid; gap: 8px; padding: 10px; border: 1px solid #334139; border-radius: 8px; background: #111913; }
+.progress-backup > strong { font-size: 12px; letter-spacing: .03em; }
+.progress-backup p { margin: 0; font-size: 12px; color: #b8c8bb; overflow-wrap: anywhere; }
+.progress-backup > button, .progress-backup__import { display: block; padding: 8px; border: 1px solid #45604d; border-radius: 7px; background: #17251b; cursor: pointer; color: #e4f0e6; font-weight: 700; font-size: 12px; }
+.progress-backup__import { display: grid; gap: 7px; }
+.progress-backup__import input { width: 100%; min-width: 0; font-size: 11px; }
