@@ -294,3 +294,13 @@ Lire dans l’ordre : `AGENTS.md`, `SPEC.md`, `ARCHITECTURE.md`, `docs/DATA_MODE
 - **Source et JSON contrôlés** : 981 identifiants dans le même ordre, aucune divergence observée sur titres, actions, instructions, prérequis, blocs, moments, rôles ou séries Dofus. Liens DPLN restaurés sur les lignes déplacées.
 - CI frontend vérifiée sur le commit `8f2f3922dece9448eab9e1845379126bb607c259` : `test:route`, `validate:route` et `build` verts ; `cargo check` Windows encore en cours au dernier contrôle.
 - **À vérifier en recette manuelle** : lisibilité de la préparation longue du bloc 26, récupération effective des Totems pendant chacun des cinq combats mutualisés, et reprise des sauvegardes antérieures à ce changement d'ordre.
+
+## Update 2026-10-21 — polish UI, navigation, sauvegarde de secours
+
+- **A — visuel :** hiérarchie du titre de carte et badges resserrée, cibles footer agrandies, objectifs terminés/futurs moins pâles, bloc courant et titres à deux lignes plus visibles dans Progression ; prise en compte de `prefers-reduced-motion`.
+- **B — interactions :** avance automatique conservée après validation ; `Annuler` restaure le dernier instantané des coches et revient à la carte d'origine ; détails de séquence accessibles par Entrée/Espace sur l'élément focalisé. La progression reste portée uniquement par `completedStepIds`.
+- **C — robustesse :** `saveProgress` entouré d'un traitement d'erreur visible en Paramètres, export JSON de secours depuis Paramètres, import JSON validé puis réconcilié avec les IDs de route ; tests supplémentaires sur la restauration et les fichiers invalides. Pas de modification du format de sauvegarde locale `v1`.
+- Périmètre code : `src/App.tsx`, `src/styles.css`, `src/sequence.css`, `src/progression.css`, `src/progress/storage.ts`, `src/progress/storage.test.ts`.
+- Aucun changement de `ROUTE`, `data/route.json` ou des identifiants.
+- CI frontend du commit `76e2e729df6974dc097271ccb687f5a1b411702e` : tests route, validation et build verts.
+- **Recette Windows restant à faire :** vérifier que le WebView Tauri télécharge bien le backup Blob, réimporte le fichier, affiche les erreurs de quota, conserve l'état après fermeture/relaunch, et que resize/déplacement multi-écrans/raccourcis restent fiables ; `cargo check` ne remplace pas la recette runtime.
