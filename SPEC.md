@@ -229,6 +229,6 @@ La V1 est gelable lorsque :
 
 ## Décision 2026-11-05 — Début du guide par actions
 
-Les blocs Incarnam et Astrub (1 à 3) utilisent des cartes autonomes : prise, avancée jusqu'à un objectif explicite, rendu, ou action utile de donjon/récolte. Les actions de différentes quêtes peuvent s'intercaler. Elles sont éditées dans ROUTE sans MOMENT_ID ni DISPLAY_ROLE ; le rendu autonome existant les affiche sans règle spécifique dans React.
+Les blocs Incarnam et Astrub (1 à 3) regroupent les actions par arrêt utile ou courte portion de parcours cohérente. Une carte peut réunir plusieurs prises, avancées et rendus, chacun avec sa propre checkbox. Une quête exécutée sans interruption garde ses actions sur la même carte. MOMENT_ID fixe ces regroupements dans ROUTE ; chaque action reste OBJECTIVE (maximum 5 par carte). Les actions restent visibles dans le résumé, y compris lorsque leur détail est replié. Les identifiants et la progression ne changent pas lors du regroupement.
 
 Les STEP_ID historiques sont conservés ; les décompositions utilisent de nouveaux identifiants stables. La table versionnée data/route-progress-migrations.json décrit les décompositions pour préserver les anciennes validations, via reconcileProgressWithRoute et la routeVersion. Elle ne pilote pas le contenu du guide.

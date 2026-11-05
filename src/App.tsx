@@ -74,9 +74,10 @@ function groupGuideItems(items: GuideItem[]) {
 }
 
 function getSequenceTitle(steps: RouteStep[]): string {
+  if (steps.every((step) => step.title === steps[0].title)) return steps[0].title;
   return steps.some((step) => step.type === 'dungeon')
-    ? 'Enchaînement de quêtes et donjons'
-    : 'Enchaînement de quêtes';
+    ? 'Quêtes et donjon'
+    : 'Objectifs de l’étape';
 }
 
 function getSequenceCoordinate(step: RouteStep) {
@@ -566,7 +567,7 @@ export function App() {
   const typeLabel = containsHardLock
     ? 'VERROU DUR'
     : isSequence
-      ? 'SÉQUENCE'
+      ? 'ÉTAPE'
       : currentStep.displayType ?? typeLabels[currentStep.type];
   const displayIndex = viewIndex + 1;
   const travelTarget = currentStep.destination ?? currentStep.location;
@@ -1046,6 +1047,11 @@ export function App() {
                     <div className="sequence-item__content">
                       <div className="sequence-item__header">
                         <strong>
+                          {displayStep.action && (
+                            <span className={`sequence-item__action sequence-item__action--${getActionTone(displayStep.action)}`}>
+                              {displayStep.action}
+                            </span>
+                          )}
                           <span className="title-with-markers">
                             <StepMarkers step={displayStep} />
                             {displayStep.source ? (
@@ -1097,7 +1103,7 @@ export function App() {
                             )}
                             <div className="sequence-item__header">
                               <div>
-                                {step.action && (
+                                {step !== displayStep && step.action && (
                                   <span className={`sequence-item__action sequence-item__action--${getActionTone(step.action)}`}>
                                     {step.action}
                                   </span>

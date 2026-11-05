@@ -372,3 +372,13 @@ Lire dans l’ordre : `AGENTS.md`, `SPEC.md`, `ARCHITECTURE.md`, `docs/DATA_MODE
 - Migration des validations : data/route-progress-migrations.json, appliquée par reconcileProgressWithRoute uniquement aux versions antérieures ; les coches existantes se répartissent sur les actions issues de leur ancienne carte. Une simple consultation ne valide rien. Import et multi-profils passent par le même chemin.
 - Vérification frontend réussie sur f07f01cd8d40a89dba844ffe5d87dc71e743a029, CI 42063271594 : export officiel depuis les deux lectures complètes du Sheet, comparaison exacte JSON sans écart, 99 tests réussis, validation route et build frontend verts. La capture et le branchement CI temporaires sont retirés après ce contrôle ; aucune seconde source éditoriale n'est conservée. Le job cargo check Windows était encore en cours à cette note.
 - Recette Tauri visuelle non effectuée : vérifier fenêtre étroite, enchaînement automatique, reprise d'un profil partiellement avancé et d'un profil déjà après Astrub.
+
+
+## 2026-11-05 — Correction du découpage excessif en cartes
+
+- Retour utilisateur : une carte par action rend le guide trop fragmenté. Le début passe de 283 à 90 cartes (33 Incarnam, 30 Astrub I, 27 Astrub II), préparations incluses. Les 283 actions gardent leurs STEP_ID et leur ordre ; aucun reset ni migration supplémentaire.
+- Regroupements éditoriaux explicites dans ROUTE via MOMENT_ID et DISPLAY_ROLE=OBJECTIVE : 1 à 5 actions cochables par carte, prises/avancées/rendus réunis lorsque le parcours le permet. Aucun regroupement déduit à l'exécution.
+- Rendu partagé : badge de l'action visible dans chaque résumé, sans doublon dans le détail ; titre de quête conservé pour les cartes mono-quête ; badge ÉTAPE.
+- Correction d'une erreur introduite pendant la passe précédente : le témoignage et combat Oskar est sur son action Espoirs en [2,-1] ; l'action suivante retrouve l'activation du zaap du cimetière en [3,0].
+- Source et export : lectures complètes FORMATTED_VALUE/FORMULA du Sheet après modification, exporteur officiel exécuté localement sur ces réponses. Route valide : 1121 étapes / 32 blocs.
+- Vérification : 100 tests réussis, dont regroupements, action individuelle cochable, quête sans interruption, migration et profils. Build frontend vert ; pas de recette visuelle Tauri Windows. Le navigateur de contrôle ne peut pas joindre le serveur local d'aperçu (connexion refusée).

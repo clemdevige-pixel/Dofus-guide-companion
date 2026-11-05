@@ -2,18 +2,23 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import routeData from '../../data/route.json';
 import migrations from '../../data/route-progress-migrations.json';
-import { getStepGroups } from './selectors';
+import { getStepGroups, getSequenceObjectives } from './selectors';
 import type { RouteDocument } from './types';
 
 const route = routeData as RouteDocument;
 const openingBlocks = new Set(['block-01', 'block-02', 'block-03']);
 const opening = route.steps.filter(step => openingBlocks.has(step.blockId));
 
-test('Incarnam and Astrub expose independent chronological action cards', () => {
+test('Incarnam and Astrub group explicit actions into useful stops', () => {
   assert.ok(opening.length > 142);
-  for (const group of getStepGroups(route).filter(group => openingBlocks.has(group.blockId))) {
-    assert.equal(group.isSequence, false, group.id);
-    assert.equal(group.steps.length, 1);
+  const groups = getStepGroups(route).filter(group => openingBlocks.has(group.blockId));
+  assert.ok(groups.length <= 100, `Too many opening cards: ${groups.length}`);
+  assert.ok(groups.some(group => group.steps.some(step => step.action === 'LANCER')
+    && group.steps.some(step => step.action === 'TERMINER')));
+  for (const group of groups) {
+    assert.ok(group.steps.length <= 5, group.id);
+    assert.deepEqual(getSequenceObjectives(group.steps).map(objective => objective.id),
+      group.steps.map(step => step.id), `${group.id}: each action must keep its checkbox`);
   }
   for (const step of opening.filter(step => step.type !== 'preparation')) {
     assert.ok(['LANCER', 'AVANCER', 'TERMINER', 'FAIRE'].includes(step.action ?? ''), step.id);
@@ -21,6 +26,13 @@ test('Incarnam and Astrub expose independent chronological action cards', () => 
     assert.equal(step.guideItems, undefined, step.id);
     if (step.action === 'LANCER') assert.ok(step.location || step.launchInstruction, step.id);
   }
+});
+
+test('an uninterrupted quest keeps its take, progress and turn-in on one card', () => {
+  const groups = getStepGroups(route);
+  const ids = ['route-step-0009-action-1', 'route-step-0009-action-2', 'route-step-0009'];
+  const group = groups.find(group => group.steps.some(step => step.id === ids[0]));
+  assert.deepEqual(group?.steps.map(step => step.id), ids);
 });
 
 test('new action IDs have a unique legacy migration and all migration targets exist', () => {

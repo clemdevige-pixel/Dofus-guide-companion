@@ -82,7 +82,7 @@ test('contrat route — les quatre étapes Totems utilisent les combats Ébène 
   assert.doesNotMatch(comte?.instruction ?? '', /Totem de la surprise/);
 });
 
-test('contrat route — un moment ne contient pas deux fois le même objectif éditorial brut', () => {
+test('contrat route — un moment ne contient pas deux fois la même action au même checkpoint', () => {
   const objectiveTitlesByMoment = new Map<string, Map<string, string>>();
 
   for (const step of route.steps) {
@@ -90,7 +90,10 @@ test('contrat route — un moment ne contient pas deux fois le même objectif é
 
     // Lint éditorial de la donnée source uniquement : les suffixes de checkpoint restent
     // disponibles ici même s'ils sont masqués ensuite par le renderer joueur.
-    const objectiveKey = normalizeObjectiveTitle(step.title);
+    const objectiveKey = normalizeObjectiveTitle([
+      step.title, step.action, step.instruction ?? step.launchInstruction,
+      JSON.stringify(step.destination ?? step.location),
+    ].filter(Boolean).join(' '));
     const titles = objectiveTitlesByMoment.get(step.momentId) ?? new Map<string, string>();
     const existingStepId = titles.get(objectiveKey);
 
@@ -388,13 +391,15 @@ test('contrat UX — pas de duplication textuelle brute dans une même carte', (
     for (const step of steps) {
       if (!step.instruction) continue;
       const normalized = normalize(step.instruction);
-      const previousStepId = seenInstructions.get(normalized);
+      // Two different quests can legitimately be taken from the same NPC.
+      const instructionKey = `${normalize(step.title)}|${step.action ?? ''}|${normalized}`;
+      const previousStepId = seenInstructions.get(instructionKey);
       assert.equal(
         previousStepId,
         undefined,
         `${momentId}: instruction dupliquée entre ${previousStepId ?? 'inconnu'} et ${step.id}.`,
       );
-      seenInstructions.set(normalized, step.id);
+      seenInstructions.set(instructionKey, step.id);
     }
   }
 
