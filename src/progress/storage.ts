@@ -1,3 +1,4 @@
+import routeProgressMigrations from '../../data/route-progress-migrations.json';
 import { loadBundledRoute } from '../route/loader';
 import { getPreparationItemKey } from '../route/preparation';
 import { getSortedSteps } from '../route/selectors';
@@ -63,6 +64,20 @@ export function reconcileProgressWithRoute(
     progress.completedStepIds.filter((stepId) => routeStepIds.has(stepId)),
   );
 
+  // Expand only legacy validations, once per route revision. Consultation alone never completes actions.
+  const applicableMigrations = routeProgressMigrations.migrations.filter(
+    (migration) => route.routeVersion >= migration.introducedIn
+      && (!progress.routeVersion || progress.routeVersion < migration.introducedIn),
+  );
+  for (const migration of applicableMigrations) {
+    for (const [legacyId, actionIds] of Object.entries(migration.expansions)) {
+      if (!progress.completedStepIds.includes(legacyId)) continue;
+      for (const id of actionIds) {
+        if (routeStepIds.has(id)) completedStepIds.add(id);
+      }
+    }
+  }
+
   let furthestCompletedProgressIndex = -1;
   for (const step of sortedSteps) {
     if (step.type === 'preparation' || !completedStepIds.has(step.id)) {
@@ -94,6 +109,17 @@ export function reconcileProgressWithRoute(
     progress.currentStepId && stepIndexById.has(progress.currentStepId)
       ? progress.currentStepId
       : undefined;
+
+  // Resume an unfinished expanded card at its first action, preserving a completed cursor.
+  for (const migration of applicableMigrations) {
+    const actionIds = currentStepId
+      ? (migration.expansions as Record<string, string[]>)[currentStepId]
+      : undefined;
+    if (actionIds && currentStepId && !completedStepIds.has(currentStepId)) {
+      currentStepId = actionIds.find((id) => routeStepIds.has(id) && !completedStepIds.has(id))
+        ?? currentStepId;
+    }
+  }
 
   if (!currentStepId && furthestCompletedProgressIndex >= 0) {
     currentStepId = sortedSteps

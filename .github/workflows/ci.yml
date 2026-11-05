@@ -27,6 +27,17 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
+      - name: Export verified Sheet snapshot with the official exporter
+        run: pnpm export:route
+        env:
+          NODE_OPTIONS: --import ./.github/verify-sheet-export.mjs
+          ROUTE_SHEET_ID: snapshot
+          GOOGLE_ACCESS_TOKEN: snapshot
+          ROUTE_VERSION: '2026-11-05'
+
+      - name: Check exact Sheet and JSON synchronization
+        run: git diff --exit-code -- data/route.json
+
       - name: Test route logic
         run: pnpm test:route
 
