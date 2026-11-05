@@ -1,0 +1,60 @@
+.title-with-markers {
+  display: inline-flex;
+  max-width: 100%;
+  align-items: center;
+  gap: 7px;
+  vertical-align: middle;
+}
+
+.step-markers {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 3px;
+}
+
+.step-marker {
+  display: inline-flex;
+  width: 16px;
+  height: 16px;
+  align-items: center;
+  justify-content: center;
+  color: #93a396;
+}
+
+.step-marker svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.step-marker--alignment {
+  color: #9bb8ff;
+}
+
+.step-marker--dofus {
+  color: #d6bf76;
+}
+
+.step-marker--dungeon {
+  color: #c9a17b;
+}
+
+.sequence-item--completed .step-markers {
+  opacity: 0.55;
+}
+
+@media (max-width: 430px) {
+  .title-with-markers {
+    gap: 5px;
+  }
+
+  .step-marker {
+    width: 15px;
+    height: 15px;
+  }
+}
