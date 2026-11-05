@@ -385,6 +385,15 @@
           "route-step-0090"
         ]
       }
+    },
+    {
+      "introducedIn": "2026-11-05.1",
+      "expansions": {
+        "route-step-audit-champ-pomy": [
+          "route-step-champ-pomy-start",
+          "route-step-audit-champ-pomy"
+        ]
+      }
     }
   ]
 }

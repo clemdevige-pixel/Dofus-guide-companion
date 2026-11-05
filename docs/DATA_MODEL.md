@@ -316,3 +316,16 @@ L’export/chargement doit échouer notamment si :
 Les blocs Incarnam et Astrub (1 à 3) regroupent les actions par arrêt utile ou courte portion de parcours cohérente. Une carte peut réunir plusieurs prises, avancées et rendus, chacun avec sa propre checkbox. Une quête exécutée sans interruption garde ses actions sur la même carte. MOMENT_ID fixe ces regroupements dans ROUTE ; chaque action reste OBJECTIVE (maximum 5 par carte). Les actions restent visibles dans le résumé, y compris lorsque leur détail est replié. Les identifiants et la progression ne changent pas lors du regroupement.
 
 Les STEP_ID historiques sont conservés ; les décompositions utilisent de nouveaux identifiants stables. La table versionnée data/route-progress-migrations.json décrit les décompositions pour préserver les anciennes validations, via reconcileProgressWithRoute et la routeVersion. Elle ne pilote pas le contenu du guide.
+
+
+## Décision 2026-11-05 — Modèle de quête étendu au guide
+
+Le modèle Lancer / Avancer / Terminer s'applique aux quêtes de toute la route, sans décomposition systématique en trois étapes :
+- LANCER / TERMINER : prendre, effectuer et rendre une quête sans pause imposée dans le parcours ; un seul objectif coché à son rendu.
+- LANCER / AVANCER / STOP : prendre la quête et atteindre le checkpoint nommé ; conserver la quête active.
+- AVANCER / STOP ou REPRENDRE / STOP : poursuivre une quête déjà active jusqu'au checkpoint nommé.
+- TERMINER ou REPRENDRE / TERMINER : rendre une quête déjà active.
+
+Les quêtes, alignements, ordres et passages de donjon exécutables sont OBJECTIVE ; leurs actions restent visibles et cochables individuellement. TRANSITION et DETAIL servent aux informations d'accompagnement, dont FIN DU SUIVI du Parangon. Les préparations, jalons et verrous gardent leur sens propre. MOMENT_ID demeure la seule frontière de regroupement, avec cinq objectifs maximum. Aucun nom de quête ni parsing de texte métier n'est ajouté à React.
+
+Une quête complète peut conserver une seule ligne, tandis que plusieurs prises, avancées ou rendus peuvent partager une carte. Les étapes différées conservent leur ordre et leurs dépendances. Les lancements ont LANCEMENT_REQUIS=TRUE et une POSITION ou un LANCEMENT structuré.

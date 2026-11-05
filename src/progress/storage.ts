@@ -6,6 +6,11 @@ import type { RouteDocument } from '../route/types';
 
 const STORAGE_KEY = 'dofus-guide-companion.progress.v1';
 
+const progressMigrations: readonly {
+  introducedIn: string;
+  expansions: Readonly<Record<string, readonly string[] | undefined>>;
+}[] = routeProgressMigrations.migrations;
+
 export interface ProgressState {
   completedStepIds: string[];
   checkedPreparationItemIds: string[];
@@ -65,13 +70,13 @@ export function reconcileProgressWithRoute(
   );
 
   // Expand only legacy validations, once per route revision. Consultation alone never completes actions.
-  const applicableMigrations = routeProgressMigrations.migrations.filter(
+  const applicableMigrations = progressMigrations.filter(
     (migration) => route.routeVersion >= migration.introducedIn
       && (!progress.routeVersion || progress.routeVersion < migration.introducedIn),
   );
   for (const migration of applicableMigrations) {
     for (const [legacyId, actionIds] of Object.entries(migration.expansions)) {
-      if (!progress.completedStepIds.includes(legacyId)) continue;
+      if (!actionIds || !progress.completedStepIds.includes(legacyId)) continue;
       for (const id of actionIds) {
         if (routeStepIds.has(id)) completedStepIds.add(id);
       }
@@ -113,7 +118,7 @@ export function reconcileProgressWithRoute(
   // Resume an unfinished expanded card at its first action, preserving a completed cursor.
   for (const migration of applicableMigrations) {
     const actionIds = currentStepId
-      ? (migration.expansions as Record<string, string[]>)[currentStepId]
+      ? migration.expansions[currentStepId]
       : undefined;
     if (actionIds && currentStepId && !completedStepIds.has(currentStepId)) {
       currentStepId = actionIds.find((id) => routeStepIds.has(id) && !completedStepIds.has(id))

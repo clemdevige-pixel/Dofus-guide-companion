@@ -490,7 +490,7 @@ test('contrat UX — une poursuite dans la même carte ne redevient pas une repr
 
   const nordalie = route.steps.find((step) => step.id === 'route-step-0832');
   assert.equal(nordalie?.action, 'AVANCER');
-  assert.equal(nordalie?.instruction, undefined);
+  assert.match(nordalie?.instruction ?? '', /quatre missions/);
 });
 
 test('contrat UX — les informations de flow sont intégrées aux descriptions', () => {

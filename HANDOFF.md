@@ -1,24 +1,22 @@
 # HANDOFF — Dofus Guide Companion / V1
 
-Date : 2026-09-25
+Date : 2026-11-05
 Branche : `agent/initial-scaffold`
 Version : **1.0.0**
 
 ## TL;DR
 
-V1 gelée et prête à distribuer.
+État courant : extension du modèle Lancer / Avancer / Terminer à toute la route.
 
-État validé :
-- route Astrub → Dofus Sylvestre certifiée sur son périmètre métier ;
-- **973 étapes / 32 blocs** ;
-- **59 PRÉPA** reconstruites autour des consommations réelles ;
-- ordre relatif des **943 étapes métier historiques** conservé pendant la refonte blocs/prépas ;
-- tests route/progress : **verts sur la CI du correctif Meno/Frimar** ;
-- validation route : verte ;
-- build frontend : vert ;
-- `cargo check` Tauri Windows : vérification CI en cours sur le dernier correctif ;
-- recette manuelle validée : save/reload, navigation, progression, compact, DPLN, `/travel`, raccourcis, taille/position fenêtre, console ;
-- Sheet `ROUTE` et `data/route.json` synchronisés.
+- **1122 étapes / 32 blocs / 397 cartes**, dont 90 cartes inchangées pour Incarnam et Astrub ;
+- 191 quêtes complètes annoncent désormais leur lancement et leur fin ; 34 premiers checkpoints annoncent aussi leur lancement ;
+- actions exécutables visibles et cochables, cinq objectifs maximum par carte ; 18 cartes supplémentaires sur l'ensemble du guide, sans tripler les quêtes ;
+- Sheet ROUTE et export officiel synchronisés ; aucun ancien STEP_ID supprimé ;
+- routeVersion **2026-11-05.1**, migration Champ Pomy pour préserver les validations ;
+- tests route/progression : **104 réussis** ; validation route et build frontend verts ;
+- pas de recette visuelle Tauri Windows sur cette passe.
+
+Les sections datées ci-dessous conservent l'historique ; cette synthèse décrit la version courante.
 
 Ne pas relancer une optimisation globale de route sans bug concret ou nouvelle exigence métier.
 
@@ -382,3 +380,14 @@ Lire dans l’ordre : `AGENTS.md`, `SPEC.md`, `ARCHITECTURE.md`, `docs/DATA_MODE
 - Correction d'une erreur introduite pendant la passe précédente : le témoignage et combat Oskar est sur son action Espoirs en [2,-1] ; l'action suivante retrouve l'activation du zaap du cimetière en [3,0].
 - Source et export : lectures complètes FORMATTED_VALUE/FORMULA du Sheet après modification, exporteur officiel exécuté localement sur ces réponses. Route valide : 1121 étapes / 32 blocs.
 - Vérification : 100 tests réussis, dont regroupements, action individuelle cochable, quête sans interruption, migration et profils. Build frontend vert ; pas de recette visuelle Tauri Windows. Le navigateur de contrôle ne peut pas joindre le serveur local d'aperçu (connexion refusée).
+
+
+## 2026-11-05 — Extension du modèle de quête à toute la route
+
+- Modification éditoriale dans ROUTE puis régénération via scripts/export-route.ts depuis les lectures natives FORMATTED_VALUE et FORMULA ; aucun changement des 283 étapes des blocs 1 à 3.
+- Quête faite d'une traite : LANCER / TERMINER en une ligne. Quête différée : lancement et checkpoint explicites, progression et rendu cochables au bon moment. 191 actions de quête complète et 34 lancements avant checkpoint clarifiés.
+- 325 rôles exécutables auparavant absents ou masqués deviennent OBJECTIVE ; accompagnements conservés, dont FIN DU SUIVI du Parangon. 17 moments denses scindés à une frontière éditoriale avant/après donjon ou changement d'objectif ; préparation Champ Pomy séparée. Total 397 cartes contre 379, cinq objectifs maximum.
+- Checkpoints complétés : Coiffeur de génie / Nidas, Nordalie / quatre missions, Main dans la main / Deux souffles. Lancements sourcés sur DPLN pour les neuf quêtes de graines de Frigost, les quatre quêtes Fratrie et Jusqu'au bout du rêve.
+- Champ Pomy : Mauvaise graine et nouveau lancement avant Dan Lavy/Gros Med ; collecte dans l'Hypogée, vérification avant sortie, rendu après le passage. L'identifiant historique reste celui du rendu ; seul nouvel ID : route-step-champ-pomy-start. Migration versionnée appliquée aux sauvegardes antérieures à 2026-11-05.1 ; consultation seule sans validation et décoche conservée au rechargement.
+- Aucune couche de regroupement ou de logique de quête ajoutée au runtime. Typage de la table de migrations rendu compatible avec plusieurs révisions à clés distinctes.
+- Vérification : 104 tests, validate-route, build TypeScript/Vite. Recette visuelle Tauri Windows non effectuée. Les dépendances métier existantes sont conservées ; cette passe ne constitue pas une revérification factuelle exhaustive de chaque quête.
