@@ -229,7 +229,7 @@ test('contrat UX — le wording joueur utilise termine plutôt que ferme', () =>
 
     for (const value of texts) {
       assert.ok(
-        !/\bferme(?:r)?\b/i.test(value),
+        !/\bferme(?:r)?\b/i.test(value.replace(/\b(?:la|une|cette)\s+ferme\b/gi, 'bâtiment agricole')),
         `${step.id}: le wording joueur contient encore « ferme/fermer ».`,
       );
     }

@@ -283,7 +283,6 @@
       "type": "quest",
       "title": "Premières armes",
       "action": "LANCER",
-      "instruction": "Prends la quête auprès de Ganymède dans le tutoriel.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/premieres-armes.html"
@@ -324,7 +323,6 @@
       "dofusSeries": "Dofus Argenté",
       "title": "L'anneau de tous les dangers",
       "action": "LANCER",
-      "instruction": "Prends la quête auprès de Ganymède dans le tutoriel.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/l-anneau-de-tous-les-dangers.html"
@@ -367,7 +365,6 @@
       "dofusSeries": "Dofus Argenté",
       "title": "Sous le regard des dieux",
       "action": "LANCER",
-      "instruction": "Prends la quête auprès de Maître Hoboulo.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/sous-le-regard-des-dieux.html"
@@ -2426,7 +2423,6 @@
       "dofusSeries": "Dofus Argenté",
       "title": "Quête de classe",
       "action": "LANCER",
-      "instruction": "Prends la quête proposée par le responsable de ta classe. Ouvre le lien pour choisir la branche correspondant à ton personnage.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/quete-de-classe.html"
@@ -2469,7 +2465,6 @@
       "dofusSeries": "Dofus Argenté",
       "title": "Ça sent le gaz",
       "action": "LANCER",
-      "instruction": "Prends la quête auprès de ton chef de classe en lui demandant s'il a encore besoin de toi.",
       "source": {
         "label": "DPLN",
         "url": "https://www.dofuspourlesnoobs.com/ca-sent-le-gaz.html"

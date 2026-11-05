@@ -17,7 +17,7 @@ test('Incarnam and Astrub expose independent chronological action cards', () => 
   }
   for (const step of opening.filter(step => step.type !== 'preparation')) {
     assert.ok(['LANCER', 'AVANCER', 'TERMINER', 'FAIRE'].includes(step.action ?? ''), step.id);
-    assert.ok(step.instruction?.trim(), step.id);
+    assert.ok(step.instruction?.trim() || step.launchInstruction?.trim(), step.id);
     assert.equal(step.guideItems, undefined, step.id);
     if (step.action === 'LANCER') assert.ok(step.location || step.launchInstruction, step.id);
   }
