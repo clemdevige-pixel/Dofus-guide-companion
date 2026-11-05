@@ -363,12 +363,12 @@ Lire dans l’ordre : `AGENTS.md`, `SPEC.md`, `ARCHITECTURE.md`, `docs/DATA_MODE
 - Après cette mise à jour documentaire : vérifier la CI du nouveau commit, puis construire le bundle Windows pour distribution. Aucun nouveau changement métier n'est demandé avant ce contrôle manuel.
 
 
-## 2026-11-05 — Incarnam / Astrub : actions chronologiques (en vérification)
+## 2026-11-05 — Incarnam / Astrub : actions chronologiques
 
 - Nouvelle décision produit : les blocs 1 à 3 quittent les séquences MOMENT_ID ; une carte autonome correspond à une prise, une avancée bornée, un rendu ou une action de donjon/récolte. Les quêtes restent intercalées dans le parcours.
 - Source ROUTE modifiée en place : 283 étapes sur les trois premiers blocs (108 / 91 / 84), 141 actions ajoutées ; tous les anciens STEP_ID conservés. Route complète : 1121 étapes / 32 blocs.
 - Points factuels repris sur DPLN : cinq zones Vestiges avant rendu, retour Emma pour Donjon en mousse/Rikiki, lancement Art'empeth chez Erty, préparatifs Crise sanitaire, premier Mage Ax avant collecte Restauration rapide, Aventure miniature avec l'épicerie et Cendre.
 - 31 liens DPLN et 5 messages de hard lock déjà présents au runtime mais absents de la source ont été rétablis dans le Sheet ; le contenu runtime des blocs 4 à 32 est conservé à l'identique, hors numérotation.
 - Migration des validations : data/route-progress-migrations.json, appliquée par reconcileProgressWithRoute uniquement aux versions antérieures ; les coches existantes se répartissent sur les actions issues de leur ancienne carte. Une simple consultation ne valide rien. Import et multi-profils passent par le même chemin.
-- CI en cours : export officiel depuis une capture des deux lectures Sheet, comparaison JSON, tests route/progression et build. La capture et le branchement CI sont temporaires, à retirer après vérification.
+- Vérification frontend réussie sur f07f01cd8d40a89dba844ffe5d87dc71e743a029, CI 42063271594 : export officiel depuis les deux lectures complètes du Sheet, comparaison exacte JSON sans écart, 99 tests réussis, validation route et build frontend verts. La capture et le branchement CI temporaires sont retirés après ce contrôle ; aucune seconde source éditoriale n'est conservée. Le job cargo check Windows était encore en cours à cette note.
 - Recette Tauri visuelle non effectuée : vérifier fenêtre étroite, enchaînement automatique, reprise d'un profil partiellement avancé et d'un profil déjà après Astrub.
